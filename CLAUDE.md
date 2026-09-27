@@ -65,10 +65,16 @@ days; days in between show an `OngoingStrip`.
 
 ```
 trips/{tripId}                        title, theme, ownerId, memberIds[], plannedStart/End
-trips/{tripId}/bookings/{bookingId}   Booking.toJson()
+trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
 ```
 
-Built for family sharing (`memberIds`). Rules are in `firestore.rules`. Writes
+Built for family sharing (`memberIds`). Bookings load with one
+collection-group query on `memberIds` (index in `firestore.indexes.json`), so
+reads never look up the trip: a lookup fails for a trip created moments ago.
+**When trip members change, update every booking's `memberIds` copy in the
+same batch.** Rules are in `firestore.rules`; deploy rules + index with
+`firebase deploy --only firestore` (`.firebaserc` targets `travary-444`).
+Empty automatic trips remove themselves. Writes
 aren't awaited (Firestore's offline cache applies them at once); sync failures
 surface via `TravelRepository.errors`. Attachment files are stored locally by
 file name (never absolute paths). Cloud backup of files is a future Plus feature.
@@ -80,9 +86,8 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 | Demo (default) | `flutter run` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
 | Cloud | `flutter run --dart-define=TRAVARY_BACKEND=cloud` | Firestore + anonymous auth |
 
-Cloud mode needs, once, in the Firebase console (project `travary-444`):
-Authentication → Sign-in method → enable **Anonymous**; then deploy the rules
-with `firebase deploy --only firestore:rules`.
+Cloud mode uses anonymous sign-in (enabled in the Firebase console for
+`travary-444`); rules and index are deployed.
 
 Design tools (debug builds, Profile tab): **Preview a different time** shows
 cards before, during and after their time; **Reset sample trips**.

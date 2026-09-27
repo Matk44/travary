@@ -159,6 +159,7 @@ class TravelStore extends ChangeNotifier {
 
     if (previous != null && previous.tripId != saved.tripId) {
       await repository.moveBooking(saved, previous.tripId);
+      await _dropTripIfEmptied(previous.tripId, removing: saved.id);
     } else {
       await repository.saveBooking(saved);
     }
@@ -174,6 +175,7 @@ class TravelStore extends ChangeNotifier {
 
   Future<void> deleteBooking(Booking booking) async {
     await repository.deleteBooking(booking);
+    await _dropTripIfEmptied(booking.tripId, removing: booking.id);
     for (final attachment in booking.attachments) {
       await attachments?.delete(attachment);
     }
@@ -235,6 +237,17 @@ class TravelStore extends ChangeNotifier {
   }
 
   // --------------------------------------------------------------- internal
+
+  /// Trips form automatically, so they should also go away on their own:
+  /// once the last booking leaves a trip that has no planned dates, the
+  /// empty trip is removed.
+  Future<void> _dropTripIfEmptied(String tripId, {required String removing}) async {
+    final plan = this.plan(tripId);
+    if (plan == null || plan.trip.plannedStart != null) return;
+    if (plan.bookings.every((b) => b.id == removing)) {
+      await repository.deleteTrip(plan.trip, const []);
+    }
+  }
 
   void _rebuild() {
     _plans = buildTripPlans(_trips, _bookings);

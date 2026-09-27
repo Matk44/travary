@@ -130,6 +130,17 @@ ThemeData buildTravaryTheme() {
       labelStyle: TravaryText.small.copyWith(color: TravaryColors.ink),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.small)),
     ),
+    popupMenuTheme: PopupMenuThemeData(
+      color: TravaryColors.paper,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.small)),
+    ),
+    dialogTheme: DialogThemeData(
+      backgroundColor: TravaryColors.paper,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.card)),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: TravaryColors.linen),
+    datePickerTheme: const DatePickerThemeData(backgroundColor: TravaryColors.paper),
+    timePickerTheme: const TimePickerThemeData(backgroundColor: TravaryColors.paper),
     snackBarTheme: const SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
       backgroundColor: TravaryColors.ink,

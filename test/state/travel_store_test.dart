@@ -76,6 +76,21 @@ void main() {
     expect(failingStore.error, 'Couldn\'t load your bookings.');
   });
 
+  test('deleting the last booking of an automatic trip removes the trip', () async {
+    await store.deleteBooking(store.bookings.single);
+    await pumpEventQueue();
+    expect(store.plans, isEmpty);
+  });
+
+  test('a trip with planned dates stays when its last booking goes', () async {
+    final planned = await store.createTrip('Lisbon', start: d(12, 1), end: d(12, 5));
+    await store.saveBooking(booking('x', BookingKind.dining, d(12, 2), tripId: planned.id));
+    await pumpEventQueue();
+    await store.deleteBooking(store.booking('x')!);
+    await pumpEventQueue();
+    expect(store.plan(planned.id), isNotNull);
+  });
+
   test('deleting a trip removes its bookings', () async {
     await store.deleteTrip(store.plans.single);
     await pumpEventQueue();

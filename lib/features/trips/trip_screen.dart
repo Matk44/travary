@@ -71,7 +71,7 @@ class TripScreen extends StatelessWidget {
                   const SizedBox(height: TravarySpace.xs),
                   Text(
                     plan.hasDates
-                        ? '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} days'
+                        ? '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} ${plan.dayCount == 1 ? 'day' : 'days'}'
                         : 'No dates yet',
                     style: TravaryText.body,
                   ),
