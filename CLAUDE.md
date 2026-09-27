@@ -69,8 +69,11 @@ days; days in between show an `OngoingStrip`.
 ### Data (Firestore)
 
 ```
-trips/{tripId}                        title, theme, ownerId, memberIds[], plannedStart/End
+trips/{tripId}                        title, theme, ownerId, memberIds[], plannedStart/End,
+                                      memberNames{}, invite{} (server-only), premium (server-only)
 trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
+invites/{code}                        tripId, createdBy, expiresAt (server-only)
+users/{uid}                           purchases + Smart Import usage (server-only)
 ```
 
 Built for family sharing (`memberIds`). Bookings load with one
@@ -132,6 +135,29 @@ notification, Terms and Privacy links on the paywall, analytics wired to a
 real service, and a server function that mirrors purchases to `users/{uid}`
 and stamps `premium` on trips.
 
+## Family sharing and ticket backup
+
+- **Invites**: callable `createTripInvite` gives a 6-character code (14 days,
+  no 0/O/1/I/L); `joinTrip` adds the caller; `removeTripMember` removes
+  someone (organiser) or yourself (leave). Max 6 people. All in
+  `functions/src/sharing.ts`: only the server changes `memberIds`,
+  `memberNames` and `invite`, and it updates every booking's `memberIds`
+  copy in the same transaction. The app can't (rules).
+- **UI**: trip screen "Who's coming" (invite, remove, leave), Trips →
+  "Join a trip". Inviting is gated by `requirePremium(familySharing)`; the
+  Plus check moves server-side with RevenueCat.
+- **Tickets**: `Attachment.remotePath`; `TravelStore.syncTickets()` backs up
+  tickets for shared or Plus trips and downloads the family's tickets for
+  current/upcoming trips so they open offline. `TicketFileBuilder` fetches
+  on demand. Files live at `trips/{tripId}/attachments/{fileName}` in Cloud
+  Storage (bucket `travary-444.firebasestorage.app`, us-central1), guarded
+  by `storage.rules` (members only, images/PDF, < 20 MB).
+- Storage rules read Firestore, which needs the Storage service agent to have
+  `roles/firebaserules.firestoreServiceAgent` (granted on travary-444). A
+  new project needs it too, or every upload returns 403.
+- Invite links are codes shared as text for now; universal/app links (hosting
+  page that opens the app) come later.
+
 ## AI / Smart Import
 
 AI features use **Google AI Studio (Gemini API)**, called only from Firebase
@@ -175,8 +201,9 @@ the app. Project `travary-444` is on the Blaze plan.
 - **Now:** design phase (the graphic interface on top of this build).
 - **v1.0 launch** (in this order): premium plumbing ✓ → Smart Import ✓
   (screenshot/PDF → Gemini in a Cloud Function → draft to confirm) → family
-  sharing + ticket backup → RevenueCat + store products → onboarding with the
-  paywall. See `docs/PRODUCT_PLAN.md`.
+  sharing + ticket backup ✓ → RevenueCat + store products (+ server-side
+  entitlements, trip premium stamping) → onboarding with the paywall.
+  See `docs/PRODUCT_PLAN.md`.
 - **Later:** flight alerts, Live Activity / widgets, email-forward import,
   memories and recap, referrals.
 - Bundle ID is still `com.travary.travaryTemp`; change before release (needs

@@ -6,6 +6,7 @@ rules_version = '2';
 //   trips/{tripId}/bookings/{bookingId}   one booking + a copy of memberIds[]
 //
 //   users/{userId}                        purchases, mirrored by the server
+//   invites/{code}                        family invites, server only
 //
 // A trip (and everything in it) is visible only to its members. Only the
 // owner can delete a trip or change who's on it. Only the server grants
@@ -27,15 +28,17 @@ service cloud.firestore {
 
       // `premium` (Plus travelling with the trip) is written only by the
       // server after a purchase, never by the app.
+      // Member changes go through the sharing functions (which also update
+      // each booking's copy), so the app can't change memberIds,
+      // memberNames or invite at all after creating a trip.
       allow create: if signedIn()
         && request.resource.data.ownerId == request.auth.uid
-        && request.auth.uid in request.resource.data.memberIds
-        && !('premium' in request.resource.data);
+        && request.resource.data.memberIds == [request.auth.uid]
+        && !request.resource.data.keys().hasAny(['premium', 'memberNames', 'invite']);
 
       allow update: if isMember(resource.data)
-        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['ownerId', 'premium'])
-        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['memberIds'])
-            || resource.data.ownerId == request.auth.uid);
+        && !request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(['ownerId', 'premium', 'memberIds', 'memberNames', 'invite']);
 
       allow delete: if signedIn() && resource.data.ownerId == request.auth.uid;
 

@@ -33,6 +33,7 @@ class Trip {
     this.plannedEnd,
     required this.ownerId,
     required this.memberIds,
+    this.memberNames = const {},
     this.premium,
     required this.createdAt,
     required this.updatedAt,
@@ -50,8 +51,14 @@ class Trip {
   /// Everyone who can see the trip (the owner plus invited family).
   final List<String> memberIds;
 
+  /// What each member is called ("Alex"), set when they invite or join.
+  /// Server-written only.
+  final Map<String, String> memberNames;
+
   /// Plus unlocked for everyone on the trip. Set by the server only.
   final TripPremium? premium;
+
+  bool get isShared => memberIds.length > 1;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -70,14 +77,24 @@ class Trip {
       plannedEnd: plannedEnd ?? this.plannedEnd,
       ownerId: ownerId,
       memberIds: memberIds,
+      memberNames: memberNames,
       premium: premium,
       createdAt: createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
-  /// Fields the app writes. `premium` is deliberately absent: only the
-  /// server sets it, and writes are merged so it survives app updates.
+  /// Fields the traveller can edit: the only ones sent when updating a trip.
+  Map<String, Object?> toEditableJson() => {
+    'title': title,
+    'theme': theme.name,
+    'plannedStart': plannedStart?.toIso(),
+    'plannedEnd': plannedEnd?.toIso(),
+    'updatedAt': updatedAt.millisecondsSinceEpoch,
+  };
+
+  /// Everything the app writes when it creates a trip. Members, names,
+  /// invites and premium are absent: only the server sets those.
   Map<String, Object?> toJson() => {
     'title': title,
     'theme': theme.name,
@@ -97,6 +114,10 @@ class Trip {
     plannedEnd: LocalDate.tryParse(json['plannedEnd']),
     ownerId: json['ownerId'] as String? ?? '',
     memberIds: [for (final m in json['memberIds'] as List? ?? const []) '$m'],
+    memberNames: {
+      for (final entry in (json['memberNames'] as Map? ?? const {}).entries)
+        '${entry.key}': '${entry.value}',
+    },
     premium: TripPremium.fromJson(json['premium']),
     createdAt: _millis(json['createdAt']),
     updatedAt: _millis(json['updatedAt']),

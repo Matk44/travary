@@ -1,0 +1,24 @@
+rules_version = '2';
+
+// Ticket and document files, backed up so they're on every family member's
+// phone. Readable and writable by the trip's members only.
+//
+//   trips/{tripId}/attachments/{fileName}
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /trips/{tripId}/attachments/{fileName} {
+      function isMember() {
+        return request.auth != null
+          && request.auth.uid in firestore.get(/databases/(default)/documents/trips/$(tripId)).data.memberIds;
+      }
+
+      allow read: if isMember();
+      allow create, update: if isMember()
+        && request.resource.size < 20 * 1024 * 1024
+        && (request.resource.contentType.matches('image/.*')
+            || request.resource.contentType == 'application/pdf');
+      allow delete: if isMember();
+    }
+  }
+}

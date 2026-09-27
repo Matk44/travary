@@ -23,6 +23,8 @@ class TravaryApp extends StatelessWidget {
             repository: dependencies.repository,
             artCatalog: dependencies.artCatalog,
             attachments: dependencies.attachments,
+            backup: dependencies.backup,
+            sharing: dependencies.sharing,
           ),
         ),
         ChangeNotifierProvider(

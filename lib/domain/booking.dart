@@ -170,6 +170,7 @@ class Attachment {
     required this.name,
     required this.fileName,
     required this.sizeBytes,
+    this.remotePath,
   });
 
   final String id;
@@ -180,6 +181,13 @@ class Attachment {
   /// File name inside the attachments folder.
   final String fileName;
   final int sizeBytes;
+
+  /// Where the backed-up copy lives in cloud storage, once uploaded. Family
+  /// members' phones download it from there.
+  final String? remotePath;
+
+  Attachment withRemotePath(String path) =>
+      Attachment(id: id, name: name, fileName: fileName, sizeBytes: sizeBytes, remotePath: path);
 
   String get extension {
     final dot = fileName.lastIndexOf('.');
@@ -195,6 +203,7 @@ class Attachment {
     'name': name,
     'fileName': fileName,
     'sizeBytes': sizeBytes,
+    'remotePath': remotePath,
   };
 
   factory Attachment.fromJson(Map<String, Object?> json) => Attachment(
@@ -202,6 +211,7 @@ class Attachment {
     name: json['name'] as String? ?? 'Document',
     fileName: json['fileName'] as String? ?? '',
     sizeBytes: (json['sizeBytes'] as num?)?.toInt() ?? 0,
+    remotePath: json['remotePath'] as String?,
   );
 }
 

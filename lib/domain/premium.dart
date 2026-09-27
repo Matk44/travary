@@ -33,8 +33,8 @@ enum PremiumFeature {
   /// Whether the feature is built and shipping. The paywall only sells
   /// released features (debug builds also show the rest, marked "Soon").
   bool get released => switch (this) {
-    smartImport => true,
-    familySharing || ticketBackup || flightAlerts => false,
+    smartImport || familySharing || ticketBackup => true,
+    flightAlerts => false,
   };
 }
 

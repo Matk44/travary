@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
+import '../data/attachment_backup.dart';
 import '../data/attachment_store.dart';
 import '../data/demo_data.dart';
 import '../data/memory_travel_repository.dart';
+import '../data/sharing_service.dart';
 import '../data/travel_repository.dart';
 import '../design/art/art_catalog.dart';
 import '../design/art/art_resolver.dart';
@@ -30,6 +33,8 @@ class TravelStore extends ChangeNotifier {
     required this.repository,
     required ArtCatalog artCatalog,
     this.attachments,
+    this.backup,
+    this.sharing,
     DateTime Function()? clock,
   }) : art = ArtResolver(artCatalog),
        _clock = clock ?? DateTime.now {
@@ -59,11 +64,23 @@ class TravelStore extends ChangeNotifier {
 
   final TravelRepository repository;
   final AttachmentStore? attachments;
+
+  /// Cloud copies of ticket files (cloud mode only).
+  final AttachmentBackup? backup;
+
+  /// Family sharing (cloud mode only).
+  final SharingService? sharing;
   final ArtResolver art;
+
+  /// Which trips get their tickets backed up. The app sets this from
+  /// Travary Plus; shared trips always do, so everyone has the tickets.
+  bool Function(TripPlan plan) shouldBackUp = (plan) => plan.trip.isShared;
   final DateTime Function() _clock;
 
   final _subscriptions = <StreamSubscription<Object?>>[];
   Timer? _ticker;
+  Timer? _syncTimer;
+  final _syncing = <String>{};
   List<Trip> _trips = const [];
   List<Booking> _bookings = const [];
   List<TripPlan> _plans = const [];
@@ -76,6 +93,14 @@ class TravelStore extends ChangeNotifier {
 
   bool get isLoading => !(_tripsLoaded && _bookingsLoaded);
   bool get isDemo => repository is MemoryTravelRepository;
+  String get userId => repository.userId;
+  bool get sharingAvailable => sharing != null;
+
+  bool isOwner(TripPlan plan) => plan.trip.ownerId == userId;
+
+  /// "You", the member's name, or "Traveller".
+  String memberName(TripPlan plan, String memberId) =>
+      memberId == userId ? 'You' : (plan.trip.memberNames[memberId] ?? 'Traveller');
 
   /// The current time, or the preview time set from Profile (debug builds).
   DateTime get now => _previewNow ?? _clock();
@@ -168,9 +193,10 @@ class TravelStore extends ChangeNotifier {
     if (previous != null) {
       final kept = {for (final a in saved.attachments) a.id};
       for (final removed in previous.attachments.where((a) => !kept.contains(a.id))) {
-        await attachments?.delete(removed);
+        await _deleteFiles(removed);
       }
     }
+    unawaited(_backUp(saved.id));
     return SaveResult(saved, tripTitle, newTrip: newTrip);
   }
 
@@ -193,13 +219,18 @@ class TravelStore extends ChangeNotifier {
         }
       }
       final result = await saveBooking(booking);
-      results.add(result);
       final saved = result.booking;
       final known = createdHere.where((t) => t.id == saved.tripId).firstOrNull;
       if (result.newTrip) {
-        createdHere.add(_NewTrip(saved.tripId, saved.startDate, saved.lastDate));
+        createdHere.add(_NewTrip(saved.tripId, result.tripTitle, saved.startDate, saved.lastDate));
+        results.add(result);
       } else if (known != null) {
         known.stretch(saved.startDate, saved.lastDate);
+        // The new trip may not have come back from the cloud yet, so use
+        // the title it was created with.
+        results.add(SaveResult(saved, known.title, newTrip: false));
+      } else {
+        results.add(result);
       }
     }
     return results;
@@ -209,7 +240,7 @@ class TravelStore extends ChangeNotifier {
     await repository.deleteBooking(booking);
     await _dropTripIfEmptied(booking.tripId, removing: booking.id);
     for (final attachment in booking.attachments) {
-      await attachments?.delete(attachment);
+      await _deleteFiles(attachment);
     }
   }
 
@@ -231,21 +262,119 @@ class TravelStore extends ChangeNotifier {
       createdAt: stamp,
       updatedAt: stamp,
     );
-    await repository.saveTrip(trip);
+    await repository.createTrip(trip);
     return trip;
   }
 
   Future<void> updateTrip(Trip trip) =>
-      repository.saveTrip(trip.copyWith(updatedAt: DateTime.now()));
+      repository.updateTrip(trip.copyWith(updatedAt: DateTime.now()));
 
   Future<void> deleteTrip(TripPlan plan) async {
     await repository.deleteTrip(plan.trip, plan.bookings);
     for (final booking in plan.bookings) {
       for (final attachment in booking.attachments) {
-        await attachments?.delete(attachment);
+        await _deleteFiles(attachment);
       }
     }
   }
+
+  // --------------------------------------------------------------- tickets
+
+  /// The ticket file on this phone, downloading the family's cloud copy
+  /// first if it isn't here yet. Null if there's no copy anywhere.
+  Future<File?> ticketFile(Attachment attachment) async {
+    final store = attachments;
+    if (store == null) return null;
+    final file = store.fileFor(attachment);
+    if (await file.exists()) return file;
+    final backup = this.backup;
+    if (backup == null || attachment.remotePath == null) return null;
+    try {
+      await backup.download(attachment, file);
+      return file;
+    } catch (error) {
+      if (kDebugMode) debugPrint('Ticket download failed: $error');
+      return null;
+    }
+  }
+
+  /// Backs up tickets that should be and fetches the family's tickets for
+  /// current and coming trips, so they open offline. Safe to call often.
+  Future<void> syncTickets() async {
+    for (final booking in [..._bookings]) {
+      await _backUp(booking.id);
+    }
+    final today = this.today;
+    for (final plan in _plans.where((p) => p.phaseOn(today) != TripPhase.past)) {
+      for (final booking in plan.bookings) {
+        for (final attachment in booking.attachments.where((a) => a.remotePath != null)) {
+          await ticketFile(attachment);
+        }
+      }
+    }
+  }
+
+  /// Uploads [bookingId]'s tickets that aren't backed up yet, if its trip
+  /// should be. Failures are left for the next sync.
+  Future<void> _backUp(String bookingId) async {
+    final backup = this.backup;
+    final store = attachments;
+    final booking = this.booking(bookingId);
+    if (backup == null || store == null || booking == null) return;
+    final plan = this.plan(booking.tripId);
+    if (plan == null || !shouldBackUp(plan)) return;
+    final pending = booking.attachments.where((a) => a.remotePath == null).toList();
+    if (pending.isEmpty || !_syncing.add(bookingId)) return;
+    try {
+      final uploaded = <String, String>{};
+      for (final attachment in pending) {
+        final file = store.fileFor(attachment);
+        if (!await file.exists()) continue;
+        try {
+          uploaded[attachment.id] = await backup.upload(booking.tripId, attachment, file);
+        } catch (error) {
+          // Offline or not allowed yet: the next sync tries again.
+          if (kDebugMode) debugPrint('Ticket backup failed (will retry): $error');
+        }
+      }
+      if (uploaded.isEmpty) return;
+      // Re-read: the traveller may have edited the booking meanwhile.
+      final latest = this.booking(bookingId);
+      if (latest == null) return;
+      await repository.saveBooking(latest.copyWith(attachments: [
+        for (final a in latest.attachments)
+          uploaded.containsKey(a.id) && a.remotePath == null ? a.withRemotePath(uploaded[a.id]!) : a,
+      ]));
+    } finally {
+      _syncing.remove(bookingId);
+    }
+  }
+
+  Future<void> _deleteFiles(Attachment attachment) async {
+    await attachments?.delete(attachment);
+    if (attachment.remotePath != null) {
+      try {
+        await backup?.delete(attachment);
+      } catch (_) {
+        // A stray cloud copy is harmless; members can still delete it.
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------- sharing
+
+  SharingService get _sharing =>
+      sharing ?? (throw const SharingException('Family sharing needs your trips saved to the cloud.'));
+
+  Future<TripInvite> createInvite(TripPlan plan, {String? name}) =>
+      _sharing.createInvite(plan.id, name: name);
+
+  Future<({String tripId, String title})> joinTrip(String code, {required String name}) =>
+      _sharing.join(code, name: name);
+
+  Future<void> removeMember(TripPlan plan, String memberId) => _sharing.removeMember(plan.id, memberId);
+
+  Future<void> leaveTrip(TripPlan plan) => _sharing.removeMember(plan.id, userId);
 
   // ------------------------------------------------------- design & testing
 
@@ -275,7 +404,7 @@ class TravelStore extends ChangeNotifier {
   /// empty trip is removed.
   Future<void> _dropTripIfEmptied(String tripId, {required String removing}) async {
     final plan = this.plan(tripId);
-    if (plan == null || plan.trip.plannedStart != null) return;
+    if (plan == null || plan.trip.plannedStart != null || !isOwner(plan)) return;
     if (plan.bookings.every((b) => b.id == removing)) {
       await repository.deleteTrip(plan.trip, const []);
     }
@@ -284,6 +413,11 @@ class TravelStore extends ChangeNotifier {
   void _rebuild() {
     _plans = buildTripPlans(_trips, _bookings);
     notifyListeners();
+    if (backup != null) {
+      // Settle, then back up and fetch tickets in the background.
+      _syncTimer?.cancel();
+      _syncTimer = Timer(const Duration(seconds: 2), () => unawaited(syncTickets()));
+    }
   }
 
   void _reportError(Object error) {
@@ -294,6 +428,7 @@ class TravelStore extends ChangeNotifier {
   @override
   void dispose() {
     _ticker?.cancel();
+    _syncTimer?.cancel();
     for (final subscription in _subscriptions) {
       subscription.cancel();
     }
@@ -303,9 +438,10 @@ class TravelStore extends ChangeNotifier {
 
 /// A trip created during a batch save, before the repository echoes it back.
 class _NewTrip {
-  _NewTrip(this.id, this.start, this.end);
+  _NewTrip(this.id, this.title, this.start, this.end);
 
   final String id;
+  final String title;
   LocalDate start;
   LocalDate end;
 

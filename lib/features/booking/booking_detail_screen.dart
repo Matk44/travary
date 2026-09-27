@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +13,7 @@ import '../../state/travel_store.dart';
 import '../trips/trip_screen.dart';
 import 'attachment_viewer.dart';
 import 'booking_actions.dart';
+import 'ticket_file.dart';
 import 'edit_booking_screen.dart';
 
 class BookingDetailScreen extends StatelessWidget {
@@ -42,7 +42,8 @@ class BookingDetailScreen extends StatelessWidget {
             icon: const Icon(Icons.edit_outlined),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => EditBookingScreen(kind: booking.kind, existing: booking),
+                builder: (_) =>
+                    EditBookingScreen(kind: booking.kind, existing: booking),
               ),
             ),
           ),
@@ -50,21 +51,34 @@ class BookingDetailScreen extends StatelessWidget {
             onSelected: (value) {
               if (value == 'delete') _confirmDelete(context, store, booking);
             },
-            itemBuilder: (_) => const [PopupMenuItem(value: 'delete', child: Text('Delete'))],
+            itemBuilder: (_) => const [
+              PopupMenuItem(value: 'delete', child: Text('Delete')),
+            ],
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+        padding: const EdgeInsets.fromLTRB(
+          TravarySpace.gutter,
+          0,
+          TravarySpace.gutter,
+          TravarySpace.xxl,
+        ),
         children: [
           BookingCard(
             text: cardTextForBooking(booking),
             art: store.artFor(booking),
             size: CardSize.hero,
-            onShowTickets: booking.hasTickets ? () => showTickets(context, booking) : null,
+            onShowTickets: booking.hasTickets
+                ? () => showTickets(context, booking)
+                : null,
           ),
           const SizedBox(height: TravarySpace.lg),
-          _InfoRow(icon: Icons.schedule_rounded, label: 'When', value: describeWhen(booking)),
+          _InfoRow(
+            icon: Icons.schedule_rounded,
+            label: 'When',
+            value: describeWhen(booking),
+          ),
           if (booking.location != null)
             _InfoRow(
               icon: Icons.place_outlined,
@@ -84,15 +98,24 @@ class BookingDetailScreen extends StatelessWidget {
               actionTooltip: 'Copy',
               onAction: () {
                 Clipboard.setData(ClipboardData(text: booking.reference!));
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text('Reference copied')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Reference copied')),
+                );
               },
             ),
           for (final field in spec.fields)
             if (booking.detail(field.key) != null)
-              _InfoRow(icon: Icons.info_outline_rounded, label: field.label, value: booking.detail(field.key)!),
+              _InfoRow(
+                icon: Icons.info_outline_rounded,
+                label: field.label,
+                value: booking.detail(field.key)!,
+              ),
           if (booking.notes != null)
-            _InfoRow(icon: Icons.notes_rounded, label: 'Notes', value: booking.notes!),
+            _InfoRow(
+              icon: Icons.notes_rounded,
+              label: 'Notes',
+              value: booking.notes!,
+            ),
           SectionLabel(
             'Tickets & documents',
             inset: false,
@@ -110,10 +133,12 @@ class BookingDetailScreen extends StatelessWidget {
           for (final (index, attachment) in booking.attachments.indexed)
             _AttachmentTile(
               attachment: attachment,
-              file: store.attachments?.fileFor(attachment),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => AttachmentViewer(bookingId: booking.id, initialIndex: index),
+                  builder: (_) => AttachmentViewer(
+                    bookingId: booking.id,
+                    initialIndex: index,
+                  ),
                 ),
               ),
             ),
@@ -134,7 +159,11 @@ class BookingDetailScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _addAttachment(BuildContext context, TravelStore store, Booking booking) async {
+  Future<void> _addAttachment(
+    BuildContext context,
+    TravelStore store,
+    Booking booking,
+  ) async {
     final attachment = await pickAttachment(context);
     if (attachment == null) return;
     await store.saveBooking(
@@ -143,7 +172,11 @@ class BookingDetailScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _confirmDelete(BuildContext context, TravelStore store, Booking booking) async {
+  Future<void> _confirmDelete(
+    BuildContext context,
+    TravelStore store,
+    Booking booking,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -152,8 +185,14 @@ class BookingDetailScreen extends StatelessWidget {
             ? const Text('Its tickets and documents will be deleted too.')
             : null,
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Delete')),
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Delete'),
+          ),
         ],
       ),
     );
@@ -163,7 +202,10 @@ class BookingDetailScreen extends StatelessWidget {
   }
 
   Future<void> _openMaps(String place) async {
-    final uri = Uri.https('www.google.com', '/maps/search/', {'api': '1', 'query': place});
+    final uri = Uri.https('www.google.com', '/maps/search/', {
+      'api': '1',
+      'query': place,
+    });
     await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 }
@@ -210,7 +252,11 @@ class _InfoRow extends StatelessWidget {
             ),
           ),
           if (actionIcon != null)
-            IconButton(tooltip: actionTooltip, icon: Icon(actionIcon), onPressed: onAction),
+            IconButton(
+              tooltip: actionTooltip,
+              icon: Icon(actionIcon),
+              onPressed: onAction,
+            ),
         ],
       ),
     );
@@ -218,25 +264,51 @@ class _InfoRow extends StatelessWidget {
 }
 
 class _AttachmentTile extends StatelessWidget {
-  const _AttachmentTile({required this.attachment, required this.file, required this.onTap});
+  const _AttachmentTile({required this.attachment, required this.onTap});
 
   final Attachment attachment;
-  final File? file;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final thumbnail = attachment.isImage && file != null
-        ? ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: Image.file(file!, width: 44, height: 44, fit: BoxFit.cover,
-                errorBuilder: (_, _, _) => const Icon(Icons.broken_image_outlined)),
+    final icon = Icon(
+      attachment.isPdf
+          ? Icons.picture_as_pdf_outlined
+          : Icons.insert_drive_file_outlined,
+      size: 32,
+    );
+    final thumbnail = attachment.isImage
+        ? TicketFileBuilder(
+            attachment: attachment,
+            builder: (context, file, loading) => file == null
+                ? (loading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.cloud_download_outlined))
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image.file(
+                      file,
+                      width: 44,
+                      height: 44,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) =>
+                          const Icon(Icons.broken_image_outlined),
+                    ),
+                  ),
           )
-        : Icon(attachment.isPdf ? Icons.picture_as_pdf_outlined : Icons.insert_drive_file_outlined, size: 32);
+        : icon;
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: SizedBox(width: 44, height: 44, child: Center(child: thumbnail)),
-      title: Text(attachment.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+      title: Text(
+        attachment.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       trailing: const Icon(Icons.chevron_right_rounded),
       onTap: onTap,
     );

@@ -69,11 +69,16 @@ class FirestoreTravelRepository implements TravelRepository {
       .map((s) => [for (final d in s.docs) Booking.fromJson(d.id, d.data())]);
 
   @override
-  Future<void> saveTrip(Trip trip) async {
+  Future<void> createTrip(Trip trip) async {
     _membersByTrip[trip.id] = trip.memberIds;
-    // Merge, so fields only the server writes (premium) are kept.
-    _sync(_trips.doc(trip.id).set(trip.toJson(), SetOptions(merge: true)));
+    _sync(_trips.doc(trip.id).set(trip.toJson()));
   }
+
+  /// Only the editable fields: member lists are the server's, and this
+  /// phone's copy may be a few seconds old.
+  @override
+  Future<void> updateTrip(Trip trip) async =>
+      _sync(_trips.doc(trip.id).update(trip.toEditableJson()));
 
   @override
   Future<void> deleteTrip(Trip trip, Iterable<Booking> bookings) async {

@@ -62,9 +62,9 @@ videos (stub tear-off, ticket "printing" on import).
 - **Foundation (done):** domain, day/trip logic, demo + Firestore data,
   Today / Trips / Wallet / detail / form, art system, tests.
 - **Design phase:** travel-ephemera interface on top (cards, artwork, nav, header).
-- **v1.0:** premium plumbing (done), Smart Import (Cloud Function + Gemini via
-  Google AI Studio), family sharing, backup, RevenueCat paywalls, onboarding,
-  analytics funnel events.
+- **v1.0:** premium plumbing (done), Smart Import (done, Gemini via Google AI
+  Studio), family sharing + ticket backup (done), RevenueCat paywalls,
+  onboarding, analytics funnel events.
 - **v1.1:** flight alerts, Live Activity, "leave by", email-forward import.
 - **v1.2:** memories and recap, referrals, year-in-travel.
 

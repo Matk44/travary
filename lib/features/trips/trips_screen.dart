@@ -9,6 +9,7 @@ import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
+import '../sharing/join_trip_sheet.dart';
 import 'trip_screen.dart';
 
 /// Every trip: happening now, coming up, and past.
@@ -40,7 +41,9 @@ class TripsScreen extends StatelessWidget {
           itemCount: plans.length,
           separatorBuilder: (_, _) => const SizedBox(height: TravarySpace.md),
           itemBuilder: (context, i) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
+            padding: const EdgeInsets.symmetric(
+              horizontal: TravarySpace.gutter,
+            ),
             child: _TripTile(plan: plans[i], today: today),
           ),
         ),
@@ -53,8 +56,22 @@ class TripsScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, 0),
-              child: Text('Trips', style: TravaryText.display),
+              padding: const EdgeInsets.fromLTRB(
+                TravarySpace.gutter,
+                TravarySpace.lg,
+                TravarySpace.sm,
+                0,
+              ),
+              child: Row(
+                children: [
+                  Expanded(child: Text('Trips', style: TravaryText.display)),
+                  TextButton.icon(
+                    onPressed: () => _join(context),
+                    icon: const Icon(Icons.group_outlined, size: 18),
+                    label: const Text('Join a trip'),
+                  ),
+                ],
+              ),
             ),
           ),
           if (store.plans.isEmpty)
@@ -80,6 +97,14 @@ class TripsScreen extends StatelessWidget {
   }
 }
 
+Future<void> _join(BuildContext context) async {
+  final title = await showJoinTripSheet(context);
+  if (title == null || !context.mounted) return;
+  ScaffoldMessenger.of(
+    context,
+  ).showSnackBar(SnackBar(content: Text('You\'ve joined $title')));
+}
+
 class _TripTile extends StatelessWidget {
   const _TripTile({required this.plan, required this.today});
 
@@ -93,7 +118,8 @@ class _TripTile extends StatelessWidget {
     final phase = plan.phaseOn(today);
     final status = switch (phase) {
       TripPhase.active => 'Day ${plan.dayNumber(today)} of ${plan.dayCount}',
-      TripPhase.upcoming when plan.hasDates => 'Starts ${relativeDays(today.daysUntil(plan.start!))}',
+      TripPhase.upcoming when plan.hasDates =>
+        'Starts ${relativeDays(today.daysUntil(plan.start!))}',
       _ => null,
     };
     final summary = [
@@ -108,9 +134,9 @@ class _TripTile extends StatelessWidget {
       elevation: 1,
       shadowColor: const Color(0x33000000),
       child: InkWell(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id)),
-        ),
+        onTap: () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id))),
         child: SizedBox(
           height: 104,
           child: Row(
@@ -119,16 +145,27 @@ class _TripTile extends StatelessWidget {
               Container(
                 width: 88,
                 color: style.color,
-                child: Icon(style.icon, color: TravaryColors.paper.withValues(alpha: 0.9), size: 34),
+                child: Icon(
+                  style.icon,
+                  color: TravaryColors.paper.withValues(alpha: 0.9),
+                  size: 34,
+                ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: TravarySpace.lg),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: TravarySpace.lg,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(plan.trip.title, style: TravaryText.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+                      Text(
+                        plan.trip.title,
+                        style: TravaryText.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       const SizedBox(height: 2),
                       if (plan.hasDates)
                         Text(
@@ -140,7 +177,12 @@ class _TripTile extends StatelessWidget {
                   ),
                 ),
               ),
-              const Center(child: Icon(Icons.chevron_right_rounded, color: TravaryColors.inkFaint)),
+              const Center(
+                child: Icon(
+                  Icons.chevron_right_rounded,
+                  color: TravaryColors.inkFaint,
+                ),
+              ),
               const SizedBox(width: TravarySpace.sm),
             ],
           ),

@@ -43,7 +43,27 @@ class MemoryTravelRepository implements TravelRepository {
   }
 
   @override
-  Future<void> saveTrip(Trip trip) async {
+  Future<void> createTrip(Trip trip) async {
+    _trips[trip.id] = trip;
+    _tripsController.add(trips);
+  }
+
+  @override
+  Future<void> updateTrip(Trip trip) async {
+    final existing = _trips[trip.id];
+    if (existing == null) return;
+    _trips[trip.id] = existing.copyWith(
+      title: trip.title,
+      theme: trip.theme,
+      plannedStart: trip.plannedStart,
+      plannedEnd: trip.plannedEnd,
+      updatedAt: trip.updatedAt,
+    );
+    _tripsController.add(trips);
+  }
+
+  /// Replaces a trip wholesale, members included (tests and demo tools).
+  void putTrip(Trip trip) {
     _trips[trip.id] = trip;
     _tripsController.add(trips);
   }

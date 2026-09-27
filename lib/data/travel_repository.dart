@@ -20,7 +20,11 @@ abstract interface class TravelRepository {
 
   String newId();
 
-  Future<void> saveTrip(Trip trip);
+  /// Creates [trip] with its owner as the only member.
+  Future<void> createTrip(Trip trip);
+
+  /// Saves the traveller-editable fields of [trip] (title, theme, dates).
+  Future<void> updateTrip(Trip trip);
 
   /// Deletes [trip] and every one of its [bookings].
   Future<void> deleteTrip(Trip trip, Iterable<Booking> bookings);

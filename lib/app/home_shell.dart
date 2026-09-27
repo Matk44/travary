@@ -7,6 +7,7 @@ import '../features/profile/profile_screen.dart';
 import '../features/today/today_screen.dart';
 import '../features/trips/trips_screen.dart';
 import '../features/wallet/wallet_screen.dart';
+import '../state/premium_store.dart';
 import '../state/travel_store.dart';
 
 /// The four tabs plus the add button. Also shows background sync errors.
@@ -28,17 +29,26 @@ class _HomeShellState extends State<HomeShell> {
   int _index = 0;
   late final TravelStore _store;
 
+  late final PremiumStore _premium;
+
   @override
   void initState() {
     super.initState();
     _store = context.read<TravelStore>()..addListener(_showErrors);
+    _premium = context.read<PremiumStore>()..addListener(_premiumChanged);
+    // Tickets are backed up for shared trips and for trips with Plus.
+    _store.shouldBackUp = (plan) => plan.trip.isShared || _premium.forTrip(plan).allowed;
   }
 
   @override
   void dispose() {
     _store.removeListener(_showErrors);
+    _premium.removeListener(_premiumChanged);
     super.dispose();
   }
+
+  /// Buying Plus backs up existing tickets straight away.
+  void _premiumChanged() => _store.syncTickets();
 
   void _showErrors() {
     final error = _store.error;

@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 
+import '../data/attachment_backup.dart';
 import '../data/attachment_store.dart';
 import '../data/demo_data.dart';
 import '../data/firestore_travel_repository.dart';
 import '../data/memory_travel_repository.dart';
 import '../data/purchase_service.dart';
+import '../data/sharing_service.dart';
 import '../data/smart_import_service.dart';
 import '../data/travel_repository.dart';
 import '../design/art/art_catalog.dart';
@@ -33,12 +35,18 @@ class Dependencies {
     required this.repository,
     required this.purchases,
     required this.smartImport,
+    this.backup,
+    this.sharing,
     required this.artCatalog,
     required this.attachments,
   });
 
   final TravelRepository repository;
   final SmartImportService smartImport;
+
+  /// Cloud mode only: ticket backup and family sharing need saved trips.
+  final AttachmentBackup? backup;
+  final SharingService? sharing;
 
   /// Simulated store until RevenueCat is connected (step 4 of the plan).
   final PurchaseService purchases;
@@ -67,6 +75,12 @@ Future<Dependencies> bootstrap() async {
     // Smart Import always uses the cloud, even in demo mode. Firebase is set
     // up on first use, so demo mode still starts instantly and offline.
     smartImport: CloudSmartImportService(ensureSignedIn: () async => ensureSignedIn()),
+    backup: configuredBackend == Backend.cloud
+        ? FirebaseAttachmentBackup(ensureSignedIn: () async => ensureSignedIn())
+        : null,
+    sharing: configuredBackend == Backend.cloud
+        ? CloudSharingService(ensureSignedIn: () async => ensureSignedIn())
+        : null,
     artCatalog: artCatalog,
     attachments: attachments,
   );

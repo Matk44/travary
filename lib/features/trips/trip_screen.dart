@@ -11,10 +11,12 @@ import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
+import '../../data/sharing_service.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
 import '../premium/premium_gate.dart';
+import '../sharing/invite_sheet.dart';
 
 /// One trip, day by day, with every booking in order.
 class TripScreen extends StatelessWidget {
@@ -27,10 +29,15 @@ class TripScreen extends StatelessWidget {
     final store = context.watch<TravelStore>();
     final plan = store.plan(tripId);
     if (plan == null) {
-      return Scaffold(appBar: AppBar(), body: const Center(child: Text('This trip has been deleted.')));
+      return Scaffold(
+        appBar: AppBar(),
+        body: const Center(child: Text('This trip has been deleted.')),
+      );
     }
     final trip = plan.trip;
-    final days = [for (final day in plan.days) buildDayPlan(day, plan.bookings, store.now)];
+    final days = [
+      for (final day in plan.days) buildDayPlan(day, plan.bookings, store.now),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -45,11 +52,15 @@ class TripScreen extends StatelessWidget {
             onSelected: (value) => switch (value) {
               'rename' => _rename(context, store, trip),
               'delete' => _delete(context, store, plan),
+              'leave' => _leave(context, store, plan),
               _ => null,
             },
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 'rename', child: Text('Rename trip')),
-              PopupMenuItem(value: 'delete', child: Text('Delete trip')),
+            itemBuilder: (_) => [
+              const PopupMenuItem(value: 'rename', child: Text('Rename trip')),
+              if (store.isOwner(plan))
+                const PopupMenuItem(value: 'delete', child: Text('Delete trip'))
+              else
+                const PopupMenuItem(value: 'leave', child: Text('Leave trip')),
             ],
           ),
         ],
@@ -69,7 +80,9 @@ class TripScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
+              padding: const EdgeInsets.symmetric(
+                horizontal: TravarySpace.gutter,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -89,6 +102,13 @@ class TripScreen extends StatelessWidget {
                         : 'No dates yet',
                     style: TravaryText.body,
                   ),
+                  if (PremiumFeature.familySharing.released || kDebugMode) ...[
+                    const SizedBox(height: TravarySpace.lg),
+                    _Members(
+                      plan: plan,
+                      onInvite: () => _invite(context, plan),
+                    ),
+                  ],
                   const SizedBox(height: TravarySpace.lg),
                   Text('CARD STYLE', style: TravaryText.eyebrow),
                   const SizedBox(height: TravarySpace.sm),
@@ -101,7 +121,8 @@ class TripScreen extends StatelessWidget {
                           avatar: Icon(tripThemeStyle(theme).icon, size: 16),
                           label: Text(theme.label),
                           selected: trip.theme == theme,
-                          onSelected: (_) => store.updateTrip(trip.copyWith(theme: theme)),
+                          onSelected: (_) =>
+                              store.updateTrip(trip.copyWith(theme: theme)),
                         ),
                     ],
                   ),
@@ -109,31 +130,50 @@ class TripScreen extends StatelessWidget {
               ),
             ),
           ),
-          for (final (index, day) in days.indexed) ..._daySlivers(context, store, plan, day, index + 1),
+          for (final (index, day) in days.indexed)
+            ..._daySlivers(context, store, plan, day, index + 1),
           const SliverToBoxAdapter(child: SizedBox(height: 96)),
         ],
       ),
     );
   }
 
-  List<Widget> _daySlivers(BuildContext context, TravelStore store, TripPlan plan, DayPlan day, int number) {
+  List<Widget> _daySlivers(
+    BuildContext context,
+    TravelStore store,
+    TripPlan plan,
+    DayPlan day,
+    int number,
+  ) {
     final art = store.artForAll([for (final e in day.entries) e.booking]);
     final ongoing = [for (final b in day.ongoing) ongoingText(b, day.date)];
     return [
       SliverToBoxAdapter(
-        child: SectionLabel('Day $number · ${formatDayShort(day.date)}${day.date == store.today ? ' · Today' : ''}'),
+        child: SectionLabel(
+          'Day $number · ${formatDayShort(day.date)}${day.date == store.today ? ' · Today' : ''}',
+        ),
       ),
       for (final text in ongoing)
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
-            child: Text('${text.title} · ${text.subtitle}', style: TravaryText.small),
+            padding: const EdgeInsets.fromLTRB(
+              TravarySpace.gutter,
+              0,
+              TravarySpace.gutter,
+              TravarySpace.sm,
+            ),
+            child: Text(
+              '${text.title} · ${text.subtitle}',
+              style: TravaryText.small,
+            ),
           ),
         ),
       if (day.entries.isEmpty)
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
+            padding: const EdgeInsets.symmetric(
+              horizontal: TravarySpace.gutter,
+            ),
             child: Text('Free day', style: TravaryText.bodySoft),
           ),
         ),
@@ -142,14 +182,21 @@ class TripScreen extends StatelessWidget {
         itemBuilder: (context, i) {
           final entry = day.entries[i];
           return Padding(
-            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
+            padding: const EdgeInsets.fromLTRB(
+              TravarySpace.gutter,
+              0,
+              TravarySpace.gutter,
+              TravarySpace.sm,
+            ),
             child: BookingCard(
               text: cardTextForEntry(entry),
               art: art[i],
               size: CardSize.compact,
               status: entry.status,
               onTap: () => openBooking(context, entry.booking),
-              onShowTickets: entry.booking.hasTickets ? () => showTickets(context, entry.booking) : null,
+              onShowTickets: entry.booking.hasTickets
+                  ? () => showTickets(context, entry.booking)
+                  : null,
             ),
           );
         },
@@ -158,6 +205,16 @@ class TripScreen extends StatelessWidget {
   }
 
   Future<void> _invite(BuildContext context, TripPlan plan) async {
+    if (!context.read<TravelStore>().sharingAvailable) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Family sharing works with trips saved to the cloud. This is the demo version.',
+          ),
+        ),
+      );
+      return;
+    }
     final access = await requirePremium(
       context,
       PremiumFeature.familySharing,
@@ -165,12 +222,51 @@ class TripScreen extends StatelessWidget {
       source: 'trip_invite',
     );
     if (access == null || !context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Family sharing is being built. Invites arrive soon.')),
-    );
+    await showInviteSheet(context, plan);
   }
 
-  Future<void> _rename(BuildContext context, TravelStore store, Trip trip) async {
+  Future<void> _leave(
+    BuildContext context,
+    TravelStore store,
+    TripPlan plan,
+  ) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Leave ${plan.trip.title}?'),
+        content: const Text(
+          'It will disappear from your phone. The others keep it, and can invite you back.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Leave'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) return;
+    try {
+      await store.leaveTrip(plan);
+      if (context.mounted) Navigator.of(context).pop();
+    } on SharingException catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    }
+  }
+
+  Future<void> _rename(
+    BuildContext context,
+    TravelStore store,
+    Trip trip,
+  ) async {
     final controller = TextEditingController(text: trip.title);
     final title = await showDialog<String>(
       context: context,
@@ -183,8 +279,14 @@ class TripScreen extends StatelessWidget {
           onSubmitted: (value) => Navigator.pop(context, value),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, controller.text), child: const Text('Save')),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: const Text('Save'),
+          ),
         ],
       ),
     );
@@ -193,7 +295,11 @@ class TripScreen extends StatelessWidget {
     await store.updateTrip(trip.copyWith(title: title.trim()));
   }
 
-  Future<void> _delete(BuildContext context, TravelStore store, TripPlan plan) async {
+  Future<void> _delete(
+    BuildContext context,
+    TravelStore store,
+    TripPlan plan,
+  ) async {
     final count = plan.bookings.length;
     final confirmed = await showDialog<bool>(
       context: context,
@@ -205,8 +311,14 @@ class TripScreen extends StatelessWidget {
               : 'Its $count ${count == 1 ? 'booking' : 'bookings'} and their tickets will be deleted too.',
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Delete')),
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Delete'),
+          ),
         ],
       ),
     );
@@ -231,10 +343,146 @@ class _PlusBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.workspace_premium_rounded, size: 14, color: TravaryColors.mustard),
+          const Icon(
+            Icons.workspace_premium_rounded,
+            size: 14,
+            color: TravaryColors.mustard,
+          ),
           const SizedBox(width: 4),
-          Text('PLUS', style: TravaryText.eyebrow.copyWith(color: TravaryColors.paper, fontSize: 10.5)),
+          Text(
+            'PLUS',
+            style: TravaryText.eyebrow.copyWith(
+              color: TravaryColors.paper,
+              fontSize: 10.5,
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+/// "Who's coming": the people on the trip, and the way to invite more.
+class _Members extends StatelessWidget {
+  const _Members({required this.plan, required this.onInvite});
+
+  final TripPlan plan;
+  final VoidCallback onInvite;
+
+  @override
+  Widget build(BuildContext context) {
+    final store = context.watch<TravelStore>();
+    final trip = plan.trip;
+    final owner = store.isOwner(plan);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('WHO\'S COMING', style: TravaryText.eyebrow),
+        const SizedBox(height: TravarySpace.sm),
+        for (final memberId in trip.memberIds)
+          Padding(
+            padding: const EdgeInsets.only(bottom: TravarySpace.xs),
+            child: Row(
+              children: [
+                _Avatar(
+                  name: store.memberName(plan, memberId),
+                  highlight: memberId == store.userId,
+                ),
+                const SizedBox(width: TravarySpace.md),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: store.memberName(plan, memberId),
+                      children: [
+                        if (memberId == trip.ownerId)
+                          TextSpan(
+                            text: '  ·  Organiser',
+                            style: TravaryText.small,
+                          ),
+                      ],
+                    ),
+                    style: TravaryText.label,
+                  ),
+                ),
+                if (owner && memberId != trip.ownerId)
+                  IconButton(
+                    tooltip: 'Remove from trip',
+                    icon: const Icon(Icons.person_remove_outlined, size: 20),
+                    onPressed: () => _remove(context, store, memberId),
+                  ),
+              ],
+            ),
+          ),
+        const SizedBox(height: TravarySpace.xs),
+        OutlinedButton.icon(
+          onPressed: onInvite,
+          icon: const Icon(Icons.group_add_outlined, size: 18),
+          label: Text(trip.isShared ? 'Invite more' : 'Invite the family'),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _remove(
+    BuildContext context,
+    TravelStore store,
+    String memberId,
+  ) async {
+    final name = store.memberName(plan, memberId);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Remove $name?'),
+        content: Text(
+          '$name will no longer see ${plan.trip.title} or its tickets.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Remove'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    try {
+      await store.removeMember(plan, memberId);
+    } on SharingException catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    }
+  }
+}
+
+class _Avatar extends StatelessWidget {
+  const _Avatar({required this.name, required this.highlight});
+
+  final String name;
+  final bool highlight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 34,
+      height: 34,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: highlight ? TravaryColors.ink : TravaryColors.paper,
+        border: Border.all(color: TravaryColors.line),
+      ),
+      child: Text(
+        name.isEmpty ? '?' : name.characters.first.toUpperCase(),
+        style: TravaryText.label.copyWith(
+          color: highlight ? TravaryColors.paper : TravaryColors.ink,
+        ),
       ),
     );
   }
