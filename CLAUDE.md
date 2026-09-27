@@ -127,11 +127,32 @@ notification, Terms and Privacy links on the paywall, analytics wired to a
 real service, and a server function that mirrors purchases to `users/{uid}`
 and stamps `premium` on trips.
 
-## AI
+## AI / Smart Import
 
 AI features use **Google AI Studio (Gemini API)**, called only from Firebase
-Cloud Functions with the key in Secret Manager, never from the app. Project
-`travary-444` is on the Blaze plan.
+Cloud Functions with the key in Secret Manager (`GEMINI_API_KEY`), never from
+the app. Project `travary-444` is on the Blaze plan.
+
+- **Server** (`functions/`, TypeScript, Node 22): callable `smartImport`.
+  Screenshot/photo/PDF → Gemini with a JSON schema → `normaliseBookings`
+  validates everything → draft bookings. Models in `functions/.env`
+  (`SMART_IMPORT_MODEL`, `SMART_IMPORT_FALLBACK_MODEL`); busy errors
+  (429/500/503) retry, then fall back. Per-user daily cap. Logs never
+  contain document contents.
+- **Keep the response schema simple**: Gemini rejects schemas past a
+  complexity limit (400 "invalid argument"). Enforce limits in
+  `normaliseBookings` instead, with a test.
+- **App**: `data/smart_import_service.dart` → `features/import/smart_import_screen.dart`.
+  One draft opens the pre-filled form; several show as a review list.
+  Dates/times and uncertain fields are always outlined for checking.
+  Nothing is saved unchecked. The source file becomes the ticket.
+- Build/test/deploy the server: `npm --prefix functions test`, then
+  `firebase deploy --only functions`. Read logs with
+  `gcloud logging read 'resource.labels.service_name="smartimport"' --project travary-444`
+  (`firebase functions:log` lags).
+- Trip grouping for imports: bookings from one file share a trip within
+  30 days; a return flight ("Lisbon to London") joins the trip its outbound
+  flight started.
 
 ## Conventions
 
@@ -147,7 +168,7 @@ Cloud Functions with the key in Secret Manager, never from the app. Project
 ## Roadmap
 
 - **Now:** design phase (the graphic interface on top of this build).
-- **v1.0 launch** (in this order): premium plumbing ✓ → Smart Import
+- **v1.0 launch** (in this order): premium plumbing ✓ → Smart Import ✓
   (screenshot/PDF → Gemini in a Cloud Function → draft to confirm) → family
   sharing + ticket backup → RevenueCat + store products → onboarding with the
   paywall. See `docs/PRODUCT_PLAN.md`.

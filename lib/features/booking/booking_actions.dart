@@ -9,6 +9,7 @@ import '../../design/tokens.dart';
 import '../../domain/domain.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../import/smart_import_screen.dart';
 import '../premium/premium_gate.dart';
 import 'attachment_viewer.dart';
 import 'booking_detail_screen.dart';
@@ -69,8 +70,8 @@ class SmartImportChoice extends AddChoice {
   const SmartImportChoice();
 }
 
-/// Smart Import: premium, with a few free uses. The import itself is the
-/// next build step; this wires up the gate and the paywall.
+/// Smart Import: premium, with a few free uses. Pick a file, it's read in
+/// the cloud, and the traveller checks what was found before it's saved.
 Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
   final travel = context.read<TravelStore>();
   final plan = tripId == null ? travel.focus.plan : travel.plan(tripId);
@@ -81,18 +82,30 @@ Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
     source: 'add_sheet',
   );
   if (access == null || !context.mounted) return;
-  await showDialog<void>(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: const Text('Smart Import is on its way'),
-      content: Text(
-        access.isFreeUse
-            ? 'This is where your screenshot or PDF becomes a booking. '
-                  'It\'s the next thing being built. Your free imports haven\'t been used.'
-            : 'This is where your screenshot or PDF becomes a booking. '
-                  'It\'s the next thing being built.',
+  final file = await pickFile(context, title: 'What shall we read?');
+  if (file == null || !context.mounted) return;
+  final outcome = await Navigator.of(context).push<SmartImportOutcome>(
+    MaterialPageRoute(
+      builder: (_) => SmartImportScreen(
+        filePath: file.path,
+        fileName: file.name,
+        access: access,
+        tripId: tripId,
       ),
-      actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+    ),
+  );
+  if (outcome == null || !context.mounted) return;
+  if (outcome.addManually) {
+    await startAddBooking(context, tripId: tripId);
+    return;
+  }
+  if (outcome.added == 0) return;
+  final where = outcome.trips.length == 1 ? outcome.trips.single : '${outcome.trips.length} trips';
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        outcome.added == 1 ? 'Added to $where' : 'Added ${outcome.added} bookings to $where',
+      ),
     ),
   );
 }
@@ -121,12 +134,11 @@ VoidCallback? ticketsAction(BuildContext context, Booking booking) =>
     ? () => showTickets(context, booking)
     : null;
 
-/// Asks for a photo/screenshot or a file and copies it into the app.
-Future<Attachment?> pickAttachment(BuildContext context) async {
-  final store = context.read<TravelStore>();
-  final AttachmentStore? attachments = store.attachments;
-  if (attachments == null) return null;
-
+/// Asks for a photo/screenshot or a file. Returns its path and name.
+Future<({String path, String name})?> pickFile(
+  BuildContext context, {
+  String? title,
+}) async {
   final type = await showModalBottomSheet<FileType>(
     context: context,
     backgroundColor: TravaryColors.linen,
@@ -135,6 +147,11 @@ Future<Attachment?> pickAttachment(BuildContext context) async {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (title != null)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
+              child: Align(alignment: Alignment.centerLeft, child: Text(title, style: TravaryText.title)),
+            ),
           ListTile(
             leading: const Icon(Icons.photo_outlined),
             title: const Text('Photo or screenshot'),
@@ -160,7 +177,16 @@ Future<Attachment?> pickAttachment(BuildContext context) async {
   );
   final path = files.isEmpty ? null : files.first.path;
   if (path == null) return null;
-  return attachments.import(path, name: files.first.name);
+  return (path: path, name: files.first.name);
+}
+
+/// Asks for a photo/screenshot or a file and copies it into the app.
+Future<Attachment?> pickAttachment(BuildContext context) async {
+  final AttachmentStore? attachments = context.read<TravelStore>().attachments;
+  if (attachments == null) return null;
+  final file = await pickFile(context);
+  if (file == null) return null;
+  return attachments.import(file.path, name: file.name);
 }
 
 /// Eight big tiles, one per kind of booking.

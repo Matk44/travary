@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../data/smart_import_service.dart';
 import '../design/tokens.dart';
 import '../state/premium_store.dart';
 import '../state/travel_store.dart';
@@ -16,6 +17,7 @@ class TravaryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<SmartImportService>.value(value: dependencies.smartImport),
         ChangeNotifierProvider(
           create: (_) => TravelStore(
             repository: dependencies.repository,

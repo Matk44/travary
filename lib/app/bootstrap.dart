@@ -8,6 +8,7 @@ import '../data/demo_data.dart';
 import '../data/firestore_travel_repository.dart';
 import '../data/memory_travel_repository.dart';
 import '../data/purchase_service.dart';
+import '../data/smart_import_service.dart';
 import '../data/travel_repository.dart';
 import '../design/art/art_catalog.dart';
 import '../domain/domain.dart';
@@ -31,11 +32,13 @@ class Dependencies {
   const Dependencies({
     required this.repository,
     required this.purchases,
+    required this.smartImport,
     required this.artCatalog,
     required this.attachments,
   });
 
   final TravelRepository repository;
+  final SmartImportService smartImport;
 
   /// Simulated store until RevenueCat is connected (step 4 of the plan).
   final PurchaseService purchases;
@@ -61,6 +64,9 @@ Future<Dependencies> bootstrap() async {
   return Dependencies(
     repository: repository,
     purchases: TestPurchaseService(),
+    // Smart Import always uses the cloud, even in demo mode. Firebase is set
+    // up on first use, so demo mode still starts instantly and offline.
+    smartImport: CloudSmartImportService(ensureSignedIn: () async => ensureSignedIn()),
     artCatalog: artCatalog,
     attachments: attachments,
   );
@@ -73,13 +79,22 @@ TravelRepository _demoRepository() {
   return repository;
 }
 
-Future<TravelRepository> _cloudRepository() async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+/// Initialises Firebase (once) and signs the traveller in anonymously if
+/// they aren't signed in yet. Returns their user id.
+Future<String> ensureSignedIn() async {
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  }
   final auth = FirebaseAuth.instance;
+  final user = auth.currentUser ?? (await auth.signInAnonymously()).user;
+  if (user == null) throw const StartupException('Couldn\'t sign in.');
+  return user.uid;
+}
+
+Future<TravelRepository> _cloudRepository() async {
   try {
-    final user = auth.currentUser ?? (await auth.signInAnonymously()).user;
-    if (user == null) throw const StartupException('Couldn\'t sign in.');
-    return FirestoreTravelRepository(firestore: FirebaseFirestore.instance, userId: user.uid);
+    final userId = await ensureSignedIn();
+    return FirestoreTravelRepository(firestore: FirebaseFirestore.instance, userId: userId);
   } on FirebaseAuthException catch (e) {
     if (e.code == 'operation-not-allowed' || e.code == 'admin-restricted-operation') {
       throw const StartupException(

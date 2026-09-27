@@ -12,6 +12,12 @@ const geminiApiKey = defineSecret('GEMINI_API_KEY');
 /** Change without a code edit: `SMART_IMPORT_MODEL=...` in functions/.env. */
 const model = defineString('SMART_IMPORT_MODEL', { default: 'gemini-3.8-flash' });
 
+/** Used when the main model is overloaded. */
+const fallbackModel = defineString('SMART_IMPORT_FALLBACK_MODEL', { default: 'gemini-3.6-flash' });
+
+/** Errors worth another go: overloaded (503), rate limited (429), server (500). */
+const RETRYABLE = new Set([429, 500, 503]);
+
 const MIME_TYPES = new Set([
   'image/png', 'image/jpeg', 'image/webp', 'image/heic', 'image/heif', 'application/pdf',
 ]);
@@ -51,8 +57,41 @@ export const smartImport = onCall(
     const ai = new GoogleGenAI({ apiKey: geminiApiKey.value() });
     const started = Date.now();
     try {
+      const { response, usedModel, attempts } = await generateWithRetry(ai, input);
+      const result = normaliseBookings(JSON.parse(response.text ?? '{}'));
+      // Log sizes and timings only, never the traveller's documents.
+      logger.info('smart_import', {
+        uid,
+        files: input.files.length,
+        bookings: result.bookings.length,
+        ms: Date.now() - started,
+        model: usedModel,
+        attempts,
+        tokens: response.usageMetadata?.totalTokenCount,
+      });
+      return result;
+    } catch (error) {
+      throw toHttpsError(error);
+    }
+  },
+);
+
+/**
+ * Asks Gemini, riding out short spikes: two tries on the main model with a
+ * pause, then one on the fallback model. Other errors fail straight away.
+ */
+async function generateWithRetry(ai: GoogleGenAI, input: ImportRequest) {
+  const plan = [
+    { model: model.value(), delayMs: 0 },
+    { model: model.value(), delayMs: 1500 },
+    { model: fallbackModel.value(), delayMs: 500 },
+  ];
+  let lastError: unknown;
+  for (const [index, step] of plan.entries()) {
+    if (step.delayMs) await new Promise((resolve) => setTimeout(resolve, step.delayMs));
+    try {
       const response = await ai.models.generateContent({
-        model: model.value(),
+        model: step.model,
         contents: [
           {
             role: 'user',
@@ -69,22 +108,15 @@ export const smartImport = onCall(
           thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         },
       });
-
-      const result = normaliseBookings(JSON.parse(response.text ?? '{}'));
-      // Log sizes and timings only, never the traveller's documents.
-      logger.info('smart_import', {
-        uid,
-        files: input.files.length,
-        bookings: result.bookings.length,
-        ms: Date.now() - started,
-        tokens: response.usageMetadata?.totalTokenCount,
-      });
-      return result;
+      return { response, usedModel: step.model, attempts: index + 1 };
     } catch (error) {
-      throw toHttpsError(error);
+      lastError = error;
+      if (!(error instanceof ApiError) || !RETRYABLE.has(error.status)) throw error;
+      logger.warn('smart_import_retry', { model: step.model, status: error.status, attempt: index + 1 });
     }
-  },
-);
+  }
+  throw lastError;
+}
 
 function parseRequest(data: unknown): ImportRequest {
   const body = (data && typeof data === 'object' ? data : {}) as Record<string, unknown>;
@@ -136,9 +168,9 @@ function toHttpsError(error: unknown): HttpsError {
     return new HttpsError('internal', 'Couldn\'t read that booking. Try a clearer screenshot.');
   }
   if (error instanceof ApiError) {
-    logger.error('smart_import_gemini_error', { status: error.status, message: error.message });
-    if (error.status === 429) {
-      return new HttpsError('resource-exhausted', 'Smart Import is busy right now. Try again in a minute.');
+    logger.error('smart_import_gemini_error', { status: error.status, detail: error.message.slice(0, 1000) });
+    if (RETRYABLE.has(error.status)) {
+      return new HttpsError('unavailable', 'Smart Import is busy right now. Try again in a minute.');
     }
     if (error.status === 400) {
       return new HttpsError('invalid-argument', 'Couldn\'t read that file. Try a screenshot or PDF.');

@@ -15,16 +15,27 @@ class EditBookingScreen extends StatefulWidget {
     super.key,
     required this.kind,
     this.existing,
+    this.draft,
     this.initialDate,
     this.tripId,
+    this.sourceFilePath,
+    this.sourceFileName,
   });
 
   final BookingKind kind;
   final Booking? existing;
+
+  /// A booking read by Smart Import: pre-fills a new booking and highlights
+  /// what the traveller should check.
+  final BookingDraft? draft;
   final LocalDate? initialDate;
 
   /// Put the booking in this trip. Null lets the app choose.
   final String? tripId;
+
+  /// The file a draft was read from, attached as the booking's ticket.
+  final String? sourceFilePath;
+  final String? sourceFileName;
 
   @override
   State<EditBookingScreen> createState() => _EditBookingScreenState();
@@ -54,10 +65,12 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   KindSpec get _spec => widget.kind.spec;
   bool get _isEditing => widget.existing != null;
 
+  Set<String> get _highlight => widget.draft?.highlight ?? const {};
+
   @override
   void initState() {
     super.initState();
-    final existing = widget.existing;
+    final existing = widget.existing ?? widget.draft?.booking;
     _store = context.read<TravelStore>();
     _title = TextEditingController(text: existing?.title);
     _location = TextEditingController(text: existing?.location);
@@ -72,8 +85,25 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     _endDate = existing?.endDate ??
         (existing == null && _spec.endUsuallyLaterDay ? _startDate.addDays(1) : null);
     _endTime = existing?.endTime;
-    _tripId = existing?.tripId ?? widget.tripId ?? '';
-    _attachments = [...?existing?.attachments];
+    _tripId = widget.existing?.tripId ?? widget.tripId ?? '';
+    _attachments = [...?widget.existing?.attachments];
+    if (widget.sourceFilePath != null) _attachSource();
+  }
+
+  Future<void> _attachSource() async {
+    final attachment = await _store.attachments?.import(
+      widget.sourceFilePath!,
+      name: widget.sourceFileName,
+    );
+    if (attachment == null) return;
+    if (!mounted) {
+      await _store.attachments?.delete(attachment);
+      return;
+    }
+    setState(() {
+      _attachments.add(attachment);
+      _addedAttachments.add(attachment);
+    });
   }
 
   @override
@@ -208,6 +238,19 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
 
   // ---------------------------------------------------------------- build
 
+  /// Outlines a field Smart Import wasn't sure about.
+  InputDecoration _check(String field, InputDecoration decoration) {
+    if (!_highlight.contains(field)) return decoration;
+    return decoration.copyWith(
+      helperText: 'Check this',
+      helperStyle: TravaryText.small.copyWith(color: TravaryColors.coral),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(TravaryRadius.small),
+        borderSide: const BorderSide(color: TravaryColors.coral, width: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final store = context.watch<TravelStore>();
@@ -226,16 +269,17 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.sm, TravarySpace.gutter, TravarySpace.xxl),
         children: [
+          if (widget.draft != null) const _ImportBanner(),
           TextField(
             controller: _title,
-            autofocus: !_isEditing,
+            autofocus: !_isEditing && widget.draft == null,
             textCapitalization: TextCapitalization.words,
             style: TravaryText.title,
-            decoration: InputDecoration(
+            decoration: _check('title', InputDecoration(
               labelText: _spec.titleLabel,
               hintText: _spec.titleHint,
               errorText: _titleError,
-            ),
+            )),
             onChanged: (_) {
               if (_titleError != null) setState(() => _titleError = null);
             },
@@ -243,6 +287,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
           const SizedBox(height: TravarySpace.lg),
           _DateTimeRow(
             label: _spec.startLabel,
+            checkDate: _highlight.contains('startDate'),
+            checkTime: _highlight.contains('startTime'),
             date: formatDayShort(_startDate),
             time: _startTime == null ? null : formatClock(_startTime!),
             onDate: () async {
@@ -265,6 +311,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
             const SizedBox(height: TravarySpace.md),
             _DateTimeRow(
               label: _spec.endLabel!,
+              checkDate: _highlight.contains('endDate') && _endDate != null,
+              checkTime: _highlight.contains('endTime') && _endTime != null,
               date: _endDate == null ? 'Same day' : formatDayShort(_endDate!),
               time: _endTime == null ? null : formatClock(_endTime!),
               onDate: () async {
@@ -282,7 +330,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
           TextField(
             controller: _location,
             textCapitalization: TextCapitalization.words,
-            decoration: InputDecoration(labelText: '${_spec.locationLabel} (optional)'),
+            decoration: _check('location', InputDecoration(labelText: '${_spec.locationLabel} (optional)')),
           ),
           for (final field in _spec.fields) ...[
             const SizedBox(height: TravarySpace.md),
@@ -290,14 +338,17 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
               controller: _details[field.key],
               keyboardType: field.numeric ? TextInputType.number : TextInputType.text,
               textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(labelText: '${field.label} (optional)', hintText: field.hint),
+              decoration: _check(
+                'details.${field.key}',
+                InputDecoration(labelText: '${field.label} (optional)', hintText: field.hint),
+              ),
             ),
           ],
           const SizedBox(height: TravarySpace.md),
           TextField(
             controller: _reference,
             textCapitalization: TextCapitalization.characters,
-            decoration: const InputDecoration(labelText: 'Booking reference (optional)'),
+            decoration: _check('reference', const InputDecoration(labelText: 'Booking reference (optional)')),
           ),
           const SizedBox(height: TravarySpace.md),
           TextField(
@@ -305,7 +356,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
             minLines: 2,
             maxLines: 6,
             textCapitalization: TextCapitalization.sentences,
-            decoration: const InputDecoration(labelText: 'Notes (optional)'),
+            decoration: _check('notes', const InputDecoration(labelText: 'Notes (optional)')),
           ),
           const SectionLabel('Tickets & documents', inset: false),
           for (final attachment in _attachments)
@@ -353,9 +404,15 @@ class _DateTimeRow extends StatelessWidget {
     required this.onDate,
     required this.onTime,
     this.onClearTime,
+    this.checkDate = false,
+    this.checkTime = false,
   });
 
   final String label;
+
+  /// Outline the date / time for the traveller to check (imports).
+  final bool checkDate;
+  final bool checkTime;
   final String date;
   final String? time;
   final VoidCallback onDate;
@@ -370,6 +427,7 @@ class _DateTimeRow extends StatelessWidget {
         ActionChip(
           avatar: const Icon(Icons.calendar_today_rounded, size: 16),
           label: Text(date),
+          side: checkDate ? _checkSide : null,
           onPressed: onDate,
         ),
         const SizedBox(width: TravarySpace.sm),
@@ -383,10 +441,44 @@ class _DateTimeRow extends StatelessWidget {
           InputChip(
             avatar: const Icon(Icons.schedule_rounded, size: 16),
             label: Text(time!),
+            side: checkTime ? _checkSide : null,
             onPressed: onTime,
             onDeleted: onClearTime,
           ),
       ],
+    );
+  }
+}
+
+const _checkSide = BorderSide(color: TravaryColors.coral, width: 2);
+
+/// Shown on a form filled in by Smart Import.
+class _ImportBanner extends StatelessWidget {
+  const _ImportBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: TravarySpace.lg),
+      padding: const EdgeInsets.all(TravarySpace.md),
+      decoration: BoxDecoration(
+        color: TravaryColors.coral.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(TravaryRadius.small),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.auto_awesome_rounded, color: TravaryColors.coral, size: 20),
+          const SizedBox(width: TravarySpace.sm),
+          Expanded(
+            child: Text(
+              'Filled in by Smart Import. Please check the outlined details, '
+              'especially dates and times, then save.',
+              style: TravaryText.bodySoft.copyWith(color: TravaryColors.ink),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -67,6 +67,14 @@ void main() {
     expect(cardTextForBooking(flight).stub, 'SEAT 14A');
   });
 
+  test('review wording puts the date in the column and the time up front', () {
+    final flight = booking('f', BookingKind.flight, d(11, 14),
+        at: const ClockTime(19, 10), details: {DetailKeys.flightNumber: 'SB 2168'});
+    final text = cardTextForReview(flight);
+    expect(text.when, '14 Nov');
+    expect(text.detail, '7:10pm · SB 2168');
+  });
+
   test('ongoing wording counts down to the end', () {
     final hotel = booking('hotel', BookingKind.stay, d(10, 12), endDate: d(10, 18), title: 'Lagoon Resort',
         details: {DetailKeys.room: '2214'});

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../domain/domain.dart';
+import 'latest_stream.dart';
 
 enum PurchaseOutcome { purchased, cancelled, failed }
 
@@ -52,10 +53,7 @@ class TestPurchaseService implements PurchaseService {
   String get label => 'Test purchases';
 
   @override
-  Stream<Entitlements> watchEntitlements() async* {
-    yield _entitlements;
-    yield* _controller.stream;
-  }
+  Stream<Entitlements> watchEntitlements() => startWith(() => _entitlements, _controller.stream);
 
   @override
   Future<List<Offer>> loadOffers() async {

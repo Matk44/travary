@@ -143,7 +143,8 @@ class TravelStore extends ChangeNotifier {
     String tripTitle;
 
     if (saved.tripId.isEmpty) {
-      final match = findTripFor(saved.startDate, saved.lastDate, _plans);
+      final match = findTripFor(saved.startDate, saved.lastDate, _plans) ??
+          findReturnFlightTrip(saved, _plans);
       if (match != null) {
         saved = saved.copyWith(tripId: match.id);
         tripTitle = match.trip.title;
@@ -171,6 +172,37 @@ class TravelStore extends ChangeNotifier {
       }
     }
     return SaveResult(saved, tripTitle, newTrip: newTrip);
+  }
+
+  /// Saves several new bookings at once (everything Smart Import found in
+  /// one file). Bookings from one file land in the same trip when they're
+  /// within a few weeks, including a trip created earlier in this batch.
+  Future<List<SaveResult>> saveBookings(List<Booking> bookings) async {
+    final ordered = [...bookings]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+    final createdHere = <_NewTrip>[];
+    final results = <SaveResult>[];
+    for (var booking in ordered) {
+      if (booking.tripId.isEmpty &&
+          findTripFor(booking.startDate, booking.lastDate, _plans) == null &&
+          findReturnFlightTrip(booking, _plans) == null) {
+        for (final trip in createdHere) {
+          if (gapBetween(booking.startDate, booking.lastDate, trip.start, trip.end) <= sameSourceMarginDays) {
+            booking = booking.copyWith(tripId: trip.id);
+            break;
+          }
+        }
+      }
+      final result = await saveBooking(booking);
+      results.add(result);
+      final saved = result.booking;
+      final known = createdHere.where((t) => t.id == saved.tripId).firstOrNull;
+      if (result.newTrip) {
+        createdHere.add(_NewTrip(saved.tripId, saved.startDate, saved.lastDate));
+      } else if (known != null) {
+        known.stretch(saved.startDate, saved.lastDate);
+      }
+    }
+    return results;
   }
 
   Future<void> deleteBooking(Booking booking) async {
@@ -266,5 +298,19 @@ class TravelStore extends ChangeNotifier {
       subscription.cancel();
     }
     super.dispose();
+  }
+}
+
+/// A trip created during a batch save, before the repository echoes it back.
+class _NewTrip {
+  _NewTrip(this.id, this.start, this.end);
+
+  final String id;
+  LocalDate start;
+  LocalDate end;
+
+  void stretch(LocalDate from, LocalDate to) {
+    start = LocalDate.min(start, from);
+    end = LocalDate.max(end, to);
   }
 }

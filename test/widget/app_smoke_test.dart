@@ -111,7 +111,7 @@ void main() {
 
       await tester.tap(find.text('Import a screenshot or PDF'));
       await tester.pumpAndSettle();
-      expect(find.text('Smart Import is on its way'), findsOneWidget);
+      expect(find.text('What shall we read?'), findsOneWidget);
     });
 
     testWidgets('after the free imports, the paywall offers Plus and a Trip Pass, and buying unlocks it', (tester) async {
@@ -130,7 +130,7 @@ void main() {
 
       await tester.tap(find.text('Start my free 14 days'));
       await tester.pumpAndSettle();
-      expect(find.text('Smart Import is on its way'), findsOneWidget);
+      expect(find.text('What shall we read?'), findsOneWidget);
     });
 
     testWidgets('choosing the Trip Pass explains it and prices it per day', (tester) async {
@@ -160,7 +160,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Skip the typing'), findsNothing);
-      expect(find.text('Smart Import is on its way'), findsNothing);
+      expect(find.text('What shall we read?'), findsNothing);
     });
   });
 }

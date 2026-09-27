@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import '../domain/domain.dart';
+import 'latest_stream.dart';
 import 'travel_repository.dart';
 
 /// Keeps everything in memory. Used for demo mode (design work with sample
@@ -25,16 +26,10 @@ class MemoryTravelRepository implements TravelRepository {
   List<Booking> get bookings => List.unmodifiable(_bookings.values);
 
   @override
-  Stream<List<Trip>> watchTrips() async* {
-    yield trips;
-    yield* _tripsController.stream;
-  }
+  Stream<List<Trip>> watchTrips() => startWith(() => trips, _tripsController.stream);
 
   @override
-  Stream<List<Booking>> watchBookings() async* {
-    yield bookings;
-    yield* _bookingsController.stream;
-  }
+  Stream<List<Booking>> watchBookings() => startWith(() => bookings, _bookingsController.stream);
 
   @override
   Stream<String> get errors => const Stream.empty();

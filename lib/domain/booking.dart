@@ -73,13 +73,14 @@ class Booking {
   }
 
   Booking copyWith({
+    String? id,
     String? tripId,
     List<Attachment>? attachments,
     String? artKey,
     DateTime? updatedAt,
   }) {
     return Booking(
-      id: id,
+      id: id ?? this.id,
       tripId: tripId ?? this.tripId,
       kind: kind,
       title: title,

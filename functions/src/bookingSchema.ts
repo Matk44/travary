@@ -36,9 +36,11 @@ const text = (description: string) => ({ type: 'string', description });
 export const responseSchema = {
   type: 'object',
   properties: {
+    // Kept deliberately simple: Gemini rejects schemas past a complexity
+    // limit. List size and allowed "uncertain" values are enforced by
+    // normaliseBookings instead.
     bookings: {
       type: 'array',
-      maxItems: 12,
       items: {
         type: 'object',
         properties: {
@@ -64,8 +66,8 @@ export const responseSchema = {
           },
           uncertain: {
             type: 'array',
-            items: { type: 'string', enum: [...FIELDS] },
-            description: 'Fields you could not read with confidence.',
+            items: { type: 'string' },
+            description: `Fields you could not read with confidence, from: ${FIELDS.join(', ')}.`,
           },
         },
         required: ['kind', 'title', 'startDate'],

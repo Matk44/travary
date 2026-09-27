@@ -93,6 +93,22 @@ CardText cardTextForList(Booking booking) {
   );
 }
 
+/// Wording for checking a booking before it's saved (Smart Import): the
+/// date in the narrow column, the time up front in the detail line.
+CardText cardTextForReview(Booking booking) {
+  final time = booking.startTime == null ? null : formatClock(booking.startTime!);
+  final detail = [time, _detailLine(booking)].whereType<String>().join(' · ');
+  return CardText(
+    eyebrow: _kindEyebrow(booking, booking.startTime),
+    title: booking.title,
+    when: formatDayMonth(booking.startDate),
+    detail: detail.isEmpty ? null : detail,
+    place: _nonEmpty(booking.location),
+    stub: _stub(booking),
+    reference: _nonEmpty(booking.reference),
+  );
+}
+
 /// Wording for a multi-day booking you're in the middle of on [date]:
 /// "Lagoon Resort · Room 2214" / "Check-out in 4 days".
 ({String title, String subtitle}) ongoingText(Booking booking, LocalDate date) {
