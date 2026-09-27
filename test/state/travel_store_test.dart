@@ -67,10 +67,24 @@ void main() {
     expect(store.focus.daysUntilStart, 41);
   });
 
+  test('a failed load shows what there is instead of spinning forever', () async {
+    final failing = _FailingBookingsRepository();
+    final failingStore = TravelStore(repository: failing, artCatalog: const ArtCatalog.empty());
+    addTearDown(failingStore.dispose);
+    await pumpEventQueue();
+    expect(failingStore.isLoading, isFalse);
+    expect(failingStore.error, 'Couldn\'t load your bookings.');
+  });
+
   test('deleting a trip removes its bookings', () async {
     await store.deleteTrip(store.plans.single);
     await pumpEventQueue();
     expect(store.plans, isEmpty);
     expect(store.bookings, isEmpty);
   });
+}
+
+class _FailingBookingsRepository extends MemoryTravelRepository {
+  @override
+  Stream<List<Booking>> watchBookings() => Stream.error('Couldn\'t load your bookings.');
 }

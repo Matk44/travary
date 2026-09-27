@@ -11,10 +11,13 @@ import 'travel_repository.dart';
 /// Layout (built for family sharing):
 ///
 ///     trips/{tripId}                      title, theme, ownerId, memberIds[]
-///     trips/{tripId}/bookings/{bookingId} the booking
+///     trips/{tripId}/bookings/{bookingId} the booking + a copy of memberIds
 ///
-/// A trip is visible to everyone in its `memberIds`; bookings inherit that
-/// through the security rules (see `firestore.rules`).
+/// Every booking carries a copy of its trip's `memberIds`, so all of a
+/// traveller's bookings load with one collection-group query and the read
+/// rule never has to look the trip up. (Looking it up fails for a trip
+/// created a moment ago, before the server has it.) When trip members
+/// change, their bookings' copies must be updated in the same batch.
 class FirestoreTravelRepository implements TravelRepository {
   FirestoreTravelRepository({
     required FirebaseFirestore firestore,
@@ -23,6 +26,9 @@ class FirestoreTravelRepository implements TravelRepository {
 
   final FirebaseFirestore _db;
   final _errors = StreamController<String>.broadcast();
+
+  /// Latest known members of each trip, for stamping onto bookings.
+  final _membersByTrip = <String, List<String>>{};
 
   @override
   final String userId;
@@ -45,57 +51,28 @@ class FirestoreTravelRepository implements TravelRepository {
   Stream<List<Trip>> watchTrips() => _trips
       .where('memberIds', arrayContains: userId)
       .snapshots()
-      .map((s) => [for (final d in s.docs) Trip.fromJson(d.id, d.data())]);
-
-  /// Merges one live listener per trip into a single list of bookings.
-  @override
-  Stream<List<Booking>> watchBookings() {
-    late final StreamController<List<Booking>> controller;
-    StreamSubscription<List<Trip>>? tripsSubscription;
-    final perTrip = <String, StreamSubscription<QuerySnapshot<Map<String, dynamic>>>>{};
-    final byTrip = <String, List<Booking>>{};
-
-    void emit() => controller.add([for (final list in byTrip.values) ...list]);
-
-    void onTrips(List<Trip> trips) {
-      final ids = {for (final t in trips) t.id};
-      for (final gone in perTrip.keys.where((id) => !ids.contains(id)).toList()) {
-        perTrip.remove(gone)?.cancel();
-        byTrip.remove(gone);
-      }
-      for (final id in ids.where((id) => !perTrip.containsKey(id))) {
-        perTrip[id] = _bookingsOf(id).snapshots().listen((snapshot) {
-          byTrip[id] = [
-            for (final d in snapshot.docs) Booking.fromJson(d.id, d.data()),
-          ];
-          emit();
-        }, onError: controller.addError);
-      }
-      emit();
-    }
-
-    controller = StreamController<List<Booking>>(
-      onListen: () {
-        tripsSubscription = watchTrips().listen(
-          onTrips,
-          onError: controller.addError,
-        );
-      },
-      onCancel: () async {
-        await tripsSubscription?.cancel();
-        for (final subscription in perTrip.values) {
-          await subscription.cancel();
+      .transform(_friendlyErrors('trips'))
+      .map((snapshot) {
+        final trips = [for (final d in snapshot.docs) Trip.fromJson(d.id, d.data())];
+        for (final trip in trips) {
+          _membersByTrip[trip.id] = trip.memberIds;
         }
-        perTrip.clear();
-        byTrip.clear();
-      },
-    );
-    return controller.stream;
-  }
+        return trips;
+      });
 
   @override
-  Future<void> saveTrip(Trip trip) async =>
-      _sync(_trips.doc(trip.id).set(trip.toJson()));
+  Stream<List<Booking>> watchBookings() => _db
+      .collectionGroup('bookings')
+      .where('memberIds', arrayContains: userId)
+      .snapshots()
+      .transform(_friendlyErrors('bookings'))
+      .map((s) => [for (final d in s.docs) Booking.fromJson(d.id, d.data())]);
+
+  @override
+  Future<void> saveTrip(Trip trip) async {
+    _membersByTrip[trip.id] = trip.memberIds;
+    _sync(_trips.doc(trip.id).set(trip.toJson()));
+  }
 
   @override
   Future<void> deleteTrip(Trip trip, Iterable<Booking> bookings) async {
@@ -109,20 +86,37 @@ class FirestoreTravelRepository implements TravelRepository {
 
   @override
   Future<void> saveBooking(Booking booking) async => _sync(
-    _bookingsOf(booking.tripId).doc(booking.id).set(booking.toJson()),
+    _bookingsOf(booking.tripId).doc(booking.id).set(_bookingData(booking)),
   );
 
   @override
   Future<void> moveBooking(Booking booking, String fromTripId) async {
     final batch = _db.batch()
       ..delete(_bookingsOf(fromTripId).doc(booking.id))
-      ..set(_bookingsOf(booking.tripId).doc(booking.id), booking.toJson());
+      ..set(_bookingsOf(booking.tripId).doc(booking.id), _bookingData(booking));
     _sync(batch.commit());
   }
 
   @override
   Future<void> deleteBooking(Booking booking) async =>
       _sync(_bookingsOf(booking.tripId).doc(booking.id).delete());
+
+  Map<String, Object?> _bookingData(Booking booking) => {
+    ...booking.toJson(),
+    'memberIds': _membersByTrip[booking.tripId] ?? [userId],
+  };
+
+  /// Turns Firestore listener errors into a sentence for the traveller.
+  /// The code stays in brackets to help with support.
+  StreamTransformer<T, T> _friendlyErrors<T>(String what) =>
+      StreamTransformer.fromHandlers(
+        handleError: (error, stackTrace, sink) => sink.addError(
+          error is FirebaseException
+              ? 'Couldn\'t load your $what (${error.code}). Try again shortly.'
+              : 'Couldn\'t load your $what.',
+          stackTrace,
+        ),
+      );
 
   /// Firestore applies writes to its local cache immediately, but the
   /// returned future only completes once the server confirms, which never

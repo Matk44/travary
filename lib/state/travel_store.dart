@@ -38,12 +38,19 @@ class TravelStore extends ChangeNotifier {
         _trips = trips;
         _tripsLoaded = true;
         _rebuild();
-      }, onError: _reportError),
+      }, onError: (Object error) {
+        // Show whatever we have rather than a spinner forever.
+        _tripsLoaded = true;
+        _reportError(error);
+      }),
       repository.watchBookings().listen((bookings) {
         _bookings = bookings;
         _bookingsLoaded = true;
         _rebuild();
-      }, onError: _reportError),
+      }, onError: (Object error) {
+        _bookingsLoaded = true;
+        _reportError(error);
+      }),
       repository.errors.listen(_reportError),
     ]);
     // Keeps "happening now" / "next up" current while the app is open.

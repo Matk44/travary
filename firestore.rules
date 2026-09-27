@@ -3,7 +3,7 @@ rules_version = '2';
 // Travary security rules.
 //
 //   trips/{tripId}                        title, theme, ownerId, memberIds[]
-//   trips/{tripId}/bookings/{bookingId}   one booking
+//   trips/{tripId}/bookings/{bookingId}   one booking + a copy of memberIds[]
 //
 // A trip (and everything in it) is visible only to its members. Only the
 // owner can delete a trip or change who's on it. Everything else is denied,
@@ -34,11 +34,25 @@ service cloud.firestore {
 
       allow delete: if signedIn() && resource.data.ownerId == request.auth.uid;
 
+      // Writes check the trip itself and that the booking carries the
+      // trip's current member list. (Writes reach the server in order, so a
+      // trip created just before its first booking already exists here.)
       match /bookings/{bookingId} {
-        allow read, write: if isMember(
-          get(/databases/$(database)/documents/trips/$(tripId)).data
-        );
+        function trip() {
+          return get(/databases/$(database)/documents/trips/$(tripId)).data;
+        }
+
+        allow create, update: if isMember(trip())
+          && request.resource.data.memberIds == trip().memberIds;
+        allow delete: if isMember(trip());
       }
+    }
+
+    // Reads, including the app's collection-group query over all bookings,
+    // use the member list copied onto each booking. No trip lookup needed,
+    // so a brand-new trip's bookings are readable straight away.
+    match /{path=**}/bookings/{bookingId} {
+      allow read: if signedIn() && request.auth.uid in resource.data.memberIds;
     }
   }
 }
