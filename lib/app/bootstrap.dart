@@ -7,6 +7,7 @@ import '../data/attachment_store.dart';
 import '../data/demo_data.dart';
 import '../data/firestore_travel_repository.dart';
 import '../data/memory_travel_repository.dart';
+import '../data/purchase_service.dart';
 import '../data/travel_repository.dart';
 import '../design/art/art_catalog.dart';
 import '../domain/domain.dart';
@@ -27,9 +28,17 @@ Backend get configuredBackend => _backendName == 'cloud' ? Backend.cloud : Backe
 
 /// Everything the app needs before it can show a screen.
 class Dependencies {
-  const Dependencies({required this.repository, required this.artCatalog, required this.attachments});
+  const Dependencies({
+    required this.repository,
+    required this.purchases,
+    required this.artCatalog,
+    required this.attachments,
+  });
 
   final TravelRepository repository;
+
+  /// Simulated store until RevenueCat is connected (step 4 of the plan).
+  final PurchaseService purchases;
   final ArtCatalog artCatalog;
   final AttachmentStore attachments;
 }
@@ -49,7 +58,12 @@ Future<Dependencies> bootstrap() async {
     Backend.demo => _demoRepository(),
     Backend.cloud => await _cloudRepository(),
   };
-  return Dependencies(repository: repository, artCatalog: artCatalog, attachments: attachments);
+  return Dependencies(
+    repository: repository,
+    purchases: TestPurchaseService(),
+    artCatalog: artCatalog,
+    attachments: attachments,
+  );
 }
 
 TravelRepository _demoRepository() {

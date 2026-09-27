@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,8 +11,10 @@ import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
+import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
+import '../premium/premium_gate.dart';
 
 /// One trip, day by day, with every booking in order.
 class TripScreen extends StatelessWidget {
@@ -32,6 +35,12 @@ class TripScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          if (PremiumFeature.familySharing.released || kDebugMode)
+            IconButton(
+              tooltip: 'Invite family',
+              icon: const Icon(Icons.group_add_outlined),
+              onPressed: () => _invite(context, plan),
+            ),
           PopupMenuButton<String>(
             onSelected: (value) => switch (value) {
               'rename' => _rename(context, store, trip),
@@ -68,6 +77,11 @@ class TripScreen extends StatelessWidget {
                     onTap: () => _rename(context, store, trip),
                     child: Text(trip.title, style: TravaryText.display),
                   ),
+                  if (context.watch<PremiumStore>().forTrip(plan).allowed)
+                    const Padding(
+                      padding: EdgeInsets.only(top: TravarySpace.xs),
+                      child: _PlusBadge(),
+                    ),
                   const SizedBox(height: TravarySpace.xs),
                   Text(
                     plan.hasDates
@@ -143,6 +157,19 @@ class TripScreen extends StatelessWidget {
     ];
   }
 
+  Future<void> _invite(BuildContext context, TripPlan plan) async {
+    final access = await requirePremium(
+      context,
+      PremiumFeature.familySharing,
+      trip: plan,
+      source: 'trip_invite',
+    );
+    if (access == null || !context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Family sharing is being built. Invites arrive soon.')),
+    );
+  }
+
   Future<void> _rename(BuildContext context, TravelStore store, Trip trip) async {
     final controller = TextEditingController(text: trip.title);
     final title = await showDialog<String>(
@@ -186,5 +213,29 @@ class TripScreen extends StatelessWidget {
     if (confirmed != true || !context.mounted) return;
     Navigator.of(context).pop();
     await store.deleteTrip(plan);
+  }
+}
+
+/// "PLUS" on a trip covered by Plus or a Trip Pass.
+class _PlusBadge extends StatelessWidget {
+  const _PlusBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: TravaryColors.ink,
+        borderRadius: BorderRadius.circular(TravaryRadius.chip),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.workspace_premium_rounded, size: 14, color: TravaryColors.mustard),
+          const SizedBox(width: 4),
+          Text('PLUS', style: TravaryText.eyebrow.copyWith(color: TravaryColors.paper, fontSize: 10.5)),
+        ],
+      ),
+    );
   }
 }

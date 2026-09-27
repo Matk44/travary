@@ -71,7 +71,8 @@ class FirestoreTravelRepository implements TravelRepository {
   @override
   Future<void> saveTrip(Trip trip) async {
     _membersByTrip[trip.id] = trip.memberIds;
-    _sync(_trips.doc(trip.id).set(trip.toJson()));
+    // Merge, so fields only the server writes (premium) are kept.
+    _sync(_trips.doc(trip.id).set(trip.toJson(), SetOptions(merge: true)));
   }
 
   @override

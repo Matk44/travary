@@ -101,6 +101,38 @@ flutter run
 iOS minimum is 15.0 (Firebase SDK 12). If `pod install` crashes with an
 encoding error, run it with `LANG=en_US.UTF-8`.
 
+## Premium (Free / Trip Pass / Plus)
+
+- Rules live in one pure class: `logic/access.dart` (`AccessPolicy`). Plus
+  unlocks everything; a Trip Pass unlocks one trip until 7 days after it ends;
+  a trip stamped `premium` by the server unlocks it for everyone on it ("Plus
+  travels with the trip"); free gets 3 Smart Imports.
+- **Gate every premium entry point with `requirePremium()`**
+  (`features/premium/premium_gate.dart`): it returns the decision or opens
+  the paywall. Never check entitlements ad hoc in a screen.
+- **Never gate** a traveller's own bookings, tickets, Today or Wallet.
+- `PremiumFeature.released` controls what the paywall sells; unreleased
+  features only show (marked "soon") in debug builds.
+- Purchases go through `PurchaseService`. Today it's `TestPurchaseService`
+  (simulated, nothing charged; plan switcher in Profile → Design tools).
+  RevenueCat replaces it in step 4.
+- `Trip.premium` and `users/{uid}` are server-written only (rules enforce
+  this); trip writes use merge so the app never clobbers `premium`.
+- Prices and product IDs: `domain/pricing.dart` ($34.99/yr with a 14-day
+  trial, $7.99 Trip Pass). Price wording: `logic/price_text.dart`.
+- Funnel events: `state/analytics.dart` (`track()`), debug-print for now.
+
+**Before launch (promises the paywall makes):** a day-12 trial reminder
+notification, Terms and Privacy links on the paywall, analytics wired to a
+real service, and a server function that mirrors purchases to `users/{uid}`
+and stamps `premium` on trips.
+
+## AI
+
+AI features use **Google AI Studio (Gemini API)**, called only from Firebase
+Cloud Functions with the key in Secret Manager, never from the app. Project
+`travary-444` is on the Blaze plan.
+
 ## Conventions
 
 - snake_case files, PascalCase classes, `_private` members, `const` wherever possible.
@@ -110,14 +142,15 @@ encoding error, run it with `LANG=en_US.UTF-8`.
   (keep a reference from `initState`).
 - Layouts must survive long titles and small phones: tests run at iPhone size
   and fail on overflow.
-- Never hardcode secret keys in the app; AI import will run server-side.
+- Never hardcode secret keys in the app; AI runs server-side (see AI).
 
 ## Roadmap
 
 - **Now:** design phase (the graphic interface on top of this build).
-- **v1.0 launch:** anonymous-first onboarding, Smart Import (screenshot/PDF,
-  server-side), family co-planning, ticket backup, paywalls (RevenueCat):
-  Plus annual + Trip Pass. See `docs/PRODUCT_PLAN.md`.
+- **v1.0 launch** (in this order): premium plumbing ✓ → Smart Import
+  (screenshot/PDF → Gemini in a Cloud Function → draft to confirm) → family
+  sharing + ticket backup → RevenueCat + store products → onboarding with the
+  paywall. See `docs/PRODUCT_PLAN.md`.
 - **Later:** flight alerts, Live Activity / widgets, email-forward import,
   memories and recap, referrals.
 - Bundle ID is still `com.travary.travaryTemp`; change before release (needs

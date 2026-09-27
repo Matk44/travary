@@ -7,6 +7,7 @@ import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/travel_store.dart';
+import '../premium/plus_card.dart';
 import 'card_gallery_screen.dart';
 
 /// Account and settings. Sign-in and Travary Plus will live here.
@@ -27,6 +28,8 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, 0),
             child: Text('Profile', style: TravaryText.display),
           ),
+          const SizedBox(height: TravarySpace.lg),
+          const PlusCard(),
           const SectionLabel('Your data'),
           ListTile(
             leading: Icon(store.isDemo ? Icons.science_outlined : Icons.cloud_done_outlined),
@@ -45,6 +48,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           if (kDebugMode) ...[
             const SectionLabel('Design tools'),
+            const TestPlanSwitcher(),
             ListTile(
               leading: const Icon(Icons.style_outlined),
               title: const Text('Card gallery'),

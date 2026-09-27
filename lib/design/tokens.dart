@@ -130,6 +130,14 @@ ThemeData buildTravaryTheme() {
       labelStyle: TravaryText.small.copyWith(color: TravaryColors.ink),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.small)),
     ),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: SegmentedButton.styleFrom(
+        selectedBackgroundColor: const Color(0xFFE7DCC9),
+        selectedForegroundColor: TravaryColors.ink,
+        foregroundColor: TravaryColors.ink,
+        side: const BorderSide(color: TravaryColors.line),
+      ),
+    ),
     popupMenuTheme: PopupMenuThemeData(
       color: TravaryColors.paper,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.small)),

@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,7 +7,9 @@ import '../../data/attachment_store.dart';
 import '../../design/kind_style.dart';
 import '../../design/tokens.dart';
 import '../../domain/domain.dart';
+import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../premium/premium_gate.dart';
 import 'attachment_viewer.dart';
 import 'booking_detail_screen.dart';
 import 'edit_booking_screen.dart';
@@ -18,14 +21,22 @@ Future<void> startAddBooking(
   LocalDate? date,
   String? tripId,
 }) async {
-  final kind = await showModalBottomSheet<BookingKind>(
+  final choice = await showModalBottomSheet<AddChoice>(
     context: context,
     backgroundColor: TravaryColors.linen,
     showDragHandle: true,
     isScrollControlled: true,
     builder: (_) => const KindPickerSheet(),
   );
-  if (kind == null || !context.mounted) return;
+  if (choice == null || !context.mounted) return;
+  final kind = switch (choice) {
+    ManualChoice(:final kind) => kind,
+    SmartImportChoice() => null,
+  };
+  if (kind == null) {
+    await _startSmartImport(context, tripId: tripId);
+    return;
+  }
   final result = await Navigator.of(context).push<SaveResult>(
     MaterialPageRoute(
       builder: (_) => EditBookingScreen(kind: kind, initialDate: date, tripId: tripId),
@@ -39,6 +50,49 @@ Future<void> startAddBooking(
             ? 'Added to a new trip: ${result.tripTitle}'
             : 'Added to ${result.tripTitle}',
       ),
+    ),
+  );
+}
+
+/// What the traveller picked in the add sheet.
+sealed class AddChoice {
+  const AddChoice();
+}
+
+class ManualChoice extends AddChoice {
+  const ManualChoice(this.kind);
+
+  final BookingKind kind;
+}
+
+class SmartImportChoice extends AddChoice {
+  const SmartImportChoice();
+}
+
+/// Smart Import: premium, with a few free uses. The import itself is the
+/// next build step; this wires up the gate and the paywall.
+Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
+  final travel = context.read<TravelStore>();
+  final plan = tripId == null ? travel.focus.plan : travel.plan(tripId);
+  final access = await requirePremium(
+    context,
+    PremiumFeature.smartImport,
+    trip: plan,
+    source: 'add_sheet',
+  );
+  if (access == null || !context.mounted) return;
+  await showDialog<void>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Smart Import is on its way'),
+      content: Text(
+        access.isFreeUse
+            ? 'This is where your screenshot or PDF becomes a booking. '
+                  'It\'s the next thing being built. Your free imports haven\'t been used.'
+            : 'This is where your screenshot or PDF becomes a booking. '
+                  'It\'s the next thing being built.',
+      ),
+      actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
     ),
   );
 }
@@ -124,6 +178,10 @@ class KindPickerSheet extends StatelessWidget {
           children: [
             Text('What have you booked?', style: TravaryText.headline),
             const SizedBox(height: TravarySpace.lg),
+            if (PremiumFeature.smartImport.released || kDebugMode) ...[
+              const _SmartImportTile(),
+              const SizedBox(height: TravarySpace.md),
+            ],
             GridView.count(
               crossAxisCount: 4,
               shrinkWrap: true,
@@ -133,10 +191,66 @@ class KindPickerSheet extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 for (final kind in BookingKind.values)
-                  _KindTile(kind: kind, onTap: () => Navigator.pop(context, kind)),
+                  _KindTile(kind: kind, onTap: () => Navigator.pop(context, ManualChoice(kind))),
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// "Import from a screenshot or PDF", with how many free uses are left.
+class _SmartImportTile extends StatelessWidget {
+  const _SmartImportTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final premium = context.watch<PremiumStore>();
+    final travel = context.watch<TravelStore>();
+    final decision = premium.decide(PremiumFeature.smartImport, trip: travel.focus.plan);
+    final String status;
+    if (!decision.allowed) {
+      status = 'Travary Plus';
+    } else if (decision.isFreeUse) {
+      status = '${decision.freeUsesLeft} free to try';
+    } else {
+      status = 'Included with Plus';
+    }
+    return Material(
+      color: TravaryColors.ink,
+      borderRadius: BorderRadius.circular(TravaryRadius.card),
+      child: InkWell(
+        onTap: () => Navigator.pop(context, const SmartImportChoice()),
+        borderRadius: BorderRadius.circular(TravaryRadius.card),
+        child: Padding(
+          padding: const EdgeInsets.all(TravarySpace.lg),
+          child: Row(
+            children: [
+              const Icon(Icons.document_scanner_outlined, color: TravaryColors.paper, size: 28),
+              const SizedBox(width: TravarySpace.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Import a screenshot or PDF',
+                        style: TravaryText.label.copyWith(color: TravaryColors.paper)),
+                    Text('We fill in the details for you',
+                        style: TravaryText.small.copyWith(color: TravaryColors.paper.withValues(alpha: 0.8))),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: decision.allowed ? TravaryColors.paper : TravaryColors.mustard,
+                  borderRadius: BorderRadius.circular(TravaryRadius.chip),
+                ),
+                child: Text(status, style: TravaryText.small.copyWith(color: TravaryColors.ink, fontSize: 11.5)),
+              ),
+            ],
+          ),
         ),
       ),
     );

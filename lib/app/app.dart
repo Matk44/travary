@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../design/tokens.dart';
+import '../state/premium_store.dart';
 import '../state/travel_store.dart';
 import 'bootstrap.dart';
 import 'home_shell.dart';
@@ -13,12 +14,24 @@ class TravaryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => TravelStore(
-        repository: dependencies.repository,
-        artCatalog: dependencies.artCatalog,
-        attachments: dependencies.attachments,
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => TravelStore(
+            repository: dependencies.repository,
+            artCatalog: dependencies.artCatalog,
+            attachments: dependencies.attachments,
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) {
+            final travel = context.read<TravelStore>();
+            // Shares the travel clock, so "Preview a different time" also
+            // previews trial and Trip Pass expiry.
+            return PremiumStore(purchases: dependencies.purchases, clock: () => travel.now);
+          },
+        ),
+      ],
       child: MaterialApp(
         title: 'Travary',
         debugShowCheckedModeBanner: false,

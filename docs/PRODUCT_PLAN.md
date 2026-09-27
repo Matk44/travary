@@ -62,13 +62,20 @@ videos (stub tear-off, ticket "printing" on import).
 - **Foundation (done):** domain, day/trip logic, demo + Firestore data,
   Today / Trips / Wallet / detail / form, art system, tests.
 - **Design phase:** travel-ephemera interface on top (cards, artwork, nav, header).
-- **v1.0:** onboarding, Smart Import (Cloud Function + Claude API; model TBD),
-  family sharing, backup, RevenueCat paywalls, analytics funnel events.
+- **v1.0:** premium plumbing (done), Smart Import (Cloud Function + Gemini via
+  Google AI Studio), family sharing, backup, RevenueCat paywalls, onboarding,
+  analytics funnel events.
 - **v1.1:** flight alerts, Live Activity, "leave by", email-forward import.
 - **v1.2:** memories and recap, referrals, year-in-travel.
 
+## Decisions
+
+- Prices confirmed: Plus $34.99/yr (14-day trial), Trip Pass $7.99.
+- AI: Gemini via Google AI Studio, server-side (accuracy first: a wrong AM/PM
+  destroys trust, so imports are always a draft to confirm).
+- Firebase project on the Blaze plan.
+
 ## Open decisions
 
-- Final prices (start: $34.99 / $7.99), lifetime offer yes/no.
-- Smart Import model (accuracy first: wrong AM/PM destroys trust).
+- Founding lifetime offer: yes/no.
 - Release bundle ID (currently `com.travary.travaryTemp`).
