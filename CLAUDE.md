@@ -1,0 +1,119 @@
+# Travary: Holiday Organiser
+
+Add your bookings; Travary sorts them into days and opens each morning on what
+you need right now, with tickets one tap away. Flutter (iOS + Android),
+Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
+`legacy_v0_2026-09-27.zip`. Product and pricing plan: `docs/PRODUCT_PLAN.md`.
+
+## Principles
+
+- **Super simple for the traveller.** Bookings first: no "create a trip"
+  step. Trips form automatically from dates (`logic/trip_assignment.dart`).
+  Only title + date are required on any form.
+- **Today is the product.** Opens on today during a trip, else the first day of
+  the next trip. Past and future stay one tap away (day strip, Trips, Wallet).
+- **Never lock someone's tickets.** Tickets and bookings are always reachable,
+  offline, whatever their plan.
+- **The look is swappable.** A unique hand-made interface ("travel ephemera":
+  tickets, key cards, luggage tags, see the v1 mockup) goes on top of this
+  build. Keep logic out of `design/` and styling out of `logic/`.
+
+## Architecture
+
+```
+lib/
+├── domain/     Plain data: Booking, BookingKind (+ KindSpec), Trip, LocalDate/ClockTime
+├── logic/      Pure Dart rules, fully unit-tested:
+│               day_plan (done/now/next), trip_plan (+ focus), trip_assignment,
+│               card_text (all card wording), formatters
+├── data/       TravelRepository interface; Memory (demo/tests) + Firestore;
+│               demo_data; attachment_store (ticket files, offline)
+├── state/      TravelStore (ChangeNotifier): the single source of truth for screens
+├── design/     THE SKIN: tokens, kind_style, cards/, art/, widgets/
+├── features/   Screens: today, trips, wallet, booking (form/detail/viewer), profile
+└── app/        bootstrap (backend choice), app, home_shell (tabs + add button)
+```
+
+Dependencies flow downward only: `features → state → logic/data → domain`.
+`design` may use `domain`/`logic` types; `logic` never imports Flutter UI.
+
+### Rules that keep it reskinnable
+
+1. Screens show bookings **only** through `BookingCard` (`hero` / `standard` /
+   `compact`) and `OngoingStrip`. Never style a booking inline in a screen.
+2. Cards receive **`CardText`** (already worded: eyebrow, title, when, detail,
+   place, stub, reference) and **`ArtChoice`**. Cards never format dates or
+   decide wording; add fields to `CardText` instead.
+3. Visual variety comes from `ArtChoice.variant` (stable per booking) and
+   artwork in `assets/art/<kind>/<theme>_*.png` (see `assets/art/README.md`).
+   Use `variant % n` for any non-image variety (tilt, stamp position, palette).
+4. Each kind maps to a physical object (`CardShape` in `design/kind_style.dart`):
+   flight = boarding pass, stay = key card, attraction/activity/event = ticket,
+   dining = reservation card + luggage tag, transport = travel ticket, note = paper.
+5. Colours and type live in `design/tokens.dart` only.
+
+### Time model
+
+Bookings use **floating local time** (the time printed on the ticket, no zone):
+`LocalDate` + optional `ClockTime`. The phone adopts the destination's zone on
+arrival, so comparing with the device clock is right during the trip. No start
+time = all day. `endDate` after `startDate` = multi-day (check-in/out,
+pick-up/drop-off, overnight flights): start and end appear as entries on their
+days; days in between show an `OngoingStrip`.
+
+### Data (Firestore)
+
+```
+trips/{tripId}                        title, theme, ownerId, memberIds[], plannedStart/End
+trips/{tripId}/bookings/{bookingId}   Booking.toJson()
+```
+
+Built for family sharing (`memberIds`). Rules are in `firestore.rules`. Writes
+aren't awaited (Firestore's offline cache applies them at once); sync failures
+surface via `TravelRepository.errors`. Attachment files are stored locally by
+file name (never absolute paths). Cloud backup of files is a future Plus feature.
+
+## Running
+
+| Mode | How | Data |
+|---|---|---|
+| Demo (default) | `flutter run` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
+| Cloud | `flutter run --dart-define=TRAVARY_BACKEND=cloud` | Firestore + anonymous auth |
+
+Cloud mode needs, once, in the Firebase console (project `travary-444`):
+Authentication → Sign-in method → enable **Anonymous**; then deploy the rules
+with `firebase deploy --only firestore:rules`.
+
+Design tools (debug builds, Profile tab): **Preview a different time** shows
+cards before, during and after their time; **Reset sample trips**.
+
+```bash
+flutter analyze
+flutter test
+flutter run
+```
+
+iOS minimum is 15.0 (Firebase SDK 12). If `pod install` crashes with an
+encoding error, run it with `LANG=en_US.UTF-8`.
+
+## Conventions
+
+- snake_case files, PascalCase classes, `_private` members, `const` wherever possible.
+- New booking wording → `logic/card_text.dart` with a test in `test/logic/`.
+- New rule about time/trips → `logic/` with a unit test. Keep `logic/` pure.
+- Dispose controllers/subscriptions; never use `context` in `dispose()`
+  (keep a reference from `initState`).
+- Layouts must survive long titles and small phones: tests run at iPhone size
+  and fail on overflow.
+- Never hardcode secret keys in the app; AI import will run server-side.
+
+## Roadmap
+
+- **Now:** design phase (the graphic interface on top of this build).
+- **v1.0 launch:** anonymous-first onboarding, Smart Import (screenshot/PDF,
+  server-side), family co-planning, ticket backup, paywalls (RevenueCat):
+  Plus annual + Trip Pass. See `docs/PRODUCT_PLAN.md`.
+- **Later:** flight alerts, Live Activity / widgets, email-forward import,
+  memories and recap, referrals.
+- Bundle ID is still `com.travary.travaryTemp`; change before release (needs
+  new Firebase app registrations).

@@ -1,0 +1,44 @@
+name: travary
+description: "Travary - add your bookings and every day of your holiday organises itself."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  cloud_firestore: ^6.10.0
+  file_picker: ^13.1.0
+  firebase_auth: ^6.7.0
+  firebase_core: ^4.15.0
+  flutter:
+    sdk: flutter
+  google_fonts: ^8.2.1
+  intl: ^0.20.3
+  open_filex: ^4.7.0
+  path: ^1.9.1
+  path_provider: ^2.1.6
+  provider: ^6.1.5+1
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Card artwork. Drop images into the folder for their booking kind; they are
+  # discovered automatically. See assets/art/README.md for the naming rules.
+  assets:
+    - assets/art/common/
+    - assets/art/flight/
+    - assets/art/stay/
+    - assets/art/attraction/
+    - assets/art/dining/
+    - assets/art/transport/
+    - assets/art/activity/
+    - assets/art/event/
+    - assets/art/note/

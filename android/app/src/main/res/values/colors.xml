@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Travary linen, shown while the app starts. -->
+    <color name="travary_linen">#EFE8DC</color>
+</resources>

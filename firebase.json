@@ -1,0 +1,34 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "travary-444",
+          "appId": "1:315160115482:android:31153bef83b05617e9d4a3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "travary-444",
+          "appId": "1:315160115482:ios:f79aacf627ea203fe9d4a3",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "travary-444",
+          "configurations": {
+            "android": "1:315160115482:android:31153bef83b05617e9d4a3",
+            "ios": "1:315160115482:ios:f79aacf627ea203fe9d4a3"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "315160115482",
+    "project_id": "travary-444",
+    "storage_bucket": "travary-444.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315160115482:android:ccb9664558df60d4e9d4a3",
+        "android_client_info": {
+          "package_name": "com.travary.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315160115482-uvt4v0mpqqg03c3gi3sr443dmu2ur0la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3D-gCpxjNAD-YabJ9gL8BfuRpkMRlPcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315160115482-uvt4v0mpqqg03c3gi3sr443dmu2ur0la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315160115482-liqv57p5mjrp94cfstl0ldbcgmvq44hp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.travary.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315160115482:android:31153bef83b05617e9d4a3",
+        "android_client_info": {
+          "package_name": "com.travary.travary_temp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315160115482-uvt4v0mpqqg03c3gi3sr443dmu2ur0la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3D-gCpxjNAD-YabJ9gL8BfuRpkMRlPcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315160115482-uvt4v0mpqqg03c3gi3sr443dmu2ur0la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315160115482-liqv57p5mjrp94cfstl0ldbcgmvq44hp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.travary.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
