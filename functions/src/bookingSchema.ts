@@ -1,3 +1,5 @@
+import { describeArtSubjects, isArtSubject } from './artSubjects';
+
 /**
  * The shape Smart Import asks Gemini for, and the validation applied to
  * whatever comes back. Mirrors the app's Booking model
@@ -26,6 +28,7 @@ export interface DraftBooking {
   location?: string;
   reference?: string;
   notes?: string;
+  artSubject?: string;
   details: Partial<Record<DetailKey, string>>;
   uncertain: string[];
 }
@@ -64,6 +67,10 @@ export const responseSchema = {
               company: text('Transport company, e.g. "Alamo", "Eurostar"'),
             },
           },
+          artSubject: text(
+            `The picture for the booking's card, from its kind's list: ${describeArtSubjects()}. ` +
+              'Use "generic" if none fits.',
+          ),
           uncertain: {
             type: 'array',
             items: { type: 'string' },
@@ -158,6 +165,7 @@ export function normaliseBookings(raw: unknown): { bookings: DraftBooking[]; war
       ...optional('location', clean(b.location, 160)),
       ...optional('reference', clean(b.reference, 40)),
       ...optional('notes', clean(b.notes, 200)),
+      ...(isArtSubject(kind, b.artSubject) && b.artSubject !== 'generic' && { artSubject: b.artSubject }),
       details,
       uncertain: [...uncertain],
     });

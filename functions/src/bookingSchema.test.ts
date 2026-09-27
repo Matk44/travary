@@ -65,3 +65,16 @@ test('survives garbage', () => {
   assert.deepEqual(normaliseBookings(null), { bookings: [] });
   assert.deepEqual(normaliseBookings({ bookings: 'nope', warning: '  blurry  ' }), { bookings: [], warning: 'blurry' });
 });
+
+test('keeps a valid picture subject and drops others', () => {
+  const { bookings } = normaliseBookings({
+    bookings: [
+      { kind: 'dining', title: 'Ohana', startDate: '2026-10-14', artSubject: 'grill' },
+      { kind: 'dining', title: 'X', startDate: '2026-10-14', artSubject: 'rollercoaster' },
+      { kind: 'dining', title: 'Y', startDate: '2026-10-14', artSubject: 'generic' },
+    ],
+  });
+  assert.equal(bookings[0].artSubject, 'grill');
+  assert.equal(bookings[1].artSubject, undefined);
+  assert.equal(bookings[2].artSubject, undefined);
+});

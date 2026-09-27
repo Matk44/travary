@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
+import '../art/art_catalog.dart';
 import '../art/art_resolver.dart';
 import '../kind_style.dart';
 import '../tokens.dart';
@@ -100,7 +101,7 @@ class _HeroCard extends StatelessWidget {
                       fit: StackFit.expand,
                       children: [
                         ArtPanel(art: card.art),
-                        if (hasImage)
+                        if (hasImage && card.art.scene != null)
                           DecoratedBox(
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -280,7 +281,7 @@ class _StandardCard extends StatelessWidget {
                     ),
                   ),
                   if (isTicket) TearLine(color: fg.withValues(alpha: 0.4)),
-                  SizedBox(width: artWidth, child: ArtPanel(art: card.art)),
+                  SizedBox(width: artWidth, child: ArtPanel(art: card.art, format: ArtFormat.vignette)),
                   if (style.shape == CardShape.keyCard)
                     Container(width: 18, color: TravaryColors.tealDeep),
                 ],

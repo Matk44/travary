@@ -44,9 +44,14 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
 2. Cards receive **`CardText`** (already worded: eyebrow, title, when, detail,
    place, stub, reference) and **`ArtChoice`**. Cards never format dates or
    decide wording; add fields to `CardText` instead.
-3. Visual variety comes from `ArtChoice.variant` (stable per booking) and
-   artwork in `assets/art/<kind>/<theme>_*.png` (see `assets/art/README.md`).
-   Use `variant % n` for any non-image variety (tilt, stamp position, palette).
+3. Artwork: `assets/art/<kind>/<theme>_<subject>_<nn>_<scene|vignette>.png`
+   (brief and prompts: `docs/ART_BRIEF.md`). A booking's **subject** ("pizza",
+   "castle") comes from Smart Import (Gemini picks it: `artSubject`) or from
+   keywords (`logic/art_subjects.dart`, mirrored in
+   `functions/src/artSubjects.ts`; a test keeps them equal). `ArtResolver`
+   picks subject+theme → subject → theme → generic, stable per booking and
+   never repeating side by side. Featured cards use the scene, normal cards
+   the vignette. Use `ArtChoice.variant % n` for non-image variety.
 4. Each kind maps to a physical object (`CardShape` in `design/kind_style.dart`):
    flight = boarding pass, stay = key card, attraction/activity/event = ticket,
    dining = reservation card + luggage tag, transport = travel ticket, note = paper.

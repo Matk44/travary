@@ -125,6 +125,7 @@ SmartImportResult smartImportResultFromJson(Map<String, dynamic> json) {
           location: text('location'),
           reference: text('reference'),
           notes: text('notes'),
+          artSubject: text('artSubject'),
           details: {
             for (final entry in (map['details'] as Map? ?? const {}).entries)
               if (entry.value is String && (entry.value as String).isNotEmpty)

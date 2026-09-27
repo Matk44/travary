@@ -35,6 +35,7 @@ flutter:
   # discovered automatically. See assets/art/README.md for the naming rules.
   assets:
     - assets/art/common/
+    - assets/art/icons/
     - assets/art/flight/
     - assets/art/stay/
     - assets/art/attraction/

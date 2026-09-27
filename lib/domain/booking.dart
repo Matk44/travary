@@ -22,6 +22,7 @@ class Booking {
     this.details = const {},
     this.attachments = const [],
     this.artKey,
+    this.artSubject,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -48,6 +49,10 @@ class Booking {
 
   /// Artwork the traveller picked for this card. Null lets the app choose.
   final String? artKey;
+
+  /// What the card's picture should show ("pizza", "castle"), when Smart
+  /// Import chose it. Otherwise it's worked out from the name.
+  final String? artSubject;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -94,6 +99,7 @@ class Booking {
       details: details,
       attachments: attachments ?? this.attachments,
       artKey: artKey ?? this.artKey,
+      artSubject: artSubject,
       createdAt: createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -113,6 +119,7 @@ class Booking {
     'details': details,
     'attachments': [for (final a in attachments) a.toJson()],
     'artKey': artKey,
+    'artSubject': artSubject,
     'createdAt': createdAt.millisecondsSinceEpoch,
     'updatedAt': updatedAt.millisecondsSinceEpoch,
   };
@@ -142,6 +149,7 @@ class Booking {
           if (item is Map) Attachment.fromJson(Map<String, Object?>.from(item)),
       ],
       artKey: json['artKey'] as String?,
+      artSubject: json['artSubject'] as String?,
       createdAt: created,
       updatedAt: _dateFromMillis(json['updatedAt']),
     );

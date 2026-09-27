@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../art/art_catalog.dart';
 import '../art/art_resolver.dart';
 import '../kind_style.dart';
 import '../tokens.dart';
@@ -9,19 +10,37 @@ import '../tokens.dart';
 /// Draws a card's artwork: the image from `assets/art/` when there is one,
 /// otherwise a simple placeholder in the card's palette.
 class ArtPanel extends StatelessWidget {
-  const ArtPanel({super.key, required this.art, this.alignment = Alignment.centerRight});
+  const ArtPanel({
+    super.key,
+    required this.art,
+    this.format = ArtFormat.scene,
+    this.alignment = Alignment.centerRight,
+  });
 
   final ArtChoice art;
+
+  /// Which shape this spot wants. Falls back to the other if missing.
+  final ArtFormat format;
   final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
-    final asset = art.asset;
-    if (asset != null) {
-      return Image.asset(asset.path, fit: BoxFit.cover, alignment: alignment);
-    }
     final style = KindStyle.of(art.kind);
     final palette = style.palette(art.variant);
+    final asset = art.preferring(format);
+    if (asset != null) {
+      // Vignettes are transparent corner prints: they sit on the card's
+      // paper. Scenes fill the space.
+      final isVignette = asset.format == ArtFormat.vignette;
+      return ColoredBox(
+        color: isVignette ? palette.background : Colors.transparent,
+        child: Image.asset(
+          asset.path,
+          fit: isVignette ? BoxFit.contain : BoxFit.cover,
+          alignment: isVignette ? Alignment.bottomRight : alignment,
+        ),
+      );
+    }
     return ColoredBox(
       color: palette.background,
       child: LayoutBuilder(

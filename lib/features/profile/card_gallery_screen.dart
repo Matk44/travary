@@ -70,10 +70,11 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.md),
       child: child,
     );
-    final hasArt = art.asset != null ? art.asset!.path.split('/').last : 'placeholder';
+    final picture = art.group ?? 'placeholder';
+    final subject = art.subject ?? 'no subject';
 
     return [
-      SectionLabel('${booking.kind.spec.label} · $hasArt'),
+      SectionLabel('${booking.kind.spec.label} · $subject · $picture'),
       padded(BookingCard(
         text: cardTextForEntry(entry(EntryStatus.upcoming), highlighted: true),
         art: art,

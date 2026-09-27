@@ -223,6 +223,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       },
       attachments: _attachments,
       artKey: widget.existing?.artKey,
+      artSubject: (widget.existing ?? widget.draft?.booking)?.artSubject,
       createdAt: widget.existing?.createdAt ?? now,
       updatedAt: now,
     );
