@@ -77,13 +77,7 @@ class Booking {
     return value == null || value.isEmpty ? null : value;
   }
 
-  Booking copyWith({
-    String? id,
-    String? tripId,
-    List<Attachment>? attachments,
-    String? artKey,
-    DateTime? updatedAt,
-  }) {
+  Booking copyWith({String? id, String? tripId, List<Attachment>? attachments, String? artKey, DateTime? updatedAt}) {
     return Booking(
       id: id ?? this.id,
       tripId: tripId ?? this.tripId,
@@ -131,19 +125,14 @@ class Booking {
       tripId: json['tripId'] as String? ?? '',
       kind: BookingKind.fromName(json['kind'] as String?),
       title: json['title'] as String? ?? '',
-      startDate:
-          LocalDate.tryParse(json['startDate']) ??
-          LocalDate.fromDateTime(created),
+      startDate: LocalDate.tryParse(json['startDate']) ?? LocalDate.fromDateTime(created),
       startTime: ClockTime.tryParse(json['startTime']),
       endDate: LocalDate.tryParse(json['endDate']),
       endTime: ClockTime.tryParse(json['endTime']),
       location: json['location'] as String?,
       reference: json['reference'] as String?,
       notes: json['notes'] as String?,
-      details: {
-        for (final entry in (json['details'] as Map? ?? const {}).entries)
-          '${entry.key}': '${entry.value}',
-      },
+      details: {for (final entry in (json['details'] as Map? ?? const {}).entries) '${entry.key}': '${entry.value}'},
       attachments: [
         for (final item in json['attachments'] as List? ?? const [])
           if (item is Map) Attachment.fromJson(Map<String, Object?>.from(item)),
@@ -194,8 +183,7 @@ class Attachment {
     return dot == -1 ? '' : fileName.substring(dot + 1).toLowerCase();
   }
 
-  bool get isImage =>
-      const {'jpg', 'jpeg', 'png', 'heic', 'webp', 'gif'}.contains(extension);
+  bool get isImage => const {'jpg', 'jpeg', 'png', 'heic', 'webp', 'gif'}.contains(extension);
   bool get isPdf => extension == 'pdf';
 
   Map<String, Object?> toJson() => {
@@ -215,6 +203,5 @@ class Attachment {
   );
 }
 
-DateTime _dateFromMillis(Object? value) => value is num
-    ? DateTime.fromMillisecondsSinceEpoch(value.toInt())
-    : DateTime.now();
+DateTime _dateFromMillis(Object? value) =>
+    value is num ? DateTime.fromMillisecondsSinceEpoch(value.toInt()) : DateTime.now();

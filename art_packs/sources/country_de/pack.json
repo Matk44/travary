@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_de",
+  "version": 1,
+  "palette": {
+    "id": "germany_charcoal_forest",
+    "anchors": {"ink": "#263541", "paper": "#F4EEE3"},
+    "accents": ["#A53B3D", "#C29A45", "#435E4A", "#547A8A"],
+    "ui": {
+      "primary": "#334A58",
+      "secondary": "#923336",
+      "highlight": "#AD8032",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

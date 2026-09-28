@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_nz",
+  "version": 1,
+  "palette": {
+    "id": "new_zealand_fern_fiord",
+    "anchors": {"ink": "#24343C", "paper": "#F3EEE3"},
+    "accents": ["#1E5648", "#3E7C91", "#B95545", "#C29842"],
+    "ui": {
+      "primary": "#285F50",
+      "secondary": "#356D81",
+      "highlight": "#AC7C2C",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

@@ -54,9 +54,7 @@ class ProfileScreen extends StatelessWidget {
               title: const Text('Card gallery'),
               subtitle: const Text('Every card, size and state in any trip theme'),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const CardGalleryScreen()),
-              ),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CardGalleryScreen())),
             ),
             ListTile(
               leading: const Icon(Icons.more_time_rounded),

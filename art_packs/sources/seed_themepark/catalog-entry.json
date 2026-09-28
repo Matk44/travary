@@ -1,0 +1,8 @@
+{
+  "priority": 100,
+  "selectors": {
+    "themes": ["themepark"],
+    "subjects": ["generic", "plane"]
+  },
+  "minAppBuild": 1
+}

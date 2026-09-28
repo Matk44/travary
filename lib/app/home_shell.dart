@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../design/art/art_slots.dart';
+import '../design/cards/card_parts.dart';
+import '../design/tokens.dart';
+import '../design/trip_chrome.dart';
 import '../design/widgets/nav_bar.dart';
+import '../domain/domain.dart';
 import '../features/booking/booking_actions.dart';
 import '../features/profile/profile_screen.dart';
 import '../features/today/today_screen.dart';
@@ -9,21 +14,27 @@ import '../features/trips/trips_screen.dart';
 import '../features/wallet/wallet_screen.dart';
 import '../state/premium_store.dart';
 import '../state/travel_store.dart';
+import 'trip_chrome_scope.dart';
 
-/// The four tabs plus the add button. Also shows background sync errors.
+/// The four tabs plus the add button, on the focused trip's palette and
+/// linen. Also shows background sync errors.
 class HomeShell extends StatefulWidget {
-  const HomeShell({super.key});
+  const HomeShell({super.key, this.weather});
+
+  /// Today's forecast for the header pill, when one is available.
+  final WeatherReport? weather;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
 }
 
-class _HomeShellState extends State<HomeShell> {
+class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   static const _items = [
-    NavItem('Today', Icons.wb_sunny_outlined, Icons.wb_sunny_rounded),
-    NavItem('Trips', Icons.luggage_outlined, Icons.luggage_rounded),
-    NavItem('Wallet', Icons.confirmation_number_outlined, Icons.confirmation_number_rounded),
-    NavItem('Profile', Icons.person_outline_rounded, Icons.person_rounded),
+    NavItem('Today', IconSlot.navToday),
+    NavItem('Trips', IconSlot.navTrips),
+    // The ticket wallet: every booking's tickets and documents.
+    NavItem('Documents', IconSlot.navDocuments),
+    NavItem('Profile', IconSlot.navProfile),
   ];
 
   int _index = 0;
@@ -38,10 +49,19 @@ class _HomeShellState extends State<HomeShell> {
     _premium = context.read<PremiumStore>()..addListener(_premiumChanged);
     // Tickets are backed up for shared trips and for trips with Plus.
     _store.shouldBackUp = (plan) => plan.trip.isShared || _premium.forTrip(plan).allowed;
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  /// Back from the background: new art packs may be out (and a download
+  /// that failed offline can finish now).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) _store.refreshArtPacksIfStale();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _store.removeListener(_showErrors);
     _premium.removeListener(_premiumChanged);
     super.dispose();
@@ -59,16 +79,35 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _index,
-        children: const [TodayScreen(), TripsScreen(), WalletScreen(), ProfileScreen()],
+    return TripChromeScope(child: Builder(builder: (context) => _body(context)));
+  }
+
+  Widget _body(BuildContext context) {
+    final linen = TravaryChrome.of(context).slots.surface(SurfaceSlot.linen);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: TravaryColors.linen,
+        image: linen == null
+            ? null
+            : DecorationImage(image: artImageProvider(linen), repeat: ImageRepeat.repeat, scale: 3),
       ),
-      bottomNavigationBar: TravaryNavBar(
-        items: _items,
-        selectedIndex: _index,
-        onSelected: (index) => setState(() => _index = index),
-        onAdd: () => startAddBooking(context, date: _store.focus.day),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: IndexedStack(
+          index: _index,
+          children: [
+            TodayScreen(weather: widget.weather),
+            const TripsScreen(),
+            const WalletScreen(),
+            const ProfileScreen(),
+          ],
+        ),
+        bottomNavigationBar: TravaryNavBar(
+          items: _items,
+          selectedIndex: _index,
+          onSelected: (index) => setState(() => _index = index),
+          onAdd: () => startAddBooking(context, date: _store.focus.day),
+        ),
       ),
     );
   }

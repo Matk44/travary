@@ -5,18 +5,12 @@ enum TripPhase { upcoming, active, past }
 /// A trip together with its bookings and the dates they cover.
 class TripPlan {
   TripPlan(this.trip, Iterable<Booking> bookings)
-    : bookings = List.unmodifiable(
-        [...bookings]..sort((a, b) => a.startsAt.compareTo(b.startsAt)),
-      ) {
+    : bookings = List.unmodifiable([...bookings]..sort((a, b) => a.startsAt.compareTo(b.startsAt))) {
     LocalDate? first = trip.plannedStart;
     LocalDate? last = trip.plannedEnd ?? trip.plannedStart;
     for (final booking in this.bookings) {
-      first = first == null
-          ? booking.startDate
-          : LocalDate.min(first, booking.startDate);
-      last = last == null
-          ? booking.lastDate
-          : LocalDate.max(last, booking.lastDate);
+      first = first == null ? booking.startDate : LocalDate.min(first, booking.startDate);
+      last = last == null ? booking.lastDate : LocalDate.max(last, booking.lastDate);
     }
     start = first;
     end = last;
@@ -33,16 +27,12 @@ class TripPlan {
   bool get hasDates => start != null;
   int get dayCount => hasDates ? start!.daysUntil(end!) + 1 : 0;
 
-  List<LocalDate> get days => [
-    for (var i = 0; i < dayCount; i++) start!.addDays(i),
-  ];
+  List<LocalDate> get days => [for (var i = 0; i < dayCount; i++) start!.addDays(i)];
 
-  bool contains(LocalDate date) =>
-      hasDates && !date.isBefore(start!) && !date.isAfter(end!);
+  bool contains(LocalDate date) => hasDates && !date.isBefore(start!) && !date.isAfter(end!);
 
   /// 1-based day number of [date] within the trip, or null if outside it.
-  int? dayNumber(LocalDate date) =>
-      contains(date) ? start!.daysUntil(date) + 1 : null;
+  int? dayNumber(LocalDate date) => contains(date) ? start!.daysUntil(date) + 1 : null;
 
   TripPhase phaseOn(LocalDate today) {
     if (!hasDates || start!.isAfter(today)) return TripPhase.upcoming;
@@ -91,11 +81,7 @@ TodayFocus focusFor(List<TripPlan> plans, LocalDate today) {
   final upcoming = dated.where((p) => p.phaseOn(today) == TripPhase.upcoming);
   if (upcoming.isNotEmpty) {
     final next = upcoming.first;
-    return TodayFocus(
-      plan: next,
-      day: next.start!,
-      daysUntilStart: today.daysUntil(next.start!),
-    );
+    return TodayFocus(plan: next, day: next.start!, daysUntilStart: today.daysUntil(next.start!));
   }
   return TodayFocus(day: today);
 }

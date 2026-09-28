@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_cn",
+  "version": 1,
+  "palette": {
+    "id": "china_jade_lacquer",
+    "anchors": {"ink": "#1E625D", "paper": "#F5EDDF"},
+    "accents": ["#A73B36", "#294B70", "#C39A47", "#6F94A1"],
+    "ui": {
+      "primary": "#286F69",
+      "secondary": "#92342F",
+      "highlight": "#AD7C30",
+      "onPrimary": "#FFF8EC"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

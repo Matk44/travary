@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_za",
+  "version": 1,
+  "palette": {
+    "id": "south_africa_protea_coast",
+    "anchors": {"ink": "#174D55", "paper": "#F3EBDD"},
+    "accents": ["#C96A62", "#C7943E", "#2D7B7A", "#4A654E"],
+    "ui": {
+      "primary": "#205C63",
+      "secondary": "#A95550",
+      "highlight": "#B27B2E",
+      "onPrimary": "#FFF8EC"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

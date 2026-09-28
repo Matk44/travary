@@ -37,8 +37,23 @@ const artSubjects = <BookingKind, Map<String, List<String>>>{
     'breakfast': ['breakfast', 'brunch', 'pancake', 'pancakes', 'cafe', 'café', 'coffee', 'bakery', 'donut'],
     'dessert': ['ice cream', 'gelato', 'dessert', 'cake', 'chocolate', 'creamery', 'sweet'],
     'pizza': ['pizza', 'pizzeria', 'trattoria', 'italian', 'pasta'],
-    'asian': ['sushi', 'ramen', 'noodle', 'noodles', 'thai', 'chinese', 'japanese', 'dim sum', 'wok',
-        'curry', 'indian', 'asian', 'korean', 'vietnamese', 'pho'],
+    'asian': [
+      'sushi',
+      'ramen',
+      'noodle',
+      'noodles',
+      'thai',
+      'chinese',
+      'japanese',
+      'dim sum',
+      'wok',
+      'curry',
+      'indian',
+      'asian',
+      'korean',
+      'vietnamese',
+      'pho',
+    ],
     'burger': ['burger', 'burgers', 'diner', 'fries', 'hot dog'],
     'seafood': ['seafood', 'fish', 'oyster', 'lobster', 'crab', 'shrimp'],
     'grill': ['grill', 'steak', 'steakhouse', 'bbq', 'barbecue', 'smokehouse', 'churrasco', 'luau'],
@@ -67,8 +82,19 @@ const artSubjects = <BookingKind, Map<String, List<String>>>{
   BookingKind.event: {
     'fireworks': ['firework', 'fireworks'],
     'festival': ['festival', 'carnival', 'parade', 'fair'],
-    'sport': ['match', 'stadium', 'football', 'soccer', 'baseball', 'basketball', 'rugby', 'cricket',
-        'tennis', 'grand prix', 'race'],
+    'sport': [
+      'match',
+      'stadium',
+      'football',
+      'soccer',
+      'baseball',
+      'basketball',
+      'rugby',
+      'cricket',
+      'tennis',
+      'grand prix',
+      'race',
+    ],
     'concert': ['concert', 'gig', 'orchestra', 'symphony', 'band', 'tour'],
     'show': ['show', 'theatre', 'theater', 'musical', 'circus', 'ballet', 'opera', 'comedy', 'cirque'],
   },
@@ -101,9 +127,6 @@ String? artSubjectFor(Booking booking) {
 final _wordCache = <String, RegExp>{};
 
 bool _containsWord(String haystack, String keyword) {
-  final pattern = _wordCache.putIfAbsent(
-    keyword,
-    () => RegExp('(^|[^a-z0-9])${RegExp.escape(keyword)}(\$|[^a-z0-9])'),
-  );
+  final pattern = _wordCache.putIfAbsent(keyword, () => RegExp('(^|[^a-z0-9])${RegExp.escape(keyword)}(\$|[^a-z0-9])'));
   return pattern.hasMatch(haystack);
 }

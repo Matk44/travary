@@ -15,9 +15,7 @@ String priceOf(Offer offer) => formatPrice(offer.amount, offer.currencyCode);
 String perMonth(Offer offer) => formatPrice(offer.amount / 12, offer.currencyCode);
 
 /// "$0.49" a person a month, for the whole family on an annual plan.
-String perPersonPerMonth(Offer offer) =>
-    formatPrice(offer.amount / 12 / Pricing.familySize, offer.currencyCode);
+String perPersonPerMonth(Offer offer) => formatPrice(offer.amount / 12 / Pricing.familySize, offer.currencyCode);
 
 /// "$1.14" a day for a Trip Pass on a trip of [days] days.
-String perDay(Offer offer, int days) =>
-    formatPrice(offer.amount / (days < 1 ? 1 : days), offer.currencyCode);
+String perDay(Offer offer, int days) => formatPrice(offer.amount / (days < 1 ? 1 : days), offer.currencyCode);

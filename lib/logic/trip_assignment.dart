@@ -9,12 +9,7 @@ const tripMarginDays = 2;
 /// Finds the trip a booking dated [start]–[end] belongs to, or null when it
 /// needs a new trip. Prefers a trip the dates actually fall inside, then the
 /// nearest one within [tripMarginDays].
-TripPlan? findTripFor(
-  LocalDate start,
-  LocalDate end,
-  List<TripPlan> plans, {
-  int marginDays = tripMarginDays,
-}) {
+TripPlan? findTripFor(LocalDate start, LocalDate end, List<TripPlan> plans, {int marginDays = tripMarginDays}) {
   TripPlan? best;
   var bestGap = marginDays + 1;
   for (final plan in plans.where((p) => p.hasDates)) {
@@ -77,5 +72,4 @@ String suggestTripTitle(Booking booking) {
   return '${DateFormat('MMMM').format(booking.startDate.toDateTime())} trip';
 }
 
-String _capitalise(String value) =>
-    value.isEmpty ? value : value[0].toUpperCase() + value.substring(1);
+String _capitalise(String value) => value.isEmpty ? value : value[0].toUpperCase() + value.substring(1);

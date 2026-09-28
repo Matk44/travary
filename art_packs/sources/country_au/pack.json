@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_au",
+  "version": 1,
+  "palette": {
+    "id": "australia_eucalyptus_wattle",
+    "anchors": {"ink": "#173C45", "paper": "#F5EFE2"},
+    "accents": ["#1F5C4D", "#E2B33E", "#287A91", "#B9663A"],
+    "ui": {
+      "primary": "#205345",
+      "secondary": "#246E82",
+      "highlight": "#C89820",
+      "onPrimary": "#FFF9ED"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_es",
+  "version": 1,
+  "palette": {
+    "id": "spain_garnet_sun",
+    "anchors": {"ink": "#26384A", "paper": "#F6EFE1"},
+    "accents": ["#8F2636", "#F1BF00", "#27677D", "#65704A"],
+    "ui": {
+      "primary": "#7A2030",
+      "secondary": "#235B70",
+      "highlight": "#C99500",
+      "onPrimary": "#FFFAF0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

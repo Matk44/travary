@@ -46,9 +46,7 @@ void main() {
     await pumpEventQueue();
     expect(store.policy.freeSmartImportsLeft, 2);
 
-    purchases.set(store.entitlements.copyWith(
-      plus: PlusSubscription(expiresAt: now.add(const Duration(days: 30))),
-    ));
+    purchases.set(store.entitlements.copyWith(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 30)))));
     await pumpEventQueue();
     await store.countSmartImport(store.decide(PremiumFeature.smartImport));
     await pumpEventQueue();

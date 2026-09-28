@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "packId": "seed_themepark",
+  "version": 1,
+  "assets": [
+    {
+      "file": "dining/themepark_generic_01_vignette.png",
+      "kind": "dining",
+      "theme": "themepark",
+      "subject": "generic",
+      "group": "themepark_generic_01",
+      "format": "vignette",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "flight/themepark_plane_01_vignette.png",
+      "kind": "flight",
+      "theme": "themepark",
+      "subject": "plane",
+      "group": "themepark_plane_01",
+      "format": "vignette",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "icons/dining.png",
+      "kind": "icon",
+      "name": "dining",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "icons/flight.png",
+      "kind": "icon",
+      "name": "flight",
+      "width": 1024,
+      "height": 1024
+    }
+  ]
+}

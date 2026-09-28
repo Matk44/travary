@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_gr",
+  "version": 1,
+  "palette": {
+    "id": "greece_aegean_cobalt",
+    "anchors": {
+      "ink": "#173653",
+      "paper": "#F8F5EA"
+    },
+    "accents": ["#145DA0", "#278DB5", "#D7A548", "#718368"],
+    "ui": {
+      "primary": "#0E5595",
+      "secondary": "#237F9F",
+      "highlight": "#C58D2D",
+      "onPrimary": "#FFFBF2"
+    }
+  },
+  "assets": [
+    {
+      "file": "common/featured_ticket.png",
+      "kind": "common",
+      "name": "featured_ticket",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/room_card.png",
+      "kind": "common",
+      "name": "room_card",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/reservation_card.png",
+      "kind": "common",
+      "name": "reservation_card",
+      "width": 1983,
+      "height": 793
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_ch",
+  "version": 1,
+  "palette": {
+    "id": "switzerland_red_alpine",
+    "anchors": {"ink": "#1E4057", "paper": "#F4EFE5"},
+    "accents": ["#C64143", "#43819A", "#395B49", "#C59A43"],
+    "ui": {
+      "primary": "#28536E",
+      "secondary": "#AD373A",
+      "highlight": "#AF7E2D",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

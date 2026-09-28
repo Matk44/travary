@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_pt",
+  "version": 1,
+  "palette": {
+    "id": "portugal_green_azulejo",
+    "anchors": {"ink": "#183B4E", "paper": "#F6F0E4"},
+    "accents": ["#205B46", "#C23B3B", "#2E6790", "#C69B4A"],
+    "ui": {
+      "primary": "#1A503D",
+      "secondary": "#285D83",
+      "highlight": "#B48836",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

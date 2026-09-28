@@ -12,8 +12,7 @@ enum BookingKind {
   event,
   note;
 
-  static BookingKind fromName(String? name) =>
-      values.firstWhere((k) => k.name == name, orElse: () => note);
+  static BookingKind fromName(String? name) => values.firstWhere((k) => k.name == name, orElse: () => note);
 
   KindSpec get spec => switch (this) {
     flight => _flight,
@@ -129,9 +128,7 @@ const _attraction = KindSpec(
   startLabel: 'Entry',
   endLabel: 'Until',
   locationLabel: 'Where',
-  fields: [
-    DetailField(DetailKeys.guests, 'Tickets for', hint: '2', numeric: true),
-  ],
+  fields: [DetailField(DetailKeys.guests, 'Tickets for', hint: '2', numeric: true)],
   typicalDuration: Duration(hours: 4),
   startEvent: 'Opens',
   endEvent: 'Last day',
@@ -143,9 +140,7 @@ const _dining = KindSpec(
   titleHint: 'Lagoon Grill',
   startLabel: 'Reservation',
   locationLabel: 'Address',
-  fields: [
-    DetailField(DetailKeys.partySize, 'Table for', hint: '4', numeric: true),
-  ],
+  fields: [DetailField(DetailKeys.partySize, 'Table for', hint: '4', numeric: true)],
   typicalDuration: Duration(minutes: 90),
   startEvent: 'Reservation',
   endEvent: 'Ends',
@@ -171,9 +166,7 @@ const _activity = KindSpec(
   startLabel: 'Starts',
   endLabel: 'Ends',
   locationLabel: 'Meeting point',
-  fields: [
-    DetailField(DetailKeys.guests, 'Tickets for', hint: '2', numeric: true),
-  ],
+  fields: [DetailField(DetailKeys.guests, 'Tickets for', hint: '2', numeric: true)],
   typicalDuration: Duration(hours: 3),
   startEvent: 'Starts',
   endEvent: 'Ends',

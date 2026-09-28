@@ -37,10 +37,7 @@ class PlusCard extends StatelessWidget {
           'Smart Import, family sharing and ticket backup. '
           '$left free Smart Import${left == 1 ? '' : 's'} left.';
     }
-    final passes = [
-      for (final id in premium.entitlements.tripPasses)
-        travel.plan(id)?.trip.title ?? 'A past trip',
-    ];
+    final passes = [for (final id in premium.entitlements.tripPasses) travel.plan(id)?.trip.title ?? 'A past trip'];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
@@ -51,9 +48,7 @@ class PlusCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(TravaryRadius.card),
         ),
         child: DefaultTextStyle.merge(
-          style: TextStyle(
-            color: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink,
-          ),
+          style: TextStyle(color: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,18 +56,12 @@ class PlusCard extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.workspace_premium_rounded,
-                    color: policy.hasPlus
-                        ? TravaryColors.mustard
-                        : TravaryColors.coral,
+                    color: policy.hasPlus ? TravaryColors.mustard : TravaryColors.coral,
                   ),
                   const SizedBox(width: TravarySpace.sm),
                   Text(
                     title,
-                    style: TravaryText.title.copyWith(
-                      color: policy.hasPlus
-                          ? TravaryColors.paper
-                          : TravaryColors.ink,
-                    ),
+                    style: TravaryText.title.copyWith(color: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink),
                   ),
                 ],
               ),
@@ -80,9 +69,7 @@ class PlusCard extends StatelessWidget {
               Text(
                 body,
                 style: TravaryText.bodySoft.copyWith(
-                  color: policy.hasPlus
-                      ? TravaryColors.paper.withValues(alpha: 0.85)
-                      : null,
+                  color: policy.hasPlus ? TravaryColors.paper.withValues(alpha: 0.85) : null,
                 ),
               ),
               for (final trip in passes)
@@ -100,9 +87,7 @@ class PlusCard extends StatelessWidget {
               TextButton(
                 onPressed: premium.busy ? null : premium.restore,
                 style: TextButton.styleFrom(
-                  foregroundColor: policy.hasPlus
-                      ? TravaryColors.paper
-                      : TravaryColors.ink,
+                  foregroundColor: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink,
                   padding: EdgeInsets.zero,
                 ),
                 child: const Text('Restore purchases'),
@@ -124,9 +109,7 @@ class TestPlanSwitcher extends StatelessWidget {
     final premium = context.watch<PremiumStore>();
     final now = context.read<TravelStore>().now;
     final e = premium.entitlements;
-    final current = !premium.hasPlus
-        ? 'free'
-        : (premium.policy.inTrial ? 'trial' : 'plus');
+    final current = !premium.hasPlus ? 'free' : (premium.policy.inTrial ? 'trial' : 'plus');
 
     if (!kDebugMode || !premium.isTestStore) return const SizedBox.shrink();
     return Padding(
@@ -147,28 +130,16 @@ class TestPlanSwitcher extends StatelessWidget {
               final choice = value.single;
               premium.debugSetEntitlements(switch (choice) {
                 'trial' => e.copyWith(
-                  plus: PlusSubscription(
-                    expiresAt: now.add(const Duration(days: 14)),
-                    inTrial: true,
-                  ),
+                  plus: PlusSubscription(expiresAt: now.add(const Duration(days: 14)), inTrial: true),
                 ),
-                'plus' => e.copyWith(
-                  plus: PlusSubscription(
-                    expiresAt: now.add(const Duration(days: 365)),
-                  ),
-                ),
+                'plus' => e.copyWith(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 365)))),
                 _ => e.copyWith(clearPlus: true),
               });
             },
           ),
           TextButton(
-            onPressed: () => premium.debugSetEntitlements(
-              e.copyWith(
-                clearPlus: true,
-                tripPasses: const {},
-                smartImportsUsed: 0,
-              ),
-            ),
+            onPressed: () =>
+                premium.debugSetEntitlements(e.copyWith(clearPlus: true, tripPasses: const {}, smartImportsUsed: 0)),
             child: const Text('Reset passes and free imports'),
           ),
         ],

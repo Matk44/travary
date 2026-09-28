@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_nl",
+  "version": 1,
+  "palette": {
+    "id": "netherlands_orange_delft",
+    "anchors": {"ink": "#174B70", "paper": "#F5EFE4"},
+    "accents": ["#E47B3A", "#3D79A0", "#C54F50", "#567257"],
+    "ui": {
+      "primary": "#1E5A82",
+      "secondary": "#C7642F",
+      "highlight": "#AE7A2D",
+      "onPrimary": "#FFF9EF"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

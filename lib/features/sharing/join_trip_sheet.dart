@@ -8,18 +8,15 @@ import '../../state/travel_store.dart';
 
 /// Join a trip someone shared: their invite code plus your name.
 /// Returns the trip's title once joined.
-Future<String?> showJoinTripSheet(BuildContext context) =>
-    showModalBottomSheet<String>(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: true,
-      builder: (_) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.viewInsetsOf(context).bottom,
-        ),
-        child: const JoinTripSheet(),
-      ),
-    );
+Future<String?> showJoinTripSheet(BuildContext context) => showModalBottomSheet<String>(
+  context: context,
+  isScrollControlled: true,
+  showDragHandle: true,
+  builder: (_) => Padding(
+    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+    child: const JoinTripSheet(),
+  ),
+);
 
 class JoinTripSheet extends StatefulWidget {
   const JoinTripSheet({super.key});
@@ -34,8 +31,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
   String? _error;
   bool _busy = false;
 
-  String get _cleanCode =>
-      _code.text.toUpperCase().replaceAll(RegExp(r'[^A-Z0-9]'), '');
+  String get _cleanCode => _code.text.toUpperCase().replaceAll(RegExp(r'[^A-Z0-9]'), '');
   bool get _ready => _cleanCode.length == 6 && _name.text.trim().isNotEmpty;
 
   @override
@@ -51,10 +47,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
       _error = null;
     });
     try {
-      final joined = await context.read<TravelStore>().joinTrip(
-        _cleanCode,
-        name: _name.text.trim(),
-      );
+      final joined = await context.read<TravelStore>().joinTrip(_cleanCode, name: _name.text.trim());
       track('trip_joined');
       if (mounted) Navigator.of(context).pop(joined.title);
     } on SharingException catch (e) {
@@ -69,12 +62,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
     final available = context.read<TravelStore>().sharingAvailable;
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          TravarySpace.gutter,
-          0,
-          TravarySpace.gutter,
-          TravarySpace.lg,
-        ),
+        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -94,10 +82,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
               autofocus: available,
               textCapitalization: TextCapitalization.characters,
               style: TravaryText.title.copyWith(letterSpacing: 4),
-              decoration: const InputDecoration(
-                labelText: 'Invite code',
-                hintText: 'ABC 234',
-              ),
+              decoration: const InputDecoration(labelText: 'Invite code', hintText: 'ABC 234'),
               onChanged: (_) => setState(() {}),
             ),
             const SizedBox(height: TravarySpace.md),
@@ -105,10 +90,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
               controller: _name,
               enabled: available,
               textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                labelText: 'Your name',
-                hintText: 'How the family will see you',
-              ),
+              decoration: const InputDecoration(labelText: 'Your name', hintText: 'How the family will see you'),
               onChanged: (_) => setState(() {}),
               onSubmitted: (_) {
                 if (_ready && !_busy) _join();
@@ -116,20 +98,13 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
             ),
             if (_error != null) ...[
               const SizedBox(height: TravarySpace.md),
-              Text(
-                _error!,
-                style: TravaryText.small.copyWith(color: TravaryColors.coral),
-              ),
+              Text(_error!, style: TravaryText.small.copyWith(color: TravaryColors.coral)),
             ],
             const SizedBox(height: TravarySpace.lg),
             FilledButton(
               onPressed: available && _ready && !_busy ? _join : null,
               child: _busy
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
+                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
                   : const Text('Join trip'),
             ),
           ],

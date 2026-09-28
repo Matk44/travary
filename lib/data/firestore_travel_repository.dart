@@ -19,10 +19,7 @@ import 'travel_repository.dart';
 /// created a moment ago, before the server has it.) When trip members
 /// change, their bookings' copies must be updated in the same batch.
 class FirestoreTravelRepository implements TravelRepository {
-  FirestoreTravelRepository({
-    required FirebaseFirestore firestore,
-    required this.userId,
-  }) : _db = firestore;
+  FirestoreTravelRepository({required FirebaseFirestore firestore, required this.userId}) : _db = firestore;
 
   final FirebaseFirestore _db;
   final _errors = StreamController<String>.broadcast();
@@ -38,8 +35,7 @@ class FirestoreTravelRepository implements TravelRepository {
 
   CollectionReference<Map<String, dynamic>> get _trips => _db.collection('trips');
 
-  CollectionReference<Map<String, dynamic>> _bookingsOf(String tripId) =>
-      _trips.doc(tripId).collection('bookings');
+  CollectionReference<Map<String, dynamic>> _bookingsOf(String tripId) => _trips.doc(tripId).collection('bookings');
 
   @override
   Stream<String> get errors => _errors.stream;
@@ -48,11 +44,8 @@ class FirestoreTravelRepository implements TravelRepository {
   String newId() => _trips.doc().id;
 
   @override
-  Stream<List<Trip>> watchTrips() => _trips
-      .where('memberIds', arrayContains: userId)
-      .snapshots()
-      .transform(_friendlyErrors('trips'))
-      .map((snapshot) {
+  Stream<List<Trip>> watchTrips() =>
+      _trips.where('memberIds', arrayContains: userId).snapshots().transform(_friendlyErrors('trips')).map((snapshot) {
         final trips = [for (final d in snapshot.docs) Trip.fromJson(d.id, d.data())];
         for (final trip in trips) {
           _membersByTrip[trip.id] = trip.memberIds;
@@ -77,8 +70,7 @@ class FirestoreTravelRepository implements TravelRepository {
   /// Only the editable fields: member lists are the server's, and this
   /// phone's copy may be a few seconds old.
   @override
-  Future<void> updateTrip(Trip trip) async =>
-      _sync(_trips.doc(trip.id).update(trip.toEditableJson()));
+  Future<void> updateTrip(Trip trip) async => _sync(_trips.doc(trip.id).update(trip.toEditableJson()));
 
   @override
   Future<void> deleteTrip(Trip trip, Iterable<Booking> bookings) async {
@@ -91,9 +83,8 @@ class FirestoreTravelRepository implements TravelRepository {
   }
 
   @override
-  Future<void> saveBooking(Booking booking) async => _sync(
-    _bookingsOf(booking.tripId).doc(booking.id).set(_bookingData(booking)),
-  );
+  Future<void> saveBooking(Booking booking) async =>
+      _sync(_bookingsOf(booking.tripId).doc(booking.id).set(_bookingData(booking)));
 
   @override
   Future<void> moveBooking(Booking booking, String fromTripId) async {
@@ -104,8 +95,7 @@ class FirestoreTravelRepository implements TravelRepository {
   }
 
   @override
-  Future<void> deleteBooking(Booking booking) async =>
-      _sync(_bookingsOf(booking.tripId).doc(booking.id).delete());
+  Future<void> deleteBooking(Booking booking) async => _sync(_bookingsOf(booking.tripId).doc(booking.id).delete());
 
   Map<String, Object?> _bookingData(Booking booking) => {
     ...booking.toJson(),
@@ -114,15 +104,14 @@ class FirestoreTravelRepository implements TravelRepository {
 
   /// Turns Firestore listener errors into a sentence for the traveller.
   /// The code stays in brackets to help with support.
-  StreamTransformer<T, T> _friendlyErrors<T>(String what) =>
-      StreamTransformer.fromHandlers(
-        handleError: (error, stackTrace, sink) => sink.addError(
-          error is FirebaseException
-              ? 'Couldn\'t load your $what (${error.code}). Try again shortly.'
-              : 'Couldn\'t load your $what.',
-          stackTrace,
-        ),
-      );
+  StreamTransformer<T, T> _friendlyErrors<T>(String what) => StreamTransformer.fromHandlers(
+    handleError: (error, stackTrace, sink) => sink.addError(
+      error is FirebaseException
+          ? 'Couldn\'t load your $what (${error.code}). Try again shortly.'
+          : 'Couldn\'t load your $what.',
+      stackTrace,
+    ),
+  );
 
   /// Firestore applies writes to its local cache immediately, but the
   /// returned future only completes once the server confirms, which never
@@ -131,9 +120,7 @@ class FirestoreTravelRepository implements TravelRepository {
     unawaited(
       write.catchError((Object error) {
         _errors.add(
-          error is FirebaseException
-              ? 'Couldn\'t sync a change (${error.code}).'
-              : 'Couldn\'t sync a change.',
+          error is FirebaseException ? 'Couldn\'t sync a change (${error.code}).' : 'Couldn\'t sync a change.',
         );
       }),
     );

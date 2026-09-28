@@ -42,8 +42,7 @@ class AccessPolicy {
 
   bool get inTrial => hasPlus && (entitlements.plus?.inTrial ?? false);
 
-  int get freeSmartImportsLeft =>
-      max(0, Pricing.freeSmartImports - entitlements.smartImportsUsed);
+  int get freeSmartImportsLeft => max(0, Pricing.freeSmartImports - entitlements.smartImportsUsed);
 
   bool hasTripPass(TripPlan plan) {
     if (!entitlements.tripPasses.contains(plan.id)) return false;
@@ -68,9 +67,7 @@ class AccessPolicy {
     if (forTrip.allowed) return forTrip;
     return switch (feature) {
       PremiumFeature.smartImport =>
-        freeSmartImportsLeft > 0
-            ? AccessDecision.freeUse(freeSmartImportsLeft)
-            : const AccessDecision.locked(),
+        freeSmartImportsLeft > 0 ? AccessDecision.freeUse(freeSmartImportsLeft) : const AccessDecision.locked(),
       PremiumFeature.familySharing ||
       PremiumFeature.ticketBackup ||
       PremiumFeature.flightAlerts => const AccessDecision.locked(),

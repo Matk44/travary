@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_id",
+  "version": 1,
+  "palette": {
+    "id": "indonesia_batik_tropical",
+    "anchors": {"ink": "#243B5A", "paper": "#F5EFE4"},
+    "accents": ["#C23B3E", "#C79A3A", "#2E6654", "#2B7B7E"],
+    "ui": {
+      "primary": "#2A4568",
+      "secondary": "#275A49",
+      "highlight": "#B58629",
+      "onPrimary": "#FFF8EC"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

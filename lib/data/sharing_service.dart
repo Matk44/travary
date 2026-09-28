@@ -34,8 +34,7 @@ abstract interface class SharingService {
 }
 
 class CloudSharingService implements SharingService {
-  CloudSharingService({required this.ensureSignedIn, FirebaseFunctions? functions})
-    : _functions = functions;
+  CloudSharingService({required this.ensureSignedIn, FirebaseFunctions? functions}) : _functions = functions;
 
   final Future<void> Function() ensureSignedIn;
   final FirebaseFunctions? _functions;
@@ -57,10 +56,7 @@ class CloudSharingService implements SharingService {
   @override
   Future<TripInvite> createInvite(String tripId, {String? name}) async {
     final data = await _call('createTripInvite', {'tripId': tripId, 'name': name});
-    return TripInvite(
-      data['code'] as String,
-      DateTime.fromMillisecondsSinceEpoch((data['expiresAt'] as num).toInt()),
-    );
+    return TripInvite(data['code'] as String, DateTime.fromMillisecondsSinceEpoch((data['expiresAt'] as num).toInt()));
   }
 
   @override

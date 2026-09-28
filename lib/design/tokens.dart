@@ -18,6 +18,13 @@ abstract final class TravaryColors {
   static const mustard = Color(0xFFD7A443);
   static const plum = Color(0xFF5B3F63);
   static const line = Color(0xFFDCD2C1);
+
+  // Trip looks (tiles and theme chips).
+  static const alpine = Color(0xFF6F8FAF);
+  static const moss = Color(0xFF6E8B5E);
+  static const pine = Color(0xFF3F5E48);
+  static const harbour = Color(0xFF2F4F7F);
+  static const lilac = Color(0xFF8E7BA8);
 }
 
 abstract final class TravarySpace {
@@ -43,20 +50,51 @@ abstract final class TravaryText {
   /// Tests turn this off so no fonts are fetched.
   static bool useGoogleFonts = true;
 
-  static TextStyle _serif(double size, FontWeight weight, Color color, {double height = 1.15}) =>
-      useGoogleFonts
-          ? GoogleFonts.sourceSerif4(fontSize: size, fontWeight: weight, color: color, height: height)
-          : TextStyle(fontSize: size, fontWeight: weight, color: color, height: height);
+  /// With Google Fonts off, families already loaded some other way (the
+  /// visual QA render loads the same Source Serif 4 and Inter files).
+  static String? serifFamily;
+  static String? sansFamily;
 
-  static TextStyle _sans(double size, FontWeight weight, Color color,
-          {double height = 1.3, double letterSpacing = 0}) =>
+  static TextStyle _serif(double size, FontWeight weight, Color color, {double height = 1.15, double? letterSpacing}) =>
       useGoogleFonts
-          ? GoogleFonts.inter(
-              fontSize: size, fontWeight: weight, color: color, height: height,
-              letterSpacing: letterSpacing)
-          : TextStyle(
-              fontSize: size, fontWeight: weight, color: color, height: height,
-              letterSpacing: letterSpacing);
+      ? GoogleFonts.sourceSerif4(
+          fontSize: size,
+          fontWeight: weight,
+          color: color,
+          height: height,
+          letterSpacing: letterSpacing,
+        )
+      : TextStyle(
+          fontFamily: serifFamily,
+          fontSize: size,
+          fontWeight: weight,
+          color: color,
+          height: height,
+          letterSpacing: letterSpacing,
+        );
+
+  static TextStyle _sans(
+    double size,
+    FontWeight weight,
+    Color color, {
+    double height = 1.3,
+    double letterSpacing = 0,
+  }) => useGoogleFonts
+      ? GoogleFonts.inter(
+          fontSize: size,
+          fontWeight: weight,
+          color: color,
+          height: height,
+          letterSpacing: letterSpacing,
+        )
+      : TextStyle(
+          fontFamily: sansFamily,
+          fontSize: size,
+          fontWeight: weight,
+          color: color,
+          height: height,
+          letterSpacing: letterSpacing,
+        );
 
   /// "Good morning".
   static TextStyle get display => _serif(36, FontWeight.w700, TravaryColors.ink, height: 1.05);
@@ -76,8 +114,118 @@ abstract final class TravaryText {
   static TextStyle get small => _sans(12.5, FontWeight.w500, TravaryColors.inkSoft);
 
   /// Small spaced capitals above titles: "NEXT UP".
-  static TextStyle get eyebrow =>
-      _sans(11.5, FontWeight.w700, TravaryColors.inkSoft, letterSpacing: 2.2);
+  static TextStyle get eyebrow => _sans(11.5, FontWeight.w700, TravaryColors.inkSoft, letterSpacing: 2.2);
+
+  // ---- Today: header, raster card shells, timeline, home tabs ----------
+
+  /// "Good morning" on Today.
+  static TextStyle get greeting => _serif(43, FontWeight.w700, TravaryColors.ink, height: 1.0, letterSpacing: -0.8);
+
+  /// "Day 3 of 7 · Orlando".
+  static TextStyle get daySubtitle => _sans(16.5, FontWeight.w400, TravaryColors.ink, height: 1.25);
+
+  /// The weather or countdown pill.
+  static TextStyle get pill => _sans(12.5, FontWeight.w500, TravaryColors.ink, height: 1.2);
+
+  /// Spaced capitals on shells: "NEXT UP", "HOTEL", "LUNCH".
+  static TextStyle get shellEyebrow => _sans(11, FontWeight.w600, TravaryColors.ink, height: 1.2, letterSpacing: 2.6);
+
+  /// Title on the featured ticket.
+  static TextStyle get ticketTitle =>
+      _serif(32, FontWeight.w700, TravaryColors.paper, height: 1.08, letterSpacing: -0.5);
+
+  /// Title on the hotel key card.
+  static TextStyle get roomTitle => _serif(28, FontWeight.w700, TravaryColors.ink, height: 1.08, letterSpacing: -0.5);
+
+  /// Title on tagged reservation cards.
+  static TextStyle get reservationTitle =>
+      _serif(25, FontWeight.w700, TravaryColors.ink, height: 1.08, letterSpacing: -0.4);
+
+  /// Times and details on shells: "12:30pm · Table for 4".
+  static TextStyle get shellLine => _sans(16, FontWeight.w400, TravaryColors.ink, height: 1.3);
+
+  /// The small supporting line on a key card: "CHECK-OUT IN 4 DAYS".
+  static TextStyle get footnote => _sans(10, FontWeight.w600, TravaryColors.ink, height: 1.2, letterSpacing: 1.8);
+
+  /// "ADMIT TWO" up the ticket stub.
+  static TextStyle get stubLabel => _sans(10.5, FontWeight.w600, TravaryColors.ink, height: 1.0, letterSpacing: 3.2);
+
+  /// The "Show tickets" stamp.
+  static TextStyle get stamp => _serif(18, FontWeight.w700, TravaryColors.ink, height: 1.0);
+
+  /// Timeline stop: "9:00" over "Park".
+  static TextStyle get timelineTime => _sans(13.5, FontWeight.w700, TravaryColors.ink, height: 1.2);
+  static TextStyle get timelineLabel => _sans(13.5, FontWeight.w400, TravaryColors.ink, height: 1.2);
+
+  /// Home tab labels.
+  static TextStyle get tabLabel => _sans(11, FontWeight.w500, TravaryColors.ink, height: 1.1);
+  static TextStyle get tabLabelSelected => _sans(13.5, FontWeight.w600, TravaryColors.paper, height: 1.1);
+}
+
+/// Spacing of the Today composition, tuned at the reference 390 × 927
+/// point viewport (docs/reference/travary_today_reference.png).
+abstract final class TodayLayout {
+  /// Above the greeting (below any status bar).
+  static const headerTop = 30.0;
+
+  /// Header text from the screen edge.
+  static const headerInset = 20.0;
+
+  /// The weather pill from the right edge.
+  static const pillInset = 12.0;
+
+  /// Between the header and the first card.
+  static const headerGap = 26.0;
+
+  /// The featured ticket's scalloped edge reaches further out than cards.
+  static const featuredInset = 10.0;
+
+  /// Cards from the screen edge.
+  static const cardInset = 16.0;
+
+  /// Between cards.
+  static const cardGap = 25.0;
+
+  /// Compact rows (finished items) are closer together.
+  static const compactGap = 8.0;
+
+  /// Between the last card and the timeline.
+  static const timelineGap = 16.0;
+
+  /// The first and last timeline stops from the card edges.
+  static const timelineInset = 30.0;
+
+  /// A timeline stop needs at least this much room; more stops scroll.
+  static const timelineStopWidth = 78.0;
+
+  /// Below the timeline, above the home tabs.
+  static const bottomGap = 16.0;
+}
+
+/// The raised home tabs.
+abstract final class NavLayout {
+  /// A resting tab's height above the bottom safe area.
+  static const height = 46.0;
+
+  /// How high a selected tab rises above the others.
+  static const rise = 11.0;
+
+  /// Tabs are this far apart and this far from the screen edge.
+  static const gap = 4.0;
+  static const inset = 8.0;
+
+  /// The add tab is narrower than the others.
+  static const addFlex = 9;
+  static const tabFlex = 10;
+
+  static const radius = 14.0;
+
+  /// Raster nav icons keep a wide margin round the ink.
+  static const iconSize = 36.0;
+  static const selectedIconSize = 40.0;
+
+  /// The pop when a tab is chosen.
+  static const popDuration = Duration(milliseconds: 380);
 }
 
 ThemeData buildTravaryTheme() {
@@ -92,9 +240,7 @@ ThemeData buildTravaryTheme() {
     scaffoldBackgroundColor: TravaryColors.linen,
   );
   return base.copyWith(
-    textTheme: TravaryText.useGoogleFonts
-        ? GoogleFonts.interTextTheme(base.textTheme)
-        : base.textTheme,
+    textTheme: TravaryText.useGoogleFonts ? GoogleFonts.interTextTheme(base.textTheme) : base.textTheme,
     appBarTheme: const AppBarTheme(
       backgroundColor: TravaryColors.linen,
       foregroundColor: TravaryColors.ink,
@@ -149,9 +295,6 @@ ThemeData buildTravaryTheme() {
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: TravaryColors.linen),
     datePickerTheme: const DatePickerThemeData(backgroundColor: TravaryColors.paper),
     timePickerTheme: const TimePickerThemeData(backgroundColor: TravaryColors.paper),
-    snackBarTheme: const SnackBarThemeData(
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: TravaryColors.ink,
-    ),
+    snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating, backgroundColor: TravaryColors.ink),
   );
 }

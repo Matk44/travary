@@ -16,12 +16,7 @@ enum EntryStatus { done, now, upcoming }
 
 /// One line on a day's timeline.
 class DayEntry {
-  const DayEntry({
-    required this.booking,
-    required this.role,
-    required this.time,
-    required this.status,
-  });
+  const DayEntry({required this.booking, required this.role, required this.time, required this.status});
 
   final Booking booking;
   final EntryRole role;
@@ -35,12 +30,7 @@ class DayEntry {
 
 /// Everything happening on one calendar day, in order.
 class DayPlan {
-  const DayPlan({
-    required this.date,
-    required this.entries,
-    required this.ongoing,
-    this.highlightIndex,
-  });
+  const DayPlan({required this.date, required this.entries, required this.ongoing, this.highlightIndex});
 
   final LocalDate date;
 
@@ -55,8 +45,7 @@ class DayPlan {
   /// else what's next. Only set when [date] is today.
   final int? highlightIndex;
 
-  DayEntry? get highlight =>
-      highlightIndex == null ? null : entries[highlightIndex!];
+  DayEntry? get highlight => highlightIndex == null ? null : entries[highlightIndex!];
   bool get isEmpty => entries.isEmpty && ongoing.isEmpty;
 }
 
@@ -86,12 +75,7 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
       continue;
     }
     entries.add(
-      DayEntry(
-        booking: booking,
-        role: role,
-        time: time,
-        status: _statusOf(booking, role, date, time, today, now),
-      ),
+      DayEntry(booking: booking, role: role, time: time, status: _statusOf(booking, role, date, time, today, now)),
     );
   }
 
@@ -102,12 +86,8 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
   if (date == today) {
     // When things overlap (lunch inside a park day), feature whichever
     // started most recently: that's what the traveller is doing right now.
-    final nowIndex = entries.lastIndexWhere(
-      (e) => e.status == EntryStatus.now && !e.isAllDay,
-    );
-    final nextIndex = entries.indexWhere(
-      (e) => e.status == EntryStatus.upcoming && !e.isAllDay,
-    );
+    final nowIndex = entries.lastIndexWhere((e) => e.status == EntryStatus.now && !e.isAllDay);
+    final nextIndex = entries.indexWhere((e) => e.status == EntryStatus.upcoming && !e.isAllDay);
     highlight = nowIndex != -1 ? nowIndex : (nextIndex != -1 ? nextIndex : null);
   }
 
@@ -119,14 +99,7 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
   );
 }
 
-EntryStatus _statusOf(
-  Booking booking,
-  EntryRole role,
-  LocalDate date,
-  ClockTime? time,
-  LocalDate today,
-  DateTime now,
-) {
+EntryStatus _statusOf(Booking booking, EntryRole role, LocalDate date, ClockTime? time, LocalDate today, DateTime now) {
   if (date.isBefore(today)) return EntryStatus.done;
   if (date.isAfter(today)) return EntryStatus.upcoming;
   // All-day entries stay relevant for the whole of their day.
@@ -140,12 +113,7 @@ EntryStatus _statusOf(
 }
 
 /// When an entry stops being "happening now".
-DateTime _finishOf(
-  Booking booking,
-  EntryRole role,
-  LocalDate date,
-  DateTime start,
-) {
+DateTime _finishOf(Booking booking, EntryRole role, LocalDate date, DateTime start) {
   final endOfDay = date.addDays(1).toDateTime();
   if (role == EntryRole.single && booking.endTime != null) {
     final end = date.toDateTime(booking.endTime);

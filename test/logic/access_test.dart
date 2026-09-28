@@ -12,9 +12,7 @@ void main() {
   final orlando = TripPlan(trip('orlando'), [
     booking('hotel', BookingKind.stay, d(10, 12), tripId: 'orlando', endDate: d(10, 18)),
   ]);
-  final paris = TripPlan(trip('paris'), [
-    booking('p', BookingKind.stay, d(6, 1), tripId: 'paris', endDate: d(6, 4)),
-  ]);
+  final paris = TripPlan(trip('paris'), [booking('p', BookingKind.stay, d(6, 1), tripId: 'paris', endDate: d(6, 4))]);
 
   AccessPolicy policy(Entitlements e, [DateTime? at]) => AccessPolicy(e, at ?? now);
 
@@ -86,19 +84,15 @@ void main() {
     );
 
     test('a trip unlocked by its organiser unlocks it for everyone on it', () {
-      final decision = policy(Entitlements.none).decide(
-        PremiumFeature.familySharing,
-        trip: stamped(now.add(const Duration(days: 5))),
-      );
+      final decision = policy(
+        Entitlements.none,
+      ).decide(PremiumFeature.familySharing, trip: stamped(now.add(const Duration(days: 5))));
       expect(decision.allowed, isTrue);
       expect(decision.viaTripPremium, isTrue);
     });
 
     test('but not once it has lapsed', () {
-      expect(
-        policy(Entitlements.none).decide(PremiumFeature.familySharing, trip: stamped(now)).allowed,
-        isFalse,
-      );
+      expect(policy(Entitlements.none).decide(PremiumFeature.familySharing, trip: stamped(now)).allowed, isFalse);
     });
   });
 

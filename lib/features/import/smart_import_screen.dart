@@ -17,11 +17,7 @@ import '../booking/edit_booking_screen.dart';
 
 /// What happened, for the "Added to Orlando" message.
 class SmartImportOutcome {
-  const SmartImportOutcome({
-    this.added = 0,
-    this.trips = const {},
-    this.addManually = false,
-  });
+  const SmartImportOutcome({this.added = 0, this.trips = const {}, this.addManually = false});
 
   final int added;
   final Set<String> trips;
@@ -138,10 +134,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     final store = context.read<TravelStore>();
     final bookings = <Booking>[];
     for (final index in _selected.toList()..sort()) {
-      final attachment = await store.attachments?.import(
-        widget.filePath,
-        name: widget.fileName,
-      );
+      final attachment = await store.attachments?.import(widget.filePath, name: widget.fileName);
       bookings.add(
         _drafts[index].booking.copyWith(
           id: store.repository.newId(),
@@ -159,9 +152,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
   }
 
   void _finish() {
-    Navigator.of(
-      context,
-    ).pop(SmartImportOutcome(added: _saved.length, trips: _trips));
+    Navigator.of(context).pop(SmartImportOutcome(added: _saved.length, trips: _trips));
   }
 
   @override
@@ -196,30 +187,17 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
       children: [
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(
-              TravarySpace.gutter,
-              0,
-              TravarySpace.gutter,
-              TravarySpace.lg,
-            ),
+            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
             children: [
               Text(
-                _drafts.length == 1
-                    ? 'We found 1 booking'
-                    : 'We found ${_drafts.length} bookings',
+                _drafts.length == 1 ? 'We found 1 booking' : 'We found ${_drafts.length} bookings',
                 style: TravaryText.headline,
               ),
               const SizedBox(height: TravarySpace.xs),
-              Text(
-                'Tap one to check its details, or add them all.',
-                style: TravaryText.bodySoft,
-              ),
+              Text('Tap one to check its details, or add them all.', style: TravaryText.bodySoft),
               if (_result?.warning != null) ...[
                 const SizedBox(height: TravarySpace.sm),
-                Text(
-                  _result!.warning!,
-                  style: TravaryText.small.copyWith(color: TravaryColors.coral),
-                ),
+                Text(_result!.warning!, style: TravaryText.small.copyWith(color: TravaryColors.coral)),
               ],
               const SizedBox(height: TravarySpace.lg),
               for (final (index, draft) in _drafts.indexed)
@@ -228,15 +206,10 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
                   child: Row(
                     children: [
                       Checkbox(
-                        value:
-                            _saved.contains(index) || _selected.contains(index),
+                        value: _saved.contains(index) || _selected.contains(index),
                         onChanged: _saved.contains(index)
                             ? null
-                            : (on) => setState(
-                                () => on == true
-                                    ? _selected.add(index)
-                                    : _selected.remove(index),
-                              ),
+                            : (on) => setState(() => on == true ? _selected.add(index) : _selected.remove(index)),
                       ),
                       Expanded(
                         child: Column(
@@ -246,23 +219,14 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
                               text: cardTextForReview(draft.booking),
                               art: art[index],
                               size: CardSize.compact,
-                              onTap: _saved.contains(index)
-                                  ? null
-                                  : () => _checkOne(index),
+                              onTap: _saved.contains(index) ? null : () => _checkOne(index),
                             ),
                             if (_saved.contains(index))
-                              Text(
-                                'Added',
-                                style: TravaryText.small.copyWith(
-                                  color: TravaryColors.teal,
-                                ),
-                              )
+                              Text('Added', style: TravaryText.small.copyWith(color: TravaryColors.teal))
                             else if (draft.uncertain.isNotEmpty)
                               Text(
                                 'Check ${draft.uncertain.length} detail${draft.uncertain.length == 1 ? '' : 's'}',
-                                style: TravaryText.small.copyWith(
-                                  color: TravaryColors.coral,
-                                ),
+                                style: TravaryText.small.copyWith(color: TravaryColors.coral),
                               ),
                           ],
                         ),
@@ -285,14 +249,8 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
             child: SizedBox(
               width: double.infinity,
               child: FilledButton(
-                onPressed: _saving
-                    ? null
-                    : (toAdd == 0 ? _finish : _addSelected),
-                child: Text(
-                  toAdd == 0
-                      ? 'Done'
-                      : 'Add $toAdd booking${toAdd == 1 ? '' : 's'}',
-                ),
+                onPressed: _saving ? null : (toAdd == 0 ? _finish : _addSelected),
+                child: Text(toAdd == 0 ? 'Done' : 'Add $toAdd booking${toAdd == 1 ? '' : 's'}'),
               ),
             ),
           ),
@@ -309,8 +267,7 @@ class _Reading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isImage =
-        smartImportMimeType(filePath)?.startsWith('image/') ?? false;
+    final isImage = smartImportMimeType(filePath)?.startsWith('image/') ?? false;
     return Padding(
       padding: const EdgeInsets.all(TravarySpace.xl),
       child: Column(
@@ -324,54 +281,32 @@ class _Reading extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: TravaryColors.paper,
                   borderRadius: BorderRadius.circular(TravaryRadius.card),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x22000000),
-                      blurRadius: 12,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
+                  boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 12, offset: Offset(0, 4))],
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: isImage
                     ? Image.file(
                         File(filePath),
                         fit: BoxFit.cover,
-                        errorBuilder: (_, _, _) =>
-                            const SizedBox(width: 200, height: 200),
+                        errorBuilder: (_, _, _) => const SizedBox(width: 200, height: 200),
                       )
                     : const SizedBox(
                         width: 200,
                         height: 200,
-                        child: Icon(
-                          Icons.picture_as_pdf_outlined,
-                          size: 64,
-                          color: TravaryColors.inkSoft,
-                        ),
+                        child: Icon(Icons.picture_as_pdf_outlined, size: 64, color: TravaryColors.inkSoft),
                       ),
               ),
             ),
           ),
           const SizedBox(height: TravarySpace.xl),
-          Text(
-            'Reading your booking…',
-            style: TravaryText.title,
-            textAlign: TextAlign.center,
-          ),
+          Text('Reading your booking…', style: TravaryText.title, textAlign: TextAlign.center),
           const SizedBox(height: TravarySpace.sm),
-          Text(
-            'This usually takes a few seconds.',
-            style: TravaryText.bodySoft,
-            textAlign: TextAlign.center,
-          ),
+          Text('This usually takes a few seconds.', style: TravaryText.bodySoft, textAlign: TextAlign.center),
           const SizedBox(height: TravarySpace.lg),
           const Center(
             child: SizedBox(
               width: 160,
-              child: LinearProgressIndicator(
-                color: TravaryColors.coral,
-                backgroundColor: TravaryColors.paperEdge,
-              ),
+              child: LinearProgressIndicator(color: TravaryColors.coral, backgroundColor: TravaryColors.paperEdge),
             ),
           ),
         ],
@@ -381,11 +316,7 @@ class _Reading extends StatelessWidget {
 }
 
 class _Problem extends StatelessWidget {
-  const _Problem({
-    required this.title,
-    required this.message,
-    required this.onRetry,
-  });
+  const _Problem({required this.title, required this.message, required this.onRetry});
 
   final String title;
   final String message;
@@ -398,21 +329,11 @@ class _Problem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            EmptyState(
-              icon: Icons.document_scanner_outlined,
-              title: title,
-              message: message,
-            ),
-            if (onRetry != null)
-              OutlinedButton(
-                onPressed: onRetry,
-                child: const Text('Try again'),
-              ),
+            EmptyState(icon: Icons.document_scanner_outlined, title: title, message: message),
+            if (onRetry != null) OutlinedButton(onPressed: onRetry, child: const Text('Try again')),
             const SizedBox(height: TravarySpace.sm),
             FilledButton(
-              onPressed: () => Navigator.of(
-                context,
-              ).pop(const SmartImportOutcome(addManually: true)),
+              onPressed: () => Navigator.of(context).pop(const SmartImportOutcome(addManually: true)),
               child: const Text('Add it myself'),
             ),
           ],

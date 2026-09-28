@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_tr",
+  "version": 1,
+  "palette": {
+    "id": "turkey_crimson_bosphorus",
+    "anchors": {"ink": "#1A334A", "paper": "#F6EFE5"},
+    "accents": ["#C62828", "#287D83", "#214E75", "#C69B44"],
+    "ui": {
+      "primary": "#A82125",
+      "secondary": "#246D74",
+      "highlight": "#B58832",
+      "onPrimary": "#FFF9F1"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_mx",
+  "version": 1,
+  "palette": {
+    "id": "mexico_jade_marigold",
+    "anchors": {"ink": "#173D42", "paper": "#F6EBD8"},
+    "accents": ["#176B58", "#B8323E", "#E2A62B", "#2768A0"],
+    "ui": {
+      "primary": "#145A4A",
+      "secondary": "#9D2936",
+      "highlight": "#C68A17",
+      "onPrimary": "#FFF8EA"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

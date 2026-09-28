@@ -12,8 +12,7 @@ import 'analytics.dart';
 /// [decide] before using a premium feature; the rules live in
 /// [AccessPolicy].
 class PremiumStore extends ChangeNotifier {
-  PremiumStore({required this.purchases, DateTime Function()? clock})
-    : _clock = clock ?? DateTime.now {
+  PremiumStore({required this.purchases, DateTime Function()? clock}) : _clock = clock ?? DateTime.now {
     _subscription = purchases.watchEntitlements().listen((entitlements) {
       _entitlements = entitlements;
       notifyListeners();
@@ -42,8 +41,7 @@ class PremiumStore extends ChangeNotifier {
     return null;
   }
 
-  AccessDecision decide(PremiumFeature feature, {TripPlan? trip}) =>
-      policy.decide(feature, trip: trip);
+  AccessDecision decide(PremiumFeature feature, {TripPlan? trip}) => policy.decide(feature, trip: trip);
 
   AccessDecision forTrip(TripPlan? trip) => policy.forTrip(trip);
 

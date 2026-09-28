@@ -76,14 +76,10 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     _location = TextEditingController(text: existing?.location);
     _reference = TextEditingController(text: existing?.reference);
     _notes = TextEditingController(text: existing?.notes);
-    _details = {
-      for (final field in _spec.fields)
-        field.key: TextEditingController(text: existing?.details[field.key]),
-    };
+    _details = {for (final field in _spec.fields) field.key: TextEditingController(text: existing?.details[field.key])};
     _startDate = existing?.startDate ?? widget.initialDate ?? _store.today;
     _startTime = existing?.startTime;
-    _endDate = existing?.endDate ??
-        (existing == null && _spec.endUsuallyLaterDay ? _startDate.addDays(1) : null);
+    _endDate = existing?.endDate ?? (existing == null && _spec.endUsuallyLaterDay ? _startDate.addDays(1) : null);
     _endTime = existing?.endTime;
     _tripId = widget.existing?.tripId ?? widget.tripId ?? '';
     _attachments = [...?widget.existing?.attachments];
@@ -91,10 +87,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   }
 
   Future<void> _attachSource() async {
-    final attachment = await _store.attachments?.import(
-      widget.sourceFilePath!,
-      name: widget.sourceFileName,
-    );
+    final attachment = await _store.attachments?.import(widget.sourceFilePath!, name: widget.sourceFileName);
     if (attachment == null) return;
     if (!mounted) {
       await _store.attachments?.delete(attachment);
@@ -194,10 +187,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       return;
     }
     // "Departs 6:40pm, lands 7:10am" means landing the next morning.
-    if (endDate == null &&
-        _endTime != null &&
-        _startTime != null &&
-        _endTime!.compareTo(_startTime!) < 0) {
+    if (endDate == null && _endTime != null && _startTime != null && _endTime!.compareTo(_startTime!) < 0) {
       endDate = _startDate.addDays(1);
     }
     if (endDate == _startDate) endDate = null;
@@ -234,8 +224,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     if (mounted) Navigator.of(context).pop(result);
   }
 
-  void _showMessage(String message) =>
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  void _showMessage(String message) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 
   // ---------------------------------------------------------------- build
 
@@ -276,11 +265,10 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
             autofocus: !_isEditing && widget.draft == null,
             textCapitalization: TextCapitalization.words,
             style: TravaryText.title,
-            decoration: _check('title', InputDecoration(
-              labelText: _spec.titleLabel,
-              hintText: _spec.titleHint,
-              errorText: _titleError,
-            )),
+            decoration: _check(
+              'title',
+              InputDecoration(labelText: _spec.titleLabel, hintText: _spec.titleHint, errorText: _titleError),
+            ),
             onChanged: (_) {
               if (_titleError != null) setState(() => _titleError = null);
             },
@@ -386,10 +374,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
             onTap: _chooseTrip,
           ),
           const SizedBox(height: TravarySpace.xl),
-          FilledButton(
-            onPressed: _saving ? null : _save,
-            child: Text(_isEditing ? 'Save changes' : 'Add to my trip'),
-          ),
+          FilledButton(onPressed: _saving ? null : _save, child: Text(_isEditing ? 'Save changes' : 'Add to my trip')),
         ],
       ),
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../design/art/art_slots.dart';
+import '../../design/art/card_shells.dart';
 import '../../design/cards/booking_card.dart';
 import '../../design/cards/ongoing_strip.dart';
 import '../../design/tokens.dart';
+import '../../design/trip_chrome.dart';
 import '../../design/trip_theme_style.dart';
 import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
@@ -12,7 +15,8 @@ import '../../logic/day_plan.dart';
 import '../../state/travel_store.dart';
 
 /// Design tool: every kind of card in every size and state on one page, in
-/// any trip theme. Use it to judge new card styles and artwork at a glance.
+/// any trip look (with any installed experience packs for it). Use it to
+/// judge new card styles and artwork at a glance.
 class CardGalleryScreen extends StatefulWidget {
   const CardGalleryScreen({super.key});
 
@@ -21,45 +25,50 @@ class CardGalleryScreen extends StatefulWidget {
 }
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
-  TripTheme _theme = TripTheme.classic;
+  ExperienceTheme _theme = ExperienceTheme.classicTravel;
 
   @override
   Widget build(BuildContext context) {
     final store = context.watch<TravelStore>();
     final samples = _samples(store.bookings);
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Card gallery')),
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: TravarySpace.xxl),
-        children: [
-          SizedBox(
-            height: 48,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-              children: [
-                for (final theme in TripTheme.values)
-                  Padding(
-                    padding: const EdgeInsets.only(right: TravarySpace.sm),
-                    child: ChoiceChip(
-                      avatar: Icon(tripThemeStyle(theme).icon, size: 16),
-                      label: Text(theme.label),
-                      selected: _theme == theme,
-                      onSelected: (_) => setState(() => _theme = theme),
+    final lookContext = store.artContextForLook(_theme);
+    return TravaryChrome(
+      colors: TripColors.of(store.art.catalog.palette(context: lookContext)),
+      slots: ArtSlots(store.art.catalog, lookContext),
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Card gallery')),
+        body: ListView(
+          padding: const EdgeInsets.only(bottom: TravarySpace.xxl),
+          children: [
+            SizedBox(
+              height: 48,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
+                children: [
+                  for (final theme in ExperienceTheme.values)
+                    Padding(
+                      padding: const EdgeInsets.only(right: TravarySpace.sm),
+                      child: ChoiceChip(
+                        avatar: Icon(tripThemeStyle(theme).icon, size: 16),
+                        label: Text(theme.label),
+                        selected: _theme == theme,
+                        onSelected: (_) => setState(() => _theme = theme),
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
-          for (final booking in samples) ..._kindSection(store, booking),
-        ],
+            for (final booking in samples) ..._kindSection(store, booking),
+          ],
+        ),
       ),
     );
   }
 
   List<Widget> _kindSection(TravelStore store, Booking booking) {
-    final art = store.art.resolve(booking, _theme);
+    final art = store.art.resolve(booking, store.artContextForLook(_theme));
     DayEntry entry(EntryStatus status, {EntryRole role = EntryRole.single}) => DayEntry(
       booking: booking,
       role: role,
@@ -70,36 +79,49 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.md),
       child: child,
     );
-    final picture = art.group ?? 'placeholder';
+    final picture = art.key ?? 'placeholder';
     final subject = art.subject ?? 'no subject';
+    String shellName(ShellArt? shell) =>
+        shell == null ? 'no shell' : '${shell.art.fileKey}${shell.standInFor == null ? '' : ' (stand-in)'}';
+    final shells = art.shells;
 
     return [
       SectionLabel('${booking.kind.spec.label} · $subject · $picture'),
-      padded(BookingCard(
-        text: cardTextForEntry(entry(EntryStatus.upcoming), highlighted: true),
-        art: art,
-        size: CardSize.hero,
-        onShowTickets: () {},
-      )),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
+        child: Text(
+          'Shells: ${shellName(shells.featured)} · ${shellName(shells.room)} · ${shellName(shells.reservation)}',
+          style: TravaryText.small,
+        ),
+      ),
+      padded(
+        BookingCard(
+          text: cardTextForEntry(entry(EntryStatus.upcoming), highlighted: true),
+          art: art,
+          size: CardSize.hero,
+          onShowTickets: () {},
+        ),
+      ),
       padded(BookingCard(text: cardTextForEntry(entry(EntryStatus.upcoming)), art: art)),
-      padded(BookingCard(
-        text: cardTextForEntry(entry(EntryStatus.upcoming)),
-        art: art,
-        size: CardSize.compact,
-        onShowTickets: () {},
-      )),
-      padded(BookingCard(
-        text: cardTextForEntry(entry(EntryStatus.done)),
-        art: art,
-        size: CardSize.compact,
-        status: EntryStatus.done,
-      )),
+      padded(
+        BookingCard(
+          text: cardTextForEntry(entry(EntryStatus.upcoming)),
+          art: art,
+          size: CardSize.compact,
+          onShowTickets: () {},
+        ),
+      ),
+      padded(
+        BookingCard(
+          text: cardTextForEntry(entry(EntryStatus.done)),
+          art: art,
+          size: CardSize.compact,
+          status: EntryStatus.done,
+        ),
+      ),
       // Only bookings with a day in the middle ever show an ongoing strip.
       if (booking.startDate.addDays(1).isBefore(booking.lastDate))
-        padded(Builder(builder: (context) {
-          final text = ongoingText(booking, booking.startDate.addDays(1));
-          return OngoingStrip(title: text.title, subtitle: text.subtitle, art: art);
-        })),
+        padded(OngoingStrip(text: ongoingCardText(booking, booking.startDate.addDays(1)), art: art)),
     ];
   }
 

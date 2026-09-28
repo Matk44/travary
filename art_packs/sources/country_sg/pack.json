@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_sg",
+  "version": 1,
+  "palette": {
+    "id": "singapore_teal_orchid",
+    "anchors": {"ink": "#155864", "paper": "#F5EEE2"},
+    "accents": ["#C74649", "#387567", "#D36C6E", "#3C6F91"],
+    "ui": {
+      "primary": "#216875",
+      "secondary": "#A93A3D",
+      "highlight": "#AD7A2C",
+      "onPrimary": "#FFF8EE"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

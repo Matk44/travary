@@ -2,21 +2,18 @@ import { ApiError, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { HttpsError, onCall } from 'firebase-functions/https';
-import { defineSecret, defineString } from 'firebase-functions/params';
+import { defineString } from 'firebase-functions/params';
 
 import { normaliseBookings, responseSchema } from './bookingSchema';
+import { geminiRetryPlan, generateWithRetry, RETRYABLE_STATUSES } from './geminiRetry';
+import { geminiApiKey } from './params';
 import { SYSTEM_PROMPT, userPrompt } from './prompt';
-
-const geminiApiKey = defineSecret('GEMINI_API_KEY');
 
 /** Change without a code edit: `SMART_IMPORT_MODEL=...` in functions/.env. */
 const model = defineString('SMART_IMPORT_MODEL', { default: 'gemini-3.8-flash' });
 
 /** Used when the main model is overloaded. */
 const fallbackModel = defineString('SMART_IMPORT_FALLBACK_MODEL', { default: 'gemini-3.6-flash' });
-
-/** Errors worth another go: overloaded (503), rate limited (429), server (500). */
-const RETRYABLE = new Set([429, 500, 503]);
 
 const MIME_TYPES = new Set([
   'image/png', 'image/jpeg', 'image/webp', 'image/heic', 'image/heif', 'application/pdf',
@@ -57,7 +54,7 @@ export const smartImport = onCall(
     const ai = new GoogleGenAI({ apiKey: geminiApiKey.value() });
     const started = Date.now();
     try {
-      const { response, usedModel, attempts } = await generateWithRetry(ai, input);
+      const { response, usedModel, attempts } = await generate(ai, input);
       const result = normaliseBookings(JSON.parse(response.text ?? '{}'));
       // Log sizes and timings only, never the traveller's documents.
       logger.info('smart_import', {
@@ -77,21 +74,15 @@ export const smartImport = onCall(
 );
 
 /**
- * Asks Gemini, riding out short spikes: two tries on the main model with a
- * pause, then one on the fallback model. Other errors fail straight away.
+ * Asks Gemini, riding out short spikes with the shared retry policy
+ * (geminiRetry.ts). Other errors fail straight away.
  */
-async function generateWithRetry(ai: GoogleGenAI, input: ImportRequest) {
-  const plan = [
-    { model: model.value(), delayMs: 0 },
-    { model: model.value(), delayMs: 1500 },
-    { model: fallbackModel.value(), delayMs: 500 },
-  ];
-  let lastError: unknown;
-  for (const [index, step] of plan.entries()) {
-    if (step.delayMs) await new Promise((resolve) => setTimeout(resolve, step.delayMs));
-    try {
-      const response = await ai.models.generateContent({
-        model: step.model,
+function generate(ai: GoogleGenAI, input: ImportRequest) {
+  return generateWithRetry(
+    geminiRetryPlan(model.value(), fallbackModel.value()),
+    (stepModel) =>
+      ai.models.generateContent({
+        model: stepModel,
         contents: [
           {
             role: 'user',
@@ -107,15 +98,9 @@ async function generateWithRetry(ai: GoogleGenAI, input: ImportRequest) {
           responseJsonSchema: responseSchema,
           thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         },
-      });
-      return { response, usedModel: step.model, attempts: index + 1 };
-    } catch (error) {
-      lastError = error;
-      if (!(error instanceof ApiError) || !RETRYABLE.has(error.status)) throw error;
-      logger.warn('smart_import_retry', { model: step.model, status: error.status, attempt: index + 1 });
-    }
-  }
-  throw lastError;
+      }),
+    { onRetry: (details) => logger.warn('smart_import_retry', details) },
+  );
 }
 
 function parseRequest(data: unknown): ImportRequest {
@@ -169,7 +154,7 @@ function toHttpsError(error: unknown): HttpsError {
   }
   if (error instanceof ApiError) {
     logger.error('smart_import_gemini_error', { status: error.status, detail: error.message.slice(0, 1000) });
-    if (RETRYABLE.has(error.status)) {
+    if (RETRYABLE_STATUSES.has(error.status)) {
       return new HttpsError('unavailable', 'Smart Import is busy right now. Try again in a minute.');
     }
     if (error.status === 400) {

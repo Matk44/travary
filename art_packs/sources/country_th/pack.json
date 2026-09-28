@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_th",
+  "version": 1,
+  "palette": {
+    "id": "thailand_royal_saffron",
+    "anchors": {"ink": "#1D315D", "paper": "#F6F0E2"},
+    "accents": ["#A51931", "#D8A43B", "#2E6A5A", "#318A91"],
+    "ui": {
+      "primary": "#243C78",
+      "secondary": "#28604F",
+      "highlight": "#C48C22",
+      "onPrimary": "#FFF9EF"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

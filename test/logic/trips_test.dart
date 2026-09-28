@@ -111,14 +111,21 @@ void main() {
     });
 
     test('a return flight joins the trip its outbound flight started', () {
-      final lisbon = buildTripPlans([trip('lisbon')], [
-        booking('out', BookingKind.flight, d(11, 3), tripId: 'lisbon', title: 'London to Lisbon'),
-      ]);
+      final lisbon = buildTripPlans(
+        [trip('lisbon')],
+        [booking('out', BookingKind.flight, d(11, 3), tripId: 'lisbon', title: 'London to Lisbon')],
+      );
       final back = booking('back', BookingKind.flight, d(11, 12), title: 'Lisbon to London');
       expect(findTripFor(back.startDate, back.lastDate, lisbon), isNull);
       expect(findReturnFlightTrip(back, lisbon)?.id, 'lisbon');
-      expect(findReturnFlightTrip(booking('x', BookingKind.flight, d(11, 12), title: 'Lisbon to Porto'), lisbon), isNull);
-      expect(findReturnFlightTrip(booking('y', BookingKind.flight, d(12, 30), title: 'Lisbon to London'), lisbon), isNull);
+      expect(
+        findReturnFlightTrip(booking('x', BookingKind.flight, d(11, 12), title: 'Lisbon to Porto'), lisbon),
+        isNull,
+      );
+      expect(
+        findReturnFlightTrip(booking('y', BookingKind.flight, d(12, 30), title: 'Lisbon to London'), lisbon),
+        isNull,
+      );
     });
 
     test('falls back to the month', () {

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_jp",
+  "version": 1,
+  "palette": {
+    "id": "japan_vermilion_indigo",
+    "anchors": {
+      "ink": "#172B4D",
+      "paper": "#F7F1E7"
+    },
+    "accents": ["#BC002D", "#C9A65B", "#73869C", "#856B4A"],
+    "ui": {
+      "primary": "#9F1435",
+      "secondary": "#203A5F",
+      "highlight": "#B9822D",
+      "onPrimary": "#FFF8EE"
+    }
+  },
+  "assets": [
+    {
+      "file": "common/featured_ticket.png",
+      "kind": "common",
+      "name": "featured_ticket",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/room_card.png",
+      "kind": "common",
+      "name": "room_card",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/reservation_card.png",
+      "kind": "common",
+      "name": "reservation_card",
+      "width": 1983,
+      "height": 793
+    },
+    {
+      "file": "transport/urban_heritage_train_01_scene.png",
+      "kind": "transport",
+      "theme": "urban_heritage",
+      "subject": "train",
+      "group": "urban_heritage_train_01",
+      "format": "scene",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "transport/urban_heritage_train_01_vignette.png",
+      "kind": "transport",
+      "theme": "urban_heritage",
+      "subject": "train",
+      "group": "urban_heritage_train_01",
+      "format": "vignette",
+      "width": 1024,
+      "height": 1024
+    }
+  ]
+}

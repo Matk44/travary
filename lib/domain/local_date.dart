@@ -7,17 +7,12 @@
 class LocalDate implements Comparable<LocalDate> {
   const LocalDate(this.year, this.month, this.day);
 
-  factory LocalDate.fromDateTime(DateTime dateTime) =>
-      LocalDate(dateTime.year, dateTime.month, dateTime.day);
+  factory LocalDate.fromDateTime(DateTime dateTime) => LocalDate(dateTime.year, dateTime.month, dateTime.day);
 
   /// Parses `yyyy-MM-dd`.
   factory LocalDate.parse(String iso) {
     final parts = iso.split('-');
-    return LocalDate(
-      int.parse(parts[0]),
-      int.parse(parts[1]),
-      int.parse(parts[2]),
-    );
+    return LocalDate(int.parse(parts[0]), int.parse(parts[1]), int.parse(parts[2]));
   }
 
   static LocalDate? tryParse(Object? value) {
@@ -39,11 +34,9 @@ class LocalDate implements Comparable<LocalDate> {
   /// 1 = Monday ... 7 = Sunday.
   int get weekday => _utc.weekday;
 
-  DateTime toDateTime([ClockTime? time]) =>
-      DateTime(year, month, day, time?.hour ?? 0, time?.minute ?? 0);
+  DateTime toDateTime([ClockTime? time]) => DateTime(year, month, day, time?.hour ?? 0, time?.minute ?? 0);
 
-  LocalDate addDays(int days) =>
-      LocalDate.fromDateTime(DateTime.utc(year, month, day + days));
+  LocalDate addDays(int days) => LocalDate.fromDateTime(DateTime.utc(year, month, day + days));
 
   /// Whole days from this date to [other] (negative if [other] is earlier).
   int daysUntil(LocalDate other) => other._utc.difference(_utc).inDays;
@@ -54,8 +47,7 @@ class LocalDate implements Comparable<LocalDate> {
   static LocalDate min(LocalDate a, LocalDate b) => a.isBefore(b) ? a : b;
   static LocalDate max(LocalDate a, LocalDate b) => a.isAfter(b) ? a : b;
 
-  String toIso() =>
-      '${year.toString().padLeft(4, '0')}-${_two(month)}-${_two(day)}';
+  String toIso() => '${year.toString().padLeft(4, '0')}-${_two(month)}-${_two(day)}';
 
   @override
   int compareTo(LocalDate other) {
@@ -66,10 +58,7 @@ class LocalDate implements Comparable<LocalDate> {
 
   @override
   bool operator ==(Object other) =>
-      other is LocalDate &&
-      other.year == year &&
-      other.month == month &&
-      other.day == day;
+      other is LocalDate && other.year == year && other.month == month && other.day == day;
 
   @override
   int get hashCode => Object.hash(year, month, day);
@@ -82,8 +71,7 @@ class LocalDate implements Comparable<LocalDate> {
 class ClockTime implements Comparable<ClockTime> {
   const ClockTime(this.hour, this.minute);
 
-  factory ClockTime.fromDateTime(DateTime dateTime) =>
-      ClockTime(dateTime.hour, dateTime.minute);
+  factory ClockTime.fromDateTime(DateTime dateTime) => ClockTime(dateTime.hour, dateTime.minute);
 
   /// Parses `HH:mm`.
   factory ClockTime.parse(String value) {
@@ -111,8 +99,7 @@ class ClockTime implements Comparable<ClockTime> {
   int compareTo(ClockTime other) => minutesOfDay - other.minutesOfDay;
 
   @override
-  bool operator ==(Object other) =>
-      other is ClockTime && other.hour == hour && other.minute == minute;
+  bool operator ==(Object other) => other is ClockTime && other.hour == hour && other.minute == minute;
 
   @override
   int get hashCode => Object.hash(hour, minute);

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_ca",
+  "version": 1,
+  "palette": {
+    "id": "canada_maple_alpine",
+    "anchors": {"ink": "#173C57", "paper": "#F4EFE4"},
+    "accents": ["#C44742", "#28727B", "#345B4A", "#C6963F"],
+    "ui": {
+      "primary": "#214B69",
+      "secondary": "#AA3C39",
+      "highlight": "#B5812D",
+      "onPrimary": "#FFF9EF"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

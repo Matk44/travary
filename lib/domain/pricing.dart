@@ -51,11 +51,6 @@ abstract final class Pricing {
       currencyCode: 'USD',
       trialDays: trialDays,
     ),
-    Offer(
-      kind: OfferKind.tripPass,
-      productId: tripPassProductId,
-      amount: tripPassUsd,
-      currencyCode: 'USD',
-    ),
+    Offer(kind: OfferKind.tripPass, productId: tripPassProductId, amount: tripPassUsd, currencyCode: 'USD'),
   ];
 }

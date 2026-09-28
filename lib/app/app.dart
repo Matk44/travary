@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../data/art_pack_service.dart';
 import '../data/smart_import_service.dart';
+import '../data/visual_profile_service.dart';
 import '../design/tokens.dart';
 import '../state/premium_store.dart';
 import '../state/travel_store.dart';
 import 'bootstrap.dart';
 import 'home_shell.dart';
+import 'trip_chrome_scope.dart';
 
 class TravaryApp extends StatelessWidget {
   const TravaryApp({super.key, required this.dependencies});
@@ -18,10 +21,15 @@ class TravaryApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<SmartImportService>.value(value: dependencies.smartImport),
+        Provider<VisualProfileService?>.value(value: dependencies.visualProfiles),
+        // Owned by bootstrap for the app's lifetime.
+        ChangeNotifierProvider<ArtPackManager>.value(value: dependencies.artPacks),
         ChangeNotifierProvider(
-          create: (_) => TravelStore(
+          create: (context) => TravelStore(
             repository: dependencies.repository,
             artCatalog: dependencies.artCatalog,
+            artPacks: context.read<ArtPackManager>(),
+            visualProfiles: context.read<VisualProfileService?>(),
             attachments: dependencies.attachments,
             backup: dependencies.backup,
             sharing: dependencies.sharing,
@@ -40,6 +48,8 @@ class TravaryApp extends StatelessWidget {
         title: 'Travary',
         debugShowCheckedModeBanner: false,
         theme: buildTravaryTheme(),
+        // Every screen, pushed ones included, shares the trip's palette.
+        builder: (context, child) => TripChromeScope(child: child!),
         home: const HomeShell(),
       ),
     );

@@ -10,11 +10,7 @@ import 'ticket_file.dart';
 /// Full-screen tickets, on white for easy scanning. Swipe between a
 /// booking's attachments; images zoom, PDFs open in the system viewer.
 class AttachmentViewer extends StatefulWidget {
-  const AttachmentViewer({
-    super.key,
-    required this.bookingId,
-    this.initialIndex = 0,
-  });
+  const AttachmentViewer({super.key, required this.bookingId, this.initialIndex = 0});
 
   final String bookingId;
   final int initialIndex;
@@ -24,9 +20,7 @@ class AttachmentViewer extends StatefulWidget {
 }
 
 class _AttachmentViewerState extends State<AttachmentViewer> {
-  late final PageController _pages = PageController(
-    initialPage: widget.initialIndex,
-  );
+  late final PageController _pages = PageController(initialPage: widget.initialIndex);
   late int _index = widget.initialIndex;
 
   @override
@@ -92,11 +86,7 @@ class _AttachmentViewerState extends State<AttachmentViewer> {
                       return InteractiveViewer(
                         maxScale: 5,
                         child: Center(
-                          child: Image.file(
-                            file,
-                            errorBuilder: (_, _, _) =>
-                                const Text('This file can\'t be shown.'),
-                          ),
+                          child: Image.file(file, errorBuilder: (_, _, _) => const Text('This file can\'t be shown.')),
                         ),
                       );
                     }
@@ -104,17 +94,9 @@ class _AttachmentViewerState extends State<AttachmentViewer> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
-                            Icons.picture_as_pdf_outlined,
-                            size: 64,
-                            color: TravaryColors.inkSoft,
-                          ),
+                          const Icon(Icons.picture_as_pdf_outlined, size: 64, color: TravaryColors.inkSoft),
                           const SizedBox(height: TravarySpace.md),
-                          Text(
-                            attachment.name,
-                            style: TravaryText.label,
-                            textAlign: TextAlign.center,
-                          ),
+                          Text(attachment.name, style: TravaryText.label, textAlign: TextAlign.center),
                           const SizedBox(height: TravarySpace.lg),
                           FilledButton.icon(
                             onPressed: () => OpenFilex.open(file.path),
@@ -133,10 +115,7 @@ class _AttachmentViewerState extends State<AttachmentViewer> {
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(TravarySpace.md),
-                child: Text(
-                  '${_index + 1} of ${attachments.length}',
-                  style: TravaryText.small,
-                ),
+                child: Text('${_index + 1} of ${attachments.length}', style: TravaryText.small),
               ),
             ),
         ],
@@ -144,33 +123,20 @@ class _AttachmentViewerState extends State<AttachmentViewer> {
     );
   }
 
-  Future<void> _remove(
-    TravelStore store,
-    Booking booking,
-    Attachment attachment,
-  ) async {
+  Future<void> _remove(TravelStore store, Booking booking, Attachment attachment) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Remove ${attachment.name}?'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Remove'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Remove')),
         ],
       ),
     );
     if (confirmed != true) return;
     final remaining = [...booking.attachments]..remove(attachment);
-    await store.saveBooking(
-      booking.copyWith(attachments: remaining),
-      previous: booking,
-    );
+    await store.saveBooking(booking.copyWith(attachments: remaining), previous: booking);
     if (!mounted) return;
     if (remaining.isEmpty) {
       Navigator.of(context).pop();

@@ -78,12 +78,14 @@ class TestPurchaseService implements PurchaseService {
     switch (offer.kind) {
       case OfferKind.plusAnnual:
         final trial = offer.trialDays;
-        set(_entitlements.copyWith(
-          plus: PlusSubscription(
-            expiresAt: now.add(Duration(days: trial ?? 365)),
-            inTrial: trial != null,
+        set(
+          _entitlements.copyWith(
+            plus: PlusSubscription(
+              expiresAt: now.add(Duration(days: trial ?? 365)),
+              inTrial: trial != null,
+            ),
           ),
-        ));
+        );
       case OfferKind.tripPass:
         if (tripId == null) return PurchaseOutcome.failed;
         set(_entitlements.copyWith(tripPasses: {..._entitlements.tripPasses, tripId}));

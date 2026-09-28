@@ -48,8 +48,10 @@ class _DayStripState extends State<DayStrip> {
     final index = widget.days.indexOf(widget.selected);
     if (index == -1) return;
     final viewport = _controller.position.viewportDimension;
-    final target = (TravarySpace.gutter + index * (_itemWidth + _gap) + _itemWidth / 2 - viewport / 2)
-        .clamp(0.0, _controller.position.maxScrollExtent);
+    final target = (TravarySpace.gutter + index * (_itemWidth + _gap) + _itemWidth / 2 - viewport / 2).clamp(
+      0.0,
+      _controller.position.maxScrollExtent,
+    );
     if (animate) {
       _controller.animateTo(target, duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
     } else {

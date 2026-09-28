@@ -42,8 +42,7 @@ class _FakeSharing implements SharingService {
   final removed = <String>[];
 
   @override
-  Future<TripInvite> createInvite(String tripId, {String? name}) async =>
-      TripInvite('K7MPQ2', DateTime(2026, 10, 30));
+  Future<TripInvite> createInvite(String tripId, {String? name}) async => TripInvite('K7MPQ2', DateTime(2026, 10, 30));
 
   @override
   Future<({String tripId, String title})> join(String code, {required String name}) async =>
@@ -99,8 +98,9 @@ void main() {
     test('tickets on a shared trip are backed up and the booking remembers where', () async {
       repository.putTrip(sharedTrip());
       final ticket = await ticketFile('park.png');
-      await store.saveBooking(booking('park', BookingKind.attraction, d(10, 14), tripId: 'orlando')
-          .copyWith(attachments: [ticket]));
+      await store.saveBooking(
+        booking('park', BookingKind.attraction, d(10, 14), tripId: 'orlando').copyWith(attachments: [ticket]),
+      );
       await pumpEventQueue();
       await store.syncTickets();
       await pumpEventQueue();
@@ -112,8 +112,9 @@ void main() {
     test('a private trip without Plus stays on this phone', () async {
       repository.putTrip(sharedTrip(members: const ['me']));
       final ticket = await ticketFile('park.png');
-      await store.saveBooking(booking('park', BookingKind.attraction, d(10, 14), tripId: 'orlando')
-          .copyWith(attachments: [ticket]));
+      await store.saveBooking(
+        booking('park', BookingKind.attraction, d(10, 14), tripId: 'orlando').copyWith(attachments: [ticket]),
+      );
       await pumpEventQueue();
       await store.syncTickets();
       expect(backup.uploads, isEmpty);
@@ -132,8 +133,9 @@ void main() {
     test('removing a ticket removes its cloud copy', () async {
       repository.putTrip(sharedTrip());
       final ticket = await ticketFile('park.png');
-      await store.saveBooking(booking('park', BookingKind.attraction, d(10, 14), tripId: 'orlando')
-          .copyWith(attachments: [ticket]));
+      await store.saveBooking(
+        booking('park', BookingKind.attraction, d(10, 14), tripId: 'orlando').copyWith(attachments: [ticket]),
+      );
       await pumpEventQueue();
       await store.syncTickets();
       await pumpEventQueue();
@@ -177,15 +179,21 @@ void main() {
       tester.view.devicePixelRatio = 3;
       addTearDown(tester.view.reset);
       final repo = MemoryTravelRepository(userId: 'me')..putTrip(trip);
-      await tester.pumpWidget(MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => TravelStore(repository: repo, artCatalog: const ArtCatalog.empty(), sharing: _FakeSharing()),
+      await tester.pumpWidget(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (_) =>
+                  TravelStore(repository: repo, artCatalog: const ArtCatalog.empty(), sharing: _FakeSharing()),
+            ),
+            ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
+          ],
+          child: MaterialApp(
+            theme: buildTravaryTheme(),
+            home: TripScreen(tripId: trip.id),
           ),
-          ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
-        ],
-        child: MaterialApp(theme: buildTravaryTheme(), home: TripScreen(tripId: trip.id)),
-      ));
+        ),
+      );
       await tester.pumpAndSettle();
     }
 

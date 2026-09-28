@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_kr",
+  "version": 1,
+  "palette": {
+    "id": "south_korea_celadon_blossom",
+    "anchors": {"ink": "#215A63", "paper": "#F5EEE2"},
+    "accents": ["#739B89", "#C86056", "#2B4066", "#BE9444"],
+    "ui": {
+      "primary": "#2C6670",
+      "secondary": "#A94F48",
+      "highlight": "#A77A2D",
+      "onPrimary": "#FFF8EE"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

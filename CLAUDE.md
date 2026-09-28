@@ -11,7 +11,9 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   step. Trips form automatically from dates (`logic/trip_assignment.dart`).
   Only title + date are required on any form.
 - **Today is the product.** Opens on today during a trip, else the first day of
-  the next trip. Past and future stay one tap away (day strip, Trips, Wallet).
+  the next trip: greeting, featured ticket, the hotel's key card, the day's
+  tagged cards, then the day's timeline. Past and future stay one tap away
+  (swipe or tap "Day 3 of 7" for the day chooser, Trips, Documents).
 - **Never lock someone's tickets.** Tickets and bookings are always reachable,
   offline, whatever their plan.
 - **The look is swappable.** A unique hand-made interface ("travel ephemera":
@@ -22,16 +24,31 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
 
 ```
 lib/
-├── domain/     Plain data: Booking, BookingKind (+ KindSpec), Trip, LocalDate/ClockTime
+├── domain/     Plain data: Booking, BookingKind (+ KindSpec), Trip, LocalDate/ClockTime,
+│               visual_profile (ExperienceTheme, ThemeSource, TripVisualProfile),
+│               art_pack (selectors), country_codes (ISO allow-list),
+│               palette (DestinationPalette + validation), weather (optional pill input)
 ├── logic/      Pure Dart rules, fully unit-tested:
 │               day_plan (done/now/next), trip_plan (+ focus), trip_assignment,
-│               card_text (all card wording), formatters
+│               card_text (all card wording), formatters, art_pack_selection
+│               (trust rules, pack ranks, downloads), visual_profile_request
+│               (classifier payload, meaningful edits)
 ├── data/       TravelRepository interface; Memory (demo/tests) + Firestore;
-│               demo_data; attachment_store (ticket files, offline)
-├── state/      TravelStore (ChangeNotifier): the single source of truth for screens
-├── design/     THE SKIN: tokens, kind_style, cards/, art/, widgets/
-├── features/   Screens: today, trips, wallet, booking (form/detail/viewer), profile
+│               demo_data; attachment_store (ticket files, offline);
+│               visual_profile_service; art packs: art_pack_catalog (formats +
+│               validation, shared with tool/), art_pack_archive (safe zip),
+│               art_pack_store (disk), art_pack_service (download manager)
+├── state/      TravelStore (ChangeNotifier): the single source of truth for screens;
+│               ArtCatalogController (bundled + installed packs), VisualProfileCoordinator
+├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
+│               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
+│               TaggedReservationCard on ShellFrame), art/ (catalog, resolver,
+│               card_shells, art_slots), widgets/ (nav_bar, today_header, day_timeline)
+├── features/   Screens: today, trips, wallet (the "Documents" tab), booking (form/detail/viewer), profile
 └── app/        bootstrap (backend choice), app, home_shell (tabs + add button)
+tool/           art_packs.dart: builds, validates and publishes art packs (operator only)
+art_packs/      pack sources (+ catalog.json once published)
+rules-tests/    Firestore/Storage rules tests; test_emulator/: art-pack end to end
 ```
 
 Dependencies flow downward only: `features → state → logic/data → domain`.
@@ -45,17 +62,35 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    place, stub, reference) and **`ArtChoice`**. Cards never format dates or
    decide wording; add fields to `CardText` instead.
 3. Artwork: `assets/art/<kind>/<theme>_<subject>_<nn>_<scene|vignette>.png`
-   (brief and prompts: `docs/ART_BRIEF.md`). A booking's **subject** ("pizza",
-   "castle") comes from Smart Import (Gemini picks it: `artSubject`) or from
-   keywords (`logic/art_subjects.dart`, mirrored in
-   `functions/src/artSubjects.ts`; a test keeps them equal). `ArtResolver`
-   picks subject+theme → subject → theme → generic, stable per booking and
-   never repeating side by side. Featured cards use the scene, normal cards
-   the vignette. Use `ArtChoice.variant % n` for non-image variety.
-4. Each kind maps to a physical object (`CardShape` in `design/kind_style.dart`):
-   flight = boarding pass, stay = key card, attraction/activity/event = ticket,
-   dining = reservation card + luggage tag, transport = travel ticket, note = paper.
-5. Colours and type live in `design/tokens.dart` only.
+   (brief and prompts: `docs/ART_BRIEF.md`); themes are `ExperienceTheme`
+   wire names (`urban_heritage`), legacy `tropical`/`city`/`snow`/`classic`
+   still load. A booking's **subject** ("pizza", "castle") comes from Smart
+   Import (Gemini picks it: `artSubject`) or from keywords
+   (`logic/art_subjects.dart`, mirrored in `functions/src/artSubjects.ts`;
+   a test keeps them equal). Downloaded **art packs** add destination and
+   experience art (`docs/ART_PACKS.md`). `ArtResolver` takes a
+   `TripArtContext` and tries the subject from the city → region → country
+   pack → the trip's look → secondary look → core, then generics, stable per
+   booking and never repeating side by side. Pictures are `ArtImageRef`s
+   (bundled or file); `ArtPanel` draws both and shows the placeholder if a
+   file can't load. Featured cards use the scene, normal cards the vignette.
+   Use `ArtChoice.variant % n` for non-image variety.
+4. Cards are complete **raster shells** with live text on top, never
+   drawn lookalikes: the featured "next up" booking on a ticket
+   (`featured_ticket`), stays on the hotel key card (`room_card`), everything
+   else on a tagged reservation card (the look's complete `reservation_card`,
+   else `reservation_card_blank` + the booking's vignette). `ShellResolver`
+   (`design/art/card_shells.dart`) picks them by the same ranks as card art
+   (packs, then bundled `<look>_<role>.png`, then a stand-in look); text,
+   buttons and tag icons sit at measured fractional anchors (`ShellGeometry`),
+   and shells are never stretched. Icons and interface surfaces (tabs, linen,
+   leather, pill, stamp) resolve through `ArtSlots` (`design/art/art_slots.dart`).
+   A missing file gets its documented stand-in; list every gap in
+   `docs/ART_ASSET_GAPS.md`.
+5. Colours and type live in `design/tokens.dart` only. A trip's interface
+   colours come from its palette (`TravaryChrome.of(context).colors`: the
+   best-ranked installed pack's `palette`, else Travary's own); chrome uses
+   them, artwork is never tinted.
 
 ### Time model
 
@@ -69,12 +104,17 @@ days; days in between show an `OngoingStrip`.
 ### Data (Firestore)
 
 ```
-trips/{tripId}                        title, theme, ownerId, memberIds[], plannedStart/End,
-                                      memberNames{}, invite{} (server-only), premium (server-only)
+trips/{tripId}                        title, theme, themeSource, ownerId, memberIds[], plannedStart/End,
+                                      memberNames{}, invite{} (server-only), premium (server-only),
+                                      visualProfile, visualProfileUpdatedAt, visualProfileRequest (server-only)
 trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
 invites/{code}                        tripId, createdBy, expiresAt (server-only)
-users/{uid}                           purchases + Smart Import usage (server-only)
+users/{uid}                           purchases + Smart Import / classification usage (server-only)
 ```
+
+A trip's look: `themeSource` `auto` (the classifier's profile decides;
+`Trip.effectiveTheme`) or `manual` (the traveller's chip; the server never
+overwrites it). The app never writes `theme` for an automatic trip.
 
 Built for family sharing (`memberIds`). Bookings load with one
 collection-group query on `memberIds` (index in `firestore.indexes.json`), so
@@ -93,16 +133,28 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 |---|---|---|
 | Demo (default) | `flutter run` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
 | Cloud | `flutter run --dart-define=TRAVARY_BACKEND=cloud` | Firestore + anonymous auth |
+| Emulators | add `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` | Local Firebase emulators (`docs/ART_PACKS.md`) |
 
 Cloud mode uses anonymous sign-in (enabled in the Firebase console for
 `travary-444`); rules and index are deployed.
 
 Design tools (debug builds, Profile tab): **Preview a different time** shows
-cards before, during and after their time; **Reset sample trips**.
+cards before, during and after their time; **Reset sample trips**; **Card
+gallery** (every kind and size per look, with the shells chosen).
+
+The Today screen's target is `docs/reference/travary_today_reference.png`
+(813 × 1933: a 390-point phone). `tool/visual_qa.sh` renders the canonical
+fixture (`test/support/canonical_today.dart`) at that size with the app's
+real fonts and writes `build/visual_qa/today_{actual,overlay,diff}.png`.
+Never edit the reference to make a comparison pass.
 
 ```bash
+dart format --output=none --set-exit-if-changed .
 flutter analyze
 flutter test
+npm --prefix functions test
+tool/run_emulator_tests.sh     # functions store, security rules, art packs end to end
+tool/visual_qa.sh              # Today vs the reference image
 flutter run
 ```
 
@@ -184,6 +236,14 @@ the app. Project `travary-444` is on the Blaze plan.
 - Trip grouping for imports: bookings from one file share a trip within
   30 days; a return flight ("Lisbon to London") joins the trip its outbound
   flight started.
+- **Automatic looks** (`classifyTripVisuals`, `docs/VISUAL_PROFILES.md`):
+  a separate Gemini call classifies a whole trip into an experience theme,
+  setting, moods and destination, verified with Places Text Search (New)
+  (`GOOGLE_MAPS_PLATFORM_KEY` secret). Cached by a source hash; one shared
+  retry policy with Smart Import (`geminiRetry.ts`). Vocabulary lives in
+  `functions/src/visualVocabulary.ts`, mirrored in
+  `lib/domain/visual_profile.dart` (a test keeps them equal). Only place IDs
+  and 30-day coordinates from Places are stored (Google's terms).
 
 ## Conventions
 
@@ -195,6 +255,10 @@ the app. Project `travary-444` is on the Blaze plan.
 - Layouts must survive long titles and small phones: tests run at iPhone size
   and fail on overflow.
 - Never hardcode secret keys in the app; AI runs server-side (see AI).
+- Mirrors kept equal by tests: art subjects, the visual vocabulary and ISO
+  country list (Dart ↔ TypeScript), `appBuildNumber` ↔ pubspec's `+N`.
+- The Firebase CLI shadows `node` inside `emulators:exec`; scripts use
+  `$npm_node_execpath`.
 
 ## Roadmap
 

@@ -1,4 +1,5 @@
 import '../domain/domain.dart';
+import 'art_subjects.dart';
 import 'day_plan.dart';
 import 'formatters.dart';
 
@@ -15,6 +16,8 @@ class CardText {
     this.place,
     this.stub,
     this.reference,
+    this.footnote,
+    this.action,
   });
 
   /// Small uppercase label above the title: "NEXT UP", "LUNCH", "CHECK-OUT".
@@ -31,6 +34,14 @@ class CardText {
   /// Short text for a ticket stub: "ADMIT TWO", "SEAT 14A", "ROOM 2214".
   final String? stub;
   final String? reference;
+
+  /// A small supporting line in spaced capitals, for cards with room for
+  /// one: "CHECK-OUT IN 4 DAYS" on a hotel key card.
+  final String? footnote;
+
+  /// The featured card's button: "Show tickets" when there's something to
+  /// show at the gate, else "Details".
+  final String? action;
 
   /// [when] and [detail] joined for one-line layouts.
   String? get whenAndDetail {
@@ -63,8 +74,15 @@ CardText cardTextForEntry(DayEntry entry, {bool highlighted = false}) {
     place: _nonEmpty(booking.location),
     stub: _stub(booking),
     reference: _nonEmpty(booking.reference),
+    action: _action(booking),
   );
 }
+
+/// Whether [booking] has something to show at the gate: ticket files, or at
+/// least a booking reference.
+bool showsTickets(Booking booking) => booking.hasTickets || _nonEmpty(booking.reference) != null;
+
+String _action(Booking booking) => showsTickets(booking) ? 'Show tickets' : 'Details';
 
 /// Wording for [booking] outside a day context (Wallet, detail screen).
 CardText cardTextForBooking(Booking booking) {
@@ -76,6 +94,7 @@ CardText cardTextForBooking(Booking booking) {
     place: _nonEmpty(booking.location),
     stub: _stub(booking),
     reference: _nonEmpty(booking.reference),
+    action: _action(booking),
   );
 }
 
@@ -118,23 +137,103 @@ CardText cardTextForReview(Booking booking) {
     BookingKind.transport => booking.detail(DetailKeys.company),
     _ => null,
   };
-  return (
-    title: [booking.title, ?extra].join(' · '),
-    subtitle: '${booking.kind.spec.endEvent} ${relativeDays(days)}',
+  return (title: [booking.title, ?extra].join(' · '), subtitle: '${booking.kind.spec.endEvent} ${relativeDays(days)}');
+}
+
+/// Card wording for a multi-day booking you're in the middle of on [date]
+/// (the hotel key card): "HOTEL" / "Lagoon Resort" / "Room 2214" /
+/// "CHECK-OUT IN 4 DAYS".
+CardText ongoingCardText(Booking booking, LocalDate date) {
+  final days = date.daysUntil(booking.lastDate);
+  final detail = switch (booking.kind) {
+    BookingKind.stay => _prefixed('Room', booking.detail(DetailKeys.room)),
+    BookingKind.transport => booking.detail(DetailKeys.company),
+    _ => _detailLine(booking),
+  };
+  return CardText(
+    eyebrow: _kindEyebrow(booking, null),
+    title: booking.title,
+    detail: detail,
+    place: _nonEmpty(booking.location),
+    stub: _stub(booking),
+    reference: _nonEmpty(booking.reference),
+    footnote: '${booking.kind.spec.endEvent} ${relativeDays(days)}'.toUpperCase(),
+    action: _action(booking),
   );
+}
+
+/// One stop on a day's timeline: "9:00" over "Park".
+class TimelineStop {
+  const TimelineStop({required this.time, required this.label, required this.spoken, required this.status});
+
+  /// Twelve-hour clock without am/pm: the day reads left to right.
+  final String time;
+
+  /// One short word or two: "Park", "Lunch", "Check-in".
+  final String label;
+
+  /// For screen readers: "9:00am, Park, Magic Kingdom".
+  final String spoken;
+  final EntryStatus status;
+}
+
+/// The timed stops of [plan] for its timeline, in order. Notes and all-day
+/// entries aren't stops.
+List<TimelineStop> timelineFor(DayPlan plan) => [
+  for (final entry in plan.entries)
+    if (entry.time != null && entry.booking.kind != BookingKind.note)
+      TimelineStop(
+        time: formatClockShort(entry.time!),
+        label: _timelineLabel(entry),
+        spoken: '${formatClock(entry.time!)}, ${_timelineLabel(entry)}, ${entry.booking.title}',
+        status: entry.status,
+      ),
+];
+
+String _timelineLabel(DayEntry entry) {
+  final booking = entry.booking;
+  final spec = booking.kind.spec;
+  if (entry.role == EntryRole.start) return spec.startEvent;
+  if (entry.role == EntryRole.end) return spec.endEvent;
+  final subject = artSubjectFor(booking);
+  return switch (booking.kind) {
+    BookingKind.dining => _sentenceCase(_kindEyebrow(booking, entry.time)),
+    BookingKind.attraction => switch (subject) {
+      'castle' || 'rollercoaster' || 'waterpark' => 'Park',
+      'museum' => 'Museum',
+      'zoo' => 'Zoo',
+      'aquarium' => 'Aquarium',
+      'gardens' => 'Gardens',
+      _ => 'Visit',
+    },
+    BookingKind.transport => switch (subject) {
+      'train' => 'Train',
+      'bus' => 'Bus',
+      'ferry' => 'Ferry',
+      'bike' => 'Bike',
+      'car' => 'Car',
+      _ => 'Transfer',
+    },
+    BookingKind.activity => switch (subject) {
+      'boat' => 'Boat trip',
+      'hiking' => 'Hike',
+      'snorkel' => 'Snorkel',
+      'spa' => 'Spa',
+      'safari' => 'Safari',
+      'class' => 'Class',
+      _ => 'Tour',
+    },
+    _ => spec.label,
+  };
 }
 
 /// Full date wording: "Wed 14 Oct · 12:30pm", "Wed 14 – Sat 17 Oct".
 String describeWhen(Booking booking) {
   final start = formatDayShort(booking.startDate);
-  final startTime = booking.startTime == null
-      ? ''
-      : ' · ${formatClock(booking.startTime!)}';
+  final startTime = booking.startTime == null ? '' : ' · ${formatClock(booking.startTime!)}';
   if (booking.spansDays) {
     final end = formatDayShort(booking.lastDate);
-    final endTime = booking.endTime == null
-        ? ''
-        : ' · ${formatClock(booking.endTime!)}';
+    final endTime = booking.endTime == null ? '' : ' · ${formatClock(booking.endTime!)}';
     return '$start$startTime → $end$endTime';
   }
   if (booking.endTime != null && booking.startTime != null) {
@@ -149,16 +248,26 @@ String _kindEyebrow(Booking booking, ClockTime? time) {
     if (time.hour < 16) return 'LUNCH';
     return 'DINNER';
   }
+  if (booking.kind == BookingKind.stay) {
+    // What the key card is for: most stays are hotels.
+    return switch (artSubjectFor(booking)) {
+      'cottage' => 'COTTAGE',
+      'chalet' => 'CHALET',
+      'villa' => 'VILLA',
+      'camping' => 'CAMPSITE',
+      _ => 'HOTEL',
+    };
+  }
   return booking.kind.spec.label.toUpperCase();
 }
+
+String _sentenceCase(String value) => value.isEmpty ? value : value[0] + value.substring(1).toLowerCase();
 
 String _whenForEntry(DayEntry entry) {
   if (entry.time == null) return 'All day';
   final booking = entry.booking;
   final start = formatClock(entry.time!);
-  if (entry.role == EntryRole.single &&
-      booking.endTime != null &&
-      booking.endTime!.compareTo(entry.time!) > 0) {
+  if (entry.role == EntryRole.single && booking.endTime != null && booking.endTime!.compareTo(entry.time!) > 0) {
     return '$start – ${formatClock(booking.endTime!)}';
   }
   return start;
@@ -180,12 +289,8 @@ String? _detailLine(Booking booking) {
       _prefixed('Room', booking.detail(DetailKeys.room)),
       plural(booking.detail(DetailKeys.guests), 'guest', 'guests'),
     ],
-    BookingKind.attraction || BookingKind.activity => [
-      plural(booking.detail(DetailKeys.guests), 'ticket', 'tickets'),
-    ],
-    BookingKind.dining => [
-      _prefixed('Table for', booking.detail(DetailKeys.partySize)),
-    ],
+    BookingKind.attraction || BookingKind.activity => [plural(booking.detail(DetailKeys.guests), 'ticket', 'tickets')],
+    BookingKind.dining => [_prefixed('Table for', booking.detail(DetailKeys.partySize))],
     BookingKind.transport => [booking.detail(DetailKeys.company)],
     BookingKind.event => [_prefixed('Seats', booking.detail(DetailKeys.seats))],
     BookingKind.note => [_firstLine(booking.notes)],
@@ -220,8 +325,7 @@ String? _stub(Booking booking) {
   }
 }
 
-String? _prefixed(String prefix, String? value) =>
-    value == null ? null : '$prefix $value';
+String? _prefixed(String prefix, String? value) => value == null ? null : '$prefix $value';
 
 String? _nonEmpty(String? value) {
   final trimmed = value?.trim();

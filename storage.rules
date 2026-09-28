@@ -4,6 +4,12 @@ rules_version = '2';
 // phone. Readable and writable by the trip's members only.
 //
 //   trips/{tripId}/attachments/{fileName}
+//
+// Card art packs: read-only for any signed-in traveller. Published by an
+// operator with admin credentials (tool/art_packs.dart), never by the app.
+//
+//   art-packs/catalog.json
+//   art-packs/{packId}/{version}/pack.zip
 
 service firebase.storage {
   match /b/{bucket}/o {
@@ -19,6 +25,11 @@ service firebase.storage {
         && (request.resource.contentType.matches('image/.*')
             || request.resource.contentType == 'application/pdf');
       allow delete: if isMember();
+    }
+
+    match /art-packs/{path=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
     }
   }
 }

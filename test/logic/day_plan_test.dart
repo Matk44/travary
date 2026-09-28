@@ -11,8 +11,14 @@ void main() {
   final park = booking('park', BookingKind.attraction, today, at: const ClockTime(9, 0));
   final lunch = booking('lunch', BookingKind.dining, today, at: const ClockTime(12, 30));
   final dinner = booking('dinner', BookingKind.dining, today, at: const ClockTime(19, 15));
-  final hotel = booking('hotel', BookingKind.stay, d(10, 12),
-      at: const ClockTime(16, 0), endDate: d(10, 18), until: const ClockTime(11, 0));
+  final hotel = booking(
+    'hotel',
+    BookingKind.stay,
+    d(10, 12),
+    at: const ClockTime(16, 0),
+    endDate: d(10, 18),
+    until: const ClockTime(11, 0),
+  );
   final note = booking('note', BookingKind.note, today);
 
   group('ordering', () {
@@ -66,8 +72,13 @@ void main() {
     });
 
     test('an explicit end time wins over the typical duration', () {
-      final tour = booking('tour', BookingKind.activity, today,
-          at: const ClockTime(9, 0), until: const ClockTime(16, 0));
+      final tour = booking(
+        'tour',
+        BookingKind.activity,
+        today,
+        at: const ClockTime(9, 0),
+        until: const ClockTime(16, 0),
+      );
       final plan = buildDayPlan(today, [tour], at(15));
       expect(plan.entries.single.status, EntryStatus.now);
     });
@@ -79,7 +90,12 @@ void main() {
     });
 
     test('other days have no highlight', () {
-      expect(buildDayPlan(d(10, 15), [booking('x', BookingKind.dining, d(10, 15), at: const ClockTime(12, 0))], at(8)).highlight, isNull);
+      expect(
+        buildDayPlan(d(10, 15), [
+          booking('x', BookingKind.dining, d(10, 15), at: const ClockTime(12, 0)),
+        ], at(8)).highlight,
+        isNull,
+      );
     });
 
     test('past days are all done, future days all upcoming', () {
@@ -110,8 +126,14 @@ void main() {
     });
 
     test('an overnight flight departs one day and lands the next', () {
-      final flight = booking('flight', BookingKind.flight, today,
-          at: const ClockTime(18, 40), endDate: d(10, 15), until: const ClockTime(7, 10));
+      final flight = booking(
+        'flight',
+        BookingKind.flight,
+        today,
+        at: const ClockTime(18, 40),
+        endDate: d(10, 15),
+        until: const ClockTime(7, 10),
+      );
       expect(buildDayPlan(today, [flight], at(8)).entries.single.role, EntryRole.start);
       expect(buildDayPlan(d(10, 15), [flight], at(8)).entries.single.time, const ClockTime(7, 10));
     });

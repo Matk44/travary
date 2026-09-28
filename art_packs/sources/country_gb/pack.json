@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_gb",
+  "version": 1,
+  "palette": {
+    "id": "britain_heritage_rain",
+    "anchors": {"ink": "#173653", "paper": "#F6F0E5"},
+    "accents": ["#A9363E", "#BA9147", "#7893A3", "#536B54"],
+    "ui": {
+      "primary": "#21496B",
+      "secondary": "#92323A",
+      "highlight": "#A87B2E",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

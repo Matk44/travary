@@ -52,9 +52,7 @@ void main() {
   });
 
   test('search matches references, places and trip names', () async {
-    await store.saveBooking(
-      booking('lunch', BookingKind.dining, d(10, 14), tripId: 'orlando', reference: 'ST-4412'),
-    );
+    await store.saveBooking(booking('lunch', BookingKind.dining, d(10, 14), tripId: 'orlando', reference: 'ST-4412'));
     await pumpEventQueue();
     expect(store.search('st-44').single.id, 'lunch');
     expect(store.search('orlando'), hasLength(2));

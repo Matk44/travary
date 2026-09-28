@@ -37,9 +37,7 @@ class MemoryTravelRepository implements TravelRepository {
   @override
   String newId() {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    return String.fromCharCodes(
-      List.generate(20, (_) => chars.codeUnitAt(_random.nextInt(chars.length))),
-    );
+    return String.fromCharCodes(List.generate(20, (_) => chars.codeUnitAt(_random.nextInt(chars.length))));
   }
 
   @override
@@ -48,15 +46,27 @@ class MemoryTravelRepository implements TravelRepository {
     _tripsController.add(trips);
   }
 
+  /// Like Firestore: only the traveller-editable fields change, and an
+  /// automatic trip's theme stays the classifier's.
   @override
   Future<void> updateTrip(Trip trip) async {
     final existing = _trips[trip.id];
     if (existing == null) return;
-    _trips[trip.id] = existing.copyWith(
+    final manual = trip.themeSource == ThemeSource.manual;
+    _trips[trip.id] = Trip(
+      id: existing.id,
       title: trip.title,
-      theme: trip.theme,
+      theme: manual ? trip.theme : existing.theme,
+      themeSource: trip.themeSource,
+      visualProfile: existing.visualProfile,
+      unknownTheme: manual ? trip.unknownTheme : existing.unknownTheme,
       plannedStart: trip.plannedStart,
       plannedEnd: trip.plannedEnd,
+      ownerId: existing.ownerId,
+      memberIds: existing.memberIds,
+      memberNames: existing.memberNames,
+      premium: existing.premium,
+      createdAt: existing.createdAt,
       updatedAt: trip.updatedAt,
     );
     _tripsController.add(trips);
@@ -85,8 +95,7 @@ class MemoryTravelRepository implements TravelRepository {
   }
 
   @override
-  Future<void> moveBooking(Booking booking, String fromTripId) =>
-      saveBooking(booking);
+  Future<void> moveBooking(Booking booking, String fromTripId) => saveBooking(booking);
 
   @override
   Future<void> deleteBooking(Booking booking) async {

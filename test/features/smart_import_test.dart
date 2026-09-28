@@ -97,10 +97,7 @@ void main() {
     });
 
     test('far-apart bookings get separate trips', () async {
-      await store.saveBookings([
-        fresh('a', BookingKind.dining, d(11, 3)),
-        fresh('b', BookingKind.dining, d(12, 20)),
-      ]);
+      await store.saveBookings([fresh('a', BookingKind.dining, d(11, 3)), fresh('b', BookingKind.dining, d(12, 20))]);
       await pumpEventQueue();
       expect(store.plans, hasLength(2));
     });
@@ -114,8 +111,11 @@ void main() {
       File(filePath).writeAsBytesSync([37, 80, 68, 70]);
     });
 
-    Future<(TravelStore, PremiumStore)> pump(WidgetTester tester, SmartImportService service,
-        {AccessDecision access = const AccessDecision.freeUse(3)}) async {
+    Future<(TravelStore, PremiumStore)> pump(
+      WidgetTester tester,
+      SmartImportService service, {
+      AccessDecision access = const AccessDecision.freeUse(3),
+    }) async {
       tester.view.physicalSize = const Size(1179, 2556);
       tester.view.devicePixelRatio = 3;
       addTearDown(tester.view.reset);
@@ -128,7 +128,8 @@ void main() {
             Provider<SmartImportService>.value(value: service),
             // Created by the providers so they're disposed with the tree.
             ChangeNotifierProvider(
-              create: (_) => travel = TravelStore(repository: MemoryTravelRepository(), artCatalog: const ArtCatalog.empty()),
+              create: (_) =>
+                  travel = TravelStore(repository: MemoryTravelRepository(), artCatalog: const ArtCatalog.empty()),
             ),
             ChangeNotifierProvider(create: (_) => premium = PremiumStore(purchases: TestPurchaseService())),
           ],
@@ -141,7 +142,8 @@ void main() {
                     onPressed: () async {
                       outcome = await Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => SmartImportScreen(filePath: filePath, fileName: 'booking.pdf', access: access),
+                          builder: (_) =>
+                              SmartImportScreen(filePath: filePath, fileName: 'booking.pdf', access: access),
                         ),
                       );
                     },
@@ -158,13 +160,16 @@ void main() {
       return (travel, premium);
     }
 
-    BookingDraft draft(String title, BookingKind kind, LocalDate date) =>
-        BookingDraft(booking(title, kind, date, title: title, tripId: ''), uncertain: const {'startTime'});
+    BookingDraft draft(String title, BookingKind kind, LocalDate date) => BookingDraft(
+      booking(title, kind, date, title: title, tripId: ''),
+      uncertain: const {'startTime'},
+    );
 
     testWidgets('one booking opens the pre-filled form to check', (tester) async {
-      final (_, premium) = await pump(tester, _FakeImport(SmartImportResult([
-        draft('Lagoon Grill', BookingKind.dining, d(11, 3)),
-      ])));
+      final (_, premium) = await pump(
+        tester,
+        _FakeImport(SmartImportResult([draft('Lagoon Grill', BookingKind.dining, d(11, 3))])),
+      );
 
       expect(find.textContaining('Filled in by Smart Import'), findsOneWidget);
       expect(find.byType(EditBookingScreen), findsOneWidget);
@@ -174,10 +179,15 @@ void main() {
     });
 
     testWidgets('several bookings can be added together', (tester) async {
-      final (travel, _) = await pump(tester, _FakeImport(SmartImportResult([
-        draft('London to Lisbon', BookingKind.flight, d(11, 3)),
-        draft('Lisbon to London', BookingKind.flight, d(11, 8)),
-      ])));
+      final (travel, _) = await pump(
+        tester,
+        _FakeImport(
+          SmartImportResult([
+            draft('London to Lisbon', BookingKind.flight, d(11, 3)),
+            draft('Lisbon to London', BookingKind.flight, d(11, 8)),
+          ]),
+        ),
+      );
 
       expect(find.text('We found 2 bookings'), findsOneWidget);
       expect(find.text('Check 1 detail'), findsNWidgets(2));

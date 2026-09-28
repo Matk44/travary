@@ -70,11 +70,16 @@ class _WalletScreenState extends State<WalletScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, TravarySpace.md),
+              padding: const EdgeInsets.fromLTRB(
+                TravarySpace.gutter,
+                TravarySpace.lg,
+                TravarySpace.gutter,
+                TravarySpace.md,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Wallet', style: TravaryText.display),
+                  Text('Documents', style: TravaryText.display),
                   const SizedBox(height: TravarySpace.xs),
                   Text('Every booking and ticket, even offline.', style: TravaryText.bodySoft),
                   const SizedBox(height: TravarySpace.lg),
@@ -104,10 +109,7 @@ class _WalletScreenState extends State<WalletScreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-                children: [
-                  _filter('All', null),
-                  for (final kind in BookingKind.values) _filter(kind.spec.label, kind),
-                ],
+                children: [_filter('All', null), for (final kind in BookingKind.values) _filter(kind.spec.label, kind)],
               ),
             ),
           ),

@@ -26,8 +26,7 @@ class AttachmentStore {
   final Directory _directory;
   final _random = Random();
 
-  File fileFor(Attachment attachment) =>
-      File(p.join(_directory.path, attachment.fileName));
+  File fileFor(Attachment attachment) => File(p.join(_directory.path, attachment.fileName));
 
   /// Copies the file at [sourcePath] into the store.
   Future<Attachment> import(String sourcePath, {String? name}) async {
@@ -36,12 +35,7 @@ class AttachmentStore {
     final id = '${DateTime.now().millisecondsSinceEpoch}${_random.nextInt(1 << 20)}';
     final fileName = '$id$extension';
     final copy = await source.copy(p.join(_directory.path, fileName));
-    return Attachment(
-      id: id,
-      name: name ?? p.basename(sourcePath),
-      fileName: fileName,
-      sizeBytes: await copy.length(),
-    );
+    return Attachment(id: id, name: name ?? p.basename(sourcePath), fileName: fileName, sizeBytes: await copy.length());
   }
 
   Future<void> delete(Attachment attachment) async {

@@ -1,0 +1,9 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["JP"],
+    "themes": ["urban_heritage"],
+    "subjects": ["train"]
+  },
+  "minAppBuild": 1
+}

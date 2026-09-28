@@ -9,21 +9,27 @@ String formatClock(ClockTime time) {
   return '$hour:${time.minute.toString().padLeft(2, '0')}$suffix';
 }
 
+/// "9:00", "7:15": twelve-hour, no am/pm, for a timeline that reads in
+/// order.
+String formatClockShort(ClockTime time) {
+  final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
+  return '$hour:${time.minute.toString().padLeft(2, '0')}';
+}
+
+/// "28° Sunny": a forecast for the header pill.
+String formatWeather(WeatherReport report) => '${report.temperature}° ${report.condition.label}';
+
 /// "Wed 14 Oct".
-String formatDayShort(LocalDate date) =>
-    DateFormat('EEE d MMM').format(date.toDateTime());
+String formatDayShort(LocalDate date) => DateFormat('EEE d MMM').format(date.toDateTime());
 
 /// "Wednesday 14 October".
-String formatDayLong(LocalDate date) =>
-    DateFormat('EEEE d MMMM').format(date.toDateTime());
+String formatDayLong(LocalDate date) => DateFormat('EEEE d MMMM').format(date.toDateTime());
 
 /// "14 Oct".
-String formatDayMonth(LocalDate date) =>
-    DateFormat('d MMM').format(date.toDateTime());
+String formatDayMonth(LocalDate date) => DateFormat('d MMM').format(date.toDateTime());
 
 /// "14 Oct 2026".
-String formatDate(LocalDate date) =>
-    DateFormat('d MMM y').format(date.toDateTime());
+String formatDate(LocalDate date) => DateFormat('d MMM y').format(date.toDateTime());
 
 /// "12–18 Oct 2026", "28 Sep – 3 Oct 2026", "28 Dec 2026 – 3 Jan 2027".
 String formatDateRange(LocalDate start, LocalDate end) {

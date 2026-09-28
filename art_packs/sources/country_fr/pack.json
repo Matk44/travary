@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_fr",
+  "version": 1,
+  "palette": {
+    "id": "france_blue_champagne",
+    "anchors": {"ink": "#152A49", "paper": "#F6F1E7"},
+    "accents": ["#1D3F73", "#C23B42", "#C5A365", "#8E8AA2"],
+    "ui": {
+      "primary": "#244775",
+      "secondary": "#A9363E",
+      "highlight": "#B78A43",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

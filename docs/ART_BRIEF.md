@@ -41,10 +41,11 @@ Textures are tiled or stretched behind everything, so they must be quiet.
 | File | Size | Prompt |
 |---|---|---|
 | `common/tag.png` | 1024×1536 | Transparent background PNG. A blank kraft-paper luggage tag with a brass grommet near the top and a loop of natural twine, straight-on view, rotated 4°, soft realistic drop shadow. Plain surface, no printing (an icon is placed on it). |
-| `common/stamp.png` | 1536×1024 | Transparent background PNG. An empty rectangular rubber-stamp border in navy ink, double line, rounded corners, uneven ink with speckles and small gaps like a real stamp impression, rotated −3°. Empty inside. |
-| `common/tab.png` | 1024×1024 | Transparent background PNG. A soft cream canvas fabric tab shaped like a file-folder tab: rounded top corners, flat bottom, stitched edge, gentle shadow. Empty. |
-| `common/tab_selected.png` | 1024×1024 | Same as the tab above, in deep teal #1E5B70 cotton, slightly raised. |
-| `common/tab_add.png` | 1024×1024 | Same tab in coral #E5785B cotton. |
+| `common/stamp.png` | 1536×464 | Transparent background PNG. An empty rectangular rubber-stamp border in navy ink, double line, rounded corners, uneven ink with speckles and small gaps like a real stamp impression, rotated −3°. Empty inside. Fills the frame edge to edge (the "Show tickets" button on tickets that don't print a frame). |
+| `common/tab.png` | 720×1024 | Transparent background PNG. A soft cream canvas fabric tab shaped like a file-folder tab: rounded top corners, straight sides running off the bottom edge, stitched edge, gentle shadow. Empty. Only the top 60% shows; the rest runs under the leather strip. |
+| `common/tab_selected.png` | 720×1024 | Same as the tab above in a **neutral near-white** cotton, slightly raised. The app tints it with the trip palette's primary colour (teal #1E5B70 by default), so keep it colourless. |
+| `common/tab_add.png` | 720×1024 | Same tab in coral #E5785B cotton. |
+| `common/pill.png` | 1536×512 | Transparent background PNG. An empty raised cream pill, soft shadow, like a paper badge. Drawn 35 pt tall behind the weather or countdown. |
 
 ## Batch 3: icons (transparent background)
 
@@ -67,9 +68,19 @@ One prompt, repeated per icon:
 | `icons/note.png` | pinned note |
 | `icons/nav_today.png` | small house |
 | `icons/nav_trips.png` | suitcase |
-| `icons/nav_wallet.png` | folded ticket wallet |
+| `icons/nav_wallet.png` | a document with folded corner (the Documents tab) |
 | `icons/nav_profile.png` | person silhouette |
 | `icons/nav_add.png` | plus sign |
+| `icons/calendar.png` | small calendar page |
+| `icons/timeline_stop.png` | a round ink dot (256×256) |
+| `icons/timeline_now.png` | a ringed ink dot (256×256) |
+
+Weather icons for the header pill may be full colour (they're drawn
+untinted), 1024×1024: `icons/weather_sunny.png` (coral sun with rays),
+`weather_cloudy.png`, `weather_rain.png`, `weather_snow.png`.
+
+Every one-colour icon keeps about a quarter of the canvas empty on each
+side, like `nav_today.png`: the app sizes icons by their canvas.
 
 ## Batch 4: booking artwork (the "smart" pictures)
 
@@ -93,9 +104,9 @@ Each subject comes in **two formats**:
 | `attraction/themepark_castle_01_scene.png` | `attraction/themepark_castle_01_vignette.png` | a fairytale castle with tall spires among palm trees, reflected in a lagoon |
 | `attraction/any_waterpark_01_scene.png` | `attraction/any_waterpark_01_vignette.png` | a water park with twisting slides, a lazy river and palm trees |
 | `attraction/any_rollercoaster_01_scene.png` | `…_vignette.png` | a looping wooden rollercoaster against the sunset |
-| `stay/tropical_resort_01_scene.png` | `…_vignette.png` | a Polynesian-style resort with thatched roofs, palms and hibiscus |
+| `stay/coastal_resort_resort_01_scene.png` | `…_vignette.png` | a Polynesian-style resort with thatched roofs, palms and hibiscus |
 | `dining/themepark_castle_01_scene.png` | `…_vignette.png` | an elegant castle dining hall glimpsed through arched windows |
-| `dining/tropical_grill_01_scene.png` | `…_vignette.png` | a beachside grill at dusk with lanterns and palm trees |
+| `dining/coastal_resort_grill_01_scene.png` | `…_vignette.png` | a beachside grill at dusk with lanterns and palm trees |
 | `dining/any_pizza_01_scene.png` | `…_vignette.png` | a wood-fired pizza oven and a rustic pizza on a board |
 | `dining/any_breakfast_01_scene.png` | `…_vignette.png` | a stack of pancakes with berries and a steaming coffee |
 | `flight/any_plane_01_scene.png` | `…_vignette.png` | a passenger plane climbing over soft clouds |
@@ -109,6 +120,27 @@ variety (`_02`, `_03` of the same subject are used in turn).
 
 ---
 
+## Card shells
+
+Each look has a family of complete card objects with no text: the app sets
+every word on top at measured positions (`lib/design/art/card_shells.dart`).
+
+| File | Size | What |
+|---|---|---|
+| `common/<look>_featured_ticket.png` | 1774×887 | The "next up" ticket: the look's scene printed on the left 75%, security strip, tear-off stub with a barcode, blank left 42% for text |
+| `common/<look>_room_card.png` | 1774×887 | Hotel key card: blank left 60%, illustration lower right, a band near the right edge |
+| `common/<look>_reservation_card.png` | 1983×793 | Tagged card: blank tag (for the category icon), blank centre, a small illustration right of a thin rule |
+| `common/reservation_card_blank.png` | 1983×793 | The neutral tagged card with an empty right panel (the booking's own vignette goes there) |
+
+`<look>` is an experience theme's wire name (`coastal_resort`,
+`urban_heritage`…). The first families use two longer names, read as
+aliases: `alpine_adventure_*` → `alpine`, `countryside_escape_*` →
+`countryside`. The unprefixed `featured_ticket.png` and `room_card.png`
+are the theme-park anchors. Make every shell at exactly its size and to
+the same zones as the existing ones, and add its measured anchors to
+`ShellGeometry` (a test fails otherwise). Looks without a family borrow
+one until theirs is made: see `docs/ART_ASSET_GAPS.md`.
+
 ## Naming: how the app matches pictures to bookings
 
 ```
@@ -117,22 +149,34 @@ assets/art/<type>/<theme>_<subject>_<number>_<format>.png
 
 - **type**: the folder: `flight`, `stay`, `attraction`, `dining`, `transport`,
   `activity`, `event`, `note`.
-- **theme**: the trip's card style: `classic`, `tropical`, `city`, `snow`,
-  `countryside`, `themepark`, or **`any`** for pictures that suit every trip.
+- **theme**: the trip's look (its experience theme): `classic_travel`,
+  `coastal_resort`, `urban_modern`, `urban_heritage`, `alpine`,
+  `countryside`, `outdoor_adventure`, `themepark`, `cruise`, `roadtrip`,
+  `wellness_retreat`, or **`any`** for pictures that suit every trip. The
+  older names still load: `classic`, `tropical` (coastal resort), `city`
+  (modern city), `snow` (alpine). No theme at all counts as classic.
 - **subject**: one word from the vocabulary below (or `generic`).
 - **number**: `01`, `02`… More numbers = more variety.
 - **format**: `scene` or `vignette`. Leave it off if one image should do both.
 
-How a picture is chosen for a booking:
+Bundled art is the core set that is always on the phone. Destination and
+extra experience art ships as downloadable **art packs** (see
+`docs/ART_PACKS.md`): same subjects and formats, described in each pack's
+`pack.json` rather than by file name.
+
+How a picture is chosen for a booking (`lib/design/art/art_resolver.dart`):
 1. A picture the traveller picked themselves, if any.
-2. The **subject**: chosen by Smart Import (Gemini reads the booking), or by
-   keywords in the name ("Harbour Pizza Co." → `pizza`).
-3. Same subject and the trip's theme, then `any`/`classic`, then any theme.
-4. No subject match: a `generic` picture for the trip's theme.
+2. The **subject** (chosen by Smart Import, or by keywords in the name:
+   "Harbour Pizza Co." → `pizza`) from, in turn: the trip's city pack, region
+   pack, country pack, the trip's look (packs and bundled art for it), a
+   secondary look, then theme-free/classic art.
+3. No subject match: a `generic` picture, in the same order.
+4. Anything that suits the trip, then anything bundled.
 5. Nothing at all: the drawn placeholder you see today.
 
-The same booking always gets the same picture, and neighbouring cards never
-repeat.
+A trip's look is chosen automatically from its bookings (Gemini, on the
+server) unless the traveller picks one. The same booking always gets the
+same picture, and neighbouring cards never repeat.
 
 ### Vocabulary (subjects per type)
 

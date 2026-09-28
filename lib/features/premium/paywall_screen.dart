@@ -62,9 +62,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
       case PurchaseOutcome.cancelled:
         break;
       case PurchaseOutcome.failed:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('That didn\'t go through. You haven\'t been charged.')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('That didn\'t go through. You haven\'t been charged.')));
     }
   }
 
@@ -90,10 +90,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 children: [
                   IconButton(tooltip: 'Close', icon: const Icon(Icons.close_rounded), onPressed: _close),
                   const Spacer(),
-                  TextButton(
-                    onPressed: premium.busy ? null : premium.restore,
-                    child: const Text('Restore purchases'),
-                  ),
+                  TextButton(onPressed: premium.busy ? null : premium.restore, child: const Text('Restore purchases')),
                 ],
               ),
             ),
@@ -179,10 +176,7 @@ class _PaywallCopy {
       'Never miss a gate change',
       'Delays and gate changes the moment they happen.',
     ),
-    null => const _PaywallCopy(
-      'Holidays, handled',
-      'Less admin, everyone in sync, and your tickets always safe.',
-    ),
+    null => const _PaywallCopy('Holidays, handled', 'Less admin, everyone in sync, and your tickets always safe.'),
   };
 }
 
@@ -281,10 +275,7 @@ class _PlanOption extends StatelessWidget {
         color: TravaryColors.paper,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TravaryRadius.card),
-          side: BorderSide(
-            color: selected ? TravaryColors.ink : TravaryColors.line,
-            width: selected ? 2 : 1,
-          ),
+          side: BorderSide(color: selected ? TravaryColors.ink : TravaryColors.line, width: selected ? 2 : 1),
         ),
         child: InkWell(
           onTap: onTap,
@@ -315,7 +306,11 @@ class _PlanOption extends StatelessWidget {
                               ),
                               child: Text(
                                 badge!.toUpperCase(),
-                                style: TravaryText.eyebrow.copyWith(color: TravaryColors.paper, fontSize: 9.5, letterSpacing: 1),
+                                style: TravaryText.eyebrow.copyWith(
+                                  color: TravaryColors.paper,
+                                  fontSize: 9.5,
+                                  letterSpacing: 1,
+                                ),
                               ),
                             ),
                           ],
@@ -348,7 +343,11 @@ class _TrialTimeline extends StatelessWidget {
     final steps = [
       ('Today', 'Everything in Plus unlocks. Nothing to pay today.', Icons.lock_open_rounded),
       ('Day ${days - 2}', 'We\'ll remind you that your trial is ending.', Icons.notifications_none_rounded),
-      ('Day $days', 'Your Plus year starts at ${priceOf(offer)}. Cancel any time before and you won\'t be charged.', Icons.event_available_rounded),
+      (
+        'Day $days',
+        'Your Plus year starts at ${priceOf(offer)}. Cancel any time before and you won\'t be charged.',
+        Icons.event_available_rounded,
+      ),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -371,8 +370,7 @@ class _TrialTimeline extends StatelessWidget {
                       ),
                       child: Icon(step.$3, size: 16, color: index == 0 ? TravaryColors.paper : TravaryColors.ink),
                     ),
-                    if (index < steps.length - 1)
-                      Expanded(child: Container(width: 2, color: TravaryColors.line)),
+                    if (index < steps.length - 1) Expanded(child: Container(width: 2, color: TravaryColors.line)),
                   ],
                 ),
                 const SizedBox(width: TravarySpace.md),
@@ -406,10 +404,7 @@ class _PassSummary extends StatelessWidget {
     final until = plan.end!.addDays(Pricing.tripPassGraceDays);
     return Container(
       padding: const EdgeInsets.all(TravarySpace.lg),
-      decoration: BoxDecoration(
-        color: TravaryColors.paper,
-        borderRadius: BorderRadius.circular(TravaryRadius.card),
-      ),
+      decoration: BoxDecoration(color: TravaryColors.paper, borderRadius: BorderRadius.circular(TravaryRadius.card)),
       child: Text(
         'One payment, no subscription. Unlocks Plus on ${plan.trip.title} for everyone '
         'on the trip, until ${formatDate(until)}.',

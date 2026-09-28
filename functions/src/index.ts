@@ -3,4 +3,5 @@ import { initializeApp } from 'firebase-admin/app';
 initializeApp();
 
 export { smartImport } from './smartImport';
+export { classifyTripVisuals, purgeExpiredPlaceCoordinates } from './classifyTripVisuals';
 export { createTripInvite, joinTrip, removeTripMember } from './sharing';

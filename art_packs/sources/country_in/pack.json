@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_in",
+  "version": 1,
+  "palette": {
+    "id": "india_peacock_saffron",
+    "anchors": {"ink": "#155E63", "paper": "#F6EBDD"},
+    "accents": ["#DB8B2B", "#2D3F72", "#C96561", "#BF9640"],
+    "ui": {
+      "primary": "#1E6A6E",
+      "secondary": "#B36C20",
+      "highlight": "#A9782B",
+      "onPrimary": "#FFF8EB"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

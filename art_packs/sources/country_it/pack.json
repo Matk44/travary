@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_it",
+  "version": 1,
+  "palette": {
+    "id": "italy_heritage_tricolore",
+    "anchors": {
+      "ink": "#183B52",
+      "paper": "#F6F0E4"
+    },
+    "accents": ["#147A55", "#C63B3C", "#C96A4A", "#C7A154"],
+    "ui": {
+      "primary": "#126746",
+      "secondary": "#9E3034",
+      "highlight": "#B77A35",
+      "onPrimary": "#FFF9EF"
+    }
+  },
+  "assets": [
+    {
+      "file": "common/featured_ticket.png",
+      "kind": "common",
+      "name": "featured_ticket",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/room_card.png",
+      "kind": "common",
+      "name": "room_card",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/reservation_card.png",
+      "kind": "common",
+      "name": "reservation_card",
+      "width": 1983,
+      "height": 793
+    }
+  ]
+}

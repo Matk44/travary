@@ -7,6 +7,7 @@ import '../../data/attachment_store.dart';
 import '../../design/kind_style.dart';
 import '../../design/tokens.dart';
 import '../../domain/domain.dart';
+import '../../logic/card_text.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../import/smart_import_screen.dart';
@@ -17,11 +18,7 @@ import 'edit_booking_screen.dart';
 
 /// The add flow: pick a kind, fill in a short form, done. The booking joins
 /// the right trip automatically unless [tripId] says otherwise.
-Future<void> startAddBooking(
-  BuildContext context, {
-  LocalDate? date,
-  String? tripId,
-}) async {
+Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tripId}) async {
   final choice = await showModalBottomSheet<AddChoice>(
     context: context,
     backgroundColor: TravaryColors.linen,
@@ -46,11 +43,7 @@ Future<void> startAddBooking(
   if (result == null || !context.mounted) return;
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(
-        result.newTrip
-            ? 'Added to a new trip: ${result.tripTitle}'
-            : 'Added to ${result.tripTitle}',
-      ),
+      content: Text(result.newTrip ? 'Added to a new trip: ${result.tripTitle}' : 'Added to ${result.tripTitle}'),
     ),
   );
 }
@@ -75,23 +68,13 @@ class SmartImportChoice extends AddChoice {
 Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
   final travel = context.read<TravelStore>();
   final plan = tripId == null ? travel.focus.plan : travel.plan(tripId);
-  final access = await requirePremium(
-    context,
-    PremiumFeature.smartImport,
-    trip: plan,
-    source: 'add_sheet',
-  );
+  final access = await requirePremium(context, PremiumFeature.smartImport, trip: plan, source: 'add_sheet');
   if (access == null || !context.mounted) return;
   final file = await pickFile(context, title: 'What shall we read?');
   if (file == null || !context.mounted) return;
   final outcome = await Navigator.of(context).push<SmartImportOutcome>(
     MaterialPageRoute(
-      builder: (_) => SmartImportScreen(
-        filePath: file.path,
-        fileName: file.name,
-        access: access,
-        tripId: tripId,
-      ),
+      builder: (_) => SmartImportScreen(filePath: file.path, fileName: file.name, access: access, tripId: tripId),
     ),
   );
   if (outcome == null || !context.mounted) return;
@@ -102,18 +85,12 @@ Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
   if (outcome.added == 0) return;
   final where = outcome.trips.length == 1 ? outcome.trips.single : '${outcome.trips.length} trips';
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(
-        outcome.added == 1 ? 'Added to $where' : 'Added ${outcome.added} bookings to $where',
-      ),
-    ),
+    SnackBar(content: Text(outcome.added == 1 ? 'Added to $where' : 'Added ${outcome.added} bookings to $where')),
   );
 }
 
 void openBooking(BuildContext context, Booking booking) {
-  Navigator.of(context).push(
-    MaterialPageRoute(builder: (_) => BookingDetailScreen(bookingId: booking.id)),
-  );
+  Navigator.of(context).push(MaterialPageRoute(builder: (_) => BookingDetailScreen(bookingId: booking.id)));
 }
 
 /// Straight to the tickets: the first attachment, or the booking details
@@ -123,22 +100,15 @@ void showTickets(BuildContext context, Booking booking) {
     openBooking(context, booking);
     return;
   }
-  Navigator.of(context).push(
-    MaterialPageRoute(builder: (_) => AttachmentViewer(bookingId: booking.id)),
-  );
+  Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttachmentViewer(bookingId: booking.id)));
 }
 
 /// The "Show tickets" callback for a card, or null if there's nothing to show.
 VoidCallback? ticketsAction(BuildContext context, Booking booking) =>
-    booking.hasTickets || (booking.reference?.trim().isNotEmpty ?? false)
-    ? () => showTickets(context, booking)
-    : null;
+    showsTickets(booking) ? () => showTickets(context, booking) : null;
 
 /// Asks for a photo/screenshot or a file. Returns its path and name.
-Future<({String path, String name})?> pickFile(
-  BuildContext context, {
-  String? title,
-}) async {
+Future<({String path, String name})?> pickFile(BuildContext context, {String? title}) async {
   final type = await showModalBottomSheet<FileType>(
     context: context,
     backgroundColor: TravaryColors.linen,
@@ -150,7 +120,10 @@ Future<({String path, String name})?> pickFile(
           if (title != null)
             Padding(
               padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
-              child: Align(alignment: Alignment.centerLeft, child: Text(title, style: TravaryText.title)),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(title, style: TravaryText.title),
+              ),
             ),
           ListTile(
             leading: const Icon(Icons.photo_outlined),
@@ -171,9 +144,7 @@ Future<({String path, String name})?> pickFile(
 
   final files = await FilePicker.pickFiles(
     type: type,
-    allowedExtensions: type == FileType.custom
-        ? const ['pdf', 'png', 'jpg', 'jpeg', 'heic', 'webp']
-        : null,
+    allowedExtensions: type == FileType.custom ? const ['pdf', 'png', 'jpg', 'jpeg', 'heic', 'webp'] : null,
   );
   final path = files.isEmpty ? null : files.first.path;
   if (path == null) return null;
@@ -260,10 +231,11 @@ class _SmartImportTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Import a screenshot or PDF',
-                        style: TravaryText.label.copyWith(color: TravaryColors.paper)),
-                    Text('We fill in the details for you',
-                        style: TravaryText.small.copyWith(color: TravaryColors.paper.withValues(alpha: 0.8))),
+                    Text('Import a screenshot or PDF', style: TravaryText.label.copyWith(color: TravaryColors.paper)),
+                    Text(
+                      'We fill in the details for you',
+                      style: TravaryText.small.copyWith(color: TravaryColors.paper.withValues(alpha: 0.8)),
+                    ),
                   ],
                 ),
               ),

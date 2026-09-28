@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_ae",
+  "version": 1,
+  "palette": {
+    "id": "uae_emerald_desert",
+    "anchors": {"ink": "#252A2E", "paper": "#F7F0E3"},
+    "accents": ["#176B52", "#C63D43", "#C79A45", "#267783"],
+    "ui": {
+      "primary": "#145C47",
+      "secondary": "#B1363C",
+      "highlight": "#B58130",
+      "onPrimary": "#FFF9EE"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.png", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.png", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.png", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793}
+  ]
+}

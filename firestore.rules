@@ -2,7 +2,8 @@ rules_version = '2';
 
 // Travary security rules.
 //
-//   trips/{tripId}                        title, theme, ownerId, memberIds[]
+//   trips/{tripId}                        title, theme, themeSource, ownerId, memberIds[]
+//                                         visualProfile* (server only)
 //   trips/{tripId}/bookings/{bookingId}   one booking + a copy of memberIds[]
 //
 //   users/{userId}                        purchases, mirrored by the server
@@ -23,6 +24,20 @@ service cloud.firestore {
       return signedIn() && request.auth.uid in tripData.memberIds;
     }
 
+    // Written only by the server: premium, membership, invites, and the
+    // classifyTripVisuals function's profile, timestamp and request marker.
+    function serverOnlyTripFields() {
+      return ['premium', 'memberNames', 'invite',
+              'visualProfile', 'visualProfileUpdatedAt', 'visualProfileRequest'];
+    }
+
+    // The look stays the traveller's to choose: a theme name, and who picks
+    // it (automatic or manual).
+    function validLook(data) {
+      return (!('theme' in data) || (data.theme is string && data.theme.size() <= 40))
+        && (!('themeSource' in data) || data.themeSource in ['auto', 'manual']);
+    }
+
     match /trips/{tripId} {
       allow read: if isMember(resource.data);
 
@@ -31,14 +46,18 @@ service cloud.firestore {
       // Member changes go through the sharing functions (which also update
       // each booking's copy), so the app can't change memberIds,
       // memberNames or invite at all after creating a trip.
+      // The visual profile comes only from classifyTripVisuals (Admin SDK);
+      // theme and themeSource stay the traveller's.
       allow create: if signedIn()
         && request.resource.data.ownerId == request.auth.uid
         && request.resource.data.memberIds == [request.auth.uid]
-        && !request.resource.data.keys().hasAny(['premium', 'memberNames', 'invite']);
+        && !request.resource.data.keys().hasAny(serverOnlyTripFields())
+        && validLook(request.resource.data);
 
       allow update: if isMember(resource.data)
         && !request.resource.data.diff(resource.data).affectedKeys()
-            .hasAny(['ownerId', 'premium', 'memberIds', 'memberNames', 'invite']);
+            .hasAny(serverOnlyTripFields().concat(['ownerId', 'memberIds']))
+        && validLook(request.resource.data);
 
       allow delete: if signedIn() && resource.data.ownerId == request.auth.uid;
 

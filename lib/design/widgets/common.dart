@@ -46,10 +46,7 @@ class InfoPill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (icon != null) ...[
-            Icon(icon, size: 18, color: TravaryColors.coral),
-            const SizedBox(width: 6),
-          ],
+          if (icon != null) ...[Icon(icon, size: 18, color: TravaryColors.coral), const SizedBox(width: 6)],
           Text(label, style: TravaryText.label),
         ],
       ),
@@ -88,11 +85,7 @@ class EmptyState extends StatelessWidget {
           Text(message, style: TravaryText.bodySoft, textAlign: TextAlign.center),
           if (actionLabel != null && onAction != null) ...[
             const SizedBox(height: TravarySpace.xl),
-            FilledButton.icon(
-              onPressed: onAction,
-              icon: const Icon(Icons.add_rounded),
-              label: Text(actionLabel!),
-            ),
+            FilledButton.icon(onPressed: onAction, icon: const Icon(Icons.add_rounded), label: Text(actionLabel!)),
           ],
         ],
       ),

@@ -13,13 +13,20 @@ attraction/themepark_castle_01.png   one image used for both formats
 ```
 
 - **type**: `flight`, `stay`, `attraction`, `dining`, `transport`, `activity`, `event`, `note`
-- **theme**: `classic`, `tropical`, `city`, `snow`, `countryside`, `themepark`, or `any`
+- **theme**: `classic_travel`, `coastal_resort`, `urban_modern`, `urban_heritage`, `alpine`,
+  `countryside`, `outdoor_adventure`, `themepark`, `cruise`, `roadtrip`, `wellness_retreat`,
+  or `any` (older names `classic`, `tropical`, `city`, `snow` still load)
 - **subject**: from the vocabulary in `lib/logic/art_subjects.dart` (or `generic`)
 - **format**: `scene` (1536×1024, left side calm) or `vignette` (1024×1024,
   transparent); leave off to use one image for both
-- `common/`: textures and objects (`linen`, `paper`, `kraft`, `foil`,
-  `leather`, `tag`, `stamp`, `tab`…) · `icons/`: kind and nav icons
+- `common/`: card shells per look (`<look>_featured_ticket`, `_room_card`,
+  `_reservation_card`, plus `reservation_card_blank`; see the brief) and
+  interface surfaces (`linen`, `leather`, `tab`, `tab_selected`, `tab_add`,
+  `pill`, `stamp`) · `icons/`: kind, nav, weather and timeline icons
+- What's still missing, and what stands in: `docs/ART_ASSET_GAPS.md`
 
 A booking's subject comes from Smart Import (Gemini picks it) or from
-keywords in its name. See the chosen picture for every kind in
+keywords in its name. This folder is the core art that ships with the app;
+destination and extra experience art comes as downloadable art packs
+(`docs/ART_PACKS.md`). See the chosen picture for every kind in
 **Profile → Design tools → Card gallery**.

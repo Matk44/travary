@@ -52,8 +52,7 @@ String? smartImportMimeType(String path) {
 /// Calls the `smartImport` Cloud Function (Gemini). [ensureSignedIn] makes
 /// sure Firebase is ready and the traveller is signed in, even in demo mode.
 class CloudSmartImportService implements SmartImportService {
-  CloudSmartImportService({required this.ensureSignedIn, FirebaseFunctions? functions})
-    : _functions = functions;
+  CloudSmartImportService({required this.ensureSignedIn, FirebaseFunctions? functions}) : _functions = functions;
 
   final Future<void> Function() ensureSignedIn;
   final FirebaseFunctions? _functions;
@@ -128,8 +127,7 @@ SmartImportResult smartImportResultFromJson(Map<String, dynamic> json) {
           artSubject: text('artSubject'),
           details: {
             for (final entry in (map['details'] as Map? ?? const {}).entries)
-              if (entry.value is String && (entry.value as String).isNotEmpty)
-                '${entry.key}': entry.value as String,
+              if (entry.value is String && (entry.value as String).isNotEmpty) '${entry.key}': entry.value as String,
           },
           createdAt: now,
           updatedAt: now,

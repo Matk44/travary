@@ -1,6 +1,9 @@
 import '../../domain/domain.dart';
+import '../../logic/art_pack_selection.dart';
 import '../../logic/art_subjects.dart';
 import 'art_catalog.dart';
+import 'art_slots.dart';
+import 'card_shells.dart';
 
 /// The artwork decision for one card.
 class ArtChoice {
@@ -11,10 +14,12 @@ class ArtChoice {
     this.subject,
     this.scene,
     this.vignette,
+    this.shells = CardShells.none,
+    this.icon,
   });
 
   final BookingKind kind;
-  final TripTheme theme;
+  final ExperienceTheme theme;
 
   /// What the picture shows ("pizza"), or null when nothing specific fits.
   final String? subject;
@@ -29,80 +34,109 @@ class ArtChoice {
   /// (placeholder palettes, tag angles, stamp positions): `variant % n`.
   final int variant;
 
+  /// The raster shells for this booking's trip: featured ticket, key card
+  /// and tagged card (see `ShellResolver`).
+  final CardShells shells;
+
+  /// The kind's icon (printed on tags and compact rows).
+  final IconArt? icon;
+
   ArtAsset? get asset => scene ?? vignette;
 
-  ArtAsset? preferring(ArtFormat format) =>
-      format == ArtFormat.scene ? (scene ?? vignette) : (vignette ?? scene);
+  ArtAsset? preferring(ArtFormat format) => format == ArtFormat.scene ? (scene ?? vignette) : (vignette ?? scene);
 
+  /// The picture's name, for design tools.
   String? get group => asset?.group;
+
+  /// The picture's unique key (see [ArtAsset.key]).
+  String? get key => asset?.key;
 }
 
-/// Picks artwork for bookings.
+/// Picks artwork for bookings, in this order:
 ///
 /// 1. Artwork the traveller picked.
-/// 2. The booking's subject (from Smart Import, or its name's keywords):
-///    same theme, then theme-free/classic, then any theme.
-/// 3. A generic picture for the trip's theme, then anything for that theme.
-/// 4. Generic theme-free/classic, then anything of the kind, then nothing
-///    (the card draws a placeholder).
+/// 2. The booking's subject (from Smart Import, or its name's keywords)
+///    from, in turn: the city pack, region pack, country pack, the trip's
+///    experience (packs and bundled art for its look), a secondary theme,
+///    then the always-bundled core (theme-free and classic art).
+///    An unverified destination ranks after the experience art.
+/// 3. A generic picture: destination packs, then the trip's look, then a
+///    secondary theme.
+/// 4. A generic classic picture.
+/// 5. So sparse art never regresses to placeholders: anything that suits
+///    the trip, then anything bundled (or from a pack that suits the trip)
+///    for the kind. Another destination's pack is never used.
+/// 6. Nothing: the card draws its placeholder.
 ///
-/// Within the best tier, the same booking always gets the same picture, and
-/// neighbouring cards of the same kind are nudged apart.
+/// A destination pack places every picture at its own rank (the place is
+/// the point). An experience pack's pictures are ranked by their own theme
+/// exactly like bundled art, so bundled and downloaded pictures follow
+/// identical rules. Within the best tier the same booking always gets the
+/// same picture, and neighbouring cards of the same kind are nudged apart.
 class ArtResolver {
   const ArtResolver(this.catalog);
 
   final ArtCatalog catalog;
 
-  ArtChoice resolve(Booking booking, TripTheme theme) {
+  ArtChoice resolve(Booking booking, TripArtContext context) {
     final variant = stableHash(booking.id);
     final subject = artSubjectFor(booking);
-    final picked = booking.artKey == null ? const <ArtAsset>[] : catalog.group(booking.kind, booking.artKey!);
-    final groups = picked.isNotEmpty ? [booking.artKey!] : _candidateGroups(booking.kind, theme, subject);
-    final group = groups.isEmpty ? null : groups[variant % groups.length];
-    return _choice(booking.kind, theme, subject, variant, group);
+    final picked = booking.artKey == null ? const <ArtAsset>[] : catalog.byKey(booking.kind, booking.artKey!);
+    final keys = picked.isNotEmpty ? [booking.artKey!] : _candidateKeys(booking.kind, context, subject);
+    final key = keys.isEmpty ? null : keys[variant % keys.length];
+    return _choice(booking.kind, context, subject, variant, key);
   }
 
   /// Resolves a run of cards shown together, avoiding repeats side by side.
-  List<ArtChoice> resolveAll(List<Booking> bookings, TripTheme Function(Booking) themeOf) {
+  List<ArtChoice> resolveAll(List<Booking> bookings, TripArtContext Function(Booking) contextOf) {
     final choices = <ArtChoice>[];
     for (final booking in bookings) {
-      final theme = themeOf(booking);
-      var choice = resolve(booking, theme);
+      final context = contextOf(booking);
+      var choice = resolve(booking, context);
       final previous = choices.isEmpty ? null : choices.last;
       if (previous != null && previous.kind == choice.kind && booking.artKey == null) {
-        choice = _differentFrom(previous, choice, booking, theme);
+        choice = _differentFrom(previous, choice, booking, context);
       }
       choices.add(choice);
     }
     return choices;
   }
 
-  List<String> _candidateGroups(BookingKind kind, TripTheme theme, String? subject) {
+  List<String> _candidateKeys(BookingKind kind, TripArtContext context, String? subject) {
     final all = catalog.allFor(kind);
     if (all.isEmpty) return const [];
-    bool themeIs(ArtAsset a) => a.theme == theme;
-    bool themeFree(ArtAsset a) => a.theme == null || a.theme == TripTheme.classic;
-    bool isSubject(ArtAsset a) => subject != null && a.subject == subject;
+    ArtRank? rankOf(ArtAsset a) {
+      final pack = a.pack;
+      if (pack == null) return context.rankOfBundledTheme(a.theme);
+      final packRank = context.packRanks[pack.id];
+      if (packRank == null) return null;
+      return packRank.index <= ArtRank.country.index ? packRank : context.rankOfBundledTheme(a.theme);
+    }
+
+    bool suitsTrip(ArtAsset a) => a.pack == null || context.packRanks.containsKey(a.pack!.id);
     bool isGeneric(ArtAsset a) => a.subject == genericSubject;
 
     final tiers = <bool Function(ArtAsset)>[
-      (a) => isSubject(a) && themeIs(a),
-      (a) => isSubject(a) && themeFree(a),
-      isSubject,
-      (a) => isGeneric(a) && themeIs(a),
-      themeIs,
-      (a) => isGeneric(a) && themeFree(a),
-      (_) => true,
+      if (subject != null)
+        for (final rank in context.rankOrder) (a) => a.subject == subject && rankOf(a) == rank,
+      for (final rank in context.rankOrder)
+        if (rank != ArtRank.core) (a) => isGeneric(a) && rankOf(a) == rank,
+      (a) => isGeneric(a) && rankOf(a) == ArtRank.core,
+      (a) => rankOf(a) != null,
+      suitsTrip,
     ];
     for (final tier in tiers) {
-      final groups = {for (final a in all) if (tier(a)) a.group}.toList()..sort();
-      if (groups.isNotEmpty) return groups;
+      final keys = {
+        for (final a in all)
+          if (tier(a)) a.key,
+      }.toList()..sort();
+      if (keys.isNotEmpty) return keys;
     }
     return const [];
   }
 
-  ArtChoice _choice(BookingKind kind, TripTheme theme, String? subject, int variant, String? group) {
-    final assets = group == null ? const <ArtAsset>[] : catalog.group(kind, group);
+  ArtChoice _choice(BookingKind kind, TripArtContext context, String? subject, int variant, String? key) {
+    final assets = key == null ? const <ArtAsset>[] : catalog.byKey(kind, key);
     ArtAsset? scene;
     ArtAsset? vignette;
     for (final asset in assets) {
@@ -117,25 +151,34 @@ class ArtResolver {
     }
     return ArtChoice(
       kind: kind,
-      theme: theme,
+      theme: context.theme,
       subject: subject,
       variant: variant,
       scene: scene,
       vignette: vignette,
+      shells: ShellResolver(catalog).resolve(context),
+      icon: ArtSlots(catalog, context).icon(IconSlot.forKind(kind)),
     );
   }
 
-  ArtChoice _differentFrom(ArtChoice previous, ArtChoice choice, Booking booking, TripTheme theme) {
+  ArtChoice _differentFrom(ArtChoice previous, ArtChoice choice, Booking booking, TripArtContext context) {
     if (choice.asset == null) {
       // previous.variant + 1 lands on a different placeholder look for any
       // number of looks greater than one.
-      return ArtChoice(kind: choice.kind, theme: theme, subject: choice.subject, variant: previous.variant + 1);
+      return ArtChoice(
+        kind: choice.kind,
+        theme: context.theme,
+        subject: choice.subject,
+        variant: previous.variant + 1,
+        shells: choice.shells,
+        icon: choice.icon,
+      );
     }
-    if (choice.group != previous.group) return choice;
-    final groups = _candidateGroups(booking.kind, theme, choice.subject);
-    if (groups.length < 2) return choice;
-    final next = groups[(groups.indexOf(choice.group!) + 1) % groups.length];
-    return _choice(booking.kind, theme, choice.subject, choice.variant, next);
+    if (choice.key != previous.key) return choice;
+    final keys = _candidateKeys(booking.kind, context, choice.subject);
+    if (keys.length < 2) return choice;
+    final next = keys[(keys.indexOf(choice.key!) + 1) % keys.length];
+    return _choice(booking.kind, context, choice.subject, choice.variant, next);
   }
 }
 

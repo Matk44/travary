@@ -38,11 +38,8 @@ class _TicketFileBuilderState extends State<TicketFileBuilder> {
   Widget build(BuildContext context) {
     return FutureBuilder<File?>(
       future: _file,
-      builder: (context, snapshot) => widget.builder(
-        context,
-        snapshot.data,
-        snapshot.connectionState != ConnectionState.done,
-      ),
+      builder: (context, snapshot) =>
+          widget.builder(context, snapshot.data, snapshot.connectionState != ConnectionState.done),
     );
   }
 }

@@ -13,18 +13,15 @@ import '../../state/travel_store.dart';
 
 /// Invite the family: a six-character code to share by message. Asks for
 /// the inviter's name first time, so the family knows who it's from.
-Future<void> showInviteSheet(BuildContext context, TripPlan plan) =>
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: true,
-      builder: (_) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.viewInsetsOf(context).bottom,
-        ),
-        child: InviteSheet(plan: plan),
-      ),
-    );
+Future<void> showInviteSheet(BuildContext context, TripPlan plan) => showModalBottomSheet<void>(
+  context: context,
+  isScrollControlled: true,
+  showDragHandle: true,
+  builder: (_) => Padding(
+    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+    child: InviteSheet(plan: plan),
+  ),
+);
 
 class InviteSheet extends StatefulWidget {
   const InviteSheet({super.key, required this.plan});
@@ -37,9 +34,7 @@ class InviteSheet extends StatefulWidget {
 
 class _InviteSheetState extends State<InviteSheet> {
   late final TravelStore _store = context.read<TravelStore>();
-  late final _name = TextEditingController(
-    text: widget.plan.trip.memberNames[_store.userId],
-  );
+  late final _name = TextEditingController(text: widget.plan.trip.memberNames[_store.userId]);
   TripInvite? _invite;
   String? _error;
   bool _busy = false;
@@ -65,10 +60,7 @@ class _InviteSheetState extends State<InviteSheet> {
     });
     try {
       final name = _name.text.trim();
-      final invite = await _store.createInvite(
-        widget.plan,
-        name: name.isEmpty ? null : name,
-      );
+      final invite = await _store.createInvite(widget.plan, name: name.isEmpty ? null : name);
       track('invite_created', {'members': widget.plan.trip.memberIds.length});
       if (mounted) setState(() => _invite = invite);
     } on SharingException catch (e) {
@@ -96,12 +88,7 @@ class _InviteSheetState extends State<InviteSheet> {
     final invite = _invite;
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          TravarySpace.gutter,
-          0,
-          TravarySpace.gutter,
-          TravarySpace.lg,
-        ),
+        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -125,16 +112,10 @@ class _InviteSheetState extends State<InviteSheet> {
                 onSubmitted: (_) => _create(),
               ),
               const SizedBox(height: TravarySpace.md),
-              FilledButton(
-                onPressed: _busy ? null : _create,
-                child: const Text('Create invite'),
-              ),
+              FilledButton(onPressed: _busy ? null : _create, child: const Text('Create invite')),
             ] else if (invite == null)
               const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(TravarySpace.xl),
-                  child: CircularProgressIndicator(),
-                ),
+                child: Padding(padding: EdgeInsets.all(TravarySpace.xl), child: CircularProgressIndicator()),
               )
             else ...[
               _CodeCard(code: invite.code),
@@ -154,9 +135,7 @@ class _InviteSheetState extends State<InviteSheet> {
               TextButton.icon(
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: invite.code));
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('Code copied')));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Code copied')));
                 },
                 icon: const Icon(Icons.copy_rounded, size: 18),
                 label: const Text('Copy code'),
@@ -169,11 +148,7 @@ class _InviteSheetState extends State<InviteSheet> {
                 style: TravaryText.small.copyWith(color: TravaryColors.coral),
                 textAlign: TextAlign.center,
               ),
-              if (!_needsName)
-                TextButton(
-                  onPressed: _busy ? null : _create,
-                  child: const Text('Try again'),
-                ),
+              if (!_needsName) TextButton(onPressed: _busy ? null : _create, child: const Text('Try again')),
             ],
           ],
         ),
@@ -204,10 +179,7 @@ class _CodeCard extends StatelessWidget {
           children: [
             Text('INVITE CODE', style: TravaryText.eyebrow),
             const SizedBox(height: TravarySpace.sm),
-            Text(
-              '${code.substring(0, 3)} ${code.substring(3)}',
-              style: TravaryText.display.copyWith(letterSpacing: 6),
-            ),
+            Text('${code.substring(0, 3)} ${code.substring(3)}', style: TravaryText.display.copyWith(letterSpacing: 6)),
           ],
         ),
       ),

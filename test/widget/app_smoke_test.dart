@@ -26,11 +26,7 @@ void main() {
       MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (_) => TravelStore(
-              repository: repository,
-              artCatalog: const ArtCatalog.empty(),
-              clock: () => now,
-            ),
+            create: (_) => TravelStore(repository: repository, artCatalog: const ArtCatalog.empty(), clock: () => now),
           ),
           ChangeNotifierProvider(
             create: (_) => PremiumStore(
@@ -52,7 +48,9 @@ void main() {
     expect(find.text('Day 3 of 8 · Orlando'), findsOneWidget);
     expect(find.text('HAPPENING NOW'), findsOneWidget);
     expect(find.text('Sunshine Park'), findsOneWidget);
-    expect(find.text('Lagoon Resort · Room 2214'), findsOneWidget);
+    // The hotel you're staying at, with its room and the countdown.
+    expect(find.text('Lagoon Resort'), findsOneWidget);
+    expect(find.text('Room 2214 · Check-out in 4 days'), findsOneWidget);
   });
 
   testWidgets('in the afternoon dinner is next up and earlier items are done', (tester) async {
@@ -69,9 +67,11 @@ void main() {
     expect(find.text('Sunshine Park'), findsOneWidget);
   });
 
-  testWidgets('tapping another day in the strip shows that day', (tester) async {
+  testWidgets('choosing another day from the day line shows that day', (tester) async {
     await pumpApp(tester, DateTime(2026, 10, 14, 11, 0));
 
+    await tester.tap(find.text('Day 3 of 8 · Orlando'));
+    await tester.pumpAndSettle();
     await tester.tap(find.bySemanticsLabel('Thursday 15 October'));
     await tester.pumpAndSettle();
 
@@ -79,10 +79,10 @@ void main() {
     expect(find.textContaining('Day 4 of 8'), findsOneWidget);
   });
 
-  testWidgets('Wallet search finds a booking by reference', (tester) async {
+  testWidgets('Documents search finds a booking by reference', (tester) async {
     await pumpApp(tester, DateTime(2026, 10, 14, 11, 0));
 
-    await tester.tap(find.bySemanticsLabel('Wallet'));
+    await tester.tap(find.bySemanticsLabel('Documents'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'CIR-30412');
     await tester.pumpAndSettle();
@@ -114,7 +114,9 @@ void main() {
       expect(find.text('What shall we read?'), findsOneWidget);
     });
 
-    testWidgets('after the free imports, the paywall offers Plus and a Trip Pass, and buying unlocks it', (tester) async {
+    testWidgets('after the free imports, the paywall offers Plus and a Trip Pass, and buying unlocks it', (
+      tester,
+    ) async {
       await pumpApp(tester, DateTime(2026, 10, 14, 11, 0), entitlements: const Entitlements(smartImportsUsed: 3));
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
