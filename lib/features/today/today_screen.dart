@@ -191,7 +191,6 @@ class _TodayScreenState extends State<TodayScreen> {
             art: store.artFor(booking),
             onTap: () => openBooking(context, booking),
           ),
-          compact: booking.kind != BookingKind.stay,
         ),
       for (final index in rest) _Item(card(index), compact: dayPlan.entries[index].status == EntryStatus.done),
       if (earlier.isNotEmpty) ...[

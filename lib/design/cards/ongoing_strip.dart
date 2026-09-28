@@ -6,11 +6,13 @@ import '../art/art_resolver.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
 import 'card_parts.dart';
+import 'ongoing_tag_card.dart';
 import 'room_key_card.dart';
 
 /// Something you're in the middle of: the hotel you're staying at (its key
 /// card, full size, as on the reference Today screen) or the hire car you
-/// have (a slim row). [text] comes from `ongoingCardText`.
+/// have (its key tag). A slim row stands in only if those shells are
+/// missing. [text] comes from `ongoingCardText`.
 class OngoingStrip extends StatelessWidget {
   const OngoingStrip({super.key, required this.text, required this.art, this.onTap});
 
@@ -22,6 +24,8 @@ class OngoingStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final room = art.shells.room;
     if (art.kind == BookingKind.stay && room != null) return RoomKeyCard(shell: room, text: text, onTap: onTap);
+    final tag = art.shells.ongoing;
+    if (tag != null) return OngoingTagCard(shell: tag, text: text, art: art, onTap: onTap);
 
     final colors = TravaryChrome.of(context).colors;
     final subtitle = [text.detail, _sentenceCase(text.footnote)].whereType<String>().join(' · ');

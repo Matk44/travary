@@ -41,7 +41,26 @@ enum ShellRole {
 
   /// The neutral tagged reservation card: blank, so the booking's own
   /// vignette sits in its right-hand panel.
-  reservationBlank('reservation_card_blank', 1983, 793);
+  reservationBlank('reservation_card_blank', 1983, 793),
+
+  /// A flight that's next up: a boarding pass with an open picture window
+  /// for the booking's scene.
+  boardingPass('boarding_pass', 1774, 887),
+
+  /// A restaurant booking that's next up: menu-card stock with a picture
+  /// window and a table stub.
+  featuredReservation('featured_reservation', 1774, 887),
+
+  /// A train, coach, ferry, transfer or car pick-up that's next up: a
+  /// travel ticket with a picture window.
+  travelTicket('travel_ticket', 1774, 887),
+
+  /// A note, next up or not: ruled paper with a paperclip.
+  notePaper('note_paper', 1983, 793),
+
+  /// Something you're in the middle of that isn't a hotel (a hire car, a
+  /// multi-day pass): a key tag.
+  ongoingTag('ongoing_tag', 1983, 466);
 
   const ShellRole(this.key, this.width, this.height);
 
@@ -52,12 +71,12 @@ enum ShellRole {
   double get aspectRatio => width / height;
 }
 
-/// What colour an icon printed on a shell's luggage tag should be.
-enum TagInk {
-  /// Navy ink on a light kraft or coral tag.
+/// Which ink reads on a part of a shell.
+enum ShellInk {
+  /// Navy ink, on light paper, kraft or a coral tag.
   dark,
 
-  /// Paper-coloured ink on a dark dyed tag.
+  /// Paper-coloured ink, on a dark printed panel or dyed tag.
   light,
 }
 
@@ -75,8 +94,11 @@ class ShellGeometry {
     this.footnote,
     this.tagIcon,
     this.tagAngle = 0,
-    this.tagInk = TagInk.dark,
+    this.tagInk = ShellInk.dark,
     this.vignette,
+    this.scene,
+    this.badge,
+    this.textInk = ShellInk.dark,
   });
 
   /// The physical card itself (for a tagged card, without the tag and
@@ -102,15 +124,27 @@ class ShellGeometry {
   /// 4 DAYS").
   final FractionRect? footnote;
 
-  /// Tagged cards: the blank face of the luggage tag, for the category
-  /// icon, tilted like the tag by [tagAngle] radians.
+  /// The blank spot for the category icon: a luggage tag's face, or the
+  /// printed medallion on a note or key tag. Tilted like the tag by
+  /// [tagAngle] radians.
   final FractionRect? tagIcon;
   final double tagAngle;
-  final TagInk tagInk;
+  final ShellInk tagInk;
 
   /// Blank tagged cards: the panel right of the rule, for the booking's
   /// vignette.
   final FractionRect? vignette;
+
+  /// Windowed featured shells: the transparent picture window. The
+  /// booking's scene is drawn beneath the shell here, so the shell's own
+  /// frame, keyline and rounded corners sit on top of it.
+  final FractionRect? scene;
+
+  /// Restaurant tickets: the blank table disc on the stub ("TABLE FOR" / "4").
+  final FractionRect? badge;
+
+  /// The ink for the card's live text and printed-frame words.
+  final ShellInk textInk;
 
   /// The geometry for a shell: measured values for each bundled file, the
   /// role's template for pack shells (which are made to the same template).
@@ -126,7 +160,13 @@ class ShellGeometry {
       text: FractionRect(0.090, 0.180, 0.560, 0.620),
       action: FractionRect(0.090, 0.640, 0.360, 0.800),
       stubLabel: FractionRect(0.822, 0.260, 0.868, 0.760),
+      textInk: ShellInk.light,
     ),
+    ShellRole.boardingPass: _boardingPass,
+    ShellRole.featuredReservation: _featuredReservation,
+    ShellRole.travelTicket: _travelTicket,
+    ShellRole.notePaper: _notePaper,
+    ShellRole.ongoingTag: _ongoingTag,
     ShellRole.roomCard: ShellGeometry(
       body: FractionRect(0.035, 0.100, 0.970, 0.920),
       text: FractionRect(0.090, 0.220, 0.600, 0.700),
@@ -138,7 +178,7 @@ class ShellGeometry {
       tagIcon: _tagIcon,
       tagAngle: _tagAngle,
       // Destination packs dye their tags (navy, green): light ink reads.
-      tagInk: TagInk.light,
+      tagInk: ShellInk.light,
     ),
     ShellRole.reservationBlank: ShellGeometry(
       body: _reservationBody,
@@ -149,10 +189,72 @@ class ShellGeometry {
     ),
   };
 
+  // The universal round-2 shells: one bundled file each, the same for
+  // every look (a pack may still supply its own, made to these anchors).
+
+  /// Navy pass: light text left, picture window centre, barcode outline on
+  /// the stub for the seat or flight number. Its stamp frame is printed.
+  static const _boardingPass = ShellGeometry(
+    body: FractionRect(0.027, 0.117, 0.974, 0.898),
+    text: FractionRect(0.075, 0.175, 0.385, 0.635),
+    action: FractionRect(0.080, 0.668, 0.363, 0.808),
+    actionAngle: -0.059,
+    actionFramed: true,
+    stubLabel: FractionRect(0.880, 0.235, 0.924, 0.785),
+    scene: FractionRect(0.406, 0.174, 0.746, 0.835),
+    textInk: ShellInk.light,
+  );
+
+  /// Deep-teal menu card: light text left, picture window, a table disc on
+  /// the stub.
+  static const _featuredReservation = ShellGeometry(
+    body: FractionRect(0.030, 0.121, 0.970, 0.873),
+    text: FractionRect(0.075, 0.175, 0.405, 0.630),
+    action: FractionRect(0.070, 0.674, 0.368, 0.815),
+    actionAngle: -0.087,
+    actionFramed: true,
+    scene: FractionRect(0.423, 0.169, 0.761, 0.831),
+    // Inset well inside the printed ring, where the circle is wide
+    // enough for the caption.
+    badge: FractionRect(0.847, 0.408, 0.931, 0.574),
+    textInk: ShellInk.light,
+  );
+
+  /// Sage travel ticket: navy text (cream wouldn't read on sage), picture
+  /// window, a ticket-number strip on the stub for the company.
+  static const _travelTicket = ShellGeometry(
+    body: FractionRect(0.028, 0.111, 0.972, 0.886),
+    text: FractionRect(0.080, 0.190, 0.395, 0.635),
+    action: FractionRect(0.073, 0.655, 0.347, 0.780),
+    actionFramed: true,
+    stubLabel: FractionRect(0.861, 0.215, 0.918, 0.765),
+    scene: FractionRect(0.409, 0.181, 0.745, 0.813),
+  );
+
+  /// Ruled paper: the medallion by the paperclip takes the icon; text on
+  /// the ruled lines, clear of the washi tape.
+  static const _notePaper = ShellGeometry(
+    body: FractionRect(0.040, 0.135, 0.975, 0.910),
+    text: FractionRect(0.215, 0.265, 0.930, 0.850),
+    tagIcon: FractionRect(0.075, 0.250, 0.167, 0.486),
+  );
+
+  /// Key tag: the key and ring hang off the left of the label (the body
+  /// starts at the ring so little of it leaves the screen); the medallion
+  /// takes the icon, two lines of text follow.
+  static const _ongoingTag = ShellGeometry(
+    body: FractionRect(0.040, 0.219, 0.980, 0.713),
+    text: FractionRect(0.270, 0.245, 0.955, 0.690),
+    tagIcon: FractionRect(0.186, 0.355, 0.238, 0.583),
+  );
+
   static const _reservationBody = FractionRect(0.104, 0.204, 0.978, 0.906);
   static const _blankText = FractionRect(0.272, 0.305, 0.815, 0.865);
   static const _completeText = FractionRect(0.272, 0.305, 0.690, 0.865);
-  static const _blankVignette = FractionRect(0.838, 0.270, 0.968, 0.880);
+
+  /// Everything right of the printed rule, less a small margin inside the
+  /// card's rounded edge.
+  static const _blankVignette = FractionRect(0.834, 0.235, 0.972, 0.880);
   static const _tagIcon = FractionRect(0.117, 0.455, 0.229, 0.735);
   static const _tagAngle = -0.07;
 
@@ -165,30 +267,35 @@ class ShellGeometry {
       actionAngle: -0.075,
       actionFramed: true,
       stubLabel: FractionRect(0.805, 0.260, 0.860, 0.760),
+      textInk: ShellInk.light,
     ),
     'coastal_resort_featured_ticket': ShellGeometry(
       body: FractionRect(0.040, 0.123, 0.970, 0.893),
       text: FractionRect(0.090, 0.180, 0.550, 0.620),
       action: FractionRect(0.090, 0.640, 0.360, 0.800),
       stubLabel: FractionRect(0.805, 0.260, 0.865, 0.760),
+      textInk: ShellInk.light,
     ),
     'urban_heritage_featured_ticket': ShellGeometry(
       body: FractionRect(0.025, 0.117, 0.976, 0.890),
       text: FractionRect(0.075, 0.180, 0.580, 0.620),
       action: FractionRect(0.075, 0.640, 0.345, 0.800),
       stubLabel: FractionRect(0.835, 0.260, 0.880, 0.760),
+      textInk: ShellInk.light,
     ),
     'alpine_adventure_featured_ticket': ShellGeometry(
       body: FractionRect(0.033, 0.125, 0.968, 0.876),
       text: FractionRect(0.085, 0.180, 0.550, 0.620),
       action: FractionRect(0.085, 0.640, 0.355, 0.800),
       stubLabel: FractionRect(0.828, 0.260, 0.875, 0.760),
+      textInk: ShellInk.light,
     ),
     'countryside_escape_featured_ticket': ShellGeometry(
       body: FractionRect(0.026, 0.121, 0.974, 0.890),
       text: FractionRect(0.075, 0.180, 0.580, 0.620),
       action: FractionRect(0.075, 0.640, 0.345, 0.800),
       stubLabel: FractionRect(0.832, 0.260, 0.870, 0.760),
+      textInk: ShellInk.light,
     ),
     // The theme-park anchor key card prints a small palm bottom-left; the
     // footnote starts after it.
@@ -217,6 +324,11 @@ class ShellGeometry {
       text: FractionRect(0.080, 0.220, 0.600, 0.700),
       footnote: FractionRect(0.080, 0.745, 0.380, 0.815),
     ),
+    'boarding_pass': _boardingPass,
+    'featured_reservation': _featuredReservation,
+    'travel_ticket': _travelTicket,
+    'note_paper': _notePaper,
+    'ongoing_tag': _ongoingTag,
     'reservation_card_blank': ShellGeometry(
       body: _reservationBody,
       text: _blankText,
@@ -241,7 +353,7 @@ class ShellGeometry {
       text: _completeText,
       tagIcon: _tagIcon,
       tagAngle: _tagAngle,
-      tagInk: TagInk.light,
+      tagInk: ShellInk.light,
     ),
     'countryside_escape_reservation_card': ShellGeometry(
       body: _reservationBody,
@@ -266,18 +378,31 @@ class ShellArt {
 
   ArtImageRef get image => art.image;
 
-  /// Whether the shell already carries an illustration (every role but the
-  /// blank reservation card). No second picture is layered on top.
+  /// Whether the shell already carries its illustration (every role but the
+  /// blank reservation card). No second picture is layered on top; a
+  /// windowed shell shows the booking's scene *through* its window instead.
   bool get isComplete => role != ShellRole.reservationBlank;
+
+  /// Whether the booking's scene shows through a window in the shell.
+  bool get hasSceneWindow => geometry.scene != null;
 }
 
-/// The shells for one booking's cards.
+/// The shells for one booking's cards, and which one each card uses.
 class CardShells {
-  const CardShells({this.featured, this.room, this.reservation});
+  const CardShells({
+    this.featured,
+    this.room,
+    this.reservation,
+    this.boardingPass,
+    this.featuredReservation,
+    this.travelTicket,
+    this.note,
+    this.ongoing,
+  });
 
   static const none = CardShells();
 
-  /// The featured "next up" ticket.
+  /// The look's featured admission ticket (with its destination printed on).
   final ShellArt? featured;
 
   /// The hotel key card (stays).
@@ -285,6 +410,43 @@ class CardShells {
 
   /// The tagged reservation card: the look's complete one, else blank.
   final ShellArt? reservation;
+
+  /// Windowed featured shells for flights, restaurants and travel.
+  final ShellArt? boardingPass;
+  final ShellArt? featuredReservation;
+  final ShellArt? travelTicket;
+
+  /// Note paper.
+  final ShellArt? note;
+
+  /// The key tag for something in progress that isn't a stay.
+  final ShellArt? ongoing;
+
+  /// The featured "next up" card for a booking of [kind]: a flight's
+  /// boarding pass, a restaurant's reservation card, transport's travel
+  /// ticket, a note's paper, a stay's key card, and the look's admission
+  /// ticket for attractions, activities and shows (and for any kind whose
+  /// own shell is missing).
+  ShellArt? featuredFor(BookingKind kind) =>
+      switch (kind) {
+        BookingKind.flight => boardingPass,
+        BookingKind.dining => featuredReservation,
+        BookingKind.transport => travelTicket,
+        BookingKind.note => note,
+        BookingKind.stay => room,
+        BookingKind.attraction || BookingKind.activity || BookingKind.event => null,
+      } ??
+      featured;
+
+  /// The card for a booking of [kind] in a day's list: a stay's key card,
+  /// a note's paper, the tagged reservation card for everything else.
+  ShellArt? standardFor(BookingKind kind) =>
+      switch (kind) {
+        BookingKind.stay => room,
+        BookingKind.note => note,
+        _ => null,
+      } ??
+      reservation;
 }
 
 /// Looks without their own shell family borrow the nearest one until theirs
@@ -300,7 +462,10 @@ const shellStandIns = <ExperienceTheme, ExperienceTheme>{
   ExperienceTheme.wellnessRetreat: ExperienceTheme.coastalResort,
 };
 
-/// Picks card shells for a trip, the one place shell art is chosen.
+/// Picks card shells for a trip, the one place shell art is chosen. The
+/// round-2 shells (boarding pass, reservation and travel tickets, note
+/// paper, key tag) are universal: one bundled file each, overridable by a
+/// look-prefixed bundled file or a pack.
 ///
 /// Order, per role: the trip's city, region and country packs; its look
 /// (pack, then bundled `<look>_<role>`); a secondary look; then the core: a
@@ -319,6 +484,11 @@ class ShellResolver {
     featured: shell(ShellRole.featuredTicket, context),
     room: shell(ShellRole.roomCard, context),
     reservation: shell(ShellRole.reservationCard, context) ?? shell(ShellRole.reservationBlank, context),
+    boardingPass: shell(ShellRole.boardingPass, context),
+    featuredReservation: shell(ShellRole.featuredReservation, context),
+    travelTicket: shell(ShellRole.travelTicket, context),
+    note: shell(ShellRole.notePaper, context),
+    ongoing: shell(ShellRole.ongoingTag, context),
   );
 
   ShellArt? shell(ShellRole role, TripArtContext context) {

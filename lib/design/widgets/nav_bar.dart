@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../art/art_catalog.dart';
 import '../art/art_slots.dart';
+import '../art/card_shells.dart' show FractionRect;
 import '../cards/card_parts.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
@@ -19,10 +20,12 @@ class NavItem {
 /// the leather strip at the bottom of the screen (in the safe area).
 ///
 /// The chosen tab pops up [NavLayout.rise] points with an ease-out-back
-/// spring, its shadow deepening, and takes the trip palette's primary
-/// colour; the others settle back without anything moving sideways. With
-/// reduced motion the change is instant. Tabs and their pictures come from
-/// raster surfaces; while those are missing, plain flat tabs stand in
+/// spring, its shadow deepening, as its cream fabric crossfades into the
+/// teal selected tab; the others settle back without anything moving
+/// sideways. With reduced motion the change is instant. Each tab is a
+/// raster shell, a raster icon (tinted navy, or the palette's onPrimary
+/// when selected), a real label and one hit target; nothing is baked into
+/// the shells. While a file is missing, plain flat tabs stand in
 /// (docs/ART_ASSET_GAPS.md).
 class TravaryNavBar extends StatelessWidget {
   const TravaryNavBar({
@@ -102,40 +105,99 @@ class TravaryNavBar extends StatelessWidget {
   }
 }
 
-/// A tab's surface: its raster fabric, or a plain flat tab while the art is
-/// missing. [tint] recolours a neutral selected-tab fabric.
+/// A tab's surface. The raster tabs are finished materials (`tab.png`
+/// cream, `tab_selected.png` petrol teal, `tab_add.png` coral), never tinted:
+/// a destination pack that wants another selected tab supplies its own
+/// `common/tab_selected.png`. Each is placed by the tab's own measured
+/// edges ([SurfaceSlot.body]), never stretched: its top edge sits at the top
+/// of the slot and its foot runs on under the bottom rail, while the file's
+/// transparent margin spills harmlessly round it. Resting crossfades into
+/// selected by [selection], and a soft shadow behind the tab deepens as it
+/// rises ([elevation]).
+///
+/// While a file is missing, a plain flat tab in [color] stands in (the only
+/// place the palette colours a tab).
 class _TabSurface extends StatelessWidget {
-  const _TabSurface({required this.image, required this.color, required this.elevation, this.tint});
+  const _TabSurface({
+    required this.resting,
+    required this.restingSlot,
+    required this.color,
+    required this.elevation,
+    this.selected,
+    this.selection = 0,
+  });
 
-  final ArtImageRef? image;
+  final ArtImageRef? resting;
+  final SurfaceSlot restingSlot;
+  final ArtImageRef? selected;
+
+  /// 0 resting, 1 selected.
+  final double selection;
+
+  /// The flat stand-in's colour.
   final Color color;
+
+  /// 0 resting, 1 raised (may overshoot with the spring).
   final double elevation;
-  final Color? tint;
 
   static const _shape = BorderRadius.vertical(top: Radius.circular(NavLayout.radius));
 
+  List<BoxShadow> get _shadow => [
+    BoxShadow(
+      color: Color.fromRGBO(0, 0, 0, 0.14 + 0.10 * elevation.clamp(0.0, 1.0)),
+      blurRadius: 3 + elevation * 6,
+      offset: Offset(0, 1 + elevation * 2),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final shadow = [
-      BoxShadow(color: const Color(0x33000000), blurRadius: 3 + elevation * 6, offset: Offset(0, 1 + elevation * 2)),
-    ];
-    if (image != null) {
+    if (resting == null) {
       return DecoratedBox(
-        decoration: BoxDecoration(borderRadius: _shape, boxShadow: shadow),
-        // Never stretched: the tab's top edge shows, its foot runs on under
-        // the leather strip.
-        child: Image(
-          image: artImageProvider(image!),
-          fit: BoxFit.cover,
-          alignment: Alignment.topCenter,
-          color: tint,
-          colorBlendMode: tint == null ? null : BlendMode.multiply,
-        ),
+        key: const ValueKey('tab-fallback'),
+        decoration: BoxDecoration(color: color, borderRadius: _shape, boxShadow: _shadow),
       );
     }
-    return DecoratedBox(
-      key: const ValueKey('tab-fallback'),
-      decoration: BoxDecoration(color: color, borderRadius: _shape, boxShadow: shadow),
+    return LayoutBuilder(
+      builder: (context, box) {
+        Widget place(ArtImageRef image, SurfaceSlot slot, {Key? key}) {
+          final body = slot.body ?? const FractionRect(0, 0, 1, 1);
+          final width = box.maxWidth / body.width;
+          // Tab files are made at 720 × 1024: this box is exactly their shape.
+          final height = width * 1024 / 720;
+          return Positioned(
+            left: -body.left * width,
+            top: -body.top * height,
+            width: width,
+            height: height,
+            child: Image(key: key, image: artImageProvider(image), fit: BoxFit.fill, gaplessPlayback: true),
+          );
+        }
+
+        Widget layer(double opacity, Widget child) => Positioned.fill(
+          child: Opacity(
+            opacity: opacity,
+            child: Stack(clipBehavior: Clip.none, children: [child]),
+          ),
+        );
+
+        final showSelected = selected != null && selection > 0;
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // The elevation response: a shadow under the tab's own outline.
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(borderRadius: _shape, boxShadow: _shadow),
+              ),
+            ),
+            if (!showSelected || selection < 1)
+              layer(showSelected ? 1 - selection : 1, place(resting!, restingSlot, key: const ValueKey('tab-raster'))),
+            if (showSelected)
+              layer(selection, place(selected!, SurfaceSlot.tabSelected, key: const ValueKey('tab-selected-raster'))),
+          ],
+        );
+      },
     );
   }
 }
@@ -189,8 +251,10 @@ class _NavTab extends StatelessWidget {
                   // Reaches past the screen bottom so the rise never shows a gap.
                   bottom: -NavLayout.rise,
                   child: _TabSurface(
-                    image: c > 0.5 ? (selectedImage ?? tabImage) : tabImage,
-                    tint: c > 0.5 && selectedImage != null ? colors.primary : null,
+                    resting: tabImage,
+                    restingSlot: SurfaceSlot.tab,
+                    selected: selectedImage,
+                    selection: c,
                     color: surface,
                     elevation: t,
                   ),
@@ -275,7 +339,12 @@ class _AddTab extends StatelessWidget {
           children: [
             Positioned.fill(
               bottom: -NavLayout.rise,
-              child: _TabSurface(image: image, color: TravaryColors.coral, elevation: 0.6),
+              child: _TabSurface(
+                resting: image,
+                restingSlot: SurfaceSlot.tabAdd,
+                color: TravaryColors.coral,
+                elevation: 0.6,
+              ),
             ),
             Positioned(
               left: 0,

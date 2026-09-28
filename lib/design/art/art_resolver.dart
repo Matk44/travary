@@ -68,8 +68,8 @@ class ArtChoice {
 ///    for the kind. Another destination's pack is never used.
 /// 6. Nothing: the card draws its placeholder.
 ///
-/// A destination pack places every picture at its own rank (the place is
-/// the point). An experience pack's pictures are ranked by their own theme
+/// A destination pack places its pictures at its own rank (the place is
+/// the point), except pictures drawn for a look the trip doesn't have. An experience pack's pictures are ranked by their own theme
 /// exactly like bundled art, so bundled and downloaded pictures follow
 /// identical rules. Within the best tier the same booking always gets the
 /// same picture, and neighbouring cards of the same kind are nudged apart.
@@ -105,12 +105,19 @@ class ArtResolver {
   List<String> _candidateKeys(BookingKind kind, TripArtContext context, String? subject) {
     final all = catalog.allFor(kind);
     if (all.isEmpty) return const [];
+    final looks = {context.theme, ...context.secondaryThemes};
     ArtRank? rankOf(ArtAsset a) {
       final pack = a.pack;
       if (pack == null) return context.rankOfBundledTheme(a.theme);
       final packRank = context.packRanks[pack.id];
       if (packRank == null) return null;
-      return packRank.index <= ArtRank.country.index ? packRank : context.rankOfBundledTheme(a.theme);
+      if (packRank.index > ArtRank.country.index) return context.rankOfBundledTheme(a.theme);
+      // A destination picture drawn for one look (a Kyoto temple for
+      // historic-city trips) isn't used on a trip with another look in the
+      // same place (an Okinawa beach week): a country isn't a style.
+      // Pictures marked `any` suit every trip there.
+      if (a.theme != null && !looks.contains(a.theme)) return null;
+      return packRank;
     }
 
     bool suitsTrip(ArtAsset a) => a.pack == null || context.packRanks.containsKey(a.pack!.id);

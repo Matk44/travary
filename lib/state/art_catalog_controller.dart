@@ -4,6 +4,7 @@ import '../data/art_pack_catalog.dart';
 import '../data/art_pack_service.dart';
 import '../data/art_pack_store.dart';
 import '../design/art/art_catalog.dart';
+import '../domain/domain.dart';
 
 /// The artwork catalog cards resolve against: the bundled art plus every
 /// validated installed pack. Rebuilt, and listeners told, whenever a pack is
@@ -56,6 +57,7 @@ ArtPackContent artPackContentOf(InstalledArtPack pack) {
   final common = <String, ArtImageRef>{};
   final icons = <String, ArtImageRef>{};
   final sizes = <String, ({int width, int height})>{};
+  final themes = <String, List<ExperienceTheme>>{};
   for (final entry in pack.manifest.assets) {
     final image = FileArtImage(pack.file(entry.file).path);
     switch (entry) {
@@ -78,9 +80,11 @@ ArtPackContent artPackContentOf(InstalledArtPack pack) {
       case PackSharedArt(role: 'common'):
         common[entry.name] = image;
         sizes['common/${entry.name}'] = (width: entry.width, height: entry.height);
+        if (entry.themes.isNotEmpty) themes['common/${entry.name}'] = entry.themes;
       case PackSharedArt():
         icons[entry.name] = image;
         sizes['icons/${entry.name}'] = (width: entry.width, height: entry.height);
+        if (entry.themes.isNotEmpty) themes['icons/${entry.name}'] = entry.themes;
     }
   }
   assets.sort((a, b) => a.path.compareTo(b.path));
@@ -90,6 +94,7 @@ ArtPackContent artPackContentOf(InstalledArtPack pack) {
     common: common,
     icons: icons,
     sizes: sizes,
+    themes: themes,
     palette: pack.manifest.palette,
   );
 }

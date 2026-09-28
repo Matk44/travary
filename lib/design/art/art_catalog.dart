@@ -101,6 +101,7 @@ class ArtPackContent {
     this.common = const {},
     this.icons = const {},
     this.sizes = const {},
+    this.themes = const {},
     this.palette,
   });
 
@@ -115,6 +116,10 @@ class ArtPackContent {
 
   /// Pixel sizes from `pack.json`, keyed `common/<name>` or `icons/<name>`.
   final Map<String, ({int width, int height})> sizes;
+
+  /// Shared pictures drawn for particular looks, keyed like [sizes]; the
+  /// others suit every trip the pack suits.
+  final Map<String, List<ExperienceTheme>> themes;
 
   /// The pack's interface colours, if it has any.
   final DestinationPalette? palette;
@@ -251,6 +256,9 @@ class ArtCatalog {
   /// the unthemed bundled file (`featured_ticket`). So a downloaded
   /// destination shell overrides the bundled one, and every trip still
   /// gets bundled art offline.
+  ///
+  /// A pack picture drawn for particular looks (`themes` in `pack.json`) is
+  /// used only for a trip with one of those looks, primary or secondary.
   SharedArtRef? commonArt(String name, {TripArtContext? context, List<ExperienceTheme> fallbackThemes = const []}) =>
       _shared(name, context, _common, (content) => content.common[name], 'common', fallbackThemes);
 
@@ -284,12 +292,19 @@ class ArtCatalog {
     }
 
     if (context == null) return bundledFor(null);
+    final looks = {context.theme, ...context.secondaryThemes};
+    ArtImageRef? suited(ArtPackContent content) {
+      final drawnFor = content.themes['$folder/$name'];
+      if (drawnFor != null && !drawnFor.any(looks.contains)) return null;
+      return find(content);
+    }
+
     for (final rank in context.rankOrder) {
-      final content = _bestPack(context, rank, find);
+      final content = _bestPack(context, rank, suited);
       if (content != null) {
         final size = content.sizes['$folder/$name'];
         return SharedArtRef(
-          image: find(content)!,
+          image: suited(content)!,
           name: name,
           pack: content.pack,
           width: size?.width,

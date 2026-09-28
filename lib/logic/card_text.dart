@@ -18,6 +18,8 @@ class CardText {
     this.reference,
     this.footnote,
     this.action,
+    this.badge,
+    this.badgeCaption,
   });
 
   /// Small uppercase label above the title: "NEXT UP", "LUNCH", "CHECK-OUT".
@@ -42,6 +44,11 @@ class CardText {
   /// The featured card's button: "Show tickets" when there's something to
   /// show at the gate, else "Details".
   final String? action;
+
+  /// A short value for a round badge on a ticket stub, with its caption:
+  /// "4" under "TABLE FOR" on a restaurant ticket.
+  final String? badge;
+  final String? badgeCaption;
 
   /// [when] and [detail] joined for one-line layouts.
   String? get whenAndDetail {
@@ -75,7 +82,15 @@ CardText cardTextForEntry(DayEntry entry, {bool highlighted = false}) {
     stub: _stub(booking),
     reference: _nonEmpty(booking.reference),
     action: _action(booking),
+    badge: _badge(booking),
+    badgeCaption: _badge(booking) == null ? null : 'TABLE FOR',
   );
+}
+
+String? _badge(Booking booking) {
+  if (booking.kind != BookingKind.dining) return null;
+  final party = int.tryParse(booking.detail(DetailKeys.partySize) ?? '');
+  return party == null ? null : '$party';
 }
 
 /// Whether [booking] has something to show at the gate: ticket files, or at
@@ -84,7 +99,9 @@ bool showsTickets(Booking booking) => booking.hasTickets || _nonEmpty(booking.re
 
 String _action(Booking booking) => showsTickets(booking) ? 'Show tickets' : 'Details';
 
-/// Wording for [booking] outside a day context (Wallet, detail screen).
+/// Wording for [booking] outside a day context (the booking's own page).
+/// Its button opens the ticket files, or adds some when there are none
+/// (the reference is printed on the page itself).
 CardText cardTextForBooking(Booking booking) {
   return CardText(
     eyebrow: _kindEyebrow(booking, booking.startTime),
@@ -94,7 +111,9 @@ CardText cardTextForBooking(Booking booking) {
     place: _nonEmpty(booking.location),
     stub: _stub(booking),
     reference: _nonEmpty(booking.reference),
-    action: _action(booking),
+    action: booking.hasTickets ? 'Show tickets' : 'Add tickets',
+    badge: _badge(booking),
+    badgeCaption: _badge(booking) == null ? null : 'TABLE FOR',
   );
 }
 
@@ -320,6 +339,8 @@ String? _stub(Booking booking) {
     case BookingKind.event:
       return booking.detail(DetailKeys.seats)?.toUpperCase();
     case BookingKind.transport:
+      // The operator, on the ticket's number strip: "EUROSTAR", "ALAMO".
+      return _nonEmpty(booking.detail(DetailKeys.company))?.toUpperCase();
     case BookingKind.note:
       return null;
   }

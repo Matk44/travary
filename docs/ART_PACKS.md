@@ -71,8 +71,11 @@ from folder names):
 - `width`/`height`: the image's real size; the publisher checks it.
 - `common` names the app looks up: the card shells `featured_ticket`
   (1774 × 887), `room_card` (1774 × 887), `reservation_card` (1983 × 793,
-  a tagged card with its illustration printed in) and
-  `reservation_card_blank` (1983 × 793), and the interface surfaces
+  a tagged card with its illustration printed in),
+  `reservation_card_blank` (1983 × 793), `boarding_pass`,
+  `featured_reservation`, `travel_ticket` (1774 × 887, with a transparent
+  picture window), `note_paper` (1983 × 793) and `ongoing_tag` (1983 × 466),
+  and the interface surfaces
   `linen`, `leather`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`.
   Shells are made to the same template as the bundled ones (same size and
   zones, no text); a shell of another size is ignored. `icon` names:
@@ -80,6 +83,27 @@ from folder names):
   `nav_wallet`, `nav_profile`, `nav_add`, `weather_sunny`/`_cloudy`/
   `_rain`/`_snow`, `calendar`, `timeline_stop`, `timeline_now`. Sizes and
   what's still missing from the bundled set: `docs/ART_ASSET_GAPS.md`.
+
+- `themes` (optional, on `common` and `icon` entries): the looks a shared
+  picture is drawn for, e.g. `["urban_heritage", "classic_travel"]`. Without
+  it the picture suits every trip the pack suits. A country isn't a style:
+  Japan's historic-city ticket shouldn't dress an Okinawa beach week. Card
+  pictures already say this with `theme`: in a destination pack, a picture
+  drawn for one look is used only on trips with that look (primary or
+  secondary); `any` suits every trip there. A place with several looks gets
+  region or city packs (they outrank the country's).
+
+### What goes in a destination pack
+
+Only what changes with the place: complete featured tickets, key cards and
+tagged cards with the destination printed on, booking scenes and
+vignettes, trip-cover stickers and look emblems, and the palette.
+Everything universal stays bundled and is never duplicated per country:
+navigation, kind, weather and timeline icons; linen, leather, tabs, pill
+and stamp; the windowed boarding pass, restaurant and travel tickets
+(their windows already show the destination's scenes); note paper and the
+key tag. A pack may still override any of these by name, in the same
+ranks.
 
 ### The palette
 

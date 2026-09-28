@@ -6,7 +6,9 @@ import 'package:travary/data/demo_data.dart';
 import 'package:travary/data/memory_travel_repository.dart';
 import 'package:travary/data/purchase_service.dart';
 import 'package:travary/design/art/art_catalog.dart';
+import 'package:travary/design/cards/card_parts.dart';
 import 'package:travary/design/cards/featured_ticket_card.dart';
+import 'package:travary/design/cards/ongoing_tag_card.dart';
 import 'package:travary/design/cards/room_key_card.dart';
 import 'package:travary/design/cards/tagged_reservation_card.dart';
 import 'package:travary/design/tokens.dart';
@@ -82,10 +84,10 @@ void main() {
       expect(imageIn(tester, find.byType(RoomKeyCard)), const AssetImage('assets/art/common/room_card.png'));
       final lunch = find.byType(TaggedReservationCard).first;
       expect(imageIn(tester, lunch), const AssetImage('assets/art/common/reservation_card_blank.png'));
-      final vignette = tester.widget<Image>(
+      final vignette = tester.widget<TrimmedArt>(
         find.descendant(of: lunch, matching: find.byKey(const ValueKey('card-vignette'))),
       );
-      expect(vignette.image, const AssetImage('assets/art/dining/any_bistro_01_vignette.png'));
+      expect(vignette.image, const BundledArtImage('assets/art/dining/any_bistro_01_vignette.png'));
       expect(find.descendant(of: lunch, matching: find.byKey(const ValueKey('icon-raster-dining'))), findsOneWidget);
       // Nav icons: raster where supplied, the documented stand-in otherwise.
       expect(find.byKey(const ValueKey('icon-raster-nav_today')), findsOneWidget);
@@ -116,10 +118,11 @@ void main() {
         const AssetImage('assets/art/common/featured_ticket.png'),
       );
       expect(find.byKey(const ValueKey('icon-raster-nav_today')), findsOneWidget);
-      // The theme-park key card is gone: just that stay drops to a plain row.
+      // The theme-park key card is gone: just that stay moves to the key tag.
       expect(find.byType(RoomKeyCard), findsNothing);
-      expect(find.text("Disney's Polynesian Resort"), findsOneWidget);
-      expect(find.text('Room 2214 · Check-out in 4 days'), findsOneWidget);
+      final tag = find.byType(OngoingTagCard);
+      expect(find.descendant(of: tag, matching: find.text("Disney's Polynesian Resort")), findsOneWidget);
+      expect(find.descendant(of: tag, matching: find.textContaining('Room 2214', findRichText: true)), findsOneWidget);
       expect(find.byType(TaggedReservationCard), findsNWidgets(2));
     });
 
@@ -242,6 +245,51 @@ void main() {
       expect(rise(tester, 'Today'), NavLayout.rise);
     });
 
+    testWidgets('tabs are the supplied rasters, and choosing one crossfades cream into teal', (tester) async {
+      await pump(tester);
+      final nav = find.byType(TravaryNavBar);
+      Finder inTab(String label, String key) => find.descendant(
+        of: find
+            .ancestor(
+              of: label == '+'
+                  ? find.bySemanticsLabel('Add a booking')
+                  : find.descendant(of: nav, matching: find.text(label)),
+              matching: find.byType(Stack),
+            )
+            .first,
+        matching: find.byKey(ValueKey(key)),
+      );
+      final images = [
+        for (final element in find.descendant(of: nav, matching: find.byType(Image)).evaluate())
+          ((element.widget as Image).image as AssetImage).assetName,
+      ];
+      expect(
+        images,
+        containsAll([
+          'assets/art/common/tab.png',
+          'assets/art/common/tab_selected.png',
+          'assets/art/common/tab_add.png',
+        ]),
+      );
+      expect(find.descendant(of: nav, matching: find.byKey(const ValueKey('tab-fallback'))), findsNothing);
+      expect(inTab('Today', 'tab-selected-raster'), findsOneWidget);
+
+      await tester.tap(find.descendant(of: nav, matching: find.bySemanticsLabel('Trips')));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 60));
+      // Mid-pop: both fabrics are there, fading across.
+      expect(inTab('Trips', 'tab-raster'), findsOneWidget);
+      expect(inTab('Trips', 'tab-selected-raster'), findsOneWidget);
+      await tester.pumpAndSettle();
+      expect(inTab('Trips', 'tab-raster'), findsNothing);
+      expect(inTab('Today', 'tab-selected-raster'), findsNothing);
+      expect(
+        find.descendant(of: nav, matching: find.byType(ColorFiltered)),
+        findsNothing,
+        reason: 'never tinted',
+      );
+    });
+
     testWidgets('with reduced motion the change is immediate', (tester) async {
       tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
         disableAnimations: true,
@@ -268,18 +316,17 @@ void main() {
       highlight: 0xFFD1603D,
       onPrimary: 0xFFFFFFFF,
     );
-    final catalog = bundled.withPacks([
-      ArtPackContent(
-        pack: const ArtPackRef(
-          id: 'country_us',
-          version: 1,
-          priority: 500,
-          selectors: ArtPackSelectors(countryCodes: ['US']),
-        ),
-        assets: const [],
-        palette: palette,
+    const usPack = ArtPackContent(
+      pack: ArtPackRef(
+        id: 'country_us',
+        version: 1,
+        priority: 500,
+        selectors: ArtPackSelectors(countryCodes: ['US']),
       ),
-    ]);
+      assets: [],
+      palette: palette,
+    );
+    final catalog = bundled.withPacks([usPack]);
     const profile = TripVisualProfile(
       primaryTheme: ExperienceTheme.themepark,
       confidence: 0.9,
@@ -288,8 +335,19 @@ void main() {
     );
     await pump(tester, catalog: catalog, profile: profile);
 
-    final selectedTab = tester.widget<DecoratedBox>(find.byKey(const ValueKey('tab-fallback')).first);
-    expect((selectedTab.decoration as BoxDecoration).color, const Color(0xFF2D6A4F));
+    // The selected tab is its finished teal raster, never recoloured; the
+    // palette reaches its icon and label ink instead.
+    final nav = find.byType(TravaryNavBar);
+    expect(find.descendant(of: nav, matching: find.byKey(const ValueKey('tab-selected-raster'))), findsOneWidget);
+    expect(find.descendant(of: nav, matching: find.byType(ColorFiltered)), findsNothing);
+    expect(
+      tester.widget<Image>(find.descendant(of: nav, matching: find.byKey(const ValueKey('tab-selected-raster')))).color,
+      isNull,
+    );
+    expect(
+      tester.widget<Text>(find.descendant(of: nav, matching: find.text('Today'))).style?.color,
+      const Color(0xFFFFFFFF),
+    );
     final line = tester.widget<ColoredBox>(
       find.descendant(of: find.byType(DayTimeline), matching: find.byType(ColoredBox)).first,
     );
@@ -300,6 +358,45 @@ void main() {
       find.descendant(of: find.byType(FeaturedTicketCard), matching: find.byType(Image)).first,
     );
     expect(ticketImage.color, isNull);
+  });
+
+  testWidgets('without tab files the flat stand-in tab takes the palette colour', (tester) async {
+    const palette = DestinationPalette(
+      id: 'orlando_citrus',
+      ink: 0xFF1C2A47,
+      paper: 0xFFF8F4EC,
+      accents: [0xFF2D6A4F, 0xFFF4A259],
+      primary: 0xFF2D6A4F,
+      secondary: 0xFF3A506B,
+      highlight: 0xFFD1603D,
+      onPrimary: 0xFFFFFFFF,
+    );
+    final noTabs =
+        ArtCatalog.fromAssetPaths([
+          for (final path in bundledArtPaths())
+            if (!path.contains('/common/tab')) path,
+        ]).withPacks([
+          const ArtPackContent(
+            pack: ArtPackRef(
+              id: 'country_us',
+              version: 1,
+              priority: 500,
+              selectors: ArtPackSelectors(countryCodes: ['US']),
+            ),
+            assets: [],
+            palette: palette,
+          ),
+        ]);
+    const profile = TripVisualProfile(
+      primaryTheme: ExperienceTheme.themepark,
+      confidence: 0.9,
+      sourceHash: 'hash',
+      location: TripLocationHint(countryCode: 'US', confidence: 0.9, verification: LocationVerification.verified),
+    );
+    await pump(tester, catalog: noTabs, profile: profile);
+
+    final selectedTab = tester.widget<DecoratedBox>(find.byKey(const ValueKey('tab-fallback')).first);
+    expect((selectedTab.decoration as BoxDecoration).color, const Color(0xFF2D6A4F));
   });
 
   testWidgets('the demo trip, all kinds of card, at 320 points and large text: no overflow', (tester) async {

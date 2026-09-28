@@ -26,6 +26,10 @@ class ShellOverlay {
 /// hanging tag spill outside it. Overlays sit at fractional anchors, so the
 /// same layout works at any width.
 ///
+/// [underlays] are drawn *beneath* the shell: a windowed shell's scene, so
+/// the shell's own window frame, keyline and rounded corners sit on top of
+/// the picture and nothing has to be clipped or drawn to match them.
+///
 /// The whole card is one tap target with a focus ring in the trip's
 /// highlight colour. If the image can't be drawn (a damaged pack file) a
 /// plain panel stands in so the text stays readable.
@@ -35,12 +39,14 @@ class ShellFrame extends StatelessWidget {
     required this.shell,
     required this.overlays,
     required this.fallbackColor,
+    this.underlays = const [],
     this.onTap,
     this.semanticLabel,
   });
 
   final ShellArt shell;
   final List<ShellOverlay> overlays;
+  final List<ShellOverlay> underlays;
 
   /// The stand-in panel's colour if the image fails.
   final Color fallbackColor;
@@ -77,6 +83,11 @@ class ShellFrame extends StatelessWidget {
                   return Stack(
                     clipBehavior: Clip.none,
                     children: [
+                      for (final underlay in underlays)
+                        Positioned.fromRect(
+                          rect: place(underlay.rect),
+                          child: IgnorePointer(child: ExcludeSemantics(child: underlay.child)),
+                        ),
                       Positioned.fromRect(
                         rect: place(const FractionRect(0, 0, 1, 1)),
                         child: ExcludeSemantics(

@@ -187,7 +187,14 @@ void main() {
       for (final missing in [IconSlot.navDocuments, IconSlot.navProfile, IconSlot.navAdd, IconSlot.stay]) {
         expect(slots.icon(missing).isFallback, isTrue, reason: missing.key);
       }
-      expect(slots.surface(SurfaceSlot.linen), isNull, reason: 'listed in docs/ART_ASSET_GAPS.md');
+      // Surfaces are used exactly when their files exist.
+      for (final surface in SurfaceSlot.values) {
+        expect(
+          slots.surface(surface) != null,
+          File('assets/art/common/${surface.key}.png').existsSync(),
+          reason: surface.key,
+        );
+      }
     });
 
     test('every card carries its shells and kind icon', () {

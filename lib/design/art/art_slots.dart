@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../domain/domain.dart';
 import '../../logic/art_pack_selection.dart';
 import 'art_catalog.dart';
+import 'card_shells.dart' show FractionRect;
 
 /// Every raster icon the interface places, with its catalog name
 /// (`icons/<name>.png`, overridable by an installed pack) and the Material
@@ -61,15 +62,16 @@ enum SurfaceSlot {
   /// Navy leather strip under the home tabs, in the bottom safe area.
   leather('leather'),
 
-  /// Cream canvas home tab.
-  tab('tab'),
+  /// Cream canvas home tab. The tab itself spans [body] of the image (the
+  /// rest is margin and shadow); its foot runs off the bottom edge.
+  tab('tab', body: FractionRect(0.080, 0.290, 0.920, 1.0)),
 
-  /// The selected home tab: a neutral light fabric tinted with the trip
-  /// palette's primary colour.
-  tabSelected('tab_selected'),
+  /// The selected home tab: a finished petrol-teal canvas, drawn as it is
+  /// (never tinted). A destination pack may override it with its own.
+  tabSelected('tab_selected', body: FractionRect(0.062, 0.277, 0.938, 1.0)),
 
   /// The coral add tab.
-  tabAdd('tab_add'),
+  tabAdd('tab_add', body: FractionRect(0.076, 0.292, 0.924, 1.0)),
 
   /// The raised pill behind the weather or countdown.
   pill('pill'),
@@ -77,9 +79,14 @@ enum SurfaceSlot {
   /// Inked stamp frame for "Show tickets" on tickets that don't print one.
   stamp('stamp');
 
-  const SurfaceSlot(this.key);
+  const SurfaceSlot(this.key, {this.body});
 
   final String key;
+
+  /// For objects drawn with margin round them: where the object itself is,
+  /// as fractions of the image (measured from the supplied files; pack
+  /// versions are made to the same template).
+  final FractionRect? body;
 }
 
 /// A resolved icon: the raster file, or the stand-in glyph.

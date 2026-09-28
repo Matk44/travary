@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
+import 'package:travary/design/cards/card_parts.dart';
 import 'package:travary/design/cards/featured_ticket_card.dart';
 import 'package:travary/design/cards/room_key_card.dart';
 import 'package:travary/design/cards/tagged_reservation_card.dart';
@@ -139,10 +140,16 @@ Future<void> _loadFonts(String dir) async {
 Future<void> _precacheImages(WidgetTester tester) async {
   for (var pass = 0; pass < 2; pass++) {
     final elements = find.byType(Image).evaluate().toList();
+    final trimmed = find.byType(TrimmedArt).evaluate().toList();
     await tester.runAsync(() async {
       for (final element in elements) {
         await precacheImage((element.widget as Image).image, element);
       }
+      for (final element in trimmed) {
+        await precacheImage(artImageProvider((element.widget as TrimmedArt).image), element);
+      }
+      // Trimmed art measures its visible part once decoded.
+      await Future<void>.delayed(const Duration(milliseconds: 150));
     });
     await tester.pumpAndSettle();
   }
@@ -217,7 +224,8 @@ Future<void> _writeComparison(ui.Image actual, String referencePath, String outD
 /// card, not its shadow or hanging tag).
 void _writeElements(WidgetTester tester, double dpr, String outDir) {
   Rect px(Rect r) => Rect.fromLTRB(r.left * dpr, r.top * dpr, r.right * dpr, r.bottom * dpr);
-  final tabs = find.byKey(const ValueKey('tab-fallback'));
+  // Each tab's surface slot (raster or flat stand-in), wherever its rise puts it.
+  final tabs = find.byWidgetPredicate((widget) => widget.runtimeType.toString() == '_TabSurface');
   final timeline = tester.getRect(find.byType(DayTimeline));
   final elements = <String, (Rect, Rect)>{
     'weather pill': (px(tester.getRect(find.byType(HeaderPill))), const Rect.fromLTRB(565, 78, 787, 150)),

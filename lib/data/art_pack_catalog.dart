@@ -401,14 +401,27 @@ class PackSharedArt extends PackAssetEntry {
     required this.name,
     required super.width,
     required super.height,
+    this.themes = const [],
   });
 
   /// `common` or `icon`.
   final String role;
   final String name;
 
+  /// The looks this picture is for; empty means every trip the pack suits.
+  /// A country pack's featured ticket drawn for historic cities shouldn't
+  /// dress a beach trip in the same country.
+  final List<ExperienceTheme> themes;
+
   @override
-  Map<String, Object?> toJson() => {'file': file, 'kind': role, 'name': name, 'width': width, 'height': height};
+  Map<String, Object?> toJson() => {
+    'file': file,
+    'kind': role,
+    'name': name,
+    if (themes.isNotEmpty) 'themes': [for (final theme in themes) theme.wireName],
+    'width': width,
+    'height': height,
+  };
 }
 
 /// A pack's `pack.json`: its identity, its optional interface palette and
@@ -520,7 +533,26 @@ PackAssetEntry _parseAsset(Object? raw) {
     if (folder != expectedFolder) throw ArtPackFormatException('$file: $kindName art belongs in $expectedFolder/.');
     final name = raw['name'];
     if (!isArtPackId(name)) throw ArtPackFormatException('$file: invalid name.');
-    return PackSharedArt(file: file, role: kindName as String, name: name as String, width: width, height: height);
+    final rawThemes = raw['themes'];
+    final themes = <ExperienceTheme>[];
+    if (rawThemes != null) {
+      if (rawThemes is! List || rawThemes.isEmpty) {
+        throw ArtPackFormatException('$file: themes must be a non-empty list (leave it out for every look).');
+      }
+      for (final value in rawThemes) {
+        final theme = ExperienceTheme.values.where((t) => t.wireName == value).firstOrNull;
+        if (theme == null) throw ArtPackFormatException('$file: unknown theme "$value".');
+        if (!themes.contains(theme)) themes.add(theme);
+      }
+    }
+    return PackSharedArt(
+      file: file,
+      role: kindName as String,
+      name: name as String,
+      width: width,
+      height: height,
+      themes: List.unmodifiable(themes),
+    );
   }
 
   final kind = BookingKind.values.where((k) => k.name == kindName).firstOrNull;

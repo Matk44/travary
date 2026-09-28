@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
 import '../art/art_catalog.dart';
 import '../art/art_resolver.dart';
+import '../art/card_shells.dart';
 import '../kind_style.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
 import 'card_parts.dart';
 import 'featured_ticket_card.dart';
+import 'note_paper_card.dart';
+import 'ongoing_tag_card.dart';
 import 'room_key_card.dart';
 import 'tagged_reservation_card.dart';
 
@@ -30,10 +32,12 @@ enum CardSize {
 /// decides how that booking looks. Restyling the app's cards means changing
 /// this folder. No screen needs to change.
 ///
-/// Each kind is a physical object drawn from raster shells (`ArtChoice.shells`):
-/// a featured ticket for what's next (a key card when that's a stay), the
-/// hotel key card for stays, and a tagged reservation card for everything
-/// else. Only if a trip has no shell at all (the art is missing from the
+/// Each kind is a physical object drawn from raster shells (`ArtChoice.shells`,
+/// chosen by `CardShells.featuredFor`/`standardFor`): what's next on a
+/// boarding pass, restaurant or travel ticket (the booking's scene in its
+/// window), the look's admission ticket, a key card or note paper; in the
+/// day's list, the hotel key card for stays, note paper for notes, and a
+/// tagged reservation card for everything else. Only if a trip has no shell at all (the art is missing from the
 /// build) does a plain panel stand in, with no imitation of the material.
 class BookingCard extends StatelessWidget {
   const BookingCard({
@@ -58,23 +62,28 @@ class BookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shells = art.shells;
-    final isStay = art.kind == BookingKind.stay;
     switch (size) {
       case CardSize.hero:
-        if (isStay && shells.room != null) return RoomKeyCard(shell: shells.room!, text: text, onTap: onTap);
-        if (shells.featured != null) {
-          return FeaturedTicketCard(shell: shells.featured!, text: text, onTap: onTap, onAction: onShowTickets);
-        }
+        final shell = shells.featuredFor(art.kind);
+        if (shell != null) return _onShell(shell, featured: true);
       case CardSize.standard:
-        if (isStay && shells.room != null) return RoomKeyCard(shell: shells.room!, text: text, onTap: onTap);
-        if (shells.reservation != null) {
-          return TaggedReservationCard(shell: shells.reservation!, text: text, art: art, onTap: onTap);
-        }
+        final shell = shells.standardFor(art.kind);
+        if (shell != null) return _onShell(shell, featured: false);
       case CardSize.compact:
         return _Labelled(card: this, child: _CompactCard(this));
     }
     return _Labelled(card: this, child: _PlainCard(this));
   }
+
+  Widget _onShell(ShellArt shell, {required bool featured}) => switch (shell.role) {
+    ShellRole.roomCard => RoomKeyCard(shell: shell, text: text, onTap: onTap),
+    ShellRole.notePaper => NotePaperCard(shell: shell, text: text, art: art, onTap: onTap),
+    ShellRole.reservationCard ||
+    ShellRole.reservationBlank => TaggedReservationCard(shell: shell, text: text, art: art, onTap: onTap),
+    ShellRole.ongoingTag => OngoingTagCard(shell: shell, text: text, art: art, onTap: onTap),
+    ShellRole.featuredTicket || ShellRole.boardingPass || ShellRole.featuredReservation || ShellRole.travelTicket =>
+      FeaturedTicketCard(shell: shell, text: text, art: art, onTap: onTap, onAction: onShowTickets),
+  };
 }
 
 class _Labelled extends StatelessWidget {

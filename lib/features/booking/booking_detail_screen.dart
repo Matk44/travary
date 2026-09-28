@@ -60,7 +60,9 @@ class BookingDetailScreen extends StatelessWidget {
             text: cardTextForBooking(booking),
             art: store.artFor(booking),
             size: CardSize.hero,
-            onShowTickets: booking.hasTickets ? () => showTickets(context, booking) : null,
+            onShowTickets: booking.hasTickets
+                ? () => showTickets(context, booking)
+                : () => _addAttachment(context, store, booking),
           ),
           const SizedBox(height: TravarySpace.lg),
           _InfoRow(icon: Icons.schedule_rounded, label: 'When', value: describeWhen(booking)),

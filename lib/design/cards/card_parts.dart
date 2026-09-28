@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
+import '../art/art_bounds.dart';
 import '../art/art_catalog.dart';
 import '../art/art_resolver.dart';
 import '../art/art_slots.dart';
@@ -145,4 +147,124 @@ class SlotIcon extends StatelessWidget {
     final fitted = FittedBox(fit: BoxFit.contain, child: glyph);
     return size == null ? SizedBox.expand(child: fitted) : SizedBox.square(dimension: size, child: fitted);
   }
+}
+
+/// A transparent picture trimmed to its visible part (see
+/// [ArtContentBounds]) and fitted into the space it's given, never
+/// stretched, at [alignment]. For vignettes in small panels: the art fills
+/// the panel instead of its empty canvas margin. Draws nothing until the
+/// picture has loaded, and nothing if it can't be loaded.
+class TrimmedArt extends StatefulWidget {
+  const TrimmedArt({super.key, required this.image, this.alignment = Alignment.center});
+
+  final ArtImageRef image;
+  final Alignment alignment;
+
+  @override
+  State<TrimmedArt> createState() => _TrimmedArtState();
+}
+
+class _TrimmedArtState extends State<TrimmedArt> {
+  ImageStream? _stream;
+  ImageStreamListener? _listener;
+  ui.Image? _image;
+  Rect? _bounds;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _resolve();
+  }
+
+  @override
+  void didUpdateWidget(TrimmedArt oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.image != widget.image) _resolve();
+  }
+
+  void _resolve() {
+    final stream = artImageProvider(widget.image).resolve(createLocalImageConfiguration(context));
+    if (_stream?.key != null && stream.key == _stream?.key) return;
+    _stopListening();
+    _stream = stream;
+    _listener = ImageStreamListener(_onImage, onError: (error, stackTrace) => _replace(null, null));
+    stream.addListener(_listener!);
+  }
+
+  void _onImage(ImageInfo info, bool synchronousCall) {
+    final image = info.image.clone();
+    info.dispose();
+    final key = widget.image;
+    final known = ArtContentBounds.cached(key);
+    _replace(image, known);
+    if (known == null) {
+      ArtContentBounds.measure(key, image).then((bounds) {
+        if (mounted && identical(_image, image)) setState(() => _bounds = bounds);
+      });
+    }
+  }
+
+  void _replace(ui.Image? image, Rect? bounds) {
+    final old = _image;
+    if (!mounted) {
+      image?.dispose();
+      return;
+    }
+    setState(() {
+      _image = image;
+      _bounds = bounds;
+    });
+    old?.dispose();
+  }
+
+  void _stopListening() {
+    if (_stream != null && _listener != null) _stream!.removeListener(_listener!);
+    _stream = null;
+    _listener = null;
+  }
+
+  @override
+  void dispose() {
+    _stopListening();
+    _image?.dispose();
+    _image = null;
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final image = _image;
+    final bounds = _bounds;
+    return SizedBox.expand(
+      child: image == null || bounds == null
+          ? null
+          : CustomPaint(painter: _TrimmedPainter(image, bounds, widget.alignment)),
+    );
+  }
+}
+
+class _TrimmedPainter extends CustomPainter {
+  _TrimmedPainter(this.image, this.bounds, this.alignment);
+
+  final ui.Image image;
+  final Rect bounds;
+  final Alignment alignment;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final source = Rect.fromLTRB(
+      bounds.left * image.width,
+      bounds.top * image.height,
+      bounds.right * image.width,
+      bounds.bottom * image.height,
+    );
+    if (source.isEmpty || size.isEmpty) return;
+    final fitted = applyBoxFit(BoxFit.contain, source.size, size);
+    final destination = alignment.inscribe(fitted.destination, Offset.zero & size);
+    canvas.drawImageRect(image, source, destination, Paint()..filterQuality = FilterQuality.medium);
+  }
+
+  @override
+  bool shouldRepaint(_TrimmedPainter oldDelegate) =>
+      !identical(oldDelegate.image, image) || oldDelegate.bounds != bounds || oldDelegate.alignment != alignment;
 }

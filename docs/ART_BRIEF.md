@@ -43,7 +43,7 @@ Textures are tiled or stretched behind everything, so they must be quiet.
 | `common/tag.png` | 1024×1536 | Transparent background PNG. A blank kraft-paper luggage tag with a brass grommet near the top and a loop of natural twine, straight-on view, rotated 4°, soft realistic drop shadow. Plain surface, no printing (an icon is placed on it). |
 | `common/stamp.png` | 1536×464 | Transparent background PNG. An empty rectangular rubber-stamp border in navy ink, double line, rounded corners, uneven ink with speckles and small gaps like a real stamp impression, rotated −3°. Empty inside. Fills the frame edge to edge (the "Show tickets" button on tickets that don't print a frame). |
 | `common/tab.png` | 720×1024 | Transparent background PNG. A soft cream canvas fabric tab shaped like a file-folder tab: rounded top corners, straight sides running off the bottom edge, stitched edge, gentle shadow. Empty. Only the top 60% shows; the rest runs under the leather strip. |
-| `common/tab_selected.png` | 720×1024 | Same as the tab above in a **neutral near-white** cotton, slightly raised. The app tints it with the trip palette's primary colour (teal #1E5B70 by default), so keep it colourless. |
+| `common/tab_selected.png` | 720×1024 | Same as the tab above in deep petrol-teal #1E5B70 canvas, slightly raised. A finished material: the app draws it as it is, never tinted (a destination pack may supply its own). |
 | `common/tab_add.png` | 720×1024 | Same tab in coral #E5785B cotton. |
 | `common/pill.png` | 1536×512 | Transparent background PNG. An empty raised cream pill, soft shadow, like a paper badge. Drawn 35 pt tall behind the weather or countdown. |
 
@@ -91,7 +91,11 @@ Each subject comes in **two formats**:
   > right third with a low horizon. Keep the left 40% calm and open (plain sky
   > or water) so white text can sit on it. Deep teal-to-navy sky, a large
   > coral sun low on the horizon.
-- **Vignette**: the small decoration on normal cards (1024×1024, transparent). Prompt:
+- **Vignette**: the small decoration on normal cards (1024×1024, transparent).
+  The app trims each vignette's empty transparent margin and fits the art
+  into the tall, narrow panel right of the card's rule (about 1:1.8), so a
+  compact, roughly square or upright composition fills it best; wide
+  panoramas come out small. Prompt:
   > {Style block} Transparent background PNG. A single decorative vignette of
   > **{subject}** in sage and coral with navy accents, gathered in the bottom-right
   > corner and fading out towards the top-left, like the corner print on a

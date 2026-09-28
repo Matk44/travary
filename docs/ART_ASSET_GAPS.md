@@ -26,11 +26,7 @@ below account for most of the remaining difference.
 
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
-| `common/linen.png` (`linen`) | 1024 × 1024, seamless tile | Behind every home screen, tiled at 3× density | Flat `#EFE8DC` (**visible**: no weave) | Make it (brief batch 1) |
 | `common/leather.png` (`leather`) | 1536 × 1024, tiles left to right, stitching 12% from the top | The strip under the home tabs, filling the bottom safe area (34 pt on the reference phone), `BoxFit.cover`, top-aligned | Nothing is drawn. Per the spec the strip appears only when the raster exists (**visible**: tabs run to the screen edge) | Make it |
-| `common/tab.png` (`tab`) | 720 × 1024 (≈ 0.7:1), cream canvas file tab, rounded top corners; the top 60% shows, the foot runs under the leather | Trips, Documents and Profile tabs. Drawn `BoxFit.cover`, top-aligned, never stretched | Flat cream rounded tab with a soft shadow (**visible**) | Make it |
-| `common/tab_selected.png` (`tab_selected`) | 720 × 1024, the same tab in a **neutral near-white** fabric | The selected tab, multiplied by the trip palette's `ui.primary` (teal for Travary's own palette) | Flat `ui.primary` tab (**visible**) | Make it neutral so any palette can tint it |
-| `common/tab_add.png` (`tab_add`) | 720 × 1024, coral `#E5785B` fabric tab | The central add tab | Flat coral tab (**visible**) | Make it |
 | `common/pill.png` (`pill`) | 1536 × 512 (3:1), raised cream pill, empty | Header weather or countdown pill, drawn 35 pt tall at its own aspect | Flat cream pill with a soft shadow (**visible**) | Make it |
 | `icons/nav_wallet.png` (`nav_wallet`) | 1024 × 1024, one-colour navy ink, transparent, content ≈ 50% of the canvas like `nav_today` | Documents tab (the ticket wallet) | Material `description` glyph (**visible**) | A document/ticket-wallet icon |
 | `icons/nav_profile.png` (`nav_profile`) | as above | Profile tab | Material `person` glyph (**visible**) | Make it |
@@ -41,7 +37,10 @@ below account for most of the remaining difference.
 | `dining/themepark_castle_01_vignette.png` (+ `_scene`) | 1024 × 1024 transparent (scene 1536 × 1024) | "Be Our Guest Restaurant" (subject `castle`) on a theme-park trip | The generic `dining/any_bistro_01_vignette.png` (**visible**: the reference shows a castle) | In the brief's start list |
 | `dining/themepark_grill_01_vignette.png` (+ `_scene`) | as above | "Ohana" (subject `grill`) on a theme-park trip: palm, low sun, waves | The bistro vignette (**visible**) | Make it |
 
-Present and used: every shell family (below), `icons/dining.png`,
+Present and used: the woven `linen` (tiled behind the four home tabs) and
+the home tabs `tab`, `tab_selected` (finished petrol teal, drawn as it is
+and never tinted; a pack may override it) and `tab_add`, placed by their
+measured edges (`SurfaceSlot.body`); every shell family (below), `icons/dining.png`,
 `icons/flight.png`, `icons/nav_today.png`, `icons/nav_trips.png`, and all
 eight `any_*`/`themepark_*`/`tropical_*` scene and vignette pairs.
 
@@ -61,10 +60,16 @@ has no anchors or isn't its role's exact pixel size.
 | … `outdoor_adventure` | as above | Alpine | Yes |
 | … `cruise`, `wellness_retreat` | as above | Coastal resort | Yes |
 | … `roadtrip` | as above | Countryside | Yes |
-| `common/boarding_pass.png` | 1774 × 887 | Flights that are "next up" use the look's featured ticket | Yes, on travel days |
-| `common/travel_ticket.png` | 1983 × 793 | Transport uses the tagged card | Yes |
-| `common/note_paper.png` | 1983 × 793 | Notes use the tagged card | Yes |
 | `common/stamp.png` | 1536 × 464 (the printed frame's 3.3:1), empty inked stamp frame | "Show tickets" on tickets that don't print a frame (every family but the theme-park anchor): a plain paper button with an ink border | Yes, on non-theme-park trips |
+
+Round 2 added five universal shells, all present and measured:
+`boarding_pass` (a flight that's next up), `featured_reservation` (a
+restaurant), `travel_ticket` (train, coach, ferry, car pick-up) each with a
+transparent picture window the booking's scene shows through;
+`note_paper` (notes, next up or not) and `ongoing_tag` (a hire car or
+multi-day pass in progress, and the fallback for a stay whose key card is
+missing). The train scene (`transport/any_train_01_*`) isn't made yet, so a
+train's window shows the car picture (visible).
 
 Tag ink: the bundled blank, coastal, urban and countryside tags are light,
 so their icon prints navy. The alpine tag is dark, so its icon prints

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../logic/card_text.dart';
+import '../art/art_resolver.dart';
 import '../art/art_slots.dart';
 import '../art/card_shells.dart';
 import '../tokens.dart';
@@ -8,32 +9,57 @@ import '../trip_chrome.dart';
 import 'card_parts.dart';
 import 'shell_frame.dart';
 
-/// The featured "next up" booking on its complete ticket shell: the trip's
-/// illustration is printed on the ticket; eyebrow, title, time, details, the
-/// stub's "ADMIT TWO" and the button are live text on top.
+/// The featured "next up" booking on its shell: the look's admission
+/// ticket (its destination printed on), or a windowed boarding pass,
+/// restaurant or travel ticket with the booking's own scene showing through
+/// the window (drawn beneath the shell). Eyebrow, title, time, details, the
+/// stub's label or table badge and the button are live text on top.
 class FeaturedTicketCard extends StatelessWidget {
-  const FeaturedTicketCard({super.key, required this.shell, required this.text, this.onTap, this.onAction});
+  const FeaturedTicketCard({
+    super.key,
+    required this.shell,
+    required this.text,
+    required this.art,
+    this.onTap,
+    this.onAction,
+  });
 
   final ShellArt shell;
   final CardText text;
+
+  /// The booking's picture, shown in a windowed shell's window.
+  final ArtChoice art;
   final VoidCallback? onTap;
 
-  /// The button ("Show tickets"); falls back to [onTap] ("Details").
+  /// The button, labelled by [CardText.action] ("Show tickets"); falls back
+  /// to [onTap].
   final VoidCallback? onAction;
-
-  static const _onTicket = TravaryColors.paper;
 
   @override
   Widget build(BuildContext context) {
     final geometry = shell.geometry;
     final action = onAction ?? onTap;
-    final actionLabel = onAction != null ? 'Show tickets' : (text.action ?? 'Details');
+    final actionLabel = text.action ?? 'Details';
+    final ink = geometry.textInk == ShellInk.light ? TravaryColors.paper : TravaryColors.ink;
+    final scene = geometry.scene;
+    // The table disc already says "TABLE FOR 4": the line keeps to the time.
+    final showsBadge = text.badge != null && geometry.badge != null;
+    final line = showsBadge ? text.when : text.whenAndDetail;
 
     return ShellFrame(
       shell: shell,
-      fallbackColor: TravaryColors.tealDeep,
+      fallbackColor: geometry.textInk == ShellInk.light ? TravaryColors.tealDeep : TravaryColors.paper,
       onTap: onTap,
       semanticLabel: [text.eyebrow, text.title, text.when, text.detail].whereType<String>().join(', '),
+      underlays: [
+        // A hair larger than the window: the shell's own frame covers the
+        // edge, so no seam shows and nothing needs clipping.
+        if (scene != null)
+          ShellOverlay(
+            FractionRect(scene.left - 0.006, scene.top - 0.012, scene.right + 0.006, scene.bottom + 0.012),
+            ArtPanel(key: const ValueKey('scene-window'), art: art, alignment: Alignment.centerRight),
+          ),
+      ],
       overlays: [
         ShellOverlay(
           geometry.text,
@@ -42,21 +68,21 @@ class FeaturedTicketCard extends StatelessWidget {
               children: [
                 Text(
                   text.eyebrow,
-                  style: TravaryText.shellEyebrow.copyWith(color: _onTicket),
+                  style: TravaryText.shellEyebrow.copyWith(color: ink),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),
-                FitTitle(text.title, style: TravaryText.ticketTitle),
+                FitTitle(text.title, style: TravaryText.ticketTitle.copyWith(color: ink)),
                 const SizedBox(height: 7),
-                ShellRule(color: _onTicket.withValues(alpha: 0.75), width: 0.62),
+                ShellRule(color: ink.withValues(alpha: 0.75), width: 0.62),
                 const SizedBox(height: 7),
                 // One line: the ticket's printed stamp frame leaves room
                 // for no more above it.
-                if (text.whenAndDetail != null)
+                if (line != null)
                   Text(
-                    text.whenAndDetail!,
-                    style: TravaryText.shellLine.copyWith(color: _onTicket),
+                    line,
+                    style: TravaryText.shellLine.copyWith(color: ink),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -79,10 +105,28 @@ class FeaturedTicketCard extends StatelessWidget {
               ),
             ),
           ),
-        if (action != null && geometry.action != null)
+        if (showsBadge)
+          ShellOverlay(
+            geometry.badge!,
+            ExcludeSemantics(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (text.badgeCaption != null)
+                      Text(text.badgeCaption!, style: TravaryText.stubLabel.copyWith(fontSize: 7, letterSpacing: 1.6)),
+                    Text(text.badge!, style: TravaryText.ticketTitle.copyWith(color: TravaryColors.ink, height: 1)),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        // A printed stamp frame is never left empty.
+        if (geometry.action != null && (action != null || geometry.actionFramed))
           ShellOverlay(
             geometry.action!,
-            interactive: true,
+            interactive: action != null,
             _TicketButton(
               label: actionLabel,
               onPressed: action,
@@ -103,7 +147,7 @@ class _TicketButton extends StatelessWidget {
   const _TicketButton({required this.label, required this.onPressed, required this.angle, required this.framed});
 
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double angle;
   final bool framed;
 
@@ -145,7 +189,7 @@ class _TicketButton extends StatelessWidget {
     }
 
     return Semantics(
-      button: true,
+      button: onPressed != null,
       label: label,
       excludeSemantics: true,
       child: Transform.rotate(

@@ -41,7 +41,7 @@ class TaggedReservationCard extends StatelessWidget {
             ExcludeSemantics(
               child: Transform.rotate(
                 angle: geometry.tagAngle,
-                child: KindIcon(art: art, color: geometry.tagInk == TagInk.light ? TravaryColors.paper : ink),
+                child: KindIcon(art: art, color: geometry.tagInk == ShellInk.light ? TravaryColors.paper : ink),
               ),
             ),
           ),
@@ -70,15 +70,14 @@ class TaggedReservationCard extends StatelessWidget {
         if (!shell.isComplete && geometry.vignette != null && vignette != null)
           ShellOverlay(
             geometry.vignette!,
+            // Trimmed to its visible part, so the art fills the panel
+            // rather than its canvas's empty margin; a picture that can't
+            // load leaves the panel blank.
             ExcludeSemantics(
-              child: Image(
+              child: TrimmedArt(
                 key: const ValueKey('card-vignette'),
-                image: artImageProvider(vignette.image),
-                fit: BoxFit.contain,
-                alignment: Alignment.bottomCenter,
-                // Transparent corner art on the card's own paper: a picture
-                // that can't load simply leaves the panel blank.
-                errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                image: vignette.image,
+                alignment: const Alignment(0, 0.3),
               ),
             ),
           ),

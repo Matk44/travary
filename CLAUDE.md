@@ -76,10 +76,15 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    file can't load. Featured cards use the scene, normal cards the vignette.
    Use `ArtChoice.variant % n` for non-image variety.
 4. Cards are complete **raster shells** with live text on top, never
-   drawn lookalikes: the featured "next up" booking on a ticket
-   (`featured_ticket`), stays on the hotel key card (`room_card`), everything
-   else on a tagged reservation card (the look's complete `reservation_card`,
-   else `reservation_card_blank` + the booking's vignette). `ShellResolver`
+   drawn lookalikes. Next up (`CardShells.featuredFor`): flights on the
+   `boarding_pass`, restaurants on `featured_reservation`, transport on
+   `travel_ticket` (each shows the booking's scene through a transparent
+   window, drawn beneath the shell), notes on `note_paper`, stays on the key
+   card, everything else on the look's `featured_ticket`. In the day's list
+   (`standardFor`): stays on the key card (`room_card`), notes on
+   `note_paper`, everything else on a tagged reservation card (the look's
+   complete `reservation_card`, else `reservation_card_blank` + the
+   booking's vignette). A hire car in progress is on the `ongoing_tag`. `ShellResolver`
    (`design/art/card_shells.dart`) picks them by the same ranks as card art
    (packs, then bundled `<look>_<role>.png`, then a stand-in look); text,
    buttons and tag icons sit at measured fractional anchors (`ShellGeometry`),
