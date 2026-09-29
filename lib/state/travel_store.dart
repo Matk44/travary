@@ -210,6 +210,14 @@ class TravelStore extends ChangeNotifier {
     plan == null ? TripArtContext.forTheme(ExperienceTheme.classicTravel) : artContextForPlan(plan),
   );
 
+  /// The destination postcard for [plan]'s countdown (Today between
+  /// trips), ranked like its cards: the trip's city, region and country
+  /// packs, then its look, then the core. Only packs carry postcards, and
+  /// a destination pack suits only its own verified place, so a trip with
+  /// nothing suitable gets null, never somewhere else's postcard.
+  SharedArtRef? countdownPostcardFor(TripPlan plan) =>
+      _art.catalog.commonArt(countdownPostcardArt, context: artContextForPlan(plan));
+
   /// A look's context without a trip (design tools): its experience packs
   /// count, destination packs don't.
   TripArtContext artContextForLook(ExperienceTheme theme) => TripArtContext(

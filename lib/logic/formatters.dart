@@ -45,6 +45,19 @@ String formatDateRange(LocalDate start, LocalDate end) {
   return '${start.day}–${DateFormat('d MMM y').format(e)}';
 }
 
+/// [formatDateRange] spelled out for screen readers: "25 to 28 November
+/// 2026", "28 September to 3 October 2026", "28 December 2026 to 3
+/// January 2027".
+String formatDateRangeLong(LocalDate start, LocalDate end) {
+  final s = start.toDateTime();
+  final e = end.toDateTime();
+  final full = DateFormat('d MMMM y');
+  if (start == end) return full.format(s);
+  if (start.year != end.year) return '${full.format(s)} to ${full.format(e)}';
+  if (start.month != end.month) return '${DateFormat('d MMMM').format(s)} to ${full.format(e)}';
+  return '${start.day} to ${full.format(e)}';
+}
+
 /// "Good morning" / "Good afternoon" / "Good evening".
 String greetingFor(DateTime now) {
   if (now.hour < 12) return 'Good morning';

@@ -77,7 +77,18 @@ enum SurfaceSlot {
   pill('pill'),
 
   /// Inked stamp frame for "Show tickets" on tickets that don't print one.
-  stamp('stamp');
+  stamp('stamp'),
+
+  /// The blank luggage tag hung on the countdown postcard (1024 × 1536):
+  /// warm-ivory card, brass eyelet, cord running up and off to the right.
+  /// Every word on it is live text.
+  countdownTag('countdown_luggage_tag', body: FractionRect(0.170, 0.261, 0.788, 0.982)),
+
+  /// A small tag under the countdown postcard holding one fact ("4 days").
+  countdownFact('countdown_fact_tag'),
+
+  /// The ticket-shaped "View trip" button under the countdown.
+  countdownButton('countdown_button');
 
   const SurfaceSlot(this.key, {this.body});
 
@@ -88,6 +99,13 @@ enum SurfaceSlot {
   /// versions are made to the same template).
   final FractionRect? body;
 }
+
+/// The destination postcard behind the countdown to the next trip
+/// (`common/countdown_postcard.png`, 1122 × 1402). Nothing is bundled:
+/// only a pack that suits the trip supplies one (see
+/// `TravelStore.countdownPostcardFor`), so a trip never shows another
+/// place's postcard.
+const countdownPostcardArt = 'countdown_postcard';
 
 /// A resolved icon: the raster file, or the stand-in glyph.
 class IconArt {

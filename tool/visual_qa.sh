@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Renders the canonical Today screen at the reference size and compares it
-# with docs/reference/travary_today_reference.png. Outputs in build/visual_qa/.
+# with docs/reference/travary_today_reference.png, and renders Today between
+# trips (the countdown) for docs/mockups/today-empty/02-hanging-luggage-tag.png.
+# Outputs in build/visual_qa/.
 #
 # The render uses the app's real fonts: Source Serif 4 and Inter as
 # google_fonts downloads them (copied from an iOS Simulator where the app
@@ -22,4 +24,4 @@ icons="$(find "$flutter_root" -path '*material_fonts*' -name 'MaterialIcons-Regu
 [ -n "$icons" ] && cp -n "$icons" "$fonts/" 2>/dev/null || true
 ls "$fonts" | sed 's/^/  font: /'
 
-TRAVARY_VISUAL_QA=1 flutter test test/visual_qa/today_reference_test.dart
+TRAVARY_VISUAL_QA=1 flutter test test/visual_qa/today_reference_test.dart test/visual_qa/countdown_hero_test.dart

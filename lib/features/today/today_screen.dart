@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../design/art/art_catalog.dart';
 import '../../design/art/art_slots.dart';
 import '../../design/cards/booking_card.dart';
 import '../../design/cards/ongoing_strip.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/countdown_trip_hero.dart';
 import '../../design/widgets/day_timeline.dart';
 import '../../design/widgets/today_header.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
+import '../../logic/countdown_text.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
+import '../trips/trip_screen.dart';
 
 /// Opens on what matters right now: today's plan during a trip, or the first
 /// day of the next trip before it starts.
@@ -23,6 +27,9 @@ import '../booking/booking_actions.dart';
 /// hotel you're staying at, the rest of the day's bookings, and the day's
 /// timeline. Other days of the trip are a swipe away, or a tap on the day
 /// line ("Day 3 of 7 · Orlando") opens the day chooser.
+///
+/// Between trips, when a postcard suits the next trip, Today counts down to
+/// it instead ([CountdownTripHero]); without one it keeps the first-day view.
 class TodayScreen extends StatefulWidget {
   const TodayScreen({super.key, this.weather});
 
@@ -50,9 +57,11 @@ class _TodayScreenState extends State<TodayScreen> {
 
     final focus = store.focus;
     final plan = focus.plan;
-    final day = _picked != null && plan != null && plan.contains(_picked!) ? _picked! : focus.day;
+    final picked = _picked != null && plan != null && plan.contains(_picked!) ? _picked : null;
+    final countdown = picked == null ? _countdownFor(store, focus) : null;
+    final day = picked ?? focus.day;
     final dayPlan = store.dayPlan(day);
-    final canChoose = plan != null && plan.dayCount > 1;
+    final canChoose = countdown == null && plan != null && plan.dayCount > 1;
 
     return SafeArea(
       bottom: false,
@@ -64,8 +73,8 @@ class _TodayScreenState extends State<TodayScreen> {
             SliverToBoxAdapter(
               child: TodayHeader(
                 greeting: greetingFor(store.now),
-                subtitle: _subtitle(store, focus, day),
-                pill: _pill(store, focus, day),
+                subtitle: countdown != null ? 'Nothing planned today' : _subtitle(store, focus, day),
+                pill: _pill(store, focus, day, countdown: countdown != null),
                 onChooseDay: canChoose ? () => _chooseDay(context, plan, day, store.today) : null,
               ),
             ),
@@ -82,6 +91,14 @@ class _TodayScreenState extends State<TodayScreen> {
                     actionLabel: 'Add your first booking',
                     onAction: () => startAddBooking(context),
                   ),
+                ),
+              )
+            else if (countdown != null)
+              SliverToBoxAdapter(
+                child: CountdownTripHero(
+                  text: countdown.text,
+                  postcard: countdown.postcard,
+                  onOpen: () => _openTrip(context, countdown.plan),
                 ),
               )
             else if (dayPlan.isEmpty)
@@ -116,12 +133,32 @@ class _TodayScreenState extends State<TodayScreen> {
         : '${prefix}Day $dayNumber of ${plan.dayCount} · ${plan.trip.title}';
   }
 
-  HeaderPillInfo _pill(TravelStore store, TodayFocus focus, LocalDate day) {
+  /// Between trips, the next trip's countdown: only when nothing is on
+  /// today and a postcard suits that trip (its own place, or its look).
+  /// Otherwise null, and Today stays as it was.
+  _Countdown? _countdownFor(TravelStore store, TodayFocus focus) {
+    final plan = focus.plan;
+    if (!focus.isCountdown || plan == null || !store.dayPlan(store.today).isEmpty) return null;
+    final text = countdownTextFor(plan, store.today);
+    final postcard = store.countdownPostcardFor(plan);
+    if (text == null || postcard == null) return null;
+    return (plan: plan, text: text, postcard: postcard.image);
+  }
+
+  void _openTrip(BuildContext context, TripPlan plan) =>
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id)));
+
+  /// The weather when there's a forecast, else the countdown before a trip
+  /// or today's date. The countdown hero carries its own count, so the pill
+  /// shows the date beside it.
+  HeaderPillInfo _pill(TravelStore store, TodayFocus focus, LocalDate day, {required bool countdown}) {
     final weather = widget.weather;
-    if (weather != null && day == store.today) {
+    if (weather != null && (countdown || day == store.today)) {
       return HeaderPillInfo(icon: _weatherIcon(weather.condition), label: formatWeather(weather), iconTinted: false);
     }
-    if (focus.isCountdown) return HeaderPillInfo(icon: IconSlot.flight, label: _countdownLabel(focus.daysUntilStart!));
+    if (focus.isCountdown && !countdown) {
+      return HeaderPillInfo(icon: IconSlot.flight, label: _countdownLabel(focus.daysUntilStart!));
+    }
     return HeaderPillInfo(icon: IconSlot.calendar, label: formatDayShort(store.today));
   }
 
@@ -233,6 +270,9 @@ class _TodayScreenState extends State<TodayScreen> {
     ];
   }
 }
+
+/// The next trip, its countdown wording and its postcard.
+typedef _Countdown = ({TripPlan plan, CountdownText text, ArtImageRef postcard});
 
 class _Item {
   const _Item(this.child, {this.inset = TodayLayout.cardInset, this.compact = false});

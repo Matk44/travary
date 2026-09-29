@@ -75,8 +75,12 @@ from folder names):
   `reservation_card_blank` (1983 × 793), `boarding_pass`,
   `featured_reservation`, `travel_ticket` (1774 × 887, with a transparent
   picture window), `note_paper` (1983 × 793) and `ongoing_tag` (1983 × 466),
-  and the interface surfaces
-  `linen`, `leather`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`.
+  the interface surfaces
+  `linen`, `leather`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`,
+  and the countdown to the next trip (Today between trips):
+  `countdown_postcard` (1122 × 1402, destination packs; see below),
+  `countdown_luggage_tag` (1024 × 1536), `countdown_fact_tag` (1024 × 512)
+  and `countdown_button` (1536 × 460).
   Shells are made to the same template as the bundled ones (same size and
   zones, no text); a shell of another size is ignored. `icon` names:
   booking kinds (`dining`, `flight`…), `nav_today`, `nav_trips`,
@@ -97,13 +101,38 @@ from folder names):
 
 Only what changes with the place: complete featured tickets, key cards and
 tagged cards with the destination printed on, booking scenes and
-vignettes, trip-cover stickers and look emblems, and the palette.
+vignettes, trip-cover stickers and look emblems, the countdown postcard,
+and the palette.
 Everything universal stays bundled and is never duplicated per country:
 navigation, kind, weather and timeline icons; linen, leather, tabs, pill
 and stamp; the windowed boarding pass, restaurant and travel tickets
 (their windows already show the destination's scenes); note paper and the
 key tag. A pack may still override any of these by name, in the same
 ranks.
+
+### The countdown postcard
+
+Between trips, Today counts down to the next one on its destination's
+postcard with a luggage tag hung on the corner
+(`lib/design/widgets/countdown_trip_hero.dart`; hand-off:
+`docs/COUNTDOWN_HANGING_TAG_HANDOFF.md`). The postcard is
+`common/countdown_postcard.png`, 1122 × 1402, a transparent PNG with the
+card, its deckled edge and shadow, and a quiet upper-right corner for the
+tag. No text, numbers, stamps or tags in the picture: every word is live.
+
+```json
+{ "file": "common/countdown_postcard.png", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402 }
+```
+
+It resolves like every shared picture (`TravelStore.countdownPostcardFor`):
+the trip's city pack, then region, then country, then its look, then the
+core. Nothing is bundled, so a trip with no suitable pack keeps Today's
+usual first-day view: it never shows another place's postcard.
+
+Five are made and wait in `art_packs/pending/countdown_postcards/` (Lake
+District, Orlando, Kyoto, Paris, Bali). Each goes into its **complete**
+city or region pack, never a pack of its own: a sparse city pack would
+outrank the fuller country pack for every other picture too.
 
 ### The palette
 

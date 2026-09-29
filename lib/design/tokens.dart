@@ -160,6 +160,32 @@ abstract final class TravaryText {
   /// Home tab labels.
   static TextStyle get tabLabel => _sans(11, FontWeight.w500, TravaryColors.ink, height: 1.1);
   static TextStyle get tabLabelSelected => _sans(13.5, FontWeight.w600, TravaryColors.paper, height: 1.1);
+
+  // ---- Today between trips: the countdown tag ---------------------------
+  // Sized for the tag's copy area at CountdownLayout.tagCopyWidth; the tag
+  // scales the whole block to the tag it's drawn on.
+
+  /// "NEXT TRIP" and "DAYS TO GO".
+  static TextStyle get tagEyebrow => _sans(11, FontWeight.w600, TravaryColors.ink, height: 1.2, letterSpacing: 3.0);
+
+  /// The countdown number: "58".
+  static TextStyle get tagNumber => _serif(84, FontWeight.w700, TravaryColors.ink, height: 1.0, letterSpacing: -2);
+
+  /// The trip's name: "Lake District". A longer name steps down to
+  /// [tagPlaceOneLineMinSize] to stay on one line, else takes two lines,
+  /// stepping down to [tagPlaceMinSize].
+  static TextStyle get tagPlace => _serif(24, FontWeight.w700, TravaryColors.ink, height: 1.1, letterSpacing: -0.3);
+  static const tagPlaceOneLineMinSize = 19.0;
+  static const tagPlaceMinSize = 15.0;
+
+  /// "25–28 Nov 2026".
+  static TextStyle get tagDates => _sans(14, FontWeight.w500, TravaryColors.ink, height: 1.2);
+
+  /// "4 days", "3 bookings", "Opens 25 Nov" under the postcard.
+  static TextStyle get countdownFact => _sans(14, FontWeight.w500, TravaryColors.ink, height: 1.2);
+
+  /// "View trip" on the ticket button.
+  static TextStyle get countdownAction => _serif(24, FontWeight.w700, TravaryColors.paper, height: 1.1);
 }
 
 /// Spacing of the Today composition, tuned at the reference 390 × 927
@@ -200,6 +226,65 @@ abstract final class TodayLayout {
 
   /// Below the timeline, above the home tabs.
   static const bottomGap = 16.0;
+}
+
+/// Today between trips: the next trip's postcard with its countdown tag
+/// (docs/mockups/today-empty/02-hanging-luggage-tag.png).
+abstract final class CountdownLayout {
+  /// The postcard's box from the screen edge. Its own transparent margin
+  /// and deckled edge add about 4% more.
+  static const postcardInset = 6.0;
+
+  /// Wider screens centre the postcard at this width.
+  static const postcardMaxWidth = 460.0;
+
+  /// The postcard is at most this share of the screen's height, so the
+  /// heading, postcard, facts and button fit above the home tabs on a
+  /// 390 × 844 phone (the postcard is taller than it is wide).
+  static const postcardMaxHeight = 0.5;
+
+  /// Room above the postcard for the tag's cord, as a share of the
+  /// postcard's width. The cord also runs up past the postcard's right
+  /// edge (never clipped by the hero itself).
+  static const cordRoom = 0.06;
+
+  /// The tag's card (its body, without the cord) as a share of the
+  /// postcard's width.
+  static const tagWidth = 0.46;
+
+  /// Where the tag's card sits on the postcard at rest: its right edge and
+  /// top edge, as shares of the postcard's width.
+  static const tagRight = 0.99;
+  static const tagTop = 0.095;
+
+  /// The tag hangs this far clockwise, shell and words together.
+  static const tagAngleDegrees = 7.0;
+
+  /// On entry it swings in from a few degrees further and settles.
+  static const tagSettleDegrees = 4.0;
+
+  /// The tag's words are laid out at this width, then scaled to the tag.
+  static const tagCopyWidth = 140.0;
+
+  /// Postcard lift and fade, then the tag's delayed settle.
+  static const entryDuration = Duration(milliseconds: 900);
+  static const postcardLift = 16.0;
+
+  /// Between the postcard and the facts (its own clear margin already
+  /// spaces them), and the facts and the button.
+  static const factsGap = 0.0;
+  static const buttonGap = 18.0;
+  static const factSpacing = 8.0;
+
+  /// The facts' stand-in tags.
+  static const factMinHeight = 64.0;
+  static const factIconSize = 30.0;
+
+  /// The ticket button.
+  static const buttonWidth = 0.56;
+  static const buttonMaxWidth = 260.0;
+  static const buttonMinHeight = 60.0;
+  static const buttonNotch = 9.0;
 }
 
 /// The raised home tabs.

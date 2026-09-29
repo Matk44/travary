@@ -44,6 +44,27 @@ measured edges (`SurfaceSlot.body`); every shell family (below), `icons/dining.p
 `icons/flight.png`, `icons/nav_today.png`, `icons/nav_trips.png`, and all
 eight `any_*`/`themepark_*`/`tropical_*` scene and vignette pairs.
 
+## Today between trips (the countdown)
+
+`CountdownTripHero` (`lib/design/widgets/countdown_trip_hero.dart`, target
+`docs/mockups/today-empty/02-hanging-luggage-tag.png`). Visual QA:
+`tool/visual_qa.sh` also writes `build/visual_qa/countdown_actual.png`
+(the reference canvas) and `countdown_844_actual.png` (390 × 844 with a
+status bar).
+
+| File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
+|---|---|---|---|---|
+| `common/countdown_postcard.png` (`countdown_postcard`), per destination pack | 1122 × 1402 | The postcard | None bundled on purpose. Without a suitable pack Today keeps its first-day view, so the countdown isn't seen yet | Five made (Lake District, Orlando, Kyoto, Paris, Bali), waiting in `art_packs/pending/countdown_postcards/` for their complete city/region packs (`docs/ART_PACKS.md`) |
+| `common/countdown_fact_tag.png` (`countdown_fact_tag`) | 1024 × 512, eyelet and string in the left fifth, words in `CountdownGeometry.factCopy` | The three facts under the postcard | A plain paper label with a soft shadow (**visible** with the countdown) | Make it |
+| `common/countdown_button.png` (`countdown_button`) | 1536 × 460, petrol-teal ticket with notched ends and stitching, words in `CountdownGeometry.buttonCopy` | "View trip" | A flat ticket in the palette's primary colour with notched ends (**visible**) | Make it |
+| `icons/calendar.png`, `icons/attraction.png` | as the kind icons | The "4 days" and "Opens 25 Nov" facts | Material glyphs (**visible**) | Listed below too |
+
+Present and used: `common/countdown_luggage_tag.png` (the blank tag; its
+card is `SurfaceSlot.countdownTag.body`, the eyelet is
+`CountdownGeometry.eyelet`) and `icons/nav_trips.png` (the bookings fact).
+The mockup's tree and postmark motif on the tag isn't drawn: the tag stays
+blank and every word on it is live.
+
 ## Shells
 
 Complete families exist for theme park (the unprefixed anchors
