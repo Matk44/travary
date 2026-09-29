@@ -132,3 +132,19 @@ isn't used: every tagged shell includes its tag.
   booking's time, "9:00am", and doesn't invent that the time is an opening
   time. The key card's small line is live data ("CHECK-OUT IN 4 DAYS"),
   where the reference prints "ALOHA".
+
+## Trips: coming trips' postcards
+
+`UpcomingTripPostcard` (`lib/design/widgets/upcoming_trip_postcard.dart`,
+target `docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png`).
+Visual QA: `tool/visual_qa.sh` also writes
+`build/visual_qa/trips_actual.png`.
+
+| File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
+|---|---|---|---|---|
+| `common/trip_postcard.png` (`trip_postcard`), per destination pack | 1536 × 1024 | A coming trip's row under "Coming up" | None bundled on purpose. Without a suitable pack the trip keeps its plain row, so the postcards aren't seen yet | Five made (Lake District, Orlando, Kyoto, Paris, Bali), waiting in `art_packs/pending/trip_postcards/` for their complete city/region packs (`docs/ART_PACKS.md`) |
+
+The tag is the countdown's blank `common/countdown_luggage_tag.png`
+(`SurfaceSlot.countdownTag`), drawn smaller; no second tag raster. The
+mockup's destination motifs on the tag (trees, a maple leaf, a palm) aren't
+drawn: the tag stays blank and every word on it is live.

@@ -107,6 +107,13 @@ enum SurfaceSlot {
 /// place's postcard.
 const countdownPostcardArt = 'countdown_postcard';
 
+/// A coming trip's landscape postcard on the Trips tab
+/// (`common/trip_postcard.png`, 1536 × 1024), with the countdown tag hung
+/// on it. Like [countdownPostcardArt], only a pack that suits the trip
+/// supplies one (`TravelStore.tripPostcardFor`); without it the trip keeps
+/// its plain row.
+const tripPostcardArt = 'trip_postcard';
+
 /// A resolved icon: the raster file, or the stand-in glyph.
 class IconArt {
   const IconArt({required this.slot, this.art});

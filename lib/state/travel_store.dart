@@ -218,6 +218,12 @@ class TravelStore extends ChangeNotifier {
   SharedArtRef? countdownPostcardFor(TripPlan plan) =>
       _art.catalog.commonArt(countdownPostcardArt, context: artContextForPlan(plan));
 
+  /// The landscape postcard for [plan] on the Trips tab, ranked and
+  /// guarded exactly like [countdownPostcardFor]: null rather than another
+  /// place's postcard.
+  SharedArtRef? tripPostcardFor(TripPlan plan) =>
+      _art.catalog.commonArt(tripPostcardArt, context: artContextForPlan(plan));
+
   /// A look's context without a trip (design tools): its experience packs
   /// count, destination packs don't.
   TripArtContext artContextForLook(ExperienceTheme theme) => TripArtContext(

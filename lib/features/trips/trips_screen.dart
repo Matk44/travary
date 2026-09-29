@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../design/art/art_resolver.dart' show stableHash;
+import '../../design/art/art_slots.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_theme_style.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/upcoming_trip_postcard.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
+import '../../logic/trip_postcard_text.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
 import '../sharing/join_trip_sheet.dart';
 import 'trip_screen.dart';
 
-/// Every trip: happening now, coming up, and past.
+/// Every trip: happening now, coming up, and past. A coming trip whose
+/// destination has a postcard shows on it, with its countdown on a
+/// hanging tag ([UpcomingTripPostcard]); the rest are plain rows.
 class TripsScreen extends StatelessWidget {
   const TripsScreen({super.key});
 
@@ -48,6 +54,43 @@ class TripsScreen extends StatelessWidget {
       ],
     );
 
+    // Coming up: the trip's postcard when one suits it, else its row.
+    Widget upcomingSection(List<TripPlan> plans) {
+      final rows = [
+        for (final plan in plans)
+          if ((tripPostcardTextFor(plan, today), store.tripPostcardFor(plan)) case (final text?, final art?))
+            UpcomingTripPostcard(
+              key: ValueKey('trip-postcard-${plan.id}'),
+              text: text,
+              postcard: art.image,
+              tag: store.chromeArtFor(plan).surface(SurfaceSlot.countdownTag),
+              variant: stableHash(plan.id),
+              onOpen: () => _openTrip(context, plan),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
+              child: _TripTile(plan: plan, today: today),
+            ),
+      ];
+      return SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(child: SectionLabel('Coming up')),
+          SliverList.builder(
+            itemCount: rows.length,
+            itemBuilder: (context, i) {
+              // Postcards carry their own clear margin; rows need a gap.
+              final postcards = rows[i] is UpcomingTripPostcard && (i == 0 || rows[i - 1] is UpcomingTripPostcard);
+              return Padding(
+                padding: EdgeInsets.only(top: i == 0 || postcards ? 0 : TravarySpace.md),
+                child: rows[i],
+              );
+            },
+          ),
+        ],
+      );
+    }
+
     return SafeArea(
       bottom: false,
       child: CustomScrollView(
@@ -81,7 +124,7 @@ class TripsScreen extends StatelessWidget {
               ),
             ),
           if (active.isNotEmpty) section('Happening now', active),
-          if (upcoming.isNotEmpty) section('Coming up', upcoming),
+          if (upcoming.isNotEmpty) upcomingSection(upcoming),
           if (past.isNotEmpty) section('Past trips', past.reversed.toList()),
           const SliverToBoxAdapter(child: SizedBox(height: TravarySpace.xxl)),
         ],
@@ -89,6 +132,9 @@ class TripsScreen extends StatelessWidget {
     );
   }
 }
+
+void _openTrip(BuildContext context, TripPlan plan) =>
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id)));
 
 Future<void> _join(BuildContext context) async {
   final title = await showJoinTripSheet(context);

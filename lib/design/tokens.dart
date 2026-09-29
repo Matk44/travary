@@ -161,6 +161,30 @@ abstract final class TravaryText {
   static TextStyle get tabLabel => _sans(11, FontWeight.w500, TravaryColors.ink, height: 1.1);
   static TextStyle get tabLabelSelected => _sans(13.5, FontWeight.w600, TravaryColors.paper, height: 1.1);
 
+  // ---- Trips: the tag on a coming trip's postcard ------------------------
+  // Sized for the tag's copy area at TripPostcardLayout.tagCopyWidth; the
+  // tag scales the whole block to the tag it's drawn on.
+
+  /// The countdown: "58".
+  static TextStyle get tripTagNumber =>
+      _serif(62, FontWeight.w700, TravaryColors.ink, height: 1.0, letterSpacing: -1.5);
+
+  /// "DAYS".
+  static TextStyle get tripTagLabel => _sans(11, FontWeight.w600, TravaryColors.ink, height: 1.2, letterSpacing: 3.0);
+
+  /// The trip's name. A longer name steps down to
+  /// [tripTagPlaceOneLineMinSize] on one line, else takes two lines,
+  /// stepping down to [tripTagPlaceMinSize].
+  static TextStyle get tripTagPlace => _serif(22, FontWeight.w700, TravaryColors.ink, height: 1.1, letterSpacing: -0.3);
+  static const tripTagPlaceOneLineMinSize = 17.0;
+  static const tripTagPlaceMinSize = 14.0;
+
+  /// "25–28 Nov 2026".
+  static TextStyle get tripTagDates => _sans(13, FontWeight.w500, TravaryColors.ink, height: 1.2);
+
+  /// "4 days · 3 bookings".
+  static TextStyle get tripTagFacts => _sans(11, FontWeight.w500, TravaryColors.ink, height: 1.25);
+
   // ---- Today between trips: the countdown tag ---------------------------
   // Sized for the tag's copy area at CountdownLayout.tagCopyWidth; the tag
   // scales the whole block to the tag it's drawn on.
@@ -311,6 +335,39 @@ abstract final class NavLayout {
 
   /// The pop when a tab is chosen.
   static const popDuration = Duration(milliseconds: 380);
+}
+
+/// Trips: a coming trip's landscape postcard with the countdown tag hung
+/// on its right edge (docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png).
+abstract final class TripPostcardLayout {
+  /// The postcard's box from the screen edge; its own transparent margin
+  /// and deckled edge add about 2% more.
+  static const inset = 6.0;
+
+  /// Wider screens centre the postcard at this width.
+  static const maxWidth = 560.0;
+
+  /// Share of the postcard's height (the top of its transparent margin)
+  /// tucked under the row above, so postcards sit about as close as in
+  /// the mockup.
+  static const rise = 0.04;
+
+  /// The tag's card (its body, without the cord) as a share of the
+  /// postcard's width.
+  static const tagWidth = 0.31;
+
+  /// Where the tag's card sits at rest: its right edge and top edge, as
+  /// shares of the postcard's width.
+  static const tagRight = 0.99;
+  static const tagTop = 0.045;
+
+  /// The tag hangs this far clockwise, give or take [tagAngleSpread] per
+  /// trip, shell and words together.
+  static const tagAngleDegrees = 4.0;
+  static const tagAngleSpread = 1.0;
+
+  /// The tag's words are laid out at this width, then scaled to the tag.
+  static const tagCopyWidth = 112.0;
 }
 
 ThemeData buildTravaryTheme() {

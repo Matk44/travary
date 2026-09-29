@@ -16,7 +16,9 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   (swipe or tap "Day 3 of 7" for the day chooser, Trips, Documents).
   Between trips, when a destination postcard suits the next trip, Today
   counts down to it instead (`CountdownTripHero`: the postcard with a
-  luggage tag hung on it, three facts, "View trip").
+  luggage tag hung on it, three facts, "View trip"). On the Trips tab a
+  coming trip with a landscape postcard shows on it with the same tag
+  (`UpcomingTripPostcard`); other rows stay plain.
 - **Never lock someone's tickets.** Tickets and bookings are always reachable,
   offline, whatever their plan.
 - **The look is swappable.** A unique hand-made interface ("travel ephemera":
@@ -34,7 +36,8 @@ lib/
 ├── logic/      Pure Dart rules, fully unit-tested:
 │               day_plan (done/now/next), trip_plan (+ focus), trip_assignment,
 │               card_text (all card wording), countdown_text (the countdown's
-│               wording, calendar-date count), formatters, art_pack_selection
+│               wording, calendar-date count), trip_postcard_text (a coming
+│               trip's tag), formatters, art_pack_selection
 │               (trust rules, pack ranks, downloads), visual_profile_request
 │               (classifier payload, meaningful edits)
 ├── data/       TravelRepository interface; Memory (demo/tests) + Firestore;
@@ -48,7 +51,7 @@ lib/
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
 │               TaggedReservationCard on ShellFrame), art/ (catalog, resolver,
 │               card_shells, art_slots), widgets/ (nav_bar, today_header, day_timeline,
-│               countdown_trip_hero)
+│               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name)
 ├── features/   Screens: today, trips, wallet (the "Documents" tab), booking (form/detail/viewer), profile
 └── app/        bootstrap (backend choice), app, home_shell (tabs + add button)
 tool/           art_packs.dart: builds, validates and publishes art packs (operator only)
@@ -97,9 +100,11 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    leather, pill, stamp) resolve through `ArtSlots` (`design/art/art_slots.dart`).
    A missing file gets its documented stand-in; list every gap in
    `docs/ART_ASSET_GAPS.md`. The countdown postcard
-   (`common/countdown_postcard`, `TravelStore.countdownPostcardFor`) comes
-   only from a pack that suits the trip and is never bundled: no postcard,
-   no countdown, never another place's.
+   (`common/countdown_postcard`, `TravelStore.countdownPostcardFor`) and
+   its landscape Trips companion (`common/trip_postcard`,
+   `TravelStore.tripPostcardFor`) come only from a pack that suits the trip
+   and are never bundled: no postcard, no countdown or postcard row, never
+   another place's.
 5. Colours and type live in `design/tokens.dart` only. A trip's interface
    colours come from its palette (`TravaryChrome.of(context).colors`: the
    best-ranked installed pack's `palette`, else Travary's own); chrome uses
@@ -161,7 +166,10 @@ fixture (`test/support/canonical_today.dart`) at that size with the app's
 real fonts and writes `build/visual_qa/today_{actual,overlay,diff}.png`,
 plus the countdown between trips (`test/support/countdown_today.dart`,
 target `docs/mockups/today-empty/02-hanging-luggage-tag.png`) as
-`countdown_actual.png` and `countdown_844_actual.png`.
+`countdown_actual.png` and `countdown_844_actual.png`, and the Trips tab's
+coming trips (`test/support/trip_postcards.dart`, target
+`docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png`) as
+`trips_actual.png`.
 Never edit the reference to make a comparison pass.
 
 ```bash

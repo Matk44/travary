@@ -79,6 +79,7 @@ from folder names):
   `linen`, `leather`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`,
   and the countdown to the next trip (Today between trips):
   `countdown_postcard` (1122 × 1402, destination packs; see below),
+  `trip_postcard` (1536 × 1024, its landscape companion on the Trips tab),
   `countdown_luggage_tag` (1024 × 1536), `countdown_fact_tag` (1024 × 512)
   and `countdown_button` (1536 × 460).
   Shells are made to the same template as the bundled ones (same size and
@@ -101,8 +102,8 @@ from folder names):
 
 Only what changes with the place: complete featured tickets, key cards and
 tagged cards with the destination printed on, booking scenes and
-vignettes, trip-cover stickers and look emblems, the countdown postcard,
-and the palette.
+vignettes, trip-cover stickers and look emblems, the countdown and Trips
+postcards, and the palette.
 Everything universal stays bundled and is never duplicated per country:
 navigation, kind, weather and timeline icons; linen, leather, tabs, pill
 and stamp; the windowed boarding pass, restaurant and travel tickets
@@ -133,6 +134,21 @@ Five are made and wait in `art_packs/pending/countdown_postcards/` (Lake
 District, Orlando, Kyoto, Paris, Bali). Each goes into its **complete**
 city or region pack, never a pack of its own: a sparse city pack would
 outrank the fuller country pack for every other picture too.
+
+Its landscape companion, `common/trip_postcard.png` (1536 × 1024, the same
+scene recomposed, with a quiet upper-right corner), puts a coming trip on
+the Trips tab with the same blank tag hung on its right edge
+(`lib/design/widgets/upcoming_trip_postcard.dart`; hand-off:
+`docs/TRIPS_HANGING_TAG_HANDOFF.md`). It resolves the same way
+(`TravelStore.tripPostcardFor`), and a trip without one keeps its plain
+row: the portrait countdown postcard is never cropped to stand in.
+
+```json
+{ "file": "common/trip_postcard.png", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024 }
+```
+
+The five made so far wait in `art_packs/pending/trip_postcards/`, for the
+same complete packs as their countdown postcards.
 
 ### The palette
 
