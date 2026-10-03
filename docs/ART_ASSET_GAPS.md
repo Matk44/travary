@@ -204,3 +204,10 @@ drawn: the tag stays blank and every word on it is live.
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
 | A passport-cover shell for a document row | about 1983 × 793 | `TravelDocumentCard` (the travel documents list) | A plain paper row with the kind's icon on a palette-coloured medallion (visible) | Optional: a blank passport/ID cover in the travel-ephemera style, with a clean live-text zone |
+
+## Sign in (Profile)
+
+| File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
+|---|---|---|---|---|
+| Google's official "G" logo | SVG or 3× PNG, about 60 × 60 | `GoogleSignInButton` (`design/widgets/sign_in_buttons.dart`) | A four-colour G drawn in Flutter (`_GoogleGPainter`), close to Google's mark (visible) | Google's own logo file from its branding guidelines, unaltered |
+| Apple's logo | n/a | `AppleSignInButton` | Material's `Icons.apple` on Apple's black button (visible) | Fine as is; for Apple's own artwork, swap in `sign_in_with_apple`'s button or Apple's HIG resources |

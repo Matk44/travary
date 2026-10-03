@@ -9,6 +9,7 @@ import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/analytics.dart';
+import '../../state/app_session.dart';
 import '../../state/travel_store.dart';
 
 /// Invite the family: a six-character code to share by message. Asks for
@@ -34,7 +35,10 @@ class InviteSheet extends StatefulWidget {
 
 class _InviteSheetState extends State<InviteSheet> {
   late final TravelStore _store = context.read<TravelStore>();
-  late final _name = TextEditingController(text: widget.plan.trip.memberNames[_store.userId]);
+  // Their name on this trip, else their account's.
+  late final _name = TextEditingController(
+    text: widget.plan.trip.memberNames[_store.userId] ?? context.read<AppSession>().account?.name,
+  );
   TripInvite? _invite;
   String? _error;
   bool _busy = false;

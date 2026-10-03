@@ -8,6 +8,18 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Travary uses Face ID to keep your passports and travel documents private.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- Google sign-in returns here: GoogleService-Info.plist's REVERSED_CLIENT_ID. -->
+				<string>com.googleusercontent.apps.315160115482-liqv57p5mjrp94cfstl0ldbcgmvq44hp</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Itinerary App - Travary</string>
 	<key>CFBundleExecutable</key>

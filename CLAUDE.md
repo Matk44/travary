@@ -81,10 +81,11 @@ lib/
 │               visual_profile_service; art packs: art_pack_catalog (formats +
 │               validation, shared with tool/), art_pack_archive (safe zip),
 │               art_pack_store (disk), art_pack_service (download manager);
-│               travel_document_repository (local only) + document_lock (local_auth)
+│               travel_document_repository (local only) + document_lock (local_auth);
+│               auth_service (guest, Apple/Google sign-in, delete account)
 ├── state/      TravelStore (ChangeNotifier): the single source of truth for screens;
 │               ArtCatalogController (bundled + installed packs), VisualProfileCoordinator,
-│               TravelDocumentsStore (documents + lock)
+│               TravelDocumentsStore (documents + lock), AppSession (account + uid)
 ├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
 │               TaggedReservationCard on ShellFrame, DocumentStampCard),
@@ -92,7 +93,8 @@ lib/
 │               card_shells, art_slots), widgets/ (nav_bar, today_header, time_rail, trip_calendar,
 │               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name)
 ├── features/   Screens: today, trips, wallet (the "Documents" tab), booking (form/detail/viewer), profile,
-│               travel_documents (list, form, document, the tab's entry pill)
+│               travel_documents (list, form, document, the tab's entry pill),
+│               account (Profile's sign-in card)
 └── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
 tool/           art_packs.dart: builds, validates and publishes art packs (operator only)
 art_packs/      pack sources (+ catalog.json once published)
@@ -210,12 +212,13 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 
 | Mode | How | Data |
 |---|---|---|
-| Demo (default) | `flutter run` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
-| Cloud | `flutter run --dart-define=TRAVARY_BACKEND=cloud` | Firestore + anonymous auth |
+| Demo (default in debug) | `flutter run` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
+| Cloud (default in release) | `flutter run --dart-define=TRAVARY_BACKEND=cloud` | Firestore; a guest account until the traveller signs in |
 | Emulators | add `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` | Local Firebase emulators (`docs/ART_PACKS.md`) |
 
-Cloud mode uses anonymous sign-in (enabled in the Firebase console for
-`travary-444`); rules and index are deployed.
+Cloud mode starts as an anonymous guest (enabled in the Firebase console for
+`travary-444`); rules and index are deployed. Sign in with Apple or Google
+works only in cloud mode (see Accounts).
 
 Design tools (debug builds, Profile tab): **Preview a different time** shows
 cards before, during and after their time; **Reset sample trips**; **Card
@@ -286,6 +289,39 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
 notification, Terms and Privacy links on the paywall, analytics wired to a
 real service, and a server function that mirrors purchases to `users/{uid}`
 and stamps `premium` on trips.
+
+## Accounts (Sign in with Apple / Google)
+
+- Everyone starts as an anonymous **guest**; Profile's `AccountCard`
+  (`features/account/`) offers "Continue with Apple" / "Continue with
+  Google" (the platform's own first). Signing in **links** the guest, so
+  the uid and every trip stay as they are. Never required.
+- If that Apple/Google login already has an account (another phone), the
+  app switches to it and calls `adoptGuestTrips` with the guest's ID token:
+  the server moves the guest's trips (members, owner, names, every
+  booking's `memberIds` copy, invites) and deletes the guest.
+- `AppSession` (`state/app_session.dart`) holds the uid. `TravaryApp`
+  rebuilds `TravelStore`, `PremiumStore` and the `MaterialApp` per uid
+  (`KeyedSubtree`); `TravelDocumentsStore` and `AppSession` sit above it,
+  so travel documents never change with the account. The message after a
+  switch ("Signed in with Google. 2 trips…") is taken by `HomeShell`.
+- **Sign out** starts a new guest. **Delete account** (required by both
+  stores): the `deleteAccount` callable deletes trips only they are on
+  (bookings, invites, ticket files), leaves or hands over shared ones
+  (`tripFateOnAccountDeletion`), then `users/{uid}` and the auth user. On
+  iOS an Apple account first re-authenticates and revokes Apple's token.
+- Auth lives behind `AuthService` (`data/auth_service.dart`,
+  `FirebaseAuthService`); tests use `FakeAuthService`
+  (`test/support/session.dart`). Server: `functions/src/account.ts`.
+- Setup (done): Apple App ID capability + `Runner.entitlements`; Services
+  ID `com.travary.app.signin` (return URL
+  `https://travary-444.firebaseapp.com/__/auth/handler`); Sign in with
+  Apple key `CLLWJ9Q78P` in Firebase's Apple provider; Google's iOS client
+  ID in `_googleIosClientId` and its reversed scheme in Info.plist
+  `CFBundleURLTypes`; the web client ID is `serverClientId`. Android needs
+  each signing SHA-1/256 (debug, upload, Play App Signing) in Firebase,
+  then a fresh `google-services.json`: a new signing key breaks Google
+  sign-in until it's added.
 
 ## Family sharing and ticket backup
 

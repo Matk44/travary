@@ -13,6 +13,7 @@ import 'package:travary/features/wallet/wallet_screen.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 import '../support/travel_documents.dart';
+import '../support/session.dart';
 
 /// Tabs are pages of one PageView: nav taps slide through every tab in
 /// between with a slight overshoot, swiping is off, and each tab keeps its
@@ -43,6 +44,7 @@ void main() {
               clock: () => now,
             ),
           ),
+          appSessionProvider(),
           travelDocumentsProvider(),
         ],
         child: MaterialApp(theme: buildTravaryTheme(), home: const HomeShell()),

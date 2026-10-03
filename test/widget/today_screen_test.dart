@@ -24,6 +24,7 @@ import 'package:travary/state/travel_store.dart';
 
 import '../support/canonical_today.dart';
 import '../support/travel_documents.dart';
+import '../support/session.dart';
 
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
@@ -536,6 +537,7 @@ void main() {
               clock: () => now,
             ),
           ),
+          appSessionProvider(),
           travelDocumentsProvider(),
         ],
         child: MaterialApp(theme: buildTravaryTheme(), home: const HomeShell()),

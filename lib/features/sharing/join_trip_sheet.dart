@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../data/sharing_service.dart';
 import '../../design/tokens.dart';
 import '../../state/analytics.dart';
+import '../../state/app_session.dart';
 import '../../state/travel_store.dart';
 
 /// Join a trip someone shared: their invite code plus your name.
@@ -34,7 +35,8 @@ class JoinTripSheet extends StatefulWidget {
 
 class _JoinTripSheetState extends State<JoinTripSheet> {
   final _code = TextEditingController();
-  final _name = TextEditingController();
+  // The account's name, when signed in.
+  late final _name = TextEditingController(text: context.read<AppSession>().account?.name);
   String? _error;
   bool _busy = false;
 

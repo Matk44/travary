@@ -14,6 +14,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "315160115482-ifa8vhkfi047b9g38q21bcj7o8abrfnp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.travary.app",
+            "certificate_hash": "fe87b967f4130cda677fea673dac92333829a34c"
+          }
+        },
+        {
+          "client_id": "315160115482-utgddk8193v6l9k0fnv7sa3taab35tp0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.travary.app",
+            "certificate_hash": "b3e14cf6748a2a9fa57b524b2411e9c4db366105"
+          }
+        },
+        {
+          "client_id": "315160115482-vao7iofo2tma0amig8h06bpjigks76i4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.travary.app",
+            "certificate_hash": "3d5c4251f9868d42d99c1823849bbe93803204ec"
+          }
+        },
+        {
           "client_id": "315160115482-uvt4v0mpqqg03c3gi3sr443dmu2ur0la.apps.googleusercontent.com",
           "client_type": 3
         }

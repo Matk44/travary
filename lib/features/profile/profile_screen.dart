@@ -7,11 +7,12 @@ import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/travel_store.dart';
+import '../account/account_card.dart';
 import '../premium/plus_card.dart';
 import '../travel_documents/document_actions.dart';
 import 'card_gallery_screen.dart';
 
-/// Account and settings. Sign-in and Travary Plus will live here.
+/// Account and settings: signing in, Travary Plus, travel documents.
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -29,6 +30,8 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, 0),
             child: Text('Profile', style: TravaryText.display),
           ),
+          const SizedBox(height: TravarySpace.lg),
+          const AccountCard(),
           const SizedBox(height: TravarySpace.lg),
           const PlusCard(),
           const SectionLabel('Your documents'),

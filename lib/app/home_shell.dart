@@ -13,6 +13,7 @@ import '../features/profile/profile_screen.dart';
 import '../features/today/today_screen.dart';
 import '../features/trips/trips_screen.dart';
 import '../features/wallet/wallet_screen.dart';
+import '../state/app_session.dart';
 import '../state/premium_store.dart';
 import '../state/travel_documents_store.dart';
 import '../state/travel_store.dart';
@@ -64,6 +65,13 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
     _store = context.read<TravelStore>()..addListener(_showErrors);
     _premium = context.read<PremiumStore>()..addListener(_premiumChanged);
     _documents = context.read<TravelDocumentsStore>();
+    // After switching account the app is rebuilt: say what happened.
+    final notice = context.read<AppSession>().takeNotice();
+    if (notice != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(notice)));
+      });
+    }
     // Tickets are backed up for shared trips and for trips with Plus.
     _store.shouldBackUp = (plan) => plan.trip.isShared || _premium.forTrip(plan).allowed;
     WidgetsBinding.instance.addObserver(this);

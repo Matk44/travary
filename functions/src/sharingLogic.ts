@@ -36,3 +36,29 @@ export function withMember(memberIds: readonly string[], uid: string): string[] 
 export function withoutMember(memberIds: readonly string[], uid: string): string[] {
   return memberIds.filter((id) => id !== uid);
 }
+
+/** [from] swapped for [to] in a member list, keeping its place and never
+ * listing [to] twice (they may already be on the trip). */
+export function replaceMember(memberIds: readonly string[], from: string, to: string): string[] {
+  const out: string[] = [];
+  for (const id of memberIds) {
+    const next = id === from ? to : id;
+    if (!out.includes(next)) out.push(next);
+  }
+  return out;
+}
+
+/** What deleting [uid]'s account does to one trip they're on: an organiser
+ * with others on the trip hands it to the next person; an organiser on
+ * their own deletes it; anyone else just leaves. */
+export type TripFate =
+  | { action: 'delete' }
+  | { action: 'leave'; memberIds: string[] }
+  | { action: 'hand-over'; memberIds: string[]; ownerId: string };
+
+export function tripFateOnAccountDeletion(ownerId: string, memberIds: readonly string[], uid: string): TripFate {
+  const others = withoutMember(memberIds, uid);
+  if (ownerId !== uid) return { action: 'leave', memberIds: others };
+  if (others.length === 0) return { action: 'delete' };
+  return { action: 'hand-over', memberIds: others, ownerId: others[0] };
+}

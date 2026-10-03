@@ -12,6 +12,7 @@ import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 import 'travel_documents.dart';
 import 'package:travary/app/route_observer.dart';
+import 'session.dart';
 
 /// The real bundled art catalog, read from `assets/art/` (the same files the
 /// app bundles), so tests exercise the actual shells and icons.
@@ -140,6 +141,7 @@ Widget canonicalTodayApp({ArtCatalog? catalog, DateTime? now, TripVisualProfile?
           clock: () => clock,
         ),
       ),
+      appSessionProvider(),
       travelDocumentsProvider(),
     ],
     child: MaterialApp(

@@ -5,12 +5,14 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../data/art_pack_service.dart';
 import '../data/art_pack_store.dart';
 import '../data/attachment_backup.dart';
 import '../data/attachment_store.dart';
+import '../data/auth_service.dart';
 import '../data/demo_data.dart';
 import '../data/document_lock.dart';
 import '../data/firestore_travel_repository.dart';
@@ -26,18 +28,25 @@ import '../domain/domain.dart';
 import '../firebase_options.dart';
 import 'build_info.dart';
 
-/// Where data lives. Pick with `--dart-define=TRAVARY_BACKEND=cloud`.
+/// Where data lives. Pick with `--dart-define=TRAVARY_BACKEND=cloud` or
+/// `=demo`; without it, release builds use the cloud and debug builds the
+/// demo.
 enum Backend {
-  /// Sample trips in memory. The default while the interface is designed.
+  /// Sample trips in memory, for designing and testing.
   demo,
 
-  /// Firestore with anonymous sign-in.
+  /// Firestore: a guest (anonymous) account until the traveller signs in
+  /// with Apple or Google.
   cloud,
 }
 
-const _backendName = String.fromEnvironment('TRAVARY_BACKEND', defaultValue: 'demo');
+const _backendName = String.fromEnvironment('TRAVARY_BACKEND');
 
-Backend get configuredBackend => _backendName == 'cloud' ? Backend.cloud : Backend.demo;
+Backend get configuredBackend => switch (_backendName) {
+  'cloud' => Backend.cloud,
+  'demo' => Backend.demo,
+  _ => kReleaseMode ? Backend.cloud : Backend.demo,
+};
 
 /// Local development against the Firebase emulators:
 /// `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` (10.0.2.2 from the
@@ -47,7 +56,9 @@ const _emulatorHost = String.fromEnvironment('TRAVARY_EMULATOR_HOST');
 /// Everything the app needs before it can show a screen.
 class Dependencies {
   const Dependencies({
-    required this.repository,
+    required this.repositoryFor,
+    required this.initialUserId,
+    this.auth,
     required this.purchases,
     required this.smartImport,
     this.visualProfiles,
@@ -60,7 +71,16 @@ class Dependencies {
     required this.documentLock,
   });
 
-  final TravelRepository repository;
+  /// The traveller's trips and bookings, for the account [userId]. Called
+  /// again when the account changes (sign in to another account, sign out,
+  /// delete); demo mode always returns the same sample data.
+  final TravelRepository Function(String userId) repositoryFor;
+
+  /// Who is signed in at startup (a guest at first).
+  final String initialUserId;
+
+  /// Signing in with Apple or Google. Cloud mode only.
+  final AuthService? auth;
   final SmartImportService smartImport;
 
   /// Automatic trip looks. Cloud mode only: the server classifies the trip
@@ -111,15 +131,15 @@ Future<Dependencies> bootstrap() async {
   await artPacks.loadInstalled();
   final attachments = await AttachmentStore.open();
   final travelDocuments = await LocalTravelDocumentRepository.open();
-  final repository = switch (configuredBackend) {
-    Backend.demo => _demoRepository(),
-    Backend.cloud => await _cloudRepository(),
-  };
+  final cloud = configuredBackend == Backend.cloud;
+  final demo = cloud ? null : _demoRepository();
+  final initialUserId = demo?.userId ?? await _cloudSignIn();
   // Signs in first (in the background in demo mode); never awaited.
   unawaited(artPacks.refreshCatalog());
-  final cloud = configuredBackend == Backend.cloud;
   return Dependencies(
-    repository: repository,
+    repositoryFor: (userId) => demo ?? FirestoreTravelRepository(firestore: FirebaseFirestore.instance, userId: userId),
+    initialUserId: initialUserId,
+    auth: cloud ? FirebaseAuthService(ensureSignedIn: ensureSignedIn) : null,
     purchases: TestPurchaseService(),
     // Smart Import always uses the cloud, even in demo mode. Firebase is set
     // up on first use, so demo mode still starts instantly and offline.
@@ -135,7 +155,7 @@ Future<Dependencies> bootstrap() async {
   );
 }
 
-TravelRepository _demoRepository() {
+MemoryTravelRepository _demoRepository() {
   final repository = MemoryTravelRepository();
   final demo = buildDemoData(LocalDate.fromDateTime(DateTime.now()), userId: repository.userId);
   repository.replaceAll(demo.trips, demo.bookings);
@@ -170,10 +190,10 @@ Future<void> _useEmulators(String host) async {
   await FirebaseStorage.instance.useStorageEmulator(host, 9199);
 }
 
-Future<TravelRepository> _cloudRepository() async {
+/// Signs in (a guest the first time) and returns who.
+Future<String> _cloudSignIn() async {
   try {
-    final userId = await ensureSignedIn();
-    return FirestoreTravelRepository(firestore: FirebaseFirestore.instance, userId: userId);
+    return await ensureSignedIn();
   } on FirebaseAuthException catch (e) {
     if (e.code == 'operation-not-allowed' || e.code == 'admin-restricted-operation') {
       throw const StartupException(

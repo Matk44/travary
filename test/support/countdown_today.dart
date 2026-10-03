@@ -13,6 +13,7 @@ import 'package:travary/state/travel_store.dart';
 import 'canonical_today.dart';
 import 'travel_documents.dart';
 import 'package:travary/app/route_observer.dart';
+import 'session.dart';
 
 /// The mockup's moment (docs/mockups/today-empty/02-hanging-luggage-tag.png):
 /// 8am on Monday 28 September 2026, between trips.
@@ -212,6 +213,7 @@ Widget countdownTodayApp({
           clock: () => clock,
         ),
       ),
+      appSessionProvider(),
       travelDocumentsProvider(documents: documents, lock: documentLock, repository: documentRepository),
     ],
     child: MaterialApp(
