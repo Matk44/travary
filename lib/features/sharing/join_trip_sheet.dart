@@ -18,6 +18,13 @@ Future<String?> showJoinTripSheet(BuildContext context) => showModalBottomSheet<
   ),
 );
 
+/// Asks for an invite code, joins, and says which trip it was.
+Future<void> startJoinTrip(BuildContext context) async {
+  final title = await showJoinTripSheet(context);
+  if (title == null || !context.mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('You\'ve joined $title')));
+}
+
 class JoinTripSheet extends StatefulWidget {
   const JoinTripSheet({super.key});
 

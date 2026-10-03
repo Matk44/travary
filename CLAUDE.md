@@ -7,20 +7,52 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
 
 ## Principles
 
-- **Super simple for the traveller.** Bookings first: no "create a trip"
-  step. Trips form automatically from dates (`logic/trip_assignment.dart`).
-  Only title + date are required on any form.
+- **Super simple for the traveller.** Bookings first: creating a trip is
+  never required. Trips form automatically from dates
+  (`logic/trip_assignment.dart`). "New trip" (Trips tab pill, the empty
+  Today and Trips screens) can start one first with a name and dates
+  (`features/trips/trip_details_sheet.dart`, also "Edit trip"); its
+  planned dates keep it when empty, widen it, but never cut a booking out.
+  The destination is read from the name as it's typed ("Japan holiday",
+  "Disney World") by `logic/destinations.dart`: every country plus
+  well-known regions and cities, offline, with suggestions for a half-typed
+  place and a picker; never required (a "Grandma's" trip is left to the
+  classifier and its bookings). Trips started by a booking get the same
+  detection from their suggested name. Only title + date are required on
+  any form.
 - **Today is the product.** Opens on today during a trip, else the first day of
-  the next trip: greeting, featured ticket, the hotel's key card, the day's
-  tagged cards, then the day's timeline. Past and future stay one tap away
-  (swipe or tap "Day 3 of 7" for the day chooser, Trips, Documents).
-  Between trips, when a destination postcard suits the next trip, Today
-  counts down to it instead (`CountdownTripHero`: the postcard with a
-  luggage tag hung on it, three facts, "View trip"). On the Trips tab a
+  the next trip: the greeting, then the day's cards down a time rail (each
+  timed card's time and a dot on its left, joined by a line): the featured
+  ticket in its place in time, the hotel's key card after it, the day's
+  tagged cards; finished ones fold under "Earlier" (`logic/day_layout.dart`,
+  mockup `docs/mockups/today-time-rail/01-left-time-rail.webp`). Past and
+  future stay one tap away (swipe, or tap the date pill or "Day 3 of 7" for
+  the trip calendar; Trips, Documents).
+  Between trips, Today counts down to the next trip instead
+  (`CountdownTripHero`: its destination's postcard, else the neutral one,
+  as large as the screen allows, with a luggage tag over its lower right
+  corner, about half of it below the card; tapping
+  it opens the trip). Each time Today comes into view (its tab, back from
+  the background, a screen closed over it: `HomeShell` ticks `shown`) the
+  postcard lifts in and the tag is slapped on, swings and settles. On the Trips tab a
   coming trip with a landscape postcard shows on it with the same tag
   (`UpcomingTripPostcard`); other rows stay plain.
 - **Never lock someone's tickets.** Tickets and bookings are always reachable,
   offline, whatever their plan.
+- **Travel documents stay on the phone.** Passports, visas, insurance and
+  the like (`TravelDocument`) are personal, not bookings: they belong to a
+  person, not a trip. Stored only on this phone (`LocalTravelDocumentRepository`,
+  the app's private support folder), behind the phone's own lock
+  (`DocumentLock`: Face ID, fingerprint or passcode), and locked again
+  whenever the app goes to the background (`HomeShell`). Never written to
+  Firestore or Storage, never sent to Smart Import or Gemini, never shared
+  with a trip's family (only "Send a copy", asked first), never logged
+  (analytics carry the type only), never gated by a plan. Numbers stay
+  masked until asked; the number field never lets the keyboard learn.
+  Expiry checks against the next trip (`logic/travel_documents.dart`:
+  passports need 6 months left after it). Ways in: the "Travel documents"
+  pill leading the Documents tab's chips (a count, never contents), the +
+  sheet's "Passport, visa or insurance" row, and Profile.
 - **The look is swappable.** A unique hand-made interface ("travel ephemera":
   tickets, key cards, luggage tags, see the v1 mockup) goes on top of this
   build. Keep logic out of `design/` and styling out of `logic/`.
@@ -32,9 +64,13 @@ lib/
 ├── domain/     Plain data: Booking, BookingKind (+ KindSpec), Trip, LocalDate/ClockTime,
 │               visual_profile (ExperienceTheme, ThemeSource, TripVisualProfile),
 │               art_pack (selectors), country_codes (ISO allow-list),
-│               palette (DestinationPalette + validation), weather (optional pill input)
+│               palette (DestinationPalette + validation), weather (optional pill input),
+│               travel_document (passports etc.: on this phone only)
 ├── logic/      Pure Dart rules, fully unit-tested:
-│               day_plan (done/now/next), trip_plan (+ focus), trip_assignment,
+│               day_plan (done/now/next), day_layout (Today's rows and time rail),
+│               trip_plan (+ focus), trip_calendar (the calendar's weeks), trip_assignment,
+│               destinations (places a trip's name can mean: detection, suggestions, picker),
+│               travel_documents (expiry checks against the next trip, masking, wording),
 │               card_text (all card wording), countdown_text (the countdown's
 │               wording, calendar-date count), trip_postcard_text (a coming
 │               trip's tag), formatters, art_pack_selection
@@ -44,16 +80,20 @@ lib/
 │               demo_data; attachment_store (ticket files, offline);
 │               visual_profile_service; art packs: art_pack_catalog (formats +
 │               validation, shared with tool/), art_pack_archive (safe zip),
-│               art_pack_store (disk), art_pack_service (download manager)
+│               art_pack_store (disk), art_pack_service (download manager);
+│               travel_document_repository (local only) + document_lock (local_auth)
 ├── state/      TravelStore (ChangeNotifier): the single source of truth for screens;
-│               ArtCatalogController (bundled + installed packs), VisualProfileCoordinator
+│               ArtCatalogController (bundled + installed packs), VisualProfileCoordinator,
+│               TravelDocumentsStore (documents + lock)
 ├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
-│               TaggedReservationCard on ShellFrame), art/ (catalog, resolver,
-│               card_shells, art_slots), widgets/ (nav_bar, today_header, day_timeline,
+│               TaggedReservationCard on ShellFrame, DocumentStampCard),
+│               art/ (catalog, resolver, document_stamps,
+│               card_shells, art_slots), widgets/ (nav_bar, today_header, time_rail, trip_calendar,
 │               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name)
-├── features/   Screens: today, trips, wallet (the "Documents" tab), booking (form/detail/viewer), profile
-└── app/        bootstrap (backend choice), app, home_shell (tabs + add button)
+├── features/   Screens: today, trips, wallet (the "Documents" tab), booking (form/detail/viewer), profile,
+│               travel_documents (list, form, document, the tab's entry pill)
+└── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
 tool/           art_packs.dart: builds, validates and publishes art packs (operator only)
 art_packs/      pack sources (+ catalog.json once published)
 rules-tests/    Firestore/Storage rules tests; test_emulator/: art-pack end to end
@@ -65,7 +105,8 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
 ### Rules that keep it reskinnable
 
 1. Screens show bookings **only** through `BookingCard` (`hero` / `standard` /
-   `compact`) and `OngoingStrip`. Never style a booking inline in a screen.
+   `compact` / `document`) and `OngoingStrip`. Never style a booking inline
+   in a screen.
 2. Cards receive **`CardText`** (already worded: eyebrow, title, when, detail,
    place, stub, reference) and **`ArtChoice`**. Cards never format dates or
    decide wording; add fields to `CardText` instead.
@@ -76,13 +117,18 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    Import (Gemini picks it: `artSubject`) or from keywords
    (`logic/art_subjects.dart`, mirrored in `functions/src/artSubjects.ts`;
    a test keeps them equal). Downloaded **art packs** add destination and
-   experience art (`docs/ART_PACKS.md`). `ArtResolver` takes a
+   experience art (`docs/ART_PACKS.md`; sources are WebP, converted with
+   `dart run tool/art_packs.dart webp`, PNG masters in `art_packs/originals/`;
+   30 destination packs are published). `ArtResolver` takes a
    `TripArtContext` and tries the subject from the city → region → country
    pack → the trip's look → secondary look → core, then generics, stable per
    booking and never repeating side by side. Pictures are `ArtImageRef`s
    (bundled or file); `ArtPanel` draws both and shows the placeholder if a
-   file can't load. Featured cards use the scene, normal cards the vignette.
-   Use `ArtChoice.variant % n` for non-image variety.
+   file can't load. Featured cards and Documents use the scene, normal
+   cards the vignette; each format is picked separately by those ranks, so
+   a picture drawn only as a scene never fills a vignette's place (the
+   best vignette stands in). Use `ArtChoice.variant % n` for non-image
+   variety.
 4. Cards are complete **raster shells** with live text on top, never
    drawn lookalikes. Next up (`CardShells.featuredFor`): flights on the
    `boarding_pass`, restaurants on `featured_reservation`, transport on
@@ -92,7 +138,16 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    (`standardFor`): stays on the key card (`room_card`), notes on
    `note_paper`, everything else on a tagged reservation card (the look's
    complete `reservation_card`, else `reservation_card_blank` + the
-   booking's vignette). A hire car in progress is on the `ongoing_tag`. `ShellResolver`
+   booking's vignette). A hire car in progress is on the `ongoing_tag`. In
+   the Documents list (`CardSize.document`, `DocumentStampCard`): a paper
+   row drawn in Flutter with the live date in the `documents_postmark`
+   ring, its `documents_cancel_lines`, and one of three stamp frames
+   (`documents_stamp_01`–`03`, `StampDesign.forVariant` = `variant % 3`)
+   over the booking's scene, which is cropped under the frame's measured
+   window (`StampGeometry`); the kind's icon sits on a small badge. The
+   heading shows the focused trip's `documents_destination_stamp`, only
+   ever from its own verified city, region or country pack
+   (`TravelStore.destinationStampFor`), the place name live. `ShellResolver`
    (`design/art/card_shells.dart`) picks them by the same ranks as card art
    (packs, then bundled `<look>_<role>.png`, then a stand-in look); text,
    buttons and tag icons sit at measured fractional anchors (`ShellGeometry`),
@@ -102,9 +157,11 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    `docs/ART_ASSET_GAPS.md`. The countdown postcard
    (`common/countdown_postcard`, `TravelStore.countdownPostcardFor`) and
    its landscape Trips companion (`common/trip_postcard`,
-   `TravelStore.tripPostcardFor`) come only from a pack that suits the trip
-   and are never bundled: no postcard, no countdown or postcard row, never
-   another place's.
+   `TravelStore.tripPostcardFor`) come only from a pack that suits the trip,
+   never another place's. When the next trip's place has none, Today counts
+   down on the bundled, place-neutral `countdown_postcard_anywhere`
+   (`TravelStore.neutralCountdownPostcard`); the Trips tab keeps that trip's
+   plain row. Prompts for new destinations: `art_packs/prompts/postcards.md`.
 5. Colours and type live in `design/tokens.dart` only. A trip's interface
    colours come from its palette (`TravaryChrome.of(context).colors`: the
    best-ranked installed pack's `palette`, else Travary's own); chrome uses
@@ -122,7 +179,7 @@ days; days in between show an `OngoingStrip`.
 ### Data (Firestore)
 
 ```
-trips/{tripId}                        title, theme, themeSource, ownerId, memberIds[], plannedStart/End,
+trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[], plannedStart/End,
                                       memberNames{}, invite{} (server-only), premium (server-only),
                                       visualProfile, visualProfileUpdatedAt, visualProfileRequest (server-only)
 trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
@@ -132,7 +189,11 @@ users/{uid}                           purchases + Smart Import / classification 
 
 A trip's look: `themeSource` `auto` (the classifier's profile decides;
 `Trip.effectiveTheme`) or `manual` (the traveller's chip; the server never
-overwrites it). The app never writes `theme` for an automatic trip.
+overwrites it). The app never writes `theme` for an automatic trip. Its
+place: `destination` (app-written, `TripDestination`: country code, names,
+art-pack slugs) when the traveller set or confirmed one, else the
+classifier's location (`Trip.effectiveLocation`). The traveller's counts as
+verified for place art (postcards, stamps, destination packs).
 
 Built for family sharing (`memberIds`). Bookings load with one
 collection-group query on `memberIds` (index in `firestore.indexes.json`), so
@@ -161,15 +222,24 @@ cards before, during and after their time; **Reset sample trips**; **Card
 gallery** (every kind and size per look, with the shells chosen).
 
 The Today screen's target is `docs/reference/travary_today_reference.png`
-(813 × 1933: a 390-point phone). `tool/visual_qa.sh` renders the canonical
+(813 × 1933: a 390-point phone). It predates the time rail: its cards are
+full width with the timeline under them, so card positions and sizes now
+differ from it by design (the rail's own mockup is in
+`docs/mockups/today-time-rail/`). `tool/visual_qa.sh` renders the canonical
 fixture (`test/support/canonical_today.dart`) at that size with the app's
 real fonts and writes `build/visual_qa/today_{actual,overlay,diff}.png`,
 plus the countdown between trips (`test/support/countdown_today.dart`,
 target `docs/mockups/today-empty/02-hanging-luggage-tag.png`) as
-`countdown_actual.png` and `countdown_844_actual.png`, and the Trips tab's
+`countdown_actual.png` and `countdown_844_actual.png`, the Trips tab's
 coming trips (`test/support/trip_postcards.dart`, target
 `docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png`) as
-`trips_actual.png`.
+`trips_actual.png`, and the Documents tab's stamps on the demo data
+(`test/support/documents_stamps.dart`, target
+`docs/mockups/documents-themed-v2/02-collectible-scenic-stamps.png`) as
+`documents_actual.png` (Orlando), `documents_lakes_actual.png` (the Lake
+District) and `documents_halo_{light,dark}.png` (rows on light and dark
+backdrops, to catch alpha halos). The same two lists are goldens in
+`test/widget/goldens/` (test font; update with `--update-goldens`).
 Never edit the reference to make a comparison pass.
 
 ```bash
@@ -183,7 +253,13 @@ flutter run
 ```
 
 iOS minimum is 15.0 (Firebase SDK 12). If `pod install` crashes with an
-encoding error, run it with `LANG=en_US.UTF-8`.
+encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
+(`local_auth`) needs `NSFaceIDUsageDescription` (Info.plist), a
+`FlutterFragmentActivity` (Android `MainActivity`) and an AppCompat
+`LaunchTheme`. On the simulator, enrol Face ID with
+`xcrun simctl spawn booted notifyutil -s com.apple.BiometricKit.enrollmentChanged 1`
+(then `-p` the same name) and match with
+`xcrun simctl spawn booted notifyutil -p com.apple.BiometricKit_Sim.pearl.match`.
 
 ## Premium (Free / Trip Pass / Plus)
 
@@ -220,7 +296,7 @@ and stamps `premium` on trips.
   `memberNames` and `invite`, and it updates every booking's `memberIds`
   copy in the same transaction. The app can't (rules).
 - **UI**: trip screen "Who's coming" (invite, remove, leave), Trips →
-  "Join a trip". Inviting is gated by `requirePremium(familySharing)`; the
+  "New trip" → "Join a trip" (or the empty Trips tab). Inviting is gated by `requirePremium(familySharing)`; the
   Plus check moves server-side with RevenueCat.
 - **Tickets**: `Attachment.remotePath`; `TravelStore.syncTickets()` backs up
   tickets for shared or Plus trips and downloads the family's tickets for
@@ -261,7 +337,8 @@ the app. Project `travary-444` is on the Blaze plan.
   30 days; a return flight ("Lisbon to London") joins the trip its outbound
   flight started.
 - **Automatic looks** (`classifyTripVisuals`, `docs/VISUAL_PROFILES.md`):
-  a separate Gemini call classifies a whole trip into an experience theme,
+  deployed with its Places key secret; a separate Gemini call classifies a
+  whole trip into an experience theme,
   setting, moods and destination, verified with Places Text Search (New)
   (`GOOGLE_MAPS_PLATFORM_KEY` secret). Cached by a source hash; one shared
   retry policy with Smart Import (`geminiRetry.ts`). Vocabulary lives in
@@ -278,6 +355,18 @@ the app. Project `travary-444` is on the Blaze plan.
   (keep a reference from `initState`).
 - Layouts must survive long titles and small phones: tests run at iPhone size
   and fail on overflow.
+- **Home tabs are pages of one `PageView`** (`app/home_shell.dart`). A nav tap
+  slides through every tab in between (`NavLayout.switchDuration` 500 ms,
+  `switchCurve` `easeOutBack`: the overshoot is the bobble, smaller for
+  neighbours, none at the first/last tab). Keep `NeverScrollableScrollPhysics`
+  (nav taps only, no swiping), the keep-alive wrapper (a `PageView` builds only
+  visible pages) and each page's own linen (pages slide as whole cards). Reduced
+  motion jumps instead. The nav bar stays in `bottomNavigationBar`, so pages
+  need no extra bottom padding. Tests that just want a tab on screen use
+  `openTab` (`test/support/open_tab.dart`); the slide is covered by
+  `test/widget/tab_transition_test.dart`. Scope scroll finders to the screen
+  (`find.descendant(of: find.byType(TripsScreen), ...)`): the first `Scrollable`
+  in the tree is now the `PageView`'s.
 - Never hardcode secret keys in the app; AI runs server-side (see AI).
 - Mirrors kept equal by tests: art subjects, the visual vocabulary and ISO
   country list (Dart ↔ TypeScript), `appBuildNumber` ↔ pubspec's `+N`.
@@ -294,5 +383,5 @@ the app. Project `travary-444` is on the Blaze plan.
   See `docs/PRODUCT_PLAN.md`.
 - **Later:** flight alerts, Live Activity / widgets, email-forward import,
   memories and recap, referrals.
-- Bundle ID is still `com.travary.travaryTemp`; change before release (needs
-  new Firebase app registrations).
+- Bundle ID / Android application ID: `com.travary.app` (Firebase apps
+  `ios:3d6150…` and `android:ccb966…` in travary-444).

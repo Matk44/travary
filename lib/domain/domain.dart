@@ -7,6 +7,7 @@ export 'local_date.dart';
 export 'palette.dart';
 export 'premium.dart';
 export 'pricing.dart';
+export 'travel_document.dart';
 export 'trip.dart';
 export 'visual_profile.dart';
 export 'weather.dart';

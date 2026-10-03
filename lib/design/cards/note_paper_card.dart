@@ -42,14 +42,9 @@ class NotePaperCard extends StatelessWidget {
           ExcludeSemantics(
             child: ShellTextBlock(
               children: [
-                Text(
-                  text.eyebrow,
-                  style: TravaryText.shellEyebrow.copyWith(color: colors.highlight),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                ShellEyebrow(text.eyebrow, style: TravaryText.shellEyebrow.copyWith(color: colors.highlight)),
                 const SizedBox(height: 6),
-                FitTitle(text.title, style: TravaryText.reservationTitle),
+                FitTitle(text.title, style: TravaryText.reservationTitle, floorScale: ShellLayout.titleFloorScale),
                 const SizedBox(height: 8),
                 if (text.whenAndDetail != null)
                   Text(text.whenAndDetail!, style: TravaryText.shellLine, maxLines: 2, overflow: TextOverflow.ellipsis),

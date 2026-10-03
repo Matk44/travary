@@ -179,31 +179,65 @@ class ShellTextBlock extends StatelessWidget {
   }
 }
 
+/// A card's eyebrow ("HAPPENING NOW") on one line: on a narrow card a
+/// little smaller rather than cut short.
+class ShellEyebrow extends StatelessWidget {
+  const ShellEyebrow(this.text, {super.key, required this.style});
+
+  final String text;
+  final TextStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      alignment: AlignmentDirectional.centerStart,
+      child: Text(text, style: style, maxLines: 1, softWrap: false),
+    );
+  }
+}
+
 /// A card title that keeps to one line when shrinking it a little is
-/// enough (down to [minScale] of its size), and otherwise wraps onto two
-/// lines at that smaller size, ending with an ellipsis if even that is too
-/// long.
+/// enough (down to [minScale] of its size), and otherwise wraps onto
+/// [maxLines] lines at that smaller size. If those lines are still too few
+/// (or a word too wide), it steps down towards [floorScale] first, then
+/// ends with an ellipsis.
 class FitTitle extends StatelessWidget {
-  const FitTitle(this.text, {super.key, required this.style, this.minScale = 0.66});
+  const FitTitle(
+    this.text, {
+    super.key,
+    required this.style,
+    this.minScale = 0.66,
+    this.maxLines = 2,
+    double? floorScale,
+  }) : floorScale = floorScale ?? minScale;
 
   final String text;
   final TextStyle style;
   final double minScale;
+  final int maxLines;
+  final double floorScale;
 
   @override
   Widget build(BuildContext context) {
     final scaler = MediaQuery.textScalerOf(context);
+    final direction = Directionality.of(context);
     return LayoutBuilder(
       builder: (context, box) {
-        final painter = TextPainter(
-          text: TextSpan(text: text, style: style),
-          textDirection: Directionality.of(context),
-          textScaler: scaler,
-          maxLines: 1,
-        )..layout();
-        final width = painter.width;
-        painter.dispose();
         final available = box.maxWidth;
+        double widthOf(String value, TextStyle at) {
+          final painter = TextPainter(
+            text: TextSpan(text: value, style: at),
+            textDirection: direction,
+            textScaler: scaler,
+            maxLines: 1,
+          )..layout();
+          final width = painter.width;
+          painter.dispose();
+          return width;
+        }
+
+        final width = widthOf(text, style);
         final scale = width <= available ? 1.0 : available / width;
         if (scale >= minScale) {
           return FittedBox(
@@ -212,12 +246,28 @@ class FitTitle extends StatelessWidget {
             child: Text(text, style: style, maxLines: 1, softWrap: false),
           );
         }
-        return Text(
-          text,
-          style: style.copyWith(fontSize: style.fontSize! * minScale),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        );
+
+        TextStyle sized(double scale) => style.copyWith(fontSize: style.fontSize! * scale);
+        final words = text.split(RegExp(r'\s+'));
+        bool fits(double scale) {
+          final at = sized(scale);
+          if (words.any((word) => widthOf(word, at) > available)) return false;
+          final painter = TextPainter(
+            text: TextSpan(text: text, style: at),
+            textDirection: direction,
+            textScaler: scaler,
+            maxLines: maxLines,
+          )..layout(maxWidth: available);
+          final fitted = !painter.didExceedMaxLines;
+          painter.dispose();
+          return fitted;
+        }
+
+        var size = minScale;
+        while (size > floorScale && !fits(size)) {
+          size = size - 0.04 < floorScale ? floorScale : size - 0.04;
+        }
+        return Text(text, style: sized(size), maxLines: maxLines, overflow: TextOverflow.ellipsis);
       },
     );
   }

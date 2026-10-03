@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,7 +10,8 @@ import 'package:travary/design/tokens.dart';
 import 'package:travary/design/trip_chrome.dart';
 import 'package:travary/design/widgets/common.dart';
 import 'package:travary/design/widgets/countdown_trip_hero.dart';
-import 'package:travary/design/widgets/day_timeline.dart';
+import 'package:travary/design/widgets/nav_bar.dart';
+import 'package:travary/design/widgets/time_rail.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/trips/trip_screen.dart';
 import 'package:travary/logic/art_pack_selection.dart';
@@ -22,7 +24,7 @@ import '../support/countdown_today.dart';
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
   final bundled = bundledArtCatalog();
-  final withPostcards = bundled.withPacks(pendingPostcardPacks());
+  final withPostcards = bundled.withPacks(countdownPostcardSourcePacks());
 
   Future<void> pump(
     WidgetTester tester,
@@ -88,19 +90,12 @@ void main() {
       expect(find.byType(CountdownTripHero), findsOneWidget);
       expect(find.text('Nothing planned today'), findsOneWidget);
       expect(find.text('Mon 28 Sep'), findsOneWidget, reason: 'the pill shows the date; the tag has the count');
-      for (final text in [
-        'NEXT ADVENTURE',
-        'NEXT TRIP',
-        '58',
-        'DAYS TO GO',
-        'Lake District',
-        '25–28 Nov 2026',
-        '4 days',
-        '3 bookings',
-        'Opens 25 Nov',
-        'View trip',
-      ]) {
+      for (final text in ['NEXT ADVENTURE', 'NEXT TRIP', '58', 'DAYS TO GO', 'Lake District', '25–28 Nov 2026']) {
         expect(find.text(text), findsOneWidget, reason: text);
+      }
+      // Just the postcard and its tag: no facts or button under it.
+      for (final text in ['4 days', '3 bookings', 'Opens 25 Nov', 'View trip']) {
+        expect(find.text(text), findsNothing, reason: text);
       }
       // Lake District comes before Paris; the past Orlando trip is gone.
       expect(find.text('Paris'), findsNothing);
@@ -108,7 +103,7 @@ void main() {
       // The Lake District's own postcard, whole; the shared blank tag.
       final postcard = tester.widget<Image>(find.byKey(const ValueKey('countdown-postcard')));
       expect(postcard.image, isA<FileImage>());
-      expect((postcard.image as FileImage).file.path, pendingPostcard('region_gb_lake_district'));
+      expect((postcard.image as FileImage).file.path, countdownPostcardSource('region_gb_lake_district'));
       expect(postcard.fit, BoxFit.contain, reason: 'never crop the deckled edge');
       expect(
         tester.widget<Image>(find.byKey(const ValueKey('countdown-tag-raster'))).image,
@@ -116,17 +111,18 @@ void main() {
       );
       // No itinerary preview, day chooser or swipe while counting down.
       expect(find.text('Lakeside Cottage'), findsNothing);
-      expect(find.byType(DayTimeline), findsNothing);
+      expect(find.byType(TimeRailRow), findsNothing);
       expect(find.bySemanticsLabel(RegExp('Choose a day')), findsNothing);
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('the postcard sits in its own proportions, with the tag over its upper right', (tester) async {
+    testWidgets('the postcard sits in its own proportions, with the tag over its lower right corner', (tester) async {
       await pump(tester, countdownTodayApp());
       final card = tester.getRect(find.byKey(const ValueKey('countdown-postcard')));
       expect(card.width / card.height, closeTo(1122 / 1402, 0.001));
       expect(card.width, closeTo(CountdownTripHero.postcardWidth(390, 844), 0.5));
-      expect(card.height, lessThanOrEqualTo(844 * CountdownLayout.postcardMaxHeight + 0.5));
+      final hero = tester.getRect(find.byKey(const ValueKey('countdown-hero')));
+      expect(hero.height, lessThanOrEqualTo(844 * CountdownLayout.stageMaxHeight + 0.5));
 
       // The tag stack turns as one, clockwise, from the eyelet.
       final swing = tester.widget<Transform>(find.byKey(const ValueKey('countdown-tag-swing')));
@@ -138,36 +134,44 @@ void main() {
           reason: '$text turns with the tag',
         );
       }
-      // The tag's card is about 46% of the postcard wide, over its upper
-      // right, and may reach above it (nothing clips it).
+      // The tag's card is about a third of the postcard wide, over its
+      // lower right corner, with about half of it below the card; the hero
+      // takes in the part that hangs below, so it can be tapped too.
       final tag = tester.getRect(find.byKey(const ValueKey('countdown-tag-raster')));
       expect(tagCard(tester).width / card.width, closeTo(CountdownLayout.tagWidth, 0.005));
       expect(tag.center.dx, greaterThan(card.center.dx));
-      expect(tag.top, lessThan(card.top), reason: 'the cord runs up past the postcard');
+      // The tag's card corners where they're drawn, hanging at an angle.
+      final raster = tester.renderObject<RenderBox>(find.byKey(const ValueKey('countdown-tag-raster')));
+      final c = tagCard(tester);
+      final corners = [
+        for (final corner in [c.topLeft, c.topRight, c.bottomLeft, c.bottomRight]) raster.localToGlobal(corner),
+      ];
+      final tagTop = corners.map((p) => p.dy).reduce(math.min);
+      final tagBottom = corners.map((p) => p.dy).reduce(math.max);
+      final drawnCardBottom = card.top + card.height * CountdownGeometry.postcardCardBottom;
+      expect(tagTop, lessThan(drawnCardBottom));
+      expect(tagBottom, greaterThan(drawnCardBottom));
+      expect((tagBottom - drawnCardBottom) / (tagBottom - tagTop), closeTo(CountdownLayout.tagBelow, 0.08));
+      expect(hero.bottom, greaterThanOrEqualTo(tagBottom), reason: 'the part below can be tapped too');
       expectOnTagCard(tester);
       final stage = find.ancestor(of: find.byKey(const ValueKey('countdown-tag-swing')), matching: find.byType(Stack));
       expect(tester.widget<Stack>(stage.first).clipBehavior, Clip.none);
       expect(tester.getCenter(find.text('58')).dx, greaterThan(card.center.dx));
-      expect(tester.getCenter(find.text('58')).dy, lessThan(card.center.dy + card.height * 0.25));
+      expect(tester.getCenter(find.text('58')).dy, greaterThan(card.center.dy), reason: 'in the lower half');
     });
 
-    testWidgets('one summary for screen readers, and real buttons', (tester) async {
+    testWidgets('one summary for screen readers, on the one button', (tester) async {
       await pump(tester, countdownTodayApp());
       final handle = tester.ensureSemantics();
       final hero = find.bySemanticsLabel(lakesLabel);
       expect(hero, findsOneWidget);
       expect(tester.getSemantics(hero), containsSemantics(isButton: true, hasTapAction: true));
-      final button = find.bySemanticsLabel('View trip');
-      expect(button, findsOneWidget);
-      expect(tester.getSemantics(button), containsSemantics(isButton: true, hasTapAction: true));
-      expect(tester.getSize(button).height, greaterThanOrEqualTo(48));
-      expect(tester.getSize(button).width, greaterThanOrEqualTo(48));
-      // The facts are plain text for screen readers too.
-      expect(find.bySemanticsLabel('3 bookings'), findsOneWidget);
+      expect(tester.getSize(hero).height, greaterThanOrEqualTo(48));
+      expect(find.bySemanticsLabel('View trip'), findsNothing);
       handle.dispose();
     });
 
-    testWidgets('the postcard and View trip both open the trip', (tester) async {
+    testWidgets('tapping the postcard, or its tag, opens the trip', (tester) async {
       await pump(tester, countdownTodayApp());
 
       // The picture itself, left of the tag.
@@ -182,14 +186,19 @@ void main() {
       await tester.tap(find.text('58'));
       await tester.pumpAndSettle();
       expect(tester.widget<TripScreen>(find.byType(TripScreen)).tripId, 'lakes');
-      await tester.pageBack();
-      await tester.pumpAndSettle();
+    });
 
-      await tester.ensureVisible(find.text('View trip'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('View trip'));
-      await tester.pumpAndSettle();
-      expect(tester.widget<TripScreen>(find.byType(TripScreen)).tripId, 'lakes');
+    testWidgets('it gives a little under a finger', (tester) async {
+      await pump(tester, countdownTodayApp());
+      double scale() => tester.widget<AnimatedScale>(find.byKey(const ValueKey('countdown-press'))).scale;
+      expect(scale(), 1);
+      final gesture = await tester.startGesture(tester.getCenter(find.byKey(const ValueKey('countdown-postcard'))));
+      // A press registers after a moment, so a scroll isn't taken for one.
+      await tester.pump(kPressTimeout + const Duration(milliseconds: 20));
+      expect(scale(), CountdownLayout.pressScale);
+      await gesture.cancel();
+      await tester.pump();
+      expect(scale(), 1);
     });
 
     testWidgets('the count comes from calendar dates, whatever the time of day', (tester) async {
@@ -212,30 +221,6 @@ void main() {
       );
       expect(find.text('14° Cloudy'), findsOneWidget);
       expect(find.byType(CountdownTripHero), findsOneWidget);
-    });
-
-    testWidgets('the fact tags and button use their rasters when a pack has them, text still live', (tester) async {
-      await pump(tester, countdownTodayApp());
-      expect(find.byKey(const ValueKey('countdown-fact-fallback')), findsNWidgets(3), reason: 'not made yet');
-      expect(find.byKey(const ValueKey('countdown-button-fallback')), findsOneWidget);
-
-      final lakes = pendingPostcardPacks().first;
-      final dressed = ArtPackContent(
-        pack: lakes.pack,
-        assets: const [],
-        common: {
-          ...lakes.common,
-          'countdown_fact_tag': const FileArtImage('/packs/lakes/countdown_fact_tag.png'),
-          'countdown_button': const FileArtImage('/packs/lakes/countdown_button.png'),
-        },
-      );
-      await pump(tester, countdownTodayApp(catalog: bundled.withPacks([dressed])));
-      expect(find.byKey(const ValueKey('countdown-fact-raster')), findsNWidgets(3));
-      expect(find.byKey(const ValueKey('countdown-button-raster')), findsOneWidget);
-      expect(find.byKey(const ValueKey('countdown-fact-fallback')), findsNothing);
-      for (final text in ['4 days', '3 bookings', 'Opens 25 Nov', 'View trip']) {
-        expect(find.text(text), findsOneWidget, reason: text);
-      }
     });
 
     testWidgets('a postcard file that cannot load leaves a plain card under the same tag', (tester) async {
@@ -291,15 +276,25 @@ void main() {
       expect(find.text('Day 3 of 5 · Cornwall'), findsOneWidget);
     });
 
-    testWidgets('no postcard for the trip: the usual view of its first day', (tester) async {
+    String postcardShown(WidgetTester tester) {
+      final image = tester.widget<Image>(find.byKey(const ValueKey('countdown-postcard'))).image;
+      return switch (image) {
+        FileImage(:final file) => file.path,
+        AssetImage(:final assetName) => assetName,
+        _ => '$image',
+      };
+    }
+
+    testWidgets('no postcard for the trip\'s place: the countdown on the neutral postcard', (tester) async {
       await pump(tester, countdownTodayApp(catalog: bundled));
-      expect(find.byType(CountdownTripHero), findsNothing);
-      expect(find.text('Lake District in 58 days'), findsOneWidget);
-      expect(find.text('58 days'), findsOneWidget, reason: 'the countdown pill');
-      expect(find.text('Lakeside Cottage'), findsOneWidget);
+      expect(find.byType(CountdownTripHero), findsOneWidget);
+      expect(postcardShown(tester), 'assets/art/common/countdown_postcard_anywhere.webp');
+      expect(find.text('Lake District'), findsOneWidget, reason: 'the tag still names the trip');
     });
 
-    testWidgets("never another place's postcard: Tokyo gets none of the pending five", (tester) async {
+    testWidgets("never another place's postcard: Tokyo gets the neutral one, not the five destination cards", (
+      tester,
+    ) async {
       final tokyo = verifiedProfile(ExperienceTheme.urbanModern, country: 'JP', region: 'kanto', city: 'tokyo');
       await pump(
         tester,
@@ -308,9 +303,18 @@ void main() {
           data: countdownTodayData(lakesTitle: 'Tokyo', lakesProfile: tokyo),
         ),
       );
+      expect(postcardShown(tester), 'assets/art/common/countdown_postcard_anywhere.webp');
+      expect(find.text('Tokyo'), findsOneWidget);
+    });
+
+    testWidgets('without the neutral postcard either, the usual view of the first day', (tester) async {
+      final withoutNeutral = ArtCatalog.fromAssetPaths(
+        bundledArtPaths().where((path) => !path.contains('countdown_postcard_anywhere')),
+      );
+      await pump(tester, countdownTodayApp(catalog: withoutNeutral));
       expect(find.byType(CountdownTripHero), findsNothing);
-      expect(find.byKey(const ValueKey('countdown-postcard')), findsNothing);
-      expect(find.text('Tokyo in 58 days'), findsOneWidget);
+      expect(find.text('Lake District in 58 days'), findsOneWidget);
+      expect(find.text('Lakeside Cottage'), findsOneWidget);
     });
 
     testWidgets('with no trip ahead, the empty states', (tester) async {
@@ -358,25 +362,82 @@ void main() {
     double tagAngle(WidgetTester tester) =>
         _degrees(tester.widget<Transform>(find.byKey(const ValueKey('countdown-tag-swing'))));
 
-    testWidgets('the postcard lifts in, then the tag swings and settles', (tester) async {
+    double tagScale(WidgetTester tester) =>
+        tester.widget<Transform>(find.byKey(const ValueKey('countdown-tag-slap'))).transform.getMaxScaleOnAxis();
+
+    testWidgets('the postcard lifts in, the tag is slapped on, swings both ways and comes to rest', (tester) async {
       await pump(tester, countdownTodayApp(), settle: false);
       await untilHero(tester);
+      const rest = CountdownLayout.tagAngleDegrees;
+
       await tester.pump(const Duration(milliseconds: 150));
       expect(postcardOpacity(tester), inExclusiveRange(0, 1), reason: 'the postcard is fading in');
       expect(tagOpacity(tester), 0, reason: 'the tag waits for the postcard');
 
-      await tester.pump(const Duration(milliseconds: 400));
+      // 620 ms in, mid-slap: the tag is coming down, larger than life.
+      await tester.pump(const Duration(milliseconds: 470));
       expect(postcardOpacity(tester), 1);
-      expect(tagAngle(tester), isNot(closeTo(CountdownLayout.tagAngleDegrees, 0.01)), reason: 'still settling');
-      expect(
-        tagAngle(tester),
-        lessThan(CountdownLayout.tagAngleDegrees + CountdownLayout.tagSettleDegrees + 0.01),
-        reason: 'only a few degrees',
-      );
+      expect(tagOpacity(tester), greaterThan(0));
+      expect(tagScale(tester), greaterThan(1.05));
+
+      // Then it swings either side of where it will hang.
+      final angles = <double>[];
+      for (var i = 0; i < 24; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+        angles.add(tagAngle(tester));
+      }
+      expect(tagScale(tester), closeTo(1, 0.001), reason: 'landed');
+      expect(angles.any((a) => a > rest + 1), isTrue, reason: 'swings one way');
+      expect(angles.any((a) => a < rest - 1), isTrue, reason: 'and the other');
+      expect(angles.every((a) => (a - rest).abs() < CountdownLayout.tagSwingDegrees), isTrue, reason: 'only a little');
 
       await tester.pumpAndSettle();
-      expect(tagAngle(tester), closeTo(CountdownLayout.tagAngleDegrees, 0.01));
+      expect(tagAngle(tester), closeTo(rest, 0.01));
       expect(tagOpacity(tester), 1);
+      expect(tagScale(tester), closeTo(1, 0.001));
+    });
+
+    testWidgets('it plays again whenever Today comes back into view', (tester) async {
+      await pump(tester, countdownTodayApp());
+      expect(postcardOpacity(tester), 1);
+      Finder tab(String label) =>
+          find.descendant(of: find.byType(TravaryNavBar), matching: find.bySemanticsLabel(label));
+
+      // Its tab, chosen again.
+      await tester.tap(tab('Trips'));
+      await tester.pumpAndSettle();
+      await tester.tap(tab('Today'));
+      // Partway through the page's slide back in, the entry is under way.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(postcardOpacity(tester), lessThan(1), reason: 'the entry restarted');
+      await tester.pumpAndSettle();
+      expect(postcardOpacity(tester), 1);
+
+      // Back from the background (not merely interrupted).
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(postcardOpacity(tester), 1, reason: 'Control Centre and the like don\'t replay it');
+      for (final state in [AppLifecycleState.inactive, AppLifecycleState.hidden, AppLifecycleState.paused]) {
+        tester.binding.handleAppLifecycleStateChanged(state);
+      }
+      for (final state in [AppLifecycleState.hidden, AppLifecycleState.inactive, AppLifecycleState.resumed]) {
+        tester.binding.handleAppLifecycleStateChanged(state);
+      }
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(postcardOpacity(tester), lessThan(1));
+      await tester.pumpAndSettle();
+
+      // A screen opened from it, closed again.
+      await tester.tap(find.byKey(const ValueKey('countdown-postcard')));
+      await tester.pumpAndSettle();
+      await tester.pageBack();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(postcardOpacity(tester), lessThan(1));
+      await tester.pumpAndSettle();
+      expect(tagAngle(tester), closeTo(CountdownLayout.tagAngleDegrees, 0.01));
     });
 
     testWidgets('with reduced motion everything is in place at once', (tester) async {
@@ -390,6 +451,7 @@ void main() {
       expect(postcardOpacity(tester), 1);
       expect(tagOpacity(tester), 1);
       expect(tagAngle(tester), closeTo(CountdownLayout.tagAngleDegrees, 0.01));
+      expect(tagScale(tester), closeTo(1, 0.001));
       expect(
         tester.widget<Transform>(find.byKey(const ValueKey('countdown-postcard-motion'))).transform.getTranslation().y,
         0,
@@ -410,7 +472,7 @@ void main() {
           await tester.drag(find.byType(CustomScrollView).first, const Offset(0, -2000));
           await tester.pumpAndSettle();
           expect(tester.takeException(), isNull);
-          expectFactsAndButtonFit(tester, width);
+          expectPostcardFits(tester, width);
         });
       }
     }
@@ -430,7 +492,7 @@ void main() {
         await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -2000));
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
-        expectFactsAndButtonFit(tester, width);
+        expectPostcardFits(tester, width);
       });
     }
 
@@ -460,16 +522,10 @@ void main() {
   });
 }
 
-void expectFactsAndButtonFit(WidgetTester tester, double width) {
-  final button = tester.getRect(find.byKey(const ValueKey('countdown-view-trip')));
-  expect(button.height, greaterThanOrEqualTo(48));
-  expect(button.left, greaterThanOrEqualTo(0));
-  expect(button.right, lessThanOrEqualTo(width));
-  for (final fact in ['4 days', '3 bookings', 'Opens 25 Nov']) {
-    final box = tester.getRect(find.text(fact));
-    expect(box.left, greaterThanOrEqualTo(0), reason: fact);
-    expect(box.right, lessThanOrEqualTo(width), reason: fact);
-  }
+void expectPostcardFits(WidgetTester tester, double width) {
+  final card = tester.getRect(find.byKey(const ValueKey('countdown-postcard')));
+  expect(card.left, greaterThanOrEqualTo(0));
+  expect(card.right, lessThanOrEqualTo(width));
 }
 
 /// Just the hero for the Lake District, on the bundled tag.
@@ -485,7 +541,7 @@ Widget heroAlone(ArtCatalog catalog) {
         body: SingleChildScrollView(
           child: CountdownTripHero(
             text: countdownTextFor(plan, LocalDate.fromDateTime(countdownNow))!,
-            postcard: FileArtImage(pendingPostcard('region_gb_lake_district')),
+            postcard: FileArtImage(countdownPostcardSource('region_gb_lake_district')),
             onOpen: () {},
           ),
         ),

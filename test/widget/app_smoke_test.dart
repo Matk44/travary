@@ -11,6 +11,9 @@ import 'package:travary/domain/domain.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
+import '../support/open_tab.dart';
+import '../support/travel_documents.dart';
+
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
 
@@ -34,6 +37,7 @@ void main() {
               clock: () => now,
             ),
           ),
+          travelDocumentsProvider(),
         ],
         child: MaterialApp(theme: buildTravaryTheme(), home: const HomeShell()),
       ),
@@ -67,12 +71,12 @@ void main() {
     expect(find.text('Sunshine Park'), findsOneWidget);
   });
 
-  testWidgets('choosing another day from the day line shows that day', (tester) async {
+  testWidgets('choosing another day from the trip calendar shows that day', (tester) async {
     await pumpApp(tester, DateTime(2026, 10, 14, 11, 0));
 
     await tester.tap(find.text('Day 3 of 8 · Orlando'));
     await tester.pumpAndSettle();
-    await tester.tap(find.bySemanticsLabel('Thursday 15 October'));
+    await tester.tap(find.bySemanticsLabel('Day 4 of 8, Thursday 15 October'));
     await tester.pumpAndSettle();
 
     expect(find.text('Everglades airboat tour'), findsOneWidget);
@@ -82,8 +86,7 @@ void main() {
   testWidgets('Documents search finds a booking by reference', (tester) async {
     await pumpApp(tester, DateTime(2026, 10, 14, 11, 0));
 
-    await tester.tap(find.bySemanticsLabel('Documents'));
-    await tester.pumpAndSettle();
+    await openTab(tester, 'Documents');
     await tester.enterText(find.byType(TextField), 'CIR-30412');
     await tester.pumpAndSettle();
 

@@ -12,6 +12,7 @@ import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../import/smart_import_screen.dart';
 import '../premium/premium_gate.dart';
+import '../travel_documents/document_actions.dart';
 import 'attachment_viewer.dart';
 import 'booking_detail_screen.dart';
 import 'edit_booking_screen.dart';
@@ -29,8 +30,12 @@ Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tri
   if (choice == null || !context.mounted) return;
   final kind = switch (choice) {
     ManualChoice(:final kind) => kind,
-    SmartImportChoice() => null,
+    SmartImportChoice() || TravelDocumentChoice() => null,
   };
+  if (choice is TravelDocumentChoice) {
+    await startAddTravelDocument(context);
+    return;
+  }
   if (kind == null) {
     await _startSmartImport(context, tripId: tripId);
     return;
@@ -61,6 +66,11 @@ class ManualChoice extends AddChoice {
 
 class SmartImportChoice extends AddChoice {
   const SmartImportChoice();
+}
+
+/// A passport, visa or insurance: not a booking, kept on this phone only.
+class TravelDocumentChoice extends AddChoice {
+  const TravelDocumentChoice();
 }
 
 /// Smart Import: premium, with a few free uses. Pick a file, it's read in
@@ -191,6 +201,20 @@ class KindPickerSheet extends StatelessWidget {
                   _KindTile(kind: kind, onTap: () => Navigator.pop(context, ManualChoice(kind))),
               ],
             ),
+            const SizedBox(height: TravarySpace.md),
+            Material(
+              color: TravaryColors.paper,
+              borderRadius: BorderRadius.circular(TravaryRadius.card),
+              child: ListTile(
+                key: const ValueKey('add-travel-document'),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.card)),
+                leading: const Icon(Icons.menu_book_rounded, color: TravaryColors.ink),
+                title: Text('Passport, visa or insurance', style: TravaryText.label),
+                subtitle: Text('Kept on this phone only', style: TravaryText.small),
+                trailing: const Icon(Icons.lock_outline_rounded, size: 18, color: TravaryColors.inkSoft),
+                onTap: () => Navigator.pop(context, const TravelDocumentChoice()),
+              ),
+            ),
           ],
         ),
       ),
@@ -275,7 +299,15 @@ class _KindTile extends StatelessWidget {
           children: [
             Icon(style.icon, size: 30, color: TravaryColors.ink),
             const SizedBox(height: TravarySpace.sm),
-            Text(kind.spec.label, style: TravaryText.small.copyWith(color: TravaryColors.ink)),
+            // One line, shrinking rather than breaking a word on small
+            // phones with large text.
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.xs),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(kind.spec.label, maxLines: 1, style: TravaryText.small.copyWith(color: TravaryColors.ink)),
+              ),
+            ),
           ],
         ),
       ),

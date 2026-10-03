@@ -41,6 +41,24 @@ class TripPlan {
   }
 }
 
+/// The first and last day [bookings] cover, or null when there are none.
+({LocalDate start, LocalDate end})? bookedSpan(Iterable<Booking> bookings) {
+  LocalDate? first;
+  LocalDate? last;
+  for (final booking in bookings) {
+    first = first == null ? booking.startDate : LocalDate.min(first, booking.startDate);
+    last = last == null ? booking.lastDate : LocalDate.max(last, booking.lastDate);
+  }
+  return first == null ? null : (start: first, end: last!);
+}
+
+/// Whether trip dates [start]–[end] leave out a booked day. A trip always
+/// covers its bookings ([TripPlan]), so it stretches past such dates.
+bool leavesOutBookings(Iterable<Booking> bookings, LocalDate start, LocalDate end) {
+  final span = bookedSpan(bookings);
+  return span != null && (span.start.isBefore(start) || span.end.isAfter(end));
+}
+
 /// Builds plans for every trip, ordered by start date (undated trips last).
 List<TripPlan> buildTripPlans(List<Trip> trips, List<Booking> bookings) {
   final byTrip = <String, List<Booking>>{};

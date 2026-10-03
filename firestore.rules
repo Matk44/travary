@@ -2,7 +2,7 @@ rules_version = '2';
 
 // Travary security rules.
 //
-//   trips/{tripId}                        title, theme, themeSource, ownerId, memberIds[]
+//   trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[]
 //                                         visualProfile* (server only)
 //   trips/{tripId}/bookings/{bookingId}   one booking + a copy of memberIds[]
 //
@@ -38,6 +38,22 @@ service cloud.firestore {
         && (!('themeSource' in data) || data.themeSource in ['auto', 'manual']);
     }
 
+    function shortText(map, key, max) {
+      return !(key in map) || (map[key] is string && map[key].size() <= max);
+    }
+
+    // Where the traveller says the trip goes ("Where to?"): a country
+    // code, names and art-pack slugs, or null to remove it.
+    function validDestination(data) {
+      return !('destination' in data) || data.destination == null
+        || (data.destination is map
+          && data.destination.keys().hasOnly(['countryCode', 'countryName', 'region', 'regionSlug', 'city', 'citySlug'])
+          && data.destination.countryCode is string && data.destination.countryCode.matches('[A-Z]{2}')
+          && data.destination.countryName is string && data.destination.countryName.size() <= 120
+          && shortText(data.destination, 'region', 120) && shortText(data.destination, 'regionSlug', 64)
+          && shortText(data.destination, 'city', 120) && shortText(data.destination, 'citySlug', 64));
+    }
+
     match /trips/{tripId} {
       allow read: if isMember(resource.data);
 
@@ -52,12 +68,14 @@ service cloud.firestore {
         && request.resource.data.ownerId == request.auth.uid
         && request.resource.data.memberIds == [request.auth.uid]
         && !request.resource.data.keys().hasAny(serverOnlyTripFields())
-        && validLook(request.resource.data);
+        && validLook(request.resource.data)
+        && validDestination(request.resource.data);
 
       allow update: if isMember(resource.data)
         && !request.resource.data.diff(resource.data).affectedKeys()
             .hasAny(serverOnlyTripFields().concat(['ownerId', 'memberIds']))
-        && validLook(request.resource.data);
+        && validLook(request.resource.data)
+        && validDestination(request.resource.data);
 
       allow delete: if signedIn() && resource.data.ownerId == request.auth.uid;
 

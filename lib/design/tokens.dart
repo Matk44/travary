@@ -153,9 +153,14 @@ abstract final class TravaryText {
   /// The "Show tickets" stamp.
   static TextStyle get stamp => _serif(18, FontWeight.w700, TravaryColors.ink, height: 1.0);
 
-  /// Timeline stop: "9:00" over "Park".
-  static TextStyle get timelineTime => _sans(13.5, FontWeight.w700, TravaryColors.ink, height: 1.2);
-  static TextStyle get timelineLabel => _sans(13.5, FontWeight.w400, TravaryColors.ink, height: 1.2);
+  /// A stop on the time rail: "9:00" over "am".
+  static TextStyle get railTime => _sans(14, FontWeight.w700, TravaryColors.ink, height: 1.2);
+  static TextStyle get railPeriod => _sans(12, FontWeight.w400, TravaryColors.inkSoft, height: 1.15);
+
+  /// The trip calendar: weekday letters over day numbers.
+  static TextStyle get calendarWeekday =>
+      _sans(12, FontWeight.w600, TravaryColors.inkSoft, height: 1.2, letterSpacing: 0.6);
+  static TextStyle get calendarDay => _sans(15, FontWeight.w500, TravaryColors.ink, height: 1.0);
 
   /// Home tab labels.
   static TextStyle get tabLabel => _sans(11, FontWeight.w500, TravaryColors.ink, height: 1.1);
@@ -209,7 +214,33 @@ abstract final class TravaryText {
   static TextStyle get countdownFact => _sans(14, FontWeight.w500, TravaryColors.ink, height: 1.2);
 
   /// "View trip" on the ticket button.
-  static TextStyle get countdownAction => _serif(24, FontWeight.w700, TravaryColors.paper, height: 1.1);
+  static TextStyle get countdownAction => _serif(22, FontWeight.w600, TravaryColors.paper, height: 1.0);
+
+  // ---- Documents: the stamp rows --------------------------------------
+
+  /// The postmark's date: "26" over "Sep".
+  static TextStyle get documentDay => _serif(15, FontWeight.w700, TravaryColors.ink, height: 1.0);
+  static TextStyle get documentMonth => _serif(12.5, FontWeight.w700, TravaryColors.ink, height: 1.05);
+
+  /// The booking's name. A long one shrinks a little
+  /// ([DocumentStampLayout.titleMinScale]), then ends in an ellipsis.
+  static TextStyle get documentTitle =>
+      _serif(17, FontWeight.w700, TravaryColors.ink, height: 1.15, letterSpacing: -0.2);
+
+  /// "Lunch · ST-4412".
+  static TextStyle get documentLine => _sans(13, FontWeight.w400, TravaryColors.inkSoft, height: 1.25);
+
+  /// The place on a destination stamp's label: "ORLANDO".
+  static TextStyle get destinationLabel =>
+      _sans(9, FontWeight.w700, TravaryColors.ink, height: 1.0, letterSpacing: 1.6);
+}
+
+/// Text on the raster card shells.
+abstract final class ShellLayout {
+  /// A title that won't fit its two lines at its usual smallest size (a
+  /// long name on a narrow card) steps down to this share of its size
+  /// before it ends in an ellipsis.
+  static const titleFloorScale = 0.5;
 }
 
 /// Spacing of the Today composition, tuned at the reference 390 × 927
@@ -223,6 +254,9 @@ abstract final class TodayLayout {
 
   /// The weather pill from the right edge.
   static const pillInset = 12.0;
+
+  /// The pill's tap target is at least this tall, the pill centred in it.
+  static const pillTarget = 48.0;
 
   /// Between the header and the first card.
   static const headerGap = 26.0;
@@ -239,17 +273,51 @@ abstract final class TodayLayout {
   /// Compact rows (finished items) are closer together.
   static const compactGap = 8.0;
 
-  /// Between the last card and the timeline.
-  static const timelineGap = 16.0;
+  /// The time rail's column of times, from the screen edge, and its width.
+  /// The line and dots run down the middle of it.
+  static const railLeft = 4.0;
+  static const railWidth = 44.0;
 
-  /// The first and last timeline stops from the card edges.
-  static const timelineInset = 30.0;
+  /// Cards beside the rail start this far from the screen edge. A tagged
+  /// card's luggage-tag cord hangs out left of the card, above it; this
+  /// keeps the cord short of the line.
+  static const railCardLeft = 64.0;
 
-  /// A timeline stop needs at least this much room; more stops scroll.
-  static const timelineStopWidth = 78.0;
+  /// A stop's time starts this far below its card's top edge, level with
+  /// a tagged card's first line of text.
+  static const railStopTop = 14.0;
 
-  /// Below the timeline, above the home tabs.
+  /// The line stops this far short of a stop's time; below, it leaves
+  /// from behind the dot.
+  static const railLineGap = 6.0;
+
+  /// The line's width, and a stop's dot.
+  static const railLine = 2.4;
+  static const railDot = 13.0;
+
+  /// The times grow with the text size up to this much; the card beside
+  /// each one says its time at any size.
+  static const railMaxTextScale = 1.3;
+
+  /// Below the last card, above the home tabs.
   static const bottomGap = 16.0;
+}
+
+/// The trip calendar in the day chooser.
+abstract final class CalendarLayout {
+  /// A day's row, which is also its tap target's height.
+  static const rowHeight = 48.0;
+
+  /// The disc behind a day's number: filled for the day on screen, ringed
+  /// for today.
+  static const disc = 38.0;
+  static const ring = 1.8;
+
+  /// The dot under the number on a day with something booked.
+  static const bookedDot = 4.5;
+
+  /// Numbers grow with the text size up to this much, to stay in the disc.
+  static const maxTextScale = 1.6;
 }
 
 /// Today between trips: the next trip's postcard with its countdown tag
@@ -262,53 +330,121 @@ abstract final class CountdownLayout {
   /// Wider screens centre the postcard at this width.
   static const postcardMaxWidth = 460.0;
 
-  /// The postcard is at most this share of the screen's height, so the
-  /// heading, postcard, facts and button fit above the home tabs on a
-  /// 390 × 844 phone (the postcard is taller than it is wide).
-  static const postcardMaxHeight = 0.5;
-
-  /// Room above the postcard for the tag's cord, as a share of the
-  /// postcard's width. The cord also runs up past the postcard's right
-  /// edge (never clipped by the hero itself).
-  static const cordRoom = 0.06;
+  /// The postcard with the tag hanging below it is at most this share of
+  /// the screen's height, so the greeting, heading, postcard and tag fit
+  /// above the home tabs: on a 390 × 844 phone the postcard spans the
+  /// full width.
+  static const stageMaxHeight = 0.67;
 
   /// The tag's card (its body, without the cord) as a share of the
-  /// postcard's width.
-  static const tagWidth = 0.46;
+  /// postcard's width: small enough to leave most of the picture showing.
+  static const tagWidth = 0.36;
 
-  /// Where the tag's card sits on the postcard at rest: its right edge and
-  /// top edge, as shares of the postcard's width.
-  static const tagRight = 0.99;
-  static const tagTop = 0.095;
+  /// The tag hangs over the postcard's lower right corner: its card reaches
+  /// this share of the postcard's width past the card's right edge, and
+  /// this share of the tag's card hangs below the card's bottom edge.
+  static const tagPastEdge = 0.02;
+  static const tagBelow = 0.5;
 
   /// The tag hangs this far clockwise, shell and words together.
-  static const tagAngleDegrees = 7.0;
-
-  /// On entry it swings in from a few degrees further and settles.
-  static const tagSettleDegrees = 4.0;
+  static const tagAngleDegrees = 6.0;
 
   /// The tag's words are laid out at this width, then scaled to the tag.
   static const tagCopyWidth = 140.0;
 
-  /// Postcard lift and fade, then the tag's delayed settle.
-  static const entryDuration = Duration(milliseconds: 900);
+  /// The entry, played each time Today shows the countdown: the postcard
+  /// lifts in, the tag is slapped on, the card gives, the tag swings and
+  /// settles (phases in `CountdownTripHero`).
+  static const entryDuration = Duration(milliseconds: 2200);
+
+  /// The postcard rises this far and grows from [postcardStartScale].
   static const postcardLift = 16.0;
+  static const postcardStartScale = 0.96;
 
-  /// Between the postcard and the facts (its own clear margin already
-  /// spaces them), and the facts and the button.
-  static const factsGap = 0.0;
-  static const buttonGap = 18.0;
-  static const factSpacing = 8.0;
+  /// How far the postcard gives under the slap, as a share of its size.
+  static const postcardGive = 0.015;
 
-  /// The facts' stand-in tags.
-  static const factMinHeight = 64.0;
-  static const factIconSize = 30.0;
+  /// The tag comes down from this much larger, this many points higher,
+  /// turned this many degrees the other way.
+  static const tagSlapScale = 1.4;
+  static const tagSlapDrop = 28.0;
+  static const tagSlapTurnDegrees = 8.0;
 
-  /// The ticket button.
-  static const buttonWidth = 0.56;
-  static const buttonMaxWidth = 260.0;
-  static const buttonMinHeight = 60.0;
-  static const buttonNotch = 9.0;
+  /// Then it swings: this many degrees either side at first, this many
+  /// times, dying away at this rate, and stops exactly at rest.
+  static const tagSwingDegrees = 10.0;
+  static const tagSwingCycles = 2.5;
+  static const tagSwingDamping = 4.5;
+
+  /// The postcard sinks a little under a finger.
+  static const pressScale = 0.98;
+}
+
+/// The Documents list's stamp rows (`DocumentStampCard`), tuned on a
+/// 390-point phone against
+/// docs/mockups/documents-themed-v2/02-collectible-scenic-stamps.png.
+/// Sizes are for the full-size row; a narrow phone draws the postmark and
+/// stamp smaller (down to [minArtScale]) so the text keeps its width.
+abstract final class DocumentStampLayout {
+  /// Rows from the screen edge (like Today's cards), and between rows.
+  static const inset = 16.0;
+  static const gap = 6.0;
+
+  /// A row's least height (it grows with larger text) and corner radius.
+  static const rowHeight = 62.0;
+  static const radius = 10.0;
+
+  /// Inside the row, before the postmark and after the chevron.
+  static const paddingStart = 6.0;
+  static const paddingEnd = 4.0;
+
+  /// The postmark's outer ring, across.
+  static const ringDiameter = 44.0;
+
+  /// Between the ring and the stamp, crossed by the cancellation lines;
+  /// without the lines (a narrow phone), [ringGapTight].
+  static const ringGap = 16.0;
+  static const ringGapTight = 6.0;
+
+  /// The stamp itself, perforation tips included.
+  static const stampWidth = 70.0;
+
+  /// Between the stamp and the title.
+  static const stampGap = 12.0;
+
+  /// The chevron; a row with ticket files has the wider "Show tickets"
+  /// button (a full-size target) in its place.
+  static const chevron = 30.0;
+  static const ticketsButton = 44.0;
+
+  /// The kind icon's paper badge in the window's top-right corner.
+  static const badge = 16.0;
+  static const badgeInset = 3.0;
+
+  /// The title and details are never narrower than this while the art can
+  /// still shrink. Below [linesMinScale] the cancellation lines are left
+  /// out; the art never goes below [minArtScale].
+  static const minTextWidth = 150.0;
+  static const minArtScale = 0.72;
+  static const linesMinScale = 0.9;
+
+  /// The lines' band as a share of the ring's diameter, and where they
+  /// start: this share of the ring's radius right of its centre.
+  static const linesHeight = 0.36;
+  static const linesStart = 0.58;
+
+  /// The date inside the ring, as a share of its diameter.
+  static const dateSize = 0.56;
+
+  /// The smallest a long title shrinks, as a share of its size, before it
+  /// ends in an ellipsis; and the space under it.
+  static const titleMinScale = 0.78;
+  static const lineGap = 2.0;
+
+  /// The destination stamp beside the heading, and its postmark (as a
+  /// share of the stamp's width).
+  static const headerStampWidth = 100.0;
+  static const headerRing = 0.5;
 }
 
 /// The raised home tabs.
@@ -335,6 +471,11 @@ abstract final class NavLayout {
 
   /// The pop when a tab is chosen.
   static const popDuration = Duration(milliseconds: 380);
+
+  /// The pages slide sideways through every tab in between, overshooting a
+  /// little (that curve is the bobble) before they settle on the chosen one.
+  static const switchDuration = Duration(milliseconds: 500);
+  static const switchCurve = Curves.easeOutBack;
 }
 
 /// Trips: a coming trip's landscape postcard with the countdown tag hung

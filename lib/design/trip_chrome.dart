@@ -5,7 +5,7 @@ import 'art/art_catalog.dart';
 import 'art/art_slots.dart';
 
 /// A trip palette's UI tokens as Flutter colours. Chrome (the selected home
-/// tab, the day timeline, focus rings, category labels) uses only these;
+/// tab, the day's time rail, focus rings, category labels) uses only these;
 /// full-colour artwork is never tinted.
 class TripColors {
   const TripColors({
@@ -36,7 +36,9 @@ class TripColors {
   /// Selected states: the raised home tab.
   final Color primary;
 
-  /// Quiet structure: the timeline line and its stops.
+  /// Part of every pack's palette, but nothing draws with it at the moment:
+  /// packs chose strong accents (often red) for it, too loud for the time
+  /// rail, which uses [ink].
   final Color secondary;
 
   /// What matters now: category labels, the current stop, focus rings.

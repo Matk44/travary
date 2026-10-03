@@ -3,18 +3,17 @@ import 'package:intl/intl.dart';
 import '../domain/domain.dart';
 
 /// "9:00am", "7:15pm".
-String formatClock(ClockTime time) {
-  final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
-  final suffix = time.hour < 12 ? 'am' : 'pm';
-  return '$hour:${time.minute.toString().padLeft(2, '0')}$suffix';
-}
+String formatClock(ClockTime time) => '${formatClockShort(time)}${formatClockPeriod(time)}';
 
-/// "9:00", "7:15": twelve-hour, no am/pm, for a timeline that reads in
-/// order.
+/// "9:00", "7:15": twelve-hour, no am/pm, for the day's time rail (the
+/// am/pm goes underneath).
 String formatClockShort(ClockTime time) {
   final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
   return '$hour:${time.minute.toString().padLeft(2, '0')}';
 }
+
+/// "am" or "pm".
+String formatClockPeriod(ClockTime time) => time.hour < 12 ? 'am' : 'pm';
 
 /// "28° Sunny": a forecast for the header pill.
 String formatWeather(WeatherReport report) => '${report.temperature}° ${report.condition.label}';
@@ -27,6 +26,12 @@ String formatDayLong(LocalDate date) => DateFormat('EEEE d MMMM').format(date.to
 
 /// "14 Oct".
 String formatDayMonth(LocalDate date) => DateFormat('d MMM').format(date.toDateTime());
+
+/// "14" and "Oct", for a date set on two lines.
+({String day, String month}) formatDayMonthParts(LocalDate date) {
+  final value = date.toDateTime();
+  return (day: DateFormat('d').format(value), month: DateFormat('MMM').format(value));
+}
 
 /// "14 Oct 2026".
 String formatDate(LocalDate date) => DateFormat('d MMM y').format(date.toDateTime());

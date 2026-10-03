@@ -11,7 +11,7 @@ import 'package:travary/design/cards/featured_ticket_card.dart';
 import 'package:travary/design/cards/room_key_card.dart';
 import 'package:travary/design/cards/tagged_reservation_card.dart';
 import 'package:travary/design/tokens.dart';
-import 'package:travary/design/widgets/day_timeline.dart';
+import 'package:travary/design/widgets/time_rail.dart';
 import 'package:travary/design/widgets/today_header.dart';
 
 import '../support/canonical_today.dart';
@@ -78,7 +78,6 @@ void main() {
       find.text('Be Our Guest Restaurant'),
       find.text('DINNER'),
       find.text('Ohana'),
-      find.text('12:30'),
     ];
     var previous = -1.0;
     for (final finder in order) {
@@ -94,18 +93,23 @@ void main() {
     expect(find.text('Room 2214'), findsOneWidget);
     expect(find.text('12:30pm · Table for 4'), findsOneWidget);
     expect(find.text('7:15pm'), findsOneWidget);
-    for (final label in ['Park', 'Lunch', 'Dinner', '9:00', '7:15']) {
+    // The time rail, left of the cards.
+    for (final label in ['9:00', 'am', '12:30', '7:15']) {
       expect(find.text(label), findsOneWidget);
     }
+    expect(find.text('pm'), findsNWidgets(2));
     for (final tab in ['Today', 'Trips', 'Documents', 'Profile']) {
       expect(find.text(tab), findsOneWidget);
     }
     expect(find.byType(FeaturedTicketCard), findsOneWidget);
     expect(find.byType(RoomKeyCard), findsOneWidget);
     expect(find.byType(TaggedReservationCard), findsNWidgets(2));
-    expect(find.byType(DayTimeline), findsOneWidget);
+    expect(find.byType(TimeRailRow), findsNWidgets(4));
     // Everything fits on the reference screen without scrolling.
-    expect(tester.getBottomLeft(find.text('Dinner')).dy, lessThan(927 - 34 - NavLayout.height - NavLayout.rise));
+    expect(
+      tester.getBottomLeft(find.byType(TaggedReservationCard).last).dy,
+      lessThan(927 - 34 - NavLayout.height - NavLayout.rise),
+    );
     expect(tester.takeException(), isNull);
   });
 }
@@ -221,12 +225,12 @@ Future<void> _writeComparison(ui.Image actual, String referencePath, String outD
 
 /// Where each element landed, against where it is in the reference (both in
 /// reference pixels; reference boxes measured from the PNG: the physical
-/// card, not its shadow or hanging tag).
+/// card, not its shadow or hanging tag). The reference predates the time
+/// rail: its cards are full width, with the timeline under them.
 void _writeElements(WidgetTester tester, double dpr, String outDir) {
   Rect px(Rect r) => Rect.fromLTRB(r.left * dpr, r.top * dpr, r.right * dpr, r.bottom * dpr);
   // Each tab's surface slot (raster or flat stand-in), wherever its rise puts it.
   final tabs = find.byWidgetPredicate((widget) => widget.runtimeType.toString() == '_TabSurface');
-  final timeline = tester.getRect(find.byType(DayTimeline));
   final elements = <String, (Rect, Rect)>{
     'weather pill': (px(tester.getRect(find.byType(HeaderPill))), const Rect.fromLTRB(565, 78, 787, 150)),
     'featured ticket': (px(tester.getRect(find.byType(FeaturedTicketCard))), const Rect.fromLTRB(22, 240, 795, 625)),
@@ -238,10 +242,6 @@ void _writeElements(WidgetTester tester, double dpr, String outDir) {
     'dinner card': (
       px(tester.getRect(find.byType(TaggedReservationCard).last)),
       const Rect.fromLTRB(35, 1328, 780, 1562),
-    ),
-    'timeline line (y)': (
-      px(Rect.fromLTWH(timeline.left + 30, timeline.top + 6.5, timeline.width - 60, 0)),
-      const Rect.fromLTRB(97, 1623, 715, 1623),
     ),
     'Today tab (selected)': (px(tester.getRect(tabs.at(0))), const Rect.fromLTRB(18, 1742, 170, 1933)),
     'Trips tab': (px(tester.getRect(tabs.at(1))), const Rect.fromLTRB(178, 1765, 330, 1933)),

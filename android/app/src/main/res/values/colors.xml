@@ -2,4 +2,5 @@
 <resources>
     <!-- Travary linen, shown while the app starts. -->
     <color name="travary_linen">#EFE8DC</color>
+    <color name="ic_launcher_background">#031227</color>
 </resources>

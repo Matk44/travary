@@ -8,6 +8,7 @@ import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/travel_store.dart';
 import '../premium/plus_card.dart';
+import '../travel_documents/document_actions.dart';
 import 'card_gallery_screen.dart';
 
 /// Account and settings. Sign-in and Travary Plus will live here.
@@ -30,6 +31,14 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: TravarySpace.lg),
           const PlusCard(),
+          const SectionLabel('Your documents'),
+          ListTile(
+            leading: const Icon(Icons.menu_book_rounded),
+            title: const Text('Travel documents'),
+            subtitle: const Text('Passports, visas and insurance, kept on this phone only'),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => openTravelDocuments(context),
+          ),
           const SectionLabel('Your data'),
           ListTile(
             leading: Icon(store.isDemo ? Icons.science_outlined : Icons.cloud_done_outlined),

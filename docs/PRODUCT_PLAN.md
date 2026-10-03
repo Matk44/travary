@@ -22,6 +22,7 @@ view-only; parsing errors erode trust; the category looks dated.
 | | Free | Trip Pass $7.99 (per trip) | Plus $34.99/yr (14-day trial) |
 |---|---|---|---|
 | Unlimited trips + manual bookings, Today, Wallet, offline tickets | ✓ | ✓ | ✓ |
+| Travel documents (passports, visas, insurance) on this phone, behind Face ID, with expiry checks | ✓ | ✓ | ✓ |
 | Countdown widget, read-only share link | ✓ | ✓ | ✓ |
 | Smart Import (screenshot / PDF / email) | 3 total | ✓ that trip | ✓ unlimited |
 | Family co-planning, tickets on everyone's phone (up to 6) | – | ✓ that trip | ✓ |
@@ -67,6 +68,10 @@ videos (stub tear-off, ticket "printing" on import).
   onboarding, analytics funnel events.
 - **v1.1:** flight alerts, Live Activity, "leave by", email-forward import.
 - **v1.2:** memories and recap, referrals, year-in-travel.
+- **Later (documents):** end-to-end encrypted family sharing of travel
+  documents (Plus); trip "readiness" shared as statuses only ("3 of 4
+  passports ready"), never contents; passport scan reading the
+  machine-readable zone on the phone; blurring the app switcher snapshot.
 
 ## Decisions
 
@@ -74,8 +79,8 @@ videos (stub tear-off, ticket "printing" on import).
 - AI: Gemini via Google AI Studio, server-side (accuracy first: a wrong AM/PM
   destroys trust, so imports are always a draft to confirm).
 - Firebase project on the Blaze plan.
+- Bundle ID and Android application ID: `com.travary.app`.
 
 ## Open decisions
 
 - Founding lifetime offer: yes/no.
-- Release bundle ID (currently `com.travary.travaryTemp`).

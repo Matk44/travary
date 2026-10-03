@@ -53,6 +53,22 @@ void main() {
       final plan = TripPlan(trip('x', plannedStart: d(12, 1), plannedEnd: d(12, 3)), const []);
       expect(plan.dayCount, 3);
     });
+
+    test('planned dates widen a trip but never cut a booking out', () {
+      final plan = TripPlan(trip('x', plannedStart: d(10, 14), plannedEnd: d(10, 22)), orlando.bookings);
+      expect(plan.start, d(10, 12));
+      expect(plan.end, d(10, 22));
+    });
+
+    test('booked span and dates that leave bookings out', () {
+      expect(bookedSpan(const []), isNull);
+      expect(bookedSpan(orlando.bookings), (start: d(10, 12), end: d(10, 19)));
+      expect(leavesOutBookings(orlando.bookings, d(10, 12), d(10, 19)), isFalse);
+      expect(leavesOutBookings(orlando.bookings, d(10, 10), d(10, 25)), isFalse);
+      expect(leavesOutBookings(orlando.bookings, d(10, 13), d(10, 19)), isTrue);
+      expect(leavesOutBookings(orlando.bookings, d(10, 12), d(10, 18)), isTrue);
+      expect(leavesOutBookings(const [], d(10, 13), d(10, 14)), isFalse);
+    });
   });
 
   group('focus', () {

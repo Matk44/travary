@@ -92,8 +92,25 @@ void main() {
         catalog,
       ).resolve(dining('a', 'Ohana', artSubject: 'grill'), TripArtContext.forTheme(ExperienceTheme.coastalResort));
       expect(choice.group, 'tropical_grill_01');
+      // The grill is drawn only as a scene: normal cards get the best
+      // vignette by the same rules (the look's generic), not the scene.
+      expect(choice.vignette?.group, 'tropical_01');
+      expect(choice.preferring(ArtFormat.vignette)?.group, 'tropical_01');
+    });
+
+    test('a picture in one format only stands in for the other when nothing else comes in it', () {
+      final booking = Booking(
+        id: 'p',
+        tripId: 't',
+        kind: BookingKind.attraction,
+        title: 'Sunshine Park',
+        startDate: d(10, 14),
+        createdAt: DateTime(2026),
+        updatedAt: DateTime(2026),
+      );
+      final choice = resolver(catalog).resolve(booking, TripArtContext.forTheme(ExperienceTheme.themepark));
       expect(choice.vignette, isNull);
-      expect(choice.preferring(ArtFormat.vignette)?.path, choice.scene?.path, reason: 'falls back to the scene');
+      expect(choice.preferring(ArtFormat.vignette)?.path, 'assets/art/attraction/themepark_castle_01_scene.png');
     });
 
     test('with no subject match, a generic picture for the theme', () {

@@ -6,19 +6,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travary/design/art/art_catalog.dart';
 import 'package:travary/design/art/art_slots.dart';
 import 'package:travary/design/tokens.dart';
-import 'package:travary/design/widgets/nav_bar.dart';
 import 'package:travary/design/widgets/upcoming_trip_postcard.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/trips/trip_screen.dart';
+import 'package:travary/features/trips/trips_screen.dart';
 
 import '../support/canonical_today.dart';
 import '../support/countdown_today.dart';
+import '../support/open_tab.dart';
 import '../support/trip_postcards.dart';
 
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
   final bundled = bundledArtCatalog();
-  final withPostcards = bundled.withPacks(pendingTripPostcardPacks());
+  final withPostcards = bundled.withPacks(tripPostcardSourcePacks());
 
   /// The Trips tab on the mockup's day (28 September 2026), with just the
   /// three coming trips unless [data] says otherwise.
@@ -45,8 +46,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.descendant(of: find.byType(TravaryNavBar), matching: find.bySemanticsLabel('Trips')));
-    await tester.pumpAndSettle();
+    await openTab(tester, 'Trips');
   }
 
   Finder postcard(String tripId) => find.byKey(ValueKey('trip-postcard-$tripId'));
@@ -94,11 +94,15 @@ void main() {
         return (image as ResizeImage).imageProvider as FileImage;
       }
 
-      expect(art('lakes').file.path, pendingTripPostcard('region_gb_lake_district'));
-      expect(art('kyoto').file.path, pendingTripPostcard('city_jp_kyoto'));
-      await tester.scrollUntilVisible(postcard('orlando'), 300, scrollable: find.byType(Scrollable).first);
+      expect(art('lakes').file.path, tripPostcardSource('region_gb_lake_district'));
+      expect(art('kyoto').file.path, tripPostcardSource('city_jp_kyoto'));
+      await tester.scrollUntilVisible(
+        postcard('orlando'),
+        300,
+        scrollable: find.descendant(of: find.byType(TripsScreen), matching: find.byType(Scrollable)).first,
+      );
       await tester.pumpAndSettle();
-      expect(art('orlando').file.path, pendingTripPostcard('city_us_orlando'));
+      expect(art('orlando').file.path, tripPostcardSource('city_us_orlando'));
       expectFacts('orlando', ['8 days', '1 booking']);
       // The shared blank countdown tag, not a copy.
       final tag = tester.widget<Image>(inPostcard('lakes', find.byKey(const ValueKey('trip-tag-raster')))).image;
@@ -178,6 +182,18 @@ void main() {
   });
 
   group('everything else stays as it was', () {
+    testWidgets('a demo trip without a verified location keeps its plain row', (tester) async {
+      final data = (
+        trips: [countdownTrip('demo', 'Demo getaway')],
+        bookings: [countdownBooking('demo-stay', 'demo', BookingKind.stay, 'Demo hotel', LocalDate(2026, 11, 25))],
+      );
+
+      await pumpTrips(tester, data: data, width: rowWidth);
+      expect(postcard('demo'), findsNothing);
+      expect(tile('Demo getaway'), findsOneWidget);
+      expect(find.textContaining('Starts in 58 days'), findsOneWidget);
+    });
+
     testWidgets('happening now and past trips keep their rows, word for word', (tester) async {
       /// Cornwall's and Rome's rows, scrolling down to Rome's.
       Future<Map<String, List<String>>> rows() async {
@@ -186,7 +202,11 @@ void main() {
             ?(element.widget as Text).data,
         ];
         final cornwall = row('Cornwall');
-        await tester.scrollUntilVisible(find.text('Rome'), 300, scrollable: find.byType(Scrollable).first);
+        await tester.scrollUntilVisible(
+          find.text('Rome'),
+          300,
+          scrollable: find.descendant(of: find.byType(TripsScreen), matching: find.byType(Scrollable)).first,
+        );
         await tester.pumpAndSettle();
         return {'Cornwall': cornwall, 'Rome': row('Rome')};
       }
@@ -205,18 +225,25 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('the heading, Join a trip and the sections stay in order', (tester) async {
+    testWidgets('the heading, New trip and the sections stay in order', (tester) async {
       await pumpTrips(tester, data: everything, width: rowWidth);
-      expect(find.text('Join a trip'), findsOneWidget);
+      expect(find.text('New trip'), findsOneWidget);
       final labels = ['HAPPENING NOW', 'COMING UP', 'PAST TRIPS'];
       var previous = tester.getTopLeft(find.text('Trips').first).dy;
       for (final label in labels) {
-        await tester.scrollUntilVisible(find.text(label), 300, scrollable: find.byType(Scrollable).first);
+        await tester.scrollUntilVisible(
+          find.text(label),
+          300,
+          scrollable: find.descendant(of: find.byType(TripsScreen), matching: find.byType(Scrollable)).first,
+        );
         await tester.pumpAndSettle();
         expect(find.text(label), findsOneWidget, reason: label);
       }
       // Back at the top: each section below the one before.
-      await tester.drag(find.byType(Scrollable).first, const Offset(0, 5000));
+      await tester.drag(
+        find.descendant(of: find.byType(TripsScreen), matching: find.byType(Scrollable)).first,
+        const Offset(0, 5000),
+      );
       await tester.pumpAndSettle();
       for (final label in labels.take(2)) {
         final top = tester.getTopLeft(find.text(label)).dy;
@@ -257,7 +284,11 @@ void main() {
         ),
       );
       expect(postcard('someday'), findsNothing);
-      await tester.scrollUntilVisible(find.text('Someday in Paris'), 300, scrollable: find.byType(Scrollable).first);
+      await tester.scrollUntilVisible(
+        find.text('Someday in Paris'),
+        300,
+        scrollable: find.descendant(of: find.byType(TripsScreen), matching: find.byType(Scrollable)).first,
+      );
       expect(tile('Someday in Paris'), findsOneWidget);
     });
 
@@ -288,7 +319,10 @@ void main() {
           await pumpTrips(tester, width: width, height: 700);
           expect(tester.takeException(), isNull);
           _expectOnTagCard(tester, 'lakes');
-          await tester.drag(find.byType(CustomScrollView).first, const Offset(0, -3000));
+          await tester.drag(
+            find.descendant(of: find.byType(TripsScreen), matching: find.byType(CustomScrollView)).first,
+            const Offset(0, -3000),
+          );
           await tester.pumpAndSettle();
           expect(tester.takeException(), isNull);
         });

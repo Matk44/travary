@@ -167,22 +167,33 @@ void main() {
     expect(cardTextForEntry(entryFor(bare), highlighted: true).action, 'Details');
   });
 
-  group('the day timeline', () {
-    test('lists timed stops with a short time and a word', () {
+  group('the time rail', () {
+    test('a stop is its time over am or pm, with its status', () {
       final plan = buildDayPlan(today, [
         booking('park', BookingKind.attraction, today, title: 'Magic Kingdom', at: const ClockTime(9, 0)),
         booking('lunch', BookingKind.dining, today, title: 'Be Our Guest Restaurant', at: const ClockTime(12, 30)),
         booking('dinner', BookingKind.dining, today, title: 'Ohana', at: const ClockTime(19, 15)),
-        booking('note', BookingKind.note, today, title: 'Fireworks', at: const ClockTime(21, 0)),
-        booking('allday', BookingKind.attraction, today, title: 'Water park'),
-      ], DateTime(2026, 10, 14, 8));
-      final stops = timelineFor(plan);
-      expect([for (final s in stops) (s.time, s.label)], [('9:00', 'Park'), ('12:30', 'Lunch'), ('7:15', 'Dinner')]);
-      expect(stops.first.spoken, '9:00am, Park, Magic Kingdom');
-      expect(stops.first.status, EntryStatus.upcoming);
+        booking('midnight', BookingKind.note, today, title: 'Fireworks', at: const ClockTime(0, 5)),
+      ], DateTime(2026, 10, 14, 10));
+      final stops = [for (final entry in plan.entries) timelineStopFor(entry)!];
+      expect(
+        [for (final s in stops) (s.time, s.period)],
+        [('12:05', 'am'), ('9:00', 'am'), ('12:30', 'pm'), ('7:15', 'pm')],
+      );
+      expect(
+        [for (final s in stops) s.status],
+        [EntryStatus.done, EntryStatus.now, EntryStatus.upcoming, EntryStatus.upcoming],
+      );
     });
 
-    test('uses the booking\'s role and subject', () {
+    test('an all-day entry has no stop', () {
+      final plan = buildDayPlan(today, [
+        booking('allday', BookingKind.attraction, today, title: 'Water park'),
+      ], DateTime(2026, 10, 14, 8));
+      expect(timelineStopFor(plan.entries.single), isNull);
+    });
+
+    test('a stay is on the rail at check-in, then at check-out', () {
       final hotel = booking(
         'h',
         BookingKind.stay,
@@ -191,25 +202,41 @@ void main() {
         endDate: d(10, 16),
         until: const ClockTime(11, 0),
       );
-      final train = booking(
-        't',
-        BookingKind.transport,
-        today,
-        title: 'London to Paris',
-        at: const ClockTime(9, 1),
-        details: {DetailKeys.company: 'Eurostar'},
-      );
-      final museum = booking('m', BookingKind.attraction, today, title: 'Science Museum', at: const ClockTime(14, 0));
-      final boat = booking(
-        'b',
-        BookingKind.activity,
-        today,
-        title: 'Everglades airboat tour',
-        at: const ClockTime(10, 0),
-      );
-      final stops = timelineFor(buildDayPlan(today, [hotel, train, museum, boat], DateTime(2026, 10, 14, 6)));
-      expect([for (final s in stops) s.label], ['Train', 'Boat trip', 'Museum', 'Check-in']);
+      final checkIn = buildDayPlan(today, [hotel], DateTime(2026, 10, 14, 6)).entries.single;
+      final checkOut = buildDayPlan(d(10, 16), [hotel], DateTime(2026, 10, 14, 6)).entries.single;
+      expect((timelineStopFor(checkIn)!.time, timelineStopFor(checkIn)!.period), ('3:00', 'pm'));
+      expect((timelineStopFor(checkOut)!.time, timelineStopFor(checkOut)!.period), ('11:00', 'am'));
     });
+  });
+
+  test('a Documents row sums a booking up in one line: its kind, then its reference, detail or place', () {
+    final lunch = booking(
+      'lunch',
+      BookingKind.dining,
+      today,
+      at: const ClockTime(12, 30),
+      reference: 'ST-4412',
+      details: {DetailKeys.partySize: '4'},
+    );
+    final dinner = booking(
+      'dinner',
+      BookingKind.dining,
+      today,
+      at: const ClockTime(19, 15),
+      details: {DetailKeys.partySize: '4'},
+    );
+    final walk = booking('walk', BookingKind.activity, today, location: 'Kissimmee Boat Dock');
+    expect(cardTextForList(lunch).summary, 'Lunch · ST-4412');
+    expect(cardTextForList(dinner).summary, 'Dinner · Table for 4');
+    expect(cardTextForList(walk).summary, 'Activity · Kissimmee Boat Dock');
+    expect(const CardText(eyebrow: '', title: 'x').summary, isNull);
+    expect(const CardText(eyebrow: 'NOTE', title: 'x').summary, 'Note');
+  });
+
+  test('a Documents row sets its date on two lines for the postmark', () {
+    final text = cardTextForList(booking('b', BookingKind.activity, d(9, 26)));
+    expect((text.day, text.month), ('26', 'Sep'));
+    expect(text.when, '26 Sep');
   });
 
   test('short clock and weather wording', () {

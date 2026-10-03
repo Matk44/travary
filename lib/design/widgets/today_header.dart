@@ -19,7 +19,7 @@ class HeaderPillInfo {
 }
 
 /// "Good morning" over "Day 3 of 7 · Orlando", with the pill at the top
-/// right. Tapping the day line opens the day chooser.
+/// right. Tapping the pill or the day line opens the day chooser.
 class TodayHeader extends StatelessWidget {
   const TodayHeader({super.key, required this.greeting, required this.subtitle, this.pill, this.onChooseDay});
 
@@ -70,15 +70,29 @@ class TodayHeader extends StatelessWidget {
               ],
             ),
           ),
-          if (pill != null) ...[
-            const SizedBox(width: TravarySpace.sm),
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: HeaderPill(info: pill!),
-            ),
-          ],
+          if (pill != null) ...[const SizedBox(width: TravarySpace.sm), _pill(colors)],
           const SizedBox(width: TodayLayout.pillInset),
         ],
+      ),
+    );
+  }
+
+  /// The pill, centred in a full-size tap target that opens the day
+  /// chooser when there is one.
+  Widget _pill(TripColors colors) {
+    final pill = ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: TodayLayout.pillTarget),
+      child: Center(child: HeaderPill(info: this.pill!)),
+    );
+    if (onChooseDay == null) return pill;
+    return Semantics(
+      button: true,
+      hint: 'Choose a day',
+      child: InkWell(
+        onTap: onChooseDay,
+        customBorder: const StadiumBorder(),
+        focusColor: colors.highlight.withValues(alpha: 0.2),
+        child: pill,
       ),
     );
   }

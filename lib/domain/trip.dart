@@ -1,3 +1,4 @@
+import 'country_codes.dart';
 import 'local_date.dart';
 import 'premium.dart';
 import 'visual_profile.dart';
@@ -17,6 +18,7 @@ class Trip {
     this.unknownTheme,
     this.plannedStart,
     this.plannedEnd,
+    this.destination,
     required this.ownerId,
     required this.memberIds,
     this.memberNames = const {},
@@ -45,6 +47,10 @@ class Trip {
   final LocalDate? plannedStart;
   final LocalDate? plannedEnd;
 
+  /// Where the traveller said the trip goes ("Where to?"). Wins over the
+  /// classifier's reading of the itinerary.
+  final TripDestination? destination;
+
   /// Who created the trip. Only they can delete it.
   final String ownerId;
 
@@ -64,6 +70,10 @@ class Trip {
 
   bool get isAutomaticLook => themeSource == ThemeSource.auto;
 
+  /// The destination that chooses place art: the traveller's, else the
+  /// classifier's.
+  TripLocationHint? get effectiveLocation => destination?.location ?? visualProfile?.location;
+
   /// The look the cards use: the classifier's choice for an automatic trip
   /// (as soon as its profile arrives), the traveller's for a manual one.
   ExperienceTheme get effectiveTheme {
@@ -77,6 +87,8 @@ class Trip {
     ThemeSource? themeSource,
     LocalDate? plannedStart,
     LocalDate? plannedEnd,
+    TripDestination? destination,
+    bool clearDestination = false,
     DateTime? updatedAt,
   }) {
     return Trip(
@@ -88,6 +100,7 @@ class Trip {
       unknownTheme: theme == null ? unknownTheme : null,
       plannedStart: plannedStart ?? this.plannedStart,
       plannedEnd: plannedEnd ?? this.plannedEnd,
+      destination: clearDestination ? null : destination ?? this.destination,
       ownerId: ownerId,
       memberIds: memberIds,
       memberNames: memberNames,
@@ -110,6 +123,7 @@ class Trip {
     'themeSource': themeSource.wireName,
     'plannedStart': plannedStart?.toIso(),
     'plannedEnd': plannedEnd?.toIso(),
+    'destination': destination?.toJson(),
     'updatedAt': updatedAt.millisecondsSinceEpoch,
   };
 
@@ -121,6 +135,7 @@ class Trip {
     'themeSource': themeSource.wireName,
     'plannedStart': plannedStart?.toIso(),
     'plannedEnd': plannedEnd?.toIso(),
+    'destination': ?destination?.toJson(),
     'ownerId': ownerId,
     'memberIds': memberIds,
     'createdAt': createdAt.millisecondsSinceEpoch,
@@ -139,6 +154,7 @@ class Trip {
       unknownTheme: known == null && storedTheme is String && _isThemeName(storedTheme) ? storedTheme : null,
       plannedStart: LocalDate.tryParse(json['plannedStart']),
       plannedEnd: LocalDate.tryParse(json['plannedEnd']),
+      destination: TripDestination.tryParse(json['destination']),
       ownerId: json['ownerId'] as String? ?? '',
       memberIds: [for (final m in json['memberIds'] as List? ?? const []) '$m'],
       memberNames: {
@@ -158,3 +174,96 @@ class Trip {
 bool _isThemeName(String value) => RegExp(r'^[a-z][a-z0-9_]{0,39}$').hasMatch(value);
 
 DateTime _millis(Object? value) => value is num ? DateTime.fromMillisecondsSinceEpoch(value.toInt()) : DateTime.now();
+
+/// Where a trip goes, as the traveller chose it: a country, or a region or
+/// city in one. Written by the app ("Where to?"); the art rules trust it
+/// like a verified place, since the traveller confirmed it.
+class TripDestination {
+  const TripDestination({
+    required this.countryCode,
+    required this.countryName,
+    this.region,
+    this.regionSlug,
+    this.city,
+    this.citySlug,
+  });
+
+  /// ISO 3166-1 alpha-2, upper case.
+  final String countryCode;
+  final String countryName;
+  final String? region;
+
+  /// [region] as an art-pack selector ("lake_district").
+  final String? regionSlug;
+  final String? city;
+
+  /// [city] as an art-pack selector ("kyoto").
+  final String? citySlug;
+
+  /// The place itself: "Kyoto", "Lake District", "Japan".
+  String get name => city ?? region ?? countryName;
+
+  /// With its country: "Kyoto, Japan", "Japan".
+  String get label => city == null && region == null ? countryName : '$name, $countryName';
+
+  /// As a location the art rules read.
+  TripLocationHint get location => TripLocationHint(
+    countryCode: countryCode,
+    countryName: countryName,
+    region: region,
+    regionSlug: regionSlug,
+    city: city,
+    citySlug: citySlug,
+    confidence: 1,
+    verification: LocationVerification.verified,
+  );
+
+  Map<String, Object?> toJson() => {
+    'countryCode': countryCode,
+    'countryName': countryName,
+    'region': ?region,
+    'regionSlug': ?regionSlug,
+    'city': ?city,
+    'citySlug': ?citySlug,
+  };
+
+  /// Null unless [json] names a real country.
+  static TripDestination? tryParse(Object? json) {
+    if (json is! Map) return null;
+    String? text(String key) {
+      final value = json[key];
+      if (value is! String) return null;
+      final trimmed = value.trim();
+      return trimmed.isEmpty || trimmed.length > 120 ? null : trimmed;
+    }
+
+    String? slug(String key) => isSlug(json[key]) ? json[key] as String : null;
+    final country = text('countryCode')?.toUpperCase();
+    final countryName = text('countryName');
+    if (country == null || !isoCountryCodes.contains(country) || countryName == null) return null;
+    return TripDestination(
+      countryCode: country,
+      countryName: countryName,
+      region: text('region'),
+      regionSlug: slug('regionSlug'),
+      city: text('city'),
+      citySlug: slug('citySlug'),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is TripDestination &&
+      other.countryCode == countryCode &&
+      other.countryName == countryName &&
+      other.region == region &&
+      other.regionSlug == regionSlug &&
+      other.city == city &&
+      other.citySlug == citySlug;
+
+  @override
+  int get hashCode => Object.hash(countryCode, countryName, region, regionSlug, city, citySlug);
+
+  @override
+  String toString() => 'TripDestination($label)';
+}

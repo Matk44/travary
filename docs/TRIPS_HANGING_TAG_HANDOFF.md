@@ -16,15 +16,15 @@ transparent exterior and a quieter upper-right overlay zone.
 
 | Scope | File |
 | --- | --- |
-| Lake District region, GB | `art_packs/pending/trip_postcards/region_gb_lake_district/common/trip_postcard.png` |
-| Orlando city, US | `art_packs/pending/trip_postcards/city_us_orlando/common/trip_postcard.png` |
-| Kyoto city, JP | `art_packs/pending/trip_postcards/city_jp_kyoto/common/trip_postcard.png` |
-| Paris city, FR | `art_packs/pending/trip_postcards/city_fr_paris/common/trip_postcard.png` |
-| Bali region, ID | `art_packs/pending/trip_postcards/region_id_bali/common/trip_postcard.png` |
+| Lake District region, GB | `art_packs/sources/region_gb_lake_district/common/trip_postcard.png` |
+| Orlando city, US | `art_packs/sources/city_us_orlando/common/trip_postcard.png` |
+| Kyoto city, JP | `art_packs/sources/city_jp_kyoto/common/trip_postcard.png` |
+| Paris city, FR | `art_packs/sources/city_fr_paris/common/trip_postcard.png` |
+| Bali region, ID | `art_packs/sources/region_id_bali/common/trip_postcard.png` |
 
-The pending directory is intentional. Add each asset to its eventual complete
-city or region pack; do not publish a sparse place pack that would outrank a
-fuller country pack. Each final `pack.json` entry is:
+Each asset is now in the same complete city or region pack as its portrait
+countdown postcard. Those packs retain the corresponding country pack's full
+asset set; none is a sparse postcard-only pack. Each `pack.json` entry is:
 
 ```json
 {
@@ -47,13 +47,15 @@ All trip data is live Flutter content.
 ## Resolver contract
 
 1. Add the common-art key `trip_postcard` beside `countdownPostcardArt`.
-2. Resolve it through `ArtCatalog.commonArt` with
+2. Require `LocationVerification.verified`; demo, missing-profile,
+   unverified, conflict and skipped trips keep their plain rows.
+3. Resolve it through `ArtCatalog.commonArt` with
    `TravelStore.artContextForPlan(plan)`.
-3. Expose a `TravelStore.tripPostcardFor(TripPlan)` helper parallel to
+4. Expose a `TravelStore.tripPostcardFor(TripPlan)` helper parallel to
    `countdownPostcardFor`.
-4. Preserve the existing city → region → country → look/core rank order.
-5. Never use an asset from a different verified destination.
-6. If no suitable landscape postcard is installed, render the existing
+5. Preserve the existing city → region → country → look/core rank order.
+6. Never use an asset from a different verified destination.
+7. If no suitable landscape postcard is installed, render the existing
    `_TripTile`; do not substitute Lake District or crop the portrait
    `countdown_postcard`.
 

@@ -77,7 +77,7 @@ class _InviteSheetState extends State<InviteSheet> {
         subject: 'Join our ${widget.plan.trip.title} trip',
         text:
             'Join our ${widget.plan.trip.title} trip on Travary! '
-            'Open Travary, tap Trips, then "Join a trip", and enter the code ${invite.code}. '
+            'Open Travary, tap Trips, then "New trip" and "Join a trip", and enter the code ${invite.code}. '
             'You\'ll have the plan and tickets on your phone.',
       ),
     );

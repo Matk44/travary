@@ -10,16 +10,20 @@ import 'package:travary/design/cards/card_parts.dart';
 import 'package:travary/design/cards/featured_ticket_card.dart';
 import 'package:travary/design/cards/ongoing_tag_card.dart';
 import 'package:travary/design/cards/room_key_card.dart';
+import 'package:travary/design/cards/shell_frame.dart';
 import 'package:travary/design/cards/tagged_reservation_card.dart';
 import 'package:travary/design/tokens.dart';
-import 'package:travary/design/widgets/day_timeline.dart';
 import 'package:travary/design/widgets/nav_bar.dart';
+import 'package:travary/design/widgets/time_rail.dart';
+import 'package:travary/design/widgets/today_header.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/booking/booking_detail_screen.dart';
+import 'package:travary/features/today/today_screen.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import '../support/canonical_today.dart';
+import '../support/travel_documents.dart';
 
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
@@ -56,7 +60,6 @@ void main() {
           "Disney's Polynesian Resort",
           'Be Our Guest Restaurant',
           'Ohana',
-          'Lunch',
         ])
           tester.getTopLeft(find.text(text)).dy,
       ];
@@ -71,7 +74,71 @@ void main() {
       // No boxed day strip and no section headers in the composition.
       expect(find.text('TODAY'), findsNothing);
       expect(find.text('STILL TO COME'), findsNothing);
-      expect(find.byType(DayTimeline), findsOneWidget);
+      expect(find.byType(TimeRailRow), findsNWidgets(4));
+    });
+
+    testWidgets("the time rail: each stop's time beside its card, in time order, joined by one line", (tester) async {
+      await pump(tester);
+      Rect card(String title) =>
+          tester.getRect(find.ancestor(of: find.text(title), matching: find.byType(ShellFrame)).first);
+      Finder onRail(String text) => find.descendant(of: find.byType(TimeRailRow), matching: find.text(text));
+
+      // 9:00am next up, the hotel with no time, 12:30pm lunch, 7:15pm dinner.
+      final stops = [('9:00', 'Magic Kingdom'), ('12:30', 'Be Our Guest Restaurant'), ('7:15', 'Ohana')];
+      final times = <Rect>[];
+      for (final (time, title) in stops) {
+        expect(onRail(time), findsOneWidget, reason: time);
+        final rect = tester.getRect(onRail(time));
+        final beside = card(title);
+        expect(rect.right, lessThan(beside.left), reason: '$time sits left of its card');
+        expect(
+          rect.top,
+          inInclusiveRange(beside.top + 8, beside.top + 24),
+          reason: '$time is level with the top of its card',
+        );
+        times.add(rect);
+      }
+      expect(onRail('am'), findsOneWidget);
+      expect(onRail('pm'), findsNWidgets(2));
+      expect(times.map((r) => r.top), orderedEquals([...times.map((r) => r.top)]..sort()));
+      expect(find.byKey(const ValueKey('rail-dot')), findsNWidgets(3), reason: 'nothing is happening yet at 8am');
+
+      // One line down the middle of the rail: from the first stop's dot to
+      // just above the last stop's time, passing behind the hotel.
+      final lines = [
+        for (final element in find.byKey(const ValueKey('rail-line')).evaluate())
+          tester.getRect(find.byWidget(element.widget)),
+      ]..sort((a, b) => a.top.compareTo(b.top));
+      expect(lines.map((r) => r.center.dx).toSet(), hasLength(1));
+      expect(lines.first.center.dx, closeTo(times.first.center.dx, 0.5));
+      expect(lines.first.top, greaterThan(times.first.bottom), reason: 'no line above the first stop');
+      expect(lines.last.bottom, lessThan(times.last.top), reason: 'none below the last stop');
+      final hotel = card("Disney's Polynesian Resort");
+      expect(lines.any((line) => line.top <= hotel.top && line.bottom >= hotel.bottom), isTrue);
+      for (final title in ['Magic Kingdom', "Disney's Polynesian Resort", 'Be Our Guest Restaurant', 'Ohana']) {
+        expect(card(title).left, greaterThan(lines.first.right + 20), reason: '$title is clear of the rail');
+      }
+    });
+
+    testWidgets('the featured card keeps its place in time; what is happening now is marked', (tester) async {
+      tester.view.physicalSize = const Size(390 * 3, 927 * 3);
+      tester.view.devicePixelRatio = 3;
+      addTearDown(tester.view.reset);
+      // 12:45: the park (from 9:00) is still on and lunch (12:30) is featured.
+      await tester.pumpWidget(canonicalTodayApp(catalog: bundled, now: DateTime(2026, 10, 14, 12, 45)));
+      await tester.pumpAndSettle();
+
+      expect(find.text('HAPPENING NOW'), findsOneWidget);
+      final lunchTop = tester.getTopLeft(find.text('Be Our Guest Restaurant')).dy;
+      expect(tester.getTopLeft(find.text('Magic Kingdom')).dy, lessThan(lunchTop));
+      expect(tester.getTopLeft(find.text("Disney's Polynesian Resort")).dy, greaterThan(lunchTop));
+      expect(find.byType(FeaturedTicketCard), findsOneWidget);
+      expect(
+        find.ancestor(of: find.text('Be Our Guest Restaurant'), matching: find.byType(FeaturedTicketCard)),
+        findsOneWidget,
+      );
+      expect(find.byKey(const ValueKey('rail-dot-now')), findsNWidgets(2), reason: 'the park and lunch are both on');
+      expect(find.byKey(const ValueKey('rail-dot')), findsOneWidget, reason: 'dinner is still to come');
     });
 
     testWidgets('cards draw the supplied raster shells, icons and vignettes', (tester) async {
@@ -180,12 +247,12 @@ void main() {
       expect(find.text('MK-448120'), findsWidgets);
     });
 
-    testWidgets('the day line opens a chooser; a swipe moves a day', (tester) async {
+    testWidgets('the day line opens the trip calendar; a swipe moves a day', (tester) async {
       await pump(tester);
       await tester.tap(find.text('Day 3 of 7 · Orlando'));
       await tester.pumpAndSettle();
-      expect(find.bySemanticsLabel('Wednesday 14 October'), findsOneWidget);
-      await tester.tap(find.bySemanticsLabel('Friday 16 October'));
+      expect(find.bySemanticsLabel('Day 3 of 7, Wednesday 14 October, today'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('Day 5 of 7, Friday 16 October'));
       await tester.pumpAndSettle();
       expect(find.text('Fri 16 Oct · Day 5 of 7 · Orlando'), findsOneWidget);
       expect(find.text('Magic Kingdom'), findsNothing);
@@ -193,6 +260,53 @@ void main() {
       await tester.fling(find.byType(CustomScrollView).first, const Offset(300, 0), 1200);
       await tester.pumpAndSettle();
       expect(find.text('Thu 15 Oct · Day 4 of 7 · Orlando'), findsOneWidget);
+    });
+
+    testWidgets('the date pill opens the same calendar, then shows the day on screen', (tester) async {
+      await pump(tester);
+      final handle = tester.ensureSemantics();
+      final pill = find.ancestor(of: find.byType(HeaderPill), matching: find.byType(InkWell)).first;
+      expect(tester.getSize(pill).height, greaterThanOrEqualTo(48), reason: 'a full-size tap target');
+      expect(tester.getSemantics(pill), containsSemantics(isButton: true, hint: 'Choose a day', label: '28° Sunny'));
+
+      await tester.tap(pill);
+      await tester.pumpAndSettle();
+      // Sun 11 to Sat 24 October (en_US weeks start on Sunday): the trip's
+      // seven days can be chosen, the rest are faint.
+      expect(find.text('12–18 Oct 2026'), findsOneWidget);
+      for (var day = 12; day <= 18; day++) {
+        expect(find.bySemanticsLabel(RegExp('Day ${day - 11} of 7, .* $day October')), findsOneWidget);
+      }
+      expect(find.bySemanticsLabel(RegExp('11 October|19 October')), findsNothing);
+      expect(find.text('11'), findsOneWidget);
+      expect(find.text('24'), findsOneWidget);
+      // Check-in, the park day and check-out have bookings; the days
+      // between only have the hotel.
+      expect(find.byKey(const ValueKey('calendar-booked')), findsNWidgets(3));
+      expect(find.text('Back to today'), findsNothing, reason: 'today is on screen');
+
+      await tester.tap(find.text('11'));
+      await tester.pumpAndSettle();
+      expect(find.text('12–18 Oct 2026'), findsOneWidget, reason: 'a day outside the trip does nothing');
+
+      await tester.tap(find.bySemanticsLabel('Day 6 of 7, Saturday 17 October'));
+      await tester.pumpAndSettle();
+      expect(find.text('Sat 17 Oct · Day 6 of 7 · Orlando'), findsOneWidget);
+      expect(find.text('Sat 17 Oct'), findsOneWidget, reason: 'the pill shows the day on screen');
+      expect(find.text('28° Sunny'), findsNothing, reason: "the forecast is today's");
+
+      await tester.tap(find.byType(HeaderPill));
+      await tester.pumpAndSettle();
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Day 6 of 7, Saturday 17 October')),
+        containsSemantics(isSelected: true),
+      );
+      await tester.tap(find.text('Back to today'));
+      await tester.pumpAndSettle();
+      expect(find.text('Day 3 of 7 · Orlando'), findsOneWidget);
+      expect(find.text('28° Sunny'), findsOneWidget);
+      expect(find.text('Magic Kingdom'), findsOneWidget);
+      handle.dispose();
     });
   });
 
@@ -348,10 +462,11 @@ void main() {
       tester.widget<Text>(find.descendant(of: nav, matching: find.text('Today'))).style?.color,
       const Color(0xFFFFFFFF),
     );
-    final line = tester.widget<ColoredBox>(
-      find.descendant(of: find.byType(DayTimeline), matching: find.byType(ColoredBox)).first,
-    );
-    expect(line.color, const Color(0xFF3A506B));
+    // The rail is in the palette's ink, never its (often red) secondary.
+    final line = tester.widget<ColoredBox>(find.byKey(const ValueKey('rail-line')).first);
+    expect(line.color, const Color(0xFF1C2A47));
+    final dot = tester.widget<Container>(find.byKey(const ValueKey('rail-dot')).first);
+    expect((dot.decoration! as BoxDecoration).color, const Color(0xFF1C2A47));
     expect(tester.widget<Text>(find.text('LUNCH')).style?.color, const Color(0xFFD1603D));
     // Full-colour art keeps its own colours.
     final ticketImage = tester.widget<Image>(
@@ -421,16 +536,19 @@ void main() {
               clock: () => now,
             ),
           ),
+          travelDocumentsProvider(),
         ],
         child: MaterialApp(theme: buildTravaryTheme(), home: const HomeShell()),
       ),
     );
     await tester.pumpAndSettle();
     expect(find.text('Car hire'), findsOneWidget, reason: 'a hire car in progress');
-    final list = find.byType(Scrollable).first;
-    await tester.scrollUntilVisible(find.text('Show'), 200, scrollable: list);
+    final list = find.descendant(of: find.byType(TodayScreen), matching: find.byType(Scrollable)).first;
+    // Built isn't enough: scroll until the button is on screen to tap.
+    await tester.scrollUntilVisible(find.text('Show').hitTestable(), 200, scrollable: list);
     await tester.tap(find.text('Show'));
     await tester.pumpAndSettle();
+    expect(find.text('Hide'), findsOneWidget, reason: 'the finished items are showing');
     for (var i = 0; i < 4; i++) {
       await tester.drag(find.byType(CustomScrollView).first, const Offset(0, -500));
       await tester.pumpAndSettle();
@@ -456,7 +574,7 @@ void main() {
           await tester.drag(find.byType(CustomScrollView).first, const Offset(0, -2000));
           await tester.pumpAndSettle();
           expect(tester.takeException(), isNull);
-          expect(find.byType(DayTimeline), findsOneWidget);
+          expect(find.byType(TimeRailRow), findsWidgets);
         });
       }
     }

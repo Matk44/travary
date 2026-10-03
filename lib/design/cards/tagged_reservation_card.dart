@@ -50,14 +50,9 @@ class TaggedReservationCard extends StatelessWidget {
           ExcludeSemantics(
             child: ShellTextBlock(
               children: [
-                Text(
-                  text.eyebrow,
-                  style: TravaryText.shellEyebrow.copyWith(color: colors.highlight),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                ShellEyebrow(text.eyebrow, style: TravaryText.shellEyebrow.copyWith(color: colors.highlight)),
                 const SizedBox(height: 6),
-                FitTitle(text.title, style: TravaryText.reservationTitle),
+                FitTitle(text.title, style: TravaryText.reservationTitle, floorScale: ShellLayout.titleFloorScale),
                 const SizedBox(height: 7),
                 ShellRule(color: ink.withValues(alpha: 0.35), width: 0.36),
                 const SizedBox(height: 7),

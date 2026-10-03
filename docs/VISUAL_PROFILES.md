@@ -55,6 +55,12 @@ visualProfileRequest     {hash, at, by}: cooldown and last-request-wins (server 
 users/{uid}.visualClassification   {day, today, total} (server only)
 ```
 
+The traveller's own `destination` (set or confirmed in "Where to?", see
+`lib/logic/destinations.dart`) is written by the app and wins over the
+profile's location for place art (`Trip.effectiveLocation`); the profile
+still decides the experience theme. The classifier is only needed for trips
+whose name doesn't say where (it reads the bookings).
+
 `firestore.rules` stop the app writing the three `visualProfile*` fields and
 only accept `themeSource` of `auto`/`manual`. Old trips: a classic theme (or
 none) without `themeSource` is automatic, anything else manual; legacy names
@@ -105,6 +111,13 @@ anything: the trip keeps its look, and only the explicit Automatic tap shows
 a (friendly) message.
 
 ## Operator checklist (billable services)
+
+Done for travary-444 on 3 October 2026: Places API (New) enabled; a key
+restricted to it ("Travary server: Places (classifyTripVisuals)") stored
+as the `GOOGLE_MAPS_PLATFORM_KEY` secret; rules and functions deployed;
+packs published. Verified on the simulator in cloud mode (Gemini answered,
+Places verified the location, the trip took on its pack). Repeat the steps
+below for a new project.
 
 The app works without any of this: bundled art stays, and the Automatic
 chip explains that it can't choose a look right now.

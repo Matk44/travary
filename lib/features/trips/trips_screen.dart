@@ -12,13 +12,14 @@ import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
 import '../../logic/trip_postcard_text.dart';
 import '../../state/travel_store.dart';
-import '../booking/booking_actions.dart';
 import '../sharing/join_trip_sheet.dart';
+import 'trip_details_sheet.dart';
 import 'trip_screen.dart';
 
 /// Every trip: happening now, coming up, and past. A coming trip whose
 /// destination has a postcard shows on it, with its countdown on a
-/// hanging tag ([UpcomingTripPostcard]); the rest are plain rows.
+/// hanging tag ([UpcomingTripPostcard]); the rest are plain rows. "New
+/// trip" starts one before anything is booked (or joins someone's).
 class TripsScreen extends StatelessWidget {
   const TripsScreen({super.key});
 
@@ -97,15 +98,17 @@ class TripsScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.sm, 0),
-              child: Row(
+              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, 0),
+              // The pill drops below the heading when large text leaves no
+              // room beside it. Its sheet also offers joining a trip.
+              child: Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: TravarySpace.md,
+                runSpacing: TravarySpace.sm,
                 children: [
-                  Expanded(child: Text('Trips', style: TravaryText.display)),
-                  TextButton.icon(
-                    onPressed: () => _join(context),
-                    icon: const Icon(Icons.group_outlined, size: 18),
-                    label: const Text('Join a trip'),
-                  ),
+                  Text('Trips', style: TravaryText.display),
+                  InfoPill(label: 'New trip', icon: Icons.add_rounded, onPressed: () => startNewTrip(context)),
                 ],
               ),
             ),
@@ -117,9 +120,11 @@ class TripsScreen extends StatelessWidget {
                 child: EmptyState(
                   icon: Icons.map_outlined,
                   title: 'No trips yet',
-                  message: 'Trips appear here as you add bookings.',
-                  actionLabel: 'Add a booking',
-                  onAction: () => startAddBooking(context),
+                  message: 'Start one here, or just add a booking and Travary makes the trip for you.',
+                  actionLabel: 'New trip',
+                  onAction: () => startNewTrip(context),
+                  secondaryLabel: 'Join a trip',
+                  onSecondary: () => startJoinTrip(context),
                 ),
               ),
             ),
@@ -135,12 +140,6 @@ class TripsScreen extends StatelessWidget {
 
 void _openTrip(BuildContext context, TripPlan plan) =>
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id)));
-
-Future<void> _join(BuildContext context) async {
-  final title = await showJoinTripSheet(context);
-  if (title == null || !context.mounted) return;
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('You\'ve joined $title')));
-}
 
 class _TripTile extends StatelessWidget {
   const _TripTile({required this.plan, required this.today});
@@ -158,7 +157,8 @@ class _TripTile extends StatelessWidget {
       TripPhase.upcoming when plan.hasDates => 'Starts ${relativeDays(today.daysUntil(plan.start!))}',
       _ => null,
     };
-    final summary = ['$count ${count == 1 ? 'booking' : 'bookings'}', ?status].join(' · ');
+    final bookings = count == 0 ? 'No bookings yet' : '$count ${count == 1 ? 'booking' : 'bookings'}';
+    final summary = [bookings, ?status].join(' · ');
 
     return Material(
       color: TravaryColors.paper,
@@ -168,38 +168,41 @@ class _TripTile extends StatelessWidget {
       shadowColor: const Color(0x33000000),
       child: InkWell(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id))),
-        child: SizedBox(
-          height: 104,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                width: 88,
-                color: style.color,
-                child: Icon(style.icon, color: TravaryColors.paper.withValues(alpha: 0.9), size: 34),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: TravarySpace.lg),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(plan.trip.title, style: TravaryText.title, maxLines: 1, overflow: TextOverflow.ellipsis),
-                      const SizedBox(height: 2),
-                      if (plan.hasDates)
-                        Text(
-                          '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} ${plan.dayCount == 1 ? 'day' : 'days'}',
-                          style: TravaryText.bodySoft,
-                        ),
-                      Text(summary, style: TravaryText.small),
-                    ],
+        // At least 104 tall; taller when large text needs the room.
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 104),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  width: 88,
+                  color: style.color,
+                  child: Icon(style.icon, color: TravaryColors.paper.withValues(alpha: 0.9), size: 34),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: TravarySpace.lg, vertical: TravarySpace.md),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(plan.trip.title, style: TravaryText.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        const SizedBox(height: 2),
+                        if (plan.hasDates)
+                          Text(
+                            '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} ${plan.dayCount == 1 ? 'day' : 'days'}',
+                            style: TravaryText.bodySoft,
+                          ),
+                        Text(summary, style: TravaryText.small),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const Center(child: Icon(Icons.chevron_right_rounded, color: TravaryColors.inkFaint)),
-              const SizedBox(width: TravarySpace.sm),
-            ],
+                const Center(child: Icon(Icons.chevron_right_rounded, color: TravaryColors.inkFaint)),
+                const SizedBox(width: TravarySpace.sm),
+              ],
+            ),
           ),
         ),
       ),

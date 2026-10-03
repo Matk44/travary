@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../logic/countdown_text.dart';
 import '../art/art_catalog.dart';
 import '../art/art_slots.dart';
-import '../art/card_shells.dart' show FractionRect;
 import '../cards/card_parts.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
@@ -20,6 +19,13 @@ abstract final class CountdownGeometry {
   /// of its transparent margin.
   static const postcardRise = 0.04;
 
+  /// Where the card itself ends inside the image (inside its transparent
+  /// margin and shadow), as shares of the image's width and height: the
+  /// typical value over the 30 drawn postcards (right 0.95–0.98, bottom
+  /// 0.93–0.98).
+  static const postcardCardRight = 0.966;
+  static const postcardCardBottom = 0.96;
+
   /// `common/countdown_luggage_tag.png` is 1024 × 1536. Its card is
   /// `SurfaceSlot.countdownTag.body`.
   static const tagAspect = 1024 / 1536;
@@ -33,42 +39,63 @@ abstract final class CountdownGeometry {
   static const copyTop = 0.22;
   static const copySide = 0.11;
   static const copyBottom = 0.06;
-
-  /// `common/countdown_fact_tag.png` template: 1024 × 512, eyelet and
-  /// string in the left fifth, words in [factCopy].
-  static const factAspect = 1024 / 512;
-  static const factCopy = FractionRect(0.24, 0.12, 0.94, 0.88);
-
-  /// `common/countdown_button.png` template: 1536 × 460, notched ends,
-  /// words in [buttonCopy].
-  static const buttonAspect = 1536 / 460;
-  static const buttonCopy = FractionRect(0.12, 0.16, 0.88, 0.84);
 }
 
-/// Today between trips: the next trip's destination postcard with a
-/// luggage tag hung on its corner counting the days, three facts on small
-/// tags, and a ticket-shaped "View trip" button.
+/// Today between trips: the next trip's destination postcard, as large as
+/// the screen allows, with a luggage tag hung over its lower right corner
+/// (about half of it below the card) counting the days. Tapping the
+/// postcard opens the trip.
 ///
-/// The postcard, tag, fact tags and button are raster material (resolved
-/// for the trip like every other surface); every word is live text over
-/// them. The whole postcard and the button both open the trip.
+/// Each time it comes into view ([replay]) the postcard lifts in, the tag
+/// is slapped onto its corner (the card gives a little under it), swings
+/// left and right from its eyelet, and comes to rest. The postcard and tag
+/// are raster material, resolved for the trip like every other surface;
+/// every word is live text over them.
 class CountdownTripHero extends StatefulWidget {
-  const CountdownTripHero({super.key, required this.text, required this.postcard, required this.onOpen});
+  const CountdownTripHero({super.key, required this.text, required this.postcard, required this.onOpen, this.replay});
 
   final CountdownText text;
 
-  /// The trip's destination postcard (`TravelStore.countdownPostcardFor`).
+  /// The trip's destination postcard (`TravelStore.countdownPostcardFor`),
+  /// else the neutral one.
   final ArtImageRef postcard;
   final VoidCallback onOpen;
 
+  /// Notifies when Today comes back into view (its tab, the app, a screen
+  /// closed over it): the entry plays again.
+  final Listenable? replay;
+
   /// As wide as [available] allows, up to [CountdownLayout.postcardMaxWidth],
-  /// and no taller than [CountdownLayout.postcardMaxHeight] of the screen,
-  /// so the whole countdown fits a phone without scrolling.
+  /// with the postcard and the tag hanging below it no taller than
+  /// [CountdownLayout.stageMaxHeight] of the screen, so the whole countdown
+  /// fits a phone without scrolling.
   static double postcardWidth(double available, double screenHeight) => [
     available - 2 * CountdownLayout.postcardInset,
     CountdownLayout.postcardMaxWidth,
-    screenHeight * CountdownLayout.postcardMaxHeight * CountdownGeometry.postcardAspect,
+    screenHeight * CountdownLayout.stageMaxHeight / _Stage(1).height,
   ].reduce(math.min);
+
+  /// The tag's angle, in degrees clockwise, [t] of the way through the
+  /// entry: coming down turned a little the other way, then a damped swing
+  /// either side of its resting angle, ending exactly at rest.
+  static double tagDegrees(double t) {
+    const rest = CountdownLayout.tagAngleDegrees;
+    if (t < _swing.begin) return rest - CountdownLayout.tagSlapTurnDegrees * (1 - _slap.transform(t));
+    final x = _swing.transform(t);
+    final envelope = CountdownLayout.tagSwingDegrees * math.exp(-CountdownLayout.tagSwingDamping * x);
+    return rest + envelope * math.sin(2 * math.pi * CountdownLayout.tagSwingCycles * x);
+  }
+
+  // The entry's phases, as shares of [CountdownLayout.entryDuration].
+  static const _postcardIn = Interval(0, 0.24, curve: Curves.easeOutCubic);
+
+  /// The tag comes down onto the card, faster and faster, like a hand.
+  static const _slap = Interval(0.24, 0.33, curve: Curves.easeInCubic);
+  static const _tagAppear = Interval(0.24, 0.28);
+
+  /// The postcard gives a little under the slap, and springs back.
+  static const _thud = Interval(0.33, 0.43);
+  static const _swing = Interval(0.33, 1);
 
   @override
   State<CountdownTripHero> createState() => _CountdownTripHeroState();
@@ -77,28 +104,53 @@ class CountdownTripHero extends StatefulWidget {
 class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTickerProviderStateMixin {
   late final AnimationController _entry = AnimationController(vsync: this, duration: CountdownLayout.entryDuration);
   bool _started = false;
+  bool _pressed = false;
 
-  static const _postcardIn = Interval(0, 0.55, curve: Curves.easeOutCubic);
-  static const _tagFade = Interval(0.35, 0.55, curve: Curves.easeOut);
+  @override
+  void initState() {
+    super.initState();
+    widget.replay?.addListener(_play);
+  }
 
-  /// easeOutBack swings just past the resting angle and back.
-  static const _tagSettle = Interval(0.35, 1, curve: Curves.easeOutBack);
+  @override
+  void didUpdateWidget(CountdownTripHero oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.replay != widget.replay) {
+      oldWidget.replay?.removeListener(_play);
+      widget.replay?.addListener(_play);
+    }
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!_started) {
+      _started = true;
+      _play();
+    } else if (MediaQuery.disableAnimationsOf(context)) {
+      _entry.value = 1;
+    }
+  }
+
+  /// From the start, or straight to rest with reduced motion.
+  void _play() {
+    if (!mounted) return;
     if (MediaQuery.disableAnimationsOf(context)) {
       _entry.value = 1;
-    } else if (!_started) {
-      _entry.forward();
+    } else {
+      _entry.forward(from: 0);
     }
-    _started = true;
   }
 
   @override
   void dispose() {
+    widget.replay?.removeListener(_play);
     _entry.dispose();
     super.dispose();
+  }
+
+  void _press(bool down) {
+    if (_pressed != down) setState(() => _pressed = down);
   }
 
   @override
@@ -111,75 +163,47 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
         final column = math.min(box.maxWidth, CountdownLayout.postcardMaxWidth + 2 * CountdownLayout.postcardInset);
         final width = CountdownTripHero.postcardWidth(box.maxWidth, MediaQuery.sizeOf(context).height);
         return Center(
-          child: SizedBox(width: column, child: _content(text, colors, column, width)),
+          child: SizedBox(
+            width: column,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    TodayLayout.headerInset,
+                    TodayLayout.headerGap,
+                    TodayLayout.headerInset,
+                    TravarySpace.xs,
+                  ),
+                  child: Semantics(
+                    header: true,
+                    child: Text(text.heading, style: TravaryText.eyebrow.copyWith(color: colors.ink)),
+                  ),
+                ),
+                _stage(column, width),
+              ],
+            ),
+          ),
         );
       },
     );
   }
 
-  Widget _content(CountdownText text, TripColors colors, double column, double width) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(
-            TodayLayout.headerInset,
-            TodayLayout.headerGap,
-            TodayLayout.headerInset,
-            TravarySpace.xs,
-          ),
-          child: Semantics(
-            header: true,
-            child: Text(text.heading, style: TravaryText.eyebrow.copyWith(color: colors.ink)),
-          ),
-        ),
-        _stage(column, width),
-        const SizedBox(height: CountdownLayout.factsGap),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: TodayLayout.cardInset),
-          child: IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: _FactTag(icon: IconSlot.calendar, color: colors.highlight, label: text.duration),
-                ),
-                const SizedBox(width: CountdownLayout.factSpacing),
-                Expanded(
-                  child: _FactTag(icon: IconSlot.navTrips, color: colors.primary, label: text.bookings),
-                ),
-                const SizedBox(width: CountdownLayout.factSpacing),
-                Expanded(
-                  child: _FactTag(icon: IconSlot.attraction, color: colors.secondary, label: text.opens),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: CountdownLayout.buttonGap),
-        Center(
-          child: _TicketButton(label: text.action, onPressed: widget.onOpen),
-        ),
-      ],
-    );
-  }
-
   /// The postcard, [width] wide and centred in [column], with the tag hung
-  /// on its upper-right corner. Nothing here clips: the cord runs up and
-  /// out past the postcard's edges.
+  /// over its lower right corner. Nothing here clips: the cord runs up and
+  /// out past the postcard's edge.
   Widget _stage(double column, double width) {
     final left = (column - width) / 2;
-    final height = width / CountdownGeometry.postcardAspect;
-    final rise = height * CountdownGeometry.postcardRise;
-
-    // The tag's card is a share of the postcard's width; the image
-    // round it (cord and shadow) scales with it.
+    final stage = _Stage(width);
+    final height = stage.postcardHeight;
+    final rise = stage.rise;
+    final tagWidth = stage.tagWidth;
+    final tagHeight = stage.tagHeight;
+    final tagLeft = left + stage.tagLeft;
+    final tagTop = stage.tagTop;
     final body = SurfaceSlot.countdownTag.body!;
-    final tagWidth = width * CountdownLayout.tagWidth / body.width;
-    final tagHeight = tagWidth / CountdownGeometry.tagAspect;
-    final tagLeft = left + width * CountdownLayout.tagRight - body.right * tagWidth;
-    final tagTop = -rise + width * CountdownLayout.tagTop - body.top * tagHeight;
     const eyelet = CountdownGeometry.eyelet;
+    final cardCentre = Alignment(body.left + body.right - 1, body.top + body.bottom - 1);
 
     return Semantics(
       button: true,
@@ -190,68 +214,120 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
         key: const ValueKey('countdown-hero'),
         behavior: HitTestBehavior.opaque,
         onTap: widget.onOpen,
-        child: SizedBox(
-          height: height - rise,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                left: left,
-                top: -rise,
-                width: width,
-                height: height,
-                child: AnimatedBuilder(
-                  animation: _entry,
-                  builder: (context, child) {
-                    final t = _postcardIn.transform(_entry.value);
-                    return Opacity(
-                      opacity: t,
-                      child: Transform.translate(
-                        key: const ValueKey('countdown-postcard-motion'),
-                        offset: Offset(0, CountdownLayout.postcardLift * (1 - t)),
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: Image(
-                    key: const ValueKey('countdown-postcard'),
-                    image: artImageProvider(widget.postcard),
-                    // The whole card, deckled edge and all: never cropped.
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) => const _PostcardStandIn(),
+        onTapDown: (_) => _press(true),
+        onTapUp: (_) => _press(false),
+        onTapCancel: () => _press(false),
+        child: AnimatedScale(
+          key: const ValueKey('countdown-press'),
+          scale: _pressed ? CountdownLayout.pressScale : 1,
+          duration: const Duration(milliseconds: 120),
+          child: SizedBox(
+            height: stage.height,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  left: left,
+                  top: -rise,
+                  width: width,
+                  height: height,
+                  child: AnimatedBuilder(
+                    animation: _entry,
+                    builder: (context, child) {
+                      final t = CountdownTripHero._postcardIn.transform(_entry.value);
+                      final give = math.sin(math.pi * CountdownTripHero._thud.transform(_entry.value));
+                      final scale =
+                          (CountdownLayout.postcardStartScale + (1 - CountdownLayout.postcardStartScale) * t) *
+                          (1 - CountdownLayout.postcardGive * give);
+                      return Opacity(
+                        opacity: t,
+                        child: Transform.translate(
+                          key: const ValueKey('countdown-postcard-motion'),
+                          offset: Offset(0, CountdownLayout.postcardLift * (1 - t)),
+                          child: Transform.scale(scale: scale, child: child),
+                        ),
+                      );
+                    },
+                    child: Image(
+                      key: const ValueKey('countdown-postcard'),
+                      image: artImageProvider(widget.postcard),
+                      // The whole card, deckled edge and all: never cropped.
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) => const _PostcardStandIn(),
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                left: tagLeft,
-                top: tagTop,
-                width: tagWidth,
-                height: tagHeight,
-                child: AnimatedBuilder(
-                  animation: _entry,
-                  builder: (context, child) {
-                    final settle = _tagSettle.transform(_entry.value);
-                    final degrees = CountdownLayout.tagAngleDegrees + CountdownLayout.tagSettleDegrees * (1 - settle);
-                    return Opacity(
-                      opacity: _tagFade.transform(_entry.value),
-                      // The whole stack turns: shell and words together.
-                      child: Transform.rotate(
-                        key: const ValueKey('countdown-tag-swing'),
-                        angle: degrees * math.pi / 180,
-                        alignment: Alignment(eyelet.dx * 2 - 1, eyelet.dy * 2 - 1),
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: _CountdownTag(text: widget.text),
+                Positioned(
+                  left: tagLeft,
+                  top: tagTop,
+                  width: tagWidth,
+                  height: tagHeight,
+                  child: AnimatedBuilder(
+                    animation: _entry,
+                    builder: (context, child) {
+                      final value = _entry.value;
+                      final slap = CountdownTripHero._slap.transform(value);
+                      return Opacity(
+                        opacity: CountdownTripHero._tagAppear.transform(value),
+                        child: Transform.translate(
+                          offset: Offset(0, -CountdownLayout.tagSlapDrop * (1 - slap)),
+                          child: Transform.scale(
+                            key: const ValueKey('countdown-tag-slap'),
+                            scale: CountdownLayout.tagSlapScale - (CountdownLayout.tagSlapScale - 1) * slap,
+                            alignment: cardCentre,
+                            // The whole stack turns: shell and words together.
+                            child: Transform.rotate(
+                              key: const ValueKey('countdown-tag-swing'),
+                              angle: CountdownTripHero.tagDegrees(value) * math.pi / 180,
+                              alignment: Alignment(eyelet.dx * 2 - 1, eyelet.dy * 2 - 1),
+                              child: child,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: _CountdownTag(text: widget.text),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+/// Where everything sits for a postcard [width] wide, measured from the
+/// stage's top left (the postcard's image starts [rise] above it, inside
+/// its transparent margin).
+class _Stage {
+  _Stage(this.width);
+
+  final double width;
+
+  static final _body = SurfaceSlot.countdownTag.body!;
+
+  double get postcardHeight => width / CountdownGeometry.postcardAspect;
+  double get rise => postcardHeight * CountdownGeometry.postcardRise;
+
+  /// The tag's image (its card is [CountdownLayout.tagWidth] of the
+  /// postcard; the cord and shadow round it scale with it).
+  double get tagWidth => width * CountdownLayout.tagWidth / _body.width;
+  double get tagHeight => tagWidth / CountdownGeometry.tagAspect;
+
+  /// The tag's card just past the card's right edge, and
+  /// [CountdownLayout.tagBelow] of it below the card's bottom edge.
+  double get tagLeft =>
+      width * (CountdownGeometry.postcardCardRight + CountdownLayout.tagPastEdge) - _body.right * tagWidth;
+  double get tagTop {
+    final cardBottom = -rise + postcardHeight * CountdownGeometry.postcardCardBottom;
+    final tagCard = _body.height * tagHeight;
+    return cardBottom - tagCard * (1 - CountdownLayout.tagBelow) - _body.top * tagHeight;
+  }
+
+  /// Down to the postcard's bottom, or the tag's if it hangs lower.
+  double get height => math.max(postcardHeight - rise, tagTop + tagHeight);
 }
 
 /// The luggage tag with the countdown written on it: the raster (or a
@@ -403,173 +479,6 @@ class _PlaceName extends StatelessWidget {
   }
 }
 
-/// One fact under the postcard: an icon over a few words, on its tag.
-class _FactTag extends StatelessWidget {
-  const _FactTag({required this.icon, required this.color, required this.label});
-
-  final IconSlot icon;
-  final Color color;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final chrome = TravaryChrome.of(context);
-    final surface = chrome.slots.surface(SurfaceSlot.countdownFact);
-    final style = TravaryText.countdownFact.copyWith(color: chrome.colors.ink);
-    Widget content({required bool wrap}) => Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SlotIcon(icon: chrome.slots.icon(icon), color: color, size: CountdownLayout.factIconSize),
-        const SizedBox(height: TravarySpace.xs),
-        Text(label, style: style, textAlign: TextAlign.center, maxLines: wrap ? null : 1),
-      ],
-    );
-
-    // A plain paper label: the stand-in until the raster exists (it grows
-    // with the text), and behind the words if the raster can't be read.
-    final paper = BoxDecoration(
-      color: chrome.colors.paper,
-      borderRadius: BorderRadius.circular(TravaryRadius.small),
-      boxShadow: const [
-        BoxShadow(color: Color(0x1F000000), blurRadius: 8, offset: Offset(0, 3)),
-        BoxShadow(color: Color(0x0F000000), blurRadius: 1, offset: Offset(0, 1)),
-      ],
-    );
-    if (surface == null) {
-      return Container(
-        key: const ValueKey('countdown-fact-fallback'),
-        constraints: const BoxConstraints(minHeight: CountdownLayout.factMinHeight),
-        padding: const EdgeInsets.symmetric(horizontal: TravarySpace.xs + 2, vertical: TravarySpace.sm),
-        decoration: paper,
-        child: Center(child: content(wrap: true)),
-      );
-    }
-    const copy = CountdownGeometry.factCopy;
-    return AspectRatio(
-      aspectRatio: CountdownGeometry.factAspect,
-      child: LayoutBuilder(
-        builder: (context, box) => Stack(
-          fit: StackFit.expand,
-          children: [
-            Image(
-              key: const ValueKey('countdown-fact-raster'),
-              image: artImageProvider(surface),
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) => DecoratedBox(decoration: paper),
-            ),
-            Positioned(
-              left: copy.left * box.maxWidth,
-              top: copy.top * box.maxHeight,
-              width: copy.width * box.maxWidth,
-              height: copy.height * box.maxHeight,
-              child: FittedBox(fit: BoxFit.scaleDown, child: content(wrap: false)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// "View trip" on a ticket: the raster when it exists, else a flat ticket
-/// in the trip's primary colour with notched ends.
-class _TicketButton extends StatelessWidget {
-  const _TicketButton({required this.label, required this.onPressed});
-
-  final String label;
-  final VoidCallback onPressed;
-
-  static const _shape = _TicketBorder(notch: CountdownLayout.buttonNotch);
-
-  @override
-  Widget build(BuildContext context) {
-    final chrome = TravaryChrome.of(context);
-    final colors = chrome.colors;
-    final surface = chrome.slots.surface(SurfaceSlot.countdownButton);
-    final width = math.min(
-      MediaQuery.sizeOf(context).width * CountdownLayout.buttonWidth,
-      CountdownLayout.buttonMaxWidth,
-    );
-    Widget content({required bool wrap}) => Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Flexible(
-          fit: FlexFit.loose,
-          child: Text(
-            label,
-            style: TravaryText.countdownAction.copyWith(color: colors.onPrimary),
-            textAlign: TextAlign.center,
-            maxLines: wrap ? null : 1,
-          ),
-        ),
-        const SizedBox(width: TravarySpace.sm),
-        Icon(Icons.chevron_right_rounded, color: colors.onPrimary, size: 28),
-      ],
-    );
-
-    final Widget button;
-    if (surface == null) {
-      button = Material(
-        key: const ValueKey('countdown-button-fallback'),
-        color: colors.primary,
-        shape: _shape,
-        elevation: 2,
-        shadowColor: const Color(0x66000000),
-        child: InkWell(
-          customBorder: _shape,
-          onTap: onPressed,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: CountdownLayout.buttonMinHeight),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.xl, vertical: TravarySpace.sm),
-              child: Center(child: content(wrap: true)),
-            ),
-          ),
-        ),
-      );
-    } else {
-      const copy = CountdownGeometry.buttonCopy;
-      button = AspectRatio(
-        aspectRatio: CountdownGeometry.buttonAspect,
-        child: LayoutBuilder(
-          builder: (context, box) => Stack(
-            fit: StackFit.expand,
-            children: [
-              Image(
-                key: const ValueKey('countdown-button-raster'),
-                image: artImageProvider(surface),
-                fit: BoxFit.contain,
-                errorBuilder: (context, error, stackTrace) => DecoratedBox(
-                  decoration: ShapeDecoration(color: colors.primary, shape: _shape),
-                ),
-              ),
-              Positioned(
-                left: copy.left * box.maxWidth,
-                top: copy.top * box.maxHeight,
-                width: copy.width * box.maxWidth,
-                height: copy.height * box.maxHeight,
-                child: FittedBox(fit: BoxFit.scaleDown, child: content(wrap: false)),
-              ),
-              Material(
-                type: MaterialType.transparency,
-                child: InkWell(customBorder: _shape, onTap: onPressed),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    return Semantics(
-      button: true,
-      label: label,
-      excludeSemantics: true,
-      onTap: onPressed,
-      child: SizedBox(key: const ValueKey('countdown-view-trip'), width: width, child: button),
-    );
-  }
-}
-
 /// The postcard's plain stand-in, if its file can't be read: a cream card
 /// where the picture would be.
 class _PostcardStandIn extends StatelessWidget {
@@ -606,36 +515,4 @@ class _TagStandIn extends StatelessWidget {
       ),
     );
   }
-}
-
-/// A ticket's outline: a rounded rectangle with a half-round notch in the
-/// middle of each end.
-class _TicketBorder extends ShapeBorder {
-  const _TicketBorder({required this.notch, this.radius = 6});
-
-  final double notch;
-  final double radius;
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => getOuterPath(rect, textDirection: textDirection);
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    final corner = math.min(radius, rect.shortestSide / 4);
-    final cut = math.min(notch, rect.height / 3);
-    final ticket = Path()..addRRect(RRect.fromRectAndRadius(rect, Radius.circular(corner)));
-    final notches = Path()
-      ..addOval(Rect.fromCircle(center: Offset(rect.left, rect.center.dy), radius: cut))
-      ..addOval(Rect.fromCircle(center: Offset(rect.right, rect.center.dy), radius: cut));
-    return Path.combine(PathOperation.difference, ticket, notches);
-  }
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
-
-  @override
-  ShapeBorder scale(double t) => _TicketBorder(notch: notch * t, radius: radius * t);
 }

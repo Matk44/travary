@@ -33,9 +33,9 @@ class DestinationPalette {
   final List<int> accents;
 
   /// UI tokens. [primary] fills selected states (the raised home tab);
-  /// [secondary] draws quiet structure (the day timeline); [highlight]
-  /// marks what matters now (category labels, the current step);
-  /// [onPrimary] is text and icons on [primary].
+  /// [secondary] is an accent the app doesn't draw with at the moment (the
+  /// time rail uses [ink]); [highlight] marks what matters now (category
+  /// labels, the current step); [onPrimary] is text and icons on [primary].
   final int primary;
   final int secondary;
   final int highlight;

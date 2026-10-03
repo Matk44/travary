@@ -89,6 +89,32 @@ void main() {
     expect(store.plan(planned.id), isNotNull);
   });
 
+  test('a trip started by a booking knows its place from its name', () async {
+    final result = await store.saveBooking(
+      booking('out', BookingKind.flight, d(12, 1), tripId: '', title: 'London to Tokyo'),
+    );
+    await pumpEventQueue();
+    expect(result.tripTitle, 'Tokyo');
+    expect(store.plan(store.booking('out')!.tripId)!.trip.destination?.label, 'Tokyo, Japan');
+  });
+
+  test('a booking on a new trip\'s dates joins it automatically', () async {
+    final planned = await store.createTrip('Lisbon', start: d(12, 1), end: d(12, 5));
+    await pumpEventQueue();
+    final result = await store.saveBooking(booking('x', BookingKind.dining, d(12, 3), tripId: ''));
+    await pumpEventQueue();
+    expect(result.newTrip, isFalse);
+    expect(store.booking('x')?.tripId, planned.id);
+  });
+
+  test('changing a trip\'s dates keeps it covering its bookings', () async {
+    final orlando = store.plans.single;
+    await store.updateTrip(orlando.trip.copyWith(plannedStart: d(10, 14), plannedEnd: d(10, 22)));
+    await pumpEventQueue();
+    final plan = store.plan('orlando')!;
+    expect((plan.start, plan.end), (d(10, 12), d(10, 22)));
+  });
+
   test('deleting a trip removes its bookings', () async {
     await store.deleteTrip(store.plans.single);
     await pumpEventQueue();

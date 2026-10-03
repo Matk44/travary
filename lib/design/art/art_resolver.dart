@@ -4,6 +4,7 @@ import '../../logic/art_subjects.dart';
 import 'art_catalog.dart';
 import 'art_slots.dart';
 import 'card_shells.dart';
+import 'document_stamps.dart';
 
 /// The artwork decision for one card.
 class ArtChoice {
@@ -16,6 +17,7 @@ class ArtChoice {
     this.vignette,
     this.shells = CardShells.none,
     this.icon,
+    this.documents = DocumentArt.none,
   });
 
   final BookingKind kind;
@@ -24,9 +26,11 @@ class ArtChoice {
   /// What the picture shows ("pizza"), or null when nothing specific fits.
   final String? subject;
 
-  /// The full scene (featured cards) and the corner vignette (normal cards)
-  /// of the chosen picture. Either may be missing; cards fall back to the
-  /// other, then to a drawn placeholder.
+  /// The full scene (featured cards, Documents) and the corner vignette
+  /// (normal cards), each the best of its format by the same rules: usually
+  /// the two halves of one picture, but where a picture comes in one format
+  /// only, the other format's best stands in. Either may be missing; cards
+  /// fall back to the other, then to a drawn placeholder.
   final ArtAsset? scene;
   final ArtAsset? vignette;
 
@@ -40,6 +44,10 @@ class ArtChoice {
 
   /// The kind's icon (printed on tags and compact rows).
   final IconArt? icon;
+
+  /// The trip's stamp frames and postmark for a Documents row; the row's
+  /// own frame is `documents.stampFor(variant)`.
+  final DocumentArt documents;
 
   ArtAsset? get asset => scene ?? vignette;
 
@@ -68,6 +76,10 @@ class ArtChoice {
 ///    for the kind. Another destination's pack is never used.
 /// 6. Nothing: the card draws its placeholder.
 ///
+/// Scenes and vignettes are chosen separately, by the same steps, so a
+/// picture drawn only as a scene (for featured cards) never leaves a
+/// normal card showing a scene where its vignette goes.
+///
 /// A destination pack places its pictures at its own rank (the place is
 /// the point), except pictures drawn for a look the trip doesn't have. An experience pack's pictures are ranked by their own theme
 /// exactly like bundled art, so bundled and downloaded pictures follow
@@ -82,9 +94,13 @@ class ArtResolver {
     final variant = stableHash(booking.id);
     final subject = artSubjectFor(booking);
     final picked = booking.artKey == null ? const <ArtAsset>[] : catalog.byKey(booking.kind, booking.artKey!);
-    final keys = picked.isNotEmpty ? [booking.artKey!] : _candidateKeys(booking.kind, context, subject);
-    final key = keys.isEmpty ? null : keys[variant % keys.length];
-    return _choice(booking.kind, context, subject, variant, key);
+    if (picked.isNotEmpty) return _choice(booking.kind, context, subject, variant, booking.artKey, booking.artKey);
+    String? pick(ArtFormat format) {
+      final keys = _candidateKeys(booking.kind, context, subject, format);
+      return keys.isEmpty ? null : keys[variant % keys.length];
+    }
+
+    return _choice(booking.kind, context, subject, variant, pick(ArtFormat.scene), pick(ArtFormat.vignette));
   }
 
   /// Resolves a run of cards shown together, avoiding repeats side by side.
@@ -102,8 +118,12 @@ class ArtResolver {
     return choices;
   }
 
-  List<String> _candidateKeys(BookingKind kind, TripArtContext context, String? subject) {
-    final all = catalog.allFor(kind);
+  /// The best tier's keys among pictures that come in [format].
+  List<String> _candidateKeys(BookingKind kind, TripArtContext context, String? subject, ArtFormat format) {
+    final all = [
+      for (final asset in catalog.allFor(kind))
+        if (asset.format == null || asset.format == format) asset,
+    ];
     if (all.isEmpty) return const [];
     final looks = {context.theme, ...context.secondaryThemes};
     ArtRank? rankOf(ArtAsset a) {
@@ -142,29 +162,30 @@ class ArtResolver {
     return const [];
   }
 
-  ArtChoice _choice(BookingKind kind, TripArtContext context, String? subject, int variant, String? key) {
-    final assets = key == null ? const <ArtAsset>[] : catalog.byKey(kind, key);
-    ArtAsset? scene;
-    ArtAsset? vignette;
-    for (final asset in assets) {
-      if (asset.format == ArtFormat.vignette) {
-        vignette = asset;
-      } else if (asset.format == ArtFormat.scene) {
-        scene = asset;
-      } else {
-        scene ??= asset;
-        vignette ??= asset;
-      }
+  ArtChoice _choice(
+    BookingKind kind,
+    TripArtContext context,
+    String? subject,
+    int variant,
+    String? sceneKey,
+    String? vignetteKey,
+  ) {
+    /// The picture's image in [format], or its one image for both.
+    ArtAsset? find(String? key, ArtFormat format) {
+      final assets = key == null ? const <ArtAsset>[] : catalog.byKey(kind, key);
+      return assets.where((a) => a.format == format).firstOrNull ?? assets.where((a) => a.format == null).firstOrNull;
     }
+
     return ArtChoice(
       kind: kind,
       theme: context.theme,
       subject: subject,
       variant: variant,
-      scene: scene,
-      vignette: vignette,
+      scene: find(sceneKey, ArtFormat.scene),
+      vignette: find(vignetteKey, ArtFormat.vignette),
       shells: ShellResolver(catalog).resolve(context),
       icon: ArtSlots(catalog, context).icon(IconSlot.forKind(kind)),
+      documents: ArtSlots(catalog, context).documentArt(),
     );
   }
 
@@ -179,13 +200,23 @@ class ArtResolver {
         variant: previous.variant + 1,
         shells: choice.shells,
         icon: choice.icon,
+        documents: choice.documents,
       );
     }
-    if (choice.key != previous.key) return choice;
-    final keys = _candidateKeys(booking.kind, context, choice.subject);
-    if (keys.length < 2) return choice;
-    final next = keys[(keys.indexOf(choice.key!) + 1) % keys.length];
-    return _choice(booking.kind, context, choice.subject, choice.variant, next);
+
+    /// The key for [format], moved on to the next candidate if it's the
+    /// neighbour's.
+    String? apart(ArtAsset? mine, ArtAsset? theirs, ArtFormat format) {
+      if (mine == null || mine.key != theirs?.key) return mine?.key;
+      final keys = _candidateKeys(booking.kind, context, choice.subject, format);
+      if (keys.length < 2) return mine.key;
+      return keys[(keys.indexOf(mine.key) + 1) % keys.length];
+    }
+
+    final sceneKey = apart(choice.scene, previous.scene, ArtFormat.scene);
+    final vignetteKey = apart(choice.vignette, previous.vignette, ArtFormat.vignette);
+    if (sceneKey == choice.scene?.key && vignetteKey == choice.vignette?.key) return choice;
+    return _choice(booking.kind, context, choice.subject, choice.variant, sceneKey, vignetteKey);
   }
 }
 

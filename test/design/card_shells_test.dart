@@ -181,10 +181,15 @@ void main() {
   group('icons and surfaces', () {
     test('supplied raster icons are used; missing ones say so', () {
       final slots = ArtSlots(bundled, look(ExperienceTheme.themepark));
-      for (final present in [IconSlot.flight, IconSlot.dining, IconSlot.navToday, IconSlot.navTrips]) {
+      // Every booking kind has its raster icon, drawn as one set.
+      for (final kind in BookingKind.values) {
+        final icon = slots.icon(IconSlot.forKind(kind));
+        expect(icon.image, BundledArtImage('assets/art/icons/${icon.slot.key}.png'), reason: kind.name);
+      }
+      for (final present in [IconSlot.navToday, IconSlot.navTrips]) {
         expect(slots.icon(present).isFallback, isFalse, reason: present.key);
       }
-      for (final missing in [IconSlot.navDocuments, IconSlot.navProfile, IconSlot.navAdd, IconSlot.stay]) {
+      for (final missing in [IconSlot.navDocuments, IconSlot.navProfile, IconSlot.navAdd]) {
         expect(slots.icon(missing).isFallback, isTrue, reason: missing.key);
       }
       // Surfaces are used exactly when their files exist.
@@ -203,6 +208,9 @@ void main() {
       expect(choice.shells.featured?.art.fileKey, 'featured_ticket');
       expect(choice.icon?.image, const BundledArtImage('assets/art/icons/dining.png'));
       expect(choice.vignette?.group, 'any_bistro_01', reason: 'no dining castle art yet: the generic dining picture');
+      // The theme park's own dining scene, drawn without a vignette, is
+      // for featured cards and Documents only.
+      expect(choice.scene?.group, 'themepark_generic_02');
     });
   });
 
@@ -246,6 +254,7 @@ void main() {
           geometry.stubLabel,
           geometry.footnote,
           geometry.vignette,
+          geometry.scene,
         ]) {
           if (anchor != null) expect(inside(anchor, body), isTrue, reason: '$name $anchor');
         }

@@ -6,9 +6,11 @@ import '../data/smart_import_service.dart';
 import '../data/visual_profile_service.dart';
 import '../design/tokens.dart';
 import '../state/premium_store.dart';
+import '../state/travel_documents_store.dart';
 import '../state/travel_store.dart';
 import 'bootstrap.dart';
 import 'home_shell.dart';
+import 'route_observer.dart';
 import 'trip_chrome_scope.dart';
 
 class TravaryApp extends StatelessWidget {
@@ -43,6 +45,10 @@ class TravaryApp extends StatelessWidget {
             return PremiumStore(purchases: dependencies.purchases, clock: () => travel.now);
           },
         ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              TravelDocumentsStore(repository: dependencies.travelDocuments, lock: dependencies.documentLock),
+        ),
       ],
       child: MaterialApp(
         title: 'Travary',
@@ -50,6 +56,7 @@ class TravaryApp extends StatelessWidget {
         theme: buildTravaryTheme(),
         // Every screen, pushed ones included, shares the trip's palette.
         builder: (context, child) => TripChromeScope(child: child!),
+        navigatorObservers: [appRouteObserver],
         home: const HomeShell(),
       ),
     );

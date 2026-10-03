@@ -9,6 +9,7 @@ import '../kind_style.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
 import 'card_parts.dart';
+import 'document_stamp_card.dart';
 import 'featured_ticket_card.dart';
 import 'note_paper_card.dart';
 import 'ongoing_tag_card.dart';
@@ -22,8 +23,12 @@ enum CardSize {
   /// A normal card on the timeline.
   standard,
 
-  /// A single row: finished items, trip timelines, the Wallet.
+  /// A single row: finished items, trip timelines.
   compact,
+
+  /// A row in the Documents list: the date in a postmark and the
+  /// booking's scene in a perforated stamp.
+  document,
 }
 
 /// The one widget every screen uses to show a booking.
@@ -37,8 +42,10 @@ enum CardSize {
 /// boarding pass, restaurant or travel ticket (the booking's scene in its
 /// window), the look's admission ticket, a key card or note paper; in the
 /// day's list, the hotel key card for stays, note paper for notes, and a
-/// tagged reservation card for everything else. Only if a trip has no shell at all (the art is missing from the
-/// build) does a plain panel stand in, with no imitation of the material.
+/// tagged reservation card for everything else; in the Documents list, a
+/// paper row with a postmark and one of three stamps (`DocumentArt`). Only
+/// if a trip has no shell at all (the art is missing from the build) does
+/// a plain panel stand in, with no imitation of the material.
 class BookingCard extends StatelessWidget {
   const BookingCard({
     super.key,
@@ -71,6 +78,11 @@ class BookingCard extends StatelessWidget {
         if (shell != null) return _onShell(shell, featured: false);
       case CardSize.compact:
         return _Labelled(card: this, child: _CompactCard(this));
+      case CardSize.document:
+        return _Labelled(
+          card: this,
+          child: DocumentStampCard(text: text, art: art, status: status, onTap: onTap, onShowTickets: onShowTickets),
+        );
     }
     return _Labelled(card: this, child: _PlainCard(this));
   }
@@ -98,7 +110,7 @@ class _Labelled extends StatelessWidget {
     return Semantics(
       button: card.onTap != null,
       label: [text.eyebrow, text.title, text.when].whereType<String>().join(', '),
-      excludeSemantics: card.size == CardSize.compact,
+      excludeSemantics: card.size == CardSize.compact || card.size == CardSize.document,
       child: child,
     );
   }
@@ -182,8 +194,8 @@ class _PlainCard extends StatelessWidget {
   }
 }
 
-/// One row: finished items, trip days, the Documents list. The kind's
-/// raster icon sits in a small paper disc.
+/// One row: finished items and trip days. The kind's raster icon sits in a
+/// small paper disc.
 class _CompactCard extends StatelessWidget {
   const _CompactCard(this.card);
 
@@ -193,7 +205,7 @@ class _CompactCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = TravaryChrome.of(context).colors;
     final text = card.text;
-    final subtitle = [_sentenceCase(text.eyebrow), text.detail ?? text.place].whereType<String>().join(' · ');
+    final subtitle = text.summary;
 
     return Opacity(
       opacity: card.status == EntryStatus.done ? 0.55 : 1,
@@ -225,7 +237,7 @@ class _CompactCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(text.title, style: TravaryText.label, maxLines: 1, overflow: TextOverflow.ellipsis),
-                      if (subtitle.isNotEmpty)
+                      if (subtitle != null)
                         Text(subtitle, style: TravaryText.small, maxLines: 1, overflow: TextOverflow.ellipsis),
                     ],
                   ),
@@ -244,5 +256,3 @@ class _CompactCard extends StatelessWidget {
     );
   }
 }
-
-String _sentenceCase(String value) => value.isEmpty ? value : value[0] + value.substring(1).toLowerCase();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travary/app/home_shell.dart';
+import 'package:travary/data/memory_travel_document_repository.dart';
 import 'package:travary/data/memory_travel_repository.dart';
 import 'package:travary/data/purchase_service.dart';
 import 'package:travary/design/art/art_catalog.dart';
@@ -10,13 +11,15 @@ import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import 'canonical_today.dart';
+import 'travel_documents.dart';
+import 'package:travary/app/route_observer.dart';
 
 /// The mockup's moment (docs/mockups/today-empty/02-hanging-luggage-tag.png):
 /// 8am on Monday 28 September 2026, between trips.
 final countdownNow = DateTime(2026, 9, 28, 8, 0);
 
-/// A postcard waiting in `art_packs/pending/` for its complete pack.
-String pendingPostcard(String packId) => 'art_packs/pending/countdown_postcards/$packId/common/countdown_postcard.png';
+/// A countdown postcard in its complete destination pack source.
+String countdownPostcardSource(String packId) => 'art_packs/sources/$packId/common/countdown_postcard.webp';
 
 /// A classifier profile whose place Google verified.
 TripVisualProfile verifiedProfile(
@@ -63,33 +66,40 @@ ArtPackContent postcardPack(
   themes: drawnFor,
 );
 
-/// The five pending postcards as the packs they'll eventually join.
-List<ArtPackContent> pendingPostcardPacks() => [
+/// The five countdown postcards from their complete destination packs.
+List<ArtPackContent> countdownPostcardSourcePacks() => [
   postcardPack(
     'region_gb_lake_district',
     country: 'GB',
     region: 'lake_district',
-    postcard: pendingPostcard('region_gb_lake_district'),
+    postcard: countdownPostcardSource('region_gb_lake_district'),
   ),
-  postcardPack('city_us_orlando', country: 'US', city: 'orlando', postcard: pendingPostcard('city_us_orlando')),
+  postcardPack('city_us_orlando', country: 'US', city: 'orlando', postcard: countdownPostcardSource('city_us_orlando')),
   postcardPack(
     'city_jp_kyoto',
     country: 'JP',
     region: 'kansai',
     city: 'kyoto',
-    postcard: pendingPostcard('city_jp_kyoto'),
+    postcard: countdownPostcardSource('city_jp_kyoto'),
   ),
-  postcardPack('city_fr_paris', country: 'FR', city: 'paris', postcard: pendingPostcard('city_fr_paris')),
-  postcardPack('region_id_bali', country: 'ID', region: 'bali', postcard: pendingPostcard('region_id_bali')),
+  postcardPack('city_fr_paris', country: 'FR', city: 'paris', postcard: countdownPostcardSource('city_fr_paris')),
+  postcardPack('region_id_bali', country: 'ID', region: 'bali', postcard: countdownPostcardSource('region_id_bali')),
 ];
 
 final _created = DateTime(2026, 1, 1);
 
-Trip countdownTrip(String id, String title, {TripVisualProfile? profile, String userId = 'me'}) => Trip(
+Trip countdownTrip(
+  String id,
+  String title, {
+  TripVisualProfile? profile,
+  TripDestination? destination,
+  String userId = 'me',
+}) => Trip(
   id: id,
   title: title,
   theme: profile?.primaryTheme ?? ExperienceTheme.classicTravel,
   visualProfile: profile,
+  destination: destination,
   ownerId: userId,
   memberIds: [userId],
   createdAt: _created,
@@ -172,13 +182,16 @@ Booking countdownBooking(
 }
 
 /// The app's home screen on [data] at [now] (the mockup's moment unless
-/// given), with [catalog] (bundled art plus every pending postcard unless
+/// given), with [catalog] (bundled art plus every postcard source pack unless
 /// given).
 Widget countdownTodayApp({
   ArtCatalog? catalog,
   DateTime? now,
   ({List<Trip> trips, List<Booking> bookings})? data,
   WeatherReport? weather,
+  List<TravelDocument> documents = const [],
+  FixedDocumentLock? documentLock,
+  MemoryTravelDocumentRepository? documentRepository,
 }) {
   final clock = now ?? countdownNow;
   final repository = MemoryTravelRepository(userId: 'me');
@@ -189,7 +202,7 @@ Widget countdownTodayApp({
       ChangeNotifierProvider(
         create: (_) => TravelStore(
           repository: repository,
-          artCatalog: catalog ?? bundledArtCatalog().withPacks(pendingPostcardPacks()),
+          artCatalog: catalog ?? bundledArtCatalog().withPacks(countdownPostcardSourcePacks()),
           clock: () => clock,
         ),
       ),
@@ -199,10 +212,12 @@ Widget countdownTodayApp({
           clock: () => clock,
         ),
       ),
+      travelDocumentsProvider(documents: documents, lock: documentLock, repository: documentRepository),
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: buildTravaryTheme(),
+      navigatorObservers: [appRouteObserver],
       home: HomeShell(weather: weather),
     ),
   );

@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -7,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
+import 'package:travary/design/art/art_slots.dart';
 import 'package:travary/design/tokens.dart';
 import 'package:travary/design/widgets/countdown_trip_hero.dart';
 import 'package:travary/design/widgets/nav_bar.dart';
@@ -14,7 +16,7 @@ import 'package:travary/design/widgets/nav_bar.dart';
 import '../support/countdown_today.dart';
 
 /// Today between trips, rendered like the canonical Today screen (a
-/// 390-point phone at 813 × 1933 pixels) with the pending Lake District
+/// 390-point phone at 813 × 1933 pixels) with the Lake District pack's
 /// postcard, for comparison with
 /// docs/mockups/today-empty/02-hanging-luggage-tag.png.
 ///
@@ -45,7 +47,9 @@ void main() {
 
     // Pack pictures are files: decode them for real before the screen asks
     // for them (a load started under the test clock never finishes).
-    await tester.runAsync(() => _preloadFiles(pendingPostcardPacks().map((pack) => pack.common.values.first.path)));
+    await tester.runAsync(
+      () => _preloadFiles(countdownPostcardSourcePacks().map((pack) => pack.common.values.first.path)),
+    );
     final boundary = GlobalKey();
     await tester.pumpWidget(RepaintBoundary(key: boundary, child: countdownTodayApp()));
     await tester.pumpAndSettle();
@@ -72,8 +76,6 @@ void main() {
       find.text('DAYS TO GO'),
       find.text('Lake District'),
       find.text('25–28 Nov 2026'),
-      find.text('4 days'),
-      find.text('View trip'),
     ];
     var previous = -1.0;
     for (final finder in order) {
@@ -83,44 +85,54 @@ void main() {
       previous = top;
     }
     expect(find.text('Mon 28 Sep'), findsOneWidget);
-    expect(find.text('3 bookings'), findsOneWidget);
-    expect(find.text('Opens 25 Nov'), findsOneWidget);
     expect(find.byType(CountdownTripHero), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('on a 390 × 844 phone with a status bar, all of it fits above the tabs', (tester) async {
-    const dpr = 3.0;
-    tester.view.physicalSize = const Size(390 * dpr, 844 * dpr);
-    tester.view.devicePixelRatio = dpr;
-    tester.view.padding = const FakeViewPadding(top: 47 * dpr, bottom: 34 * dpr);
-    tester.view.viewPadding = const FakeViewPadding(top: 47 * dpr, bottom: 34 * dpr);
-    addTearDown(tester.view.reset);
+  testWidgets(
+    'on a 390 × 844 phone with a status bar, the postcard spans the width; it and its tag fit above the tabs',
+    (tester) async {
+      const dpr = 3.0;
+      tester.view.physicalSize = const Size(390 * dpr, 844 * dpr);
+      tester.view.devicePixelRatio = dpr;
+      tester.view.padding = const FakeViewPadding(top: 47 * dpr, bottom: 34 * dpr);
+      tester.view.viewPadding = const FakeViewPadding(top: 47 * dpr, bottom: 34 * dpr);
+      addTearDown(tester.view.reset);
 
-    await tester.runAsync(() => _preloadFiles(pendingPostcardPacks().map((pack) => pack.common.values.first.path)));
-    final boundary = GlobalKey();
-    await tester.pumpWidget(RepaintBoundary(key: boundary, child: countdownTodayApp()));
-    await tester.pumpAndSettle();
-    await _precacheImages(tester);
+      await tester.runAsync(
+        () => _preloadFiles(countdownPostcardSourcePacks().map((pack) => pack.common.values.first.path)),
+      );
+      final boundary = GlobalKey();
+      await tester.pumpWidget(RepaintBoundary(key: boundary, child: countdownTodayApp()));
+      await tester.pumpAndSettle();
+      await _precacheImages(tester);
 
-    final card = tester.getRect(find.byKey(const ValueKey('countdown-postcard')));
-    expect(card.height, lessThanOrEqualTo(844 * CountdownLayout.postcardMaxHeight + 0.5));
-    if (qa) {
-      final actual = await tester.runAsync(() async {
-        final render = boundary.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-        return render.toImage(pixelRatio: 813 / 390);
-      });
-      await tester.runAsync(() async {
-        final png = await actual!.toByteData(format: ui.ImageByteFormat.png);
-        await File(p.join(outDir, 'countdown_844_actual.png')).writeAsBytes(png!.buffer.asUint8List());
-      });
-      // Only with the app's real fonts: the test font's wide squares wrap
-      // every label.
-      final tabs = tester.getRect(find.byType(TravaryNavBar));
-      expect(tester.getRect(find.byKey(const ValueKey('countdown-view-trip'))).bottom, lessThan(tabs.top));
-    }
-    expect(tester.takeException(), isNull);
-  });
+      final card = tester.getRect(find.byKey(const ValueKey('countdown-postcard')));
+      expect(card.width, closeTo(390 - 2 * CountdownLayout.postcardInset, 0.5), reason: 'as wide as the phone allows');
+      final tabs = tester.getRect(find.byType(TravaryNavBar)).top;
+      expect(card.bottom, lessThan(tabs), reason: 'no scrolling to see it');
+      // The tag's card (not its transparent margin), hanging at an angle.
+      final raster = tester.renderObject<RenderBox>(find.byKey(const ValueKey('countdown-tag-raster')));
+      final body = SurfaceSlot.countdownTag.body!;
+      final size = raster.size;
+      final tagBottom = [
+        for (final x in [body.left, body.right])
+          raster.localToGlobal(Offset(x * size.width, body.bottom * size.height)).dy,
+      ].reduce(math.max);
+      expect(tagBottom, lessThan(tabs), reason: 'the tag hanging below it too');
+      if (qa) {
+        final actual = await tester.runAsync(() async {
+          final render = boundary.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+          return render.toImage(pixelRatio: 813 / 390);
+        });
+        await tester.runAsync(() async {
+          final png = await actual!.toByteData(format: ui.ImageByteFormat.png);
+          await File(p.join(outDir, 'countdown_844_actual.png')).writeAsBytes(png!.buffer.asUint8List());
+        });
+      }
+      expect(tester.takeException(), isNull);
+    },
+  );
 }
 
 Future<void> _loadFonts(String dir) async {

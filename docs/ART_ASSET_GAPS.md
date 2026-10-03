@@ -35,7 +35,7 @@ below account for most of the remaining difference.
 | `icons/timeline_stop.png` (`timeline_stop`) | 256 × 256, one-colour ink dot, tinted `ui.secondary` | Day timeline stops | Plain round dot (**visible**, matches the reference closely) | Optional |
 | `icons/timeline_now.png` (`timeline_now`) | 256 × 256, one-colour ring, tinted `ui.highlight` | The stop happening now | Plain dot with a halo (not in the morning reference) | Optional |
 | `dining/themepark_castle_01_vignette.png` (+ `_scene`) | 1024 × 1024 transparent (scene 1536 × 1024) | "Be Our Guest Restaurant" (subject `castle`) on a theme-park trip | The generic `dining/any_bistro_01_vignette.png` (**visible**: the reference shows a castle) | In the brief's start list |
-| `dining/themepark_grill_01_vignette.png` (+ `_scene`) | as above | "Ohana" (subject `grill`) on a theme-park trip: palm, low sun, waves | The bistro vignette (**visible**) | Make it |
+| `dining/themepark_grill_01_vignette.png` | as above | "Ohana" (subject `grill`) on a theme-park trip: palm, low sun, waves | The bistro vignette (**visible**). Its scene exists and is used on featured cards and in Documents | Make it |
 
 Present and used: the woven `linen` (tiled behind the four home tabs) and
 the home tabs `tab`, `tab_selected` (finished petrol teal, drawn as it is
@@ -54,16 +54,25 @@ status bar).
 
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
-| `common/countdown_postcard.png` (`countdown_postcard`), per destination pack | 1122 × 1402 | The postcard | None bundled on purpose. Without a suitable pack Today keeps its first-day view, so the countdown isn't seen yet | Five made (Lake District, Orlando, Kyoto, Paris, Bali), waiting in `art_packs/pending/countdown_postcards/` for their complete city/region packs (`docs/ART_PACKS.md`) |
-| `common/countdown_fact_tag.png` (`countdown_fact_tag`) | 1024 × 512, eyelet and string in the left fifth, words in `CountdownGeometry.factCopy` | The three facts under the postcard | A plain paper label with a soft shadow (**visible** with the countdown) | Make it |
-| `common/countdown_button.png` (`countdown_button`) | 1536 × 460, petrol-teal ticket with notched ends and stitching, words in `CountdownGeometry.buttonCopy` | "View trip" | A flat ticket in the palette's primary colour with notched ends (**visible**) | Make it |
-| `icons/calendar.png`, `icons/attraction.png` | as the kind icons | The "4 days" and "Opens 25 Nov" facts | Material glyphs (**visible**) | Listed below too |
+| `common/countdown_postcard.png` (`countdown_postcard`), per destination pack | 1122 × 1402 | The postcard | Only place packs carry one (Lake District, Orlando, Kyoto, Paris and Bali so far). Any other trip counts down on the neutral postcard below | A postcard per destination pack: prompts and per-country scenes in `art_packs/prompts/postcards.md` |
+| `common/countdown_postcard_anywhere` (`countdown_postcard_anywhere`), bundled | 1122 × 1402 | The postcard for a trip whose place has none | **A stand-in**: the bundled plane scene inside the Lake District postcard's frame (visible) | The real neutral postcard (prompt in `art_packs/prompts/postcards.md`) |
+
+Since 3 October 2026 the countdown shows only the postcard and its tag:
+the fact tickets (`countdown_fact_duration`, `countdown_fact_bookings`,
+`countdown_fact_opens`, legacy `countdown_fact_tag`) and `countdown_button`
+are no longer drawn. They stay bundled in case they return; remove them to
+save about 3.6 MB if not.
 
 Present and used: `common/countdown_luggage_tag.png` (the blank tag; its
 card is `SurfaceSlot.countdownTag.body`, the eyelet is
-`CountdownGeometry.eyelet`) and `icons/nav_trips.png` (the bookings fact).
-The mockup's tree and postmark motif on the tag isn't drawn: the tag stays
-blank and every word on it is live.
+`CountdownGeometry.eyelet`); the individually drawn
+`common/countdown_fact_duration.png`, `common/countdown_fact_bookings.png`,
+and `common/countdown_fact_opens.png`; `common/countdown_button.png`; and
+`icons/calendar.png`, `icons/countdown_bookings.png`, and
+`icons/attraction.png`. The legacy `countdown_fact_tag` key remains a pack
+fallback, but is not bundled. The mockup's tree and postmark motif on the
+large tag isn't drawn: the tag stays blank and every word on every surface
+is live.
 
 ## Shells
 
@@ -100,13 +109,14 @@ current country pack does), so icons on them print cream.
 ## Icons for booking kinds
 
 `icons/<kind>.png`, 1024 × 1024, one-colour navy ink (tinted per tag), for
-the tagged cards' luggage tags and compact rows. Present: `flight`,
-`dining`. **Missing:** `stay`, `attraction`, `transport`, `activity`,
-`event`, `note`, and `calendar` (the header pill on days without a
-forecast). The kind's Material glyph stands in (visible wherever that kind
-shows a tag or row). The reference's dinner tag prints a hibiscus. That's
-a decorative motif, not a kind icon, so it isn't modelled; dinner tags show
-the dining icon.
+the tagged cards' luggage tags, compact rows and the Documents stamps'
+badges. All eight are present, drawn as one set of solid letterpress
+silhouettes: `flight` and `dining` set the style; `stay`, `attraction`,
+`transport`, `activity`, `event` and `note` were drawn to match them.
+`calendar` (the header pill and countdown facts) and the countdown's
+`countdown_bookings` are outline icons. The reference's dinner tag prints a hibiscus. That's a
+decorative motif, not a kind icon, so it isn't modelled; dinner tags show the
+dining icon.
 
 ## Brief materials not used by this build
 
@@ -133,6 +143,46 @@ isn't used: every tagged shell includes its tag.
   time. The key card's small line is live data ("CHECK-OUT IN 4 DAYS"),
   where the reference prints "ALOHA".
 
+## Documents: stamp rows
+
+`DocumentStampCard` (`lib/design/cards/document_stamp_card.dart`) and the
+heading's `DestinationStamp` (`lib/design/widgets/destination_stamp.dart`),
+target `docs/mockups/documents-themed-v2/02-collectible-scenic-stamps.png`
+(assets: `docs/documents_stamps_prompts.md`). Visual QA: `tool/visual_qa.sh`
+also writes `build/visual_qa/documents_actual.png` (Orlando on 28 September
+2026, at the mockup's 851 × 1848), `documents_lakes_actual.png` and
+`documents_halo_{light,dark}.png`.
+
+Present and used: the three stamp frames `common/documents_stamp_01.png`
+(classic), `_02` (airmail) and `_03` (vintage), 1024 × 896, their windows
+measured in `StampGeometry` (a test checks the window is clear and the
+frame solid where the geometry says); `common/documents_postmark.png` and
+`common/documents_cancel_lines.png` (one-colour ink, tinted); every booking
+kind's icon; the destination stamps (1024 × 1280) in the Orlando, Lake
+District, Kyoto, Paris and Bali packs, their label band measured in
+`DestinationStampGeometry`; and the scenes, including the four made for the
+first Documents design: `dining/themepark_generic_02_scene.png`,
+`dining/themepark_grill_01_scene.png`, `note/themepark_generic_01_scene.png`
+and `activity/themepark_boat_01_scene.png`. Scenes are cropped a little
+right of centre, where the brief puts their subject.
+
+| Missing | Size | Stand-in now | Visible? |
+|---|---|---|---|
+| `…_vignette.png` for the three dining and activity scenes above (the note scene needs none: note paper shows no picture) | 1024 × 1024 transparent | Tagged cards on Today use the best vignette there is: the bistro for dining, `any_boat_01` for the airboat | Yes, on Today's normal cards |
+| `common/documents_destination_stamp.png` for every other destination | 1024 × 1280, same template | No stamp beside the heading | Only on trips without one |
+
+No longer used: the ticket-ledger shells `common/documents_ticket_01.png`
+to `_03` (the first Documents design, replaced by the stamps) are still in
+the bundle; delete them to save about 1.9 MB.
+
+Differences that art alone won't close:
+
+- **Headline serif.** The mockup's titles are a condensed display serif;
+  Source Serif 4 runs wider, so the longest titles shrink a little and then
+  end in an ellipsis.
+- **Header postmark.** The mockup prints "JOURNEY INSPIRE EXPLORE MORE"
+  round its header postmark; art carries no text, so the ring is plain.
+
 ## Trips: coming trips' postcards
 
 `UpcomingTripPostcard` (`lib/design/widgets/upcoming_trip_postcard.dart`,
@@ -142,9 +192,15 @@ Visual QA: `tool/visual_qa.sh` also writes
 
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
-| `common/trip_postcard.png` (`trip_postcard`), per destination pack | 1536 × 1024 | A coming trip's row under "Coming up" | None bundled on purpose. Without a suitable pack the trip keeps its plain row, so the postcards aren't seen yet | Five made (Lake District, Orlando, Kyoto, Paris, Bali), waiting in `art_packs/pending/trip_postcards/` for their complete city/region packs (`docs/ART_PACKS.md`) |
+| `common/trip_postcard.png` (`trip_postcard`), per destination pack | 1536 × 1024 | A coming trip's row under "Coming up" | None bundled on purpose. Without a suitable installed pack the trip keeps its plain row | Complete place packs exist for Lake District, Orlando, Kyoto, Paris and Bali under `art_packs/sources/` (`docs/ART_PACKS.md`) |
 
 The tag is the countdown's blank `common/countdown_luggage_tag.png`
 (`SurfaceSlot.countdownTag`), drawn smaller; no second tag raster. The
 mockup's destination motifs on the tag (trees, a maple leaf, a palm) aren't
 drawn: the tag stays blank and every word on it is live.
+
+## Travel documents
+
+| File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
+|---|---|---|---|---|
+| A passport-cover shell for a document row | about 1983 × 793 | `TravelDocumentCard` (the travel documents list) | A plain paper row with the kind's icon on a palette-coloured medallion (visible) | Optional: a blank passport/ID cover in the travel-ephemera style, with a clean live-text zone |

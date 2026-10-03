@@ -1,5 +1,16 @@
 # Empty Today — hanging luggage tag hand-off
 
+> **Update, 3 October 2026.** The three fact tags and the "View trip"
+> button are gone: the postcard is larger (up to 60% of the screen's height,
+> the full width of a 390 × 844 phone), the tag smaller (36% of the
+> postcard's width) and hung over the lower right corner with half of it
+> below the card, and tapping the postcard opens the trip. The entry
+> replays each time Today comes into view: the postcard lifts in, the tag is
+> slapped on (the card gives a little), swings left and right from its
+> eyelet and settles (`CountdownLayout`, `CountdownTripHero.tagDegrees`).
+> Sections below on the facts and button describe the earlier design.
+
+
 The approved state is shown only when the selected Today date has no itinerary
 items and a future trip exists. It celebrates the earliest future trip; it does
 not replace the existing Today itinerary while travelling.
@@ -12,15 +23,16 @@ common asset key is `countdown_postcard`.
 
 | Scope | File |
 | --- | --- |
-| Lake District region, GB | `art_packs/pending/countdown_postcards/region_gb_lake_district/common/countdown_postcard.png` |
-| Orlando city, US | `art_packs/pending/countdown_postcards/city_us_orlando/common/countdown_postcard.png` |
-| Kyoto city, JP | `art_packs/pending/countdown_postcards/city_jp_kyoto/common/countdown_postcard.png` |
-| Paris city, FR | `art_packs/pending/countdown_postcards/city_fr_paris/common/countdown_postcard.png` |
-| Bali region, ID | `art_packs/pending/countdown_postcards/region_id_bali/common/countdown_postcard.png` |
+| Lake District region, GB | `art_packs/sources/region_gb_lake_district/common/countdown_postcard.png` |
+| Orlando city, US | `art_packs/sources/city_us_orlando/common/countdown_postcard.png` |
+| Kyoto city, JP | `art_packs/sources/city_jp_kyoto/common/countdown_postcard.png` |
+| Paris city, FR | `art_packs/sources/city_fr_paris/common/countdown_postcard.png` |
+| Bali region, ID | `art_packs/sources/region_id_bali/common/countdown_postcard.png` |
 
-The pending directory is intentional: add each image to its complete city or
-region pack rather than creating a partial pack that would outrank a fuller
-country pack. Each final `pack.json` entry should declare:
+Each image is in a complete city or region pack containing the corresponding
+country pack's full asset set, rather than a postcard-only pack that would
+prevent the fuller country pack from being downloaded. Each `pack.json`
+declares:
 
 ```json
 {
@@ -40,15 +52,34 @@ It is a `1024 x 1536` transparent PNG. It contains only the warm-ivory cotton
 tag, aged-brass eyelet, braided cord and restrained physical shadow. All copy
 is live Flutter content.
 
+The approved shared countdown chrome is also bundled:
+
+| Asset | Size | Purpose |
+| --- | --- | --- |
+| `assets/art/common/countdown_fact_duration.png` | `1024 x 512` | Duration fact ticket |
+| `assets/art/common/countdown_fact_bookings.png` | `1024 x 512` | Booking-count fact ticket |
+| `assets/art/common/countdown_fact_opens.png` | `1024 x 512` | Opening-date fact ticket |
+| `assets/art/common/countdown_button.png` | `1536 x 460` | Petrol-teal `View trip` ticket |
+| `assets/art/icons/calendar.png` | `1024 x 1024` | Duration outline icon |
+| `assets/art/icons/countdown_bookings.png` | `1024 x 1024` | Booking-count outline icon |
+| `assets/art/icons/attraction.png` | `1024 x 1024` | Opening-date outline icon |
+
+The three fact tickets are separate physical drawings, with distinct cord,
+knot, eyelet, paper edge, wear and shadow details. Their labels and the CTA
+copy remain live Flutter text. The `View trip` label is centred independently
+of its right-hand chevron.
+
 ## Resolver contract
 
 1. If Today has at least one booking, keep the existing Today itinerary.
 2. Otherwise select the future trip with the earliest start date.
-3. Build `TripArtContext` from that trip's verified visual profile.
-4. Resolve `common/countdown_postcard` through the existing ranked art catalog.
-5. Prefer city, then region, then country/look fallbacks according to existing
+3. Require `LocationVerification.verified`; demo, missing-profile,
+   unverified, conflict and skipped trips keep the old view.
+4. Build `TripArtContext` from that trip's verified visual profile.
+5. Resolve `common/countdown_postcard` through the existing ranked art catalog.
+6. Prefer city, then region, then country/look fallbacks according to existing
    resolver rules. Never show a postcard for a different verified place.
-6. If no suitable postcard exists yet, keep the existing safe empty state; do
+7. If no suitable postcard exists yet, keep the existing safe empty state; do
    not substitute Lake District or another arbitrary destination.
 
 ## Flutter composition
@@ -104,9 +135,11 @@ live-copy zone.
 - The hero: `lib/design/widgets/countdown_trip_hero.dart`; measurements in
   `CountdownGeometry`, sizes and timings in `CountdownLayout`
   (`lib/design/tokens.dart`). The tag is `SurfaceSlot.countdownTag`; the
-  fact tags and button look up `countdown_fact_tag` and `countdown_button`
-  and use plain stand-ins until those rasters exist
-  (`docs/ART_ASSET_GAPS.md`).
+  bundled fact tags resolve `countdown_fact_duration`,
+  `countdown_fact_bookings`, and `countdown_fact_opens`; the button resolves
+  `countdown_button`. The legacy shared `countdown_fact_tag` key remains a
+  pack fallback. Plain stand-ins are retained only when neither raster can be
+  read (`docs/ART_ASSET_GAPS.md`).
 - Today: `lib/features/today/today_screen.dart` shows it only between
   trips, when today is empty and a postcard resolves; otherwise Today is
   unchanged. Screen tests: `test/widget/countdown_today_test.dart`.

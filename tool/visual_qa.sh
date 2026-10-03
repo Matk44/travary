@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 # Renders the canonical Today screen at the reference size and compares it
 # with docs/reference/travary_today_reference.png, and renders Today between
-# trips (the countdown) for docs/mockups/today-empty/02-hanging-luggage-tag.png
-# and the Trips tab's coming trips for
-# docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png.
+# trips (the countdown) for docs/mockups/today-empty/02-hanging-luggage-tag.png,
+# the Trips tab's coming trips for
+# docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png, and the
+# Documents tab's stamps for
+# docs/mockups/documents-themed-v2/02-collectible-scenic-stamps.png (Orlando,
+# the Lake District, and rows on light and dark backdrops).
 # Outputs in build/visual_qa/.
 #
 # The render uses the app's real fonts: Source Serif 4 and Inter as
@@ -27,4 +30,4 @@ icons="$(find "$flutter_root" -path '*material_fonts*' -name 'MaterialIcons-Regu
 ls "$fonts" | sed 's/^/  font: /'
 
 TRAVARY_VISUAL_QA=1 flutter test test/visual_qa/today_reference_test.dart test/visual_qa/countdown_hero_test.dart \
-  test/visual_qa/trips_postcards_test.dart
+  test/visual_qa/trips_postcards_test.dart test/visual_qa/documents_stamps_test.dart

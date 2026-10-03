@@ -96,6 +96,24 @@ void main() {
       );
     });
 
+    test('the traveller\'s own destination: city, region and country, over the classifier\'s', () {
+      final chosen = kyotoTrip(verification: LocationVerification.conflict).copyWith(
+        destination: const TripDestination(
+          countryCode: 'JP',
+          countryName: 'Japan',
+          region: 'Kansai',
+          regionSlug: 'kansai',
+          city: 'Osaka',
+          citySlug: 'osaka',
+        ),
+      );
+      final trusted = trustedDestinationOf(chosen);
+      expect((trusted.countryCode, trusted.regionSlug, trusted.citySlug), ('JP', 'kansai', 'osaka'));
+      expect(trusted.experienceFirst, isFalse);
+      expect(artContextFor(chosen, all).packRanks['region_jp_kansai'], ArtRank.region);
+      expect(artContextFor(chosen, all).packRanks.containsKey('city_jp_kyoto'), isFalse);
+    });
+
     test('conflict, skipped or no profile: nothing', () {
       expect(trustedDestinationOf(kyotoTrip(verification: LocationVerification.conflict)).isEmpty, isTrue);
       expect(trustedDestinationOf(kyotoTrip(verification: LocationVerification.skipped)).isEmpty, isTrue);

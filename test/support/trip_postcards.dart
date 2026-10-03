@@ -3,9 +3,8 @@ import 'package:travary/domain/domain.dart';
 
 import 'countdown_today.dart';
 
-/// A landscape Trips postcard waiting in `art_packs/pending/` for its
-/// complete pack.
-String pendingTripPostcard(String packId) => 'art_packs/pending/trip_postcards/$packId/common/trip_postcard.png';
+/// A landscape Trips postcard in its complete destination pack source.
+String tripPostcardSource(String packId) => 'art_packs/sources/$packId/common/trip_postcard.webp';
 
 /// A destination pack (city, region or country, from its selectors) that
 /// may carry a Trips postcard, as `pack.json` would describe it.
@@ -29,24 +28,24 @@ ArtPackContent tripPostcardPack(
   sizes: {if (postcard != null) 'common/trip_postcard': (width: 1536, height: 1024)},
 );
 
-/// The five pending Trips postcards as the packs they'll eventually join.
-List<ArtPackContent> pendingTripPostcardPacks() => [
+/// The five Trips postcards from their complete destination packs.
+List<ArtPackContent> tripPostcardSourcePacks() => [
   tripPostcardPack(
     'region_gb_lake_district',
     country: 'GB',
     region: 'lake_district',
-    postcard: pendingTripPostcard('region_gb_lake_district'),
+    postcard: tripPostcardSource('region_gb_lake_district'),
   ),
-  tripPostcardPack('city_us_orlando', country: 'US', city: 'orlando', postcard: pendingTripPostcard('city_us_orlando')),
+  tripPostcardPack('city_us_orlando', country: 'US', city: 'orlando', postcard: tripPostcardSource('city_us_orlando')),
   tripPostcardPack(
     'city_jp_kyoto',
     country: 'JP',
     region: 'kansai',
     city: 'kyoto',
-    postcard: pendingTripPostcard('city_jp_kyoto'),
+    postcard: tripPostcardSource('city_jp_kyoto'),
   ),
-  tripPostcardPack('city_fr_paris', country: 'FR', city: 'paris', postcard: pendingTripPostcard('city_fr_paris')),
-  tripPostcardPack('region_id_bali', country: 'ID', region: 'bali', postcard: pendingTripPostcard('region_id_bali')),
+  tripPostcardPack('city_fr_paris', country: 'FR', city: 'paris', postcard: tripPostcardSource('city_fr_paris')),
+  tripPostcardPack('region_id_bali', country: 'ID', region: 'bali', postcard: tripPostcardSource('region_id_bali')),
 ];
 
 /// The mockup's Trips tab on 28 September 2026 (`countdownNow`): Cornwall

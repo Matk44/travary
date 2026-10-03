@@ -298,10 +298,11 @@ class ShellGeometry {
       textInk: ShellInk.light,
     ),
     // The theme-park anchor key card prints a small palm bottom-left; the
-    // footnote starts after it.
+    // footnote starts after it, and the text stops above it (its leaves
+    // reach up to 0.665), so a name on two lines never runs into it.
     'room_card': ShellGeometry(
       body: FractionRect(0.057, 0.114, 0.944, 0.912),
-      text: FractionRect(0.110, 0.245, 0.760, 0.720),
+      text: FractionRect(0.110, 0.245, 0.760, 0.655),
       footnote: FractionRect(0.180, 0.745, 0.580, 0.815),
     ),
     'coastal_resort_room_card': ShellGeometry(

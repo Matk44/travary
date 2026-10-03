@@ -6,36 +6,46 @@ import '../../design/art/art_slots.dart';
 import '../../design/cards/booking_card.dart';
 import '../../design/cards/ongoing_strip.dart';
 import '../../design/tokens.dart';
+import '../../design/trip_chrome.dart';
 import '../../design/widgets/common.dart';
 import '../../design/widgets/countdown_trip_hero.dart';
-import '../../design/widgets/day_timeline.dart';
+import '../../design/widgets/time_rail.dart';
 import '../../design/widgets/today_header.dart';
+import '../../design/widgets/trip_calendar.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/countdown_text.dart';
+import '../../logic/day_layout.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
+import '../trips/trip_details_sheet.dart';
 import '../trips/trip_screen.dart';
 
 /// Opens on what matters right now: today's plan during a trip, or the first
 /// day of the next trip before it starts.
 ///
-/// Top to bottom: the greeting and day, the featured "next up" ticket, the
-/// hotel you're staying at, the rest of the day's bookings, and the day's
-/// timeline. Other days of the trip are a swipe away, or a tap on the day
-/// line ("Day 3 of 7 · Orlando") opens the day chooser.
+/// Under the greeting and day, the day's cards run down the time rail: the
+/// timed ones in time order, each with its time beside it, the featured
+/// "next up" ticket in its place and the hotel you're staying at after it
+/// ([layOutDay]). Other days of the trip are a swipe away, or a tap on the
+/// date pill or the day line ("Day 3 of 7 · Orlando") opens the trip's
+/// calendar.
 ///
 /// Between trips, when a postcard suits the next trip, Today counts down to
 /// it instead ([CountdownTripHero]); without one it keeps the first-day view.
 class TodayScreen extends StatefulWidget {
-  const TodayScreen({super.key, this.weather});
+  const TodayScreen({super.key, this.weather, this.shown});
 
   /// Today's forecast, when there is one. Travary has no weather service
   /// yet; without it the pill shows the date or a countdown.
   final WeatherReport? weather;
+
+  /// Ticks each time Today comes back into view (from the home shell): the
+  /// countdown replays its entry.
+  final Listenable? shown;
 
   @override
   State<TodayScreen> createState() => _TodayScreenState();
@@ -75,7 +85,7 @@ class _TodayScreenState extends State<TodayScreen> {
                 greeting: greetingFor(store.now),
                 subtitle: countdown != null ? 'Nothing planned today' : _subtitle(store, focus, day),
                 pill: _pill(store, focus, day, countdown: countdown != null),
-                onChooseDay: canChoose ? () => _chooseDay(context, plan, day, store.today) : null,
+                onChooseDay: canChoose ? () => _chooseDay(context, store, plan, day) : null,
               ),
             ),
             if (!store.hasAnything)
@@ -86,10 +96,12 @@ class _TodayScreenState extends State<TodayScreen> {
                     icon: Icons.luggage_outlined,
                     title: 'Where are you off to?',
                     message:
-                        'Add a flight, hotel, ticket or table. Travary sorts '
-                        'your holiday into days and shows you each one as it comes.',
-                    actionLabel: 'Add your first booking',
-                    onAction: () => startAddBooking(context),
+                        'Start a trip, then add your flights, hotels, tickets and tables. '
+                        'Travary sorts them into days and shows you each one as it comes.',
+                    actionLabel: 'New trip',
+                    onAction: () => startNewTrip(context),
+                    secondaryLabel: 'Or add a booking',
+                    onSecondary: () => startAddBooking(context),
                   ),
                 ),
               )
@@ -99,19 +111,28 @@ class _TodayScreenState extends State<TodayScreen> {
                   text: countdown.text,
                   postcard: countdown.postcard,
                   onOpen: () => _openTrip(context, countdown.plan),
+                  replay: widget.shown,
                 ),
               )
             else if (dayPlan.isEmpty)
               SliverToBoxAdapter(
-                child: EmptyState(
-                  icon: Icons.wb_twilight_rounded,
-                  title: plan == null ? 'Nothing coming up' : 'A free day',
-                  message: plan == null
-                      ? 'Add a booking and your next trip will appear here.'
-                      : 'Nothing booked on ${formatDayLong(day)}.',
-                  actionLabel: 'Add a booking',
-                  onAction: () => startAddBooking(context, date: day, tripId: plan?.id),
-                ),
+                child: plan == null
+                    ? EmptyState(
+                        icon: Icons.wb_twilight_rounded,
+                        title: 'Nothing coming up',
+                        message: 'Start your next trip, or add a booking and it will appear here.',
+                        actionLabel: 'New trip',
+                        onAction: () => startNewTrip(context),
+                        secondaryLabel: 'Or add a booking',
+                        onSecondary: () => startAddBooking(context, date: day),
+                      )
+                    : EmptyState(
+                        icon: Icons.wb_twilight_rounded,
+                        title: 'A free day',
+                        message: 'Nothing booked on ${formatDayLong(day)}.',
+                        actionLabel: 'Add a booking',
+                        onAction: () => startAddBooking(context, date: day, tripId: plan.id),
+                      ),
               )
             else
               ..._daySlivers(context, store, dayPlan),
@@ -133,14 +154,14 @@ class _TodayScreenState extends State<TodayScreen> {
         : '${prefix}Day $dayNumber of ${plan.dayCount} · ${plan.trip.title}';
   }
 
-  /// Between trips, the next trip's countdown: only when nothing is on
-  /// today and a postcard suits that trip (its own place, or its look).
-  /// Otherwise null, and Today stays as it was.
+  /// Between trips, the next trip's countdown, when nothing is on today:
+  /// on the postcard that suits that trip (its own place, or its look),
+  /// else on the neutral one. Null otherwise, and Today stays as it was.
   _Countdown? _countdownFor(TravelStore store, TodayFocus focus) {
     final plan = focus.plan;
     if (!focus.isCountdown || plan == null || !store.dayPlan(store.today).isEmpty) return null;
     final text = countdownTextFor(plan, store.today);
-    final postcard = store.countdownPostcardFor(plan);
+    final postcard = store.countdownPostcardFor(plan) ?? store.neutralCountdownPostcard;
     if (text == null || postcard == null) return null;
     return (plan: plan, text: text, postcard: postcard.image);
   }
@@ -148,18 +169,19 @@ class _TodayScreenState extends State<TodayScreen> {
   void _openTrip(BuildContext context, TripPlan plan) =>
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id)));
 
-  /// The weather when there's a forecast, else the countdown before a trip
-  /// or today's date. The countdown hero carries its own count, so the pill
-  /// shows the date beside it.
+  /// Today's forecast when there is one, else the countdown on the first
+  /// day of a trip still to come, else the date of the day on screen. The
+  /// countdown hero carries its own count, so the pill shows today's date
+  /// beside it.
   HeaderPillInfo _pill(TravelStore store, TodayFocus focus, LocalDate day, {required bool countdown}) {
     final weather = widget.weather;
     if (weather != null && (countdown || day == store.today)) {
       return HeaderPillInfo(icon: _weatherIcon(weather.condition), label: formatWeather(weather), iconTinted: false);
     }
-    if (focus.isCountdown && !countdown) {
+    if (focus.isCountdown && !countdown && day == focus.day) {
       return HeaderPillInfo(icon: IconSlot.flight, label: _countdownLabel(focus.daysUntilStart!));
     }
-    return HeaderPillInfo(icon: IconSlot.calendar, label: formatDayShort(store.today));
+    return HeaderPillInfo(icon: IconSlot.calendar, label: formatDayShort(countdown ? store.today : day));
   }
 
   static IconSlot _weatherIcon(WeatherCondition condition) => switch (condition) {
@@ -182,35 +204,35 @@ class _TodayScreenState extends State<TodayScreen> {
     if (plan.contains(next)) setState(() => _picked = next);
   }
 
-  Future<void> _chooseDay(BuildContext context, TripPlan plan, LocalDate selected, LocalDate today) async {
+  Future<void> _chooseDay(BuildContext context, TravelStore store, TripPlan plan, LocalDate selected) async {
+    // The sheet opens above this screen's trip palette: carry it along.
+    final chrome = TravaryChrome.of(context);
+    final booked = {
+      for (final date in plan.days)
+        if (store.dayPlan(date).entries.isNotEmpty) date,
+    };
     final picked = await showModalBottomSheet<LocalDate>(
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      builder: (context) => _DayChooser(plan: plan, selected: selected, today: today),
+      builder: (context) => TravaryChrome(
+        colors: chrome.colors,
+        slots: chrome.slots,
+        child: _DayChooser(plan: plan, selected: selected, today: store.today, booked: booked),
+      ),
     );
     if (picked != null && mounted) setState(() => _picked = picked);
   }
 
   List<Widget> _daySlivers(BuildContext context, TravelStore store, DayPlan dayPlan) {
-    final isToday = dayPlan.date == store.today;
+    final layout = layOutDay(dayPlan, store.today);
     final art = store.artForAll([for (final e in dayPlan.entries) e.booking]);
-    final hero = dayPlan.highlightIndex;
-    final earlier = <int>[];
-    final rest = <int>[];
-    for (var i = 0; i < dayPlan.entries.length; i++) {
-      if (i == hero) continue;
-      (isToday && dayPlan.entries[i].status == EntryStatus.done ? earlier : rest).add(i);
-    }
 
-    Widget card(int index) {
+    Widget card(int index, {bool featured = false}) {
       final entry = dayPlan.entries[index];
-      final highlighted = index == hero;
-      final size = highlighted
-          ? CardSize.hero
-          : (entry.status == EntryStatus.done ? CardSize.compact : CardSize.standard);
+      final size = featured ? CardSize.hero : (entry.status == EntryStatus.done ? CardSize.compact : CardSize.standard);
       return BookingCard(
-        text: cardTextForEntry(entry, highlighted: highlighted),
+        text: cardTextForEntry(entry, highlighted: featured),
         art: art[index],
         size: size,
         status: entry.status,
@@ -220,20 +242,28 @@ class _TodayScreenState extends State<TodayScreen> {
     }
 
     final items = <_Item>[
-      if (hero != null) _Item(card(hero), inset: TodayLayout.featuredInset),
-      for (final booking in dayPlan.ongoing)
-        _Item(
-          OngoingStrip(
-            text: ongoingCardText(booking, dayPlan.date),
-            art: store.artFor(booking),
-            onTap: () => openBooking(context, booking),
+      for (final row in layout.rows)
+        switch (row) {
+          EntryRow(:final index, :final featured) => _Item(
+            card(index, featured: featured),
+            stop: row.rail.stop ? timelineStopFor(dayPlan.entries[index]) : null,
+            rail: row.rail,
+            featured: featured,
+            compact: dayPlan.entries[index].status == EntryStatus.done,
           ),
-        ),
-      for (final index in rest) _Item(card(index), compact: dayPlan.entries[index].status == EntryStatus.done),
-      if (earlier.isNotEmpty) ...[
+          OngoingRow(:final booking) => _Item(
+            OngoingStrip(
+              text: ongoingCardText(booking, dayPlan.date),
+              art: store.artFor(booking),
+              onTap: () => openBooking(context, booking),
+            ),
+            rail: row.rail,
+          ),
+        },
+      if (layout.earlier.isNotEmpty) ...[
         _Item(
           SectionLabel(
-            'Earlier (${earlier.length})',
+            'Earlier (${layout.earlier.length})',
             inset: false,
             trailing: TextButton(
               onPressed: () => setState(() => _showEarlier = !_showEarlier),
@@ -243,10 +273,9 @@ class _TodayScreenState extends State<TodayScreen> {
           compact: true,
         ),
         if (_showEarlier)
-          for (final index in earlier) _Item(card(index), compact: true),
+          for (final index in layout.earlier) _Item(card(index), compact: true),
       ],
     ];
-    final stops = timelineFor(dayPlan);
 
     return [
       SliverPadding(
@@ -258,15 +287,23 @@ class _TodayScreenState extends State<TodayScreen> {
             final gap = i == 0
                 ? 0.0
                 : (item.compact || items[i - 1].compact ? TodayLayout.compactGap : TodayLayout.cardGap);
-            return Padding(padding: EdgeInsets.fromLTRB(item.inset, gap, item.inset, 0), child: item.child);
+            // The featured ticket's scalloped edge reaches further out.
+            final outset = item.featured ? TodayLayout.cardInset - TodayLayout.featuredInset : 0.0;
+            if (!layout.hasRail) {
+              final inset = TodayLayout.cardInset - outset;
+              return Padding(padding: EdgeInsets.fromLTRB(inset, gap, inset, 0), child: item.child);
+            }
+            return TimeRailRow(
+              stop: item.stop,
+              lineAbove: item.rail.lineAbove,
+              lineBelow: item.rail.lineBelow,
+              gap: gap,
+              outset: outset,
+              child: item.child,
+            );
           },
         ),
       ),
-      if (stops.length > 1)
-        SliverPadding(
-          padding: const EdgeInsets.fromLTRB(TodayLayout.cardInset, TodayLayout.timelineGap, TodayLayout.cardInset, 0),
-          sliver: SliverToBoxAdapter(child: DayTimeline(stops: stops)),
-        ),
     ];
   }
 }
@@ -275,61 +312,77 @@ class _TodayScreenState extends State<TodayScreen> {
 typedef _Countdown = ({TripPlan plan, CountdownText text, ArtImageRef postcard});
 
 class _Item {
-  const _Item(this.child, {this.inset = TodayLayout.cardInset, this.compact = false});
+  const _Item(this.child, {this.stop, this.rail = RailMark.none, this.featured = false, this.compact = false});
 
   final Widget child;
-  final double inset;
+
+  /// The row's time on the rail, when it's a stop.
+  final TimelineStop? stop;
+  final RailMark rail;
+  final bool featured;
 
   /// Rows sit closer together than cards.
   final bool compact;
 }
 
-/// Every day of the trip, to jump to one.
+/// The trip's calendar, to jump to one of its days; "Back to today" when
+/// another day is on screen.
 class _DayChooser extends StatelessWidget {
-  const _DayChooser({required this.plan, required this.selected, required this.today});
+  const _DayChooser({required this.plan, required this.selected, required this.today, required this.booked});
 
   final TripPlan plan;
   final LocalDate selected;
   final LocalDate today;
 
+  /// Days with something booked.
+  final Set<LocalDate> booked;
+
   @override
   Widget build(BuildContext context) {
-    final days = plan.days;
+    void choose(LocalDate date) => Navigator.of(context).pop(date);
     return SafeArea(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.7),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
-              child: Text(plan.trip.title, style: TravaryText.headline),
-            ),
-            Flexible(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: days.length,
-                itemBuilder: (context, i) {
-                  final date = days[i];
-                  final isSelected = date == selected;
-                  return Semantics(
-                    selected: isSelected,
-                    button: true,
-                    label: formatDayLong(date),
-                    excludeSemantics: true,
-                    child: ListTile(
-                      selected: isSelected,
-                      title: Text('Day ${i + 1} · ${formatDayShort(date)}', style: TravaryText.label),
-                      subtitle: date == today ? const Text('Today') : null,
-                      trailing: isSelected ? const Icon(Icons.check_rounded) : null,
-                      onTap: () => Navigator.of(context).pop(date),
-                    ),
-                  );
-                },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // The button sits beside the trip's name when there's room,
+              // else under it.
+              OverflowBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                overflowAlignment: OverflowBarAlignment.start,
+                overflowSpacing: TravarySpace.xs,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(plan.trip.title, style: TravaryText.headline, maxLines: 2, overflow: TextOverflow.ellipsis),
+                      Text(formatDateRange(plan.start!, plan.end!), style: TravaryText.bodySoft),
+                    ],
+                  ),
+                  if (plan.contains(today) && selected != today)
+                    TextButton(onPressed: () => choose(today), child: const Text('Back to today')),
+                ],
               ),
-            ),
-          ],
+              const SizedBox(height: TravarySpace.md),
+              TripCalendar(
+                first: plan.start!,
+                last: plan.end!,
+                selected: selected,
+                today: today,
+                booked: booked,
+                semanticLabel: (date) => [
+                  'Day ${plan.dayNumber(date)} of ${plan.dayCount}',
+                  formatDayLong(date),
+                  if (date == today) 'today',
+                ].join(', '),
+                onSelected: choose,
+              ),
+            ],
+          ),
         ),
       ),
     );

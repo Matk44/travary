@@ -5,14 +5,18 @@ import '../../design/cards/booking_card.dart';
 import '../../design/kind_style.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/destination_stamp.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
+import '../travel_documents/travel_documents_entry.dart';
 
-/// Find any booking in two taps: search, or filter by kind. Upcoming first,
-/// then past, so last year's hotel is as easy to find as tomorrow's flight.
+/// The traveller's travel documents (passports, visas, insurance: locked,
+/// on this phone only), then every booking: find any in two taps by search
+/// or kind. Upcoming first, then past, so last year's hotel is as easy to
+/// find as tomorrow's flight.
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
 
@@ -39,6 +43,8 @@ class _WalletScreenState extends State<WalletScreen> {
       ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
     final past = results.where((b) => b.lastDate.isBefore(today)).toList()
       ..sort((a, b) => b.startsAt.compareTo(a.startsAt));
+    final focused = store.focus.plan;
+    final stamp = focused == null ? null : store.destinationStampFor(focused);
 
     Widget section(String label, List<Booking> bookings, EntryStatus status) => SliverMainAxisGroup(
       slivers: [
@@ -48,11 +54,16 @@ class _WalletScreenState extends State<WalletScreen> {
           itemBuilder: (context, i) {
             final booking = bookings[i];
             return Padding(
-              padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
+              padding: const EdgeInsets.fromLTRB(
+                DocumentStampLayout.inset,
+                0,
+                DocumentStampLayout.inset,
+                DocumentStampLayout.gap,
+              ),
               child: BookingCard(
                 text: cardTextForList(booking),
                 art: store.artFor(booking),
-                size: CardSize.compact,
+                size: CardSize.document,
                 status: status,
                 onTap: () => openBooking(context, booking),
                 onShowTickets: booking.hasTickets ? () => showTickets(context, booking) : null,
@@ -79,9 +90,29 @@ class _WalletScreenState extends State<WalletScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Documents', style: TravaryText.display),
-                  const SizedBox(height: TravarySpace.xs),
-                  Text('Every booking and ticket, even offline.', style: TravaryText.bodySoft),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: stamp == null ? 0 : TravarySpace.md),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Documents', style: TravaryText.display),
+                              const SizedBox(height: TravarySpace.xs),
+                              Text('Tickets and passports, even offline.', style: TravaryText.bodySoft),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // The trip Today shows, on its own place's stamp.
+                      if (stamp != null) ...[
+                        const SizedBox(width: TravarySpace.sm),
+                        DestinationStamp(image: stamp.art.image, place: stamp.place),
+                      ],
+                    ],
+                  ),
                   const SizedBox(height: TravarySpace.lg),
                   TextField(
                     controller: _search,
@@ -109,7 +140,16 @@ class _WalletScreenState extends State<WalletScreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-                children: [_filter('All', null), for (final kind in BookingKind.values) _filter(kind.spec.label, kind)],
+                children: [
+                  // Passports and the like lead the kinds: the way in,
+                  // never their contents, at no cost to the list's room.
+                  const Padding(
+                    padding: EdgeInsets.only(right: TravarySpace.md),
+                    child: Center(child: TravelDocumentsEntry()),
+                  ),
+                  _filter('All', null),
+                  for (final kind in BookingKind.values) _filter(kind.spec.label, kind),
+                ],
               ),
             ),
           ),

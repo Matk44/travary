@@ -8,11 +8,15 @@ import '../domain/domain.dart';
   final trips = <Trip>[];
   final bookings = <Booking>[];
 
-  Trip trip(String id, String title, ExperienceTheme theme) {
+  /// A trip as the server would have classified it: its look, and a place
+  /// it verified, so demo trips pick up destination art packs (postcards,
+  /// shells) exactly like real ones.
+  Trip trip(String id, String title, ExperienceTheme theme, TripLocationHint place) {
     final t = Trip(
       id: id,
       title: title,
       theme: theme,
+      visualProfile: TripVisualProfile(primaryTheme: theme, confidence: 0.9, sourceHash: 'demo', location: place),
       ownerId: userId,
       memberIds: [userId],
       createdAt: created,
@@ -57,7 +61,21 @@ import '../domain/domain.dart';
   }
 
   // Orlando: started two days ago, so today is day 3.
-  final orlando = trip('demo-orlando', 'Orlando', ExperienceTheme.themepark);
+  final orlando = trip(
+    'demo-orlando',
+    'Orlando',
+    ExperienceTheme.themepark,
+    const TripLocationHint(
+      countryCode: 'US',
+      countryName: 'United States',
+      region: 'Florida',
+      regionSlug: 'florida',
+      city: 'Orlando',
+      citySlug: 'orlando',
+      confidence: 0.95,
+      verification: LocationVerification.verified,
+    ),
+  );
   final d1 = today.addDays(-2);
   LocalDate day(int n) => d1.addDays(n - 1);
 
@@ -228,7 +246,19 @@ import '../domain/domain.dart';
   );
 
   // Lake District: coming up in about two months.
-  final lakes = trip('demo-lakes', 'Lake District', ExperienceTheme.countryside);
+  final lakes = trip(
+    'demo-lakes',
+    'Lake District',
+    ExperienceTheme.countryside,
+    const TripLocationHint(
+      countryCode: 'GB',
+      countryName: 'United Kingdom',
+      region: 'Lake District',
+      regionSlug: 'lake_district',
+      confidence: 0.95,
+      verification: LocationVerification.verified,
+    ),
+  );
   final l1 = today.addDays(58);
   add(
     lakes,
@@ -266,7 +296,21 @@ import '../domain/domain.dart';
   );
 
   // Paris: a few months ago.
-  final paris = trip('demo-paris', 'Paris', ExperienceTheme.urbanHeritage);
+  final paris = trip(
+    'demo-paris',
+    'Paris',
+    ExperienceTheme.urbanHeritage,
+    const TripLocationHint(
+      countryCode: 'FR',
+      countryName: 'France',
+      region: 'Île-de-France',
+      regionSlug: 'ile_de_france',
+      city: 'Paris',
+      citySlug: 'paris',
+      confidence: 0.95,
+      verification: LocationVerification.verified,
+    ),
+  );
   final p1 = today.addDays(-110);
   add(
     paris,

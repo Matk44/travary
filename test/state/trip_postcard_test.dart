@@ -66,7 +66,7 @@ void main() {
       'region_gb_lake_district',
       country: 'GB',
       region: 'lake_district',
-      postcard: pendingPostcard('region_gb_lake_district'),
+      postcard: countdownPostcardSource('region_gb_lake_district'),
     );
     expect(await postcardFor(lakes, [countdownOnly]), isNull);
     // A pack with only the countdown postcard steps aside for the next
@@ -75,7 +75,7 @@ void main() {
     expect(await postcardFor(lakes, [countdownOnly, gb]), 'country_gb');
   });
 
-  test('an unconfirmed place picks only its country; a disputed one nothing', () async {
+  test('an unverified, disputed or missing location gets no postcard', () async {
     final unverified = verifiedProfile(
       ExperienceTheme.urbanHeritage,
       country: 'JP',
@@ -85,7 +85,7 @@ void main() {
       confidence: 0.9,
     );
     expect(await postcardFor(unverified, [kyotoCity, kansai]), isNull);
-    expect(await postcardFor(unverified, [kyotoCity, japan]), 'country_jp');
+    expect(await postcardFor(unverified, [kyotoCity, japan]), isNull);
     final disputed = verifiedProfile(
       ExperienceTheme.urbanHeritage,
       country: 'JP',
@@ -93,10 +93,17 @@ void main() {
       verification: LocationVerification.conflict,
     );
     expect(await postcardFor(disputed, [kyotoCity, japan]), isNull);
+    final skipped = verifiedProfile(
+      ExperienceTheme.urbanHeritage,
+      country: 'JP',
+      city: 'kyoto',
+      verification: LocationVerification.skipped,
+    );
+    expect(await postcardFor(skipped, [kyotoCity, japan]), isNull);
     expect(await postcardFor(null, [kyotoCity, japan, paris]), isNull, reason: 'no profile, no place');
   });
 
-  test("the trip's look when its place has none; its place first", () async {
+  test("a verified trip can use its look when its place has none; its place still wins", () async {
     final countrysideLook = ArtPackContent(
       pack: const ArtPackRef(
         id: 'theme_countryside',
@@ -112,10 +119,10 @@ void main() {
     expect(await postcardFor(kyoto, [countrysideLook]), isNull);
   });
 
-  test('nothing bundled; the pending postcards are the handed-off size', () async {
+  test('nothing bundled; the packed postcards have their contracted size', () async {
     expect(bundled.commonArt('trip_postcard'), isNull);
     expect(await postcardFor(lakes, const []), isNull);
-    for (final pack in pendingTripPostcardPacks()) {
+    for (final pack in tripPostcardSourcePacks()) {
       final path = pack.common['trip_postcard']!.path;
       final info = header.readImageInfo(File(path).readAsBytesSync())!;
       expect((info.width, info.height), (1536, 1024), reason: path);

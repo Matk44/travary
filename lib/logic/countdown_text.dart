@@ -15,8 +15,6 @@ class CountdownText {
     required this.dates,
     required this.duration,
     required this.bookings,
-    required this.opens,
-    required this.action,
     required this.semanticLabel,
   });
 
@@ -38,14 +36,9 @@ class CountdownText {
   /// "25–28 Nov 2026".
   final String dates;
 
-  /// The three facts below the postcard: "4 days", "3 bookings",
-  /// "Opens 25 Nov".
+  /// Facts for the Trips tab's tag: "4 days", "3 bookings".
   final String duration;
   final String bookings;
-  final String opens;
-
-  /// The button: "View trip".
-  final String action;
 
   /// The whole hero for screen readers: "Lake District, 58 days to go,
   /// 25 to 28 November 2026."
@@ -74,8 +67,6 @@ CountdownText? countdownTextFor(TripPlan plan, LocalDate today) {
     dates: formatDateRange(start, end),
     duration: _count(plan.dayCount, 'day'),
     bookings: plan.bookings.isEmpty ? 'No bookings yet' : _count(plan.bookings.length, 'booking'),
-    opens: 'Opens ${formatDayMonth(start)}',
-    action: 'View trip',
     semanticLabel: '$place, $toGo, ${formatDateRangeLong(start, end)}.',
   );
 }

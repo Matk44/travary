@@ -19,6 +19,7 @@ import '../domain/domain.dart';
 import '../logic/art_pack_selection.dart';
 import '../logic/art_subjects.dart';
 import '../logic/day_plan.dart';
+import '../logic/destinations.dart';
 import '../logic/trip_assignment.dart';
 import '../logic/trip_plan.dart';
 import '../logic/visual_profile_request.dart';
@@ -211,18 +212,52 @@ class TravelStore extends ChangeNotifier {
   );
 
   /// The destination postcard for [plan]'s countdown (Today between
-  /// trips), ranked like its cards: the trip's city, region and country
-  /// packs, then its look, then the core. Only packs carry postcards, and
-  /// a destination pack suits only its own verified place, so a trip with
-  /// nothing suitable gets null, never somewhere else's postcard.
-  SharedArtRef? countdownPostcardFor(TripPlan plan) =>
-      _art.catalog.commonArt(countdownPostcardArt, context: artContextForPlan(plan));
+  /// trips). Postcards are place-specific, so they stay hidden until the
+  /// trip's location has been verified. Once verified, resolution follows
+  /// the normal city, region, country, look and core ranks.
+  SharedArtRef? countdownPostcardFor(TripPlan plan) {
+    if (!_hasVerifiedLocation(plan)) return null;
+    return _art.catalog.commonArt(countdownPostcardArt, context: artContextForPlan(plan));
+  }
+
+  /// The bundled, place-neutral postcard for a countdown whose trip has no
+  /// postcard of its own ([countdownPostcardFor] is null). Null if the app
+  /// doesn't carry one.
+  SharedArtRef? get neutralCountdownPostcard => _art.catalog.commonArt(countdownPostcardAnywhereArt);
 
   /// The landscape postcard for [plan] on the Trips tab, ranked and
   /// guarded exactly like [countdownPostcardFor]: null rather than another
   /// place's postcard.
-  SharedArtRef? tripPostcardFor(TripPlan plan) =>
-      _art.catalog.commonArt(tripPostcardArt, context: artContextForPlan(plan));
+  SharedArtRef? tripPostcardFor(TripPlan plan) {
+    if (!_hasVerifiedLocation(plan)) return null;
+    return _art.catalog.commonArt(tripPostcardArt, context: artContextForPlan(plan));
+  }
+
+  /// The destination stamp beside the Documents heading for [plan], and
+  /// the place to print on its label. Only the trip's own city, region or
+  /// country pack supplies one, for a verified place; never a look pack or
+  /// bundled art, so null rather than another place's stamp.
+  ({SharedArtRef art, String place})? destinationStampFor(TripPlan plan) {
+    final location = plan.trip.effectiveLocation;
+    if (location == null || !_hasVerifiedLocation(plan)) return null;
+    final context = artContextForPlan(plan);
+    final own = TripArtContext(
+      theme: context.theme,
+      packRanks: {
+        for (final entry in context.packRanks.entries)
+          if (destinationRanks.contains(entry.value)) entry.key: entry.value,
+      },
+      rankOrder: destinationRanks,
+    );
+    final art = _art.catalog.commonArt(documentsDestinationStampArt, context: own);
+    final pack = art?.pack;
+    if (art == null || pack == null) return null;
+    return (art: art, place: destinationName(location, own.packRanks[pack.id]!) ?? plan.trip.title);
+  }
+
+  /// The traveller's own destination counts: they confirmed it.
+  bool _hasVerifiedLocation(TripPlan plan) =>
+      plan.trip.effectiveLocation?.verification == LocationVerification.verified;
 
   /// A look's context without a trip (design tools): its experience packs
   /// count, destination packs don't.
@@ -272,7 +307,8 @@ class TravelStore extends ChangeNotifier {
         saved = saved.copyWith(tripId: match.id);
         tripTitle = match.trip.title;
       } else {
-        final trip = await createTrip(suggestTripTitle(saved));
+        final title = suggestTripTitle(saved);
+        final trip = await createTrip(title, destination: detectPlace(title)?.destination);
         saved = saved.copyWith(tripId: trip.id);
         tripTitle = trip.title;
         newTrip = true;
@@ -360,7 +396,13 @@ class TravelStore extends ChangeNotifier {
   }
 
   /// Creates a trip. Its look is automatic unless a [theme] is given.
-  Future<Trip> createTrip(String title, {ExperienceTheme? theme, LocalDate? start, LocalDate? end}) async {
+  Future<Trip> createTrip(
+    String title, {
+    ExperienceTheme? theme,
+    LocalDate? start,
+    LocalDate? end,
+    TripDestination? destination,
+  }) async {
     final stamp = DateTime.now();
     final trip = Trip(
       id: repository.newId(),
@@ -369,6 +411,7 @@ class TravelStore extends ChangeNotifier {
       themeSource: theme == null ? ThemeSource.auto : ThemeSource.manual,
       plannedStart: start,
       plannedEnd: end,
+      destination: destination,
       ownerId: repository.userId,
       memberIds: [repository.userId],
       createdAt: stamp,

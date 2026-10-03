@@ -62,6 +62,7 @@ class MemoryTravelRepository implements TravelRepository {
       unknownTheme: manual ? trip.unknownTheme : existing.unknownTheme,
       plannedStart: trip.plannedStart,
       plannedEnd: trip.plannedEnd,
+      destination: trip.destination,
       ownerId: existing.ownerId,
       memberIds: existing.memberIds,
       memberNames: existing.memberNames,

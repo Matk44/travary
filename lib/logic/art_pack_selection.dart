@@ -44,13 +44,14 @@ class TrustedDestination {
 
 /// What of [trip]'s destination may pick art packs:
 ///
-/// - verified: city, region and country;
+/// - the traveller's own destination, or a verified one: city, region and
+///   country;
 /// - unverified: a confident country only, ranked after experience art;
 /// - conflict or skipped (or no profile): nothing.
 ///
 /// City and region always need a country too (place names repeat).
 TrustedDestination trustedDestinationOf(Trip trip) {
-  final location = trip.visualProfile?.location;
+  final location = trip.effectiveLocation;
   final country = location?.countryCode;
   if (location == null || country == null) return TrustedDestination.none;
   return switch (location.verification) {
@@ -174,6 +175,19 @@ ArtRank? packRankFor(
       return null;
   }
 }
+
+/// The ranks of a trip's own destination packs, best first.
+const destinationRanks = [ArtRank.city, ArtRank.region, ArtRank.country];
+
+/// The place a destination pack of [rank] shows for a trip at [location]:
+/// its city, region or country. Null if that name isn't known, or [rank]
+/// isn't a destination's.
+String? destinationName(TripLocationHint location, ArtRank rank) => switch (rank) {
+  ArtRank.city => location.city,
+  ArtRank.region => location.region,
+  ArtRank.country => location.countryName,
+  ArtRank.primary || ArtRank.secondary || ArtRank.core => null,
+};
 
 /// The art context for [trip], given the packs installed on this phone.
 TripArtContext artContextFor(Trip trip, Iterable<ArtPackRef> installed) {

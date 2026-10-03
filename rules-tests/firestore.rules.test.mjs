@@ -109,3 +109,23 @@ test('existing protections are unchanged', async () => {
   await assertFails(updateDoc(trip, { ownerId: 'bob' }));
   await assertFails(updateDoc(trip, { memberNames: { bob: 'Bob' } }));
 });
+
+test('members can set, change or remove where the trip goes', async () => {
+  const trip = doc(db('bob'), 'trips/t1');
+  const kyoto = { countryCode: 'JP', countryName: 'Japan', region: 'Kansai', regionSlug: 'kansai', city: 'Kyoto', citySlug: 'kyoto' };
+  await assertSucceeds(updateDoc(trip, { destination: kyoto, updatedAt: 2 }));
+  await assertSucceeds(updateDoc(trip, { destination: { countryCode: 'JP', countryName: 'Japan' }, updatedAt: 3 }));
+  await assertSucceeds(updateDoc(trip, { destination: null, updatedAt: 4 }));
+  await assertSucceeds(setDoc(doc(db('carol'), 'trips/t5'), newTrip('carol', { destination: kyoto })));
+});
+
+test('only a well-formed destination is accepted', async () => {
+  const trip = doc(db('bob'), 'trips/t1');
+  await assertFails(updateDoc(trip, { destination: 'Japan' }));
+  await assertFails(updateDoc(trip, { destination: { countryName: 'Japan' } }));
+  await assertFails(updateDoc(trip, { destination: { countryCode: 'jp', countryName: 'Japan' } }));
+  await assertFails(updateDoc(trip, { destination: { countryCode: 'JP', countryName: 'x'.repeat(121) } }));
+  await assertFails(updateDoc(trip, { destination: { countryCode: 'JP', countryName: 'Japan', notes: 'secret' } }));
+  await assertFails(updateDoc(trip, { destination: { countryCode: 'JP', countryName: 'Japan', city: 7 } }));
+  await assertFails(updateDoc(doc(db('mallory'), 'trips/t1'), { destination: { countryCode: 'JP', countryName: 'Japan' } }));
+});

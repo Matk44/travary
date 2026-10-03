@@ -66,14 +66,13 @@ class FeaturedTicketCard extends StatelessWidget {
           ExcludeSemantics(
             child: ShellTextBlock(
               children: [
-                Text(
-                  text.eyebrow,
-                  style: TravaryText.shellEyebrow.copyWith(color: ink),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                ShellEyebrow(text.eyebrow, style: TravaryText.shellEyebrow.copyWith(color: ink)),
                 const SizedBox(height: 5),
-                FitTitle(text.title, style: TravaryText.ticketTitle.copyWith(color: ink)),
+                FitTitle(
+                  text.title,
+                  style: TravaryText.ticketTitle.copyWith(color: ink),
+                  floorScale: ShellLayout.titleFloorScale,
+                ),
                 const SizedBox(height: 7),
                 ShellRule(color: ink.withValues(alpha: 0.75), width: 0.62),
                 const SizedBox(height: 7),

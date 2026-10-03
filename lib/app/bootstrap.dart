@@ -12,11 +12,13 @@ import '../data/art_pack_store.dart';
 import '../data/attachment_backup.dart';
 import '../data/attachment_store.dart';
 import '../data/demo_data.dart';
+import '../data/document_lock.dart';
 import '../data/firestore_travel_repository.dart';
 import '../data/memory_travel_repository.dart';
 import '../data/purchase_service.dart';
 import '../data/sharing_service.dart';
 import '../data/smart_import_service.dart';
+import '../data/travel_document_repository.dart';
 import '../data/travel_repository.dart';
 import '../data/visual_profile_service.dart';
 import '../design/art/art_catalog.dart';
@@ -54,6 +56,8 @@ class Dependencies {
     required this.artCatalog,
     required this.artPacks,
     required this.attachments,
+    required this.travelDocuments,
+    required this.documentLock,
   });
 
   final TravelRepository repository;
@@ -76,6 +80,11 @@ class Dependencies {
   /// Downloaded art packs, already loaded from this phone.
   final ArtPackManager artPacks;
   final AttachmentStore attachments;
+
+  /// Passports and other travel documents: on this phone only, in every
+  /// mode, behind [documentLock].
+  final TravelDocumentRepository travelDocuments;
+  final DocumentLock documentLock;
 }
 
 /// A startup problem worth explaining to whoever is running the app.
@@ -101,6 +110,7 @@ Future<Dependencies> bootstrap() async {
   );
   await artPacks.loadInstalled();
   final attachments = await AttachmentStore.open();
+  final travelDocuments = await LocalTravelDocumentRepository.open();
   final repository = switch (configuredBackend) {
     Backend.demo => _demoRepository(),
     Backend.cloud => await _cloudRepository(),
@@ -120,6 +130,8 @@ Future<Dependencies> bootstrap() async {
     artCatalog: artCatalog,
     artPacks: artPacks,
     attachments: attachments,
+    travelDocuments: travelDocuments,
+    documentLock: DeviceDocumentLock(),
   );
 }
 

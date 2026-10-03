@@ -31,14 +31,9 @@ class RoomKeyCard extends StatelessWidget {
           ExcludeSemantics(
             child: ShellTextBlock(
               children: [
-                Text(
-                  text.eyebrow,
-                  style: TravaryText.shellEyebrow.copyWith(color: ink),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                ShellEyebrow(text.eyebrow, style: TravaryText.shellEyebrow.copyWith(color: ink)),
                 const SizedBox(height: 8),
-                FitTitle(text.title, style: TravaryText.roomTitle),
+                FitTitle(text.title, style: TravaryText.roomTitle, floorScale: ShellLayout.titleFloorScale),
                 const SizedBox(height: 8),
                 ShellRule(color: ink.withValues(alpha: 0.7), width: 0.36),
                 const SizedBox(height: 8),

@@ -6,8 +6,10 @@
 	<string>Attach photos and screenshots of your tickets so they're ready offline.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Travary uses Face ID to keep your passports and travel documents private.</string>
 	<key>CFBundleDisplayName</key>
-	<string>Travary</string>
+	<string>Itinerary App - Travary</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +17,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>travary_temp</string>
+	<string>Itinerary App</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

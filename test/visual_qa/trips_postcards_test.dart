@@ -8,14 +8,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:travary/design/tokens.dart';
-import 'package:travary/design/widgets/nav_bar.dart';
 import 'package:travary/design/widgets/upcoming_trip_postcard.dart';
 
 import '../support/canonical_today.dart';
 import '../support/countdown_today.dart';
+import '../support/open_tab.dart';
 import '../support/trip_postcards.dart';
 
-/// The Trips tab with three coming trips on their pending postcards,
+/// The Trips tab with three coming trips on their destination postcards,
 /// rendered like the canonical Today screen (a 390-point phone at 813 ×
 /// 1933 pixels), for comparison with
 /// docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png.
@@ -51,14 +51,13 @@ void main() {
         RepaintBoundary(
           key: boundary,
           child: countdownTodayApp(
-            catalog: bundledArtCatalog().withPacks(pendingTripPostcardPacks()),
+            catalog: bundledArtCatalog().withPacks(tripPostcardSourcePacks()),
             data: upcomingTripsData(activeAndPast: false),
           ),
         ),
       );
       await tester.pumpAndSettle();
-      await tester.tap(find.descendant(of: find.byType(TravaryNavBar), matching: find.bySemanticsLabel('Trips')));
-      await tester.pumpAndSettle();
+      await openTab(tester, 'Trips');
     }
 
     await open();

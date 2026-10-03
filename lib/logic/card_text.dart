@@ -20,6 +20,8 @@ class CardText {
     this.action,
     this.badge,
     this.badgeCaption,
+    this.day,
+    this.month,
   });
 
   /// Small uppercase label above the title: "NEXT UP", "LUNCH", "CHECK-OUT".
@@ -50,9 +52,20 @@ class CardText {
   final String? badge;
   final String? badgeCaption;
 
+  /// The date on two lines, for a postmark: "26" over "Sep".
+  final String? day;
+  final String? month;
+
   /// [when] and [detail] joined for one-line layouts.
   String? get whenAndDetail {
     final parts = [when, detail].whereType<String>();
+    return parts.isEmpty ? null : parts.join(' · ');
+  }
+
+  /// The kind and one detail (else the place) for single-row layouts whose
+  /// date sits apart: "Lunch · ST-4412", "Hotel · LR-99312".
+  String? get summary {
+    final parts = [_sentenceCase(eyebrow), detail ?? place].whereType<String>().where((part) => part.isNotEmpty);
     return parts.isEmpty ? null : parts.join(' · ');
   }
 }
@@ -120,6 +133,7 @@ CardText cardTextForBooking(Booking booking) {
 /// Wording for [booking] in a list covering many days (the Wallet), where
 /// the date matters more than the time.
 CardText cardTextForList(Booking booking) {
+  final date = formatDayMonthParts(booking.startDate);
   return CardText(
     eyebrow: _kindEyebrow(booking, booking.startTime),
     title: booking.title,
@@ -128,6 +142,8 @@ CardText cardTextForList(Booking booking) {
     place: _nonEmpty(booking.location),
     stub: _stub(booking),
     reference: _nonEmpty(booking.reference),
+    day: date.day,
+    month: date.month,
   );
 }
 
@@ -181,69 +197,26 @@ CardText ongoingCardText(Booking booking, LocalDate date) {
   );
 }
 
-/// One stop on a day's timeline: "9:00" over "Park".
+/// A card's stop on the day's time rail: "9:00" over "am", beside the
+/// card. The card itself carries the time for screen readers.
 class TimelineStop {
-  const TimelineStop({required this.time, required this.label, required this.spoken, required this.status});
+  const TimelineStop({required this.time, required this.period, required this.status});
 
-  /// Twelve-hour clock without am/pm: the day reads left to right.
+  /// Twelve-hour clock: "9:00", "12:30".
   final String time;
 
-  /// One short word or two: "Park", "Lunch", "Check-in".
-  final String label;
-
-  /// For screen readers: "9:00am, Park, Magic Kingdom".
-  final String spoken;
+  /// "am" or "pm", under [time].
+  final String period;
   final EntryStatus status;
 }
 
-/// The timed stops of [plan] for its timeline, in order. Notes and all-day
-/// entries aren't stops.
-List<TimelineStop> timelineFor(DayPlan plan) => [
-  for (final entry in plan.entries)
-    if (entry.time != null && entry.booking.kind != BookingKind.note)
-      TimelineStop(
-        time: formatClockShort(entry.time!),
-        label: _timelineLabel(entry),
-        spoken: '${formatClock(entry.time!)}, ${_timelineLabel(entry)}, ${entry.booking.title}',
-        status: entry.status,
-      ),
-];
-
-String _timelineLabel(DayEntry entry) {
-  final booking = entry.booking;
-  final spec = booking.kind.spec;
-  if (entry.role == EntryRole.start) return spec.startEvent;
-  if (entry.role == EntryRole.end) return spec.endEvent;
-  final subject = artSubjectFor(booking);
-  return switch (booking.kind) {
-    BookingKind.dining => _sentenceCase(_kindEyebrow(booking, entry.time)),
-    BookingKind.attraction => switch (subject) {
-      'castle' || 'rollercoaster' || 'waterpark' => 'Park',
-      'museum' => 'Museum',
-      'zoo' => 'Zoo',
-      'aquarium' => 'Aquarium',
-      'gardens' => 'Gardens',
-      _ => 'Visit',
-    },
-    BookingKind.transport => switch (subject) {
-      'train' => 'Train',
-      'bus' => 'Bus',
-      'ferry' => 'Ferry',
-      'bike' => 'Bike',
-      'car' => 'Car',
-      _ => 'Transfer',
-    },
-    BookingKind.activity => switch (subject) {
-      'boat' => 'Boat trip',
-      'hiking' => 'Hike',
-      'snorkel' => 'Snorkel',
-      'spa' => 'Spa',
-      'safari' => 'Safari',
-      'class' => 'Class',
-      _ => 'Tour',
-    },
-    _ => spec.label,
-  };
+/// [entry]'s stop on the time rail: the time it starts that day (a
+/// check-out's or drop-off's time on its last day). Null for an all-day
+/// entry, which has no place on the rail.
+TimelineStop? timelineStopFor(DayEntry entry) {
+  final time = entry.time;
+  if (time == null) return null;
+  return TimelineStop(time: formatClockShort(time), period: formatClockPeriod(time), status: entry.status);
 }
 
 /// Full date wording: "Wed 14 Oct · 12:30pm", "Wed 14 – Sat 17 Oct".

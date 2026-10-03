@@ -9,6 +9,7 @@ import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
+import '../../logic/destinations.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_plan.dart';
 import '../../data/sharing_service.dart';
@@ -18,6 +19,7 @@ import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
 import '../premium/premium_gate.dart';
 import '../sharing/invite_sheet.dart';
+import 'trip_details_sheet.dart';
 
 /// One trip, day by day, with every booking in order.
 class TripScreen extends StatelessWidget {
@@ -37,6 +39,10 @@ class TripScreen extends StatelessWidget {
     }
     final trip = plan.trip;
     final days = [for (final day in plan.days) buildDayPlan(day, plan.bookings, store.now)];
+    final addDate = plan.contains(store.today) ? store.today : plan.start;
+    // A trip started before anything was booked leads with its first
+    // booking, instead of a column of free days.
+    final empty = plan.bookings.isEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,13 +55,13 @@ class TripScreen extends StatelessWidget {
             ),
           PopupMenuButton<String>(
             onSelected: (value) => switch (value) {
-              'rename' => _rename(context, store, trip),
+              'edit' => editTripDetails(context, plan),
               'delete' => _delete(context, store, plan),
               'leave' => _leave(context, store, plan),
               _ => null,
             },
             itemBuilder: (_) => [
-              const PopupMenuItem(value: 'rename', child: Text('Rename trip')),
+              const PopupMenuItem(value: 'edit', child: Text('Edit trip')),
               if (store.isOwner(plan))
                 const PopupMenuItem(value: 'delete', child: Text('Delete trip'))
               else
@@ -64,14 +70,15 @@ class TripScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: TravaryColors.ink,
-        foregroundColor: TravaryColors.paper,
-        tooltip: 'Add to this trip',
-        onPressed: () =>
-            startAddBooking(context, tripId: trip.id, date: plan.contains(store.today) ? store.today : plan.start),
-        child: const Icon(Icons.add_rounded),
-      ),
+      floatingActionButton: empty
+          ? null
+          : FloatingActionButton(
+              backgroundColor: TravaryColors.ink,
+              foregroundColor: TravaryColors.paper,
+              tooltip: 'Add to this trip',
+              onPressed: () => startAddBooking(context, tripId: trip.id, date: addDate),
+              child: const Icon(Icons.add_rounded),
+            ),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -80,8 +87,14 @@ class TripScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Where it is, when the name doesn't already say.
+                  if (trip.destination case final place? when foldPlaceText(place.name) != foldPlaceText(trip.title))
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: TravarySpace.xs),
+                      child: Text(place.label.toUpperCase(), style: TravaryText.eyebrow),
+                    ),
                   GestureDetector(
-                    onTap: () => _rename(context, store, trip),
+                    onTap: () => editTripDetails(context, plan),
                     child: Text(trip.title, style: TravaryText.display),
                   ),
                   if (context.watch<PremiumStore>().forTrip(plan).allowed)
@@ -90,12 +103,28 @@ class TripScreen extends StatelessWidget {
                       child: _PlusBadge(),
                     ),
                   const SizedBox(height: TravarySpace.xs),
-                  Text(
-                    plan.hasDates
-                        ? '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} ${plan.dayCount == 1 ? 'day' : 'days'}'
-                        : 'No dates yet',
-                    style: TravaryText.body,
+                  GestureDetector(
+                    onTap: () => editTripDetails(context, plan),
+                    child: Text(
+                      plan.hasDates
+                          ? '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} ${plan.dayCount == 1 ? 'day' : 'days'}'
+                          : 'No dates yet',
+                      style: TravaryText.body,
+                    ),
                   ),
+                  if (empty) ...[
+                    const SizedBox(height: TravarySpace.lg),
+                    FilledButton.icon(
+                      onPressed: () => startAddBooking(context, tripId: trip.id, date: addDate),
+                      icon: const Icon(Icons.add_rounded),
+                      label: const Text('Add your first booking'),
+                    ),
+                    const SizedBox(height: TravarySpace.sm),
+                    Text(
+                      'Flights, stays, tickets and tables. Anything on these dates joins this trip.',
+                      style: TravaryText.small,
+                    ),
+                  ],
                   if (PremiumFeature.familySharing.released || kDebugMode) ...[
                     const SizedBox(height: TravarySpace.lg),
                     _Members(plan: plan, onInvite: () => _invite(context, plan)),
@@ -126,7 +155,8 @@ class TripScreen extends StatelessWidget {
               ),
             ),
           ),
-          for (final (index, day) in days.indexed) ..._daySlivers(context, store, plan, day, index + 1),
+          if (!empty)
+            for (final (index, day) in days.indexed) ..._daySlivers(context, store, plan, day, index + 1),
           const SliverToBoxAdapter(child: SizedBox(height: 96)),
         ],
       ),
@@ -218,29 +248,6 @@ class TripScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
       }
     }
-  }
-
-  Future<void> _rename(BuildContext context, TravelStore store, Trip trip) async {
-    final controller = TextEditingController(text: trip.title);
-    final title = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Rename trip'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          textCapitalization: TextCapitalization.words,
-          onSubmitted: (value) => Navigator.pop(context, value),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, controller.text), child: const Text('Save')),
-        ],
-      ),
-    );
-    controller.dispose();
-    if (title == null || title.trim().isEmpty) return;
-    await store.updateTrip(trip.copyWith(title: title.trim()));
   }
 
   Future<void> _delete(BuildContext context, TravelStore store, TripPlan plan) async {

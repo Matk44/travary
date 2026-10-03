@@ -79,7 +79,9 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.md),
       child: child,
     );
-    final picture = art.key ?? 'placeholder';
+    // Scenes and vignettes are picked separately; name both when they differ.
+    final pictures = {?art.scene?.key, ?art.vignette?.key};
+    final picture = pictures.isEmpty ? 'placeholder' : pictures.join(' / ');
     final subject = art.subject ?? 'no subject';
     String shellName(ShellArt? shell) =>
         shell == null ? 'no shell' : '${shell.art.fileKey}${shell.standInFor == null ? '' : ' (stand-in)'}';
@@ -90,7 +92,8 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       Padding(
         padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
         child: Text(
-          'Shells: ${shellName(shells.featured)} · ${shellName(shells.room)} · ${shellName(shells.reservation)}',
+          'Shells: ${shellName(shells.featured)} · ${shellName(shells.room)} · ${shellName(shells.reservation)}'
+          ' · stamp ${art.documents.stampFor(art.variant)?.design.name ?? 'none'}',
           style: TravaryText.small,
         ),
       ),
@@ -119,6 +122,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
           status: EntryStatus.done,
         ),
       ),
+      padded(BookingCard(text: cardTextForList(booking), art: art, size: CardSize.document, onShowTickets: () {})),
       // Only bookings with a day in the middle ever show an ongoing strip.
       if (booking.startDate.addDays(1).isBefore(booking.lastDate))
         padded(OngoingStrip(text: ongoingCardText(booking, booking.startDate.addDays(1)), art: art)),

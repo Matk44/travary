@@ -47,7 +47,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC3D-gCpxjNAD-YabJ9gL8BfuRpkMRlPcU',
-    appId: '1:315160115482:android:31153bef83b05617e9d4a3',
+    appId: '1:315160115482:android:ccb9664558df60d4e9d4a3',
     messagingSenderId: '315160115482',
     projectId: 'travary-444',
     storageBucket: 'travary-444.firebasestorage.app',
@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBjKJlX6lVvXci11xDDe4frRJ0fp4gDLNc',
-    appId: '1:315160115482:ios:f79aacf627ea203fe9d4a3',
+    appId: '1:315160115482:ios:3d6150b8b983ede5e9d4a3',
     messagingSenderId: '315160115482',
     projectId: 'travary-444',
     storageBucket: 'travary-444.firebasestorage.app',
-    iosClientId: '315160115482-tlba7grafhm1vqfbfess7bi8il4jb02m.apps.googleusercontent.com',
-    iosBundleId: 'com.travary.travaryTemp',
+    iosClientId: '315160115482-liqv57p5mjrp94cfstl0ldbcgmvq44hp.apps.googleusercontent.com',
+    iosBundleId: 'com.travary.app',
   );
 
   // Run: flutterfire configure

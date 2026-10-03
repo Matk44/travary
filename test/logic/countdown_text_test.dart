@@ -23,8 +23,6 @@ void main() {
       expect(text.dates, '25–28 Nov 2026');
       expect(text.duration, '4 days');
       expect(text.bookings, '3 bookings');
-      expect(text.opens, 'Opens 25 Nov');
-      expect(text.action, 'View trip');
       expect(text.semanticLabel, 'Lake District, 58 days to go, 25 to 28 November 2026.');
     });
 
