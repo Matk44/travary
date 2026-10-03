@@ -9,7 +9,9 @@ sample icons, used by tests and local development.
 
 How to author, build and publish: `docs/ART_PACKS.md`.
 
-`pending/` holds finished art waiting for the complete pack it belongs to
-(for now, the five countdown postcards and their five landscape Trips
-postcards). Nothing there is built or
-published; move each file into its pack's source when that pack is made.
+The five portrait countdown postcards, their five landscape Trips
+companions and the five Documents destination stamps live in complete city
+or region sources alongside the full contents of their corresponding
+country pack. `pending/` is reserved for
+finished art that does not yet have a complete pack and is never built or
+published.

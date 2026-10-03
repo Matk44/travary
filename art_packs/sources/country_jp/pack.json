@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "country_jp",
-  "version": 1,
+  "version": 2,
   "palette": {
     "id": "japan_vermilion_indigo",
     "anchors": {
@@ -18,28 +18,28 @@
   },
   "assets": [
     {
-      "file": "common/featured_ticket.png",
+      "file": "common/featured_ticket.webp",
       "kind": "common",
       "name": "featured_ticket",
       "width": 1774,
       "height": 887
     },
     {
-      "file": "common/room_card.png",
+      "file": "common/room_card.webp",
       "kind": "common",
       "name": "room_card",
       "width": 1774,
       "height": 887
     },
     {
-      "file": "common/reservation_card.png",
+      "file": "common/reservation_card.webp",
       "kind": "common",
       "name": "reservation_card",
       "width": 1983,
       "height": 793
     },
     {
-      "file": "transport/urban_heritage_train_01_scene.png",
+      "file": "transport/urban_heritage_train_01_scene.webp",
       "kind": "transport",
       "theme": "urban_heritage",
       "subject": "train",
@@ -49,7 +49,7 @@
       "height": 1024
     },
     {
-      "file": "transport/urban_heritage_train_01_vignette.png",
+      "file": "transport/urban_heritage_train_01_vignette.webp",
       "kind": "transport",
       "theme": "urban_heritage",
       "subject": "train",
@@ -57,6 +57,13 @@
       "format": "vignette",
       "width": 1024,
       "height": 1024
+    },
+    {
+      "file": "common/countdown_postcard.webp",
+      "kind": "common",
+      "name": "countdown_postcard",
+      "width": 1122,
+      "height": 1402
     }
   ]
 }

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "packId": "city_jp_kyoto",
+  "version": 1,
+  "palette": {
+    "id": "japan_vermilion_indigo",
+    "anchors": {
+      "ink": "#172B4D",
+      "paper": "#F7F1E7"
+    },
+    "accents": ["#BC002D", "#C9A65B", "#73869C", "#856B4A"],
+    "ui": {
+      "primary": "#9F1435",
+      "secondary": "#203A5F",
+      "highlight": "#B9822D",
+      "onPrimary": "#FFF8EE"
+    }
+  },
+  "assets": [
+    {
+      "file": "common/featured_ticket.webp",
+      "kind": "common",
+      "name": "featured_ticket",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/room_card.webp",
+      "kind": "common",
+      "name": "room_card",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "common/reservation_card.webp",
+      "kind": "common",
+      "name": "reservation_card",
+      "width": 1983,
+      "height": 793
+    },
+    {
+      "file": "transport/urban_heritage_train_01_scene.webp",
+      "kind": "transport",
+      "theme": "urban_heritage",
+      "subject": "train",
+      "group": "urban_heritage_train_01",
+      "format": "scene",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "transport/urban_heritage_train_01_vignette.webp",
+      "kind": "transport",
+      "theme": "urban_heritage",
+      "subject": "train",
+      "group": "urban_heritage_train_01",
+      "format": "vignette",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "common/countdown_postcard.webp",
+      "kind": "common",
+      "name": "countdown_postcard",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "common/trip_postcard.webp",
+      "kind": "common",
+      "name": "trip_postcard",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "common/documents_destination_stamp.webp",
+      "kind": "common",
+      "name": "documents_destination_stamp",
+      "width": 1024,
+      "height": 1280
+    }
+  ]
+}

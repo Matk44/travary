@@ -1,0 +1,5 @@
+{
+  "priority": 500,
+  "selectors": {"countryCodes": ["ID"], "regions": ["bali"]},
+  "minAppBuild": 1
+}

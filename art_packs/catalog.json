@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": 55,
+  "generatedAt": "2026-10-03T07:43:26.915355Z",
+  "packs": [
+    {
+      "id": "city_fr_paris",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "FR"
+        ],
+        "regions": [],
+        "cities": [
+          "paris"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_fr_paris/1/pack.zip",
+        "sha256": "24674e1fd023dfbab1062076fc9682ce07de73e5be7378e1cba8f5eefc3541e6",
+        "compressedBytes": 2342079,
+        "uncompressedBytes": 2341167,
+        "fileCount": 7
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_jp_kyoto",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "JP"
+        ],
+        "regions": [],
+        "cities": [
+          "kyoto"
+        ],
+        "themes": [
+          "urban_heritage"
+        ],
+        "subjects": [
+          "train"
+        ]
+      },
+      "archive": {
+        "storagePath": "art-packs/city_jp_kyoto/1/pack.zip",
+        "sha256": "7a8309e6fd54206335b370db077511997d6d81cb63f0d3c3de665010d007a232",
+        "compressedBytes": 3301918,
+        "uncompressedBytes": 3300672,
+        "fileCount": 9
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_orlando",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "orlando"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_orlando/1/pack.zip",
+        "sha256": "59f41f14dd8fb2bd91ab51819e39114117fff3f8bcabc3a88eb41c97e0c7e602",
+        "compressedBytes": 2424399,
+        "uncompressedBytes": 2423487,
+        "fileCount": 7
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_ae",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "AE"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_ae/2/pack.zip",
+        "sha256": "f971afaecf75d58acf47fdec71b3f2d80e51c56d882696d127497344fc91f7f2",
+        "compressedBytes": 1574347,
+        "uncompressedBytes": 1573715,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_au",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "AU"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_au/2/pack.zip",
+        "sha256": "abd802ccf1690b79ddb4f243bb503a25552169acf00b9c4b3c60d74321a5fceb",
+        "compressedBytes": 1590080,
+        "uncompressedBytes": 1589448,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_br",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "BR"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_br/2/pack.zip",
+        "sha256": "993d1377da243c5d3bb5191ed5334f7eba150b3b97c659e83bac3eaa8db06347",
+        "compressedBytes": 1738348,
+        "uncompressedBytes": 1737716,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_ca",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "CA"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_ca/2/pack.zip",
+        "sha256": "b3633dde805a87af0548f97b64fd3520038f17cedc19e9dda8aacc447e8030b0",
+        "compressedBytes": 1695058,
+        "uncompressedBytes": 1694426,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_ch",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "CH"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_ch/2/pack.zip",
+        "sha256": "c4aa37e35d0dad2bc77520915ea382a0113ac85c024931d5d1bfcaf152d636aa",
+        "compressedBytes": 1769869,
+        "uncompressedBytes": 1769237,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_cn",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "CN"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_cn/2/pack.zip",
+        "sha256": "5a966239a3400bcd78ca8b92ef54e08daec00c817063ffe42f69ee59dbfa8e59",
+        "compressedBytes": 1750045,
+        "uncompressedBytes": 1749413,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_de",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "DE"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_de/2/pack.zip",
+        "sha256": "a0130ec759d9c7c764ff25de2a46ace16c315ecb48be26c108952cf7e98b4199",
+        "compressedBytes": 1700216,
+        "uncompressedBytes": 1699584,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_es",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "ES"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_es/2/pack.zip",
+        "sha256": "2101d840ce0770e01d851351b84315a2c2ba9cc3d91c66d50713f90a852fee12",
+        "compressedBytes": 1816739,
+        "uncompressedBytes": 1816107,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_fr",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "FR"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_fr/2/pack.zip",
+        "sha256": "e94d78ebacc305c89199511a2a805627ade202a0d44eb655c574d4e9ebccdac0",
+        "compressedBytes": 1761788,
+        "uncompressedBytes": 1761156,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_gb",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "GB"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_gb/2/pack.zip",
+        "sha256": "320e4fcb2c8d56d9a24ddfedc33debf555ae5a1331ca97ad0d75df7e98170add",
+        "compressedBytes": 1810372,
+        "uncompressedBytes": 1809740,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_gr",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "GR"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_gr/2/pack.zip",
+        "sha256": "8b8a586656d9d24467762d9d2df2c6df7c5c548968813efd01a5a7f1d8985cde",
+        "compressedBytes": 1684727,
+        "uncompressedBytes": 1684095,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_id",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "ID"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_id/2/pack.zip",
+        "sha256": "928c55759b8d65296e9db3d0d29433818b6a7aabf728a9d3533dc009911e5ad2",
+        "compressedBytes": 1773125,
+        "uncompressedBytes": 1772493,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_in",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "IN"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_in/2/pack.zip",
+        "sha256": "77428b7d0276ac8e0b49c4d18705561cd1ec108455384812521a1772c3d25658",
+        "compressedBytes": 1754570,
+        "uncompressedBytes": 1753938,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_it",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "IT"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_it/2/pack.zip",
+        "sha256": "057d7058cc2d9b273da44300642dad90d0214e624ea791d34d4b3380eeb8f93e",
+        "compressedBytes": 1773355,
+        "uncompressedBytes": 1772723,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_jp",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "JP"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [
+          "urban_heritage"
+        ],
+        "subjects": [
+          "train"
+        ]
+      },
+      "archive": {
+        "storagePath": "art-packs/country_jp/2/pack.zip",
+        "sha256": "f1d4b1b8a82e1723722f4753f77e9005916b35d698c31fb88ac59ba41ce93d08",
+        "compressedBytes": 2349287,
+        "uncompressedBytes": 2348321,
+        "fileCount": 7
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_kr",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "KR"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_kr/2/pack.zip",
+        "sha256": "54bb52aa0732a3ee9b998c22d6be6b2b1e964a67c09094edc13b842076ea833b",
+        "compressedBytes": 1708764,
+        "uncompressedBytes": 1708132,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_mx",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "MX"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_mx/2/pack.zip",
+        "sha256": "ce45e4c2ed8d4754fd0931fcc673bdf15bc0bc5842ec532a0ddb4fc0a804aa23",
+        "compressedBytes": 1876177,
+        "uncompressedBytes": 1875545,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_nl",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "NL"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_nl/2/pack.zip",
+        "sha256": "004e2e941510e5f7893596681ede81b51530cdf77c4bff95b6a363997f7bdb5e",
+        "compressedBytes": 1651019,
+        "uncompressedBytes": 1650387,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_nz",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "NZ"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_nz/2/pack.zip",
+        "sha256": "61f66e982b3240d1e3bb4854d56e99b634cc94505dbd0eea380eb4d846e7db4c",
+        "compressedBytes": 1698883,
+        "uncompressedBytes": 1698251,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_pt",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "PT"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_pt/2/pack.zip",
+        "sha256": "ef7984cdc18c2960c12aad13cb6131cc73e6667ba01215a5c3a1c00b09d2a94d",
+        "compressedBytes": 1682871,
+        "uncompressedBytes": 1682239,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_sg",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "SG"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_sg/2/pack.zip",
+        "sha256": "f61a0bfb94d5569f200ffb6bd01f36290e6220638b52d0e681b30c8ce7dfd95e",
+        "compressedBytes": 1639488,
+        "uncompressedBytes": 1638856,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_th",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "TH"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_th/2/pack.zip",
+        "sha256": "a92abf3e5c0155756fad40c022530957e4f1d78e4e7a37921645a418e956d0db",
+        "compressedBytes": 1565221,
+        "uncompressedBytes": 1564589,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_tr",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "TR"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_tr/2/pack.zip",
+        "sha256": "2dc4eade85ca2adba3b48583299de5b6d4fca854040576dfed6758b5f226e310",
+        "compressedBytes": 1711849,
+        "uncompressedBytes": 1711217,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_us",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_us/2/pack.zip",
+        "sha256": "918f0ed2cab68a1f197356da92e261a3adab9f4b1059697e64d6f67223d971b8",
+        "compressedBytes": 1700996,
+        "uncompressedBytes": 1700364,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "country_za",
+      "version": 2,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "ZA"
+        ],
+        "regions": [],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/country_za/2/pack.zip",
+        "sha256": "e6ebc268568430a5e548b4d32f739863c4c5d25a202d9637273d800426a750d6",
+        "compressedBytes": 1728422,
+        "uncompressedBytes": 1727790,
+        "fileCount": 5
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_gb_lake_district",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "GB"
+        ],
+        "regions": [
+          "lake_district"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_gb_lake_district/1/pack.zip",
+        "sha256": "fb57d18f75f6ee1d67d7a56ce43a80e0cf3b4feb66047e49050fc736feb81ae0",
+        "compressedBytes": 2458717,
+        "uncompressedBytes": 2457805,
+        "fileCount": 7
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_id_bali",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "ID"
+        ],
+        "regions": [
+          "bali"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_id_bali/1/pack.zip",
+        "sha256": "9011718bb11cc1e1c2524854a6deac54719d62ae808f29087268fa7643d70fc8",
+        "compressedBytes": 2574565,
+        "uncompressedBytes": 2573653,
+        "fileCount": 7
+      },
+      "minAppBuild": 1
+    }
+  ]
+}

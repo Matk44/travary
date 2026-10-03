@@ -1,0 +1,10 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["JP"],
+    "cities": ["kyoto"],
+    "themes": ["urban_heritage"],
+    "subjects": ["train"]
+  },
+  "minAppBuild": 1
+}

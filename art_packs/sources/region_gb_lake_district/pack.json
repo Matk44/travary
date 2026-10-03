@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "region_gb_lake_district",
+  "version": 1,
+  "palette": {
+    "id": "britain_heritage_rain",
+    "anchors": {"ink": "#173653", "paper": "#F6F0E5"},
+    "accents": ["#A9363E", "#BA9147", "#7893A3", "#536B54"],
+    "ui": {
+      "primary": "#21496B",
+      "secondary": "#92323A",
+      "highlight": "#A87B2E",
+      "onPrimary": "#FFF9F0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

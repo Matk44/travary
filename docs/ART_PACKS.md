@@ -74,20 +74,29 @@ from folder names):
   a tagged card with its illustration printed in),
   `reservation_card_blank` (1983 × 793), `boarding_pass`,
   `featured_reservation`, `travel_ticket` (1774 × 887, with a transparent
-  picture window), `note_paper` (1983 × 793) and `ongoing_tag` (1983 × 466),
-  the interface surfaces
+  picture window), `note_paper` (1983 × 793), `ongoing_tag` (1983 × 466),
+  the Documents list's stamp frames `documents_stamp_01`, `_02` and `_03`
+  (1024 × 896, with a transparent scene window in the same place as the
+  bundled ones), its `documents_postmark` (1024 × 1024) and
+  `documents_cancel_lines` (1536 × 384, both one-colour ink), the
+  Documents heading's `documents_destination_stamp` (1024 × 1280,
+  destination packs; see below), the interface surfaces
   `linen`, `leather`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`,
   and the countdown to the next trip (Today between trips):
   `countdown_postcard` (1122 × 1402, destination packs; see below),
   `trip_postcard` (1536 × 1024, its landscape companion on the Trips tab),
-  `countdown_luggage_tag` (1024 × 1536), `countdown_fact_tag` (1024 × 512)
-  and `countdown_button` (1536 × 460).
+  `countdown_luggage_tag` (1024 × 1536), the three distinct fact tickets
+  `countdown_fact_duration`, `countdown_fact_bookings`, and
+  `countdown_fact_opens` (each 1024 × 512), and `countdown_button`
+  (1536 × 460). The older shared `countdown_fact_tag` key is still accepted
+  as a fallback when a pack does not provide the three individual tickets.
   Shells are made to the same template as the bundled ones (same size and
   zones, no text); a shell of another size is ignored. `icon` names:
   booking kinds (`dining`, `flight`…), `nav_today`, `nav_trips`,
   `nav_wallet`, `nav_profile`, `nav_add`, `weather_sunny`/`_cloudy`/
-  `_rain`/`_snow`, `calendar`, `timeline_stop`, `timeline_now`. Sizes and
-  what's still missing from the bundled set: `docs/ART_ASSET_GAPS.md`.
+  `_rain`/`_snow`, `calendar`, `countdown_bookings`, `timeline_stop`,
+  `timeline_now`. Sizes and what's still missing from the bundled set:
+  `docs/ART_ASSET_GAPS.md`.
 
 - `themes` (optional, on `common` and `icon` entries): the looks a shared
   picture is drawn for, e.g. `["urban_heritage", "classic_travel"]`. Without
@@ -130,10 +139,10 @@ the trip's city pack, then region, then country, then its look, then the
 core. Nothing is bundled, so a trip with no suitable pack keeps Today's
 usual first-day view: it never shows another place's postcard.
 
-Five are made and wait in `art_packs/pending/countdown_postcards/` (Lake
-District, Orlando, Kyoto, Paris, Bali). Each goes into its **complete**
-city or region pack, never a pack of its own: a sparse city pack would
-outrank the fuller country pack for every other picture too.
+Five are installed in complete place-pack sources: Lake District and Bali
+regions, and Orlando, Kyoto and Paris cities. Each pack contains the full
+asset set of its corresponding country pack plus both postcard formats, so
+the more specific pack never displaces fuller destination art.
 
 Its landscape companion, `common/trip_postcard.png` (1536 × 1024, the same
 scene recomposed, with a quiet upper-right corner), puts a coming trip on
@@ -147,8 +156,25 @@ row: the portrait countdown postcard is never cropped to stand in.
 { "file": "common/trip_postcard.png", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024 }
 ```
 
-The five made so far wait in `art_packs/pending/trip_postcards/`, for the
-same complete packs as their countdown postcards.
+The five landscape postcards live in the same complete packs as their
+countdown postcards under `art_packs/sources/`.
+
+The Documents heading's destination stamp, `common/documents_destination_stamp.png`
+(1024 × 1280: a perforated portrait stamp with the place's picture and a
+blank ivory label band under it, where the app prints the place's name), is
+stricter still: it comes only from the trip's own city, region or country
+pack (`TravelStore.destinationStampFor`), never a look pack or bundled
+art, so a trip without one shows none rather than another place's. The
+five complete place packs carry one.
+
+```json
+{ "file": "common/documents_destination_stamp.png", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280 }
+```
+
+These helpers add a stricter gate than general art selection: the
+trip location must be `verified`. Demo trips and locations marked
+`unverified`, `conflict` or `skipped` keep the existing Today view and plain
+Trips rows even when a country or experience pack is installed.
 
 ### The palette
 
@@ -161,8 +187,11 @@ warm cream `#F8F4EC` are Travary's own anchors.
 - `id`: a lowercase slug, like pack IDs.
 - `anchors`: exactly `ink` and `paper`.
 - `accents`: two to four illustrative colours.
-- `ui`: exactly `primary` (the selected home tab), `secondary` (the day
-  timeline), `highlight` (category labels, the current stop, focus rings)
+- `ui`: exactly `primary` (the selected home tab, the day chosen in the
+  trip calendar), `secondary` (still required, but not drawn at the moment:
+  the day's time rail uses `ink`, as a strong accent was too loud down a
+  whole screen), `highlight` (category labels, the current stop, today in
+  the calendar, focus rings)
   and `onPrimary` (text and icons on `primary`).
 - Every colour is an uppercase `#RRGGBB`. No colour repeats within
   `anchors`, `accents` or `ui` (a UI token may reuse an accent or anchor,
@@ -176,7 +205,8 @@ One palette colours the whole trip screen: the best-ranked installed pack
 that has one, in the trip's rank order (city → region → country → look →
 secondary look → classic; for an unverified destination the look comes
 before the country). Otherwise Travary's own palette applies (teal
-`#1E5B70` selection, navy `#1C2A47` timeline, coral `#E5785B` highlights).
+`#1E5B70` selection, navy `#1C2A47` ink and time rail, coral `#E5785B`
+highlights).
 Only interface chrome takes these colours; full-colour artwork is never
 tinted (`TripColors` in `lib/design/trip_chrome.dart`).
 
@@ -259,6 +289,20 @@ evicting a pack redraws cards at once (`ArtCatalogController`).
 
 ## Publishing
 
+Generated art arrives as large PNGs. Convert a new or changed source to
+WebP first (needs `cwebp`: `brew install webp`):
+
+```bash
+dart run tool/art_packs.dart webp art_packs/sources/<pack-id> [more sources...] [--dry-run]
+```
+
+Each PNG that `pack.json` declares becomes a same-size `.webp` (colour at
+quality 88, transparency kept exactly, so windows, deckled edges and
+shadows stay clean), `pack.json` changes only those file names, and the PNG
+original moves to `art_packs/originals/<pack-id>/` (masters, never built or
+published). Packs shrink by about 85%: a country pack is about 1 MB, a city
+or region pack with postcards about 2.5 MB.
+
 ```bash
 dart run tool/art_packs.dart build art_packs/sources/<pack-id> --dry-run
 ```
@@ -283,6 +327,11 @@ archives, and uploads `catalog.json` last, so the app never sees a catalog
 pointing at a missing archive. It uses `$ART_PACKS_ACCESS_TOKEN` or
 `gcloud auth print-access-token`: the operator's own credentials, never
 stored in the repository. `--dry-run` reads and writes nothing remote.
+
+Published so far (3 October 2026, catalog v30): 25 country packs, the
+Paris, Kyoto and Orlando city packs, and the Lake District and Bali region
+packs, all in WebP. `seed_themepark` is for tests and local development
+only and is never published.
 
 ## Local development with the emulators
 

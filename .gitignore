@@ -53,3 +53,7 @@ legacy_v0_*.zip
 
 # Gradle cache created by Android Studio at the project root
 /.gradle/
+
+# Scratch output from image generation and measuring (not project files)
+/tmp/
+/output/

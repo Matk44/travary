@@ -1,6 +1,7 @@
 // Builds, validates and publishes Travary art packs. The app never uploads
 // or edits packs; this tool (run by an operator) does.
 //
+//   dart run tool/art_packs.dart webp <source-dir>... [--originals art_packs/originals] [--dry-run]
 //   dart run tool/art_packs.dart build <source-dir> [--catalog art_packs/catalog.json]
 //       [--out build/art_packs] [--dry-run]
 //   dart run tool/art_packs.dart publish [--catalog art_packs/catalog.json]
@@ -16,6 +17,7 @@ import 'dart:io';
 import 'src/bucket.dart';
 import 'src/pack_builder.dart';
 import 'src/publisher.dart';
+import 'src/webp_converter.dart';
 
 Future<void> main(List<String> args) async {
   try {
@@ -25,6 +27,20 @@ Future<void> main(List<String> args) async {
     final out = Directory(options.value('--out') ?? 'build/art_packs');
     final dryRun = options.flag('--dry-run');
     switch (command) {
+      case 'webp':
+        final sources = options.positional;
+        if (sources.isEmpty) throw const PublishException('Which packs? webp <source-dir>...');
+        final originals = Directory(options.value('--originals') ?? 'art_packs/originals');
+        options.done(maxPositional: sources.length);
+        for (final source in sources) {
+          final report = await convertSourceToWebp(source: Directory(source), originals: originals, dryRun: dryRun);
+          String mb(int bytes) => (bytes / 1e6).toStringAsFixed(1);
+          stdout.writeln(
+            '$source: ${report.converted} pictures, ${mb(report.bytesBefore)} MB'
+            '${dryRun ? '' : ' → ${mb(report.bytesAfter)} MB'}',
+          );
+        }
+        if (dryRun) stdout.writeln('Dry run: nothing written.');
       case 'build':
         final source = options.positional.singleOrNull;
         if (source == null) throw const PublishException('Which pack? build <source-dir>');
@@ -55,7 +71,7 @@ Future<void> main(List<String> args) async {
         await publishArtPacks(catalogFile: catalog, outDir: out, bucket: bucket, dryRun: dryRun);
       default:
         throw const PublishException(
-          'Usage: dart run tool/art_packs.dart build|publish ... (see the top of this file)',
+          'Usage: dart run tool/art_packs.dart webp|build|publish ... (see the top of this file)',
         );
     }
   } on PublishException catch (e) {
