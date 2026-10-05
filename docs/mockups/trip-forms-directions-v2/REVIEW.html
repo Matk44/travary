@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Travary — cleaner screen directions</title>
+<style>
+:root{color-scheme:light;--ink:#1c2a47;--cream:#f8f4ec;--teal:#1e5b70}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{max-width:1800px;margin:auto;padding:28px 30px}h1{font:700 clamp(28px,4vw,40px)/1.15 Georgia,serif;margin:0 0 10px}
+p{margin:8px 0;max-width:850px}.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0 14px}
+button,select{font:inherit;color:inherit;border:1px solid #dcd2c1;border-radius:8px;background:transparent;padding:10px 16px}
+button{cursor:pointer}button[aria-pressed=true]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+label{margin-left:auto;display:flex;gap:10px;align-items:center;color:#56617a}.controls select{padding:9px 12px}
+#note{font-size:15px;color:#56617a}figure{margin:16px 0}#frame{position:relative;width:100%}#frame.focused{overflow:hidden;width:min(440px,100%);margin:24px auto}
+#board{display:block;width:100%;height:auto}figcaption{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:14px}a{color:var(--teal)}
+footer{margin-top:24px;font-size:12px;color:#56617a}
+@media(max-width:650px){main{padding:20px 14px}.controls{gap:8px}label{margin-left:0;width:100%}button{padding:9px 12px}}
+</style></head>
+<body><main>
+<h1>Less to look at. Easier to use.</h1>
+<p>Two cleaner directions for Travary, with one focal point and one main action per screen.</p>
+<div class="controls" role="group" aria-label="Style direction">
+<button data-key="d" aria-pressed="true">D · Postcard light</button>
+<button data-key="e" aria-pressed="false">E · Editorial light</button>
+<label for="focus">View <select id="focus"><option value="all">All four screens</option><option value="0">Your trip</option><option value="1">Add a booking</option><option value="2">Add a stay</option><option value="3">Find your flight</option></select></label>
+</div>
+<p id="note">One destination illustration, a simple itinerary, and essential forms with room to breathe.</p>
+<figure><div id="frame"><img id="board" src="04-postcard-light.png" alt="Postcard light: four clean Travary mobile screen mockups"></div>
+<figcaption><a id="fullsize" href="04-postcard-light.png" target="_blank" rel="noopener">Open full-size board</a><a id="download" href="04-postcard-light.png" download>Download board</a><a href="PROMPTS.md">ImageGen prompts</a></figcaption></figure>
+<footer>Concept mockups · Built-in ImageGen · 5 October 2026 · Illustrative booking data. <a href="../REVIEW.html">Earlier studies</a></footer>
+</main><script>
+const directions={
+d:{file:'04-postcard-light.png',name:'Postcard light',note:'One destination illustration, a simple itinerary, and essential forms with room to breathe.',crops:[[35/1672,104/941,390/1672,814/941],[449/1672,103/941,375/1672,815/941],[848/1672,103/941,376/1672,815/941],[1248/1672,103/941,393/1672,815/941]]},
+e:{file:'05-editorial-light.png',name:'Editorial light',note:'Expressive type, a small destination illustration, and the quietest layout of the two.',crops:[[24/1672,114/941,398/1672,801/941],[443/1672,114/941,383/1672,801/941],[847/1672,114/941,380/1672,801/941],[1251/1672,114/941,399/1672,801/941]]}
+};
+let current='d';const board=document.getElementById('board'),frame=document.getElementById('frame'),focus=document.getElementById('focus');
+function fit(){const value=focus.value;if(value==='all'){frame.className='';frame.style.aspectRatio='';board.style.cssText='';return}const [x,y,w,h]=directions[current].crops[Number(value)];frame.className='focused';frame.style.aspectRatio=(board.naturalWidth*w)+' / '+(board.naturalHeight*h);board.style.cssText='position:absolute;width:'+(100/w)+'%;left:'+(-100*x/w)+'%;top:'+(-100*y/h)+'%'}
+function choose(key){const d=directions[key];if(!d)return;current=key;board.src=d.file;board.alt=d.name+': four clean Travary mobile screen mockups';document.getElementById('note').textContent=d.note;document.getElementById('fullsize').href=d.file;document.getElementById('download').href=d.file;document.querySelectorAll('[data-key]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.key===key)));fit()}
+document.querySelectorAll('[data-key]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.key)));
+focus.addEventListener('change',fit);board.addEventListener('load',fit);
+document.addEventListener('keydown',event=>{if(event.target.tagName==='SELECT'||event.ctrlKey||event.altKey||event.metaKey)return;choose(event.key.toLowerCase())});
+</script></body></html>

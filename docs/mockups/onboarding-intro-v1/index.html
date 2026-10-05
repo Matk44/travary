@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Travary · Meet Travi</title>
+<style>
+:root{color-scheme:light;--ink:#1c2a47;--teal:#1e5b70;--cream:#f8f4ec;--coral:#e5785b}
+*{box-sizing:border-box}body{margin:0;background:#e9e2d5;color:var(--ink);font-family:system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #e5785b;outline-offset:4px}
+main{min-height:100svh;display:flex;align-items:center;justify-content:center;gap:56px;padding:32px}aside{max-width:320px}aside .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#53717a}aside h2{font-family:Georgia,serif;font-size:38px;line-height:1.08;font-weight:500;margin:14px 0}aside p{font-size:15px;line-height:1.6;color:#53606d}.review-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.review-actions button{border:1px solid #b7b5ac;border-radius:20px;background:#f8f4ec;padding:10px 16px;color:var(--ink);font-size:13px}.review-actions button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}.status{font-size:13px;min-height:40px;margin-top:18px;color:#53717a}.note{font-size:12px!important}
+.screen{position:relative;isolation:isolate;container-type:inline-size;width:min(414px,calc((100svh - 64px)*.5034));aspect-ratio:890/1768;overflow:hidden;background:var(--teal);border-radius:25px;box-shadow:0 20px 65px #293c4140;font-family:Georgia,'Times New Roman',serif}
+.art,.film{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.art{z-index:0}.film{z-index:1;opacity:0;pointer-events:none}.film.visible{opacity:1}.heading{position:absolute;z-index:3;top:3.3%;left:4%;width:92%;text-align:center;color:var(--cream);pointer-events:none}.wordmark{font-size:7.6cqw;margin:0;font-weight:600;letter-spacing:-.025em}.heading h1{font-size:15.5cqw;line-height:.94;letter-spacing:-.035em;margin:5cqw 0 2.7cqw;font-weight:700}.line{display:block;white-space:nowrap}.word{display:inline-block;opacity:0;transform:translateY(12px) rotate(1deg);transform-origin:50% 90%}.accent{color:#ff9775}.subtitle{font-size:4cqw;line-height:1.25;margin:0;opacity:0}.screen.reveal .word{animation:word-in .56s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i)*55ms)}.screen.reveal .subtitle{animation:word-in .55s .34s both}.screen.settled .word,.screen.settled .subtitle{opacity:1;transform:none;animation:none}@keyframes word-in{to{opacity:1;transform:translateY(0) rotate(0)}}
+.controls{position:absolute;z-index:4;left:4%;width:92%;top:71.2%;text-align:center}.destination{position:relative;width:100%;min-height:18cqw;display:flex;align-items:center;gap:3cqw;padding:4cqw 5cqw 4cqw 8.8cqw;border:0;color:var(--ink);background:transparent;text-align:left;font-family:Georgia,serif;font-weight:600;font-size:5.4cqw;filter:drop-shadow(0 4px 4px #7e5e3335)}.destination:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(125deg,#fff9eb,#f4dfbc);clip-path:polygon(5% 0,95% 0,100% 17%,100% 83%,95% 100%,5% 100%,0 75%,0 25%)}.eyelet{position:absolute;left:3.2cqw;width:3.4cqw;height:3.4cqw;border-radius:50%;border:1cqw solid #c78934;background:#735223;box-shadow:inset 1px 1px 1px #352409,0 0 0 1px #f3c66d}.destination svg{flex-shrink:0;width:6cqw;height:6cqw}.destination .arrow{margin-left:auto;width:3.5cqw}.destination span.label{white-space:nowrap;font-size:5.1cqw}.shortcuts{margin-top:5cqw;display:flex;flex-direction:column;align-items:center;gap:1cqw}.shortcut{border:0;background:transparent;font-family:Georgia,serif;font-size:4cqw;text-decoration:underline;text-underline-offset:3px;color:var(--ink);min-height:44px;padding:8px 10px}
+dialog{position:absolute;inset:auto 0 0;margin:0;width:100%;max-width:none;max-height:58%;border:0;border-radius:22px 22px 0 0;background:#fcf7ec;color:var(--ink);padding:24px;font-family:system-ui,sans-serif;box-shadow:0 -5px 50px #03192540}dialog::backdrop{background:#081f2940}.sheet-top{display:flex;align-items:center;justify-content:space-between;gap:12px}dialog h2{font-family:Georgia,serif;font-size:26px;margin:0;font-weight:500}.close{border:0;background:#e9e1d2;border-radius:50%;width:36px;height:36px;font-size:23px;color:var(--ink)}dialog label{display:block;margin:20px 0 7px;font-size:13px}dialog input{width:100%;border:1px solid #b3b4a8;background:#fffdf7;border-radius:12px;padding:12px 14px;color:var(--ink)}.choices{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.choice{border:1px solid #cdc7b9;background:#fffaf0;border-radius:20px;padding:10px 15px;color:var(--ink);min-height:44px}.confirm{border:0;background:var(--ink);color:var(--cream);width:100%;border-radius:12px;padding:14px;margin-top:6px;font-weight:600;min-height:48px}.confirm:disabled{opacity:.4;cursor:default}.sheet-note{font-size:12px;line-height:1.4;color:#616b71;margin:10px 0 0}
+@media(max-width:760px){main{flex-direction:column;gap:24px;padding:16px}.screen{width:min(430px,100%);border-radius:18px}aside{max-width:430px;order:2}aside h2{font-size:28px;margin:8px 0}aside p{margin:8px 0}.review-actions{margin-top:14px}}
+@media(prefers-reduced-motion:reduce){.word,.subtitle{opacity:1;transform:none;animation:none!important}.film{display:none!important}}.screen.no-motion .word,.screen.no-motion .subtitle{opacity:1;transform:none;animation:none!important}.screen.no-motion .film{display:none}
+.heading{top:3%}.wordmark{font-size:6.8cqw}.heading h1{font-size:14.2cqw;margin:3.5cqw 0 2cqw}.subtitle{font-size:clamp(12px,3.8cqw,17px)}.controls{top:70%}.shortcuts{margin-top:3cqw}.shortcut{font-size:clamp(14px,4cqw,18px)}
+dialog{position:fixed;left:var(--sheet-left,0px);right:auto;bottom:var(--sheet-bottom,0px);width:var(--sheet-width,100%);max-height:var(--sheet-height,60vh)}
+</style>
+</head>
+<body>
+<main>
+<section class="screen" aria-label="Travary welcome" id="screen">
+<img class="art" src="idle-start-v1.png" alt="" id="poster">
+<video id="entrance" class="film" src="travi-entrance-playback-v1.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+<video id="idle" class="film" src="travi-idle-loop-v1.mp4?v=2" muted playsinline preload="auto" loop aria-hidden="true"></video>
+<header class="heading">
+<p class="wordmark">Travary</p>
+<h1 aria-label="Where are we off to?"><span class="line" aria-hidden="true"><span class="word" style="--i:0">Where</span> <span class="word" style="--i:1">are</span></span><span class="line" aria-hidden="true"><span class="word" style="--i:2">we</span> <span class="word accent" style="--i:3">off</span> <span class="word accent" style="--i:4">to?</span></span></h1>
+<p class="subtitle">Let's bring your holiday to life.</p>
+</header>
+<div class="controls">
+<button class="destination" id="choose"><span class="eyelet" aria-hidden="true"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 7 7"/></svg><span class="label">Choose a destination</span><svg class="arrow" viewBox="0 0 12 22" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m2 2 8 9-8 9"/></svg></button>
+<div class="shortcuts"><button class="shortcut" data-handoff="booking import">Already have a booking?</button><button class="shortcut" data-handoff="joining a holiday">Joining a holiday?</button></div>
+</div>
+<dialog id="destination-sheet" aria-labelledby="sheet-title">
+<div class="sheet-top"><h2 id="sheet-title">Where are we off to?</h2><button class="close" id="close-sheet" aria-label="Close destination search">×</button></div>
+<form id="destination-form"><label for="destination">Your destination</label><input id="destination" name="destination" placeholder="A city, island or country" autocomplete="off" maxlength="80"><div class="choices"><button type="button" class="choice" data-place="Bali">Bali</button><button type="button" class="choice" data-place="Kyoto">Kyoto</button><button type="button" class="choice" data-place="Paris">Paris</button><button type="button" class="choice" data-place="Sydney">Sydney</button></div><button class="confirm" id="confirm" disabled>Let's go</button></form>
+</dialog>
+</section>
+<aside>
+<span class="eyebrow">Travary · Intro motion review</span>
+<h2>A little porter.<br>A big holiday.</h2>
+<p>Travi rolls in once, greets you, then keeps you company. Tap the destination tag to interrupt his idle and begin.</p>
+<div class="review-actions"><button id="replay">Replay intro</button><button id="pause" aria-pressed="false">Pause motion</button><button id="still" aria-pressed="false">Still version</button></div>
+<div class="status" role="status" aria-live="polite" id="status">Preparing Travi's entrance…</div>
+<p class="note">This local prototype reviews the intro and interruption behaviour. Destination choices are temporary; creating a trip, importing bookings and joining a holiday will use the app's real flows.</p>
+</aside>
+</main>
+<script>
+(() => {
+ const screen=document.getElementById('screen'), entrance=document.getElementById('entrance'), idle=document.getElementById('idle'), poster=document.getElementById('poster'), status=document.getElementById('status'), sheet=document.getElementById('destination-sheet'), input=document.getElementById('destination'), confirm=document.getElementById('confirm'), replay=document.getElementById('replay'), pause=document.getElementById('pause'), still=document.getElementById('still');
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ let phase='entrance', motionOff=reduce.matches, manualPause=false, actionPause=false, headlineTimer=0, previousIdleTime=0, loopCount=0, playbackRequest=0;
+ function report(text){status.textContent=text;screen.dataset.phase=phase;screen.dataset.paused=String(manualPause||actionPause||document.hidden||motionOff);}
+ function stop(){playbackRequest++;entrance.pause();idle.pause();}
+ function title(instant=false){clearTimeout(headlineTimer);screen.classList.add(instant?'settled':'reveal');}
+ function visible(video){entrance.classList.toggle('visible',video===entrance);idle.classList.toggle('visible',video===idle);}
+ function canPlay(){return !motionOff&&!manualPause&&!actionPause&&!document.hidden;}
+ async function playCurrent(){stop();if(!canPlay())return;const clip=phase==='entrance'?entrance:idle,request=playbackRequest;visible(clip);try{await clip.play();if(request!==playbackRequest)return;if(!canPlay()){stop();return}report(phase==='entrance'?'Entrance · one time':'Idle · waiting for your destination')}catch{if(request!==playbackRequest)return;visible(null);poster.src='idle-start-v1.png';title(true);report('Motion could not start. Tap Replay intro to retry.')}}
+ function setStill(value){motionOff=value;screen.classList.toggle('no-motion',value);still.setAttribute('aria-pressed',String(value));stop();if(value){poster.src='idle-start-v1.png';title(true);report('Still version · ready immediately')}else playCurrent();}
+ function start(resetDecoder=false){stop();clearTimeout(headlineTimer);sheet.close('replay');phase='entrance';actionPause=false;manualPause=false;pause.setAttribute('aria-pressed','false');pause.textContent='Pause motion';if(resetDecoder&&!motionOff){entrance.load();idle.load()}entrance.currentTime=0;idle.currentTime=0;previousIdleTime=0;loopCount=0;screen.dataset.loopCount='0';screen.classList.remove('reveal','settled');poster.src='entrance-start-v1.png';visible(null);if(motionOff){setStill(true);return}report('Entrance · one time');playCurrent();}
+ entrance.addEventListener('timeupdate',()=>{if(entrance.currentTime>=2.45&&!screen.classList.contains('reveal')&&!screen.classList.contains('settled')) title();});
+ idle.addEventListener('timeupdate',()=>{if(idle.currentTime<previousIdleTime-1){loopCount++;screen.dataset.loopCount=String(loopCount)}previousIdleTime=idle.currentTime});
+ for(const video of [entrance,idle]){if(typeof video.requestVideoFrameCallback!=='function')continue;let callback=0;const frame=(now,metadata)=>{screen.dataset[video.id+'PresentedFrames']=String(metadata.presentedFrames);screen.dataset[video.id+'FrameTime']=String(metadata.mediaTime);callback=video.requestVideoFrameCallback(frame)};video.addEventListener('playing',()=>{if(callback)video.cancelVideoFrameCallback(callback);callback=video.requestVideoFrameCallback(frame)});video.addEventListener('pause',()=>{if(callback)video.cancelVideoFrameCallback(callback);callback=0})}
+ entrance.addEventListener('ended',()=>{phase='idle';poster.src='idle-start-v1.png';title();playCurrent();});
+ entrance.addEventListener('error',()=>{setStill(true);report('Still version · video unavailable')});idle.addEventListener('error',()=>{setStill(true);report('Still version · idle unavailable')});
+ function alignSheet(){const rect=screen.getBoundingClientRect();sheet.style.setProperty('--sheet-left',rect.left+'px');sheet.style.setProperty('--sheet-bottom',Math.max(0,innerHeight-rect.bottom)+'px');sheet.style.setProperty('--sheet-width',rect.width+'px');sheet.style.setProperty('--sheet-height',Math.min(innerHeight*.75,rect.height*.65)+'px')}
+ window.addEventListener('resize',alignSheet);window.addEventListener('scroll',alignSheet,{passive:true});
+ document.getElementById('choose').addEventListener('click',()=>{actionPause=true;stop();title(true);report('Paused · choosing a destination');alignSheet();sheet.returnValue='';sheet.showModal();input.focus()});
+ document.getElementById('close-sheet').addEventListener('click',()=>sheet.close(''));sheet.addEventListener('close',()=>{if(sheet.returnValue)return;actionPause=false;playCurrent()});
+ document.querySelectorAll('[data-place]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.place;confirm.disabled=false;input.focus()}));input.addEventListener('input',()=>{confirm.disabled=!input.value.trim()});
+ document.getElementById('destination-form').addEventListener('submit',event=>{event.preventDefault();const destination=input.value.trim();if(!destination)return;sheet.close('selected');actionPause=true;stop();title(true);report(destination+' selected · the destination reveal and dates are the next scene. No trip was saved.');replay.focus()});
+ document.querySelectorAll('[data-handoff]').forEach(button=>button.addEventListener('click',()=>{actionPause=true;stop();title(true);report('Paused · handoff to '+button.dataset.handoff+'. This preview ends at the app flow.');replay.focus()}));
+ replay.addEventListener('click',()=>start(true));pause.addEventListener('click',()=>{manualPause=!manualPause;pause.setAttribute('aria-pressed',String(manualPause));pause.textContent=manualPause?'Resume motion':'Pause motion';if(manualPause){stop();title(true);report('Motion paused')}else playCurrent()});still.addEventListener('click',()=>setStill(!motionOff));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else playCurrent()});reduce.addEventListener('change',()=>setStill(reduce.matches));
+ start();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travary — screen directions</title>
+<style>
+:root{color-scheme:light;--ink:#1c2a47;--cream:#f8f4ec;--teal:#1e5b70;--coral:#e5785b}
+*{box-sizing:border-box}body{margin:0;background:#efe8dc;color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{max-width:1800px;margin:auto;padding:28px 32px}header{max-width:1000px}h1{font:700 clamp(28px,4vw,44px)/1.1 Georgia,serif;margin:0 0 12px}
+p{margin:8px 0}nav{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 16px}button,a{color:inherit}
+button{font:inherit;cursor:pointer;border:1px solid #c7beb0;border-radius:6px;padding:10px 16px;background:var(--cream)}
+button[aria-pressed="true"]{background:var(--teal);color:var(--cream);border-color:var(--teal)}
+#note{max-width:1000px;min-height:48px}figure{margin:12px 0 0}img{width:100%;height:auto;display:block;background:var(--cream)}
+img:fullscreen{object-fit:contain;background:#efe8dc;cursor:zoom-out}figcaption{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px}
+#zoom{padding:6px 12px}small{display:block;margin-top:24px;color:#596477}
+@media(max-width:650px){main{padding:20px 14px}nav{gap:8px}button{padding:8px 12px}}
+</style>
+</head>
+<body><main>
+<header>
+<h1>Travary screen directions</h1>
+<p>Compare the same four screens: trip folio, add sheet, stay form, and flight finder.</p>
+</header>
+<nav aria-label="Style direction">
+<button data-key="a" aria-pressed="true">A · Classic folio</button>
+<button data-key="b" aria-pressed="false">B · Playful keepsakes</button>
+<button data-key="c" aria-pressed="false">C · Quiet ledger</button>
+</nav>
+<p id="note">Closest to the approved screens: rich postcard art, warm paper, restrained shadows, and clear ticket forms.</p>
+<figure>
+<img id="board" src="01-classic-folio.png" alt="Classic folio: four Travary mobile screen mockups" tabindex="0">
+<figcaption><button id="zoom">View full screen</button><a id="download" href="01-classic-folio.png" download>Download full-size board</a><a href="PROMPTS.md">Generation prompts</a></figcaption>
+</figure>
+<small>Concept mockups generated with the built-in ImageGen tool on 5 October 2026. Sample bookings and flight details are illustrative. Use A, B, or C to switch direction; click the board to enlarge.</small>
+</main>
+<script>
+const directions={
+a:{file:'01-classic-folio.png',name:'Classic folio',note:'Closest to the approved screens: rich postcard art, warm paper, restrained shadows, and clear ticket forms.'},
+b:{file:'02-playful-keepsakes.png',name:'Playful keepsakes',note:'More warmth and charm: colourful miniature booking objects, bolder screen-print illustrations, and friendly kraft tags.'},
+c:{file:'03-quiet-ledger.png',name:'Quiet ledger',note:'The calmest option: precise alignment, lighter textures, flatter objects, and more editorial spacing.'}
+};
+const board=document.getElementById('board');
+function choose(key){const d=directions[key];if(!d)return;board.src=d.file;board.alt=d.name+': four Travary mobile screen mockups';document.getElementById('note').textContent=d.note;document.getElementById('download').href=d.file;document.querySelectorAll('[data-key]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.key===key)))}
+function zoom(){if(document.fullscreenElement){document.exitFullscreen?.()}else{board.requestFullscreen?.()}}
+document.querySelectorAll('[data-key]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.key)));
+document.getElementById('zoom').addEventListener('click',zoom);board.addEventListener('click',zoom);
+board.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();zoom()}});
+document.addEventListener('keydown',e=>{if(!e.ctrlKey&&!e.altKey&&!e.metaKey)choose(e.key.toLowerCase())});
+</script>
+</body></html>
+

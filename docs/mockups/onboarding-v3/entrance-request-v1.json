@@ -1,0 +1,26 @@
+{
+  "provider": "replicate-seedance-2",
+  "prompt": "A continuous 4-second portrait shot on a sophisticated handmade paper theatre stage. Begin at the supplied EMPTY stage first frame. Tavi rolls in from outside the LEFT edge and finishes in the exact position, scale and excited pose of the supplied final frame. This is a genuine wheeled entrance: no appearing, dissolving, growing or dropping in.\n\nTavi is the exact original coral vintage carry-on in the final-frame reference: navy trim and handle, brass corners, cream luggage tag, two folded-paper arms, two little wheels, front-panel face. Preserve the same textured cut-paper material, adult-friendly crafted silhouette and warm lighting.\n\n0–0.25 seconds: empty petrol-teal paper wall and cream paper floor.\n0.25–1.7 seconds: Tavi rolls briskly onto the screen from the LEFT, his wheels visibly turning and remaining in contact with the floor. His body is a little tilted by momentum. His face is already eager: FULLY OPEN alert cream-and-navy eyes, lifted friendly brows, delighted open smile. His arms balance him and the luggage tag flutters lightly.\n1.7–2.4 seconds: he brakes at his mark with one tiny overshoot and springy rock back, like a porter arriving just a little too eagerly. The tag gives one small flap. A brief comic surprise in his raised brows becomes a pleased grin.\n2.4–3.5 seconds: he straightens, turns his attention towards the traveller, and presents his free hand invitingly. Give a small lively head/body tilt and a warm excited smile. Keep the eyes open and attentive; only an ordinary split-second blink.\n3.5–4 seconds: arrive cleanly at the final reference pose, happy and ready to open his closed lid.\n\nFixed camera, consistent wall-floor boundary, no scenery or new props, preserve the simple stage. Physical wheels, natural contact shadow and controlled paper puppet motion. Enthusiastic, curious and welcoming, never bored or smug. Avoid sustained half-lidded eyes, deadpan eyelids, long eye closure, frantic bouncing, extra limbs, flattened face, changing costume, text, logos, UI, confetti or plastic gloss. Silent.",
+  "idea": "Travary — Tavi rolls in, brakes and greets the traveller",
+  "cast_image_paths": [
+    "1791111751409-178a0433850f9c3a.png",
+    "1791111751476-72ab408c50d8b455.png"
+  ],
+  "first_frame_path": "1791111751409-178a0433850f9c3a.png",
+  "last_frame_path": "1791111751476-72ab408c50d8b455.png",
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "duration_seconds": 4,
+  "generate_audio": false,
+  "seed": 140993,
+  "shot_card": {
+    "title": "Tavi arrives with enthusiasm",
+    "raw_prompt": "A continuous 4-second portrait shot on a sophisticated handmade paper theatre stage. Begin at the supplied EMPTY stage first frame. Tavi rolls in from outside the LEFT edge and finishes in the exact position, scale and excited pose of the supplied final frame. This is a genuine wheeled entrance: no appearing, dissolving, growing or dropping in.\n\nTavi is the exact original coral vintage carry-on in the final-frame reference: navy trim and handle, brass corners, cream luggage tag, two folded-paper arms, two little wheels, front-panel face. Preserve the same textured cut-paper material, adult-friendly crafted silhouette and warm lighting.\n\n0–0.25 seconds: empty petrol-teal paper wall and cream paper floor.\n0.25–1.7 seconds: Tavi rolls briskly onto the screen from the LEFT, his wheels visibly turning and remaining in contact with the floor. His body is a little tilted by momentum. His face is already eager: FULLY OPEN alert cream-and-navy eyes, lifted friendly brows, delighted open smile. His arms balance him and the luggage tag flutters lightly.\n1.7–2.4 seconds: he brakes at his mark with one tiny overshoot and springy rock back, like a porter arriving just a little too eagerly. The tag gives one small flap. A brief comic surprise in his raised brows becomes a pleased grin.\n2.4–3.5 seconds: he straightens, turns his attention towards the traveller, and presents his free hand invitingly. Give a small lively head/body tilt and a warm excited smile. Keep the eyes open and attentive; only an ordinary split-second blink.\n3.5–4 seconds: arrive cleanly at the final reference pose, happy and ready to open his closed lid.\n\nFixed camera, consistent wall-floor boundary, no scenery or new props, preserve the simple stage. Physical wheels, natural contact shadow and controlled paper puppet motion. Enthusiastic, curious and welcoming, never bored or smug. Avoid sustained half-lidded eyes, deadpan eyelids, long eye closure, frantic bouncing, extra limbs, flattened face, changing costume, text, logos, UI, confetti or plastic gloss. Silent.",
+    "first_frame_path": "1791111751409-178a0433850f9c3a.png",
+    "last_frame_path": "1791111751476-72ab408c50d8b455.png",
+    "duration_seconds": 4,
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "camera_move": "none"
+  }
+}

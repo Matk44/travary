@@ -1,0 +1,25 @@
+{
+  "provider": "replicate-seedance-2",
+  "prompt": "A single continuous 6-second portrait shot of an exquisitely handmade paper stop-motion holiday theatre. Preserve the coral vintage suitcase character from the first frame: same proportions, navy trim and eyebrows, brass corners, cream luggage tag, paper-fold arms, little wheels, textured paper surface and expressive face. Keep its face on the front panel throughout.\n\n0–1 seconds: the closed suitcase character blinks, glances upwards with a knowing smile, and shifts one paper hand to the lid.\n1–2 seconds: it opens its rear-hinged lid backwards, leaving its face clearly visible on the front.\n2–4.5 seconds: a magnificent miniature Bali landscape physically unfolds upwards and outwards from INSIDE the suitcase like a layered pop-up book. Emerald paper terraces rise, sculpted palms fan open, dark temple silhouettes unfold, indigo paper sea waves curl into place, a warm coral paper sun rises. All elements are dimensional cut paper, never photographic. The world grows into the empty teal space above the character, with a clear continuous origin inside the case. Tiny paper leaves spring gently into place. The character watches the world with amused pride and extends its free arm to present it.\n4.5–6 seconds: hold the completed composition, character gives a tiny satisfied nod, gentle paper-leaf movement settles. Keep the final world fully open.\n\nLocked camera, no cuts or zoom, stable framing, warm tactile stage lighting, petrol teal backdrop and cream paper floor. Elegant sophisticated travel-poster colour, visible paper grain and cut edges. Understated charming animation with physical paper mechanics. No text, logos, captions, screens, UI, voice, confetti, morphing face, extra limbs, floating disconnected landscape, realistic people, glossy plastic or camera shake.",
+  "idea": "Travary — Tavi opens a Bali paper holiday world",
+  "cast_image_paths": [
+    "1791110219826-20d23b098c9f1dce.png"
+  ],
+  "first_frame_path": "1791110219826-20d23b098c9f1dce.png",
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "duration_seconds": 6,
+  "generate_audio": false,
+  "seed": 140991,
+  "shot_card": {
+    "title": "Tavi's holiday reveal",
+    "shot_type": "locked portrait paper-theatre stage",
+    "camera_move": "none",
+    "lighting": "warm tactile stage light",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 6,
+    "raw_prompt": "A single continuous 6-second portrait shot of an exquisitely handmade paper stop-motion holiday theatre. Preserve the coral vintage suitcase character from the first frame: same proportions, navy trim and eyebrows, brass corners, cream luggage tag, paper-fold arms, little wheels, textured paper surface and expressive face. Keep its face on the front panel throughout.\n\n0–1 seconds: the closed suitcase character blinks, glances upwards with a knowing smile, and shifts one paper hand to the lid.\n1–2 seconds: it opens its rear-hinged lid backwards, leaving its face clearly visible on the front.\n2–4.5 seconds: a magnificent miniature Bali landscape physically unfolds upwards and outwards from INSIDE the suitcase like a layered pop-up book. Emerald paper terraces rise, sculpted palms fan open, dark temple silhouettes unfold, indigo paper sea waves curl into place, a warm coral paper sun rises. All elements are dimensional cut paper, never photographic. The world grows into the empty teal space above the character, with a clear continuous origin inside the case. Tiny paper leaves spring gently into place. The character watches the world with amused pride and extends its free arm to present it.\n4.5–6 seconds: hold the completed composition, character gives a tiny satisfied nod, gentle paper-leaf movement settles. Keep the final world fully open.\n\nLocked camera, no cuts or zoom, stable framing, warm tactile stage lighting, petrol teal backdrop and cream paper floor. Elegant sophisticated travel-poster colour, visible paper grain and cut edges. Understated charming animation with physical paper mechanics. No text, logos, captions, screens, UI, voice, confetti, morphing face, extra limbs, floating disconnected landscape, realistic people, glossy plastic or camera shake.",
+    "first_frame_path": "1791110219826-20d23b098c9f1dce.png"
+  }
+}

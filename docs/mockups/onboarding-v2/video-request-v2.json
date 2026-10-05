@@ -1,0 +1,28 @@
+{
+  "provider": "replicate-seedance-2",
+  "prompt": "One continuous 8-second portrait shot, an ambitious magical holiday reveal in an exquisite handmade paper theatre. Begin exactly at the supplied first frame and finish at the supplied last frame, matching the final frame's lavish Bali scenery, layered cut-paper texture, character identity and composition.\n\nThe protagonist is the SAME original coral vintage suitcase Tavi throughout: navy trim, brass corners, cream luggage tag, folded-paper arms, two little wheels and expressive face on the FRONT panel. Keep its front-panel face visible while the rear-hinged lid opens backwards. It is a witty capable porter, warm and self-assured.\n\n0–1 seconds: Tavi blinks, glances upwards with a knowing smile and reaches to the lid.\n1–2.5 seconds: the lid swings backwards smoothly, revealing dimensional layers packed inside. The character stays grounded on the cream stage.\n2.5–6 seconds: an ENTIRE breathtaking Bali world physically unfolds out of the case and expands behind and around Tavi to fill the upper two thirds and sides of the portrait, reaching the composition in the last frame. Large layered emerald terraces rise and fan outward, tall paper palms spring open, temple towers unfold from stacked shapes, the teal sea curls into wide paper waves, the coral sun and mountain rise. Foreground flowers and leaves unfold along the sides. Give these transformations beautifully staged successive physical movements with clear origins in the suitcase. Preserve visible cut edges, ink grain and warm shadows. This world is expansive and cinematic, not confined to a tiny tray on top of the case.\n6–8 seconds: settle fully into the supplied final composition. Tavi presents the holiday with its paper arms, gives a tiny satisfied nod. Leaves and waves settle softly. Hold the completed world clearly for the end of the shot.\n\nFixed eye-level camera, no cuts, no zoom, no shake. Rich sophisticated vintage travel-poster colour and meticulous tactile stop-motion puppet craft. Transformation should feel like a spectacular unfolding pop-up book, with continuity and physical cause and effect, not a dissolve or an instant replacement of the scene. No text, captions, wordmarks, UI, screens, confetti, realistic people, plastic sheen, extra arms, disappearing wheels or face morphing. Silent.",
+  "idea": "Travary — Tavi's whole holiday world unfolds (refined)",
+  "cast_image_paths": [
+    "1791110219826-20d23b098c9f1dce.png",
+    "1791110694013-3c643f2b846dd506.png"
+  ],
+  "first_frame_path": "1791110219826-20d23b098c9f1dce.png",
+  "last_frame_path": "1791110694013-3c643f2b846dd506.png",
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "duration_seconds": 8,
+  "generate_audio": false,
+  "seed": 140992,
+  "shot_card": {
+    "title": "Tavi's expansive holiday reveal",
+    "shot_type": "locked portrait paper-theatre stage",
+    "camera_move": "none",
+    "lighting": "warm tactile stage light",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 8,
+    "raw_prompt": "One continuous 8-second portrait shot, an ambitious magical holiday reveal in an exquisite handmade paper theatre. Begin exactly at the supplied first frame and finish at the supplied last frame, matching the final frame's lavish Bali scenery, layered cut-paper texture, character identity and composition.\n\nThe protagonist is the SAME original coral vintage suitcase Tavi throughout: navy trim, brass corners, cream luggage tag, folded-paper arms, two little wheels and expressive face on the FRONT panel. Keep its front-panel face visible while the rear-hinged lid opens backwards. It is a witty capable porter, warm and self-assured.\n\n0–1 seconds: Tavi blinks, glances upwards with a knowing smile and reaches to the lid.\n1–2.5 seconds: the lid swings backwards smoothly, revealing dimensional layers packed inside. The character stays grounded on the cream stage.\n2.5–6 seconds: an ENTIRE breathtaking Bali world physically unfolds out of the case and expands behind and around Tavi to fill the upper two thirds and sides of the portrait, reaching the composition in the last frame. Large layered emerald terraces rise and fan outward, tall paper palms spring open, temple towers unfold from stacked shapes, the teal sea curls into wide paper waves, the coral sun and mountain rise. Foreground flowers and leaves unfold along the sides. Give these transformations beautifully staged successive physical movements with clear origins in the suitcase. Preserve visible cut edges, ink grain and warm shadows. This world is expansive and cinematic, not confined to a tiny tray on top of the case.\n6–8 seconds: settle fully into the supplied final composition. Tavi presents the holiday with its paper arms, gives a tiny satisfied nod. Leaves and waves settle softly. Hold the completed world clearly for the end of the shot.\n\nFixed eye-level camera, no cuts, no zoom, no shake. Rich sophisticated vintage travel-poster colour and meticulous tactile stop-motion puppet craft. Transformation should feel like a spectacular unfolding pop-up book, with continuity and physical cause and effect, not a dissolve or an instant replacement of the scene. No text, captions, wordmarks, UI, screens, confetti, realistic people, plastic sheen, extra arms, disappearing wheels or face morphing. Silent.",
+    "first_frame_path": "1791110219826-20d23b098c9f1dce.png",
+    "last_frame_path": "1791110694013-3c643f2b846dd506.png"
+  }
+}

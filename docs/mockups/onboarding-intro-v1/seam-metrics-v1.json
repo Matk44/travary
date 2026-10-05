@@ -1,0 +1,11 @@
+{
+  "entrance-end-v1.png \u2192 idle-start-v1.png": {
+    "rgb_mean_absolute_difference_0_255": 2.0406
+  },
+  "idle-start-v1.png \u2192 idle-end-v1.png": {
+    "rgb_mean_absolute_difference_0_255": 1.6004
+  },
+  "idle-loop-last-v1.png \u2192 idle-start-v1.png": {
+    "rgb_mean_absolute_difference_0_255": 1.7508
+  }
+}
