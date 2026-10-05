@@ -1,8 +1,8 @@
 # Art asset gaps
 
 The Today screen and home tabs are built to draw every distinctive object
-from supplied raster art (`docs/ART_BRIEF.md`). This file lists every file
-the build looks for that doesn't exist yet, what stands in meanwhile, and
+from supplied raster art (`docs/ART_BRIEF.md`). This file tracks requested
+art, completed deliveries, what stands in while art is missing, and
 what must be made before the screen can be signed off against
 `docs/reference/travary_today_reference.png`.
 
@@ -28,9 +28,9 @@ below account for most of the remaining difference.
 |---|---|---|---|---|
 | `common/leather.png` (`leather`) | 1536 × 1024, tiles left to right, stitching 12% from the top | The strip under the home tabs, filling the bottom safe area (34 pt on the reference phone), `BoxFit.cover`, top-aligned | Nothing is drawn. Per the spec the strip appears only when the raster exists (**visible**: tabs run to the screen edge) | Make it |
 | `common/pill.png` (`pill`) | 1536 × 512 (3:1), raised cream pill, empty | Header weather or countdown pill, drawn 35 pt tall at its own aspect | Flat cream pill with a soft shadow (**visible**) | Make it |
-| `icons/nav_wallet.png` (`nav_wallet`) | 1024 × 1024, one-colour navy ink, transparent, content ≈ 50% of the canvas like `nav_today` | Documents tab (the ticket wallet) | Material `description` glyph (**visible**) | A document/ticket-wallet icon |
-| `icons/nav_profile.png` (`nav_profile`) | as above | Profile tab | Material `person` glyph (**visible**) | Make it |
-| `icons/nav_add.png` (`nav_add`) | as above, a bold plus | Add tab | Material `add` glyph (**visible**) | Make it |
+| `icons/nav_wallet.png` (`nav_wallet`) | 1024 × 1024, one-colour navy ink, transparent, content ≈ 50% of the canvas like `nav_today` | Documents tab (the ticket wallet) | Supplied letterpress document icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
+| `icons/nav_profile.png` (`nav_profile`) | as above | Profile tab | Supplied letterpress person icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
+| `icons/nav_add.png` (`nav_add`) | as above, a bold plus | Add tab | Supplied letterpress plus icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
 | `icons/weather_sunny.png` (`weather_sunny`) | 1024 × 1024, full colour allowed (drawn untinted) | Header pill when a forecast is given ("28° Sunny") | Material sun glyph in coral (**visible**) | Make it; also `weather_cloudy`, `weather_rain`, `weather_snow` |
 | `icons/timeline_stop.png` (`timeline_stop`) | 256 × 256, one-colour ink dot, tinted `ui.secondary` | Day timeline stops | Plain round dot (**visible**, matches the reference closely) | Optional |
 | `icons/timeline_now.png` (`timeline_now`) | 256 × 256, one-colour ring, tinted `ui.highlight` | The stop happening now | Plain dot with a halo (not in the morning reference) | Optional |
@@ -218,16 +218,19 @@ The trip screen, Trip details, the add sheet, the booking forms, the flight
 board and a booking's page (`docs/mockups/trip-ledger-c2/`) are mostly
 **drawn**: paper panels, plan rows, gap rows, the form ticket and its
 notches, the perforation, the notched button, the departures board and its
-split-flap tiles. They need no raster. These are the files they look for:
+split-flap tiles. They need no raster. The eight shared assets below and
+the three navigation icons above were supplied on 5 October 2026. Exact
+generation prompts and checks are in
+[`c2_screen_assets_prompts.md`](c2_screen_assets_prompts.md).
 
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
-| `common/add_snap.png` (`SurfaceSlot.addSnap`) | 768 × 768, transparent | Add sheet, "Snap a booking" | A document-scanner glyph on a linen square (**visible**) | Make it (prompt in `docs/ART_DIRECTION_SCREENS.md`) |
-| `common/add_passport.png` (`SurfaceSlot.addPassport`) | 768 × 768, transparent | Add sheet, "Passport & documents" | A passport glyph on a linen square (**visible**) | Make it |
-| `common/trip_postcard_anywhere.png` (`tripPostcardAnywhereArt`) | 1536 × 1024, the card in a transparent margin | Top of a trip whose place has no `trip_postcard` | The trip's portrait countdown postcard cropped to landscape in a plain paper print, else the neutral portrait one cropped (**visible**, looks fine) | Make it |
-| `icons/attach.png` (`IconSlot.attach`) | 1024 × 1024 | "Attach your ticket" on forms and booking pages | Material paperclip (**visible**) | Make it |
-| `icons/invite.png` (`IconSlot.invite`) | 1024 × 1024 | "Who's coming · Invite" on the trip, Trip details | Material person-add (**visible**) | Make it |
-| `icons/look.png` (`IconSlot.look`) | 1024 × 1024 | Card style (Trip details) | Material style glyph (not shown yet) | Optional |
-| `icons/clock.png` (`IconSlot.clock`) | 1024 × 1024 | Times on the form ticket | Material clock (**visible**) | Optional |
-| `icons/passport.png` (`IconSlot.passport`) | 1024 × 1024 | Travel documents rows | Material book (**visible**) | Optional |
-| Country packs' `common/trip_postcard` | 1536 × 1024 | Trip headers and Trips rows for the 25 countries | The cropped countdown postcard (above) | **Generated** (`art_packs/generated/trip_postcards/`), installed in the packs at version 3, built; publish to show them |
+| `common/add_snap.png` (`SurfaceSlot.addSnap`) | 768 × 768, transparent | Add sheet, "Snap a booking" | Supplied polaroid with abstract travel bookings | **Supplied** |
+| `common/add_passport.png` (`SurfaceSlot.addPassport`) | 768 × 768, transparent | Add sheet, "Passport & documents" | Supplied navy passport with gold globe and cream card | **Supplied** |
+| `common/trip_postcard_anywhere.png` (`tripPostcardAnywhereArt`) | 1536 × 1024, the card in a transparent margin | Top of a trip whose place has no `trip_postcard` | Supplied landscape companion to the neutral portrait postcard | **Supplied** |
+| `icons/attach.png` (`IconSlot.attach`) | 1024 × 1024, transparent | "Attach your ticket" on forms and booking pages | Supplied letterpress paperclip | **Supplied** |
+| `icons/invite.png` (`IconSlot.invite`) | 1024 × 1024, transparent | "Who's coming · Invite" on the trip, Trip details | Supplied letterpress person with plus | **Supplied** |
+| `icons/look.png` (`IconSlot.look`) | 1024 × 1024, transparent | Card style (Trip details) | Supplied letterpress perforated stamp | **Supplied** |
+| `icons/clock.png` (`IconSlot.clock`) | 1024 × 1024, transparent | Times on the form ticket | Supplied letterpress clock at 10:10 | **Supplied** |
+| `icons/passport.png` (`IconSlot.passport`) | 1024 × 1024, transparent | Travel documents rows | Supplied letterpress passport booklet | **Supplied** |
+| Country packs' `common/trip_postcard` | 1536 × 1024 | Trip headers and Trips rows for the 25 countries | The place's countdown postcard, cropped | **Published** 5 Oct 2026 (packs v3, catalog v80) |

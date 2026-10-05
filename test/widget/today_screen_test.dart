@@ -157,11 +157,11 @@ void main() {
       );
       expect(vignette.image, const BundledArtImage('assets/art/dining/any_bistro_01_vignette.png'));
       expect(find.descendant(of: lunch, matching: find.byKey(const ValueKey('icon-raster-dining'))), findsOneWidget);
-      // Nav icons: raster where supplied, the documented stand-in otherwise.
-      expect(find.byKey(const ValueKey('icon-raster-nav_today')), findsOneWidget);
-      expect(find.byKey(const ValueKey('icon-raster-nav_trips')), findsOneWidget);
-      expect(find.byKey(const ValueKey('icon-fallback-nav_wallet')), findsOneWidget);
-      expect(find.byKey(const ValueKey('icon-fallback-nav_profile')), findsOneWidget);
+      // Nav icons: every tab's raster is supplied.
+      for (final key in ['nav_today', 'nav_trips', 'nav_wallet', 'nav_profile']) {
+        expect(find.byKey(ValueKey('icon-raster-$key')), findsOneWidget, reason: key);
+        expect(find.byKey(ValueKey('icon-fallback-$key')), findsNothing, reason: key);
+      }
       // No drawn stand-ins where rasters exist.
       expect(find.byKey(const ValueKey('plain-card')), findsNothing);
       expect(

@@ -94,7 +94,12 @@ class _TripBody extends StatelessWidget {
           children: [
             TripHero(
               text: tripHeroTextFor(plan, store.today),
-              postcard: (store.tripPostcardFor(plan) ?? store.neutralTripPostcard)?.image,
+              // The place's own art first (its landscape postcard, else its
+              // portrait one cropped), and only then the neutral postcard.
+              postcard:
+                  (store.tripPostcardFor(plan) ??
+                          (store.countdownPostcardFor(plan) == null ? store.neutralTripPostcard : null))
+                      ?.image,
               portrait: (store.countdownPostcardFor(plan) ?? store.neutralCountdownPostcard)?.image,
               tag: chrome.slots.surface(SurfaceSlot.countdownTag),
               variant: plan.id.hashCode,

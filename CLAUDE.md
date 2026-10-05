@@ -180,7 +180,10 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    never another place's. When the next trip's place has none, Today counts
    down on the bundled, place-neutral `countdown_postcard_anywhere`
    (`TravelStore.neutralCountdownPostcard`); the Trips tab keeps that trip's
-   plain row. Prompts for new destinations: `art_packs/prompts/postcards.md`.
+   plain row. A trip's own screen (`TripHero`) shows its `trip_postcard`,
+   else its countdown postcard cropped to landscape, and only for a trip
+   with no place art the bundled `trip_postcard_anywhere`
+   (`TravelStore.neutralTripPostcard`). Prompts for new destinations: `art_packs/prompts/postcards.md`.
 5. Colours and type live in `design/tokens.dart` only. A trip's interface
    colours come from its palette (`TravaryChrome.of(context).colors`: the
    best-ranked installed pack's `palette`, else Travary's own); chrome uses

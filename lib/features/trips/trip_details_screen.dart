@@ -75,9 +75,14 @@ class _Details extends StatelessWidget {
     final trip = plan.trip;
     final owner = store.isOwner(plan);
     final covered = context.watch<PremiumStore>().forTrip(plan).allowed;
-    Widget heading(String text) => Padding(
+    Widget heading(String text, {IconSlot? icon}) => Padding(
       padding: const EdgeInsets.fromLTRB(TravarySpace.xs, TravarySpace.xl, 0, TravarySpace.sm),
-      child: Text(text, style: TravaryText.title),
+      child: Row(
+        children: [
+          if (icon != null) ...[RowIcon(icon, size: 24), const SizedBox(width: TravarySpace.sm)],
+          Expanded(child: Text(text, style: TravaryText.title)),
+        ],
+      ),
     );
 
     return LinenBackground(
@@ -113,7 +118,7 @@ class _Details extends StatelessWidget {
               ),
             ),
             if (PremiumFeature.familySharing.released || kDebugMode) ...[
-              heading('Who\'s coming'),
+              heading('Who\'s coming', icon: IconSlot.invite),
               PaperPanel(
                 child: Column(
                   children: [
@@ -132,7 +137,7 @@ class _Details extends StatelessWidget {
                 ),
               ),
             ],
-            heading('Card style'),
+            heading('Card style', icon: IconSlot.look),
             PaperPanel(
               child: Column(
                 children: [

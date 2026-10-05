@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../design/art/art_slots.dart';
+import '../../design/cards/card_parts.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../state/travel_documents_store.dart';
@@ -50,7 +52,12 @@ class TravelDocumentsEntry extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.menu_book_rounded, size: 18, color: colors.primary),
+                  SlotIcon(
+                    icon: TravaryChrome.of(context).slots.icon(IconSlot.passport),
+                    color: colors.primary,
+                    // Letterpress icons keep a quarter margin round the ink.
+                    size: 24,
+                  ),
                   const SizedBox(width: 6),
                   Flexible(
                     child: Text(

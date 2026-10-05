@@ -2,7 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../design/art/art_slots.dart';
+import '../../design/cards/card_parts.dart';
 import '../../design/tokens.dart';
+import '../../design/trip_chrome.dart';
 import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
@@ -37,7 +40,11 @@ class ProfileScreen extends StatelessWidget {
           const PlusCard(),
           const SectionLabel('Your documents'),
           ListTile(
-            leading: const Icon(Icons.menu_book_rounded),
+            leading: SlotIcon(
+              icon: TravaryChrome.of(context).slots.icon(IconSlot.passport),
+              color: TravaryColors.ink,
+              size: 26,
+            ),
             title: const Text('Travel documents'),
             subtitle: const Text('Passports, visas and insurance, kept on this phone only'),
             trailing: const Icon(Icons.chevron_right_rounded),

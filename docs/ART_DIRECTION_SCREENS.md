@@ -32,15 +32,24 @@ rows, the form ticket and its notches, the perforation, the notched button,
 the board, its rivets and flap tiles. They take the trip's palette (the
 form's band is Japan's vermilion on a Japan trip).
 
-## Images to make with GPT
+## Generated images and prompts
 
-Seven files, in order of how much they show. File names matter: drop each
-into the folder named and the app uses it on the next build. No code is
-needed (stand-ins are listed in `docs/ART_ASSET_GAPS.md`).
+**Supplied on 5 October 2026:** all eight screen assets below, plus
+`nav_wallet`, `nav_profile` and `nav_add`. The 11 transparent PNGs are saved
+at the exact paths the app resolves. The two keepsakes are 768 × 768, the
+neutral postcard is 1536 × 1024, and the eight icons are 1024 × 1024.
+They sit over the app's existing woven linen.
 
-Paste the **Style block** from `docs/ART_BRIEF.md` before the illustration
-prompts. Upload the C2 mockup and an approved postcard as references and
-say *"same app, same style, same palette"*.
+Generation used the built-in ImageGen tool with the C2 mockup, existing
+neutral postcard and existing letterpress icons as references. Exact
+prompts, source outputs and export checks are recorded in
+[`c2_screen_assets_prompts.md`](c2_screen_assets_prompts.md). No code
+change is needed: these folders are already bundled and discovered by
+the art catalogue.
+
+For future variants, paste the **Style block** from `docs/ART_BRIEF.md`
+before the illustration prompts. Upload the C2 mockup and an approved
+postcard as references and say *"same app, same style, same palette"*.
 
 ### 1. `assets/art/common/add_snap.png`: "Snap a booking"
 
@@ -87,15 +96,14 @@ Batch 3's icon prompt from `docs/ART_BRIEF.md` (letterpress navy #1C2A47,
 | `passport.png` | a closed passport booklet |
 | `look.png` | a postage stamp with a perforated edge |
 
-The older gaps still open are `nav_wallet`, `nav_profile` and `nav_add`
-(same prompt).
+The older gaps `nav_wallet`, `nav_profile` and `nav_add` were also supplied
+with the same letterpress treatment.
 
 ### Already done
 
 - **The 25 country trip postcards** (`art_packs/generated/trip_postcards/`)
-  are installed in their packs (`common/trip_postcard`, version 3) and
-  built. Publishing them puts them on every country trip's header and
-  Trips row.
+  are in their packs (`common/trip_postcard`, version 3) and published
+  (catalog v80): every country trip's header and Trips row shows its own.
 
 ### Next for the packs
 

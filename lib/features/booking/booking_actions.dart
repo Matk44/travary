@@ -275,6 +275,7 @@ class _KindPickerSheetState extends State<KindPickerSheet> {
                 leading: RowPicture(
                   image: chrome.slots.surface(SurfaceSlot.addPassport),
                   fallback: Icons.menu_book_rounded,
+                  size: 72,
                 ),
                 onTap: () => Navigator.pop(context, const TravelDocumentChoice()),
               ),

@@ -186,11 +186,12 @@ void main() {
         final icon = slots.icon(IconSlot.forKind(kind));
         expect(icon.image, BundledArtImage('assets/art/icons/${icon.slot.key}.png'), reason: kind.name);
       }
-      for (final present in [IconSlot.navToday, IconSlot.navTrips]) {
-        expect(slots.icon(present).isFallback, isFalse, reason: present.key);
+      // Icons, like surfaces, are used exactly when their files exist.
+      for (final slot in IconSlot.values) {
+        expect(slots.icon(slot).isFallback, !File('assets/art/icons/${slot.key}.png').existsSync(), reason: slot.key);
       }
-      for (final missing in [IconSlot.navDocuments, IconSlot.navProfile, IconSlot.navAdd]) {
-        expect(slots.icon(missing).isFallback, isTrue, reason: missing.key);
+      for (final supplied in [IconSlot.navDocuments, IconSlot.navProfile, IconSlot.navAdd, IconSlot.attach]) {
+        expect(slots.icon(supplied).isFallback, isFalse, reason: supplied.key);
       }
       // Surfaces are used exactly when their files exist.
       for (final surface in SurfaceSlot.values) {

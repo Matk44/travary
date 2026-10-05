@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../art/art_resolver.dart';
+import '../art/art_slots.dart';
 import '../cards/card_parts.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
@@ -163,7 +164,10 @@ class TicketDateBox extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(time == null ? Icons.add_rounded : Icons.schedule_rounded, size: 16, color: colors.ink),
+                  if (time == null)
+                    Icon(Icons.add_rounded, size: 16, color: colors.ink)
+                  else
+                    SlotIcon(icon: TravaryChrome.of(context).slots.icon(IconSlot.clock), color: colors.ink, size: 18),
                   const SizedBox(width: 4),
                   Flexible(
                     child: Text(
