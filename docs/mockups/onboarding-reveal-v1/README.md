@@ -38,4 +38,6 @@ Take turns: Travi's short reaction, then the world, then the headline. Avoid con
 
 ## Next production unit
 
-Review the still and choose a headline treatment. Then separate the workshop, Travi and scene into clean assets and reproduce the chosen timing in a playable Flutter scene. The full still is not a reusable background layer because it includes the character and illustrative controls. The motion study is not yet installed in the app. No new video was generated.
+The owner selected **Paper words** and confirmed the full colourful stage. A [connected arrival → destination → dates prototype](../onboarding-journey-v1/README.md) now uses clean Bali/Kyoto background plates, a transparent Travi pose, the existing intro films and working date controls. Its full scenery replaces the small postcard treatment used in this earlier typography comparison. No new destination video was generated.
+
+Review that complete sequence, then build the booking-folio interaction and carry the approved flow into Flutter. The original full still remains an art-direction reference because it includes illustrative text and controls; the connected prototype has separate live UI and reusable assets. Neither browser study is installed in the app.

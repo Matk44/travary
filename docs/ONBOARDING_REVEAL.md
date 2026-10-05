@@ -10,7 +10,7 @@ Proposed sequence:
 
 1. Confirm the chosen destination in the normal picker and preserve its real name in live UI.
 2. Travi glances towards the workshop, makes a small anticipatory lean, then presents the view with delighted surprise.
-3. The teal paper stage opens like a theatre. The destination illustration rises into view as a large paper scene/postcard, with a slight perspective settle and soft shadow. Animate the whole image with native masks and transforms for the first prototype.
+3. The teal paper stage opens like a theatre. The destination illustration rises into view as a full scenic background, continuing behind Travi into the cream workshop floor. Animate the whole image with native masks and transforms for the first prototype. The owner confirmed the full colourful composition; the small postcard in the early typography study does not define this screen's final layout.
 4. Travi returns his gaze to the traveller and gives a proud small nod. The destination remains visible as the heading changes to “When do we leave?” and date controls become available.
 
 Keep the camera, cream control floor and character scale coherent with [the arrival screen](mockups/onboarding-arrival-v1/README.md). Motion can settle immediately when the traveller advances; the selected destination and useful controls remain reliable.
@@ -35,4 +35,8 @@ A generated arrival clip can still use the fixed workshop setting. A full-scene 
 
 No per-destination video rendering or per-user image generation is needed for this approach. There is still work in character animation, clean artwork, motion implementation and device validation. Inspect cropping, quiet copy areas, fallback/loading states and Reduce Motion in the prototype.
 
-The new [reveal composition](mockups/onboarding-reveal-v1/bali-reveal-screen-v1.png) combines the approved spinner with the Bali reference and a single coral headline accent. The accompanying motion study switches between Bali and Kyoto postcards using shared timing, and compares quiet, word-based and letter-based text entrances. It demonstrates typography and whole-image motion; clean reusable stage/character assets and the Flutter implementation remain the next production unit.
+The [reveal composition](mockups/onboarding-reveal-v1/bali-reveal-screen-v1.png) combines the approved spinner with the Bali reference and a single coral headline accent. The owner selected the word-based **Paper words** entrance. The early typography study compares small Bali and Kyoto postcards; a newer [connected journey prototype](mockups/onboarding-journey-v1/README.md) now proves the full colourful stage with separate clean Bali/Kyoto plates, a transparent Travi pose, the existing arrival/idle films and real local date selection.
+
+The destination reveal moves the whole scene and character pose. Internal scenic parallax and articulated facial/hand acting remain separate production work. The booking-folio interaction and Flutter integration are still to build. No new video was generated for the connected reveal.
+
+Future scenery follows the [destination art expansion guide](ONBOARDING_DESTINATION_ART.md). Its approved clean-stage reference, reusable generation brief and [continuing asset register](onboarding/DESTINATION_ART_REGISTER.md) make each new place one scenic plate rather than another full-scene video. Record new destination/shared asset requirements there as onboarding work proceeds.

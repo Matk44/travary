@@ -1,0 +1,1359 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-05",
+  "purpose": "Planning ledger for onboarding art; not a runtime resolver or published art-pack catalog",
+  "guidePath": "docs/ONBOARDING_DESTINATION_ART.md",
+  "referenceTemplatePath": "docs/mockups/onboarding-journey-v1/bali-stage-v1.png",
+  "perDestinationRequiredAsset": "one clean portrait onboarding stage",
+  "referenceDimensions": [
+    851,
+    1848
+  ],
+  "stageStatuses": [
+    "needed",
+    "generated",
+    "review_ready",
+    "approved",
+    "prototype_ready",
+    "integrated",
+    "published"
+  ],
+  "sharedAssets": [
+    {
+      "assetId": "neutral_workshop",
+      "storyBeat": "arrival and fallback",
+      "status": "prototype_ready",
+      "requiredForEveryNewDestination": false,
+      "path": "docs/mockups/onboarding-journey-v1/empty-stage-v1.png",
+      "nextAction": "Bundle a guest/offline fallback during integration"
+    },
+    {
+      "assetId": "travi_excited_pose",
+      "storyBeat": "destination reveal and dates",
+      "status": "prototype_ready",
+      "requiredForEveryNewDestination": false,
+      "path": "docs/mockups/onboarding-journey-v1/travi-cutout-v2.png",
+      "nextAction": "Reuse; author a rig only if articulated motion is needed"
+    },
+    {
+      "assetId": "shared_arrival_and_idle",
+      "storyBeat": "arrival",
+      "status": "prototype_ready",
+      "requiredForEveryNewDestination": false,
+      "paths": [
+        "docs/mockups/onboarding-journey-v1/travi-entrance-playback-v1.mp4",
+        "docs/mockups/onboarding-journey-v1/travi-idle-loop-v1.mp4"
+      ],
+      "nextAction": "Reuse; validate native framing/controller lifecycle"
+    },
+    {
+      "assetId": "open_booking_folio",
+      "storyBeat": "first booking",
+      "status": "to_brief",
+      "requiredForEveryNewDestination": false,
+      "path": null,
+      "nextAction": "Brief one open navy folio with blank live ticket spaces"
+    },
+    {
+      "assetId": "travi_receives_booking",
+      "storyBeat": "first booking",
+      "status": "to_brief",
+      "requiredForEveryNewDestination": false,
+      "path": null,
+      "nextAction": "Brief one transparent offering/receiving pose against the actual interaction"
+    },
+    {
+      "assetId": "travi_checks_ticket",
+      "storyBeat": "booking review",
+      "status": "to_brief",
+      "requiredForEveryNewDestination": false,
+      "path": null,
+      "nextAction": "Brief one attentive checking pose; keep real ticket data live"
+    },
+    {
+      "assetId": "travi_presents_folio",
+      "storyBeat": "first itinerary day and possible pass invitation",
+      "status": "to_brief",
+      "requiredForEveryNewDestination": false,
+      "path": null,
+      "nextAction": "Brief one proud handoff pose; initially reuse for the pass invitation"
+    },
+    {
+      "assetId": "travi_articulated_rig",
+      "storyBeat": "richer acting",
+      "status": "optional",
+      "requiredForEveryNewDestination": false,
+      "path": null,
+      "nextAction": "Author separate facial/hand/wheel pieces when an approved performance needs them"
+    }
+  ],
+  "destinations": [
+    {
+      "destinationId": "city_fr_paris",
+      "label": "Paris",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "FR"
+        ],
+        "cities": [
+          "paris"
+        ]
+      },
+      "sourcePackVersion": 1,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/city_fr_paris/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/city_fr_paris/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/city_fr_paris/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/city_fr_paris/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        "documents_destination_stamp": {
+          "masterPath": "art_packs/originals/city_fr_paris/common/documents_destination_stamp.png",
+          "packSourcePath": "art_packs/sources/city_fr_paris/common/documents_destination_stamp.webp",
+          "dimensions": [
+            1024,
+            1280
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/city_fr_paris/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "city_jp_kyoto",
+      "label": "Kyoto",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "JP"
+        ],
+        "cities": [
+          "kyoto"
+        ]
+      },
+      "sourcePackVersion": 1,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/city_jp_kyoto/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/city_jp_kyoto/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/city_jp_kyoto/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/city_jp_kyoto/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        "documents_destination_stamp": {
+          "masterPath": "art_packs/originals/city_jp_kyoto/common/documents_destination_stamp.png",
+          "packSourcePath": "art_packs/sources/city_jp_kyoto/common/documents_destination_stamp.webp",
+          "dimensions": [
+            1024,
+            1280
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "prototype_ready",
+        "masterPath": "docs/mockups/onboarding-journey-v1/kyoto-stage-v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "promptLogPath": "docs/mockups/onboarding-journey-v1/PROMPTS.md",
+        "stagingPath": null,
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-05",
+        "nextAction": "Review native integration and guest delivery"
+      }
+    },
+    {
+      "destinationId": "city_us_orlando",
+      "label": "Orlando",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "cities": [
+          "orlando"
+        ]
+      },
+      "sourcePackVersion": 1,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/city_us_orlando/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/city_us_orlando/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/city_us_orlando/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/city_us_orlando/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        "documents_destination_stamp": {
+          "masterPath": "art_packs/originals/city_us_orlando/common/documents_destination_stamp.png",
+          "packSourcePath": "art_packs/sources/city_us_orlando/common/documents_destination_stamp.webp",
+          "dimensions": [
+            1024,
+            1280
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/city_us_orlando/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_ae",
+      "label": "United Arab Emirates",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "AE"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_ae/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_ae/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_ae/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_ae/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_ae/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_au",
+      "label": "Australia",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "AU"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_au/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_au/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_au/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_au/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_au/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_br",
+      "label": "Brazil",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "BR"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_br/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_br/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_br/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_br/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_br/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_ca",
+      "label": "Canada",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "CA"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_ca/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_ca/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_ca/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_ca/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_ca/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_ch",
+      "label": "Switzerland",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "CH"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_ch/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_ch/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_ch/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_ch/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_ch/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_cn",
+      "label": "China",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "CN"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_cn/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_cn/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_cn/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_cn/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_cn/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_de",
+      "label": "Germany",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "DE"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_de/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_de/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_de/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_de/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_de/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_es",
+      "label": "Spain",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "ES"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_es/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_es/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_es/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_es/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_es/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_fr",
+      "label": "France",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "FR"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_fr/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_fr/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_fr/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_fr/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_fr/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_gb",
+      "label": "United Kingdom",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "GB"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_gb/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_gb/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_gb/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_gb/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_gb/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_gr",
+      "label": "Greece",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "GR"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_gr/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_gr/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_gr/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_gr/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_gr/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_id",
+      "label": "Indonesia",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "ID"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_id/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_id/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_id/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_id/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_id/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_in",
+      "label": "India",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "IN"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_in/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_in/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_in/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_in/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_in/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_it",
+      "label": "Italy",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "IT"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_it/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_it/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_it/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_it/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_it/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_jp",
+      "label": "Japan",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "JP"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_jp/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_jp/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_jp/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_jp/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_jp/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_kr",
+      "label": "South Korea",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "KR"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_kr/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_kr/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_kr/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_kr/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_kr/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_mx",
+      "label": "Mexico",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "MX"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_mx/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_mx/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_mx/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_mx/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_mx/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_nl",
+      "label": "Netherlands",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "NL"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_nl/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_nl/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_nl/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_nl/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_nl/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_nz",
+      "label": "New Zealand",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "NZ"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_nz/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_nz/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_nz/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_nz/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_nz/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_pt",
+      "label": "Portugal",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "PT"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_pt/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_pt/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_pt/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_pt/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_pt/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_sg",
+      "label": "Singapore",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "SG"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_sg/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_sg/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_sg/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_sg/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_sg/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_th",
+      "label": "Thailand",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "TH"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_th/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_th/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_th/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_th/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_th/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_tr",
+      "label": "Turkey",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "TR"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_tr/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_tr/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_tr/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_tr/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_tr/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_us",
+      "label": "United States",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_us/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_us/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_us/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_us/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_us/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "country_za",
+      "label": "South Africa",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "ZA"
+        ]
+      },
+      "sourcePackVersion": 3,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/country_za/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/country_za/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/country_za/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/country_za/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/country_za/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "region_gb_lake_district",
+      "label": "Lake District",
+      "scope": "region",
+      "selectors": {
+        "countryCodes": [
+          "GB"
+        ],
+        "regions": [
+          "lake_district"
+        ]
+      },
+      "sourcePackVersion": 1,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/region_gb_lake_district/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/region_gb_lake_district/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/region_gb_lake_district/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/region_gb_lake_district/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        "documents_destination_stamp": {
+          "masterPath": "art_packs/originals/region_gb_lake_district/common/documents_destination_stamp.png",
+          "packSourcePath": "art_packs/sources/region_gb_lake_district/common/documents_destination_stamp.webp",
+          "dimensions": [
+            1024,
+            1280
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "needed",
+        "masterPath": null,
+        "dimensions": null,
+        "promptLogPath": null,
+        "stagingPath": "art_packs/pending/onboarding/region_gb_lake_district/onboarding_stage_v1.png",
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": null,
+        "nextAction": "Generate one clean portrait stage using the Bali template and own place reference"
+      }
+    },
+    {
+      "destinationId": "region_id_bali",
+      "label": "Bali",
+      "scope": "region",
+      "selectors": {
+        "countryCodes": [
+          "ID"
+        ],
+        "regions": [
+          "bali"
+        ]
+      },
+      "sourcePackVersion": 1,
+      "references": {
+        "countdown_postcard": {
+          "masterPath": "art_packs/originals/region_id_bali/common/countdown_postcard.png",
+          "packSourcePath": "art_packs/sources/region_id_bali/common/countdown_postcard.webp",
+          "dimensions": [
+            1122,
+            1402
+          ]
+        },
+        "trip_postcard": {
+          "masterPath": "art_packs/originals/region_id_bali/common/trip_postcard.png",
+          "packSourcePath": "art_packs/sources/region_id_bali/common/trip_postcard.webp",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        "documents_destination_stamp": {
+          "masterPath": "art_packs/originals/region_id_bali/common/documents_destination_stamp.png",
+          "packSourcePath": "art_packs/sources/region_id_bali/common/documents_destination_stamp.webp",
+          "dimensions": [
+            1024,
+            1280
+          ]
+        }
+      },
+      "onboardingStage": {
+        "status": "prototype_ready",
+        "masterPath": "docs/mockups/onboarding-journey-v1/bali-stage-v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "promptLogPath": "docs/mockups/onboarding-journey-v1/PROMPTS.md",
+        "stagingPath": null,
+        "flutterIntegrated": false,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-05",
+        "nextAction": "Review native integration and guest delivery"
+      }
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-10-05",
+      "change": "Owner requested a continuing image-requirements log for future destinations. Audited 30 local place packs, recorded two prototype stages and 28 stage gaps, and added the shared booking-story image queue. No image generation, production integration or publication performed."
+    }
+  ]
+}

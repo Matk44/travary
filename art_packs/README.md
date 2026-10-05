@@ -9,6 +9,12 @@ sample icons, used by tests and local development.
 
 How to author, build and publish: `docs/ART_PACKS.md`.
 
+Onboarding destination stages have a separate [expansion guide](../docs/ONBOARDING_DESTINATION_ART.md)
+and [asset register](../docs/onboarding/DESTINATION_ART_REGISTER.md). Reuse the approved clean
+stage template and the destination's own references; log each needed stage there. The proposed
+`onboarding_stage` key is not yet integrated or published. New onboarding masters remain in
+`pending/onboarding/<destination-id>/` until a deliberate app/pack integration task.
+
 The five portrait countdown postcards, their five landscape Trips
 companions and the five Documents destination stamps live in complete city
 or region sources alongside the full contents of their corresponding
