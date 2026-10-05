@@ -67,6 +67,7 @@ class MemoryTravelRepository implements TravelRepository {
       memberIds: existing.memberIds,
       memberNames: existing.memberNames,
       premium: existing.premium,
+      hiddenGaps: trip.hiddenGaps,
       createdAt: existing.createdAt,
       updatedAt: trip.updatedAt,
     );

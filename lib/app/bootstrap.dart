@@ -18,6 +18,7 @@ import '../data/document_lock.dart';
 import '../data/firestore_travel_repository.dart';
 import '../data/memory_travel_repository.dart';
 import '../data/purchase_service.dart';
+import '../data/flight_status_service.dart';
 import '../data/sharing_service.dart';
 import '../data/smart_import_service.dart';
 import '../data/travel_document_repository.dart';
@@ -28,9 +29,8 @@ import '../domain/domain.dart';
 import '../firebase_options.dart';
 import 'build_info.dart';
 
-/// Where data lives. Pick with `--dart-define=TRAVARY_BACKEND=cloud` or
-/// `=demo`; without it, release builds use the cloud and debug builds the
-/// demo.
+/// Where data lives: the cloud (real trips) unless started with
+/// `--dart-define=TRAVARY_BACKEND=demo` for the sample trips.
 enum Backend {
   /// Sample trips in memory, for designing and testing.
   demo,
@@ -42,11 +42,7 @@ enum Backend {
 
 const _backendName = String.fromEnvironment('TRAVARY_BACKEND');
 
-Backend get configuredBackend => switch (_backendName) {
-  'cloud' => Backend.cloud,
-  'demo' => Backend.demo,
-  _ => kReleaseMode ? Backend.cloud : Backend.demo,
-};
+Backend get configuredBackend => _backendName == 'demo' ? Backend.demo : Backend.cloud;
 
 /// Local development against the Firebase emulators:
 /// `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` (10.0.2.2 from the
@@ -64,6 +60,7 @@ class Dependencies {
     this.visualProfiles,
     this.backup,
     this.sharing,
+    this.flightStatus,
     required this.artCatalog,
     required this.artPacks,
     required this.attachments,
@@ -90,6 +87,10 @@ class Dependencies {
   /// Cloud mode only: ticket backup and family sharing need saved trips.
   final AttachmentBackup? backup;
   final SharingService? sharing;
+
+  /// Live flight status. On AeroDataBox's free plan, which doesn't allow
+  /// commercial use, so debug builds only until there's a paid plan.
+  final FlightStatusService? flightStatus;
 
   /// Simulated store until RevenueCat is connected (step 4 of the plan).
   final PurchaseService purchases;
@@ -147,6 +148,7 @@ Future<Dependencies> bootstrap() async {
     visualProfiles: cloud ? CloudVisualProfileService(ensureSignedIn: () async => ensureSignedIn()) : null,
     backup: cloud ? FirebaseAttachmentBackup(ensureSignedIn: () async => ensureSignedIn()) : null,
     sharing: cloud ? CloudSharingService(ensureSignedIn: () async => ensureSignedIn()) : null,
+    flightStatus: cloud && kDebugMode ? CloudFlightStatusService(ensureSignedIn: () async => ensureSignedIn()) : null,
     artCatalog: artCatalog,
     artPacks: artPacks,
     attachments: attachments,

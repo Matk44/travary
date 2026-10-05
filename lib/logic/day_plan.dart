@@ -99,6 +99,29 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
   );
 }
 
+/// Where [booking] as a whole stands at [now], for a list of a trip's
+/// bookings: done once its last day's entry is done (a stay after
+/// check-out, a flight after landing), happening now while any part of it
+/// is, else upcoming.
+EntryStatus bookingStatus(Booking booking, DateTime now) {
+  final today = LocalDate.fromDateTime(now);
+  final spans = booking.spansDays || (booking.endTime != null && booking.endDate != null);
+  final role = spans ? EntryRole.end : EntryRole.single;
+  final last = spans ? booking.lastDate : booking.startDate;
+  final time = spans ? booking.endTime : booking.startTime;
+  final end = _statusOf(booking, role, last, time, today, now);
+  if (end == EntryStatus.done) return EntryStatus.done;
+  final start = _statusOf(
+    booking,
+    spans ? EntryRole.start : EntryRole.single,
+    booking.startDate,
+    booking.startTime,
+    today,
+    now,
+  );
+  return start == EntryStatus.upcoming ? EntryStatus.upcoming : EntryStatus.now;
+}
+
 EntryStatus _statusOf(Booking booking, EntryRole role, LocalDate date, ClockTime? time, LocalDate today, DateTime now) {
   if (date.isBefore(today)) return EntryStatus.done;
   if (date.isAfter(today)) return EntryStatus.upcoming;

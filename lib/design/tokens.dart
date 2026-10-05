@@ -166,6 +166,44 @@ abstract final class TravaryText {
   static TextStyle get tabLabel => _sans(11, FontWeight.w500, TravaryColors.ink, height: 1.1);
   static TextStyle get tabLabelSelected => _sans(13.5, FontWeight.w600, TravaryColors.paper, height: 1.1);
 
+  // ---- The trip ledger and paper forms (C2 "refined ledger") ------------
+
+  /// A screen's own heading in the ledger look: "Your plan", "Add a booking".
+  static TextStyle get ledgerHeading =>
+      _serif(28, FontWeight.w700, TravaryColors.ink, height: 1.1, letterSpacing: -0.4);
+
+  /// A centred form title: "Add a stay", "Find your flight".
+  static TextStyle get formTitle => _serif(24, FontWeight.w700, TravaryColors.ink, height: 1.1, letterSpacing: -0.3);
+
+  /// A row of a trip's plan: "Kyoto House".
+  static TextStyle get ledgerTitle => _serif(18, FontWeight.w700, TravaryColors.ink, height: 1.15);
+
+  /// The date column of a plan row: "11" over "OCT".
+  static TextStyle get ledgerDay => _serif(22, FontWeight.w700, TravaryColors.ink, height: 1.0);
+  static TextStyle get ledgerMonth => _sans(10.5, FontWeight.w700, TravaryColors.ink, height: 1.2, letterSpacing: 1.4);
+
+  /// A paper form's small-caps label: "PROPERTY NAME".
+  static TextStyle get fieldLabel =>
+      _sans(10.5, FontWeight.w700, TravaryColors.inkSoft, height: 1.2, letterSpacing: 1.8);
+
+  /// What's written on a paper form's line: "Kyoto House".
+  static TextStyle get fieldValue => _serif(20, FontWeight.w500, TravaryColors.ink, height: 1.2);
+
+  /// A date in a ticket's box: "12 OCT 2026".
+  static TextStyle get ticketDate => _sans(15.5, FontWeight.w600, TravaryColors.ink, height: 1.1, letterSpacing: 1.3);
+
+  /// The heading on a form ticket's band: "YOUR STAY".
+  static TextStyle get ticketBand => _sans(13, FontWeight.w700, TravaryColors.paper, height: 1.1, letterSpacing: 3.4);
+
+  /// The notched primary button: "Add stay".
+  static TextStyle get ticketButton => _serif(20, FontWeight.w700, TravaryColors.paper, height: 1.1);
+
+  /// The departures board: its labels, a split-flap character, and the
+  /// route between them.
+  static TextStyle get boardLabel => _sans(10.5, FontWeight.w700, TravaryColors.paper, height: 1.2, letterSpacing: 2.2);
+  static TextStyle get boardFlap => _sans(30, FontWeight.w800, TravaryColors.paper, height: 1.0);
+  static TextStyle get boardRoute => _serif(24, FontWeight.w600, TravaryColors.paper, height: 1.1);
+
   // ---- Trips: the tag on a coming trip's postcard ------------------------
   // Sized for the tag's copy area at TripPostcardLayout.tagCopyWidth; the
   // tag scales the whole block to the tag it's drawn on.
@@ -480,6 +518,30 @@ abstract final class NavLayout {
 
 /// Trips: a coming trip's landscape postcard with the countdown tag hung
 /// on its right edge (docs/mockups/trips-postcards-v2/02-hanging-tag-postcards.png).
+/// The ledger look's measures: paper panels, plan rows, form tickets and
+/// the departures board.
+abstract final class LedgerLayout {
+  /// Corner radius of paper panels and the board.
+  static const panelRadius = 14.0;
+
+  /// Width of a plan row's date column.
+  static const dateColumn = 44.0;
+
+  /// The form ticket's coloured band, its notches (cut where the band
+  /// meets the paper) and the notched button's.
+  static const bandHeight = 64.0;
+  static const ticketRadius = 18.0;
+  static const ticketNotch = 12.0;
+  static const buttonNotch = 9.0;
+  static const buttonHeight = 56.0;
+
+  /// A split-flap character's tile on the board, before it scales down to
+  /// fit, and the pause between neighbouring tiles as they flip.
+  static const flapTile = Size(34, 48);
+  static const flapStagger = Duration(milliseconds: 35);
+  static const flapDuration = Duration(milliseconds: 260);
+}
+
 abstract final class TripPostcardLayout {
   /// The postcard's box from the screen edge; its own transparent margin
   /// and deckled edge add about 2% more.

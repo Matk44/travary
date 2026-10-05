@@ -19,7 +19,7 @@ abstract interface class PurchaseService {
   /// Live entitlements for the signed-in traveller.
   Stream<Entitlements> watchEntitlements();
 
-  /// Products with store prices (localised, trial eligibility applied).
+  /// Products with store prices (localised).
   Future<List<Offer>> loadOffers();
 
   /// [tripId] is required for a Trip Pass.
@@ -56,36 +56,14 @@ class TestPurchaseService implements PurchaseService {
   Stream<Entitlements> watchEntitlements() => startWith(() => _entitlements, _controller.stream);
 
   @override
-  Future<List<Offer>> loadOffers() async {
-    // A traveller who already had a trial isn't offered another.
-    final trialUsed = _entitlements.plus != null;
-    return [
-      for (final offer in Pricing.defaults)
-        offer.kind == OfferKind.plusAnnual && trialUsed
-            ? Offer(
-                kind: offer.kind,
-                productId: offer.productId,
-                amount: offer.amount,
-                currencyCode: offer.currencyCode,
-              )
-            : offer,
-    ];
-  }
+  Future<List<Offer>> loadOffers() async => Pricing.defaults;
 
   @override
   Future<PurchaseOutcome> purchase(Offer offer, {String? tripId}) async {
     final now = _clock();
     switch (offer.kind) {
       case OfferKind.plusAnnual:
-        final trial = offer.trialDays;
-        set(
-          _entitlements.copyWith(
-            plus: PlusSubscription(
-              expiresAt: now.add(Duration(days: trial ?? 365)),
-              inTrial: trial != null,
-            ),
-          ),
-        );
+        set(_entitlements.copyWith(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 365)))));
       case OfferKind.tripPass:
         if (tripId == null) return PurchaseOutcome.failed;
         set(_entitlements.copyWith(tripPasses: {..._entitlements.tripPasses, tripId}));

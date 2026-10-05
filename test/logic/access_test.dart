@@ -31,14 +31,13 @@ void main() {
   });
 
   group('Plus', () {
-    final plus = Entitlements(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 10)), inTrial: true));
+    final plus = Entitlements(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 10))));
 
     test('unlocks everything on every trip, without using free imports', () {
       final decision = policy(plus).decide(PremiumFeature.smartImport);
       expect(decision.allowed, isTrue);
       expect(decision.isFreeUse, isFalse);
       expect(policy(plus).decide(PremiumFeature.familySharing, trip: paris).allowed, isTrue);
-      expect(policy(plus).inTrial, isTrue);
     });
 
     test('stops when it expires', () {

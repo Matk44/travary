@@ -339,7 +339,7 @@ only and is never published.
 firebase emulators:start --only auth,firestore,functions,storage --project travary-444
 dart run tool/art_packs.dart build art_packs/sources/seed_themepark --catalog build/art_packs/catalog.json
 dart run tool/art_packs.dart publish --catalog build/art_packs/catalog.json --emulator 127.0.0.1:9199 --bucket travary-444.firebasestorage.app
-flutter run --dart-define=TRAVARY_BACKEND=cloud --dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1
+flutter run --dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1
 ```
 
 (From the Android emulator use `10.0.2.2`.) The functions emulator needs

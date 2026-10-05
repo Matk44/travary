@@ -11,6 +11,7 @@ import '../account/account_card.dart';
 import '../premium/plus_card.dart';
 import '../travel_documents/document_actions.dart';
 import 'card_gallery_screen.dart';
+import 'flight_status_test_screen.dart';
 
 /// Account and settings: signing in, Travary Plus, travel documents.
 class ProfileScreen extends StatelessWidget {
@@ -68,6 +69,15 @@ class ProfileScreen extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right_rounded),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CardGalleryScreen())),
             ),
+            if (store.flightStatus != null)
+              ListTile(
+                leading: const Icon(Icons.flight_takeoff_rounded),
+                title: const Text('Flight status test'),
+                subtitle: const Text('Live gate and delays for any real flight'),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () =>
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FlightStatusTestScreen())),
+              ),
             ListTile(
               leading: const Icon(Icons.more_time_rounded),
               title: const Text('Preview a different time'),

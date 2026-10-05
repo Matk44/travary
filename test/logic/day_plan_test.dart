@@ -138,4 +138,21 @@ void main() {
       expect(buildDayPlan(d(10, 15), [flight], at(8)).entries.single.time, const ClockTime(7, 10));
     });
   });
+
+  group('a booking as a whole, for a trip\'s plan', () {
+    test('a stay is happening from check-in until check-out, then done', () {
+      final stay = booking('kyoto', BookingKind.stay, d(10, 12), endDate: d(10, 14), until: const ClockTime(10, 0));
+      expect(bookingStatus(stay, DateTime(2026, 10, 11, 12)), EntryStatus.upcoming);
+      expect(bookingStatus(stay, DateTime(2026, 10, 13, 12)), EntryStatus.now);
+      expect(bookingStatus(stay, DateTime(2026, 10, 14, 9)), EntryStatus.now);
+      expect(bookingStatus(stay, DateTime(2026, 10, 14, 11)), EntryStatus.done);
+    });
+
+    test('a timed booking is done once its time has passed', () {
+      final lunch = booking('lunch', BookingKind.dining, d(10, 12), at: const ClockTime(12, 30));
+      expect(bookingStatus(lunch, DateTime(2026, 10, 12, 9)), EntryStatus.upcoming);
+      expect(bookingStatus(lunch, DateTime(2026, 10, 12, 13)), EntryStatus.now);
+      expect(bookingStatus(lunch, DateTime(2026, 10, 13, 9)), EntryStatus.done);
+    });
+  });
 }

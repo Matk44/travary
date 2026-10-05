@@ -36,6 +36,25 @@ String formatDayMonth(LocalDate date) => DateFormat('d MMM').format(date.toDateT
 /// "14 Oct 2026".
 String formatDate(LocalDate date) => DateFormat('d MMM y').format(date.toDateTime());
 
+/// "14 OCT 2026", for a date printed in a ticket's box.
+String formatTicketDate(LocalDate date) => DateFormat('d MMM y').format(date.toDateTime()).toUpperCase();
+
+/// "20:55": a departures board's twenty-four-hour clock.
+String formatClock24(ClockTime time) =>
+    '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+
+/// "14–16 Oct", "30 Oct – 2 Nov": a span within a trip, whose year the trip
+/// already shows. Spans across a new year keep both years.
+String formatDayMonthRange(LocalDate start, LocalDate end) {
+  if (start == end) return formatDayMonth(start);
+  if (start.year != end.year) return formatDateRange(start, end);
+  if (start.month != end.month) return '${formatDayMonth(start)} – ${formatDayMonth(end)}';
+  return '${start.day}–${formatDayMonth(end)}';
+}
+
+/// "1 night", "4 nights".
+String formatNights(int nights) => nights == 1 ? '1 night' : '$nights nights';
+
 /// "12–18 Oct 2026", "28 Sep – 3 Oct 2026", "28 Dec 2026 – 3 Jan 2027".
 String formatDateRange(LocalDate start, LocalDate end) {
   final s = start.toDateTime();

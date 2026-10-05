@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../design/tokens.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
-import '../../logic/price_text.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import 'premium_gate.dart';
@@ -20,16 +19,13 @@ class PlusCard extends StatelessWidget {
     final travel = context.watch<TravelStore>();
     final policy = premium.policy;
     final plus = premium.entitlements.plus;
-    final plusOffer = premium.offer(OfferKind.plusAnnual);
 
     final String title;
     final String body;
     if (policy.hasPlus && plus != null) {
       final date = formatDate(LocalDate.fromDateTime(plus.expiresAt));
-      title = policy.inTrial ? 'Plus · free trial' : 'Travary Plus';
-      body = policy.inTrial
-          ? 'Your trial ends on $date${plusOffer == null ? '' : ', then ${priceOf(plusOffer)} a year'}.'
-          : (plus.willRenew ? 'Renews on $date.' : 'Ends on $date.');
+      title = 'Travary Plus';
+      body = plus.willRenew ? 'Renews on $date.' : 'Ends on $date.';
     } else {
       final left = policy.freeSmartImportsLeft;
       title = 'Travary Plus';
@@ -109,7 +105,7 @@ class TestPlanSwitcher extends StatelessWidget {
     final premium = context.watch<PremiumStore>();
     final now = context.read<TravelStore>().now;
     final e = premium.entitlements;
-    final current = !premium.hasPlus ? 'free' : (premium.policy.inTrial ? 'trial' : 'plus');
+    final current = premium.hasPlus ? 'plus' : 'free';
 
     if (!kDebugMode || !premium.isTestStore) return const SizedBox.shrink();
     return Padding(
@@ -122,16 +118,12 @@ class TestPlanSwitcher extends StatelessWidget {
           SegmentedButton<String>(
             segments: const [
               ButtonSegment(value: 'free', label: Text('Free')),
-              ButtonSegment(value: 'trial', label: Text('Trial')),
               ButtonSegment(value: 'plus', label: Text('Plus')),
             ],
             selected: {current},
             onSelectionChanged: (value) {
               final choice = value.single;
               premium.debugSetEntitlements(switch (choice) {
-                'trial' => e.copyWith(
-                  plus: PlusSubscription(expiresAt: now.add(const Duration(days: 14)), inTrial: true),
-                ),
                 'plus' => e.copyWith(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 365)))),
                 _ => e.copyWith(clearPlus: true),
               });

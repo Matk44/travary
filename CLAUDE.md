@@ -11,7 +11,8 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   never required. Trips form automatically from dates
   (`logic/trip_assignment.dart`). "New trip" (Trips tab pill, the empty
   Today and Trips screens) can start one first with a name and dates
-  (`features/trips/trip_details_sheet.dart`, also "Edit trip"); its
+  (`features/trips/trip_details_sheet.dart`, also editing a trip: tap its
+  tag or "Trip details"); its
   planned dates keep it when empty, widen it, but never cut a booking out.
   The destination is read from the name as it's typed ("Japan holiday",
   "Disney World") by `logic/destinations.dart`: every country plus
@@ -37,6 +38,14 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   postcard lifts in and the tag is slapped on, swings and settles. On the Trips tab a
   coming trip with a landscape postcard shows on it with the same tag
   (`UpcomingTripPostcard`); other rows stay plain.
+- **Inside a trip** (C2 "refined ledger", `docs/ART_DIRECTION_SCREENS.md`,
+  mockup `docs/mockups/trip-ledger-c2/`): its postcard with the luggage tag,
+  "Your plan" as ledger rows by date (`CardSize.ledger`, tickets on the
+  row), what it still needs as dashed rows with Add and "Not needed"
+  (`logic/trip_gaps.dart`), who's coming, and a notched "Add a booking".
+  The trip itself (name, dates, family, card style, delete) is under "Trip
+  details". Forms are a paper ticket in the trip's colours; a new flight
+  starts on the departures board (`FlightFinder`) when flight data is on.
 - **Never lock someone's tickets.** Tickets and bookings are always reachable,
   offline, whatever their plan.
 - **Travel documents stay on the phone.** Passports, visas, insurance and
@@ -71,6 +80,10 @@ lib/
 │               trip_plan (+ focus), trip_calendar (the calendar's weeks), trip_assignment,
 │               destinations (places a trip's name can mean: detection, suggestions, picker),
 │               travel_documents (expiry checks against the next trip, masking, wording),
+│               flight_status_text (when live flight status shows, its wording),
+│               flight_fill (a found flight → the add-flight form, board wording),
+│               trip_gaps (what a trip still needs: nights without a stay, the
+│               flight home), trip_hero_text (a trip's tag), booking_form_text,
 │               card_text (all card wording), countdown_text (the countdown's
 │               wording, calendar-date count), trip_postcard_text (a coming
 │               trip's tag), formatters, art_pack_selection
@@ -88,11 +101,15 @@ lib/
 │               TravelDocumentsStore (documents + lock), AppSession (account + uid)
 ├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
-│               TaggedReservationCard on ShellFrame, DocumentStampCard),
+│               TaggedReservationCard on ShellFrame, DocumentStampCard, LedgerRowCard),
 │               art/ (catalog, resolver, document_stamps,
 │               card_shells, art_slots), widgets/ (nav_bar, today_header, time_rail, trip_calendar,
-│               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name)
-├── features/   Screens: today, trips, wallet (the "Documents" tab), booking (form/detail/viewer), profile,
+│               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name,
+│               the C2 ledger look: ledger (paper panels, rows, TicketButton, linen),
+│               trip_hero, plan_gap_row, paper_form (form ticket, fields, date boxes),
+│               departure_board (board, split-flap tiles))
+├── features/   Screens: today, trips (trip, trip details), wallet (the "Documents" tab),
+│               booking (form, flight finder, detail, viewer), profile,
 │               travel_documents (list, form, document, the tab's entry pill),
 │               account (Profile's sign-in card)
 └── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
@@ -107,8 +124,8 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
 ### Rules that keep it reskinnable
 
 1. Screens show bookings **only** through `BookingCard` (`hero` / `standard` /
-   `compact` / `document`) and `OngoingStrip`. Never style a booking inline
-   in a screen.
+   `compact` / `document` / `ledger`) and `OngoingStrip`. Never style a
+   booking inline in a screen.
 2. Cards receive **`CardText`** (already worded: eyebrow, title, when, detail,
    place, stub, reference) and **`ArtChoice`**. Cards never format dates or
    decide wording; add fields to `CardText` instead.
@@ -182,6 +199,7 @@ days; days in between show an `OngoingStrip`.
 
 ```
 trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[], plannedStart/End,
+                                      hiddenGaps[] (plan gaps marked "Not needed", for everyone),
                                       memberNames{}, invite{} (server-only), premium (server-only),
                                       visualProfile, visualProfileUpdatedAt, visualProfileRequest (server-only)
 trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
@@ -212,8 +230,8 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 
 | Mode | How | Data |
 |---|---|---|
-| Demo (default in debug) | `flutter run` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
-| Cloud (default in release) | `flutter run --dart-define=TRAVARY_BACKEND=cloud` | Firestore; a guest account until the traveller signs in |
+| Cloud (default) | `flutter run` | Firestore, real trips: a guest account until the traveller signs in |
+| Demo | `flutter run --dart-define=TRAVARY_BACKEND=demo` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
 | Emulators | add `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` | Local Firebase emulators (`docs/ART_PACKS.md`) |
 
 Cloud mode starts as an anonymous guest (enabled in the Firebase console for
@@ -281,14 +299,16 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   RevenueCat replaces it in step 4.
 - `Trip.premium` and `users/{uid}` are server-written only (rules enforce
   this); trip writes use merge so the app never clobbers `premium`.
-- Prices and product IDs: `domain/pricing.dart` ($34.99/yr with a 14-day
-  trial, $7.99 Trip Pass). Price wording: `logic/price_text.dart`.
+- Prices and product IDs: `domain/pricing.dart` ($34.99/yr, $7.99 Trip
+  Pass). Price wording: `logic/price_text.dart`.
+- **No free trial, and no trial reminders.** Premium sells itself at the
+  moment it's needed (sharing with family, Smart Import, never missing
+  anything), never with a trial or a countdown to a charge.
 - Funnel events: `state/analytics.dart` (`track()`), debug-print for now.
 
-**Before launch (promises the paywall makes):** a day-12 trial reminder
-notification, Terms and Privacy links on the paywall, analytics wired to a
-real service, and a server function that mirrors purchases to `users/{uid}`
-and stamps `premium` on trips.
+**Before launch:** Terms and Privacy links on the paywall, analytics wired
+to a real service, and a server function that mirrors purchases to
+`users/{uid}` and stamps `premium` on trips.
 
 ## Accounts (Sign in with Apple / Google)
 
@@ -381,6 +401,38 @@ the app. Project `travary-444` is on the Blaze plan.
   `functions/src/visualVocabulary.ts`, mirrored in
   `lib/domain/visual_profile.dart` (a test keeps them equal). Only place IDs
   and 30-day coordinates from Places are stored (Google's terms).
+
+## Live flight status (testing)
+
+- **AeroDataBox** through API.Market (key in Secret Manager as
+  `AERODATABOX_API_KEY`, header `x-api-market-key`). Callable `flightStatus`
+  (`functions/src/flightStatus.ts`, pure logic in `flightStatusLogic.ts`)
+  takes a flight number, local departure date (a week back to a year ahead)
+  and optional departure IATA. It returns the traveller's leg and every leg:
+  airports, cities, schedule, and close to the day the gate, terminal,
+  check-in desk, baggage belt and delays, all as airport-local times. Predicted times are AeroDataBox's guess, so
+  they're not shown.
+- Answers are cached in `flightStatus/{NUMBER_date}` (server-only, shared by
+  everyone on the flight). The cache lasts 10 min near departure and up to
+  6 h once landed (`cacheLifetimeMs`). There's a per-traveller daily cap.
+  Logs never name the flight.
+- **Adding a flight:** a new flight opens on the departures board,
+  `FlightFinder` (`features/booking/flight_finder.dart`). The flight
+  number and departure date find the flight in the airline's schedule (up
+  to a year ahead, by departure date) and flip it onto split-flap tiles.
+  "Use this flight" fills in the ticket: the title ("London to Tokyo"),
+  departure and landing times, and the departure airport with its code
+  (`logic/flight_fill.dart`). "Enter flight manually" skips to the ticket.
+  It searches once typing pauses on a whole flight number. Editing or a
+  Smart Import draft goes straight to the ticket. A trip's "Flight out" or
+  "Flight home" gap opens the board on that day.
+- **On the day:** the flight's page shows `FlightStatusPanel` from 3 days
+  before take-off to the day after landing (`logic/flight_status_text.dart`:
+  `flightLookupFor`, all wording). Design tools have a "Flight status test"
+  for any real flight.
+- **Debug builds only** (`Dependencies.flightStatus`). The free plan doesn't
+  allow commercial use, so release builds need a paid plan first (about
+  $7.50/month), plus premium gating and, later, alerts by webhook.
 
 ## Conventions
 

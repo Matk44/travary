@@ -19,18 +19,15 @@ void main() {
   test('starts free with the launch offers', () {
     expect(store.hasPlus, isFalse);
     expect(store.offer(OfferKind.plusAnnual)?.amount, 34.99);
-    expect(store.offer(OfferKind.plusAnnual)?.trialDays, 14);
     expect(store.offer(OfferKind.tripPass)?.amount, 7.99);
   });
 
-  test('buying Plus starts a 14-day trial, and no second trial is offered', () async {
+  test('buying Plus unlocks it for a year straight away: there is no free trial', () async {
     final outcome = await store.purchase(store.offer(OfferKind.plusAnnual)!, source: 'test');
     await pumpEventQueue();
     expect(outcome, PurchaseOutcome.purchased);
     expect(store.hasPlus, isTrue);
-    expect(store.policy.inTrial, isTrue);
-    expect(store.entitlements.plus!.expiresAt, now.add(const Duration(days: 14)));
-    expect(store.offer(OfferKind.plusAnnual)?.trialDays, isNull);
+    expect(store.entitlements.plus!.expiresAt, now.add(const Duration(days: 365)));
   });
 
   test('a Trip Pass needs a trip', () async {

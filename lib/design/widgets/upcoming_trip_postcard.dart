@@ -108,7 +108,11 @@ class UpcomingTripPostcard extends StatelessWidget {
                       key: const ValueKey('trip-tag-swing'),
                       angle: tagDegrees(variant) * math.pi / 180,
                       alignment: Alignment(eyelet.dx * 2 - 1, eyelet.dy * 2 - 1),
-                      child: _TripTag(text: text, image: tag, decodeWidth: (tagWidth * pixels).round()),
+                      child: HangingTag(
+                        image: tag,
+                        decodeWidth: (tagWidth * pixels).round(),
+                        copy: _TagCopy(text: text, ink: TravaryChrome.of(context).colors.ink),
+                      ),
                     ),
                   ),
                 ],
@@ -121,17 +125,20 @@ class UpcomingTripPostcard extends StatelessWidget {
   }
 }
 
-/// The blank tag with the trip written on it.
-class _TripTag extends StatelessWidget {
-  const _TripTag({required this.text, required this.image, required this.decodeWidth});
+/// The blank countdown tag with words written on it: [copy], laid out at
+/// [TripPostcardLayout.tagCopyWidth] and scaled as a block to the tag.
+/// Hung on a coming trip's postcard (Trips) and on a trip's own (the trip
+/// screen).
+class HangingTag extends StatelessWidget {
+  const HangingTag({super.key, required this.image, required this.decodeWidth, required this.copy});
 
-  final TripPostcardText text;
+  /// The blank tag (`SurfaceSlot.countdownTag`); a plain card stands in.
   final ArtImageRef? image;
   final int decodeWidth;
+  final Widget copy;
 
   @override
   Widget build(BuildContext context) {
-    final ink = TravaryChrome.of(context).colors.ink;
     final body = SurfaceSlot.countdownTag.body!;
     return LayoutBuilder(
       builder: (context, box) {
@@ -143,7 +150,7 @@ class _TripTag extends StatelessWidget {
           body.bottom * size.height,
         );
         // Below the eyelet and cord, inside the card's margins.
-        final copy = Rect.fromLTRB(
+        final words = Rect.fromLTRB(
           card.left + card.width * CountdownGeometry.copySide,
           card.top + card.height * CountdownGeometry.copyTop,
           card.right - card.width * CountdownGeometry.copySide,
@@ -168,15 +175,12 @@ class _TripTag extends StatelessWidget {
                     ),
             ),
             Positioned.fromRect(
-              rect: copy,
+              rect: words,
               // The words wrap at one width, then the block scales as a
               // unit to the tag: every tag reads the same, and enlarged
               // text still fits.
               child: FittedBox(
-                child: SizedBox(
-                  width: TripPostcardLayout.tagCopyWidth,
-                  child: _TagCopy(text: text, ink: ink),
-                ),
+                child: SizedBox(width: TripPostcardLayout.tagCopyWidth, child: copy),
               ),
             ),
           ],

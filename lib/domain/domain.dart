@@ -4,6 +4,7 @@ export 'booking.dart';
 export 'booking_draft.dart';
 export 'booking_kind.dart';
 export 'country_codes.dart';
+export 'flight_status.dart';
 export 'local_date.dart';
 export 'palette.dart';
 export 'premium.dart';

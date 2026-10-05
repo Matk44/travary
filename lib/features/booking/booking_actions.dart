@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/attachment_store.dart';
-import '../../design/kind_style.dart';
+import '../../design/art/art_slots.dart';
 import '../../design/tokens.dart';
+import '../../design/trip_chrome.dart';
+import '../../design/widgets/ledger.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../state/premium_store.dart';
@@ -40,9 +42,21 @@ Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tri
     await _startSmartImport(context, tripId: tripId);
     return;
   }
+  await addBookingOfKind(context, kind, date: date, tripId: tripId);
+}
+
+/// Straight to the form for [kind] (e.g. "Add your flights" on a new trip),
+/// then says where the booking went.
+Future<void> addBookingOfKind(
+  BuildContext context,
+  BookingKind kind, {
+  LocalDate? date,
+  LocalDate? endDate,
+  String? tripId,
+}) async {
   final result = await Navigator.of(context).push<SaveResult>(
     MaterialPageRoute(
-      builder: (_) => EditBookingScreen(kind: kind, initialDate: date, tripId: tripId),
+      builder: (_) => EditBookingScreen(kind: kind, initialDate: date, initialEndDate: endDate, tripId: tripId),
     ),
   );
   if (result == null || !context.mounted) return;
@@ -170,48 +184,98 @@ Future<Attachment?> pickAttachment(BuildContext context) async {
   return attachments.import(file.path, name: file.name);
 }
 
-/// Eight big tiles, one per kind of booking.
-class KindPickerSheet extends StatelessWidget {
+/// "Add a booking": Snap a booking (Smart Import) first, then the four
+/// kinds people add most, the other four folded under "More booking
+/// types", and passports and other travel documents (kept on this phone)
+/// at the end.
+class KindPickerSheet extends StatefulWidget {
   const KindPickerSheet({super.key});
+
+  /// The kinds shown straight away; the rest wait under "More booking types".
+  static const common = [BookingKind.flight, BookingKind.stay, BookingKind.attraction, BookingKind.dining];
+
+  @override
+  State<KindPickerSheet> createState() => _KindPickerSheetState();
+}
+
+class _KindPickerSheetState extends State<KindPickerSheet> {
+  bool _more = false;
 
   @override
   Widget build(BuildContext context) {
+    final chrome = TravaryChrome.of(context);
+    final others = [
+      for (final kind in BookingKind.values)
+        if (!KindPickerSheet.common.contains(kind)) kind,
+    ];
+    Widget kindRow(BookingKind kind) => PaperRow(
+      key: ValueKey('add-${kind.name}'),
+      title: kind.spec.label,
+      titleStyle: TravaryText.label.copyWith(fontSize: 16.5),
+      leading: RowIcon(IconSlot.forKind(kind)),
+      onTap: () => Navigator.pop(context, ManualChoice(kind)),
+    );
+
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('What have you booked?', style: TravaryText.headline),
-            const SizedBox(height: TravarySpace.lg),
-            if (PremiumFeature.smartImport.released || kDebugMode) ...[
-              const _SmartImportTile(),
-              const SizedBox(height: TravarySpace.md),
-            ],
-            GridView.count(
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              mainAxisSpacing: TravarySpace.md,
-              crossAxisSpacing: TravarySpace.md,
-              childAspectRatio: 0.82,
-              physics: const NeverScrollableScrollPhysics(),
+            Row(
               children: [
-                for (final kind in BookingKind.values)
-                  _KindTile(kind: kind, onTap: () => Navigator.pop(context, ManualChoice(kind))),
+                Expanded(child: Text('Add a booking', style: TravaryText.ledgerHeading)),
+                IconButton(
+                  tooltip: 'Close',
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(Icons.close_rounded, color: chrome.colors.ink),
+                ),
               ],
             ),
             const SizedBox(height: TravarySpace.md),
-            Material(
-              color: TravaryColors.paper,
-              borderRadius: BorderRadius.circular(TravaryRadius.card),
-              child: ListTile(
+            if (PremiumFeature.smartImport.released || kDebugMode) ...[
+              const _SnapRow(),
+              const SizedBox(height: TravarySpace.lg),
+            ],
+            Padding(
+              padding: const EdgeInsets.only(left: TravarySpace.xs, bottom: TravarySpace.sm),
+              child: Text('Add manually', style: TravaryText.title),
+            ),
+            PaperPanel(
+              child: Column(
+                children: [
+                  for (final (index, kind) in KindPickerSheet.common.indexed) ...[
+                    if (index > 0) const PaperDivider(),
+                    kindRow(kind),
+                  ],
+                  const PaperDivider(),
+                  PaperRow(
+                    key: const ValueKey('add-more-kinds'),
+                    title: 'More booking types',
+                    subtitle: _more ? null : others.map((kind) => kind.spec.label).join(', '),
+                    titleStyle: TravaryText.label.copyWith(fontSize: 16.5),
+                    trailing: Icon(
+                      _more ? Icons.expand_less_rounded : Icons.expand_more_rounded,
+                      color: TravaryColors.inkSoft,
+                    ),
+                    onTap: () => setState(() => _more = !_more),
+                  ),
+                  if (_more)
+                    for (final kind in others) ...[const PaperDivider(), kindRow(kind)],
+                ],
+              ),
+            ),
+            const SizedBox(height: TravarySpace.lg),
+            PaperPanel(
+              child: PaperRow(
                 key: const ValueKey('add-travel-document'),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.card)),
-                leading: const Icon(Icons.menu_book_rounded, color: TravaryColors.ink),
-                title: Text('Passport, visa or insurance', style: TravaryText.label),
-                subtitle: Text('Kept on this phone only', style: TravaryText.small),
-                trailing: const Icon(Icons.lock_outline_rounded, size: 18, color: TravaryColors.inkSoft),
+                title: 'Passport & documents',
+                subtitle: 'Passport, visa or insurance, kept on this phone only',
+                leading: RowPicture(
+                  image: chrome.slots.surface(SurfaceSlot.addPassport),
+                  fallback: Icons.menu_book_rounded,
+                ),
                 onTap: () => Navigator.pop(context, const TravelDocumentChoice()),
               ),
             ),
@@ -222,14 +286,15 @@ class KindPickerSheet extends StatelessWidget {
   }
 }
 
-/// "Import from a screenshot or PDF", with how many free uses are left.
-class _SmartImportTile extends StatelessWidget {
-  const _SmartImportTile();
+/// "Snap a booking": Smart Import, with how many free uses are left.
+class _SnapRow extends StatelessWidget {
+  const _SnapRow();
 
   @override
   Widget build(BuildContext context) {
     final premium = context.watch<PremiumStore>();
     final travel = context.watch<TravelStore>();
+    final chrome = TravaryChrome.of(context);
     final decision = premium.decide(PremiumFeature.smartImport, trip: travel.focus.plan);
     final String status;
     if (!decision.allowed) {
@@ -239,77 +304,17 @@ class _SmartImportTile extends StatelessWidget {
     } else {
       status = 'Included with Plus';
     }
-    return Material(
-      color: TravaryColors.ink,
-      borderRadius: BorderRadius.circular(TravaryRadius.card),
-      child: InkWell(
+    return PaperPanel(
+      child: PaperRow(
+        key: const ValueKey('add-snap'),
+        title: 'Snap a booking',
+        subtitle: 'Photo, screenshot or PDF\n$status',
+        leading: RowPicture(
+          image: chrome.slots.surface(SurfaceSlot.addSnap),
+          fallback: Icons.document_scanner_outlined,
+          size: 72,
+        ),
         onTap: () => Navigator.pop(context, const SmartImportChoice()),
-        borderRadius: BorderRadius.circular(TravaryRadius.card),
-        child: Padding(
-          padding: const EdgeInsets.all(TravarySpace.lg),
-          child: Row(
-            children: [
-              const Icon(Icons.document_scanner_outlined, color: TravaryColors.paper, size: 28),
-              const SizedBox(width: TravarySpace.md),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Import a screenshot or PDF', style: TravaryText.label.copyWith(color: TravaryColors.paper)),
-                    Text(
-                      'We fill in the details for you',
-                      style: TravaryText.small.copyWith(color: TravaryColors.paper.withValues(alpha: 0.8)),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: decision.allowed ? TravaryColors.paper : TravaryColors.mustard,
-                  borderRadius: BorderRadius.circular(TravaryRadius.chip),
-                ),
-                child: Text(status, style: TravaryText.small.copyWith(color: TravaryColors.ink, fontSize: 11.5)),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _KindTile extends StatelessWidget {
-  const _KindTile({required this.kind, required this.onTap});
-
-  final BookingKind kind;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final style = KindStyle.of(kind);
-    return Material(
-      color: TravaryColors.paper,
-      borderRadius: BorderRadius.circular(TravaryRadius.card),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(TravaryRadius.card),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(style.icon, size: 30, color: TravaryColors.ink),
-            const SizedBox(height: TravarySpace.sm),
-            // One line, shrinking rather than breaking a word on small
-            // phones with large text.
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.xs),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(kind.spec.label, maxLines: 1, style: TravaryText.small.copyWith(color: TravaryColors.ink)),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -1,0 +1,130 @@
+import '../domain/domain.dart';
+import 'formatters.dart';
+
+/// "ba 283", "BA-283", "ezy8123" → "BA283", "EZY8123"; null when it isn't a
+/// flight number yet. Mirrors `cleanFlightNumber` on the server, so the app
+/// only asks once a whole number has been typed.
+String? cleanFlightNumber(String input) {
+  final clean = input.toUpperCase().replaceAll(RegExp(r'[\s-]'), '');
+  return RegExp(r'^(?:[A-Z]{3}|[A-Z0-9]{2})\d{1,4}[A-Z]?$').hasMatch(clean) ? clean : null;
+}
+
+/// What a found flight fills in on the add-flight form, from the airline's
+/// schedule: the times printed on the ticket, not today's delays.
+class FlightFill {
+  const FlightFill({
+    required this.title,
+    required this.startDate,
+    this.startTime,
+    this.endDate,
+    this.endTime,
+    this.location,
+    required this.flightNumber,
+  });
+
+  /// "London to Los Angeles".
+  final String title;
+  final LocalDate startDate;
+  final ClockTime? startTime;
+
+  /// Set only when it lands on a later day.
+  final LocalDate? endDate;
+  final ClockTime? endTime;
+
+  /// The departure airport, with its code so live status finds the right
+  /// leg: "London Heathrow (LHR)".
+  final String? location;
+
+  /// As the airline writes it: "BA 283".
+  final String flightNumber;
+}
+
+/// The form's fill for [leg]. Null when the schedule has no departure time.
+FlightFill? flightFill(FlightStatus leg, {required String typedNumber}) {
+  final departs = leg.departure.scheduled;
+  if (departs == null) return null;
+  final lands = leg.arrival.scheduled;
+  return FlightFill(
+    title: '${_place(leg.departure)} to ${_place(leg.arrival)}',
+    startDate: departs.date,
+    startTime: departs.time,
+    endDate: lands == null || lands.date == departs.date ? null : lands.date,
+    endTime: lands?.time,
+    location: _airport(leg.departure),
+    flightNumber: leg.number.isEmpty ? typedNumber : leg.number,
+  );
+}
+
+/// A found flight, worded for "Is this your flight?".
+class FoundFlightText {
+  const FoundFlightText({required this.heading, required this.route, required this.times});
+
+  /// "BA 283 · British Airways".
+  final String heading;
+
+  /// "London Heathrow (LHR) → Los Angeles (LAX)".
+  final String route;
+
+  /// "10:05am → 1:25pm", with the day when it lands on a later one.
+  final String times;
+}
+
+FoundFlightText describeFoundFlight(FlightStatus leg) {
+  final departs = leg.departure.scheduled;
+  final lands = leg.arrival.scheduled;
+  final landTime = lands == null
+      ? null
+      : departs != null && lands.date != departs.date
+      ? '${formatClock(lands.time)} ${formatDayShort(lands.date)}'
+      : formatClock(lands.time);
+  return FoundFlightText(
+    heading: [leg.number, ?leg.airline].where((part) => part.isNotEmpty).join(' · '),
+    route: '${_airport(leg.departure) ?? 'Departure'} → ${_airport(leg.arrival) ?? 'Arrival'}',
+    times: [departs == null ? 'Time to be confirmed' : formatClock(departs.time), ?landTime].join(' → '),
+  );
+}
+
+String _place(FlightEnd end) => end.city ?? end.airportName ?? end.airport ?? '?';
+
+String? _airport(FlightEnd end) {
+  final name = end.airportFullName ?? end.airportName;
+  if (name == null) return end.airport;
+  return end.airport == null ? name : '$name (${end.airport})';
+}
+
+/// A found flight on the departures board: "QF 25" / "Sydney" → "Tokyo"
+/// / "20:55", and when it lands.
+class BoardText {
+  const BoardText({required this.flight, required this.from, required this.to, this.departs, this.lands});
+
+  /// As the airline writes it, in capitals: "QF 25".
+  final String flight;
+  final String from;
+  final String to;
+
+  /// The board's twenty-four-hour clock: "20:55".
+  final String? departs;
+
+  /// Under the board: "Lands 6:10am Mon 12 Oct".
+  final String? lands;
+}
+
+BoardText boardTextFor(FlightStatus leg, {required String typedNumber}) {
+  final departs = leg.departure.scheduled;
+  final arrives = leg.arrival.scheduled;
+  final String? lands;
+  if (arrives == null) {
+    lands = null;
+  } else if (departs != null && arrives.date != departs.date) {
+    lands = 'Lands ${formatClock(arrives.time)} ${formatDayShort(arrives.date)}';
+  } else {
+    lands = 'Lands ${formatClock(arrives.time)}';
+  }
+  return BoardText(
+    flight: (leg.number.isEmpty ? typedNumber : leg.number).toUpperCase(),
+    from: _place(leg.departure),
+    to: _place(leg.arrival),
+    departs: departs == null ? null : formatClock24(departs.time),
+    lands: lands,
+  );
+}

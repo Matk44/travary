@@ -4,13 +4,7 @@ enum OfferKind { plusAnnual, tripPass }
 
 /// A product as the store sells it, with a localised price.
 class Offer {
-  const Offer({
-    required this.kind,
-    required this.productId,
-    required this.amount,
-    required this.currencyCode,
-    this.trialDays,
-  });
+  const Offer({required this.kind, required this.productId, required this.amount, required this.currencyCode});
 
   final OfferKind kind;
   final String productId;
@@ -20,9 +14,6 @@ class Offer {
 
   /// ISO 4217, e.g. "USD", "GBP", "AUD".
   final String currencyCode;
-
-  /// Free trial length for subscriptions, if the traveller is eligible.
-  final int? trialDays;
 }
 
 /// Launch pricing (USD). Stores localise it per country.
@@ -32,7 +23,6 @@ abstract final class Pricing {
 
   static const plusAnnualUsd = 34.99;
   static const tripPassUsd = 7.99;
-  static const trialDays = 14;
 
   /// Everyone on a Plus organiser's trips, including them.
   static const familySize = 6;
@@ -44,13 +34,7 @@ abstract final class Pricing {
   static const tripPassGraceDays = 7;
 
   static const defaults = [
-    Offer(
-      kind: OfferKind.plusAnnual,
-      productId: plusAnnualProductId,
-      amount: plusAnnualUsd,
-      currencyCode: 'USD',
-      trialDays: trialDays,
-    ),
+    Offer(kind: OfferKind.plusAnnual, productId: plusAnnualProductId, amount: plusAnnualUsd, currencyCode: 'USD'),
     Offer(kind: OfferKind.tripPass, productId: tripPassProductId, amount: tripPassUsd, currencyCode: 'USD'),
   ];
 }

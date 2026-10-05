@@ -7,7 +7,7 @@ import 'package:travary/data/visual_profile_service.dart';
 import 'package:travary/design/art/art_catalog.dart';
 import 'package:travary/design/tokens.dart';
 import 'package:travary/domain/domain.dart';
-import 'package:travary/features/trips/trip_screen.dart';
+import 'package:travary/features/trips/trip_details_screen.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
@@ -65,7 +65,7 @@ void main() {
         ],
         child: MaterialApp(
           theme: buildTravaryTheme(),
-          home: const TripScreen(tripId: 'kyoto'),
+          home: const TripDetailsScreen(tripId: 'kyoto'),
         ),
       ),
     );
@@ -73,48 +73,49 @@ void main() {
     return repo;
   }
 
+  Finder look(String key) => find.byKey(ValueKey('look-$key'));
+  bool ticked(WidgetTester tester, String key) =>
+      find.descendant(of: look(key), matching: find.byIcon(Icons.check_circle_rounded)).evaluate().isNotEmpty;
+  Future<void> choose(WidgetTester tester, String key) async {
+    await tester.ensureVisible(look(key));
+    await tester.pumpAndSettle();
+    await tester.tap(look(key));
+    await tester.pumpAndSettle();
+  }
+
   testWidgets('an automatic trip names the look it was given', (tester) async {
     await pump(tester);
-    expect(find.text('CARD STYLE'), findsOneWidget);
-    final automatic = tester.widget<ChoiceChip>(find.widgetWithText(ChoiceChip, 'Automatic · Historic city'));
-    expect(automatic.selected, isTrue);
-    expect(tester.widget<ChoiceChip>(find.widgetWithText(ChoiceChip, 'Historic city')).selected, isFalse);
+    expect(find.text('Card style'), findsOneWidget);
+    expect(find.text('Travary chose Historic city'), findsOneWidget);
+    expect(ticked(tester, 'automatic'), isTrue);
+    expect(ticked(tester, 'urban_heritage'), isFalse);
   });
 
   testWidgets('picking a look makes it manual', (tester) async {
     final repo = await pump(tester);
-    await tester.ensureVisible(find.widgetWithText(ChoiceChip, 'Alpine'));
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Alpine'));
-    await tester.pumpAndSettle();
+    await choose(tester, 'alpine');
     final trip = repo.trips.single;
     expect((trip.theme, trip.themeSource), (ExperienceTheme.alpine, ThemeSource.manual));
-    expect(tester.widget<ChoiceChip>(find.widgetWithText(ChoiceChip, 'Alpine')).selected, isTrue);
-    expect(find.widgetWithText(ChoiceChip, 'Automatic'), findsOneWidget);
+    expect(ticked(tester, 'alpine'), isTrue);
+    expect(ticked(tester, 'automatic'), isFalse);
+    expect(find.text('Let Travary choose from your bookings'), findsOneWidget);
   });
 
   testWidgets('going back to automatic explains a failure without blocking', (tester) async {
     final service = _FailingService();
     final repo = await pump(tester, service: service);
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Alpine'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Automatic'));
-    await tester.pumpAndSettle();
+    await choose(tester, 'alpine');
+    await choose(tester, 'automatic');
     expect(service.calls, 1);
     expect(find.text('Automatic looks are busy right now. Try again in a minute.'), findsOneWidget);
     expect(repo.trips.single.themeSource, ThemeSource.auto);
-    expect(
-      find.widgetWithText(ChoiceChip, 'Automatic · Historic city'),
-      findsOneWidget,
-      reason: 'the stored profile\'s look',
-    );
+    expect(find.text('Travary chose Historic city'), findsOneWidget, reason: 'the stored profile\'s look');
   });
 
   testWidgets('in the demo, automatic explains that it needs the cloud', (tester) async {
     await pump(tester);
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Alpine'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Automatic'));
-    await tester.pumpAndSettle();
+    await choose(tester, 'alpine');
+    await choose(tester, 'automatic');
     expect(find.textContaining('This is the demo version'), findsOneWidget);
   });
 }

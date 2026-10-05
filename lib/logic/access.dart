@@ -40,8 +40,6 @@ class AccessPolicy {
 
   bool get hasPlus => entitlements.plus?.activeAt(now) ?? false;
 
-  bool get inTrial => hasPlus && (entitlements.plus?.inTrial ?? false);
-
   int get freeSmartImportsLeft => max(0, Pricing.freeSmartImports - entitlements.smartImportsUsed);
 
   bool hasTripPass(TripPlan plan) {

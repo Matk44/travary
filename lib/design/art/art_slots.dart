@@ -31,6 +31,15 @@ enum IconSlot {
   calendar('calendar', Icons.calendar_today_rounded),
   countdownBookings('countdown_bookings', Icons.luggage_rounded),
 
+  /// The ledger screens (trip, add sheet, forms): a paperclip for tickets,
+  /// a person with a plus for inviting, a postage stamp for the card style,
+  /// a clock face for times, a passport for travel documents.
+  attach('attach', Icons.attach_file_rounded),
+  invite('invite', Icons.group_add_outlined),
+  look('look', Icons.style_outlined),
+  clock('clock', Icons.schedule_rounded),
+  passport('passport', Icons.menu_book_rounded),
+
   /// A stop on the day timeline, and the stop happening now. While these
   /// are missing the timeline draws plain dots.
   timelineStop('timeline_stop', Icons.circle),
@@ -98,6 +107,14 @@ enum SurfaceSlot {
   /// The ticket-shaped "View trip" button under the countdown.
   countdownButton('countdown_button'),
 
+  /// The add sheet's "Snap a booking" picture (768 × 768, transparent): a
+  /// polaroid snapshot of a ticket. A glyph on paper stands in.
+  addSnap('add_snap'),
+
+  /// The add sheet's "Passport & documents" picture (768 × 768,
+  /// transparent): a closed passport. A glyph on paper stands in.
+  addPassport('add_passport'),
+
   /// The round date postmark at the start of a Documents row (1024 ×
   /// 1024): two rings, one-colour ink, tinted; the live date sits in its
   /// empty centre. [body] is the outer ring.
@@ -145,6 +162,12 @@ const documentsDestinationStampArt = 'documents_destination_stamp';
 /// supplies one (`TravelStore.tripPostcardFor`); without it the trip keeps
 /// its plain row.
 const tripPostcardArt = 'trip_postcard';
+
+/// The place-neutral landscape postcard at the top of a trip whose place
+/// has no `trip_postcard` (`common/trip_postcard_anywhere`, 1536 × 1024,
+/// bundled; see `TravelStore.neutralTripPostcard`). Until it's made, the
+/// trip shows the picture of its portrait countdown postcard, cropped.
+const tripPostcardAnywhereArt = 'trip_postcard_anywhere';
 
 /// A resolved icon: the raster file, or the stand-in glyph.
 class IconArt {

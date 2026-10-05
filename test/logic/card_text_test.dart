@@ -247,4 +247,46 @@ void main() {
     expect(formatWeather(const WeatherReport(temperature: 28, condition: WeatherCondition.sunny)), '28° Sunny');
     expect(formatWeather(const WeatherReport(temperature: -3, condition: WeatherCondition.snow)), '-3° Snow');
   });
+
+  group('a row of the trip\'s plan', () {
+    test('flights lead with the flight number, then the time', () {
+      final text = cardTextForLedger(
+        booking(
+          'out',
+          BookingKind.flight,
+          d(10, 11),
+          title: 'Sydney to Tokyo',
+          at: const ClockTime(20, 55),
+          details: {DetailKeys.flightNumber: 'qf 25'},
+        ),
+      );
+      expect(text.day, '11');
+      expect(text.month, 'OCT');
+      expect(text.title, 'Sydney to Tokyo');
+      expect(text.detail, 'QF 25 · 8:55pm');
+    });
+
+    test('stays give their nights', () {
+      final text = cardTextForLedger(
+        booking('kyoto', BookingKind.stay, d(10, 12), title: 'Kyoto House', endDate: d(10, 14)),
+      );
+      expect(text.detail, '12–14 Oct · 2 nights');
+    });
+
+    test('everything else: the time and its detail; a second row that day leaves the date out', () {
+      final museum = booking(
+        'museum',
+        BookingKind.attraction,
+        d(10, 13),
+        title: 'Kyoto Railway Museum',
+        at: const ClockTime(10, 0),
+        details: {DetailKeys.guests: '2'},
+      );
+      expect(cardTextForLedger(museum).detail, '10:00am · 2 tickets');
+      final second = cardTextForLedger(museum, showDate: false);
+      expect(second.day, isNull);
+      expect(second.month, isNull);
+      expect(cardTextForLedger(booking('n', BookingKind.note, d(10, 13), title: 'Rail pass')).detail, 'Note');
+    });
+  });
 }

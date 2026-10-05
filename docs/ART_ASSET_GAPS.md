@@ -211,3 +211,23 @@ drawn: the tag stays blank and every word on it is live.
 |---|---|---|---|---|
 | Google's official "G" logo | SVG or 3× PNG, about 60 × 60 | `GoogleSignInButton` (`design/widgets/sign_in_buttons.dart`) | A four-colour G drawn in Flutter (`_GoogleGPainter`), close to Google's mark (visible) | Google's own logo file from its branding guidelines, unaltered |
 | Apple's logo | n/a | `AppleSignInButton` | Material's `Icons.apple` on Apple's black button (visible) | Fine as is; for Apple's own artwork, swap in `sign_in_with_apple`'s button or Apple's HIG resources |
+
+## Trip, add sheet and forms (C2 "refined ledger")
+
+The trip screen, Trip details, the add sheet, the booking forms, the flight
+board and a booking's page (`docs/mockups/trip-ledger-c2/`) are mostly
+**drawn**: paper panels, plan rows, gap rows, the form ticket and its
+notches, the perforation, the notched button, the departures board and its
+split-flap tiles. They need no raster. These are the files they look for:
+
+| File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
+|---|---|---|---|---|
+| `common/add_snap.png` (`SurfaceSlot.addSnap`) | 768 × 768, transparent | Add sheet, "Snap a booking" | A document-scanner glyph on a linen square (**visible**) | Make it (prompt in `docs/ART_DIRECTION_SCREENS.md`) |
+| `common/add_passport.png` (`SurfaceSlot.addPassport`) | 768 × 768, transparent | Add sheet, "Passport & documents" | A passport glyph on a linen square (**visible**) | Make it |
+| `common/trip_postcard_anywhere.png` (`tripPostcardAnywhereArt`) | 1536 × 1024, the card in a transparent margin | Top of a trip whose place has no `trip_postcard` | The trip's portrait countdown postcard cropped to landscape in a plain paper print, else the neutral portrait one cropped (**visible**, looks fine) | Make it |
+| `icons/attach.png` (`IconSlot.attach`) | 1024 × 1024 | "Attach your ticket" on forms and booking pages | Material paperclip (**visible**) | Make it |
+| `icons/invite.png` (`IconSlot.invite`) | 1024 × 1024 | "Who's coming · Invite" on the trip, Trip details | Material person-add (**visible**) | Make it |
+| `icons/look.png` (`IconSlot.look`) | 1024 × 1024 | Card style (Trip details) | Material style glyph (not shown yet) | Optional |
+| `icons/clock.png` (`IconSlot.clock`) | 1024 × 1024 | Times on the form ticket | Material clock (**visible**) | Optional |
+| `icons/passport.png` (`IconSlot.passport`) | 1024 × 1024 | Travel documents rows | Material book (**visible**) | Optional |
+| Country packs' `common/trip_postcard` | 1536 × 1024 | Trip headers and Trips rows for the 25 countries | The cropped countdown postcard (above) | **Generated** (`art_packs/generated/trip_postcards/`), installed in the packs at version 3, built; publish to show them |

@@ -71,11 +71,14 @@ void main() {
     expect(find.byType(TripDetailsSheet), findsNothing);
     expect(find.byType(TripScreen), findsOneWidget);
     expect(find.descendant(of: find.byType(TripScreen), matching: find.text('Paris')), findsOneWidget);
-    expect(find.text('12–18 Oct 2026 · 7 days'), findsOneWidget);
-    // It leads with its first booking: no free days, no second add button.
-    expect(find.text('Add your first booking'), findsOneWidget);
+    expect(find.text('12–18 Oct 2026'), findsOneWidget);
+    // Its plan is empty, and it suggests what a holiday usually needs
+    // first: the flight out and somewhere to stay. No free days.
+    expect(find.text('Your plan'), findsOneWidget);
+    expect(find.byKey(const ValueKey('gap-flight-out')), findsOneWidget);
+    expect(find.byKey(const ValueKey('gap-stay:2026-10-12')), findsOneWidget);
+    expect(find.text('Add a booking'), findsOneWidget);
     expect(find.textContaining('Day 1'), findsNothing);
-    expect(find.byType(FloatingActionButton), findsNothing);
     expect(tester.takeException(), isNull);
 
     final plan = storeOf(tester).plans.single;
@@ -121,12 +124,11 @@ void main() {
     await openTab(tester, 'Trips');
     await tester.tap(find.text('Rome'));
     await tester.pumpAndSettle();
-    expect(find.text('10–14 Nov 2026 · 5 days'), findsOneWidget);
+    expect(find.text('10–14 Nov 2026'), findsOneWidget);
 
-    // Just the name: the dates keep following the bookings.
-    await tester.tap(find.byType(PopupMenuButton<String>));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Edit trip'));
+    // Just the name (tapping the trip's tag edits it): the dates keep
+    // following the bookings.
+    await tester.tap(find.byKey(const ValueKey('trip-hero-tag')));
     await tester.pumpAndSettle();
     expect(find.widgetWithText(TextField, 'Rome'), findsOneWidget);
     await tester.enterText(find.widgetWithText(TextField, 'Where to?'), 'Roma');
@@ -136,13 +138,13 @@ void main() {
     expect(storeOf(tester).plan('rome')!.trip.plannedStart, isNull);
 
     // Dates that start after the hotel: the trip still covers it.
-    await tester.tap(find.text('10–14 Nov 2026 · 5 days'));
+    await tester.tap(find.byKey(const ValueKey('trip-hero-tag')));
     await tester.pumpAndSettle();
     await pickDates(tester, '11/12/2026', '11/16/2026');
     expect(find.text('Your bookings run 10–14 Nov 2026, so the trip covers those days too.'), findsOneWidget);
     await tester.tap(find.text('Save'));
     await tester.pumpAndSettle();
-    expect(find.text('10–16 Nov 2026 · 7 days'), findsOneWidget);
+    expect(find.text('10–16 Nov 2026'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

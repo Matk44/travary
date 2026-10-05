@@ -147,6 +147,37 @@ CardText cardTextForList(Booking booking) {
   );
 }
 
+/// Wording for [booking] as a row of a trip's plan (the trip screen): the
+/// date in its own column, then what matters at a glance: "QF 25 ·
+/// 8:55pm", "12–14 Oct · 2 nights", "10:00am · 2 tickets". [showDate] is
+/// false for a row sharing the date above it.
+CardText cardTextForLedger(Booking booking, {bool showDate = true}) {
+  final date = formatDayMonthParts(booking.startDate);
+  final time = booking.startTime == null ? null : formatClock(booking.startTime!);
+  final List<String?> parts;
+  if (booking.kind == BookingKind.flight) {
+    parts = [booking.detail(DetailKeys.flightNumber)?.toUpperCase(), time];
+  } else if (booking.spansDays) {
+    final range = formatDayMonthRange(booking.startDate, booking.lastDate);
+    final nights = booking.startDate.daysUntil(booking.lastDate);
+    parts = [range, booking.kind == BookingKind.stay ? formatNights(nights) : _detailLine(booking)];
+  } else {
+    parts = [time, _detailLine(booking)];
+  }
+  final present = parts.whereType<String>().where((part) => part.isNotEmpty).toList();
+  final eyebrow = _kindEyebrow(booking, booking.startTime);
+  return CardText(
+    eyebrow: eyebrow,
+    title: booking.title,
+    when: describeWhen(booking),
+    detail: present.isEmpty ? _sentenceCase(eyebrow) : present.join(' · '),
+    place: _nonEmpty(booking.location),
+    reference: _nonEmpty(booking.reference),
+    day: showDate ? date.day : null,
+    month: showDate ? date.month.toUpperCase() : null,
+  );
+}
+
 /// Wording for checking a booking before it's saved (Smart Import): the
 /// date in the narrow column, the time up front in the detail line.
 CardText cardTextForReview(Booking booking) {

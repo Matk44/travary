@@ -10,6 +10,7 @@ import '../tokens.dart';
 import '../trip_chrome.dart';
 import 'card_parts.dart';
 import 'document_stamp_card.dart';
+import 'ledger_row_card.dart';
 import 'featured_ticket_card.dart';
 import 'note_paper_card.dart';
 import 'ongoing_tag_card.dart';
@@ -29,6 +30,10 @@ enum CardSize {
   /// A row in the Documents list: the date in a postmark and the
   /// booking's scene in a perforated stamp.
   document,
+
+  /// A row of a trip's plan: the date in its own column, the title and one
+  /// line, on the paper panel it sits in.
+  ledger,
 }
 
 /// The one widget every screen uses to show a booking.
@@ -83,6 +88,11 @@ class BookingCard extends StatelessWidget {
           card: this,
           child: DocumentStampCard(text: text, art: art, status: status, onTap: onTap, onShowTickets: onShowTickets),
         );
+      case CardSize.ledger:
+        return _Labelled(
+          card: this,
+          child: LedgerRowCard(text: text, art: art, status: status, onTap: onTap, onShowTickets: onShowTickets),
+        );
     }
     return _Labelled(card: this, child: _PlainCard(this));
   }
@@ -110,7 +120,7 @@ class _Labelled extends StatelessWidget {
     return Semantics(
       button: card.onTap != null,
       label: [text.eyebrow, text.title, text.when].whereType<String>().join(', '),
-      excludeSemantics: card.size == CardSize.compact || card.size == CardSize.document,
+      excludeSemantics: card.size == CardSize.compact || card.size == CardSize.document || card.size == CardSize.ledger,
       child: child,
     );
   }

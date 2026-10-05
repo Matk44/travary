@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "country_jp",
-  "version": 2,
+  "version": 3,
   "palette": {
     "id": "japan_vermilion_indigo",
     "anchors": {
@@ -64,6 +64,13 @@
       "name": "countdown_postcard",
       "width": 1122,
       "height": 1402
+    },
+    {
+      "file": "common/trip_postcard.webp",
+      "kind": "common",
+      "name": "trip_postcard",
+      "width": 1536,
+      "height": 1024
     }
   ]
 }

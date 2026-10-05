@@ -1,27 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../design/art/art_slots.dart';
 import '../../design/cards/booking_card.dart';
 import '../../design/tokens.dart';
-import '../../design/trip_theme_style.dart';
-import '../../design/widgets/common.dart';
+import '../../design/trip_chrome.dart';
+import '../../design/widgets/ledger.dart';
+import '../../design/widgets/plan_gap_row.dart';
+import '../../design/widgets/trip_hero.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
-import '../../logic/destinations.dart';
-import '../../logic/formatters.dart';
+import '../../logic/trip_gaps.dart';
+import '../../logic/trip_hero_text.dart';
 import '../../logic/trip_plan.dart';
-import '../../data/sharing_service.dart';
-import '../../data/visual_profile_service.dart';
-import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
-import '../premium/premium_gate.dart';
-import '../sharing/invite_sheet.dart';
+import 'trip_details_screen.dart';
 import 'trip_details_sheet.dart';
 
-/// One trip, day by day, with every booking in order.
+/// One trip: its postcard and tag, then its plan as a ledger (every booking
+/// by date, tickets one tap away), what it still seems to need (a stay for
+/// some nights, the flight home), and who's going. "Add a booking" stays
+/// at the bottom; everything about the trip itself (its name and dates,
+/// family, card style, deleting it) is under "Trip details".
 class TripScreen extends StatelessWidget {
   const TripScreen({super.key, required this.tripId});
 
@@ -37,362 +41,243 @@ class TripScreen extends StatelessWidget {
         body: const Center(child: Text('This trip has been deleted.')),
       );
     }
-    final trip = plan.trip;
-    final days = [for (final day in plan.days) buildDayPlan(day, plan.bookings, store.now)];
-    final addDate = plan.contains(store.today) ? store.today : plan.start;
-    // A trip started before anything was booked leads with its first
-    // booking, instead of a column of free days.
-    final empty = plan.bookings.isEmpty;
-
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          if (PremiumFeature.familySharing.released || kDebugMode)
-            IconButton(
-              tooltip: 'Invite family',
-              icon: const Icon(Icons.group_add_outlined),
-              onPressed: () => _invite(context, plan),
-            ),
-          PopupMenuButton<String>(
-            onSelected: (value) => switch (value) {
-              'edit' => editTripDetails(context, plan),
-              'delete' => _delete(context, store, plan),
-              'leave' => _leave(context, store, plan),
-              _ => null,
-            },
-            itemBuilder: (_) => [
-              const PopupMenuItem(value: 'edit', child: Text('Edit trip')),
-              if (store.isOwner(plan))
-                const PopupMenuItem(value: 'delete', child: Text('Delete trip'))
-              else
-                const PopupMenuItem(value: 'leave', child: Text('Leave trip')),
-            ],
-          ),
-        ],
-      ),
-      floatingActionButton: empty
-          ? null
-          : FloatingActionButton(
-              backgroundColor: TravaryColors.ink,
-              foregroundColor: TravaryColors.paper,
-              tooltip: 'Add to this trip',
-              onPressed: () => startAddBooking(context, tripId: trip.id, date: addDate),
-              child: const Icon(Icons.add_rounded),
-            ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Where it is, when the name doesn't already say.
-                  if (trip.destination case final place? when foldPlaceText(place.name) != foldPlaceText(trip.title))
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: TravarySpace.xs),
-                      child: Text(place.label.toUpperCase(), style: TravaryText.eyebrow),
-                    ),
-                  GestureDetector(
-                    onTap: () => editTripDetails(context, plan),
-                    child: Text(trip.title, style: TravaryText.display),
-                  ),
-                  if (context.watch<PremiumStore>().forTrip(plan).allowed)
-                    const Padding(
-                      padding: EdgeInsets.only(top: TravarySpace.xs),
-                      child: _PlusBadge(),
-                    ),
-                  const SizedBox(height: TravarySpace.xs),
-                  GestureDetector(
-                    onTap: () => editTripDetails(context, plan),
-                    child: Text(
-                      plan.hasDates
-                          ? '${formatDateRange(plan.start!, plan.end!)} · ${plan.dayCount} ${plan.dayCount == 1 ? 'day' : 'days'}'
-                          : 'No dates yet',
-                      style: TravaryText.body,
-                    ),
-                  ),
-                  if (empty) ...[
-                    const SizedBox(height: TravarySpace.lg),
-                    FilledButton.icon(
-                      onPressed: () => startAddBooking(context, tripId: trip.id, date: addDate),
-                      icon: const Icon(Icons.add_rounded),
-                      label: const Text('Add your first booking'),
-                    ),
-                    const SizedBox(height: TravarySpace.sm),
-                    Text(
-                      'Flights, stays, tickets and tables. Anything on these dates joins this trip.',
-                      style: TravaryText.small,
-                    ),
-                  ],
-                  if (PremiumFeature.familySharing.released || kDebugMode) ...[
-                    const SizedBox(height: TravarySpace.lg),
-                    _Members(plan: plan, onInvite: () => _invite(context, plan)),
-                  ],
-                  const SizedBox(height: TravarySpace.lg),
-                  Text('CARD STYLE', style: TravaryText.eyebrow),
-                  const SizedBox(height: TravarySpace.sm),
-                  Wrap(
-                    spacing: TravarySpace.sm,
-                    runSpacing: TravarySpace.sm,
-                    children: [
-                      ChoiceChip(
-                        avatar: const Icon(Icons.auto_awesome_rounded, size: 16),
-                        label: Text(trip.isAutomaticLook ? 'Automatic · ${trip.effectiveTheme.label}' : 'Automatic'),
-                        selected: trip.isAutomaticLook,
-                        onSelected: (_) => _useAutomaticLook(context, store, plan),
-                      ),
-                      for (final theme in ExperienceTheme.values)
-                        ChoiceChip(
-                          avatar: Icon(tripThemeStyle(theme).icon, size: 16),
-                          label: Text(theme.label),
-                          selected: !trip.isAutomaticLook && trip.theme == theme,
-                          onSelected: (_) => store.chooseLook(plan, theme),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (!empty)
-            for (final (index, day) in days.indexed) ..._daySlivers(context, store, plan, day, index + 1),
-          const SliverToBoxAdapter(child: SizedBox(height: 96)),
-        ],
-      ),
-    );
-  }
-
-  List<Widget> _daySlivers(BuildContext context, TravelStore store, TripPlan plan, DayPlan day, int number) {
-    final art = store.artForAll([for (final e in day.entries) e.booking]);
-    final ongoing = [for (final b in day.ongoing) ongoingText(b, day.date)];
-    return [
-      SliverToBoxAdapter(
-        child: SectionLabel('Day $number · ${formatDayShort(day.date)}${day.date == store.today ? ' · Today' : ''}'),
-      ),
-      for (final text in ongoing)
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
-            child: Text('${text.title} · ${text.subtitle}', style: TravaryText.small),
-          ),
-        ),
-      if (day.entries.isEmpty)
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-            child: Text('Free day', style: TravaryText.bodySoft),
-          ),
-        ),
-      SliverList.builder(
-        itemCount: day.entries.length,
-        itemBuilder: (context, i) {
-          final entry = day.entries[i];
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.sm),
-            child: BookingCard(
-              text: cardTextForEntry(entry),
-              art: art[i],
-              size: CardSize.compact,
-              status: entry.status,
-              onTap: () => openBooking(context, entry.booking),
-              onShowTickets: entry.booking.hasTickets ? () => showTickets(context, entry.booking) : null,
-            ),
-          );
-        },
-      ),
-    ];
-  }
-
-  /// Hands the look back to Travary. The trip turns automatic at once; a
-  /// failed classification only means the current look stays for now.
-  Future<void> _useAutomaticLook(BuildContext context, TravelStore store, TripPlan plan) async {
-    final messenger = ScaffoldMessenger.of(context);
-    try {
-      await store.useAutomaticLook(plan);
-    } on VisualProfileException catch (e) {
-      messenger.showSnackBar(SnackBar(content: Text(e.message)));
-    }
-  }
-
-  Future<void> _invite(BuildContext context, TripPlan plan) async {
-    if (!context.read<TravelStore>().sharingAvailable) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Family sharing works with trips saved to the cloud. This is the demo version.')),
-      );
-      return;
-    }
-    final access = await requirePremium(context, PremiumFeature.familySharing, trip: plan, source: 'trip_invite');
-    if (access == null || !context.mounted) return;
-    await showInviteSheet(context, plan);
-  }
-
-  Future<void> _leave(BuildContext context, TravelStore store, TripPlan plan) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Leave ${plan.trip.title}?'),
-        content: const Text('It will disappear from your phone. The others keep it, and can invite you back.'),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Leave')),
-        ],
-      ),
-    );
-    if (confirmed != true || !context.mounted) return;
-    try {
-      await store.leaveTrip(plan);
-      if (context.mounted) Navigator.of(context).pop();
-    } on SharingException catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
-      }
-    }
-  }
-
-  Future<void> _delete(BuildContext context, TravelStore store, TripPlan plan) async {
-    final count = plan.bookings.length;
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Delete ${plan.trip.title}?'),
-        content: Text(
-          count == 0
-              ? 'This trip has no bookings.'
-              : 'Its $count ${count == 1 ? 'booking' : 'bookings'} and their tickets will be deleted too.',
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Delete')),
-        ],
-      ),
-    );
-    if (confirmed != true || !context.mounted) return;
-    Navigator.of(context).pop();
-    await store.deleteTrip(plan);
-  }
-}
-
-/// "PLUS" on a trip covered by Plus or a Trip Pass.
-class _PlusBadge extends StatelessWidget {
-  const _PlusBadge();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: TravaryColors.ink, borderRadius: BorderRadius.circular(TravaryRadius.chip)),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.workspace_premium_rounded, size: 14, color: TravaryColors.mustard),
-          const SizedBox(width: 4),
-          Text('PLUS', style: TravaryText.eyebrow.copyWith(color: TravaryColors.paper, fontSize: 10.5)),
-        ],
-      ),
+    // The trip's own palette and art, wherever Today happens to be.
+    return TravaryChrome(
+      colors: TripColors.of(store.paletteFor(plan)),
+      slots: store.chromeArtFor(plan),
+      child: _TripBody(plan: plan),
     );
   }
 }
 
-/// "Who's coming": the people on the trip, and the way to invite more.
-class _Members extends StatelessWidget {
-  const _Members({required this.plan, required this.onInvite});
+class _TripBody extends StatelessWidget {
+  const _TripBody({required this.plan});
 
   final TripPlan plan;
-  final VoidCallback onInvite;
 
   @override
   Widget build(BuildContext context) {
     final store = context.watch<TravelStore>();
-    final trip = plan.trip;
-    final owner = store.isOwner(plan);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('WHO\'S COMING', style: TravaryText.eyebrow),
-        const SizedBox(height: TravarySpace.sm),
-        for (final memberId in trip.memberIds)
-          Padding(
-            padding: const EdgeInsets.only(bottom: TravarySpace.xs),
-            child: Row(
-              children: [
-                _Avatar(name: store.memberName(plan, memberId), highlight: memberId == store.userId),
-                const SizedBox(width: TravarySpace.md),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      text: store.memberName(plan, memberId),
-                      children: [
-                        if (memberId == trip.ownerId) TextSpan(text: '  ·  Organiser', style: TravaryText.small),
-                      ],
-                    ),
-                    style: TravaryText.label,
-                  ),
-                ),
-                if (owner && memberId != trip.ownerId)
-                  IconButton(
-                    tooltip: 'Remove from trip',
-                    icon: const Icon(Icons.person_remove_outlined, size: 20),
-                    onPressed: () => _remove(context, store, memberId),
-                  ),
-              ],
+    final chrome = TravaryChrome.of(context);
+    final addDate = plan.contains(store.today) ? store.today : plan.start;
+    final gaps = planGaps(plan);
+
+    return LinenBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: _bar(
+          AppBar(
+            backgroundColor: Colors.transparent,
+            // Dark clock and battery on the light linen.
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            // A real back button (screen readers say "Back"), with where it
+            // goes beside it.
+            leading: BackButton(color: chrome.colors.ink),
+            titleSpacing: 0,
+            title: GestureDetector(
+              onTap: () => Navigator.of(context).maybePop(),
+              child: Text('Trips', style: TravaryText.body.copyWith(color: chrome.colors.ink)),
+            ),
+            actions: [
+              TextButton(
+                key: const ValueKey('trip-details'),
+                onPressed: () => openTripDetails(context, plan),
+                style: TextButton.styleFrom(foregroundColor: chrome.colors.ink, textStyle: TravaryText.body),
+                child: const Text('Trip details'),
+              ),
+              const SizedBox(width: TravarySpace.sm),
+            ],
+          ),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
+          children: [
+            TripHero(
+              text: tripHeroTextFor(plan, store.today),
+              postcard: (store.tripPostcardFor(plan) ?? store.neutralTripPostcard)?.image,
+              portrait: (store.countdownPostcardFor(plan) ?? store.neutralCountdownPostcard)?.image,
+              tag: chrome.slots.surface(SurfaceSlot.countdownTag),
+              variant: plan.id.hashCode,
+              onTag: () => editTripDetails(context, plan),
+            ),
+            const SizedBox(height: TravarySpace.lg),
+            _Plan(plan: plan),
+            for (final gap in gaps) ...[const SizedBox(height: TravarySpace.md), _GapRow(plan: plan, gap: gap)],
+            if (PremiumFeature.familySharing.released || kDebugMode) ...[
+              const SizedBox(height: TravarySpace.lg),
+              _Travellers(plan: plan),
+            ],
+          ],
+        ),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+              TravarySpace.gutter,
+              TravarySpace.sm,
+              TravarySpace.gutter,
+              TravarySpace.md,
+            ),
+            child: TicketButton(
+              key: const ValueKey('trip-add-booking'),
+              label: 'Add a booking',
+              icon: Icons.add_rounded,
+              onPressed: () => startAddBooking(context, tripId: plan.id, date: addDate),
             ),
           ),
-        const SizedBox(height: TravarySpace.xs),
-        OutlinedButton.icon(
-          onPressed: onInvite,
-          icon: const Icon(Icons.group_add_outlined, size: 18),
-          label: Text(trip.isShared ? 'Invite more' : 'Invite the family'),
         ),
-      ],
-    );
-  }
-
-  Future<void> _remove(BuildContext context, TravelStore store, String memberId) async {
-    final name = store.memberName(plan, memberId);
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Remove $name?'),
-        content: Text('$name will no longer see ${plan.trip.title} or its tickets.'),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Remove')),
-        ],
       ),
     );
-    if (confirmed != true) return;
-    try {
-      await store.removeMember(plan, memberId);
-    } on SharingException catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
-      }
-    }
   }
 }
 
-class _Avatar extends StatelessWidget {
-  const _Avatar({required this.name, required this.highlight});
+/// "Your plan": every booking by date, as ledger rows on one paper panel.
+class _Plan extends StatelessWidget {
+  const _Plan({required this.plan});
 
-  final String name;
-  final bool highlight;
+  final TripPlan plan;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 34,
-      height: 34,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: highlight ? TravaryColors.ink : TravaryColors.paper,
-        border: Border.all(color: TravaryColors.line),
-      ),
-      child: Text(
-        name.isEmpty ? '?' : name.characters.first.toUpperCase(),
-        style: TravaryText.label.copyWith(color: highlight ? TravaryColors.paper : TravaryColors.ink),
+    final store = context.watch<TravelStore>();
+    final bookings = plan.bookings;
+    final art = store.artForAll(bookings);
+    return PaperPanel(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(TravarySpace.lg, TravarySpace.lg, TravarySpace.lg, TravarySpace.sm),
+            child: Text('Your plan', style: TravaryText.ledgerHeading),
+          ),
+          if (bookings.isEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(TravarySpace.lg, 0, TravarySpace.lg, TravarySpace.lg),
+              child: Text(
+                'Add what you\'ve booked and Travary sorts it into days, with your tickets one tap away.',
+                style: TravaryText.bodySoft,
+              ),
+            ),
+          for (final (index, booking) in bookings.indexed) ...[
+            const PaperDivider(indent: 0),
+            BookingCard(
+              key: ValueKey('plan-${booking.id}'),
+              text: cardTextForLedger(
+                booking,
+                showDate: index == 0 || bookings[index - 1].startDate != booking.startDate,
+              ),
+              art: art[index],
+              size: CardSize.ledger,
+              status: bookingStatus(booking, store.now),
+              onTap: () => openBooking(context, booking),
+              onShowTickets: booking.hasTickets ? () => showTickets(context, booking) : null,
+            ),
+          ],
+        ],
       ),
     );
   }
 }
+
+class _GapRow extends StatelessWidget {
+  const _GapRow({required this.plan, required this.gap});
+
+  final TripPlan plan;
+  final PlanGap gap;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = describeGap(gap, plan);
+    return PlanGapRow(
+      key: ValueKey('gap-${gap.id}'),
+      title: text.title,
+      when: text.when,
+      semanticLabel: text.semanticLabel,
+      icon: IconSlot.forKind(gap.bookingKind),
+      onAdd: () => addBookingOfKind(context, gap.bookingKind, tripId: plan.id, date: gap.start, endDate: gap.end),
+      onNotNeeded: () => _hide(context),
+    );
+  }
+
+  void _hide(BuildContext context) {
+    final store = context.read<TravelStore>();
+    final messenger = ScaffoldMessenger.of(context);
+    final title = describeGap(gap, plan).title;
+    store.hideGap(plan, gap);
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text('$title hidden'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            final current = store.plan(plan.id)?.trip ?? plan.trip;
+            store.updateTrip(current.copyWith(hiddenGaps: {...current.hiddenGaps}..remove(gap.id)));
+          },
+        ),
+      ),
+    );
+  }
+}
+
+/// Who's going: an initial for each traveller and a way to invite more.
+class _Travellers extends StatelessWidget {
+  const _Travellers({required this.plan});
+
+  final TripPlan plan;
+
+  @override
+  Widget build(BuildContext context) {
+    final store = context.watch<TravelStore>();
+    final colors = TravaryChrome.of(context).colors;
+    final members = plan.trip.memberIds;
+    final names = [for (final id in members) store.memberName(plan, id)];
+    final shown = names.take(4).toList();
+    return PaperPanel(
+      child: PaperRow(
+        key: const ValueKey('trip-travellers'),
+        title: 'Who\'s coming',
+        subtitle: members.length <= 1 ? 'Just you so far' : names.join(', '),
+        leading: SizedBox(
+          width: 34.0 + 18 * (shown.length - 1).clamp(0, 3),
+          height: 34,
+          child: Stack(
+            children: [
+              for (final (index, name) in shown.indexed)
+                Positioned(
+                  left: 18.0 * index,
+                  child: Container(
+                    width: 34,
+                    height: 34,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: index == 0 ? colors.ink : colors.paper,
+                      border: Border.all(color: index == 0 ? colors.paper : TravaryColors.line, width: 2),
+                    ),
+                    child: Text(
+                      name.isEmpty ? '?' : name.characters.first.toUpperCase(),
+                      style: TravaryText.label.copyWith(color: index == 0 ? colors.paper : colors.ink),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const RowIcon(IconSlot.invite, size: 20),
+            const SizedBox(width: 6),
+            Text(plan.trip.isShared ? 'Invite more' : 'Invite', style: TravaryText.label.copyWith(color: colors.ink)),
+          ],
+        ),
+        onTap: () => inviteToTrip(context, plan),
+      ),
+    );
+  }
+}
+
+/// The top bar with its text kept to [BarText.maxScale].
+PreferredSizeWidget _bar(AppBar bar) => PreferredSize(
+  preferredSize: bar.preferredSize,
+  child: BarText(child: bar),
+);

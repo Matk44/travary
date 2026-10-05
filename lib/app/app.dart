@@ -53,13 +53,14 @@ class TravaryApp extends StatelessWidget {
                   attachments: dependencies.attachments,
                   backup: dependencies.backup,
                   sharing: dependencies.sharing,
+                  flightStatus: dependencies.flightStatus,
                 ),
               ),
               ChangeNotifierProvider(
                 create: (context) {
                   final travel = context.read<TravelStore>();
                   // Shares the travel clock, so "Preview a different time"
-                  // also previews trial and Trip Pass expiry.
+                  // also previews Plus and Trip Pass expiry.
                   return PremiumStore(purchases: dependencies.purchases, clock: () => travel.now);
                 },
               ),

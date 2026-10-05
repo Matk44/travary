@@ -9,6 +9,7 @@ import '../data/attachment_backup.dart';
 import '../data/attachment_store.dart';
 import '../data/demo_data.dart';
 import '../data/memory_travel_repository.dart';
+import '../data/flight_status_service.dart';
 import '../data/sharing_service.dart';
 import '../data/travel_repository.dart';
 import '../data/visual_profile_service.dart';
@@ -21,6 +22,7 @@ import '../logic/art_subjects.dart';
 import '../logic/day_plan.dart';
 import '../logic/destinations.dart';
 import '../logic/trip_assignment.dart';
+import '../logic/trip_gaps.dart';
 import '../logic/trip_plan.dart';
 import '../logic/visual_profile_request.dart';
 import 'art_catalog_controller.dart';
@@ -48,6 +50,7 @@ class TravelStore extends ChangeNotifier {
     this.attachments,
     this.backup,
     this.sharing,
+    this.flightStatus,
     DateTime Function()? clock,
   }) : _artCatalogs = ArtCatalogController(bundled: artCatalog, packs: artPacks),
        _clock = clock ?? DateTime.now {
@@ -104,6 +107,9 @@ class TravelStore extends ChangeNotifier {
 
   /// Family sharing (cloud mode only).
   final SharingService? sharing;
+
+  /// Live gate, terminal and delays for flights. Null hides it.
+  final FlightStatusService? flightStatus;
 
   /// Downloadable art packs; null leaves just the bundled art.
   final ArtPackManager? artPacks;
@@ -224,6 +230,10 @@ class TravelStore extends ChangeNotifier {
   /// postcard of its own ([countdownPostcardFor] is null). Null if the app
   /// doesn't carry one.
   SharedArtRef? get neutralCountdownPostcard => _art.catalog.commonArt(countdownPostcardAnywhereArt);
+
+  /// The bundled, place-neutral landscape postcard for the top of a trip
+  /// whose place has none ([tripPostcardFor] is null). Null until it's made.
+  SharedArtRef? get neutralTripPostcard => _art.catalog.commonArt(tripPostcardAnywhereArt);
 
   /// The landscape postcard for [plan] on the Trips tab, ranked and
   /// guarded exactly like [countdownPostcardFor]: null rather than another
@@ -431,6 +441,11 @@ class TravelStore extends ChangeNotifier {
 
   /// The traveller picks [theme] for [plan]: a manual look the classifier
   /// never changes.
+  /// Says [gap] in [plan] isn't needed ("we're staying with family"), for
+  /// everyone on the trip.
+  Future<void> hideGap(TripPlan plan, PlanGap gap) =>
+      updateTrip(plan.trip.copyWith(hiddenGaps: {...plan.trip.hiddenGaps, gap.id}));
+
   Future<void> chooseLook(TripPlan plan, ExperienceTheme theme) =>
       updateTrip(plan.trip.copyWith(theme: theme, themeSource: ThemeSource.manual));
 

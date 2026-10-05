@@ -23,6 +23,7 @@ class Trip {
     required this.memberIds,
     this.memberNames = const {},
     this.premium,
+    this.hiddenGaps = const {},
     required this.createdAt,
     required this.updatedAt,
   });
@@ -64,6 +65,11 @@ class Trip {
   /// Plus unlocked for everyone on the trip. Set by the server only.
   final TripPremium? premium;
 
+  /// Gaps in the plan the travellers said aren't needed ("we're staying
+  /// with family"), by `PlanGap.id`. Shared, so nobody on the trip is
+  /// asked again.
+  final Set<String> hiddenGaps;
+
   bool get isShared => memberIds.length > 1;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -89,6 +95,7 @@ class Trip {
     LocalDate? plannedEnd,
     TripDestination? destination,
     bool clearDestination = false,
+    Set<String>? hiddenGaps,
     DateTime? updatedAt,
   }) {
     return Trip(
@@ -105,6 +112,7 @@ class Trip {
       memberIds: memberIds,
       memberNames: memberNames,
       premium: premium,
+      hiddenGaps: hiddenGaps ?? this.hiddenGaps,
       createdAt: createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -124,6 +132,7 @@ class Trip {
     'plannedStart': plannedStart?.toIso(),
     'plannedEnd': plannedEnd?.toIso(),
     'destination': destination?.toJson(),
+    'hiddenGaps': [...hiddenGaps]..sort(),
     'updatedAt': updatedAt.millisecondsSinceEpoch,
   };
 
@@ -136,6 +145,7 @@ class Trip {
     'plannedStart': plannedStart?.toIso(),
     'plannedEnd': plannedEnd?.toIso(),
     'destination': ?destination?.toJson(),
+    if (hiddenGaps.isNotEmpty) 'hiddenGaps': [...hiddenGaps]..sort(),
     'ownerId': ownerId,
     'memberIds': memberIds,
     'createdAt': createdAt.millisecondsSinceEpoch,
@@ -161,6 +171,10 @@ class Trip {
         for (final entry in (json['memberNames'] as Map? ?? const {}).entries) '${entry.key}': '${entry.value}',
       },
       premium: TripPremium.fromJson(json['premium']),
+      hiddenGaps: {
+        for (final gap in json['hiddenGaps'] as List? ?? const [])
+          if (gap is String && gap.length <= 40) gap,
+      },
       createdAt: _millis(json['createdAt']),
       updatedAt: _millis(json['updatedAt']),
     );

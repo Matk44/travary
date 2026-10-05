@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "country_ae",
-  "version": 2,
+  "version": 3,
   "palette": {
     "id": "uae_emerald_desert",
     "anchors": {"ink": "#252A2E", "paper": "#F7F0E3"},
@@ -17,6 +17,7 @@
     {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
     {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
     {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
-    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402}
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024}
   ]
 }

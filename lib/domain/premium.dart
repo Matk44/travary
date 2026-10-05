@@ -49,13 +49,13 @@ enum PremiumPillar {
   final String label;
 }
 
-/// A Travary Plus subscription (annual, 14-day free trial).
+/// A Travary Plus subscription (annual, no free trial: premium features
+/// sell themselves where they're needed).
 class PlusSubscription {
-  const PlusSubscription({required this.expiresAt, this.inTrial = false, this.willRenew = true});
+  const PlusSubscription({required this.expiresAt, this.willRenew = true});
 
-  /// End of the current period (or of the trial).
+  /// End of the current year.
   final DateTime expiresAt;
-  final bool inTrial;
   final bool willRenew;
 
   bool activeAt(DateTime now) => now.isBefore(expiresAt);

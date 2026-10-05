@@ -16,8 +16,8 @@ import '../../state/travel_store.dart';
 ///
 /// Built on the plan in docs/PRODUCT_PLAN.md: Plus preselected, a Trip Pass
 /// when there's a trip to attach it to, prices framed per month and per day,
-/// a transparent trial timeline, and an easy way out. Returns true from the
-/// route when something was bought.
+/// no free trial (premium sells itself where it's needed), and an easy way
+/// out. Returns true from the route when something was bought.
 class PaywallScreen extends StatefulWidget {
   const PaywallScreen({super.key, this.feature, this.tripId, required this.source});
 
@@ -111,9 +111,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       selected: selected == plus,
                       title: 'Travary Plus',
                       badge: 'Best value',
-                      price: plus.trialDays != null
-                          ? 'Free for ${plus.trialDays} days, then ${priceOf(plus)}/year'
-                          : '${priceOf(plus)}/year',
+                      price: '${priceOf(plus)}/year',
                       detail: '${perMonth(plus)} a month · everyone on your trips, up to ${Pricing.familySize}',
                       onTap: () => setState(() => _selected = OfferKind.plusAnnual),
                     ),
@@ -128,10 +126,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     ),
                   ],
                   const SizedBox(height: TravarySpace.xl),
-                  if (selected != null && selected.kind == OfferKind.plusAnnual && selected.trialDays != null)
-                    _TrialTimeline(offer: selected)
-                  else if (selected != null && selected.kind == OfferKind.tripPass && plan != null)
-                    _PassSummary(plan: plan),
+                  if (selected != null && selected.kind == OfferKind.tripPass && plan != null) _PassSummary(plan: plan),
                   const SizedBox(height: TravarySpace.xl),
                   Text('WHAT YOU GET', style: TravaryText.eyebrow),
                   const SizedBox(height: TravarySpace.md),
@@ -331,69 +326,6 @@ class _PlanOption extends StatelessWidget {
   }
 }
 
-/// "Today / Day 12 / Day 14" so nobody is surprised by a charge.
-class _TrialTimeline extends StatelessWidget {
-  const _TrialTimeline({required this.offer});
-
-  final Offer offer;
-
-  @override
-  Widget build(BuildContext context) {
-    final days = offer.trialDays!;
-    final steps = [
-      ('Today', 'Everything in Plus unlocks. Nothing to pay today.', Icons.lock_open_rounded),
-      ('Day ${days - 2}', 'We\'ll remind you that your trial is ending.', Icons.notifications_none_rounded),
-      (
-        'Day $days',
-        'Your Plus year starts at ${priceOf(offer)}. Cancel any time before and you won\'t be charged.',
-        Icons.event_available_rounded,
-      ),
-    ];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('HOW YOUR FREE TRIAL WORKS', style: TravaryText.eyebrow),
-        const SizedBox(height: TravarySpace.md),
-        for (final (index, step) in steps.indexed)
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: index == 0 ? TravaryColors.ink : TravaryColors.paper,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(step.$3, size: 16, color: index == 0 ? TravaryColors.paper : TravaryColors.ink),
-                    ),
-                    if (index < steps.length - 1) Expanded(child: Container(width: 2, color: TravaryColors.line)),
-                  ],
-                ),
-                const SizedBox(width: TravarySpace.md),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: TravarySpace.lg, top: 4),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(step.$1, style: TravaryText.label),
-                        Text(step.$2, style: TravaryText.bodySoft),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-      ],
-    );
-  }
-}
-
 class _PassSummary extends StatelessWidget {
   const _PassSummary({required this.plan});
 
@@ -434,7 +366,6 @@ class _Footer extends StatelessWidget {
     final offer = this.offer;
     final label = switch (offer) {
       null => 'Unavailable',
-      Offer(kind: OfferKind.plusAnnual, trialDays: final int days) => 'Start my free $days days',
       Offer(kind: OfferKind.plusAnnual) => 'Get Travary Plus · ${priceOf(offer)}/year',
       Offer(kind: OfferKind.tripPass) => 'Get Trip Pass · ${priceOf(offer)}',
     };

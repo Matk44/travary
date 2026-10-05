@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "country_it",
-  "version": 2,
+  "version": 3,
   "palette": {
     "id": "italy_heritage_tricolore",
     "anchors": {
@@ -44,6 +44,13 @@
       "name": "countdown_postcard",
       "width": 1122,
       "height": 1402
+    },
+    {
+      "file": "common/trip_postcard.webp",
+      "kind": "common",
+      "name": "trip_postcard",
+      "width": 1536,
+      "height": 1024
     }
   ]
 }

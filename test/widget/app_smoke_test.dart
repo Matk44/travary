@@ -102,8 +102,10 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Add a booking'));
     await tester.pumpAndSettle();
 
-    expect(find.text('What have you booked?'), findsOneWidget);
+    expect(find.text('Add a booking'), findsOneWidget);
+    expect(find.text('Snap a booking'), findsOneWidget);
     expect(find.text('Flight'), findsOneWidget);
+    expect(find.text('Passport & documents'), findsOneWidget);
   });
 
   group('premium', () {
@@ -112,9 +114,9 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      expect(find.text('3 free to try'), findsOneWidget);
+      expect(find.textContaining('3 free to try'), findsOneWidget);
 
-      await tester.tap(find.text('Import a screenshot or PDF'));
+      await tester.tap(find.text('Snap a booking'));
       await tester.pumpAndSettle();
       expect(find.text('What shall we read?'), findsOneWidget);
     });
@@ -126,16 +128,16 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Import a screenshot or PDF'));
+      await tester.tap(find.text('Snap a booking'));
       await tester.pumpAndSettle();
 
       expect(find.text('Skip the typing'), findsOneWidget);
-      expect(find.text(r'Free for 14 days, then $34.99/year'), findsOneWidget);
+      expect(find.text(r'$34.99/year'), findsOneWidget);
       expect(find.text('Just Orlando'), findsOneWidget);
-      expect(find.text('HOW YOUR FREE TRIAL WORKS'), findsOneWidget);
-      expect(find.text('Start my free 14 days'), findsOneWidget);
+      expect(find.textContaining('free trial', findRichText: true), findsNothing);
+      expect(find.text(r'Get Travary Plus · $34.99/year'), findsOneWidget);
 
-      await tester.tap(find.text('Start my free 14 days'));
+      await tester.tap(find.text(r'Get Travary Plus · $34.99/year'));
       await tester.pumpAndSettle();
       expect(find.text('What shall we read?'), findsOneWidget);
     });
@@ -145,7 +147,7 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Import a screenshot or PDF'));
+      await tester.tap(find.text('Snap a booking'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Just Orlando'));
       await tester.pumpAndSettle();
@@ -161,7 +163,7 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Import a screenshot or PDF'));
+      await tester.tap(find.text('Snap a booking'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Not now'));
       await tester.pumpAndSettle();

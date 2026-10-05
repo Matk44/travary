@@ -149,7 +149,7 @@ chip explains that it can't choose a look right now.
    login`; needs `storage.objects.create` on the bucket):
    `dart run tool/art_packs.dart publish --bucket travary-444.firebasestorage.app --production`.
    Commit `art_packs/catalog.json`.
-9. On a staging device (`flutter run --dart-define=TRAVARY_BACKEND=cloud`):
+9. On a staging device (`flutter run`):
    add a few bookings, wait a few seconds, check the trip's Card style says
    "Automatic · …", and that matching pack art appears.
 10. Check logs hold timings and statuses only:

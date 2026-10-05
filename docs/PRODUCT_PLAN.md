@@ -19,7 +19,7 @@ view-only; parsing errors erode trust; the category looks dated.
 
 ## Tiers (starting point, A/B test via RevenueCat)
 
-| | Free | Trip Pass $7.99 (per trip) | Plus $34.99/yr (14-day trial) |
+| | Free | Trip Pass $7.99 (per trip) | Plus $34.99/yr |
 |---|---|---|---|
 | Unlimited trips + manual bookings, Today, Wallet, offline tickets | ✓ | ✓ | ✓ |
 | Travel documents (passports, visas, insurance) on this phone, behind Face ID, with expiry checks | ✓ | ✓ | ✓ |
@@ -36,15 +36,16 @@ view-only; parsing errors erode trust; the category looks dated.
 
 ## Paywall moments
 
-1. Onboarding, after the aha moment (their first booking rendered on their Day 1).
-2. Contextual: 4th import, inviting a co-planner, enabling alerts, backup.
-3. Trip Readiness meter steps that are Plus.
-4. T-10 days before a trip: Trip Pass offer.
-5. Renewal: value recap two weeks before.
+No free trial and no trial reminders: premium sells itself at the moment
+it's needed ("share it with the family", "don't miss anything").
 
-**Never:** a paywall on open during a trip, blocking tickets, fake urgency.
-Transparent trial timeline and a reminder 2 days before charging (Blinkist
-reported +23% trial starts and −55% complaints with this approach).
+1. Contextual: 4th import, inviting a co-planner, enabling alerts, backup.
+2. Trip Readiness meter steps that are Plus.
+3. T-10 days before a trip: Trip Pass offer.
+4. Renewal: value recap two weeks before.
+
+**Never:** a paywall on open during a trip, blocking tickets, fake urgency,
+a free trial or a "your trial is ending" reminder.
 
 ## Onboarding (day 0 decides most conversions)
 
@@ -75,7 +76,15 @@ videos (stub tear-off, ticket "printing" on import).
 
 ## Decisions
 
-- Prices confirmed: Plus $34.99/yr (14-day trial), Trip Pass $7.99.
+- Prices confirmed: Plus $34.99/yr, Trip Pass $7.99. No free trial (decided
+  2026-10-04): premium features sell themselves where they're needed.
+- Trip Pass (decided 2026-10-04): one trip of at most 30 days, covering the
+  dates it had when bought (later edits don't move it), until 7 days after.
+  Longer trips are offered Plus instead.
+- Family permissions (decided 2026-10-04): everyone on a trip sees all
+  bookings and tickets and can add bookings. You edit and delete your own;
+  the organiser can edit and delete anything. Deletes can be undone.
+  Passports and visas never leave each person's phone.
 - AI: Gemini via Google AI Studio, server-side (accuracy first: a wrong AM/PM
   destroys trust, so imports are always a draft to confirm).
 - Firebase project on the Blaze plan.

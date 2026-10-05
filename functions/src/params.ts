@@ -10,3 +10,6 @@ export const geminiApiKey = defineSecret('GEMINI_API_KEY');
 
 /** Google Maps Platform key restricted to Places API (New): trip location verification. */
 export const mapsApiKey = defineSecret('GOOGLE_MAPS_PLATFORM_KEY');
+
+/** AeroDataBox via API.Market: live flight status (gate, terminal, delays). */
+export const aeroDataBoxKey = defineSecret('AERODATABOX_API_KEY');

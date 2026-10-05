@@ -197,21 +197,26 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    testWidgets('shows who is coming, with the organiser marked', (tester) async {
+    testWidgets('the trip says who is coming; its details list them, with the organiser marked', (tester) async {
       await pumpTrip(tester, sharedTrip(members: const ['me', 'sam', 'kim']));
-      expect(find.text('WHO\'S COMING'), findsOneWidget);
+      expect(find.text('Who\'s coming'), findsOneWidget);
+      expect(find.text('Invite more'), findsOneWidget);
+
+      await tester.tap(find.byKey(const ValueKey('trip-details')));
+      await tester.pumpAndSettle();
       expect(find.textContaining('You'), findsWidgets);
-      expect(find.textContaining('Organiser'), findsOneWidget);
-      expect(find.textContaining('Kim'), findsOneWidget);
+      expect(find.text('Organiser'), findsOneWidget);
+      expect(find.text('Kim'), findsOneWidget);
       expect(find.byTooltip('Remove from trip'), findsNWidgets(2));
       expect(find.text('Invite more'), findsOneWidget);
     });
 
     testWidgets('family members can leave but not remove others', (tester) async {
       await pumpTrip(tester, sharedTrip(owner: 'sam'));
-      expect(find.byTooltip('Remove from trip'), findsNothing);
-      await tester.tap(find.byType(PopupMenuButton<String>));
+      await tester.tap(find.byKey(const ValueKey('trip-details')));
       await tester.pumpAndSettle();
+      expect(find.byTooltip('Remove from trip'), findsNothing);
+      await tester.scrollUntilVisible(find.text('Leave trip'), 200, scrollable: find.byType(Scrollable).last);
       expect(find.text('Leave trip'), findsOneWidget);
       expect(find.text('Delete trip'), findsNothing);
     });
