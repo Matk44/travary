@@ -78,9 +78,12 @@ videos (stub tear-off, ticket "printing" on import).
 
 - Prices confirmed: Plus $34.99/yr, Trip Pass $7.99. No free trial (decided
   2026-10-04): premium features sell themselves where they're needed.
-- Trip Pass (decided 2026-10-04): one trip of at most 30 days, covering the
-  dates it had when bought (later edits don't move it), until 7 days after.
-  Longer trips are offered Plus instead.
+- Trip Pass (decided 2026-10-04, refined 2026-10-06): one trip of at most
+  30 days, bought for the dates it had then, until 7 days after it ends. It
+  grows with the same holiday (adding the flight home later stays covered,
+  up to 30 days) but never moves to another one: changing the trip to other
+  dates or another place doesn't carry the pass. Longer trips are offered
+  Plus instead.
 - Family permissions (decided 2026-10-04): everyone on a trip sees all
   bookings and tickets and can add bookings. You edit and delete your own;
   the organiser can edit and delete anything. Deletes can be undone.

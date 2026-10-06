@@ -13,6 +13,8 @@ import '../../logic/flight_fill.dart';
 import '../../logic/formatters.dart';
 import '../../logic/trip_assignment.dart';
 import '../../logic/trip_plan.dart';
+import '../../logic/trip_window.dart';
+import '../../state/analytics.dart';
 import '../../state/travel_store.dart';
 import 'booking_actions.dart';
 import 'flight_finder.dart';
@@ -24,6 +26,11 @@ import 'flight_finder.dart';
 ///
 /// A new flight starts on the departures board ([FlightFinder]) when live
 /// flight data is available: its number and date fill in the rest.
+///
+/// The booking goes where [placeBooking] says, shown under the title. In a
+/// trip with planned dates the date pickers only offer its days (and a
+/// travel day either side); tapping the trip line chooses another trip or
+/// lets the dates decide.
 class EditBookingScreen extends StatefulWidget {
   const EditBookingScreen({
     super.key,
@@ -70,7 +77,14 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   ClockTime? _startTime;
   LocalDate? _endDate;
   ClockTime? _endTime;
+
+  /// The trip the booking is in, was added from or was imported into, or
+  /// empty to go by its dates. It keeps that trip while its dates fit.
   late String _tripId;
+
+  /// The traveller picked the trip on this form ("Choose automatically"
+  /// included), so it goes there whatever the dates.
+  bool _tripChosen = false;
   late List<Attachment> _attachments;
   late final TravelStore _store;
 
@@ -157,19 +171,59 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     super.dispose();
   }
 
-  /// The trip this booking is going into: the chosen one, else the one its
-  /// dates fall in (null: it will start a new trip).
-  TripPlan? _tripPlan(TravelStore store) =>
-      _tripId.isNotEmpty ? store.plan(_tripId) : findTripFor(_startDate, _endDate ?? _startDate, store.plans);
+  /// Editing, the dates differ from the saved booking's. Only new dates
+  /// can move a booking to another trip.
+  bool get _datesChanged {
+    final existing = widget.existing;
+    return existing == null || existing.startDate != _startDate || existing.lastDate != (_endDate ?? _startDate);
+  }
+
+  /// Where the booking goes with the form as it stands (ending on [end]).
+  TripPlacement _placement(TravelStore store, {LocalDate? end}) => placeBooking(
+    start: _startDate,
+    end: end ?? _endDate ?? _startDate,
+    plans: store.plans,
+    tripId: _tripId,
+    chosen: _tripChosen,
+    editing: widget.existing?.id,
+    datesChanged: _datesChanged,
+    // Smart Import's dates come off the ticket, so a trip that formed on
+    // its own keeps what's within a few weeks of it.
+    looseMarginDays: widget.draft == null ? tripMarginDays : sameSourceMarginDays,
+  );
+
+  /// The trip as the traveller sees it (with this booking, if it's in it),
+  /// for the line under the title.
+  TripPlan? _shown(TravelStore store, TripPlacement placement) {
+    final plan = placement.plan;
+    return plan == null ? null : store.plan(plan.id) ?? plan;
+  }
+
+  /// The days the pickers offer: the trip's, while the booking stays in a
+  /// trip with planned dates. Null: any day.
+  DateWindow? _window(TripPlacement placement) {
+    final plan = placement.plan;
+    return plan == null || plan.id != _tripId ? null : bookingWindowFor(plan);
+  }
 
   // ------------------------------------------------------------- pickers
 
-  Future<LocalDate?> _pickDate(LocalDate initial) async {
+  /// A date, inside the trip's days when it keeps to them, and not before
+  /// [notBefore] (an end date).
+  Future<LocalDate?> _pickDate(LocalDate initial, {LocalDate? notBefore}) async {
+    final placement = _placement(_store);
+    final window = _window(placement);
+    final last = window?.last ?? LocalDate(2100, 12, 31);
+    var first = window?.first ?? LocalDate(2000, 1, 1);
+    if (notBefore != null && notBefore.isAfter(first)) first = notBefore;
+    if (first.isAfter(last)) first = last;
+    final range = DateWindow(first, last);
     final picked = await showDatePicker(
       context: context,
-      initialDate: initial.toDateTime(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      initialDate: range.clamp(initial).toDateTime(),
+      firstDate: first.toDateTime(),
+      lastDate: last.toDateTime(),
+      helpText: window == null ? null : formTripLine(_shown(_store, placement)),
     );
     return picked == null ? null : LocalDate.fromDateTime(picked);
   }
@@ -219,15 +273,40 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
         ),
       ),
     );
-    if (choice != null) setState(() => _tripId = choice);
+    if (choice == null || !mounted) return;
+    final plan = store.plan(choice);
+    final editing = widget.existing?.id;
+    final window = plan == null ? null : bookingWindowFor(editing == null ? plan : withoutBooking(plan, editing));
+    setState(() {
+      _tripId = choice;
+      _tripChosen = true;
+      // Dates outside the chosen trip move to its first day (today during
+      // it), keeping the booking's length where they can.
+      if (plan != null && window != null) {
+        final moved = moveInto(
+          window,
+          _startDate,
+          _endDate,
+          preferredStart: plan.contains(store.today) ? store.today : plan.start!,
+        );
+        _startDate = moved.start;
+        _endDate = moved.end;
+      }
+    });
   }
 
-  void _changeStartDate(LocalDate picked) => setState(() {
-    final shift = _startDate.daysUntil(picked);
-    _startDate = picked;
-    // Keep the length of a stay when its start moves.
-    if (_endDate != null) _endDate = _endDate!.addDays(shift);
-  });
+  void _changeStartDate(LocalDate picked) {
+    final window = _window(_placement(_store));
+    setState(() {
+      final shift = _startDate.daysUntil(picked);
+      _startDate = picked;
+      // Keep the length of a stay when its start moves, inside the trip.
+      if (_endDate != null) {
+        final end = _endDate!.addDays(shift);
+        _endDate = window == null ? end : window.clamp(end);
+      }
+    });
+  }
 
   void _useFlight(FlightFill fill) => setState(() {
     _title.text = fill.title;
@@ -263,22 +342,70 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     if (endDate == _startDate) endDate = null;
 
     final store = _store;
+    final placement = _placement(store, end: endDate ?? _startDate);
+    var tripId = placement.plan?.id ?? '';
+    if (placement.stretches) {
+      final answer = await _askToStretch(placement, endDate ?? _startDate);
+      track('booking_stretch_asked', {
+        'kind': widget.kind.name,
+        'choice': answer == null ? 'back' : (answer == placement.plan!.id ? 'stretch' : 'elsewhere'),
+      });
+      if (answer == null || !mounted) return;
+      tripId = answer;
+    }
+    // Taken out of the trip it was in, with nowhere its dates fit: a trip
+    // of its own, not back into the one it left.
+    final newTrip = tripId.isEmpty && _tripId.isNotEmpty;
     setState(() => _saving = true);
     final result = await store.saveBooking(
-      _booking(id: widget.existing?.id ?? store.repository.newId(), endDate: endDate),
+      _booking(id: widget.existing?.id ?? store.repository.newId(), endDate: endDate, tripId: tripId),
       previous: widget.existing,
+      newTrip: newTrip,
     );
     _saved = true;
     if (mounted) Navigator.of(context).pop(result);
   }
 
-  /// The booking as the form stands.
-  Booking _booking({required String id, LocalDate? endDate}) {
+  /// Before a booking stretches a trip that formed from its bookings well
+  /// past them: into it anyway, or where its dates put it. Returns the trip
+  /// id ('' for a new trip), or null to keep editing.
+  Future<String?> _askToStretch(TripPlacement placement, LocalDate end) {
+    final question = stretchQuestion(
+      placement.plan!,
+      _startDate,
+      end,
+      alternative: placement.alternative,
+      editing: _isEditing,
+    );
+    return showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        key: const ValueKey('stretch-trip'),
+        title: Text(question.title),
+        content: Text(question.message),
+        actions: [
+          TextButton(
+            key: const ValueKey('stretch-other'),
+            onPressed: () => Navigator.pop(context, placement.alternative?.id ?? ''),
+            child: Text(question.other),
+          ),
+          TextButton(
+            key: const ValueKey('stretch-keep'),
+            onPressed: () => Navigator.pop(context, placement.plan!.id),
+            child: Text(question.keep),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// The booking as the form stands, going into [tripId].
+  Booking _booking({required String id, LocalDate? endDate, required String tripId}) {
     final now = DateTime.now();
     String? clean(TextEditingController c) => c.text.trim().isEmpty ? null : c.text.trim();
     return Booking(
       id: id,
-      tripId: _tripId,
+      tripId: tripId,
       kind: widget.kind,
       title: _title.text.trim(),
       startDate: _startDate,
@@ -307,7 +434,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   @override
   Widget build(BuildContext context) {
     final store = context.watch<TravelStore>();
-    final plan = _tripPlan(store);
+    final plan = _shown(store, _placement(store));
     final chromePlan = plan ?? store.focus.plan;
     return TravaryChrome(
       colors: TripColors.of(store.paletteFor(chromePlan)),
@@ -319,7 +446,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   Widget _screen(BuildContext context, TravelStore store, TripPlan? plan) {
     final colors = TravaryChrome.of(context).colors;
     final text = bookingFormText(widget.kind, editing: _isEditing);
-    final tripLine = _tripId.isEmpty && plan == null ? 'Starts a new trip' : formTripLine(plan);
+    final existing = widget.existing;
+    final tripLine = formTripLine(plan, moves: existing != null && plan?.id != existing.tripId);
     return LinenBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -384,15 +512,15 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
                   ),
                 ],
               )
-            : _ticket(context, store, text),
+            : _ticket(context, store, text, plan),
       ),
     );
   }
 
-  Widget _ticket(BuildContext context, TravelStore store, BookingFormText text) {
+  Widget _ticket(BuildContext context, TravelStore store, BookingFormText text, TripPlan? plan) {
     final colors = TravaryChrome.of(context).colors;
     final span = bookingSpanLabel(widget.kind, _startDate, _endDate);
-    final preview = _booking(id: widget.existing?.id ?? 'draft');
+    final preview = _booking(id: widget.existing?.id ?? 'draft', tripId: plan?.id ?? '');
     return ListView(
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.xxl),
       children: [
@@ -568,7 +696,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       checkDate: _highlight.contains('endDate') && _endDate != null,
       checkTime: _highlight.contains('endTime') && _endTime != null,
       onDate: () async {
-        final picked = await _pickDate(_endDate ?? _startDate);
+        final picked = await _pickDate(_endDate ?? _startDate, notBefore: _startDate);
         if (picked != null) setState(() => _endDate = picked);
       },
       onTime: () async {

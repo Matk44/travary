@@ -45,11 +45,13 @@ class PremiumStore extends ChangeNotifier {
 
   AccessDecision forTrip(TripPlan? trip) => policy.forTrip(trip);
 
-  Future<PurchaseOutcome> purchase(Offer offer, {String? tripId, required String source}) async {
+  /// Buys [offer]. A Trip Pass needs [tripPass]: the trip and the dates it
+  /// covers ([newTripPassFor]).
+  Future<PurchaseOutcome> purchase(Offer offer, {TripPass? tripPass, required String source}) async {
     _setBusy(true);
     track('purchase_started', {'product': offer.productId, 'source': source});
     try {
-      final outcome = await purchases.purchase(offer, tripId: tripId);
+      final outcome = await purchases.purchase(offer, tripPass: tripPass);
       track('purchase_${outcome.name}', {'product': offer.productId, 'source': source});
       await _loadOffers();
       return outcome;

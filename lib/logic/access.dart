@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../domain/domain.dart';
+import 'trip_assignment.dart';
 import 'trip_plan.dart';
 
 /// The answer to "can I use this?".
@@ -27,7 +28,9 @@ class AccessDecision {
 /// everywhere in the app.
 ///
 /// - Plus unlocks every premium feature on every trip.
-/// - A Trip Pass unlocks them on one trip, until a week after it ends.
+/// - A Trip Pass unlocks them on one trip of at most 30 days, until a week
+///   after it ends. It grows with its trip (the flight home added later)
+///   but never moves to another holiday ([tripPassLastDay]).
 /// - "Plus travels with the trip": a trip stamped premium by the server
 ///   (its organiser has Plus or a pass) unlocks them for everyone on it.
 /// - Free: a few Smart Imports to try it, nothing else premium.
@@ -42,11 +45,14 @@ class AccessPolicy {
 
   int get freeSmartImportsLeft => max(0, Pricing.freeSmartImports - entitlements.smartImportsUsed);
 
+  /// The Trip Pass bought for [plan], on or not.
+  TripPass? tripPassFor(TripPlan plan) => entitlements.tripPasses[plan.id];
+
+  /// Whether a Trip Pass covers [plan] now ([tripPassLastDay]).
   bool hasTripPass(TripPlan plan) {
-    if (!entitlements.tripPasses.contains(plan.id)) return false;
-    final end = plan.end;
-    if (end == null) return true;
-    return !now.isAfter(end.addDays(Pricing.tripPassGraceDays + 1).toDateTime());
+    final pass = tripPassFor(plan);
+    if (pass == null) return false;
+    return now.isBefore(tripPassLastDay(pass, plan.start, plan.end).addDays(1).toDateTime());
   }
 
   /// Whether premium features are on for [plan], and why.
@@ -72,10 +78,32 @@ class AccessPolicy {
     };
   }
 
-  /// A Trip Pass only makes sense for a trip with dates that hasn't ended.
+  /// A Trip Pass only makes sense for a trip with dates that hasn't ended,
+  /// of at most [Pricing.tripPassMaxDays].
   bool canBuyTripPassFor(TripPlan? plan) {
     if (plan == null || !plan.hasDates || hasPlus) return false;
-    if (hasTripPass(plan)) return false;
+    if (hasTripPass(plan) || isTooLongForTripPass(plan)) return false;
     return !plan.end!.isBefore(LocalDate.fromDateTime(now));
   }
+
+  /// A trip longer than a Trip Pass covers: it's offered Plus instead.
+  bool isTooLongForTripPass(TripPlan? plan) => plan != null && plan.dayCount > Pricing.tripPassMaxDays;
 }
+
+/// The last day [pass] keeps Plus on its trip, which now runs [start] to
+/// [end]: a week after the trip ends while it's still the holiday the pass
+/// was bought for (overlapping those dates, at most
+/// [Pricing.tripPassMaxDays] long), so adding the flight home or a few more
+/// days stays covered. Otherwise a week after the dates it was bought for:
+/// moving the trip to another time, or making it another holiday, never
+/// takes the pass along.
+LocalDate tripPassLastDay(TripPass pass, LocalDate? start, LocalDate? end) {
+  if (start == null || end == null || !end.isAfter(pass.end)) return pass.lastDay;
+  final sameHoliday =
+      gapBetween(start, end, pass.start, pass.end) == 0 && start.daysUntil(end) + 1 <= Pricing.tripPassMaxDays;
+  return sameHoliday ? end.addDays(Pricing.tripPassGraceDays) : pass.lastDay;
+}
+
+/// The Trip Pass to buy for [plan]: the dates it has now. [plan] must have
+/// dates.
+TripPass newTripPassFor(TripPlan plan) => TripPass(tripId: plan.id, start: plan.start!, end: plan.end!);

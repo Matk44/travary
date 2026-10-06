@@ -33,7 +33,9 @@ class PlusCard extends StatelessWidget {
           'Smart Import, family sharing and ticket backup. '
           '$left free Smart Import${left == 1 ? '' : 's'} left.';
     }
-    final passes = [for (final id in premium.entitlements.tripPasses) travel.plan(id)?.trip.title ?? 'A past trip'];
+    final passes = [
+      for (final id in premium.entitlements.tripPasses.keys) travel.plan(id)?.trip.title ?? 'A past trip',
+    ];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),

@@ -7,23 +7,27 @@ import '../../design/art/art_slots.dart';
 import '../../design/cards/booking_card.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
+import '../../design/widgets/checklist_row.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/plan_gap_row.dart';
 import '../../design/widgets/trip_hero.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
+import '../../logic/checklist.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/trip_gaps.dart';
 import '../../logic/trip_hero_text.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/travel_store.dart';
 import '../booking/booking_actions.dart';
+import 'checklist_item_sheet.dart';
 import 'trip_details_screen.dart';
 import 'trip_details_sheet.dart';
 
 /// One trip: its postcard and tag, then its plan as a ledger (every booking
 /// by date, tickets one tap away), what it still seems to need (a stay for
-/// some nights, the flight home), and who's going. "Add a booking" stays
+/// some nights, the flight home), what to sort before going (its shared
+/// checklist), and who's going. "Add a booking" stays
 /// at the bottom; everything about the trip itself (its name and dates,
 /// family, card style, deleting it) is under "Trip details".
 class TripScreen extends StatelessWidget {
@@ -108,6 +112,7 @@ class _TripBody extends StatelessWidget {
             const SizedBox(height: TravarySpace.lg),
             _Plan(plan: plan),
             for (final gap in gaps) ...[const SizedBox(height: TravarySpace.md), _GapRow(plan: plan, gap: gap)],
+            if (showsChecklist(plan, store.today)) ...[const SizedBox(height: TravarySpace.lg), _Checklist(plan: plan)],
             if (PremiumFeature.familySharing.released || kDebugMode) ...[
               const SizedBox(height: TravarySpace.lg),
               _Travellers(plan: plan),
@@ -126,7 +131,7 @@ class _TripBody extends StatelessWidget {
               key: const ValueKey('trip-add-booking'),
               label: 'Add a booking',
               icon: Icons.add_rounded,
-              onPressed: () => startAddBooking(context, tripId: plan.id, date: addDate),
+              onPressed: () => startAddBooking(context, tripId: plan.id, date: addDate, fillGaps: true),
             ),
           ),
         ),
@@ -218,6 +223,80 @@ class _GapRow extends StatelessWidget {
             store.updateTrip(current.copyWith(hiddenGaps: {...current.hiddenGaps}..remove(gap.id)));
           },
         ),
+      ),
+    );
+  }
+}
+
+/// "Before you go": the trip's shared to-dos, open ones first, ticked in
+/// place, each opening to edit; and a way to add another.
+class _Checklist extends StatelessWidget {
+  const _Checklist({required this.plan});
+
+  final TripPlan plan;
+
+  @override
+  Widget build(BuildContext context) {
+    final store = context.watch<TravelStore>();
+    final colors = TravaryChrome.of(context).colors;
+    final items = orderedChecklist(plan.trip.checklist.values);
+    final progress = checklistProgress(items);
+    return PaperPanel(
+      key: const ValueKey('trip-checklist'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(TravarySpace.lg, TravarySpace.lg, TravarySpace.lg, TravarySpace.sm),
+            // The count sits beside the heading, or under it when there's no
+            // room (a small phone, large text).
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.end,
+              spacing: TravarySpace.md,
+              children: [
+                Text(checklistHeading(plan, store.today), style: TravaryText.ledgerHeading),
+                if (progress != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(progress, style: TravaryText.small),
+                  ),
+              ],
+            ),
+          ),
+          if (items.isEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(TravarySpace.lg, 0, TravarySpace.lg, TravarySpace.md),
+              child: Text(checklistHint, style: TravaryText.bodySoft),
+            ),
+          for (final item in items) ...[
+            const PaperDivider(indent: 0),
+            Builder(
+              builder: (context) {
+                final text = checklistItemText(item, store.today);
+                return ChecklistRow(
+                  key: ValueKey('checklist-${item.id}'),
+                  title: text.title,
+                  due: text.due,
+                  overdue: text.overdue,
+                  done: item.done,
+                  semanticLabel: text.semanticLabel,
+                  onToggle: () => store.toggleChecklistItem(plan, item),
+                  onOpen: () => showChecklistItemSheet(context, plan, editing: item),
+                );
+              },
+            ),
+          ],
+          const PaperDivider(indent: 0),
+          PaperRow(
+            key: const ValueKey('checklist-add'),
+            title: 'Add something to do',
+            titleStyle: TravaryText.label.copyWith(color: colors.ink, fontSize: 16),
+            leading: const RowIcon(IconSlot.checklist),
+            trailing: Icon(Icons.add_rounded, color: colors.ink),
+            onTap: () => showChecklistItemSheet(context, plan),
+          ),
+        ],
       ),
     );
   }

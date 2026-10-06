@@ -13,7 +13,14 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   Today and Trips screens) can start one first with a name and dates
   (`features/trips/trip_details_sheet.dart`, also editing a trip: tap its
   tag or "Trip details"); its
-  planned dates keep it when empty, widen it, but never cut a booking out.
+  planned dates keep it when empty and keep its bookings to them
+  (`logic/trip_window.dart`): the form's date pickers offer only its days
+  and two travel days either side, an edit or import whose dates leave a
+  trip goes to the trip they fit (a typo'd month's stray trip folds back),
+  a trip that formed on its own asks before a booking stretches it well
+  past its bookings, new trip dates can't leave a booking out, and a new
+  trip on another's dates offers to open that one. Adding a stay or flight
+  from a trip starts on what it still needs (`firstGapFor`).
   The destination is read from the name as it's typed ("Japan holiday",
   "Disney World") by `logic/destinations.dart`: every country plus
   well-known regions and cities, offline, with suggestions for a half-typed
@@ -42,7 +49,10 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   mockup `docs/mockups/trip-ledger-c2/`): its postcard with the luggage tag,
   "Your plan" as ledger rows by date (`CardSize.ledger`, tickets on the
   row), what it still needs as dashed rows with Add and "Not needed"
-  (`logic/trip_gaps.dart`), who's coming, and a notched "Add a booking".
+  (`logic/trip_gaps.dart`), "Before you go" (the trip's shared checklist:
+  to-dos that aren't bookings, like the visa or the dog sitter, with an
+  optional "by" date that may be before the trip, `logic/checklist.dart`),
+  who's coming, and a notched "Add a booking".
   The trip itself (name, dates, family, card style, delete) is under "Trip
   details". Forms are a paper ticket in the trip's colours; a new flight
   starts on the departures board (`FlightFinder`) when flight data is on.
@@ -74,7 +84,8 @@ lib/
 │               visual_profile (ExperienceTheme, ThemeSource, TripVisualProfile),
 │               art_pack (selectors), country_codes (ISO allow-list),
 │               palette (DestinationPalette + validation), weather (optional pill input),
-│               travel_document (passports etc.: on this phone only)
+│               travel_document (passports etc.: on this phone only),
+│               checklist (a trip's to-dos)
 ├── logic/      Pure Dart rules, fully unit-tested:
 │               day_plan (done/now/next), day_layout (Today's rows and time rail),
 │               trip_plan (+ focus), trip_calendar (the calendar's weeks), trip_assignment,
@@ -82,6 +93,9 @@ lib/
 │               travel_documents (expiry checks against the next trip, masking, wording),
 │               flight_status_text (when live flight status shows, its wording),
 │               flight_fill (a found flight → the add-flight form, board wording),
+│               trip_window (the days a trip's bookings may use, where a booking
+│               goes: placeBooking, trip dates that leave bookings out, overlaps),
+│               checklist ("Before you go": order, wording, ideas),
 │               trip_gaps (what a trip still needs: nights without a stay, the
 │               flight home), trip_hero_text (a trip's tag), booking_form_text,
 │               card_text (all card wording), countdown_text (the countdown's
@@ -106,9 +120,10 @@ lib/
 │               card_shells, art_slots), widgets/ (nav_bar, today_header, time_rail, trip_calendar,
 │               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name,
 │               the C2 ledger look: ledger (paper panels, rows, TicketButton, linen),
-│               trip_hero, plan_gap_row, paper_form (form ticket, fields, date boxes),
+│               trip_hero, plan_gap_row, checklist_row, paper_form (form ticket,
+│               fields, date boxes),
 │               departure_board (board, split-flap tiles))
-├── features/   Screens: today, trips (trip, trip details), wallet (the "Documents" tab),
+├── features/   Screens: today, trips (trip, trip details, checklist sheet), wallet (the "Documents" tab),
 │               booking (form, flight finder, detail, viewer), profile,
 │               travel_documents (list, form, document, the tab's entry pill),
 │               account (Profile's sign-in card)
@@ -203,6 +218,8 @@ days; days in between show an `OngoingStrip`.
 ```
 trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[], plannedStart/End,
                                       hiddenGaps[] (plan gaps marked "Not needed", for everyone),
+                                      checklist{} (to-dos by id: text, done, due, createdAt; any
+                                      member, one item per write via `checklist.<id>`, max 100),
                                       memberNames{}, invite{} (server-only), premium (server-only),
                                       visualProfile, visualProfileUpdatedAt, visualProfileRequest (server-only)
 trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
@@ -288,7 +305,12 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
 ## Premium (Free / Trip Pass / Plus)
 
 - Rules live in one pure class: `logic/access.dart` (`AccessPolicy`). Plus
-  unlocks everything; a Trip Pass unlocks one trip until 7 days after it ends;
+  unlocks everything; a Trip Pass unlocks one trip of at most 30 days,
+  bought for the dates it had then (`TripPass`, `newTripPassFor`), until 7
+  days after it ends. It grows with the same holiday (the flight home added
+  later, up to 30 days) but never moves to another one (`tripPassLastDay`,
+  mirrored in `functions/src/tripPass.ts`; both run
+  `functions/src/tripPassCases.json`);
   a trip stamped `premium` by the server unlocks it for everyone on it ("Plus
   travels with the trip"); free gets 3 Smart Imports.
 - **Gate every premium entry point with `requirePremium()`**
@@ -309,9 +331,26 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   anything), never with a trial or a countdown to a charge.
 - Funnel events: `state/analytics.dart` (`track()`), debug-print for now.
 
-**Before launch:** Terms and Privacy links on the paywall, analytics wired
-to a real service, and a server function that mirrors purchases to
-`users/{uid}` and stamps `premium` on trips.
+**Public pages** (support, privacy, terms, delete your data) live in the
+`Matk44/travary_support` repo on GitHub Pages
+(`https://matk44.github.io/travary_support/`); the app links to them through
+`TravaryLinks` (`domain/links.dart`): Profile's "Help and legal" and the
+paywall's Terms and Privacy links. Support email `dreamprayer.dev@gmail.com`.
+When the app starts collecting something new (analytics, a new provider),
+update `privacy.html` there before releasing.
+
+**Before launch:** analytics wired to a real service, and the server side
+of purchases:
+- A Trip Pass is a consumable. After buying, the app calls a callable
+  (e.g. `claimTripPass(tripId)`) that checks the transaction with
+  RevenueCat and records the pass in `users/{uid}` with the trip's dates
+  **read from Firestore** (never sent by the app).
+- The server stamps `premium` on the trip, with `until` from
+  `tripPassLastDay` (`functions/src/tripPass.ts`). A trigger restamps it
+  when the trip's dates change (bookings and planned dates), so the pass
+  grows with its holiday and stops at the rule's limits.
+- Plus mirrors to `users/{uid}` from RevenueCat's webhook and stamps every
+  trip the subscriber organises.
 
 ## Accounts (Sign in with Apple / Google)
 
@@ -460,7 +499,8 @@ the app. Project `travary-444` is on the Blaze plan.
   in the tree is now the `PageView`'s.
 - Never hardcode secret keys in the app; AI runs server-side (see AI).
 - Mirrors kept equal by tests: art subjects, the visual vocabulary and ISO
-  country list (Dart ↔ TypeScript), `appBuildNumber` ↔ pubspec's `+N`.
+  country list (Dart ↔ TypeScript), Trip Pass coverage (shared cases in
+  `functions/src/tripPassCases.json`), `appBuildNumber` ↔ pubspec's `+N`.
 - The Firebase CLI shadows `node` inside `emulators:exec`; scripts use
   `$npm_node_execpath`.
 

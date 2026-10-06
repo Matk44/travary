@@ -45,12 +45,60 @@ String? bookingSpanLabel(BookingKind kind, LocalDate start, LocalDate? end) {
   return '${days + 1} days';
 }
 
-/// Under a form's title: the trip it's going into, "Japan · 11–30 Oct", or
-/// what happens without one.
-String formTripLine(TripPlan? plan) {
-  if (plan == null) return 'Joins a trip by its dates';
+/// Under a form's title: the trip it's going into, "Japan · 11–30 Oct",
+/// "Moves to Japan · 11–30 Oct" when an edit takes it out of its trip, or
+/// "Starts a new trip".
+String formTripLine(TripPlan? plan, {bool moves = false}) {
+  if (plan == null) return 'Starts a new trip';
   final start = plan.start;
   final end = plan.end;
-  final title = plan.trip.title.trim().isEmpty ? 'Your trip' : plan.trip.title.trim();
-  return start == null || end == null ? title : '$title · ${formatDayMonthRange(start, end)}';
+  final title = _tripTitle(plan);
+  final line = start == null || end == null ? title : '$title · ${formatDayMonthRange(start, end)}';
+  return moves ? 'Moves to $line' : line;
 }
+
+/// Asked before a booking stretches a trip that formed from its bookings
+/// well past them: "Add to Tokyo?".
+class StretchQuestion {
+  const StretchQuestion({required this.title, required this.message, required this.keep, required this.other});
+
+  final String title;
+  final String message;
+
+  /// Into the trip anyway: "Add to Tokyo".
+  final String keep;
+
+  /// Where its dates put it instead: "Add to Paris", "Start a new trip".
+  final String other;
+}
+
+/// [plan] (without the booking being edited) runs to fewer days than a
+/// booking from [start] to [end]; [alternative] is where its dates would
+/// put it instead (null: a new trip).
+StretchQuestion stretchQuestion(
+  TripPlan plan,
+  LocalDate start,
+  LocalDate end, {
+  TripPlan? alternative,
+  bool editing = false,
+}) {
+  final title = _tripTitle(plan);
+  final from = LocalDate.min(plan.start!, start);
+  final to = LocalDate.max(plan.end!, end);
+  return StretchQuestion(
+    title: editing ? 'Keep in $title?' : 'Add to $title?',
+    message:
+        '$title runs ${formatDayMonthRange(plan.start!, plan.end!)} so far. '
+        'This is on ${formatDayMonthRange(start, end)}, so the trip would run ${formatDayMonthRange(from, to)}.',
+    keep: editing ? 'Keep in $title' : 'Add to $title',
+    other: alternative == null ? 'Start a new trip' : 'Add to ${_tripTitle(alternative)}',
+  );
+}
+
+/// Under a draft Smart Import found outside the trip it was opened from:
+/// "Not on Japan's dates, so it goes to Paris".
+String outsideTripText(TripPlan asked, TripPlan? elsewhere) =>
+    'Not on ${_tripTitle(asked)}\'s dates, so it '
+    '${elsewhere == null ? 'starts a new trip' : 'goes to ${_tripTitle(elsewhere)}'}';
+
+String _tripTitle(TripPlan plan) => plan.trip.title.trim().isEmpty ? 'Your trip' : plan.trip.title.trim();

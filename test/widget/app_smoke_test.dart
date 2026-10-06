@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:travary/app/home_shell.dart';
@@ -155,7 +156,53 @@ void main() {
       // 8-day trip: $7.99 / 8 = $1.00 a day.
       expect(find.textContaining(r'$1.00 a day'), findsOneWidget);
       expect(find.text(r'Get Trip Pass · $7.99'), findsOneWidget);
-      expect(find.textContaining('One payment, no subscription.'), findsOneWidget);
+      // It says which dates it covers: the trip's now, which later edits
+      // never move.
+      expect(
+        find.text(
+          'One payment, no subscription. Unlocks Plus on Orlando (12–19 Oct) for everyone on the trip, '
+          'until 26 Oct 2026.',
+        ),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.text(r'Get Trip Pass · $7.99'));
+      await tester.pumpAndSettle();
+      final premium = Provider.of<PremiumStore>(tester.element(find.byType(HomeShell)), listen: false);
+      final pass = premium.entitlements.tripPasses.values.single;
+      expect((pass.start, pass.end), (LocalDate(2026, 10, 12), LocalDate(2026, 10, 19)));
+    });
+
+    testWidgets('the paywall links to the Terms of Use and Privacy Policy', (tester) async {
+      await pumpApp(tester, DateTime(2026, 10, 14, 11, 0), entitlements: const Entitlements(smartImportsUsed: 3));
+
+      await tester.tap(find.bySemanticsLabel('Add a booking'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Snap a booking'));
+      await tester.pumpAndSettle();
+
+      final opened = <Object?>[];
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        const MethodChannel('plugins.flutter.io/url_launcher'),
+        (call) async {
+          opened.add((call.arguments as Map)['url']);
+          return true;
+        },
+      );
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          const MethodChannel('plugins.flutter.io/url_launcher'),
+          null,
+        ),
+      );
+      await tester.tap(find.byKey(const ValueKey('paywall-terms')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('paywall-privacy')));
+      await tester.pumpAndSettle();
+      expect(opened, [
+        'https://matk44.github.io/travary_support/terms.html',
+        'https://matk44.github.io/travary_support/privacy.html',
+      ]);
     });
 
     testWidgets('closing the paywall changes nothing', (tester) async {

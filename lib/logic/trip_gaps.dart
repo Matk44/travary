@@ -97,6 +97,21 @@ List<PlanGap> planGaps(TripPlan plan) {
   ];
 }
 
+/// The first gap a booking of [kind] would fill in [plan], leaving out
+/// any that's over before [from] (during the trip, today): where the form
+/// starts when a stay or flight is added from the trip. Null for kinds no
+/// gap asks for, or when nothing is missing.
+PlanGap? firstGapFor(BookingKind kind, TripPlan plan, {LocalDate? from}) {
+  for (final gap in planGaps(plan)) {
+    if (gap.bookingKind != kind) continue;
+    // A stay gap's last night is the day before its check-out.
+    final lastDay = gap.kind == PlanGapKind.stay ? (gap.end ?? gap.start.addDays(1)).addDays(-1) : gap.start;
+    if (from != null && lastDay.isBefore(from)) continue;
+    return gap;
+  }
+  return null;
+}
+
 /// A gap, worded for its row: "Stay needed" / "14–16 Oct · 2 nights" / "Add".
 class PlanGapText {
   const PlanGapText({required this.title, required this.when, required this.semanticLabel});

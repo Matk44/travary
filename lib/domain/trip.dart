@@ -1,3 +1,4 @@
+import 'checklist.dart';
 import 'country_codes.dart';
 import 'local_date.dart';
 import 'premium.dart';
@@ -24,6 +25,7 @@ class Trip {
     this.memberNames = const {},
     this.premium,
     this.hiddenGaps = const {},
+    this.checklist = const {},
     required this.createdAt,
     required this.updatedAt,
   });
@@ -70,6 +72,11 @@ class Trip {
   /// asked again.
   final Set<String> hiddenGaps;
 
+  /// "Before you go": things to sort out that aren't bookings, by item id.
+  /// Shared, and changed one item at a time (`TravelRepository
+  /// .saveChecklistItem`), so two people ticking at once don't collide.
+  final Map<String, ChecklistItem> checklist;
+
   bool get isShared => memberIds.length > 1;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -96,6 +103,7 @@ class Trip {
     TripDestination? destination,
     bool clearDestination = false,
     Set<String>? hiddenGaps,
+    Map<String, ChecklistItem>? checklist,
     DateTime? updatedAt,
   }) {
     return Trip(
@@ -113,6 +121,7 @@ class Trip {
       memberNames: memberNames,
       premium: premium,
       hiddenGaps: hiddenGaps ?? this.hiddenGaps,
+      checklist: checklist ?? this.checklist,
       createdAt: createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -124,7 +133,8 @@ class Trip {
   /// Fields the traveller can edit: the only ones sent when updating a trip.
   /// Never the visual profile, which only the server writes, and the theme
   /// only when the traveller picked it: an automatic trip's theme belongs
-  /// to the classifier, and this phone's copy may be seconds old.
+  /// to the classifier, and this phone's copy may be seconds old. Nor the
+  /// checklist, which changes an item at a time.
   Map<String, Object?> toEditableJson() => {
     'title': title,
     if (themeSource == ThemeSource.manual) 'theme': _themeWireName,
@@ -146,6 +156,7 @@ class Trip {
     'plannedEnd': plannedEnd?.toIso(),
     'destination': ?destination?.toJson(),
     if (hiddenGaps.isNotEmpty) 'hiddenGaps': [...hiddenGaps]..sort(),
+    if (checklist.isNotEmpty) 'checklist': {for (final item in checklist.values) item.id: item.toJson()},
     'ownerId': ownerId,
     'memberIds': memberIds,
     'createdAt': createdAt.millisecondsSinceEpoch,
@@ -174,6 +185,10 @@ class Trip {
       hiddenGaps: {
         for (final gap in json['hiddenGaps'] as List? ?? const [])
           if (gap is String && gap.length <= 40) gap,
+      },
+      checklist: {
+        for (final entry in (json['checklist'] is Map ? json['checklist'] as Map : const {}).entries)
+          if (ChecklistItem.tryParse('${entry.key}', entry.value) case final item?) item.id: item,
       },
       createdAt: _millis(json['createdAt']),
       updatedAt: _millis(json['updatedAt']),

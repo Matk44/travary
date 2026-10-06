@@ -7,6 +7,8 @@ import 'package:travary/domain/domain.dart';
 import 'package:travary/features/sharing/join_trip_sheet.dart';
 import 'package:travary/features/trips/trip_details_sheet.dart';
 import 'package:travary/features/trips/trip_screen.dart';
+import 'package:travary/logic/access.dart';
+import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import '../helpers.dart';
@@ -145,6 +147,90 @@ void main() {
     await tester.tap(find.text('Save'));
     await tester.pumpAndSettle();
     expect(find.text('10–16 Nov 2026'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('new dates can\'t leave a booking out', (tester) async {
+    await pumpApp(
+      tester,
+      trips: [trip('rome', title: 'Rome')],
+      bookings: [_romeHotel],
+    );
+    await openTab(tester, 'Trips');
+    await tester.tap(find.text('Rome'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('trip-hero-tag')));
+    await tester.pumpAndSettle();
+
+    // Next spring: the hotel would be left behind, so it won't save.
+    await pickDates(tester, '03/01/2027', '03/10/2027');
+    expect(
+      find.text(
+        'Hotel Artemide (10–14 Nov) would be left out. Choose dates that include it, or change the booking first.',
+      ),
+      findsOneWidget,
+    );
+    final save = find.byKey(const ValueKey('save-trip'));
+    expect(tester.widget<FilledButton>(save).onPressed, isNull);
+
+    // Dates that include it are fine.
+    await pickDates(tester, '11/09/2026', '11/15/2026');
+    expect(find.textContaining('would be left out'), findsNothing);
+    await tester.tap(save);
+    await tester.pumpAndSettle();
+    final plan = storeOf(tester).plan('rome')!;
+    expect((plan.start, plan.end), (LocalDate(2026, 11, 9), LocalDate(2026, 11, 15)));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a new trip on the dates of another says so, and can open that one instead', (tester) async {
+    await pumpApp(
+      tester,
+      trips: [trip('rome', title: 'Rome')],
+      bookings: [_romeHotel],
+    );
+    await openTab(tester, 'Trips');
+    await tester.tap(find.widgetWithText(InfoPill, 'New trip'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.widgetWithText(TextField, 'Where to?'), 'Florence');
+    await pickDates(tester, '11/12/2026', '11/16/2026');
+    expect(find.text('These dates overlap Rome (10–14 Nov).'), findsOneWidget);
+    expect(find.text('Create anyway'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('open-overlapping-trip')));
+    await tester.pumpAndSettle();
+    expect(find.byType(TripDetailsSheet), findsNothing);
+    expect(find.descendant(of: find.byType(TripScreen), matching: find.text('Rome')), findsOneWidget);
+    expect(storeOf(tester).plans, hasLength(1));
+  });
+
+  testWidgets('a Trip Pass grows with its trip, up to 30 days; past that, it says when Plus ends', (tester) async {
+    await pumpApp(
+      tester,
+      trips: [trip('rome', title: 'Rome')],
+      bookings: [_romeHotel],
+    );
+    final premium = Provider.of<PremiumStore>(tester.element(find.byType(Scaffold).first), listen: false);
+    premium.debugSetEntitlements(Entitlements(tripPasses: {'rome': newTripPassFor(storeOf(tester).plan('rome')!)}));
+    await openTab(tester, 'Trips');
+    await tester.tap(find.text('Rome'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('trip-hero-tag')));
+    await tester.pumpAndSettle();
+
+    // A few more days: still covered, nothing to say.
+    await pickDates(tester, '11/10/2026', '11/20/2026');
+    expect(find.byKey(const ValueKey('trip-pass-ends')), findsNothing);
+
+    // Six weeks is longer than a pass covers.
+    await pickDates(tester, '11/10/2026', '12/20/2026');
+    expect(
+      find.text('A Trip Pass covers trips of up to 30 days, so Plus on this trip ends on 21 Nov 2026.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(const ValueKey('save-trip')));
+    await tester.pumpAndSettle();
+    expect(premium.entitlements.tripPasses['rome']!.end, LocalDate(2026, 11, 14));
     expect(tester.takeException(), isNull);
   });
 

@@ -354,5 +354,18 @@ import '../domain/domain.dart';
     details: {DetailKeys.partySize: '2'},
   );
 
+  // What's left to sort before the Lake District ("Before you go").
+  ChecklistItem todo(String id, String text, {LocalDate? due, bool done = false}) =>
+      ChecklistItem(id: id, text: text, due: due, done: done, createdAt: created);
+  trips[trips.indexOf(lakes)] = lakes.copyWith(
+    checklist: {
+      for (final item in [
+        todo('l-boots', 'Re-proof the walking boots', done: true),
+        todo('l-boat', 'Book the Windermere boat cruise', due: l1.addDays(-21)),
+        todo('l-sitter', 'Cat sitter', due: l1.addDays(-7)),
+      ])
+        item.id: item,
+    },
+  );
   return (trips: trips, bookings: bookings);
 }

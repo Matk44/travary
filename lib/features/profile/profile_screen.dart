@@ -11,6 +11,7 @@ import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/travel_store.dart';
 import '../account/account_card.dart';
+import '../help/help_links.dart';
 import '../premium/plus_card.dart';
 import '../travel_documents/document_actions.dart';
 import 'card_gallery_screen.dart';
@@ -104,6 +105,36 @@ class ProfileScreen extends StatelessWidget {
               onTap: () => _pickPreviewTime(context, store),
             ),
           ],
+          const SectionLabel('Help and legal'),
+          ListTile(
+            key: const ValueKey('help-support'),
+            leading: const Icon(Icons.help_outline_rounded),
+            title: const Text('Help and support'),
+            subtitle: const Text('Answers to common questions'),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+            onTap: () => openTravaryPage(context, TravaryLinks.support),
+          ),
+          ListTile(
+            key: const ValueKey('help-email'),
+            leading: const Icon(Icons.mail_outline_rounded),
+            title: const Text('Email us'),
+            subtitle: const Text(TravaryLinks.supportEmail),
+            onTap: () => emailSupport(context),
+          ),
+          ListTile(
+            key: const ValueKey('help-privacy'),
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: const Text('Privacy Policy'),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+            onTap: () => openTravaryPage(context, TravaryLinks.privacy),
+          ),
+          ListTile(
+            key: const ValueKey('help-terms'),
+            leading: const Icon(Icons.description_outlined),
+            title: const Text('Terms of Use'),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+            onTap: () => openTravaryPage(context, TravaryLinks.terms),
+          ),
           const SectionLabel('About'),
           const ListTile(
             leading: Icon(Icons.luggage_outlined),

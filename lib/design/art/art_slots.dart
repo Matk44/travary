@@ -33,12 +33,16 @@ enum IconSlot {
 
   /// The ledger screens (trip, add sheet, forms): a paperclip for tickets,
   /// a person with a plus for inviting, a postage stamp for the card style,
-  /// a clock face for times, a passport for travel documents.
+  /// a clock face for times, a passport for travel documents, a ticked list
+  /// for the trip's checklist.
   attach('attach', Icons.attach_file_rounded),
   invite('invite', Icons.group_add_outlined),
   look('look', Icons.style_outlined),
   clock('clock', Icons.schedule_rounded),
   passport('passport', Icons.menu_book_rounded),
+
+  /// A trip's "Before you go" checklist.
+  checklist('checklist', Icons.checklist_rounded),
 
   /// A stop on the day timeline, and the stop happening now. While these
   /// are missing the timeline draws plain dots.

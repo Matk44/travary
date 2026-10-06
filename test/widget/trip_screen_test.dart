@@ -202,7 +202,13 @@ void main() {
         await tester.tap(find.byTooltip('Close'));
         await tester.pumpAndSettle();
         final gap = find.byKey(const ValueKey('gap-stay:2026-10-13'));
-        await toEnd(tester);
+        // Below the plan (and above the checklist): scroll to it.
+        await tester.scrollUntilVisible(
+          gap,
+          200,
+          scrollable: find.descendant(of: find.byType(ListView).first, matching: find.byType(Scrollable)).first,
+        );
+        await tester.pumpAndSettle();
         await tester.tap(find.descendant(of: gap, matching: find.text('Add')));
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);

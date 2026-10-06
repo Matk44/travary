@@ -9,7 +9,11 @@ import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/access.dart';
+import '../../logic/booking_form_text.dart';
 import '../../logic/card_text.dart';
+import '../../logic/trip_assignment.dart';
+import '../../logic/trip_plan.dart';
+import '../../logic/trip_window.dart';
 import '../../state/analytics.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
@@ -43,6 +47,9 @@ class SmartImportScreen extends StatefulWidget {
 
   /// The gate decision; free uses are counted once something is found.
   final AccessDecision access;
+
+  /// The trip it was opened from. Bookings on its dates go into it; the
+  /// rest find their own trip.
   final String? tripId;
 
   @override
@@ -129,16 +136,31 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     if (closeAfter || _saved.length == _drafts.length) _finish();
   }
 
+  /// Whether [draft] goes into the trip the import was opened from (when it
+  /// was): its dates fit it, as far as dates on a ticket go.
+  bool _fitsTrip(Booking draft, TripPlan? trip) =>
+      trip != null && fitsTrip(draft.startDate, draft.lastDate, trip, looseMarginDays: sameSourceMarginDays);
+
+  /// For a draft outside the trip the import was opened from: that trip,
+  /// and where its dates take it instead (null: a new trip). Null when it
+  /// goes into the trip after all.
+  (TripPlan, TripPlan?)? _elsewhere(Booking draft, TripPlan? trip, TravelStore store) {
+    if (trip == null || _fitsTrip(draft, trip)) return null;
+    final elsewhere = findTripFor(draft.startDate, draft.lastDate, store.plans);
+    return elsewhere?.id == trip.id ? null : (trip, elsewhere);
+  }
+
   Future<void> _addSelected() async {
     setState(() => _saving = true);
     final store = context.read<TravelStore>();
+    final trip = widget.tripId == null ? null : store.plan(widget.tripId!);
     final bookings = <Booking>[];
     for (final index in _selected.toList()..sort()) {
       final attachment = await store.attachments?.import(widget.filePath, name: widget.fileName);
       bookings.add(
         _drafts[index].booking.copyWith(
           id: store.repository.newId(),
-          tripId: widget.tripId ?? '',
+          tripId: _fitsTrip(_drafts[index].booking, trip) ? trip!.id : '',
           attachments: [?attachment],
         ),
       );
@@ -182,6 +204,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     final store = context.watch<TravelStore>();
     final art = store.artForAll([for (final d in _drafts) d.booking]);
     final toAdd = _selected.length;
+    final trip = widget.tripId == null ? null : store.plan(widget.tripId!);
 
     return Column(
       children: [
@@ -223,11 +246,20 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
                             ),
                             if (_saved.contains(index))
                               Text('Added', style: TravaryText.small.copyWith(color: TravaryColors.teal))
-                            else if (draft.uncertain.isNotEmpty)
-                              Text(
-                                'Check ${draft.uncertain.length} detail${draft.uncertain.length == 1 ? '' : 's'}',
-                                style: TravaryText.small.copyWith(color: TravaryColors.coral),
-                              ),
+                            else ...[
+                              if (_elsewhere(draft.booking, trip, store) case (final asked, final elsewhere))
+                                Text(
+                                  outsideTripText(asked, elsewhere),
+                                  key: ValueKey('outside-trip-$index'),
+                                  textAlign: TextAlign.end,
+                                  style: TravaryText.small,
+                                ),
+                              if (draft.uncertain.isNotEmpty)
+                                Text(
+                                  'Check ${draft.uncertain.length} detail${draft.uncertain.length == 1 ? '' : 's'}',
+                                  style: TravaryText.small.copyWith(color: TravaryColors.coral),
+                                ),
+                            ],
                           ],
                         ),
                       ),

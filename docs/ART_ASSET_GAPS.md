@@ -233,4 +233,5 @@ generation prompts and checks are in
 | `icons/look.png` (`IconSlot.look`) | 1024 × 1024, transparent | Card style (Trip details) | Supplied letterpress perforated stamp | **Supplied** |
 | `icons/clock.png` (`IconSlot.clock`) | 1024 × 1024, transparent | Times on the form ticket | Supplied letterpress clock at 10:10 | **Supplied** |
 | `icons/passport.png` (`IconSlot.passport`) | 1024 × 1024, transparent | Travel documents rows | Supplied letterpress passport booklet | **Supplied** |
+| `icons/checklist.png` (`IconSlot.checklist`) | 1024 × 1024, transparent, one-colour navy ink like `passport` | "Add something to do" on a trip's "Before you go" checklist | Material checklist glyph in the trip's ink (**visible**) | Make it: a letterpress luggage label or note with two ticked lines, matching the other C2 icons |
 | Country packs' `common/trip_postcard` | 1536 × 1024 | Trip headers and Trips rows for the 25 countries | The place's countdown postcard, cropped | **Published** 5 Oct 2026 (packs v3, catalog v80) |

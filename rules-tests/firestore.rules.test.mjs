@@ -129,3 +129,22 @@ test('only a well-formed destination is accepted', async () => {
   await assertFails(updateDoc(trip, { destination: { countryCode: 'JP', countryName: 'Japan', city: 7 } }));
   await assertFails(updateDoc(doc(db('mallory'), 'trips/t1'), { destination: { countryCode: 'JP', countryName: 'Japan' } }));
 });
+
+test('members tick, add and remove checklist items one at a time', async () => {
+  const item = { text: 'Apply for the visa', done: false, due: '2026-10-01', createdAt: 1 };
+  await assertSucceeds(updateDoc(doc(db('bob'), 'trips/t1'), { 'checklist.c1': item }));
+  await assertSucceeds(updateDoc(doc(db('alice'), 'trips/t1'), { 'checklist.c2': { ...item, text: 'Dog sitter' } }));
+  await assertSucceeds(updateDoc(doc(db('bob'), 'trips/t1'), { 'checklist.c1.done': true }));
+  const stored = (await getDoc(doc(db('alice'), 'trips/t1'))).data().checklist;
+  if (!stored.c1.done || stored.c2.text !== 'Dog sitter') throw new Error('an item was lost');
+  await assertSucceeds(updateDoc(doc(db('alice'), 'trips/t1'), { 'checklist.c1': deleteField() }));
+  await assertSucceeds(setDoc(doc(db('carol'), 'trips/t6'), newTrip('carol', { checklist: { c1: item } })));
+});
+
+test('a checklist is a map, of at most 100 items, for members only', async () => {
+  const trip = doc(db('bob'), 'trips/t1');
+  await assertFails(updateDoc(trip, { checklist: ['Apply for the visa'] }));
+  const many = Object.fromEntries(Array.from({ length: 101 }, (_, i) => [`c${i}`, { text: 'x', done: false, createdAt: 1 }]));
+  await assertFails(updateDoc(trip, { checklist: many }));
+  await assertFails(updateDoc(doc(db('mallory'), 'trips/t1'), { 'checklist.c1': { text: 'x', done: false, createdAt: 1 } }));
+});

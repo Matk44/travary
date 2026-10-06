@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart';
 
 import '../domain/domain.dart';
+import 'access.dart';
+import 'formatters.dart';
 
 /// Price wording for the paywall. Prices are framed the way people weigh
 /// them on holiday: per month, per person, per day of the trip.
@@ -19,3 +21,20 @@ String perPersonPerMonth(Offer offer) => formatPrice(offer.amount / 12 / Pricing
 
 /// "$1.14" a day for a Trip Pass on a trip of [days] days.
 String perDay(Offer offer, int days) => formatPrice(offer.amount / (days < 1 ? 1 : days), offer.currencyCode);
+
+/// What a Trip Pass covers, on the trip's details: "Trip Pass, until 30
+/// Oct 2026" ([lastDay] from `tripPassLastDay`).
+String tripPassCoversText(LocalDate lastDay) => 'Trip Pass, until ${formatDate(lastDay)}';
+
+/// Under a trip's new dates, [start] to [end], when its Trip Pass won't
+/// stretch to them (too long a trip, or another time altogether): when Plus
+/// ends instead. Null when the pass covers them.
+String? tripPassEndsText(TripPass pass, LocalDate start, LocalDate end) {
+  final lastDay = tripPassLastDay(pass, start, end);
+  if (!end.addDays(Pricing.tripPassGraceDays).isAfter(lastDay)) return null;
+  final ends = 'so Plus on this trip ends on ${formatDate(lastDay)}.';
+  if (start.daysUntil(end) + 1 > Pricing.tripPassMaxDays) {
+    return 'A Trip Pass covers trips of up to ${Pricing.tripPassMaxDays} days, $ends';
+  }
+  return 'Your Trip Pass is for ${formatDayMonthRange(pass.start, pass.end)}, $ends';
+}

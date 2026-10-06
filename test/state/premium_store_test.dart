@@ -30,12 +30,13 @@ void main() {
     expect(store.entitlements.plus!.expiresAt, now.add(const Duration(days: 365)));
   });
 
-  test('a Trip Pass needs a trip', () async {
+  test('a Trip Pass needs a trip, and keeps the dates it was bought for', () async {
     final pass = store.offer(OfferKind.tripPass)!;
+    final orlando = TripPass(tripId: 'orlando', start: LocalDate(2026, 10, 12), end: LocalDate(2026, 10, 18));
     expect(await store.purchase(pass, source: 'test'), PurchaseOutcome.failed);
-    expect(await store.purchase(pass, tripId: 'orlando', source: 'test'), PurchaseOutcome.purchased);
+    expect(await store.purchase(pass, tripPass: orlando, source: 'test'), PurchaseOutcome.purchased);
     await pumpEventQueue();
-    expect(store.entitlements.tripPasses, {'orlando'});
+    expect(store.entitlements.tripPasses, {'orlando': orlando});
   });
 
   test('only free Smart Imports are counted', () async {

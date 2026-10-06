@@ -19,12 +19,14 @@ import '../design/art/art_slots.dart';
 import '../domain/domain.dart';
 import '../logic/art_pack_selection.dart';
 import '../logic/art_subjects.dart';
+import '../logic/checklist.dart';
 import '../logic/day_plan.dart';
 import '../logic/destinations.dart';
 import '../logic/trip_assignment.dart';
 import '../logic/trip_gaps.dart';
 import '../logic/trip_plan.dart';
 import '../logic/visual_profile_request.dart';
+import 'analytics.dart';
 import 'art_catalog_controller.dart';
 import 'visual_profile_coordinator.dart';
 
@@ -305,14 +307,18 @@ class TravelStore extends ChangeNotifier {
   // ---------------------------------------------------------------- writing
 
   /// Saves [booking]. If it has no trip yet, it joins the trip it overlaps
-  /// or a new trip is created for it. Pass [previous] when editing.
-  Future<SaveResult> saveBooking(Booking booking, {Booking? previous}) async {
+  /// or a new trip is created for it ([newTrip]: a new trip whatever its
+  /// dates say, because the traveller chose one). Pass [previous] when
+  /// editing.
+  Future<SaveResult> saveBooking(Booking booking, {Booking? previous, bool newTrip = false}) async {
     var saved = booking.copyWith(updatedAt: DateTime.now());
-    var newTrip = false;
+    var created = false;
     String tripTitle;
 
     if (saved.tripId.isEmpty) {
-      final match = findTripFor(saved.startDate, saved.lastDate, _plans) ?? findReturnFlightTrip(saved, _plans);
+      final match = newTrip
+          ? null
+          : findTripFor(saved.startDate, saved.lastDate, _plans) ?? findReturnFlightTrip(saved, _plans);
       if (match != null) {
         saved = saved.copyWith(tripId: match.id);
         tripTitle = match.trip.title;
@@ -321,7 +327,7 @@ class TravelStore extends ChangeNotifier {
         final trip = await createTrip(title, destination: detectPlace(title)?.destination);
         saved = saved.copyWith(tripId: trip.id);
         tripTitle = trip.title;
-        newTrip = true;
+        created = true;
       }
     } else {
       tripTitle = plan(saved.tripId)?.trip.title ?? 'your trip';
@@ -347,7 +353,7 @@ class TravelStore extends ChangeNotifier {
       }
     }
     unawaited(_backUp(saved.id));
-    return SaveResult(saved, tripTitle, newTrip: newTrip);
+    return SaveResult(saved, tripTitle, newTrip: created);
   }
 
   /// Saves several new bookings at once (everything Smart Import found in
@@ -465,6 +471,36 @@ class TravelStore extends ChangeNotifier {
     if (!hasEnoughToClassify(trip, plan.bookings)) return;
     await classifier.classifyNow(trip.id);
   }
+
+  // -------------------------------------------------------------- checklist
+
+  /// Adds "[text]" to [plan]'s checklist, by [due] if given. Null when
+  /// there's nothing to add or the list is full. [idea]: it was one of the
+  /// suggestions (for analytics; the words themselves are never sent).
+  Future<ChecklistItem?> addChecklistItem(TripPlan plan, String text, {LocalDate? due, bool idea = false}) async {
+    final clean = cleanChecklistText(text);
+    if (clean == null || plan.trip.checklist.length >= maxChecklistItems) return null;
+    final item = ChecklistItem(id: repository.newId(), text: clean, due: due, createdAt: DateTime.now());
+    await repository.saveChecklistItem(plan.id, item);
+    track('checklist_item_added', {'idea': idea, 'due': due != null, 'count': plan.trip.checklist.length + 1});
+    return item;
+  }
+
+  /// Saves a changed (or deleted and brought back) [item].
+  Future<void> saveChecklistItem(TripPlan plan, ChecklistItem item) async {
+    final clean = cleanChecklistText(item.text);
+    if (clean == null) return;
+    await repository.saveChecklistItem(plan.id, item.copyWith(text: clean));
+  }
+
+  /// Ticks [item], or unticks it.
+  Future<void> toggleChecklistItem(TripPlan plan, ChecklistItem item) async {
+    await repository.saveChecklistItem(plan.id, item.copyWith(done: !item.done));
+    if (!item.done) track('checklist_item_done');
+  }
+
+  Future<void> deleteChecklistItem(TripPlan plan, ChecklistItem item) =>
+      repository.deleteChecklistItem(plan.id, item.id);
 
   /// Checks for new art packs if it's been a while (e.g. back from the
   /// background). Never throws.

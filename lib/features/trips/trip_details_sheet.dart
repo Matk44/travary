@@ -5,8 +5,11 @@ import '../../design/tokens.dart';
 import '../../domain/domain.dart';
 import '../../logic/destinations.dart';
 import '../../logic/formatters.dart';
+import '../../logic/price_text.dart';
 import '../../logic/trip_plan.dart';
+import '../../logic/trip_window.dart';
 import '../../state/analytics.dart';
+import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../sharing/join_trip_sheet.dart';
 import 'place_picker_sheet.dart';
@@ -19,7 +22,7 @@ Future<void> startNewTrip(BuildContext context) async {
   final outcome = await _showSheet(context, const TripDetailsSheet());
   if (outcome == null || !context.mounted) return;
   switch (outcome) {
-    case _Created(:final tripId):
+    case _Created(:final tripId) || _OpenInstead(:final tripId):
       await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => TripScreen(tripId: tripId)));
     case _JoinInstead():
       await startJoinTrip(context);
@@ -57,13 +60,21 @@ class _Saved extends _Outcome {
   const _Saved();
 }
 
+/// The new trip's dates overlap a trip already there: open that instead.
+class _OpenInstead extends _Outcome {
+  const _OpenInstead(this.tripId);
+
+  final String tripId;
+}
+
 /// "Have an invite code?": join someone's trip instead.
 class _JoinInstead extends _Outcome {
   const _JoinInstead();
 }
 
 /// A trip's name, destination and dates: a new trip, or [editing] an
-/// existing one. The destination is read from the name as it's typed
+/// existing one. New dates can't leave a booking out (the trip would only
+/// stretch over it); dates overlapping another trip say so first. The destination is read from the name as it's typed
 /// ("Japan holiday" is in Japan), with suggestions for a place half typed;
 /// the traveller can change or remove it, and it's never required.
 class TripDetailsSheet extends StatefulWidget {
@@ -172,6 +183,7 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
       _datesChanged = true;
       _datesError = null;
     });
+    if (_leftOut.isNotEmpty) track('trip_dates_left_out', {'bookings': _leftOut.length});
   }
 
   Future<void> _save() async {
@@ -180,13 +192,18 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
       _titleError = title.isEmpty ? 'Where are you going? e.g. "Paris"' : null;
       _datesError = !_isEditing && _start == null ? 'Choose your dates' : null;
     });
-    if (_titleError != null || _datesError != null) return;
+    if (_titleError != null || _datesError != null || _leftOut.isNotEmpty) return;
     setState(() => _saving = true);
     final store = context.read<TravelStore>();
     final editing = _editing;
     if (editing == null) {
+      final overlaps = overlappingTrip(_start!, _end!, store.plans) != null;
       final trip = await store.createTrip(title, start: _start, end: _end, destination: _destination);
-      track('trip_created', {'days': _start!.daysUntil(_end!) + 1, 'destination': _destination?.countryCode});
+      track('trip_created', {
+        'days': _start!.daysUntil(_end!) + 1,
+        'destination': _destination?.countryCode,
+        'overlaps': overlaps,
+      });
       if (mounted) Navigator.of(context).pop(_Created(trip.id));
       return;
     }
@@ -202,13 +219,31 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
     if (mounted) Navigator.of(context).pop(const _Saved());
   }
 
+  /// Bookings the chosen dates would leave out: they can't be saved.
+  List<Booking> get _leftOut {
+    final editing = _editing;
+    if (editing == null || !_datesChanged || _start == null) return const [];
+    return bookingsLeftOut(editing.bookings, _start!, _end!);
+  }
+
   @override
   Widget build(BuildContext context) {
     final start = _start;
     final end = _end;
     final days = start == null ? 0 : start.daysUntil(end!) + 1;
     final booked = _editing == null ? null : bookedSpan(_editing!.bookings);
-    final stretched = start != null && _editing != null && leavesOutBookings(_editing!.bookings, start, end!);
+    final leftOut = _leftOut;
+    final stretched =
+        leftOut.isEmpty && start != null && _editing != null && leavesOutBookings(_editing!.bookings, start, end!);
+    // Only for dates that can be saved: a left-out booking comes first.
+    final overlap = start == null || leftOut.isNotEmpty
+        ? null
+        : overlappingTrip(start, end!, context.watch<TravelStore>().plans, except: _editing?.id);
+    final premium = context.watch<PremiumStore>();
+    final pass = _editing == null || premium.hasPlus ? null : premium.policy.tripPassFor(_editing!);
+    final passEnds = leftOut.isEmpty && _datesChanged && pass != null && start != null
+        ? tripPassEndsText(pass, start, end!)
+        : null;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -272,7 +307,8 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
               child: InputDecorator(
                 decoration: InputDecoration(
                   labelText: 'When?',
-                  errorText: _datesError,
+                  errorText: _datesError ?? (leftOut.isEmpty ? null : leftOutText(leftOut)),
+                  errorMaxLines: 4,
                   suffixIcon: const Icon(Icons.calendar_month_outlined),
                 ),
                 child: Text(
@@ -290,8 +326,38 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
                 style: TravaryText.small,
               ),
             ],
+            if (overlap != null) ...[
+              const SizedBox(height: TravarySpace.sm),
+              Text(overlapText(overlap), key: const ValueKey('trip-overlap'), style: TravaryText.small),
+              if (!_isEditing)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    key: const ValueKey('open-overlapping-trip'),
+                    onPressed: () {
+                      track('trip_overlap_opened');
+                      Navigator.of(context).pop(_OpenInstead(overlap.id));
+                    },
+                    child: Text('Open ${overlap.trip.title} instead'),
+                  ),
+                ),
+            ],
+            if (passEnds != null) ...[
+              const SizedBox(height: TravarySpace.sm),
+              Text(passEnds, key: const ValueKey('trip-pass-ends'), style: TravaryText.small),
+            ],
             const SizedBox(height: TravarySpace.xl),
-            FilledButton(onPressed: _saving ? null : _save, child: Text(_isEditing ? 'Save' : 'Create trip')),
+            FilledButton(
+              key: const ValueKey('save-trip'),
+              onPressed: _saving || leftOut.isNotEmpty ? null : _save,
+              child: Text(
+                _isEditing
+                    ? 'Save'
+                    : overlap == null
+                    ? 'Create trip'
+                    : 'Create anyway',
+              ),
+            ),
             if (!_isEditing) ...[
               const SizedBox(height: TravarySpace.sm),
               TextButton(

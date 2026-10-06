@@ -2,7 +2,8 @@ rules_version = '2';
 
 // Travary security rules.
 //
-//   trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[]
+//   trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[],
+//                                         checklist{} (shared to-dos, any member)
 //                                         visualProfile* (server only)
 //   trips/{tripId}/bookings/{bookingId}   one booking + a copy of memberIds[]
 //
@@ -54,6 +55,12 @@ service cloud.firestore {
           && shortText(data.destination, 'city', 120) && shortText(data.destination, 'citySlug', 64));
     }
 
+    // "Before you go": shared to-dos by id, changed one at a time by any
+    // member. A map, and not an endless one.
+    function validChecklist(data) {
+      return !('checklist' in data) || (data.checklist is map && data.checklist.size() <= 100);
+    }
+
     match /trips/{tripId} {
       allow read: if isMember(resource.data);
 
@@ -69,13 +76,15 @@ service cloud.firestore {
         && request.resource.data.memberIds == [request.auth.uid]
         && !request.resource.data.keys().hasAny(serverOnlyTripFields())
         && validLook(request.resource.data)
-        && validDestination(request.resource.data);
+        && validDestination(request.resource.data)
+        && validChecklist(request.resource.data);
 
       allow update: if isMember(resource.data)
         && !request.resource.data.diff(resource.data).affectedKeys()
             .hasAny(serverOnlyTripFields().concat(['ownerId', 'memberIds']))
         && validLook(request.resource.data)
-        && validDestination(request.resource.data);
+        && validDestination(request.resource.data)
+        && validChecklist(request.resource.data);
 
       allow delete: if signedIn() && resource.data.ownerId == request.auth.uid;
 

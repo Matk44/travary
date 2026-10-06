@@ -115,6 +115,8 @@ void main() {
       WidgetTester tester,
       SmartImportService service, {
       AccessDecision access = const AccessDecision.freeUse(3),
+      MemoryTravelRepository? repository,
+      String? tripId,
     }) async {
       tester.view.physicalSize = const Size(1179, 2556);
       tester.view.devicePixelRatio = 3;
@@ -128,8 +130,10 @@ void main() {
             Provider<SmartImportService>.value(value: service),
             // Created by the providers so they're disposed with the tree.
             ChangeNotifierProvider(
-              create: (_) =>
-                  travel = TravelStore(repository: MemoryTravelRepository(), artCatalog: const ArtCatalog.empty()),
+              create: (_) => travel = TravelStore(
+                repository: repository ?? MemoryTravelRepository(),
+                artCatalog: const ArtCatalog.empty(),
+              ),
             ),
             ChangeNotifierProvider(create: (_) => premium = PremiumStore(purchases: TestPurchaseService())),
           ],
@@ -142,8 +146,12 @@ void main() {
                     onPressed: () async {
                       outcome = await Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) =>
-                              SmartImportScreen(filePath: filePath, fileName: 'booking.pdf', access: access),
+                          builder: (_) => SmartImportScreen(
+                            filePath: filePath,
+                            fileName: 'booking.pdf',
+                            access: access,
+                            tripId: tripId,
+                          ),
                         ),
                       );
                     },
@@ -196,6 +204,33 @@ void main() {
 
       expect(travel.bookings, hasLength(2));
       expect(travel.plans, hasLength(1));
+    });
+
+    testWidgets('opened from a trip, only bookings on its dates go into it', (tester) async {
+      final repository = MemoryTravelRepository(userId: 'me')
+        ..replaceAll([trip('japan', title: 'Japan holiday', plannedStart: d(10, 11), plannedEnd: d(10, 23))], const []);
+      final (travel, _) = await pump(
+        tester,
+        _FakeImport(
+          SmartImportResult([
+            draft('Sushi Saito', BookingKind.dining, d(10, 15)),
+            draft('Bali villa', BookingKind.stay, LocalDate(2027, 3, 1)),
+          ]),
+        ),
+        repository: repository,
+        tripId: 'japan',
+      );
+
+      expect(find.byKey(const ValueKey('outside-trip-0')), findsNothing);
+      expect(find.text('Not on Japan holiday\'s dates, so it starts a new trip'), findsOneWidget);
+      await tester.tap(find.text('Add 2 bookings'));
+      await tester.pumpAndSettle();
+
+      Booking saved(String title) => travel.bookings.singleWhere((b) => b.title == title);
+      expect(saved('Sushi Saito').tripId, 'japan');
+      expect(saved('Bali villa').tripId, isNot('japan'));
+      expect(travel.plan('japan')!.end, d(10, 23));
+      expect(travel.plans, hasLength(2));
     });
 
     testWidgets('a failure explains itself and offers to type it in', (tester) async {

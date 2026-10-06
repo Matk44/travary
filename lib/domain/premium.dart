@@ -1,3 +1,6 @@
+import 'local_date.dart';
+import 'pricing.dart';
+
 /// Everything Travary Plus (or a Trip Pass) unlocks.
 ///
 /// Rule of the house: a traveller's own tickets and bookings are never
@@ -61,6 +64,33 @@ class PlusSubscription {
   bool activeAt(DateTime now) => now.isBefore(expiresAt);
 }
 
+/// A Trip Pass: Plus on one trip of at most [Pricing.tripPassMaxDays],
+/// bought for the dates it had then, until [Pricing.tripPassGraceDays]
+/// after. It grows with the same holiday but can't be carried over to
+/// another one by changing the trip's dates or place (the rule is
+/// `tripPassLastDay` in `logic/access.dart`).
+class TripPass {
+  const TripPass({required this.tripId, required this.start, required this.end});
+
+  final String tripId;
+  final LocalDate start;
+  final LocalDate end;
+
+  /// A week after the dates it was bought for: the last day Plus is on
+  /// unless the trip has grown since.
+  LocalDate get lastDay => end.addDays(Pricing.tripPassGraceDays);
+
+  @override
+  bool operator ==(Object other) =>
+      other is TripPass && other.tripId == tripId && other.start == start && other.end == end;
+
+  @override
+  int get hashCode => Object.hash(tripId, start, end);
+
+  @override
+  String toString() => 'TripPass($tripId, $start → $end)';
+}
+
 /// What the signed-in traveller has bought, and how much of the free
 /// allowance they've used.
 ///
@@ -73,8 +103,8 @@ class Entitlements {
 
   final PlusSubscription? plus;
 
-  /// Trips this traveller bought a Trip Pass for.
-  final Set<String> tripPasses;
+  /// The Trip Passes this traveller bought, by trip id.
+  final Map<String, TripPass> tripPasses;
 
   /// Free Smart Imports used so far (only counts while on the free plan).
   final int smartImportsUsed;
@@ -82,7 +112,7 @@ class Entitlements {
   Entitlements copyWith({
     PlusSubscription? plus,
     bool clearPlus = false,
-    Set<String>? tripPasses,
+    Map<String, TripPass>? tripPasses,
     int? smartImportsUsed,
   }) {
     return Entitlements(

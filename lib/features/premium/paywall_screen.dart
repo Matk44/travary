@@ -5,12 +5,14 @@ import 'package:provider/provider.dart';
 import '../../data/purchase_service.dart';
 import '../../design/tokens.dart';
 import '../../domain/domain.dart';
+import '../../logic/access.dart';
 import '../../logic/formatters.dart';
 import '../../logic/price_text.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/analytics.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../help/help_links.dart';
 
 /// Travary Plus / Trip Pass paywall.
 ///
@@ -52,7 +54,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
     final premium = context.read<PremiumStore>();
     final outcome = await premium.purchase(
       offer,
-      tripId: offer.kind == OfferKind.tripPass ? plan?.id : null,
+      tripPass: offer.kind == OfferKind.tripPass && plan != null && plan.hasDates ? newTripPassFor(plan) : null,
       source: widget.source,
     );
     if (!mounted) return;
@@ -115,6 +117,15 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       detail: '${perMonth(plus)} a month · everyone on your trips, up to ${Pricing.familySize}',
                       onTap: () => setState(() => _selected = OfferKind.plusAnnual),
                     ),
+                  if (pass != null && plan != null && premium.policy.isTooLongForTripPass(plan)) ...[
+                    const SizedBox(height: TravarySpace.md),
+                    Text(
+                      'A Trip Pass covers trips of up to ${Pricing.tripPassMaxDays} days, so Plus is the one for '
+                      '${plan.trip.title}.',
+                      key: const ValueKey('pass-too-long'),
+                      style: TravaryText.small,
+                    ),
+                  ],
                   if (canPass) ...[
                     const SizedBox(height: TravarySpace.md),
                     _PlanOption(
@@ -333,18 +344,24 @@ class _PassSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final until = plan.end!.addDays(Pricing.tripPassGraceDays);
+    final pass = newTripPassFor(plan);
     return Container(
       padding: const EdgeInsets.all(TravarySpace.lg),
       decoration: BoxDecoration(color: TravaryColors.paper, borderRadius: BorderRadius.circular(TravaryRadius.card)),
       child: Text(
-        'One payment, no subscription. Unlocks Plus on ${plan.trip.title} for everyone '
-        'on the trip, until ${formatDate(until)}.',
+        'One payment, no subscription. Unlocks Plus on ${plan.trip.title} '
+        '(${formatDayMonthRange(pass.start, pass.end)}) for everyone on the trip, until ${formatDate(pass.lastDay)}.',
         style: TravaryText.bodySoft,
       ),
     );
   }
 }
+
+final _legalLink = TextButton.styleFrom(
+  foregroundColor: TravaryColors.inkSoft,
+  textStyle: TravaryText.small.copyWith(fontSize: 12, decoration: TextDecoration.underline),
+  visualDensity: VisualDensity.compact,
+);
 
 class _Footer extends StatelessWidget {
   const _Footer({
@@ -394,6 +411,24 @@ class _Footer extends StatelessWidget {
             testStore ? '$smallPrint\nTest store: nothing is charged.' : smallPrint,
             style: TravaryText.small.copyWith(fontSize: 11.5),
             textAlign: TextAlign.center,
+          ),
+          // Apple asks for these beside any subscription.
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              TextButton(
+                key: const ValueKey('paywall-terms'),
+                onPressed: () => openTravaryPage(context, TravaryLinks.terms),
+                style: _legalLink,
+                child: const Text('Terms of Use'),
+              ),
+              TextButton(
+                key: const ValueKey('paywall-privacy'),
+                onPressed: () => openTravaryPage(context, TravaryLinks.privacy),
+                style: _legalLink,
+                child: const Text('Privacy Policy'),
+              ),
+            ],
           ),
         ],
       ),

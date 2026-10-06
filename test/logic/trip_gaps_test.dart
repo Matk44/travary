@@ -91,4 +91,21 @@ void main() {
       expect(text.when, '16 Oct');
     });
   });
+
+  test('adding a stay or flight from the trip starts on the first gap it fills', () {
+    final plan = japan([flight('out', d(10, 11)), stay('kyoto', d(10, 11), d(10, 13))]);
+    expect(firstGapFor(BookingKind.stay, plan), PlanGap(kind: PlanGapKind.stay, start: d(10, 13), end: d(10, 16)));
+    expect(firstGapFor(BookingKind.flight, plan), PlanGap(kind: PlanGapKind.flightHome, start: d(10, 16)));
+    expect(firstGapFor(BookingKind.dining, plan), isNull);
+    expect(firstGapFor(BookingKind.stay, japan([stay('all', d(10, 11), d(10, 16))])), isNull);
+  });
+
+  test('during the trip, gaps already behind it are skipped', () {
+    final plan = japan([flight('out', d(10, 11)), stay('kyoto', d(10, 12), d(10, 14)), flight('home', d(10, 16))]);
+    // Nights of the 11th and of the 14th–15th have nowhere to stay.
+    expect(firstGapFor(BookingKind.stay, plan, from: d(10, 11))?.start, d(10, 11));
+    expect(firstGapFor(BookingKind.stay, plan, from: d(10, 12))?.start, d(10, 14));
+    expect(firstGapFor(BookingKind.stay, plan, from: d(10, 15))?.start, d(10, 14));
+    expect(firstGapFor(BookingKind.stay, plan, from: d(10, 16)), isNull);
+  });
 }

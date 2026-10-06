@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:travary/data/memory_travel_repository.dart';
+import 'package:travary/data/purchase_service.dart';
+import 'package:travary/design/art/art_catalog.dart';
+import 'package:travary/design/tokens.dart';
+import 'package:travary/domain/domain.dart';
+import 'package:travary/features/premium/paywall_screen.dart';
+import 'package:travary/state/premium_store.dart';
+import 'package:travary/state/travel_store.dart';
+
+import '../helpers.dart';
+
+void main() {
+  setUpAll(() => TravaryText.useGoogleFonts = false);
+
+  testWidgets('a trip longer than a Trip Pass covers is offered Plus only, and told why', (tester) async {
+    tester.view.physicalSize = const Size(390 * 3, 844 * 3);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    final now = DateTime(2026, 10, 5, 9);
+    final repository = MemoryTravelRepository(userId: 'me')
+      ..replaceAll([trip('gap', title: 'Gap year', plannedStart: d(11, 1), plannedEnd: d(12, 31))], const []);
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => TravelStore(repository: repository, artCatalog: const ArtCatalog.empty(), clock: () => now),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => PremiumStore(
+              purchases: TestPurchaseService(clock: () => now),
+              clock: () => now,
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          theme: buildTravaryTheme(),
+          home: const PaywallScreen(feature: PremiumFeature.familySharing, tripId: 'gap', source: 'test'),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Travary Plus'), findsOneWidget);
+    expect(find.text('Just Gap year'), findsNothing);
+    expect(find.text('A Trip Pass covers trips of up to 30 days, so Plus is the one for Gap year.'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+}

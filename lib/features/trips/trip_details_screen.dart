@@ -11,7 +11,9 @@ import '../../design/trip_chrome.dart';
 import '../../design/trip_theme_style.dart';
 import '../../design/widgets/ledger.dart';
 import '../../domain/domain.dart';
+import '../../logic/access.dart';
 import '../../logic/formatters.dart';
+import '../../logic/price_text.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
@@ -74,7 +76,10 @@ class _Details extends StatelessWidget {
     final store = context.watch<TravelStore>();
     final trip = plan.trip;
     final owner = store.isOwner(plan);
-    final covered = context.watch<PremiumStore>().forTrip(plan).allowed;
+    final premium = context.watch<PremiumStore>();
+    final covered = premium.forTrip(plan).allowed;
+    // Covered by a Trip Pass (not Plus): say which dates it's for.
+    final pass = premium.hasPlus || !premium.policy.hasTripPass(plan) ? null : premium.policy.tripPassFor(plan);
     Widget heading(String text, {IconSlot? icon}) => Padding(
       padding: const EdgeInsets.fromLTRB(TravarySpace.xs, TravarySpace.xl, 0, TravarySpace.sm),
       child: Row(
@@ -168,8 +173,11 @@ class _Details extends StatelessWidget {
               heading('Travary Plus'),
               PaperPanel(
                 child: PaperRow(
-                  title: 'Plus covers this trip',
-                  subtitle: 'Smart Import, family sharing and ticket backup for everyone on it',
+                  title: pass == null ? 'Plus covers this trip' : 'A Trip Pass covers this trip',
+                  subtitle: pass == null
+                      ? 'Smart Import, family sharing and ticket backup for everyone on it'
+                      : '${tripPassCoversText(tripPassLastDay(pass, plan.start, plan.end))}. '
+                            'Smart Import, family sharing and ticket backup for everyone on it',
                   leading: const Icon(Icons.workspace_premium_rounded, color: TravaryColors.mustard),
                   trailing: const SizedBox.shrink(),
                 ),

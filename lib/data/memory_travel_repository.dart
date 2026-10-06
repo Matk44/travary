@@ -68,9 +68,26 @@ class MemoryTravelRepository implements TravelRepository {
       memberNames: existing.memberNames,
       premium: existing.premium,
       hiddenGaps: trip.hiddenGaps,
+      checklist: existing.checklist,
       createdAt: existing.createdAt,
       updatedAt: trip.updatedAt,
     );
+    _tripsController.add(trips);
+  }
+
+  @override
+  Future<void> saveChecklistItem(String tripId, ChecklistItem item) async {
+    final trip = _trips[tripId];
+    if (trip == null) return;
+    _trips[tripId] = trip.copyWith(checklist: {...trip.checklist, item.id: item});
+    _tripsController.add(trips);
+  }
+
+  @override
+  Future<void> deleteChecklistItem(String tripId, String itemId) async {
+    final trip = _trips[tripId];
+    if (trip == null) return;
+    _trips[tripId] = trip.copyWith(checklist: {...trip.checklist}..remove(itemId));
     _tripsController.add(trips);
   }
 

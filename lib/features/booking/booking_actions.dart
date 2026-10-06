@@ -10,6 +10,7 @@ import '../../design/trip_chrome.dart';
 import '../../design/widgets/ledger.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
+import '../../logic/trip_gaps.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../import/smart_import_screen.dart';
@@ -20,8 +21,10 @@ import 'booking_detail_screen.dart';
 import 'edit_booking_screen.dart';
 
 /// The add flow: pick a kind, fill in a short form, done. The booking joins
-/// the right trip automatically unless [tripId] says otherwise.
-Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tripId}) async {
+/// the right trip automatically unless [tripId] says otherwise. With
+/// [fillGaps] (adding from the trip), a stay or flight starts on what the
+/// trip still needs: the nights without a stay, the missing flight's day.
+Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tripId, bool fillGaps = false}) async {
   final choice = await showModalBottomSheet<AddChoice>(
     context: context,
     backgroundColor: TravaryColors.linen,
@@ -42,7 +45,9 @@ Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tri
     await _startSmartImport(context, tripId: tripId);
     return;
   }
-  await addBookingOfKind(context, kind, date: date, tripId: tripId);
+  final plan = fillGaps && tripId != null ? context.read<TravelStore>().plan(tripId) : null;
+  final gap = plan == null ? null : firstGapFor(kind, plan, from: date);
+  await addBookingOfKind(context, kind, date: gap?.start ?? date, endDate: gap?.end, tripId: tripId);
 }
 
 /// Straight to the form for [kind] (e.g. "Add your flights" on a new trip),

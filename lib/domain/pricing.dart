@@ -33,6 +33,9 @@ abstract final class Pricing {
   /// A Trip Pass keeps the trip unlocked this long after it ends.
   static const tripPassGraceDays = 7;
 
+  /// The longest trip a Trip Pass covers. Longer trips are offered Plus.
+  static const tripPassMaxDays = 30;
+
   static const defaults = [
     Offer(kind: OfferKind.plusAnnual, productId: plusAnnualProductId, amount: plusAnnualUsd, currencyCode: 'USD'),
     Offer(kind: OfferKind.tripPass, productId: tripPassProductId, amount: tripPassUsd, currencyCode: 'USD'),

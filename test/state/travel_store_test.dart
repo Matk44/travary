@@ -51,6 +51,58 @@ void main() {
     expect(store.plans.map((p) => p.trip.title), containsAll(['Orlando', 'Lisbon']));
   });
 
+  test('a booking can start its own trip even on another trip\'s dates', () async {
+    final result = await store.saveBooking(
+      booking('lunch', BookingKind.dining, d(10, 14), tripId: '', title: 'Lunch', location: 'Miami'),
+      newTrip: true,
+    );
+    await pumpEventQueue();
+    expect(result.newTrip, isTrue);
+    expect(result.booking.tripId, isNot('orlando'));
+    expect(store.plans, hasLength(2));
+  });
+
+  test('a trip\'s checklist: add, tick, change and remove items', () async {
+    final orlando = store.plan('orlando')!;
+    expect(await store.addChecklistItem(orlando, '   '), isNull);
+    final insurance = (await store.addChecklistItem(orlando, ' Travel  insurance ', due: d(10, 1), idea: true))!;
+    await pumpEventQueue();
+    expect(store.plan('orlando')!.trip.checklist[insurance.id]?.text, 'Travel insurance');
+
+    await store.toggleChecklistItem(store.plan('orlando')!, insurance);
+    await pumpEventQueue();
+    expect(store.plan('orlando')!.trip.checklist[insurance.id]?.done, isTrue);
+
+    await store.saveChecklistItem(store.plan('orlando')!, insurance.copyWith(text: 'Insurance for all four'));
+    await pumpEventQueue();
+    expect(store.plan('orlando')!.trip.checklist[insurance.id]?.text, 'Insurance for all four');
+
+    // Editing the trip itself leaves the checklist alone.
+    await store.updateTrip(store.plan('orlando')!.trip.copyWith(title: 'Florida'));
+    await pumpEventQueue();
+    expect(store.plan('orlando')!.trip.checklist, hasLength(1));
+
+    await store.deleteChecklistItem(store.plan('orlando')!, insurance);
+    await pumpEventQueue();
+    expect(store.plan('orlando')!.trip.checklist, isEmpty);
+  });
+
+  test('a full checklist takes no more', () async {
+    repository.putTrip(
+      store
+          .plan('orlando')!
+          .trip
+          .copyWith(
+            checklist: {
+              for (var i = 0; i < 100; i++)
+                'c$i': ChecklistItem(id: 'c$i', text: 'Thing $i', createdAt: DateTime(2026)),
+            },
+          ),
+    );
+    await pumpEventQueue();
+    expect(await store.addChecklistItem(store.plan('orlando')!, 'One more'), isNull);
+  });
+
   test('search matches references, places and trip names', () async {
     await store.saveBooking(booking('lunch', BookingKind.dining, d(10, 14), tripId: 'orlando', reference: 'ST-4412'));
     await pumpEventQueue();

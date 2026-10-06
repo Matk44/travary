@@ -22,8 +22,8 @@ abstract interface class PurchaseService {
   /// Products with store prices (localised).
   Future<List<Offer>> loadOffers();
 
-  /// [tripId] is required for a Trip Pass.
-  Future<PurchaseOutcome> purchase(Offer offer, {String? tripId});
+  /// [tripPass] (the trip and its dates now) is required for a Trip Pass.
+  Future<PurchaseOutcome> purchase(Offer offer, {TripPass? tripPass});
 
   Future<void> restore();
 
@@ -59,14 +59,14 @@ class TestPurchaseService implements PurchaseService {
   Future<List<Offer>> loadOffers() async => Pricing.defaults;
 
   @override
-  Future<PurchaseOutcome> purchase(Offer offer, {String? tripId}) async {
+  Future<PurchaseOutcome> purchase(Offer offer, {TripPass? tripPass}) async {
     final now = _clock();
     switch (offer.kind) {
       case OfferKind.plusAnnual:
         set(_entitlements.copyWith(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 365)))));
       case OfferKind.tripPass:
-        if (tripId == null) return PurchaseOutcome.failed;
-        set(_entitlements.copyWith(tripPasses: {..._entitlements.tripPasses, tripId}));
+        if (tripPass == null) return PurchaseOutcome.failed;
+        set(_entitlements.copyWith(tripPasses: {..._entitlements.tripPasses, tripPass.tripId: tripPass}));
     }
     return PurchaseOutcome.purchased;
   }

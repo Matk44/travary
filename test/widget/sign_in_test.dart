@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:travary/features/profile/profile_screen.dart';
 import 'package:travary/app/app.dart';
 import 'package:travary/app/bootstrap.dart';
 import 'package:travary/data/art_pack_service.dart';
@@ -145,5 +147,31 @@ void main() {
     expect(auth.calls, ['deleteAccount']);
     expect(find.text('Your account has been deleted.'), findsOneWidget);
     expect(find.descendant(of: find.byType(TravaryNavBar), matching: find.bySemanticsLabel('Today')), findsOneWidget);
+  });
+
+  testWidgets('Profile offers help, email, the Privacy Policy and the Terms of Use', (tester) async {
+    await pumpApp(tester, FakeAuthService());
+    await openTab(tester, 'Profile');
+    final profile = find.descendant(of: find.byType(ProfileScreen), matching: find.byType(Scrollable)).first;
+    await tester.scrollUntilVisible(find.byKey(const ValueKey('help-terms')), 200, scrollable: profile);
+    for (final key in ['help-support', 'help-email', 'help-privacy', 'help-terms']) {
+      expect(find.byKey(ValueKey(key)), findsOneWidget, reason: key);
+    }
+    expect(find.text('dreamprayer.dev@gmail.com'), findsOneWidget);
+    // Without a browser to open it, it says where the page is instead.
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/url_launcher'),
+      (call) async => false,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        const MethodChannel('plugins.flutter.io/url_launcher'),
+        null,
+      ),
+    );
+    await tester.tap(find.byKey(const ValueKey('help-terms')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('travary_support/terms.html'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

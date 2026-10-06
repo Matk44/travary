@@ -31,7 +31,32 @@ void main() {
   test('the trip it goes into', () {
     final japan = TripPlan(trip('jp', title: 'Japan', plannedStart: d(10, 11), plannedEnd: d(10, 30)), const []);
     expect(formTripLine(japan), 'Japan · 11–30 Oct');
-    expect(formTripLine(null), 'Joins a trip by its dates');
+    expect(formTripLine(japan, moves: true), 'Moves to Japan · 11–30 Oct');
+    expect(formTripLine(null), 'Starts a new trip');
+  });
+
+  test('asking before a trip stretches well past its bookings', () {
+    final tokyo = TripPlan(trip('tokyo', title: 'Tokyo'), [
+      booking('out', BookingKind.flight, d(10, 11), tripId: 'tokyo'),
+    ]);
+    final paris = TripPlan(trip('paris', title: 'Paris'), const []);
+    final add = stretchQuestion(tokyo, d(10, 20), d(10, 20));
+    expect(add.title, 'Add to Tokyo?');
+    expect(add.message, 'Tokyo runs 11 Oct so far. This is on 20 Oct, so the trip would run 11–20 Oct.');
+    expect(add.keep, 'Add to Tokyo');
+    expect(add.other, 'Start a new trip');
+    final edit = stretchQuestion(tokyo, d(11, 11), d(11, 13), alternative: paris, editing: true);
+    expect(edit.title, 'Keep in Tokyo?');
+    expect(edit.message, 'Tokyo runs 11 Oct so far. This is on 11–13 Nov, so the trip would run 11 Oct – 13 Nov.');
+    expect(edit.keep, 'Keep in Tokyo');
+    expect(edit.other, 'Add to Paris');
+  });
+
+  test('where an imported booking outside its trip goes', () {
+    final japan = TripPlan(trip('jp', title: 'Japan'), const []);
+    final bali = TripPlan(trip('bali', title: 'Bali'), const []);
+    expect(outsideTripText(japan, bali), 'Not on Japan\'s dates, so it goes to Bali');
+    expect(outsideTripText(japan, null), 'Not on Japan\'s dates, so it starts a new trip');
   });
 
   test('ticket dates and board clocks', () {
