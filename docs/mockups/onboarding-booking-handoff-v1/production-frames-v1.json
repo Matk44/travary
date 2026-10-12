@@ -1,0 +1,23 @@
+{
+  "folio": {
+    "file": "folio-text-free-v1.png",
+    "originalPath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-1f4b323b-e8dc-4862-bcb2-2a1cb991b7a3.png",
+    "sha256": "51c368b11fc297f2b6c0b8e45d9328126386b6b7d4e31fd06b728cbba313e1f8",
+    "image_path": "1791401076499-d5cfd5b8a3dd175d.png",
+    "copiedUnchanged": true
+  },
+  "proof": {
+    "file": "proof-text-free-v1.png",
+    "originalPath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-cafcc320-a7e6-4dd3-bb30-415b89950564.png",
+    "sha256": "077d3e1283105cf105f0d1f82bf079900f896a4afe2bcf6a90a4057e71d7b05a",
+    "image_path": "1791401076516-adc7ce82d9e9ee8b.png",
+    "copiedUnchanged": true
+  },
+  "pass": {
+    "file": "pass-text-free-v1.png",
+    "originalPath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-81b00350-ce07-41d2-bd34-4a52ab5424a2.png",
+    "sha256": "5eb53ecf96c760567187233a0ae738551fc8477a0c4bb60da9f50734af595d18",
+    "image_path": "1791401140823-81b303bee5713516.png",
+    "copiedUnchanged": true
+  }
+}

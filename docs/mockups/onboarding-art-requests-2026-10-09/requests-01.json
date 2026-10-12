@@ -1,0 +1,14 @@
+[
+  {
+    "id": "green-folio",
+    "ref": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-handoff-v1/folio-text-free-v1.png",
+    "prompt": "Use case: compositing (chroma key). Precise background-only edit.\nInput 1 is an owner-approved Travary frame: docs/mockups/onboarding-booking-handoff-v1/folio-text-free-v1.png.\nKeep Travi (the coral ribbed spinner suitcase), the navy folio, and any card, identity tag, envelope or blank pass exactly as they are: same pose, scale, position, expression, lighting and paper detail, pixel-aligned to Input 1. Do not redraw, enlarge, shrink, move or reinterpret foreground objects. Preserve the occlusions and complete silhouette.\nReplace everything else (sky, wall, theatre wings, scenery and the cream floor) with one perfectly flat, evenly lit chroma green, #00B140, edge to edge.\nNo floor, horizon, shadow, reflection, gradient, vignette or texture on the green. No green tones or green spill on Travi, the folio or the paper. Crisp edges, no motion blur.\nOutput a 941 × 1672 portrait PNG (the films' 9:16 frame), same framing as Input 1. No text, labels, buttons, prices, UI, logo, watermark or extra objects.",
+    "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-d4196b16-05bd-4260-b5c7-12999978a554.png"
+  },
+  {
+    "id": "green-proof",
+    "ref": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-handoff-v1/proof-text-free-v1.png",
+    "prompt": "Use case: compositing (chroma key). Precise background-only edit.\nInput 1 is an owner-approved Travary frame: docs/mockups/onboarding-booking-handoff-v1/proof-text-free-v1.png.\nKeep Travi (the coral ribbed spinner suitcase), the navy folio, and any card, identity tag, envelope or blank pass exactly as they are: same pose, scale, position, expression, lighting and paper detail, pixel-aligned to Input 1. Do not redraw, enlarge, shrink, move or reinterpret foreground objects. Preserve the occlusions and complete silhouette.\nReplace everything else (sky, wall, theatre wings, scenery and the cream floor) with one perfectly flat, evenly lit chroma green, #00B140, edge to edge.\nNo floor, horizon, shadow, reflection, gradient, vignette or texture on the green. No green tones or green spill on Travi, the folio or the paper. Crisp edges, no motion blur.\nOutput a 941 × 1672 portrait PNG (the films' 9:16 frame), same framing as Input 1. No text, labels, buttons, prices, UI, logo, watermark or extra objects. The original is 940 pixels wide; keep its foreground coordinates unchanged and allow the extra one-pixel width only on the right background edge.",
+    "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-3f4add0a-f2f3-4097-8b71-c7fe030349ee.png"
+  }
+]

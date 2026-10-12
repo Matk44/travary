@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-07",
+  "generator": "built-in imagegen",
+  "status": "owner-approved for motion",
+  "file": "docs/mockups/onboarding-booking-handoff-v1/still-keyframes-v1.png",
+  "originalPath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-720f266d-4458-435b-afba-350eb7b93970.png",
+  "sha256": "9724b34cedcbe208a5f997cdce4f73d249900896551b9f8edac2f2aef9092b32",
+  "copiedUnchanged": true,
+  "prompt": "STILL_ART_PROMPT.md",
+  "videoGenerated": true,
+  "runtimeAsset": false,
+  "dayRailCompositionApproved": false,
+  "approvalDate": "2026-10-08",
+  "approvalText": "yes, lets move forward...looks awesome",
+  "approvalScope": "The three-frame board: flat booking folio, Travi straightening the saved card, and the approved pass-desk composition. A separate itinerary day-rail composition is not approved.",
+  "videoGenerationRecord": "video-generation-v1.json"
+}

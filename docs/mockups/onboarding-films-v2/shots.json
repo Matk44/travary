@@ -1,0 +1,409 @@
+{
+  "common": "IDENTITY: exactly the supplied Travi: a coral ribbed modern hard-shell spinner suitcase with navy zipper band, trim and corner guards, brass telescopic rails with a navy grip, a navy top carry handle, four dark caster wheels with gold hubs, his own small cream luggage tag with a navy palm hanging from the handle, big friendly cartoon eyes and brows, and exactly TWO folded-paper arms with paper hands. Tactile handmade cut-paper craft, warm soft studio light. The navy holiday folio has a palm emblem, brass clasp and gold corners. No extra limbs, no other characters, no duplicate folios, no melting or changing suitcase shape.\n\nSET AND CAMERA: a perfectly flat, evenly lit chroma-green background (#00B140) that stays exactly the same in every frame: no floor, horizon, shadow, reflection, light change, vignette, texture or scenery ever appears. LOCKED frontal camera: no zoom, pan, cut, reframe or shake. Travi's wheels stay planted on the same floor line and he never slides across the frame. Things he holds that will carry writing stay completely blank. No text, letters, numbers, logos, UI or watermark. Silent, no audio.\n\nMOTION: smooth, continuous movement at the full frame rate: every frame moves a little, never held or repeated frames, no stutter, no sudden jumps between poses.",
+  "shots": {
+    "tag-toss": {
+      "from": "04-tag",
+      "to": "05-toss",
+      "seed": 410451,
+      "keep": [
+        0.0,
+        2.8
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame (Travi holding up a large blank cream departure tag) to the supplied last frame (his arm following through toward the viewer, hands empty).\n0-0.4s: he holds the blank tag up proudly and gives a quick excited eyebrow lift.\n0.4-1.2s: he draws the tag back a little and flicks it straight toward the camera with one paper hand: the tag spins once and flies out of the frame toward the viewer, growing as it comes close, completely gone by 1.2s.\n1.2-1.8s: his arm follows through toward the camera, the other arm out for balance, a cheeky, pleased grin; a tiny happy bounce, wheels stay on the floor line.\n1.8-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "keep_fixed": true,
+      "handoff": 2.1
+    },
+    "folio-up": {
+      "from": "05-toss",
+      "to": "06-folio-open",
+      "seed": 410452,
+      "keep": [
+        0.0,
+        2.4
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame (Travi just after a throw, hands empty, the navy folio standing at his left) to the supplied last frame (Travi holding the folio open toward the viewer with both hands).\n0-0.3s: hold the first frame.\n0.3-1.3s: he turns to the folio standing at his left, scoops it up with both paper hands and swings it round in front of his chest, eyes following it happily.\n1.3-2.0s: he opens it toward the viewer like presenting a fresh notebook: two blank cream pages with a small paper pocket on the left page; a warm, inviting smile toward the viewer.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "keep_fixed": true
+    },
+    "tag-idle": {
+      "from": "04-tag",
+      "to": "04-tag",
+      "seed": 410453,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame: Travi holds up the large blank cream departure tag in front of his chest. He breathes softly (a barely visible rise and settle of his body), blinks once at about 1.5s, and gives the tag a tiny proud jiggle with a happy eyebrow lift at about 2.5s. By 3.5s his hands, the tag, his face and his body are back exactly in the starting position, and they hold there to the end. No travel, wheels planted, the tag stays blank."
+    },
+    "roll-in": {
+      "from": "01-empty",
+      "to": "02-hello",
+      "seed": 410401,
+      "keep": [
+        0.0,
+        3.2
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: only the folio, standing at the left on the green.\n0.2-1.7s: Travi ROLLS INTO VIEW from outside the RIGHT edge along the floor line, his four caster wheels visibly turning and grounded, leaning slightly with momentum, arms balancing, his little palm tag swinging. Full size from the moment he appears: never a fade, growth or materialisation.\n1.7-2.4s: he brakes on his mark a little too keenly: one tiny overshoot and a two-degree rock back, a fleeting surprised eyebrow lift that becomes a pleased grin.\n2.4-3.2s: he straightens and greets the viewer, easing into the exact last-frame pose (one arm out, the other waving).\n3.2-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "world": {
+      "from": "02-hello",
+      "to": "03-wow",
+      "seed": 410402,
+      "keep": [
+        0.0,
+        2.4
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame.\n0.3-1.2s: as if something wonderful is rising behind him, he spins round on his wheels to look over his shoulder, then back.\n1.2-2.0s: he gasps with delight and flings both arms up and open, eyes wide and sparkling, leaning back a touch on his wheels (wheels stay on the floor line).\n2.0-2.4s: settle into the exact last frame.\n2.4-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "tag-out": {
+      "from": "03-wow",
+      "to": "04-tag",
+      "seed": 410403,
+      "keep": [
+        0.0,
+        1.8
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.2s: he brings his arms down, whips a large blank cream departure tag out from behind his back with a flourish and holds it up in front of his chest with both hands, facing the viewer squarely.\n1.2-1.8s: an excited eyebrow lift, settling into the exact last frame. The tag stays perfectly blank.\n1.8-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "reading": {
+      "from": "06-folio-open",
+      "to": "08-reading",
+      "seed": 410404,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.0s: he closes the folio and stands it back at his left, exactly where it stood before.\n1.0-2.0s: he produces a blank sheet of cream paper and a small brass magnifying glass and peers at the sheet, one eyebrow raised in concentration, the tip of his tongue out: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "got-it": {
+      "from": "08-reading",
+      "to": "06-folio-open",
+      "seed": 410405,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: he spots something on the blank sheet and his eyes light up: got it!\n0.3-1.2s: he tucks the magnifier away, slips the sheet into the folio standing at his left and scoops the folio up with both hands.\n1.2-2.0s: he opens it toward the viewer like presenting a fresh notebook, two blank cream pages with a small paper pocket: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "folio-in": {
+      "from": "06-folio-open",
+      "to": "07-folio-full",
+      "seed": 410406,
+      "keep": [
+        0.0,
+        1.7
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.4s: he lifts the open folio up toward the viewer: it comes toward the camera and grows until it fills almost the whole frame, its blank cream pages facing the viewer, his eyes, handle and paper hands peeking over its top edge.\n1.4-1.6s: settle into the exact last frame. The camera itself never moves: the folio comes to it.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "keep_fixed": true
+    },
+    "card-out": {
+      "from": "06-folio-open",
+      "to": "09-card",
+      "seed": 410407,
+      "keep": [
+        0.0,
+        2.2
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.0s: he slides a fresh blank cream card out of the folio's paper pocket, closes the folio and stands it at his left, exactly where it stood before.\n1.0-2.2s: he holds the card up in both hands in front of his chest, facing the viewer squarely, beaming with pride: the exact last frame. The card stays blank.\n2.2-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "card-toss": {
+      "from": "09-card",
+      "to": "05-toss",
+      "seed": 410408,
+      "keep": [
+        0.0,
+        1.8
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.4s: holding the blank card up proudly, a quick excited eyebrow lift.\n0.4-1.2s: he flicks the card straight toward the camera with one paper hand: it spins once and flies out of the frame toward the viewer, growing as it comes close, gone by 1.2s.\n1.2-1.8s: his arm follows through toward the camera, the other arm out for balance, a cheeky pleased grin: the exact last frame.\n1.8-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "handoff": 1.55
+    },
+    "proud": {
+      "from": "05-toss",
+      "to": "10-proud",
+      "seed": 410409,
+      "keep": [
+        0.0,
+        1.6
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame.\n0.3-1.6s: he brings his arms in, plants his paper hands on his sides like hands on hips, puffs his chest out with a warm satisfied 'job done' smile at the viewer: the exact last frame.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "later": {
+      "from": "06-folio-open",
+      "to": "10-proud",
+      "seed": 410410,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame.\n0.3-1.2s: with a cheerful little shrug ('no rush!'), he closes the folio and stands it back at his left, exactly where it stood before.\n1.2-2.0s: hands on his sides like hands on hips, a warm satisfied smile at the viewer: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "id-tag": {
+      "from": "10-proud",
+      "to": "id-tag",
+      "seed": 410411,
+      "keep": [
+        0.0,
+        1.8
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.2s: he reaches beside the folio at his left, picks up a small cream identity tag (a small person silhouette is its only mark) and offers it toward the viewer with one hand.\n1.2-1.8s: an eager eyebrow lift: the exact last frame.\n1.8-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "envelope": {
+      "from": "id-tag",
+      "to": "11-envelope",
+      "seed": 410412,
+      "keep": [
+        0.0,
+        1.8
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.2s: he tucks the identity tag away and offers a sealed blank cream envelope with a navy wax seal toward the viewer instead, in the same hand position.\n1.2-1.8s: a hopeful smile: the exact last frame.\n1.8-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "envelope-back": {
+      "from": "11-envelope",
+      "to": "id-tag",
+      "seed": 410413,
+      "keep": [
+        0.0,
+        1.8
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.2s: he tucks the envelope away and offers the small cream identity tag toward the viewer again, in the same hand position.\n1.2-1.8s: the exact last frame.\n1.8-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "linked": {
+      "from": "id-tag",
+      "to": "12-linked",
+      "seed": 410414,
+      "keep": [
+        0.0,
+        2.2
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame, then a delighted gasp.\n0.3-1.3s: he picks up the navy folio from his left and holds it against his side.\n1.3-2.2s: he tucks the identity tag into the top of the folio and closes his eyes in a happy, proud smile: the exact last frame.\n2.2-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "envelope-linked": {
+      "from": "11-envelope",
+      "to": "12-linked",
+      "seed": 410415,
+      "keep": [
+        0.0,
+        2.4
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame, then a delighted gasp as if the letter worked.\n0.3-1.2s: he tucks the envelope away, picks up the navy folio from his left and holds it against his side.\n1.2-2.4s: he tucks a small cream identity tag into the top of the folio and closes his eyes in a happy, proud smile: the exact last frame.\n2.4-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "to-desk": {
+      "from": "12-linked",
+      "to": "13-present",
+      "seed": 410416,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame.\n0.3-1.1s: he opens his eyes and stands the folio back at his left, exactly where it stood before.\n1.1-2.0s: he turns to the viewer and presents the floor in front of him with an open palm, warm and welcoming: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "guest": {
+      "from": "id-tag",
+      "to": "13-present",
+      "seed": 410417,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame.\n0.3-1.1s: with an easy-going smile ('later's fine'), he pockets the identity tag behind the folio at his left.\n1.1-2.0s: he presents the floor in front of him with an open palm, warm and welcoming: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "cheer": {
+      "from": "13-present",
+      "to": "14-cheer",
+      "seed": 410418,
+      "keep": [
+        0.0,
+        1.6
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.0s: a burst of joy: he punches both paper fists up high, eyes squeezed shut in a huge grin, a tiny celebratory bounce, wheels landing back on the floor line.\n1.0-1.6s: the exact last frame.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "wave-paid": {
+      "from": "14-cheer",
+      "to": "15-wave",
+      "seed": 410419,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.1s: he lowers his fists, picks up the navy folio from his left and holds it out toward the viewer as if handing it over.\n1.1-2.0s: he raises his other arm high in a joyful goodbye wave: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "wave-free": {
+      "from": "13-present",
+      "to": "15-wave",
+      "seed": 410420,
+      "keep": [
+        0.0,
+        2.0
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.1s: a friendly nod, then he picks up the navy folio from his left and holds it out toward the viewer as if handing it over.\n1.1-2.0s: he raises his other arm high in a joyful goodbye wave: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "cut": [
+        [
+          1.375,
+          1.958
+        ]
+      ]
+    },
+    "finale": {
+      "from": "15-wave",
+      "to": "07-folio-full",
+      "seed": 410421,
+      "keep": [
+        0.0,
+        3.2
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.4s: he opens the folio and lifts it toward the viewer: it comes toward the camera and grows until it fills almost the whole frame, its blank cream pages facing the viewer, his eyes, handle and paper hands peeking over its top edge.\n1.4-1.6s: the exact last frame. The camera itself never moves: the folio comes to it.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "keep_fixed": true
+    },
+    "oops": {
+      "from": "10-proud",
+      "to": "16-oops",
+      "seed": 410422,
+      "keep": [
+        0.0,
+        1.6
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.6s: something didn't work: his smile falls into a sheepish shrug, one hand rubbing the back of his handle, a small apologetic smile and raised brows: the exact last frame.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "oops-back": {
+      "from": "16-oops",
+      "to": "10-proud",
+      "seed": 410423,
+      "keep": [
+        0.0,
+        1.6
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame.\n0.2-1.6s: he shakes it off with a determined little nod and plants his hands on his sides, a warm satisfied smile: the exact last frame.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "hello-idle": {
+      "from": "02-hello",
+      "to": "02-hello",
+      "seed": 410431,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi greets the viewer: a soft breath, one blink at about 1.3s, and a small friendly wave of his raised hand at about 2.2s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "folio-open-idle": {
+      "from": "06-folio-open",
+      "to": "06-folio-open",
+      "seed": 410432,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi holds the folio open to the viewer: a soft breath, one blink at about 1.5s, and a tiny inviting tilt of the folio at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "folio-full-idle": {
+      "from": "07-folio-full",
+      "to": "07-folio-full",
+      "seed": 410433,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. The folio fills the frame; only Travi's eyes, handle and paper hands peeking over its top edge move: one blink at about 1.5s and a curious little peek at about 2.5s. The folio itself stays perfectly still. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "reading-idle": {
+      "from": "08-reading",
+      "to": "08-reading",
+      "seed": 410434,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi studies the blank sheet through the magnifying glass: the glass drifts slowly across the sheet and back, one thoughtful blink, eyebrow twitch at about 2s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "card-idle": {
+      "from": "09-card",
+      "to": "09-card",
+      "seed": 410435,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi holds up the blank card proudly: a soft breath, one blink at about 1.5s, and a tiny proud lift of the card at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "proud-idle": {
+      "from": "10-proud",
+      "to": "10-proud",
+      "seed": 410436,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi stands with hands on his sides, pleased with himself: a soft breath, one blink at about 1.5s, a tiny satisfied rock on his wheels at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "id-tag-idle": {
+      "from": "id-tag",
+      "to": "id-tag",
+      "seed": 410437,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi offers the identity tag: a soft breath, one blink at about 1.5s, and a hopeful little dangle of the tag at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "envelope-idle": {
+      "from": "11-envelope",
+      "to": "11-envelope",
+      "seed": 410438,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi offers the envelope: a soft breath, one blink at about 1.3s, and a hopeful glance toward the viewer at about 2.4s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "present-idle": {
+      "from": "13-present",
+      "to": "13-present",
+      "seed": 410439,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi presents the floor in front of him: a soft breath, one blink at about 1.5s, and a gentle welcoming sweep of his open palm at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "oops-idle": {
+      "from": "16-oops",
+      "to": "16-oops",
+      "seed": 410440,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi gives a sheepish shrug: a soft breath, one blink at about 1.5s, a small apologetic smile widening at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, anything he holds stays blank."
+    },
+    "folio-up-b": {
+      "from": "05-toss",
+      "to": "06-folio-open",
+      "seed": 512452,
+      "keep": [
+        0.0,
+        2.4
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame (Travi just after a throw, hands empty, the navy folio standing at his left) to the supplied last frame (Travi holding the folio open toward the viewer with both hands).\n0-0.3s: hold the first frame.\n0.3-1.4s: he leans gently toward the folio standing at his left, scoops it up with both paper hands and, in one smooth unhurried arc, brings it round in front of his chest, eyes following it happily. His body stays upright: only a slight lean, no tipping over.\n1.3-2.0s: he opens it toward the viewer like presenting a fresh notebook: two blank cream pages with a small paper pocket on the left page; a warm, inviting smile toward the viewer.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most)."
+    },
+    "folio-open-idle-b": {
+      "from": "06-folio-open",
+      "to": "06-folio-open",
+      "seed": 410462,
+      "keep": [
+        0.0,
+        4.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi holds the folio wide OPEN toward the viewer with both paper hands the whole time: it never closes, folds, turns or leaves his hands, and its open pages stay blank. A soft breath, one blink at about 1.5s, and a tiny inviting lift of the open folio toward the viewer at about 2.5s, with a hopeful smile. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted."
+    }
+  }
+}

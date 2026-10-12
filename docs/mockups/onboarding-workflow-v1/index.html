@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Travary — full onboarding walkthrough</title>
+<link rel="icon" href="data:,"><link rel="stylesheet" href="workflow.css">
+</head>
+<body>
+<main>
+ <section class="preview" aria-label="Connected Travary onboarding preview">
+  <iframe id="scene" title="Travary onboarding" allow="autoplay"></iframe>
+ </section>
+ <aside>
+  <p class="eyebrow">Bali · connected motion review</p>
+  <h1>Your whole<br>holiday journey.</h1>
+  <p>Start with Travi’s welcome, choose your dates, add a booking and follow it through the pass desk into your example holiday.</p>
+  <ol id="progress" aria-label="Onboarding progress">
+   <li data-step="destination">Meet Travi & choose Bali</li>
+   <li data-step="dates">Choose dates, or leave them open</li>
+   <li data-step="booking">Import an example or enter a booking</li>
+   <li data-step="proof">Travi looks after your booking</li>
+   <li data-step="account">Link your holiday, or continue as a guest</li>
+   <li data-step="passes">Choose a pass or continue with free</li>
+   <li data-step="holiday">Open your holiday</li>
+  </ol>
+  <div class="tools"><button id="restart">Restart from the beginning</button><button id="back" disabled>Back to holiday setup</button></div>
+  <label class="toggle"><input id="stills" type="checkbox"> Use settled stills</label>
+  <label class="test-result">Phone width
+   <select id="preview-size"><option value="430">430 px</option><option value="390">390 px</option><option value="320">320 px</option></select>
+  </label>
+  <label class="test-result">Test purchase result
+   <select id="purchase-result"><option value="success">Success — simulated, no charge</option><option value="cancelled">Cancelled</option><option value="failure">Failure</option></select>
+  </label>
+  <label class="test-result">Test sign-in result
+   <select id="auth-result"><option value="success">Success — simulated</option><option value="cancelled">Cancelled</option><option value="failure">Failure</option></select>
+  </label>
+  <p id="status" role="status" aria-live="polite">Start by choosing your destination.</p>
+  <p class="scope">A local walkthrough using the approved Bali scenes. Your choices stay in this browser session. Imports, flights, sign-in and purchases are simulated; no account is created or email sent. Use the native app for actual services. Its new sign-in placement and email option are not yet wired.</p>
+  <a href="README.md">Native testing & review notes</a>
+ </aside>
+</main>
+<script src="workflow.js"></script>
+</body>
+</html>

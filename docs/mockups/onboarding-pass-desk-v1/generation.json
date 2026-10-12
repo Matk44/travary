@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-06",
+  "tool": "image_gen.imagegen",
+  "mode": "built_in",
+  "status": "review_ready",
+  "ownerApproval": "pending",
+  "videoRendered": false,
+  "newCountryAssets": 0,
+  "nativePrototype": true,
+  "compositionIsRuntimeBackground": false,
+  "pricesInComposition": "Repository USD defaults at creation; native prices stay live. No launch-price change approved.",
+  "assets": [
+    {
+      "assetId": "travi_handoff",
+      "reviewPath": "docs/mockups/onboarding-pass-desk-v1/travi-handoff-v1.png",
+      "sourcePath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-9ab21233-140d-4bca-841e-3f72c6416ad9.png",
+      "nativePath": "assets/onboarding/travi-handoff-v1.png",
+      "references": [
+        "assets/onboarding/travi-receiving-v1.png"
+      ],
+      "transparentBackgroundRequested": true,
+      "promptLogPath": "docs/mockups/onboarding-pass-desk-v1/PROMPTS.md",
+      "ownerApproval": "pending",
+      "nativePrototype": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaBounds": [
+        49,
+        21,
+        1216,
+        1254
+      ],
+      "sha256": "b9b06c6d5de10c730b73b3857a0271adc8c0b083303d339bf2dc870708169671"
+    },
+    {
+      "assetId": "pass_desk_composition",
+      "reviewPath": "docs/mockups/onboarding-pass-desk-v1/pass-desk-composition-v1.png",
+      "sourcePath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-3fe4677b-ed52-4122-b08b-486fb98888d3.png",
+      "nativePath": null,
+      "references": [
+        "assets/onboarding/bali-stage-prop-free-v1.png",
+        "docs/mockups/onboarding-pass-desk-v1/travi-handoff-v1.png"
+      ],
+      "transparentBackgroundRequested": false,
+      "promptLogPath": "docs/mockups/onboarding-pass-desk-v1/PROMPTS.md",
+      "ownerApproval": "pending",
+      "nativePrototype": false,
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGB",
+      "alphaBounds": null,
+      "sha256": "60e2d1ac9e9055b3cf232d535b357a8df69533092851171aacaecc48044feec9"
+    },
+    {
+      "assetId": "holiday_pass_shell",
+      "reviewPath": "docs/mockups/onboarding-pass-desk-v1/holiday-pass-shell-v1.png",
+      "sourcePath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-58622d6e-8882-4f4c-9ebf-43da150536f9.png",
+      "nativePath": "assets/onboarding/holiday-pass-shell-v1.png",
+      "references": [
+        "docs/mockups/onboarding-pass-desk-v1/pass-desk-composition-v1.png"
+      ],
+      "transparentBackgroundRequested": true,
+      "promptLogPath": "docs/mockups/onboarding-pass-desk-v1/PROMPTS.md",
+      "ownerApproval": "pending",
+      "nativePrototype": true,
+      "dimensions": [
+        2155,
+        730
+      ],
+      "mode": "RGBA",
+      "alphaBounds": [
+        39,
+        77,
+        2127,
+        706
+      ],
+      "sha256": "6a185935116b5ae6c96272ad1b2fba7a934e514568df77f71b5cc0859690c3b6"
+    },
+    {
+      "assetId": "annual_pass_shell",
+      "reviewPath": "docs/mockups/onboarding-pass-desk-v1/annual-pass-shell-v1.png",
+      "sourcePath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-7c2836be-e1b7-4efc-8689-e88cd4a6fd25.png",
+      "nativePath": "assets/onboarding/annual-pass-shell-v1.png",
+      "references": [
+        "docs/mockups/onboarding-pass-desk-v1/pass-desk-composition-v1.png"
+      ],
+      "transparentBackgroundRequested": true,
+      "promptLogPath": "docs/mockups/onboarding-pass-desk-v1/PROMPTS.md",
+      "ownerApproval": "pending",
+      "nativePrototype": true,
+      "dimensions": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "alphaBounds": [
+        47,
+        35,
+        2124,
+        702
+      ],
+      "sha256": "167f45ba3561c531353f4497ed6a3406395dc2cf3e6ddadf7e2662f73edd8b3c"
+    }
+  ],
+  "nativeEvidence": [
+    {
+      "path": "docs/mockups/onboarding-pass-desk-v1/native-annual-pass.png",
+      "dimensions": [
+        378,
+        815
+      ],
+      "mode": "RGB",
+      "alphaBounds": null,
+      "sha256": "59478d34a6503ff76545656cc6f04a812ef44ca17ea3259cd19d79263bccdbff"
+    },
+    {
+      "path": "docs/mockups/onboarding-pass-desk-v1/native-back-to-booking.png",
+      "dimensions": [
+        378,
+        815
+      ],
+      "mode": "RGB",
+      "alphaBounds": null,
+      "sha256": "9a1aa5cc9e9f178b62668e73520b3503b423b0be2b2d31da0bb50471d1946f54"
+    },
+    {
+      "path": "docs/mockups/onboarding-pass-desk-v1/native-free-holiday.png",
+      "dimensions": [
+        378,
+        815
+      ],
+      "mode": "RGB",
+      "alphaBounds": null,
+      "sha256": "512cbe9d96d44f138dfe5f3d979affe546841045ad28b820a841d6b1b289ba20"
+    },
+    {
+      "path": "docs/mockups/onboarding-pass-desk-v1/native-holiday-pass.png",
+      "dimensions": [
+        378,
+        815
+      ],
+      "mode": "RGB",
+      "alphaBounds": null,
+      "sha256": "cc60d39ccc2041250f5d1b64d9c82f46f83a79ad915c1f14d73af83bd3d26aa0"
+    }
+  ]
+}

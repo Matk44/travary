@@ -1,0 +1,172 @@
+[
+  {
+    "destinationId": "city_gb_edinburgh",
+    "batch": 2,
+    "sourceUrls": [
+      "https://edinburgh.org/point-of-interest/edinburgh-castle/",
+      "https://edinburgh.org/things-to-do/itineraries/one-day-tour-of-edinburgh/"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Edinburgh city: Castle Rock, castle, layered Old Town and Arthur's Seat backdrop.",
+      "summary": "Castle Rock and layered stone city; clear floor.",
+      "notes": "Symbolic arrangement includes church/clocktower cues; central text zone clear.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-f9ba02ae-8b96-435f-a6bd-0a139b791bcd.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_gb_edinburgh/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_gb_edinburgh.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Edinburgh (GB), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Edinburgh Castle on dark Castle Rock, layered Old Town stone buildings and steep slate roofs, distant Arthur's Seat, a few local broadleaf trees. Do not make the castle a fantasy spired palace.\nLighting/mood: early autumn, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Edinburgh (GB) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_es_barcelona",
+    "batch": 2,
+    "sourceUrls": [
+      "https://bid.barcelonaturisme.com/wv3/en/page/5707/basilica-of-la-sagrada-familia.html",
+      "https://parkguell.barcelona/en/park-guell/gallery"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Barcelona city: Sagrada Familia spires, Park Guell mosaics and Mediterranean urban/coastal backdrop.",
+      "summary": "Gaudi spires and mosaic layers; clear floor.",
+      "notes": "Park Guell, Sagrada Familia and waterfront are intentionally grouped symbolically, not a literal viewpoint.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-641aa1f0-f25e-4984-8959-2ae7098935e9.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_es_barcelona/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_es_barcelona.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Barcelona (ES), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Sagrada Familia with slender clustered sculpted spires, restrained colourful broken-tile mosaic terraces recalling Park Guell, Mediterranean cream and ochre city blocks and palms. Symbolic Barcelona composition; no Balinese temples.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Barcelona (ES) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_es_madrid",
+    "batch": 2,
+    "sourceUrls": [
+      "https://www.esmadrid.com/en/tourist-information/royal-palace",
+      "https://www.esmadrid.com/en/tourist-information/plaza-mayor-Madrid"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Madrid city: Royal Palace/Almudena skyline and Plaza Mayor's arcaded facades and equestrian monument.",
+      "summary": "Madrid palace/plaza stone layers; clear floor.",
+      "notes": "Historic equestrian statue belongs to architectural scenery, not an added shared character. Landmark grouping symbolic.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-7db0322b-525d-4662-b633-4d05c5e3af17.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_es_madrid/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_es_madrid.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Madrid (ES), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: grand Royal Palace with pale stone facade, Plaza Mayor's red-ochre arcaded buildings and restrained plane trees; a coherent symbolic Madrid streetscape. Inland city, no sea or tropical cliffs.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Madrid (ES) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_pt_lisbon",
+    "batch": 2,
+    "sourceUrls": [
+      "https://www.visitportugal.com/en/destinos/lisboa-regiao/320317",
+      "https://www.visitlisboa.com/en/places/alfama"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Lisbon city: Alfama/tiled hill streets, blank yellow tram, Tagus and symbolic Belem/25 de Abril bridge cues.",
+      "summary": "Alfama, tiled facades and blank tram; clear floor.",
+      "notes": "Belém Tower and bridge are grouped with Alfama symbolically; not a literal shared viewpoint. Dark street elements are bollards, not people.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-32d91904-4f77-480c-aaea-c09861944e2c.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_pt_lisbon/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_pt_lisbon.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Lisbon (PT), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Alfama's terracotta rooftops climbing a hillside, pastel and tiled facades, a small blank yellow tram on a plausible sloped street, Tagus estuary in distant middle depth. No invented mountain coast.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Lisbon (PT) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_nl_amsterdam",
+    "batch": 2,
+    "sourceUrls": [
+      "https://www.iamsterdam.com/en/see-and-do/nature-and-active/old-amsterdam-walking-route",
+      "https://www.iamsterdam.com/en/see-and-do/attractions-and-sights/bridges-of-amsterdam"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Amsterdam city: canal houses, stone-arch bridge, canal water and bicycles.",
+      "summary": "Dutch gables and canal layers; clear floor.",
+      "notes": "Narrow brick gables distinguish it from Venice; bicycle and boat are empty. Decorative clock details stay architectural.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-6fb7bef6-b8d4-4d48-83b2-6410be871958.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_nl_amsterdam/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_nl_amsterdam.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Amsterdam (NL), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: narrow brick Dutch canal houses with distinctive stepped and bell gables, a low stone canal bridge, layered calm canal water and leafy elm trees; modest empty bicycles at left only. Flat geography, no mountains.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Amsterdam (NL) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  }
+]

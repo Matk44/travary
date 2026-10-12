@@ -1,0 +1,420 @@
+{
+  "verifiedAt": "2026-10-07",
+  "result": "passed",
+  "generationMode": "built_in_imagegen",
+  "selectedMasters": 30,
+  "completedBatches": 6,
+  "generationAttempts": 36,
+  "measuredDimensions": {
+    "851 x 1848": 23,
+    "851 x 1847": 7
+  },
+  "uniqueHashes": 30,
+  "galleryImages": 30,
+  "galleryLocalLinksChecked": 120,
+  "countryBaselineRows": 25,
+  "existingBaliKyotoStatus": "integrated",
+  "corrections": [
+    "Venice",
+    "Prague",
+    "New York City",
+    "Tokyo",
+    "Kuala Lumpur",
+    "Melbourne"
+  ],
+  "ownerApproval": "pending",
+  "integration": false,
+  "publication": false,
+  "checks": [
+    {
+      "city": "Paris",
+      "destinationId": "city_fr_paris",
+      "selectedPath": "art_packs/pending/onboarding/city_fr_paris/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Rome",
+      "destinationId": "city_it_rome",
+      "selectedPath": "art_packs/pending/onboarding/city_it_rome/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Venice",
+      "destinationId": "city_it_venice",
+      "selectedPath": "art_packs/pending/onboarding/city_it_venice/onboarding_stage_v2.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Florence",
+      "destinationId": "city_it_florence",
+      "selectedPath": "art_packs/pending/onboarding/city_it_florence/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "London",
+      "destinationId": "city_gb_london",
+      "selectedPath": "art_packs/pending/onboarding/city_gb_london/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Edinburgh",
+      "destinationId": "city_gb_edinburgh",
+      "selectedPath": "art_packs/pending/onboarding/city_gb_edinburgh/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Barcelona",
+      "destinationId": "city_es_barcelona",
+      "selectedPath": "art_packs/pending/onboarding/city_es_barcelona/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Madrid",
+      "destinationId": "city_es_madrid",
+      "selectedPath": "art_packs/pending/onboarding/city_es_madrid/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Lisbon",
+      "destinationId": "city_pt_lisbon",
+      "selectedPath": "art_packs/pending/onboarding/city_pt_lisbon/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Amsterdam",
+      "destinationId": "city_nl_amsterdam",
+      "selectedPath": "art_packs/pending/onboarding/city_nl_amsterdam/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Prague",
+      "destinationId": "city_cz_prague",
+      "selectedPath": "art_packs/pending/onboarding/city_cz_prague/onboarding_stage_v2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Athens",
+      "destinationId": "city_gr_athens",
+      "selectedPath": "art_packs/pending/onboarding/city_gr_athens/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "New York City",
+      "destinationId": "city_us_new_york",
+      "selectedPath": "art_packs/pending/onboarding/city_us_new_york/onboarding_stage_v2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "San Francisco",
+      "destinationId": "city_us_san_francisco",
+      "selectedPath": "art_packs/pending/onboarding/city_us_san_francisco/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Orlando",
+      "destinationId": "city_us_orlando",
+      "selectedPath": "art_packs/pending/onboarding/city_us_orlando/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Tokyo",
+      "destinationId": "city_jp_tokyo",
+      "selectedPath": "art_packs/pending/onboarding/city_jp_tokyo/onboarding_stage_v2.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Osaka",
+      "destinationId": "city_jp_osaka",
+      "selectedPath": "art_packs/pending/onboarding/city_jp_osaka/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Seoul",
+      "destinationId": "city_kr_seoul",
+      "selectedPath": "art_packs/pending/onboarding/city_kr_seoul/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Hong Kong",
+      "destinationId": "city_hk_hong_kong",
+      "selectedPath": "art_packs/pending/onboarding/city_hk_hong_kong/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Bangkok",
+      "destinationId": "city_th_bangkok",
+      "selectedPath": "art_packs/pending/onboarding/city_th_bangkok/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Singapore",
+      "destinationId": "city_sg_singapore",
+      "selectedPath": "art_packs/pending/onboarding/city_sg_singapore/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Kuala Lumpur",
+      "destinationId": "city_my_kuala_lumpur",
+      "selectedPath": "art_packs/pending/onboarding/city_my_kuala_lumpur/onboarding_stage_v2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Dubai",
+      "destinationId": "city_ae_dubai",
+      "selectedPath": "art_packs/pending/onboarding/city_ae_dubai/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Istanbul",
+      "destinationId": "city_tr_istanbul",
+      "selectedPath": "art_packs/pending/onboarding/city_tr_istanbul/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Sydney",
+      "destinationId": "city_au_sydney",
+      "selectedPath": "art_packs/pending/onboarding/city_au_sydney/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Melbourne",
+      "destinationId": "city_au_melbourne",
+      "selectedPath": "art_packs/pending/onboarding/city_au_melbourne/onboarding_stage_v2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Queenstown",
+      "destinationId": "city_nz_queenstown",
+      "selectedPath": "art_packs/pending/onboarding/city_nz_queenstown/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Vancouver",
+      "destinationId": "city_ca_vancouver",
+      "selectedPath": "art_packs/pending/onboarding/city_ca_vancouver/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Cape Town",
+      "destinationId": "city_za_cape_town",
+      "selectedPath": "art_packs/pending/onboarding/city_za_cape_town/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    },
+    {
+      "city": "Cancun",
+      "destinationId": "city_mx_cancun",
+      "selectedPath": "art_packs/pending/onboarding/city_mx_cancun/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "opaque": true,
+      "sha256MatchesOriginal": true,
+      "exactPromptsMatch": true,
+      "ledgerMatches": true
+    }
+  ]
+}

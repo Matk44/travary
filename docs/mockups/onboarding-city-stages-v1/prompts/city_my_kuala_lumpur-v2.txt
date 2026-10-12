@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: clean Kuala Lumpur onboarding scenery plate revision
+Primary request: Reduce ONLY the paired Petronas Twin Towers and their skybridge together, preserving matching heights, architecture and proportions, so BOTH antenna tips begin at approximately 30% from the top of the full portrait instead of their current high placement. Keep them left of centre and visually dominant within the middle city scenery. Fill vacated space above the towers with the existing quiet embossed petrol-teal paper sky. Do not change other buildings or add any taller skyline elements.
+Input 1: Kuala Lumpur scenery plate edit target.
+Invariants: preserve full portrait canvas/aspect, KLCC park/pond/fountain, surrounding city layers, warm physical light, lush foliage, dimensional folded paper material, curved teal stage wings, and cream floor boundary near65%; keep lower cream control floor calm and clear. Keep right foreground free for separate Travi.
+Constraints: no people, characters, character shadow, folio, loose tickets, lettering, signs, UI, prices, dates, labels, logos, flags, watermark or device frame. Output one complete opaque portrait plate.

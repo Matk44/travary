@@ -1,0 +1,158 @@
+{
+  "account-entry": {
+    "provider": "replicate-seedance-2",
+    "prompt": "ONE continuous FOUR SECOND shot from supplied held-booking frame to supplied offered-identity-tag frame. 0-0.3s keep the original cream booking card steady. 0.3-1.6s Travi uses his two paper hands to slip THAT SAME card naturally just behind the navy folio cover at left, looking down with happy concentration. Do not transform the booking card into the tag. A small booking corner remains visible at the end. 1.6-2.8s he picks up the SEPARATE small cream tag with embossed person silhouette beside the folio and offers it as in the supplied endpoint, looking delightedly toward the tag then traveller. 2.8-3.4s settle with an eager eyebrow lift; wheels remain grounded. 3.4-4s hold the EXACT supplied last frame, same scale/framing/props. This is only a sign-in invitation, no account-linked success or security claim. No tickets enter in this clip.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+    "idea": "Travary owner-approved account scene \u2014 account-entry",
+    "cast_image_paths": [
+      "1791496571814-4374fd0ea4154653.png",
+      "1791496571793-e4edeeb99c4be7d9.png"
+    ],
+    "first_frame_path": "1791496571814-4374fd0ea4154653.png",
+    "last_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "seed": 510901,
+    "shot_card": {
+      "title": "account-entry",
+      "raw_prompt": "ONE continuous FOUR SECOND shot from supplied held-booking frame to supplied offered-identity-tag frame. 0-0.3s keep the original cream booking card steady. 0.3-1.6s Travi uses his two paper hands to slip THAT SAME card naturally just behind the navy folio cover at left, looking down with happy concentration. Do not transform the booking card into the tag. A small booking corner remains visible at the end. 1.6-2.8s he picks up the SEPARATE small cream tag with embossed person silhouette beside the folio and offers it as in the supplied endpoint, looking delightedly toward the tag then traveller. 2.8-3.4s settle with an eager eyebrow lift; wheels remain grounded. 3.4-4s hold the EXACT supplied last frame, same scale/framing/props. This is only a sign-in invitation, no account-linked success or security claim. No tickets enter in this clip.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+      "duration_seconds": 4,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "camera_move": "frontal locked",
+      "first_frame_path": "1791496571814-4374fd0ea4154653.png",
+      "last_frame_path": "1791496571793-e4edeeb99c4be7d9.png"
+    }
+  },
+  "account-idle": {
+    "provider": "replicate-seedance-2",
+    "prompt": "A FOUR SECOND SEAMLESS WAITING LOOP; first and last frame are the SAME supplied invitation. Keep Travi offering the small identity tag, navy folio at left and booking corner unchanged. Warm patient anticipation while a traveller chooses sign-in. One natural blink at 1s, tiny curious eyebrow lift at 2s, a 2-3 millimetre paper-hand/tag adjustment and slight relaxed body breathing. Return smoothly to the exact supplied open-eyed starting pose by 3.7s; no action completion or clasp closing. No travel movement, bouncing wheels, new props, security/linked claim, tickets or camera movement. Background perfectly steady. Loop is calm, expressive and continuous, not frantic dancing or a frozen picture.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+    "idea": "Travary owner-approved account scene \u2014 account-idle",
+    "cast_image_paths": [
+      "1791496571793-e4edeeb99c4be7d9.png",
+      "1791496571793-e4edeeb99c4be7d9.png"
+    ],
+    "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+    "last_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "seed": 510902,
+    "shot_card": {
+      "title": "account-idle",
+      "raw_prompt": "A FOUR SECOND SEAMLESS WAITING LOOP; first and last frame are the SAME supplied invitation. Keep Travi offering the small identity tag, navy folio at left and booking corner unchanged. Warm patient anticipation while a traveller chooses sign-in. One natural blink at 1s, tiny curious eyebrow lift at 2s, a 2-3 millimetre paper-hand/tag adjustment and slight relaxed body breathing. Return smoothly to the exact supplied open-eyed starting pose by 3.7s; no action completion or clasp closing. No travel movement, bouncing wheels, new props, security/linked claim, tickets or camera movement. Background perfectly steady. Loop is calm, expressive and continuous, not frantic dancing or a frozen picture.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+      "duration_seconds": 4,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "camera_move": "frontal locked",
+      "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+      "last_frame_path": "1791496571793-e4edeeb99c4be7d9.png"
+    }
+  },
+  "account-success-pass": {
+    "provider": "replicate-seedance-2",
+    "prompt": "FOUR SECOND successful account-link handoff. First frame is offered identity tag; last is EXACT approved blank pass desk. Actual authentication has succeeded outside this film. 0-0.3s warm pleased glance toward the traveller. 0.3-1.6s gently tuck the small PERSON identity tag into the navy folio's INNER loop/cover at left, then close its brass clasp with a tactile careful little click. The identity tag becomes tucked away, not an external tag in the last frame. A brief delighted closed-eye smile and small proud nod; keep original permanent PALM tag on the suitcase. 1.6-3.3s Travi smoothly straightens into the exact open-palm pose, folio remains at left, and the two BLANK pass tickets gently slide up into their EXACT final stacked positions: upper coral palm stub, lower navy palm stub, cream lettering areas completely blank; blank navy notched CTA shell below. The card-filing action is already complete; do not create another booking. 3.3-4s settle and hold the supplied end frame precisely for live UI. Physical smooth movement, no fake file upload graphics, locks, security shield or backup claim. No camera snap or hero zoom to reveal tickets.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+    "idea": "Travary owner-approved account scene \u2014 account-success-pass",
+    "cast_image_paths": [
+      "1791496571793-e4edeeb99c4be7d9.png",
+      "1791496571833-4a696b157f542849.png"
+    ],
+    "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+    "last_frame_path": "1791496571833-4a696b157f542849.png",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "seed": 510903,
+    "shot_card": {
+      "title": "account-success-pass",
+      "raw_prompt": "FOUR SECOND successful account-link handoff. First frame is offered identity tag; last is EXACT approved blank pass desk. Actual authentication has succeeded outside this film. 0-0.3s warm pleased glance toward the traveller. 0.3-1.6s gently tuck the small PERSON identity tag into the navy folio's INNER loop/cover at left, then close its brass clasp with a tactile careful little click. The identity tag becomes tucked away, not an external tag in the last frame. A brief delighted closed-eye smile and small proud nod; keep original permanent PALM tag on the suitcase. 1.6-3.3s Travi smoothly straightens into the exact open-palm pose, folio remains at left, and the two BLANK pass tickets gently slide up into their EXACT final stacked positions: upper coral palm stub, lower navy palm stub, cream lettering areas completely blank; blank navy notched CTA shell below. The card-filing action is already complete; do not create another booking. 3.3-4s settle and hold the supplied end frame precisely for live UI. Physical smooth movement, no fake file upload graphics, locks, security shield or backup claim. No camera snap or hero zoom to reveal tickets.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+      "duration_seconds": 4,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "camera_move": "frontal locked",
+      "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+      "last_frame_path": "1791496571833-4a696b157f542849.png"
+    }
+  },
+  "account-guest-pass": {
+    "provider": "replicate-seedance-2",
+    "prompt": "FOUR SECOND friendly GUEST continuation. The traveller skipped sign-in. Start on supplied invitation and end exactly on supplied approved blank pass desk. 0-0.4s Travi warmly acknowledges the choice with a tiny friendly nod. 0.4-1.6s set the offered PERSON identity tag aside discreetly behind the navy folio, WITHOUT attaching it, stamping it, closing a security clasp or celebrating account linking. The existing booking stays in its folio. 1.6-3.3s straighten smoothly into the supplied open-palm pose and let TWO BLANK pass tickets slide gently into exact stacked final positions, upper coral palm stub and lower navy palm stub; cream writing areas empty, blank navy notched CTA below. 3.3-4s hold EXACT supplied final pose. The guest receives equally warm help. No signed-in tick, account claim, locked files, documents backed up, extra tags or different final paywall. Smooth continuous physical movement; no snap zoom or cut.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+    "idea": "Travary owner-approved account scene \u2014 account-guest-pass",
+    "cast_image_paths": [
+      "1791496571793-e4edeeb99c4be7d9.png",
+      "1791496571833-4a696b157f542849.png"
+    ],
+    "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+    "last_frame_path": "1791496571833-4a696b157f542849.png",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "seed": 510904,
+    "shot_card": {
+      "title": "account-guest-pass",
+      "raw_prompt": "FOUR SECOND friendly GUEST continuation. The traveller skipped sign-in. Start on supplied invitation and end exactly on supplied approved blank pass desk. 0-0.4s Travi warmly acknowledges the choice with a tiny friendly nod. 0.4-1.6s set the offered PERSON identity tag aside discreetly behind the navy folio, WITHOUT attaching it, stamping it, closing a security clasp or celebrating account linking. The existing booking stays in its folio. 1.6-3.3s straighten smoothly into the supplied open-palm pose and let TWO BLANK pass tickets slide gently into exact stacked final positions, upper coral palm stub and lower navy palm stub; cream writing areas empty, blank navy notched CTA below. 3.3-4s hold EXACT supplied final pose. The guest receives equally warm help. No signed-in tick, account claim, locked files, documents backed up, extra tags or different final paywall. Smooth continuous physical movement; no snap zoom or cut.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+      "duration_seconds": 4,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "camera_move": "frontal locked",
+      "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+      "last_frame_path": "1791496571833-4a696b157f542849.png"
+    }
+  },
+  "account-email-gesture": {
+    "provider": "replicate-seedance-2",
+    "prompt": "A continuous FOUR SECOND transition from the offered identity-tag frame to the supplied closed paper-envelope frame, an email sign-in option chosen by the traveller. 0-0.3s Travi notices the choice with a bright curious eyebrow. 0.3-1.6s discreetly put the small identity tag behind the navy folio at left, then take a SEPARATE small closed cream paper envelope from behind the folio; DO NOT morph the tag into an envelope. 1.6-2.8s offer the envelope gently between the two folded-paper hands in the exact supplied final pose. A natural pleased glance toward the envelope. 2.8-4s settle and hold precisely the supplied final frame. Nothing has been sent; this is only waiting for an email address. No outgoing flight, upload, linked tick, success claim or magical delivery. Keep the same EXACT background and camera throughout, same character anchors/size and folio.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+    "idea": "Travary owner-approved email branch \u2014 account-email-gesture",
+    "cast_image_paths": [
+      "1791496571793-e4edeeb99c4be7d9.png",
+      "1791496691663-87019e388fd4089d.png"
+    ],
+    "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+    "last_frame_path": "1791496691663-87019e388fd4089d.png",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "seed": 510905,
+    "shot_card": {
+      "title": "account-email-gesture",
+      "raw_prompt": "A continuous FOUR SECOND transition from the offered identity-tag frame to the supplied closed paper-envelope frame, an email sign-in option chosen by the traveller. 0-0.3s Travi notices the choice with a bright curious eyebrow. 0.3-1.6s discreetly put the small identity tag behind the navy folio at left, then take a SEPARATE small closed cream paper envelope from behind the folio; DO NOT morph the tag into an envelope. 1.6-2.8s offer the envelope gently between the two folded-paper hands in the exact supplied final pose. A natural pleased glance toward the envelope. 2.8-4s settle and hold precisely the supplied final frame. Nothing has been sent; this is only waiting for an email address. No outgoing flight, upload, linked tick, success claim or magical delivery. Keep the same EXACT background and camera throughout, same character anchors/size and folio.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+      "duration_seconds": 4,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "camera_move": "frontal locked",
+      "first_frame_path": "1791496571793-e4edeeb99c4be7d9.png",
+      "last_frame_path": "1791496691663-87019e388fd4089d.png"
+    }
+  },
+  "account-email-idle": {
+    "provider": "replicate-seedance-2",
+    "prompt": "A FOUR SECOND seamless patient waiting loop, SAME supplied first and last frame, Travi holding a small closed cream envelope for email sign-in. One natural blink around 1s, tiny anticipatory eyebrow lift and 2-3 millimetre hand/envelope adjustment around 2s, gentle body breathing, return to exact relaxed open-eyed starting pose by 3.7s. Closed envelope stays unchanged, not sent/flying/opened. Folio remains at left, all four wheels grounded. No authentication completion, ticks, envelope postage, extra props or action progression. Completely fixed background and camera, no reframe, loop smoothly.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+    "idea": "Travary owner-approved email branch \u2014 account-email-idle",
+    "cast_image_paths": [
+      "1791496691663-87019e388fd4089d.png",
+      "1791496691663-87019e388fd4089d.png"
+    ],
+    "first_frame_path": "1791496691663-87019e388fd4089d.png",
+    "last_frame_path": "1791496691663-87019e388fd4089d.png",
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "seed": 510906,
+    "shot_card": {
+      "title": "account-email-idle",
+      "raw_prompt": "A FOUR SECOND seamless patient waiting loop, SAME supplied first and last frame, Travi holding a small closed cream envelope for email sign-in. One natural blink around 1s, tiny anticipatory eyebrow lift and 2-3 millimetre hand/envelope adjustment around 2s, gentle body breathing, return to exact relaxed open-eyed starting pose by 3.7s. Closed envelope stays unchanged, not sent/flying/opened. Folio remains at left, all four wheels grounded. No authentication completion, ticks, envelope postage, extra props or action progression. Completely fixed background and camera, no reframe, loop smoothly.\n\nIDENTITY AND CRAFT: preserve EXACTLY the supplied coral ribbed modern hard-shell spinner suitcase, navy zipper/trim/corner guards, brass telescopic rails/navy grip, four grounded dark caster wheels, its own cream palm luggage tag and exactly TWO folded-paper arms. Same warm expressive eyes, eyebrows and happy mouth; no extra limbs, legs, clothes, other characters, duplicate folios, melting or shifting suitcase identity. Rich handmade sculpted cut-paper theatre and tactile paper grain, navy linen folio with brass clasp and palm emblem, warm holiday lighting. Quiet textured teal heading area above and cream sandy foreground below. All landscape objects remain in place: Bali temples, terraces, palms, mountain, ocean, orange sun and cream clouds. Frontal LOCKED camera, no cut, no snap zoom, no pan, no reframe jerk or sudden horizon jump. Character may physically reposition gently toward its supplied end pose. Entire motion eased and continuous. NO letters, numbers, heading, provider logo, UI, dollar/price, selection mark, status badge, fake barcode, watermark or audio. Every actual button and all prices will be live UI outside this film. Silent.",
+      "duration_seconds": 4,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "camera_move": "frontal locked",
+      "first_frame_path": "1791496691663-87019e388fd4089d.png",
+      "last_frame_path": "1791496691663-87019e388fd4089d.png"
+    }
+  }
+}

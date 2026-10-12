@@ -1,0 +1,111 @@
+{
+  "purpose": "Display-only WebP size/encoding derivatives; unmodified PNG masters preserved.",
+  "assets": [
+    {
+      "key": "STAGE",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-bf842b16-16cd-482e-ab9e-8af6ddb2745b.png",
+      "master": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGB",
+      "sha256": "f61b467542e131d32ecfe85d9a82555101a33f5837e275a7c141dc8f56dd5f44",
+      "delivery": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.webp",
+      "deliveryBytes": 77020,
+      "deliveryDimensions": [
+        600,
+        1303
+      ]
+    },
+    {
+      "key": "CLOSED",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-a248a182-e24a-4874-a16f-e9b05f45e61e.png",
+      "master": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/closed-folio-v1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "4633f83da86ea6f3fea7ce6f1999f48c88adec59716f8ad9f6a6ea60b6cc3abc",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fullyTransparentFraction": 0.5857067108154297,
+      "delivery": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/closed-folio-v1.webp",
+      "deliveryBytes": 23464,
+      "deliveryDimensions": [
+        680,
+        453
+      ]
+    },
+    {
+      "key": "OPEN",
+      "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-folio-v1/open-folio-v2.png",
+      "master": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-folio-v1/open-folio-v2.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "e2c36835c326ec9f936ac83a531efb057c481c7f10719deacde1d81c9aac1874",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fullyTransparentFraction": 0.34454345703125,
+      "delivery": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/open-folio-delivery.webp",
+      "deliveryBytes": 44022,
+      "deliveryDimensions": [
+        800,
+        533
+      ]
+    },
+    {
+      "key": "GREETING",
+      "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-journey-v1/travi-cutout-v2.png",
+      "master": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-journey-v1/travi-cutout-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "3df41c7696b08017a97e4fd429b5643ebe94b4f62bf8974ed9825e5247736547",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentFraction": 0.5173982331499329,
+      "delivery": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/travi-greeting-delivery.webp",
+      "deliveryBytes": 57094,
+      "deliveryDimensions": [
+        640,
+        640
+      ]
+    },
+    {
+      "key": "RECEIVING",
+      "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-folio-v1/travi-receiving-v1.png",
+      "master": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-folio-v1/travi-receiving-v1.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "e407f2476a4c3fb5472dd6115c67dd8c772739f03c110e47a97f1b7e1f7c8a54",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentFraction": 0.5244340916086069,
+      "delivery": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/travi-receiving-delivery.webp",
+      "deliveryBytes": 52414,
+      "deliveryDimensions": [
+        640,
+        640
+      ]
+    }
+  ],
+  "fragmentBytes": 374500
+}

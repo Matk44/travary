@@ -1,0 +1,442 @@
+{
+  "date": "2026-10-11",
+  "mode": "built-in image_gen",
+  "brief": "art_packs/prompts/city_cards.md",
+  "templates": "art_packs/prompts/city_card_references/",
+  "status": "staged still artwork for owner review",
+  "export": "Original template dimensions, RGBA alpha, outer shell/shadows, barcode stub, reservation centre, cord and grommet retained. Generated scenes fitted uniformly within the right-hand scene zones, with 42% navy ticket text space and 62% ivory room-card text space. Stripes retain original pattern geometry with palette recolouring. Reservation tag uses generated plain leather to remove the flag.",
+  "assets": [
+    {
+      "place": "orlando",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-30e084bd-f59e-450e-be52-77bfebf426b4.png",
+      "palette": [
+        [
+          10,
+          91,
+          103
+        ],
+        [
+          224,
+          98,
+          69
+        ],
+        [
+          223,
+          157,
+          45
+        ]
+      ],
+      "output": "art_packs/staging/orlando/featured_ticket.png",
+      "prompt": "Use case: precise-object-edit\nAsset type: Orlando featured ticket, finished transparent PNG.\nInput image: edit target, finished template. Keep canvas exactly 1774 x 887 and the exact original card placement, outline, shadow, ivory stub, barcode, perforations, notches and corners. Keep original alpha silhouette. Only change illustrated scene and recolour existing decorative stripe, preserving stripe's pattern geometry.\nCRITICAL TEXT-SAFE AREA: every pixel of the navy card left of x=746 is plain empty navy textured paper. No leaves, trees, scenery, sun, cloud, fireworks, reflections, or any motif anywhere left of x=746. The new picture begins to fade in ONLY to the right of x=746, and reaches the perforated stub at x=1365. No original trees or rocks at bottom left.\nORLANDO PICTURE inside this right scene area: palm-lined teal lake, Lake Eola tiered fountain in foreground, little original fairy-tale castle nestled among palms on the opposite shore, a distant small ascending rocket and subtle fireworks. The castle is a SMALL asymmetrical storybook stone fortress, only three varied square crenellated towers and copper hipped roofs, low connecting walls, no tall central spire, no conical turret forest, no Disney or Universal resemblance. Absolutely NO flags or pennants on towers or anywhere. Keep castle part of the lake scene, not a single hero.\nMatch template's layered mid-century screen-print travel poster and fine paper grain. Lagoon teal, sunset coral, palm green and gold on navy, warm low sun. Recolour the SAME ornamental stripe's existing stars and chevrons in teal/coral/gold without moving or redesigning it.\nNo text, letters, numbers, signage, logos, flags, watermark, faces, theme-park attractions or characters. No new objects on the left. Genuinely transparent exterior. One finished card only."
+    },
+    {
+      "place": "orlando",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-2c0a6e05-d186-412f-9f64-0ac395d83d1e.png",
+      "palette": [
+        [
+          10,
+          91,
+          103
+        ],
+        [
+          224,
+          98,
+          69
+        ],
+        [
+          223,
+          157,
+          45
+        ]
+      ],
+      "output": "art_packs/staging/orlando/room_card.png",
+      "prompt": "Use case: precise-object-edit\nAsset type: finished Orlando room key card shell, transparent PNG, exactly 1774 x 887.\nInput image 1: EDIT TARGET. Change ONLY the printed right-hand window-view illustration and recolour the EXISTING narrow ornamental stripe. Keep original card position, silhouette, rounded corners, bevel, ivory paper grain, border and drop shadow exactly unchanged. Genuine transparent outside.\nScene: hotel window view of a lagoon-teal resort swimming pool, palm trees, coral poolside foliage, a distant calm lake and small coral/gold fireworks very far off over the water. No room interior, no literal new window frame. Warm low sunlight and relaxing dusk. Palette lagoon teal, sunset coral, palm green and warm gold.\nComposition: ALL scenery is restricted to the rightmost view area, x=1100 to x=1482; gently fade into ivory just at this left edge. The entire left 62% of canvas, x=0 to x=1099, MUST be empty ivory textured paper, no sky, cloud, water, pool, foliage or even faint scenery in this text zone. Scene flows to original stripe, stripe stays at its exact original position and keeps the same stars and lines recoloured to teal/coral/gold. Blank ivory right end cap remains.\nStyle: exact template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, no photography. No words, letters, numbers, signs, logos, flags, watermark or recognisable faces. No park castle, rides or characters. Return one complete card at the unchanged geometry."
+    },
+    {
+      "place": "orlando",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-dc464611-90be-489f-b5ae-05d7ee6335e9.png",
+      "palette": [
+        [
+          10,
+          91,
+          103
+        ],
+        [
+          224,
+          98,
+          69
+        ],
+        [
+          223,
+          157,
+          45
+        ]
+      ],
+      "output": "art_packs/staging/orlando/reservation_card.png",
+      "prompt": "Use case: precise-object-edit\nAsset type: finished Orlando tagged reservation card, transparent PNG exactly 1983 x 793.\nInput image 1 is the EDIT TARGET finished shell. Keep canvas, card placement, exact outline, rounded corners, drop shadow, ivory paper grain, entire braided cord, brass grommet, tag outline and tilt exactly unchanged.\nOnly replace the SMALL far-right framed picture (x=1423 to x=1948), and recolour the narrow dividing stripe and the tag for Orlando. Do not expand scene into the blank middle. Middle ivory paper stays completely empty. Maintain original picture frame position and its curved right corners.\nPicture: a small screen-printed dusk vignette of the Lake Eola tiered fountain on a lagoon, palm silhouettes and warm low sun, lagoon teal water, sunset coral sky, palm green and gold. No castle in this vignette.\nTag: same blank navy-teal textured tag, same geometry, same cord and brass eyelet. REMOVE the existing US flag pattern entirely; make its surface plain lagoon-teal leather with only subtle material grain, no stars, stripes, symbols, text or graphics. Recolour thin dividing line coral/gold.\nMatch template mid-century travel-poster layered shapes and fine grain. Genuine transparent exterior. Absolutely no text, letters, numbers, signage, logos, flags, watermark or recognisable faces. No theme parks. One finished reservation card only."
+    },
+    {
+      "place": "florida",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-b8156486-cfd4-488b-95c7-4c0121c6dc38.png",
+      "palette": [
+        [
+          11,
+          109,
+          121
+        ],
+        [
+          226,
+          120,
+          136
+        ],
+        [
+          214,
+          165,
+          88
+        ]
+      ],
+      "output": "art_packs/staging/florida/featured_ticket.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Florida featured ticket, exactly 1774 x 887.\nPrimary request: replace the original US montage with Miami Beach art deco hotels integrated into a coastal skyline, the Seven Mile Bridge sweeping low over turquoise sea, a coastal lighthouse and small pelicans; palms and warm low sun. Blank buildings without any signs..\nPalette: sea turquoise, flamingo pink, sand and palm green, within the navy/ivory palette family of the template.\nComposition: ONLY the right-hand scene on the navy main ticket, ending at the existing barcode stub. Entire LEFT 42% (x=0 through x=745) must be PLAIN EMPTY NAVY paper grain: no illustration at any height, including no foreground at bottom left. Scene fades in to the RIGHT of x=746 and flows toward the stub. Do not fill the ivory barcode stub, preserve barcode exactly.\nRecolour the same existing stars-and-chevron decorative stripe to this place's palette, keep exact pattern geometry."
+    },
+    {
+      "place": "florida",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-fa54a766-05d4-42d9-b9e6-da406dab6a86.png",
+      "palette": [
+        [
+          11,
+          109,
+          121
+        ],
+        [
+          226,
+          120,
+          136
+        ],
+        [
+          214,
+          165,
+          88
+        ]
+      ],
+      "output": "art_packs/staging/florida/room_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Florida room key card, exactly 1774 x 887.\nPrimary request: replace the original landscape with a hotel window view of turquoise sea, white sand beach and a small striped lifeguard hut with palms; warm low sunlight; no writing or numbers on hut.\nPalette: sea turquoise, flamingo pink, sand and palm green.\nComposition: no room interior and no literal window frame. Small right-hand printed view ending at the original stripe at x=1484. The ENTIRE LEFT 62% (x=0 to x=1099) must be empty ivory paper with grain, absolutely no clouds, sea, foliage or even faint scenery there. Soft screen-print fade just at the view's left boundary to ivory. Keep original blank ivory right end cap, original card border, shadow and rounding.\nRecolour the SAME existing narrow stars-and-line stripe without moving or changing its pattern geometry."
+    },
+    {
+      "place": "florida",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-97185c2b-8831-4d63-8fe5-524a078c5b9b.png",
+      "palette": [
+        [
+          11,
+          109,
+          121
+        ],
+        [
+          226,
+          120,
+          136
+        ],
+        [
+          214,
+          165,
+          88
+        ]
+      ],
+      "output": "art_packs/staging/florida/reservation_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Florida tagged reservation card, exactly 1983 x 793.\nPrimary request: replace ONLY the small framed picture at the far right (x=1423..1948) with a striped beach lifeguard hut, palms and a flamingo beside white sand and turquoise sea.\nPalette: sea turquoise, flamingo pink, sand and palm green. The central ivory paper remains completely blank and unchanged, no scene extending to the left of the thin divider.\nTag: same exact outline, tilt and leather grain; recolour to deep sea-turquoise. REMOVE the existing US flag entirely. Tag is plain textured leather with no stars, stripes, symbols, markings or lettering. Original cord and brass grommet unchanged. Recolour the same thin divider to warm sand.\nPreserve right picture frame dimensions and rounded right corners. No text anywhere inside OR outside the card."
+    },
+    {
+      "place": "new_york",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-c23eb177-43f2-4db3-bcd2-26e63a1ab6ca.png",
+      "palette": [
+        [
+          36,
+          68,
+          91
+        ],
+        [
+          172,
+          65,
+          49
+        ],
+        [
+          223,
+          171,
+          42
+        ]
+      ],
+      "output": "art_packs/staging/new_york/featured_ticket.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: New York featured ticket, exactly 1774 x 887.\nPrimary request: replace original scene with Manhattan skyline with varied small iconic towers, the Brooklyn Bridge across the harbour, a small Statue of Liberty in the harbour, the Flatiron Building within a street cluster, autumn trees of Central Park; all arranged as a balanced travel-poster montage, no single giant skyscraper.\nPalette: taxi yellow, brick red, steel blue and navy, within the original navy and ivory family.\nComposition: right-hand scene only, on navy main ticket ending at the unchanged ivory barcode stub. Left 42%, x=0..745, is ENTIRELY empty plain navy textured paper at all heights. NO trees or illustration at bottom left. Scene begins softly RIGHT of x=746 and flows toward the stub. Keep landmark silhouettes distinct and balanced; harbour and autumn foliage connect the montage.\nRecolour the exact existing stars-and-chevron stripe in yellow, brick red and steel blue without changing its pattern or placement. No flags on buildings, bridge or boats; Liberty is a small sculptural silhouette with no facial detail."
+    },
+    {
+      "place": "new_york",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-9a2f3890-26ca-4d71-9e96-3e966aa4c0e5.png",
+      "palette": [
+        [
+          36,
+          68,
+          91
+        ],
+        [
+          172,
+          65,
+          49
+        ],
+        [
+          223,
+          171,
+          42
+        ]
+      ],
+      "output": "art_packs/staging/new_york/room_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: New York room key card, exactly 1774 x 887.\nPrimary request: replace original view with hotel window view over brownstone rooftops with a wooden rooftop water tower in foreground, Manhattan skyline beyond, warm low sun and small autumn foliage accents.\nPalette: taxi yellow, brick red, steel blue and navy. No literal window frame or room interior.\nComposition: view only to the right, ending at the existing narrow ornamental stripe. Entire LEFT 62% of canvas, x=0..1099, is BLANK ivory paper with grain: no buildings, roof, sky, clouds, scenery or faint printing in this text zone. Soft screen-print fade from the view into paper at its left edge. Existing ivory right end cap unchanged.\nKeep the existing stripe's exact stars-and-line geometry, recolour steel blue, brick red and taxi yellow. No flags or rooftop signage; water tower has no markings."
+    },
+    {
+      "place": "new_york",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-3d872d28-afc1-46d7-bef6-d141bee3a0d4.png",
+      "palette": [
+        [
+          36,
+          68,
+          91
+        ],
+        [
+          172,
+          65,
+          49
+        ],
+        [
+          223,
+          171,
+          42
+        ]
+      ],
+      "output": "art_packs/staging/new_york/reservation_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: New York tagged reservation card, exactly 1983 x 793.\nPrimary request: replace ONLY small far-right framed picture with the Brooklyn Bridge crossing the harbour with the Manhattan skyline behind, warm low sun.\nPalette: taxi yellow, brick red, steel blue and navy. Keep the central ivory paper absolutely blank, same texture and divider position. Picture stays inside original far-right window x=1423..1948 with the same frame and rounded right corners.\nTag: identical outline and tilt, recolour deep steel blue; REMOVE existing US flag entirely, leaving plain textured leather with no stars, stripes, symbols, lettering or graphics. Preserve cord and brass grommet exactly. Thin divider in taxi yellow.\nNo flags on bridge, no people or faces, no readable details or labels."
+    },
+    {
+      "place": "las_vegas",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-06de7f53-d8eb-45a0-9ff6-78ad51e94ae5.png",
+      "palette": [
+        [
+          35,
+          95,
+          103
+        ],
+        [
+          205,
+          74,
+          140
+        ],
+        [
+          213,
+          154,
+          50
+        ]
+      ],
+      "output": "art_packs/staging/las_vegas/featured_ticket.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Las Vegas featured ticket, exactly 1774 x 887.\nPrimary request: replace original montage with a glowing Las Vegas boulevard at dusk, abstract neon lights WITHOUT words along anonymous modest buildings, a small diamond-shaped roadside welcome-sign silhouette absolutely BLANK inside with no letters or emblems, dancing fountains, layered Red Rock Canyon formations behind; NO casino buildings or recognisable casino facades, no Eiffel replica, pyramids, grand hotel towers, casino attractions or logos.\nPalette: neon pink, desert gold, dusk violet and teal, muted screen-print inks within original navy/ivory family.\nComposition: picture ONLY in right-hand navy scene area toward unchanged ivory barcode stub. Left 42% (x=0..745) is PLAIN EMPTY navy paper grain at all heights, no objects or foreground at bottom left. Scene begins softly to RIGHT of x=746. Boulevard, fountains and red rock landscape form balanced layered scenery.\nCRITICAL: all buildings anonymous and modest, no casinos or recognisable hotels, no famous Strip casino architecture. Neon is abstract coloured glowing lines with no words or glyphs. Diamond roadside sign is small and COMPLETELY BLANK inside, no star logo or symbols. Recolour existing narrow stars-and-chevron decorative stripe without altering geometry or moving it."
+    },
+    {
+      "place": "las_vegas",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-de4d1297-844d-43b4-aff9-d62786c03309.png",
+      "palette": [
+        [
+          35,
+          95,
+          103
+        ],
+        [
+          205,
+          74,
+          140
+        ],
+        [
+          213,
+          154,
+          50
+        ]
+      ],
+      "output": "art_packs/staging/las_vegas/room_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Las Vegas room key card, exactly 1774 x 887.\nPrimary request: replace original view with desert mountains at sunset above a distant grid of glittering pink and gold city lights, soft dusk-violet sky and teal shadows; anonymous low city silhouettes only, no recognisable casino buildings.\nPalette: neon pink, desert gold, dusk violet and teal. Landscape view from a hotel, no literal window frame or room interior.\nComposition: small scenic view on the right ending at original stripe. Entire left 62% of canvas (x=0..1099) remains EMPTY ivory textured paper with no sky, mountains, lights or faint printing. View fades softly into the paper at the left edge. Blank ivory right end cap unchanged.\nKeep exact existing stars-and-line stripe geometry and recolour teal, neon pink and desert gold. No casino buildings, hotel facades, signs, lettering, flags or logos. Sunset landscape and distant abstract lights are the subject.\nTargeted correction: REMOVE EVERY TALL CACTUS and all saguaro-like or columnar cactus silhouettes from this draft, especially at the far right. Replace those cactus shapes only with the existing red sandstone foreground and unobtrusive low scrub. No tall plants. Preserve the mountain sunset, abstract city-light grid, paper, striping, blank area and exact shell geometry. No text."
+    },
+    {
+      "place": "las_vegas",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-c178742b-2d68-4b00-9911-7a41b4cf5ada.png",
+      "palette": [
+        [
+          35,
+          95,
+          103
+        ],
+        [
+          205,
+          74,
+          140
+        ],
+        [
+          213,
+          154,
+          50
+        ]
+      ],
+      "output": "art_packs/staging/las_vegas/reservation_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Las Vegas tagged reservation card, exactly 1983 x 793.\nPrimary request: replace ONLY the small far-right framed picture with a small blank diamond-shaped roadside welcome-sign silhouette with glowing edge bulbs against layered Red Rock Canyon, dusk violet, desert gold and neon pink; sign has no text, emblem or logo.\nPalette: neon pink, desert gold, dusk violet and teal. Keep central ivory paper completely blank, same texture and frame geometry. Illustration restricted to x=1423..1948 with same rounded right corners and divider.\nSign is a modest tilted diamond panel on posts, plain cream centre with neon pink edging and small edge bulbs, NO words, letters, emblem, star or logo. No casino buildings. Red sandstone and violet dusk behind.\nTag: exact original shape, tilt, cord and brass grommet; recolour plain dusk-violet/teal leather, REMOVE existing US flag entirely. No tag graphics, stars, stripes, symbols, letters or markings. Recolour narrow divider desert gold."
+    },
+    {
+      "place": "california",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-a2f6d2f2-cdd3-4f2b-b0b7-72da6ed55bec.png",
+      "palette": [
+        [
+          21,
+          81,
+          111
+        ],
+        [
+          217,
+          99,
+          40
+        ],
+        [
+          216,
+          170,
+          100
+        ]
+      ],
+      "output": "art_packs/staging/california/featured_ticket.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: California featured ticket, exactly 1774 x 887.\nPrimary request: replace original montage with the Golden Gate Bridge over Pacific blue water, Big Sur's Bixby Bridge on a curving rugged coastal road, a small seaside pier with a Ferris wheel, Half Dome rising above a forested Yosemite valley in the background; balanced regional travel-poster montage; no Hollywood sign.\nPalette: Pacific blue, poppy orange, sand and eucalyptus green, original navy/ivory family. Balanced coastal and mountain montage.\nComposition: scene ONLY on right navy main ticket, flowing to unchanged ivory barcode stub. Entire LEFT 42% (x=0..745) is PLAIN EMPTY navy textured paper at all heights, no trees or objects at bottom left. Illustration fades in only RIGHT of x=746. Preserve the exact existing stars-and-chevron stripe and recolour Pacific blue, poppy orange and sand. No flags or signage."
+    },
+    {
+      "place": "california",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-cf1a226f-0ecb-47c9-8e20-78c27261d8c1.png",
+      "palette": [
+        [
+          21,
+          81,
+          111
+        ],
+        [
+          217,
+          99,
+          40
+        ],
+        [
+          216,
+          170,
+          100
+        ]
+      ],
+      "output": "art_packs/staging/california/room_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: California room key card, exactly 1774 x 887.\nPrimary request: replace original view with hotel window view of palm trees and a pier with a small Ferris wheel on the Pacific at sunset, warm low sunlight and poppy-orange sky reflections.\nPalette: Pacific blue, poppy orange, sand and eucalyptus green. No literal new window frame or room interior.\nComposition: small right-hand view ending at original decorative stripe. Entire LEFT 62% of canvas, x=0..1099, must be EMPTY ivory paper grain, no clouds, sea, palms or any faint illustration in this text zone. View softly fades into paper at its left edge. Right ivory end cap unchanged.\nKeep SAME stars-and-line stripe geometry and recolour Pacific blue, poppy orange, sand. No text anywhere inside or outside card."
+    },
+    {
+      "place": "california",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-04367dcf-5cec-4144-aaaa-4c44fb077ad7.png",
+      "palette": [
+        [
+          21,
+          81,
+          111
+        ],
+        [
+          217,
+          99,
+          40
+        ],
+        [
+          216,
+          170,
+          100
+        ]
+      ],
+      "output": "art_packs/staging/california/reservation_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: California tagged reservation card, exactly 1983 x 793.\nPrimary request: replace ONLY small framed far-right picture with a California seaside pier with a Ferris wheel on the Pacific, warm low sun, small palms.\nPalette: Pacific blue, poppy orange, sand and eucalyptus green. Center ivory paper remains COMPLETELY blank with unchanged original grain; same far-right picture frame and curved right corners, no picture expanding into middle.\nTag: same exact original geometry, tilt, cord and brass grommet; recolour plain deep Pacific-blue leather, REMOVE existing US flag entirely. No stars, stripes, symbols, graphics, letters or markings on tag. Existing thin divider recoloured poppy orange.\nPicture has no readable signage, numbers, flags, logos or recognisable faces. No theme-park attractions."
+    },
+    {
+      "place": "hawaii",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-75a0a33a-d1e1-4d24-bca5-6f8c78e773d2.png",
+      "palette": [
+        [
+          19,
+          102,
+          125
+        ],
+        [
+          204,
+          65,
+          49
+        ],
+        [
+          218,
+          164,
+          48
+        ]
+      ],
+      "output": "art_packs/staging/hawaii/featured_ticket.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Hawaii featured ticket, exactly 1774 x 887.\nPrimary request: replace original montage with Diamond Head rising above Waikiki's gently curving beach and small skyline, an outrigger canoe in lagoon-blue water, tiny distant surfers without facial features, the lush fluted Na Pali cliffs as a regional background montage, palms and hibiscus red accents.\nPalette: lagoon blue, hibiscus red, volcanic green and gold, within original navy and ivory family.\nComposition: ONLY right-hand illustrated scene on navy ticket, flowing toward unchanged ivory barcode stub. Entire left 42% of canvas, x=0..745, is PLAIN EMPTY navy textured paper at all heights, no foliage, blossoms or objects at bottom left. Scene fades in only to RIGHT of x=746. Balanced tropical travel poster montage, Diamond Head and Na Pali as distinct layered landforms, small Waikiki buildings within the coastal skyline.\nOuigger canoe has a clearly visible lateral float; tiny distant surfers have no facial features. No flags, boat names, hotel signage or markings. Keep exact original stars-and-chevron stripe geometry and recolour lagoon blue, hibiscus red and gold."
+    },
+    {
+      "place": "hawaii",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-0f7d2ed8-d159-4bd9-9247-6e23f7e784bc.png",
+      "palette": [
+        [
+          19,
+          102,
+          125
+        ],
+        [
+          204,
+          65,
+          49
+        ],
+        [
+          218,
+          164,
+          48
+        ]
+      ],
+      "output": "art_packs/staging/hawaii/room_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Hawaii room key card, exactly 1774 x 887.\nPrimary request: replace original view with hotel window view of Waikiki beach, palms and Diamond Head, lagoon-blue water and warm golden low sun, tropical foliage.\nPalette: lagoon blue, hibiscus red, volcanic green and gold. No literal window frame or hotel room interior.\nComposition: small scenic view on RIGHT, ending at original narrow decorative stripe. Entire LEFT 62%, x=0..1099, is EMPTY ivory paper grain with no sky, mountains, sea, palms or faint print. View softly fades into paper at its left edge. Original ivory right end cap remains.\nPreserve stars-and-line stripe's pattern geometry, recolour lagoon blue, hibiscus red and gold. Buildings small within the shoreline. No text, flags, signs or logos anywhere."
+    },
+    {
+      "place": "hawaii",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-73da2da4-71fc-4b82-b7cd-88b0a0c1bc11.png",
+      "palette": [
+        [
+          19,
+          102,
+          125
+        ],
+        [
+          204,
+          65,
+          49
+        ],
+        [
+          218,
+          164,
+          48
+        ]
+      ],
+      "output": "art_packs/staging/hawaii/reservation_card.png",
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, the finished card shell.\nStyle/medium: exactly match template mid-century travel poster, screen-printed flat layered shapes, fine paper grain and warm low sun; never photographic.\nInvariants: keep the original canvas dimensions, exact card position and outline, rounded corners, notches, perforations, bevels, drop shadow, paper texture and all functional blank text areas. Change only the illustrated scene and recolour existing narrow decorative stripes; keep their geometry and patterns. For tags, keep exact shape, tilt, cord and brass grommet.\nExterior background must be genuinely transparent. No crop, added margin, perspective shift or extra panels.\nAbsolutely NO readable text, letters, numbers, signs, logos, flags, watermark or recognisable faces anywhere. No Disney or Universal theme-park attractions, castles, rides or characters, Hollywood sign, Space Needle, Chicago Cloud Gate or casino buildings. Major buildings are part of the landscape, never one single hero. Return exactly ONE finished card.\nAsset type: Hawaii tagged reservation card, exactly 1983 x 793.\nPrimary request: replace ONLY far-right small framed picture with an outrigger canoe beside a lagoon beach, palms and hibiscus blossoms, warm golden low sun.\nPalette: lagoon blue, hibiscus red, volcanic green and gold. Centre ivory paper completely blank, unchanged grain. Picture remains inside original x=1423..1948 frame, same curved right corners, no spreading left.\nCanoe is an empty wooden outrigger canoe with clearly visible lateral float; palms and hibiscus beside lagoon water.\nTag: same exact shape and tilt, cord and brass grommet; recolour plain deep lagoon-blue leather, REMOVE existing US flag entirely. No stars, stripes, symbols, lettering, markings or graphics on tag. Thin divider warm gold. No flags, logos or boat names."
+    }
+  ]
+}

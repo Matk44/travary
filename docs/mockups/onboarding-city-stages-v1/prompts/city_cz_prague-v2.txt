@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: clean city scenery plate revision
+Primary request: Remove ONLY the small tourists/pedestrians and human silhouettes along the Charles Bridge walkway. The bridge walkway should be empty. Preserve the permanent large historical stone statues on their tall architectural pedestals; those are part of the actual monument. Do not add or change statues. Fill removed people with the existing bridge parapet and warm stone-paper surfaces.
+Input 1: existing city scenery plate edit target.
+Invariants: Preserve the original portrait canvas/aspect, city geography, rich dimensional folded cardstock, cut paper edges, embossing, warm physical light, quiet central teal upper sky, curved theatre side wings, EXACT existing cream floor boundary near 65% and all lower floor pixels. Keep close bulky objects clear of right foreground for the separate Travi. Do not change any unrelated element.
+Constraints: no added people, character, mascot, character shadow, folio, loose tickets, lettering, UI, prices, dates, labels, logos, flags or watermark. One complete opaque portrait plate.

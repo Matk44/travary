@@ -1,0 +1,5 @@
+Use case: precise-object-edit
+Asset type: clean Venice onboarding scenery plate revision
+Primary request: Remove every tiny person/human silhouette from the Rialto Bridge walkway and its central opening. Fill those spots with the existing architectural railing, arch interior and warm paper surfaces. Remove only those people.
+Input 1: Venice scenery plate edit target. Keep ALL other pixels and composition visually unchanged: bridge architecture, empty gondola, buildings, canal, fine folded cardstock, paper grain, teal quiet headline sky, theatre side wings, cream floor boundary and portrait proportions. Keep its geography and warm lighting.
+Constraints: no people, characters, character shadow, folio, loose tickets, lettering, UI, prices, labels, logos, flags or watermark. Output one complete opaque portrait plate, same canvas/aspect as input. Do not add anything.

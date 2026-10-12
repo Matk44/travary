@@ -1,0 +1,87 @@
+{
+  "04-tag": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/04-tag.png",
+    "sha256": "c8b3987283350678856fb359a65b432595bdc40c6ce94fa0ea11c6e34088fb14",
+    "image_path": "1791541210951-1a2fa12d147070fb.png"
+  },
+  "05-toss": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/05-toss.png",
+    "sha256": "8ce98e66495f8a72a847b65b41c08e49c328dab097f47f1ecbb7e87d8cd90303",
+    "image_path": "1791541210960-dab747d5760907f4.png"
+  },
+  "06-folio-open": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/06-folio-open.png",
+    "sha256": "484ad2de585f3cdc9adf6a6a2a93db16d72d844b86ef2dc8d95e3f427fcfe2b3",
+    "image_path": "1791541213493-a075b8c6543b8631.png"
+  },
+  "01-empty": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/01-empty.png",
+    "sha256": "3cbe2ad8af6a1febf1685661d7bb055dcea9b1ac71df9f8e7561a6af18132877",
+    "image_path": "1791541653041-20e043bf9b39ea66.png"
+  },
+  "02-hello": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/02-hello.png",
+    "sha256": "2af9c141ce9e5c5b167bdddb0ebf1a2aa1d574e4920989030e5117e42eb2e352",
+    "image_path": "1791541653046-686438021ee6b86f.png"
+  },
+  "03-wow": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/03-wow.png",
+    "sha256": "b2dc96d22cb594fb152a1da66a85d0d68a194a7265822f3cea1313b3accfc23d",
+    "image_path": "1791541654125-a496e95f330049e1.png"
+  },
+  "08-reading": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/08-reading.png",
+    "sha256": "4cdac6c61064dfad35b0ee3cdffaa7eacf9124054835b064d483f902eef3569c",
+    "image_path": "1791541656065-8b2bfa2ebb241d12.png"
+  },
+  "07-folio-full": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/07-folio-full.png",
+    "sha256": "8f3e94860d42f18e1970c427f96587c5ee928318c9d6495b8e7573a50cc8e7d5",
+    "image_path": "1791541658724-849a4042eec57b08.png"
+  },
+  "09-card": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/09-card.png",
+    "sha256": "cb88fb743b8b3a0653501ab8fa26b34c5ca2aeed6fbc05d25f5fd0f12fc6d2b1",
+    "image_path": "1791541659930-7aa83cde25292ae8.png"
+  },
+  "10-proud": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/10-proud.png",
+    "sha256": "c1f5ccc3767fdde9fb70f7aacb20fcf4eb7dc74725b7856f0d2132ce239ffc3f",
+    "image_path": "1791541661460-34ac7bc782410530.png"
+  },
+  "id-tag": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/id-tag.png",
+    "sha256": "b2991783e96e5d1342e37a621adf412367591141a9acab7ea5be904da30209cd",
+    "image_path": "1791550952433-1539e2c3824074a6.png"
+  },
+  "11-envelope": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/11-envelope.png",
+    "sha256": "e2b21cadb0a0f9a3395745ac8ea8de857964d9b64668f1cdf3776708bb2f9f90",
+    "image_path": "1791550956874-4e7c33df84f813a1.png"
+  },
+  "12-linked": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/12-linked.png",
+    "sha256": "13b8e3a657d3e6e4d33665ab86a7e5785a5928b1c8b9cf67403f671ec3e96865",
+    "image_path": "1791550966913-6616c3c22747700c.png"
+  },
+  "13-present": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/13-present.png",
+    "sha256": "452ce15157e1ebf9078b028315df6ac7f21ea135703b63a0fc2eb0812cd67374",
+    "image_path": "1791550976595-fd853b9804fe5c29.png"
+  },
+  "14-cheer": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/14-cheer.png",
+    "sha256": "e7d42528f9e4ee475e7c40084bbaef3fab299679aa756336aef6c02ba52cb6a0",
+    "image_path": "1791550987032-1dd992b5aa70f059.png"
+  },
+  "15-wave": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/15-wave.png",
+    "sha256": "0f27b5c7ef7219e6d89701702c892c392423de7ce3e4828cbe41c08d163a0333",
+    "image_path": "1791550991725-c67b0fd97cdd5c16.png"
+  },
+  "16-oops": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/16-oops.png",
+    "sha256": "4567386332eb31e9e919ddd109ecc598c3214130c86fb1286f1ac9a1c763a29f",
+    "image_path": "1791551007637-fac1cc5da71132ed.png"
+  }
+}

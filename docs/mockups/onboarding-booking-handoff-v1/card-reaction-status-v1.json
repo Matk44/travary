@@ -1,0 +1,20 @@
+{
+  "job": {
+    "id": "1358d859cd7eeff9",
+    "task_id": "ey6mtg9g65rmy0d12zdtqr2d3g",
+    "status": "completed",
+    "shot_card": "{\"title\":\"Travi \u2014 card corner acting refinement\",\"raw_prompt\":\"A restrained FOUR-SECOND physical paper-puppet acting shot. Begin AND finish exactly on the SAME supplied reference frame of Travi holding one blank cream card. LOCK camera and landscape completely. Do not pull back, zoom, move the folio, change scene scale, reshape the card, or reveal anything. Only Travi's eyes, eyebrows, mouth and his TWO existing folded-paper hands act. His grounded body and four wheels remain in their reference positions.\\n0\u20130.6s: attentive bright eyes glance toward the little curled top-right corner of the cream card, pleased smile, eyebrow lifted as if the paper has a mind of its own.\\n0.6\u20131.7s: the hand ALREADY on the top edge makes one small, precise, gentle pat to smooth that corner. The other hand holds the right edge steady. Minimal natural paper flex at that one corner; the main blank card stays rigid in its same reference rectangle. No big wave, arm crossing, extra fingers or duplicate hands.\\n1.7\u20132.6s: the corner springs back just a tiny bit; Travi gives a playful amused eyebrow raise and warm open grin, then gently squares the edge. His eyes follow his useful little job. This is tiny charming acting, not slapstick or a magic transformation.\\n2.6\u20133.3s: a small satisfied nod of only a few degrees, eyes warmly toward the traveller. No body rocking, dancing or jumping.\\n3.3\u20134s: return precisely to supplied reference face, hands, curled corner and pose and hold still. Same card, same folio, same landscape, same screen positions throughout.\\nIDENTITY: original coral tall rounded ribbed modern spinner, navy zipper/corners, brass handle rails with navy grip, four dark wheels, cream palm tag, exactly two folded-paper arms. Preserve face proportions and normal bright eye size. No sleepy half-lids except a single very brief natural blink. Keep sophisticated tactile cut-paper craft, warm lighting and realistic small paper movements.\\nAll Bali scenery, shadows, teal sky, orange sun, temples, palms, clouds, ocean and the navy folio are STATIC. Upper heading and lower control zones remain quiet. No new props, cards, text, letters, digits, prices, barcodes, watermarks, UI, confetti, audio, camera motion or morphing. Silent.\",\"duration_seconds\":4,\"camera_move\":\"none\",\"first_frame_path\":\"1791401076516-adc7ce82d9e9ee8b.png\",\"last_frame_path\":\"1791401076516-adc7ce82d9e9ee8b.png\"}",
+    "video_url": "https://replicate.delivery/xezq/mqNYsxMXCWYyDdvcJjiGllNvXQ9Uj8xoBfKafuFgAtb4EFVXA/tmpi60r0680.mp4",
+    "local_path": "1791401878658-1c7efd1061af564f.mp4",
+    "error": null,
+    "model": "Seedance 2.0 (Replicate)",
+    "created_at": 1791401603453,
+    "updated_at": 1791401878660,
+    "provider": "replicate-seedance-2",
+    "resolution": "720p",
+    "seed": 510083,
+    "idea": "Travary approved proud-card reaction \u2014 precise corner pat with locked stage",
+    "cast_image_paths": "[\"1791401076516-adc7ce82d9e9ee8b.png\"]",
+    "parent_id": null
+  }
+}

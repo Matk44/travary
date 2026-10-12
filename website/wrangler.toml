@@ -1,0 +1,12 @@
+# Cloudflare Pages config for travary.app (project "travary", direct upload).
+# `wrangler pages deploy` reads this when run from website/. With this file
+# present, the dashboard's binding settings are read-only: change them here.
+name = "travary"
+pages_build_output_dir = "./public"
+compatibility_date = "2026-10-01"
+
+# The waiting list. Read it with `python3 tool/waitlist.py` (see README.md).
+[[d1_databases]]
+binding = "DB"
+database_name = "travary-waitlist"
+database_id = "fc19707d-a250-4fd6-b188-42fd4d1004ba"

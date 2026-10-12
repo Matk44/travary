@@ -1,0 +1,68 @@
+{
+  "wave-up": {
+    "id": "ff0be5476b6fe6a8",
+    "task_id": "8qq6b51kn9rmw0d14j3axsh00r",
+    "status": "completed",
+    "seed": 520102,
+    "local_path": "1791614373681-35cf39de6602c4dc.mp4",
+    "error": null,
+    "updated_at": 1791614373684,
+    "source": "source/wave-up.mp4",
+    "source_sha256": "2cdc3437a7258f65c0dcda5ed502b53896a8a01abfac573a737c6dd3e53485f8"
+  },
+  "cheer-up": {
+    "id": "22b36b357e64aef3",
+    "task_id": "zbx9ed1ryhrmt0d14j3abwscmg",
+    "status": "completed",
+    "seed": 520111,
+    "local_path": "1791614277326-f15bb33875349d41.mp4",
+    "error": null,
+    "updated_at": 1791614277328,
+    "source": "source/cheer-up.mp4",
+    "source_sha256": "39c3d6405474a04cbf0910a36bf1c0457cdbde27f046493640a85d91d5a721f7"
+  },
+  "packing-up": {
+    "id": "c3a9f14702cfff73",
+    "task_id": "w5da389y7hrmr0d14j3azqd92m",
+    "status": "completed",
+    "seed": 520121,
+    "local_path": "1791614303405-cfff9152bd0eafe2.mp4",
+    "error": null,
+    "updated_at": 1791614303406,
+    "source": "source/packing-up.mp4",
+    "source_sha256": "a67a7ba9f2179b6764fa62f02e6d8712a36bccd1acfa961d082bceb407725ec3"
+  },
+  "ready-up": {
+    "id": "30100b88678fab19",
+    "task_id": "m8ag3gj1b1rmt0d14j3askrwn8",
+    "status": "completed",
+    "seed": 520131,
+    "local_path": "1791614435408-fd3f10e6e0c63b91.mp4",
+    "error": null,
+    "updated_at": 1791614435409,
+    "source": "source/ready-up.mp4",
+    "source_sha256": "bb0765987e5e93580586de53b23f33bd8590cc8ac5a8b83ea201985745cd00fd"
+  },
+  "today-up": {
+    "id": "95626e834fa2e37f",
+    "task_id": "pcexs124b5rmw0d14j3bhx5wxg",
+    "status": "completed",
+    "seed": 520141,
+    "local_path": "1791614279394-85444a99aeba81f1.mp4",
+    "error": null,
+    "updated_at": 1791614279398,
+    "source": "source/today-up.mp4",
+    "source_sha256": "c6ba7c0adf78e64f80d90ee3a25e73200f05e702a12b5b2a13b598ac12fce1a2"
+  },
+  "lounge-idle": {
+    "id": "cbd76f6d633ab3cb",
+    "task_id": "05my49a8bxrmt0d14j3ah16ysr",
+    "status": "completed",
+    "seed": 520151,
+    "local_path": "1791614280862-ce1327f44a041715.mp4",
+    "error": null,
+    "updated_at": 1791614280865,
+    "source": "source/lounge-idle.mp4",
+    "source_sha256": "4fa269c74608321248973e96350591e63edb87359d3b8ecd6a207f54d1376bde"
+  }
+}

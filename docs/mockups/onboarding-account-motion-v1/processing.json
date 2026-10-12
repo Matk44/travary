@@ -1,0 +1,308 @@
+{
+  "account-entry": {
+    "source": "account-entry-source-v1.mp4",
+    "source_sha256": "0f9fa421c8105aa2dc75eb14318bf1edd2ed908b2ec9bb10b69bc4f892859a58",
+    "processing": "60 fps motion interpolation; same approved acting",
+    "delivery": "account-entry-v1.mp4",
+    "delivery_sha256": "a1fae2a73199e4c7820c464d280f97b2f31782400dbc6ba1836aa9ddc6cf7fd9",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "60/1",
+          "nb_frames": "238"
+        }
+      ],
+      "format": {
+        "duration": "3.966667",
+        "size": "1948459"
+      }
+    },
+    "ffmpeg_args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-entry-source-v1.mp4",
+      "-vf",
+      "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-entry-v1.mp4"
+    ]
+  },
+  "account-idle": {
+    "source": "account-idle-source-v1.mp4",
+    "source_sha256": "06c27b15193558eb17e47e8b5de678a652fc355277dfe8a80a420e1bb50a32a4",
+    "processing": "60 fps motion interpolation; same approved acting",
+    "delivery": "account-idle-v1.mp4",
+    "delivery_sha256": "da7dbdb6fab5f262bb9eb4c91a592820b189882d5052a1269b977860cde0ac84",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "60/1",
+          "nb_frames": "238"
+        }
+      ],
+      "format": {
+        "duration": "3.966667",
+        "size": "1286323"
+      }
+    },
+    "ffmpeg_args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-idle-source-v1.mp4",
+      "-vf",
+      "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-idle-v1.mp4"
+    ]
+  },
+  "account-success-pass": {
+    "source": "account-success-pass-source-v1.mp4",
+    "source_sha256": "26526ba44b46cf293e991e8bd7e70157ff44b8f5a6454c2e4543caaa50e7345f",
+    "source_cut_frame": 65,
+    "source_cut_seconds": 2.7083333333333335,
+    "vertical_compensation_px": 64,
+    "easing_seconds": 0.8,
+    "dissolve_seconds": 0.3,
+    "neutral_presentation_tail": "account-success-pass-source-v1.mp4",
+    "tail_start_frame": 65,
+    "delivery": "account-success-pass-v1.mp4",
+    "delivery_sha256": "f3b1368b501671f59aede58b9e3bca2313b136399ddfb739f292fcfbe7bd2ad0",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "60/1",
+          "nb_frames": "261"
+        }
+      ],
+      "format": {
+        "duration": "4.350000",
+        "size": "2415959"
+      }
+    },
+    "ffmpeg_args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-success-pass-source-v1.mp4",
+      "-filter_complex",
+      "[0:v]trim=end_frame=65,setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration=0.35,minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1[a];[0:v]trim=start_frame=65,setpts=PTS-STARTPTS,split[base][shift];[base][shift]overlay=x=0:y='64*(1-3*pow(min(t/0.8,1),2)+2*pow(min(t/0.8,1),3))':eval=frame[aligned];[aligned]tpad=start_mode=clone:start_duration=0.3:stop_mode=clone:stop_duration=0.15,minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1[b];[a][b]xfade=transition=fade:duration=0.3:offset=2.7083333333333335,tpad=stop_mode=clone:stop_duration=0.2,trim=duration=4.35,setpts=PTS-STARTPTS[out]",
+      "-map",
+      "[out]",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-success-pass-v1.mp4"
+    ]
+  },
+  "account-guest-pass": {
+    "source": "account-guest-pass-source-v1.mp4",
+    "source_sha256": "07b7d241b05efd6854ffe748f0bae4b40318bf4765543aa51b7ac94ae5075dce",
+    "source_cut_frame": 57,
+    "source_cut_seconds": 2.375,
+    "vertical_compensation_px": 64,
+    "easing_seconds": 0.8,
+    "dissolve_seconds": 0.3,
+    "neutral_presentation_tail": "account-success-pass-source-v1.mp4",
+    "tail_start_frame": 65,
+    "delivery": "account-guest-pass-v1.mp4",
+    "delivery_sha256": "bc80aebf02556b7919faa8174b95ffd1f68e6bdc3183b1d5daaae9a945f803f7",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "60/1",
+          "nb_frames": "261"
+        }
+      ],
+      "format": {
+        "duration": "4.350000",
+        "size": "2639096"
+      }
+    },
+    "ffmpeg_args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-guest-pass-source-v1.mp4",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-success-pass-source-v1.mp4",
+      "-filter_complex",
+      "[0:v]trim=end_frame=57,setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration=0.35,minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1[a];[1:v]trim=start_frame=65,setpts=PTS-STARTPTS,split[base][shift];[base][shift]overlay=x=0:y='64*(1-3*pow(min(t/0.8,1),2)+2*pow(min(t/0.8,1),3))':eval=frame[aligned];[aligned]tpad=start_mode=clone:start_duration=0.3:stop_mode=clone:stop_duration=0.15,minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1[b];[a][b]xfade=transition=fade:duration=0.3:offset=2.375,tpad=stop_mode=clone:stop_duration=0.2,trim=duration=4.35,setpts=PTS-STARTPTS[out]",
+      "-map",
+      "[out]",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-guest-pass-v1.mp4"
+    ]
+  },
+  "account-email-gesture": {
+    "source": "account-email-gesture-source-v1.mp4",
+    "source_sha256": "fb48c9208d16223ed91e37c133715ed2830eeb1edd8b40be06d74a5c876ae3c1",
+    "processing": "60 fps motion interpolation; same approved acting",
+    "delivery": "account-email-gesture-v1.mp4",
+    "delivery_sha256": "3516b4eb94cda840a8ee6f35a11a3a8f068e191ccd6aac1050c3c80d2f405288",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "60/1",
+          "nb_frames": "238"
+        }
+      ],
+      "format": {
+        "duration": "3.966667",
+        "size": "1599685"
+      }
+    },
+    "ffmpeg_args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-email-gesture-source-v1.mp4",
+      "-vf",
+      "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-email-gesture-v1.mp4"
+    ]
+  },
+  "account-email-idle": {
+    "source": "account-email-idle-source-v1.mp4",
+    "source_sha256": "afa7a43c03d40144cd9c13ad5d061ee8c1cbc97b0c843f43320347b9646a9f45",
+    "processing": "60 fps motion interpolation; same approved acting",
+    "delivery": "account-email-idle-v1.mp4",
+    "delivery_sha256": "31fba53f49826cc1cec5f3301195d0318db52872bdff66ee3e98c813d7bbe23f",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "60/1",
+          "nb_frames": "238"
+        }
+      ],
+      "format": {
+        "duration": "3.966667",
+        "size": "1257270"
+      }
+    },
+    "ffmpeg_args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-i",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-email-idle-source-v1.mp4",
+      "-vf",
+      "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-email-idle-v1.mp4"
+    ]
+  }
+}

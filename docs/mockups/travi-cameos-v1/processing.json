@@ -1,0 +1,111 @@
+{
+  "wave-up": {
+    "frames": 69,
+    "seconds": 2.88,
+    "drift_first": 3.2,
+    "drift_last": 5.9,
+    "jumps": [
+      1.17,
+      1.21,
+      1.25,
+      1.29,
+      1.33,
+      1.38,
+      1.46,
+      1.54
+    ],
+    "held_frames": 0
+  },
+  "cheer-up": {
+    "frames": 52,
+    "seconds": 2.17,
+    "drift_first": 2.9,
+    "drift_last": 6.0,
+    "jumps": [
+      0.54,
+      0.58,
+      0.62,
+      1.12,
+      1.17,
+      1.21
+    ],
+    "held_frames": 0
+  },
+  "packing-up": {
+    "frames": 84,
+    "seconds": 3.5,
+    "drift_first": 3.1,
+    "drift_last": 6.3,
+    "jumps": [
+      1.58,
+      1.62,
+      1.67,
+      1.71,
+      1.75,
+      1.79,
+      1.83,
+      1.88,
+      1.92,
+      1.96,
+      2.0,
+      2.04,
+      2.08,
+      2.12,
+      2.17,
+      2.21,
+      2.38,
+      2.42,
+      2.46,
+      2.5,
+      2.54,
+      2.58,
+      2.62,
+      2.67,
+      2.71,
+      2.75,
+      2.79
+    ],
+    "held_frames": 0
+  },
+  "ready-up": {
+    "frames": 75,
+    "seconds": 3.12,
+    "drift_first": 3.3,
+    "drift_last": 6.4,
+    "jumps": [
+      1.67,
+      1.75,
+      1.83,
+      1.92,
+      2.0,
+      2.04,
+      2.12,
+      2.21,
+      2.29,
+      2.38,
+      2.46,
+      2.54,
+      2.62
+    ],
+    "held_frames": 8
+  },
+  "today-up": {
+    "frames": 69,
+    "seconds": 2.88,
+    "drift_first": 3.0,
+    "drift_last": 5.7,
+    "jumps": [
+      1.08,
+      1.83
+    ],
+    "held_frames": 0
+  },
+  "lounge-idle": {
+    "frames": 68,
+    "seconds": 2.83,
+    "drift_first": 4.6,
+    "drift_last": 5.0,
+    "jumps": [],
+    "held_frames": 2
+  }
+}

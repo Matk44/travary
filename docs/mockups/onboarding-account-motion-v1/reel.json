@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-09",
+  "purpose": "Short text-free creative review reel, not an interactive app recording",
+  "sources": [
+    "account-entry-v1.mp4",
+    "account-idle-v1.mp4",
+    "account-success-pass-v1.mp4"
+  ],
+  "crossfade_seconds": 0.2,
+  "output": "account-animation-reel-v1.mp4",
+  "sha256": "c298b4a3fd79fc207c05f475ba86f11a6526afa609ba777f18f51eb47e5b6fe3",
+  "ffmpeg_args": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-y",
+    "-i",
+    "docs/mockups/onboarding-account-motion-v1/account-entry-v1.mp4",
+    "-i",
+    "docs/mockups/onboarding-account-motion-v1/account-idle-v1.mp4",
+    "-i",
+    "docs/mockups/onboarding-account-motion-v1/account-success-pass-v1.mp4",
+    "-filter_complex",
+    "[0:v]settb=AVTB,setpts=PTS-STARTPTS[a];[1:v]settb=AVTB,setpts=PTS-STARTPTS[b];[2:v]settb=AVTB,setpts=PTS-STARTPTS[c];[a][b]xfade=transition=fade:duration=0.2:offset=3.766667[ab];[ab][c]xfade=transition=fade:duration=0.2:offset=7.533334[out]",
+    "-map",
+    "[out]",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "slow",
+    "-crf",
+    "18",
+    "-pix_fmt",
+    "yuv420p",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "docs/mockups/onboarding-account-motion-v1/account-animation-reel-v1.mp4"
+  ]
+}

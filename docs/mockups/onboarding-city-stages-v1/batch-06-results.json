@@ -1,0 +1,185 @@
+[
+  {
+    "destinationId": "city_au_melbourne",
+    "batch": 6,
+    "sourceUrls": [
+      "https://whatson.melbourne.vic.gov.au/things-to-do/flinders-street-railway-station",
+      "https://www.visitmelbourne.com/regions/melbourne/see-and-do/history-and-heritage/heritage-buildings/vv-flinders-street-station"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Melbourne CBD symbolic river scene: Flinders Street Station, Yarra/Princes Bridge, blank green tram, autumn plane trees; no Sydney opera shells.",
+      "summary": "Melbourne station/river layers; people and skyline clearance corrected in v2.",
+      "notes": "v1 small pedestrian shapes removed; tallest distant antenna lowered in v2. Station spire and left foliage remain peripheral. Architectural clock face retained as fixed scenery, without signage/UI. Symbolic layout, not a surveyed viewpoint.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": false,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-f9b9445c-cd11-4979-9c9a-f9e721e64f41.png",
+        "selectedWorkspacePath": null,
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_au_melbourne.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Melbourne (AU), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Flinders Street Station's yellow Edwardian facade and green copper dome at left, layered city buildings, Yarra River and Princes Bridge; a small blank green tram on a plausible left-side street and plane trees. No Sydney opera sails.\nLighting/mood: early autumn, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Melbourne (AU) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      },
+      {
+        "version": 2,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-c9952cf1-31f0-4410-b8ce-e3ada16b02b2.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_au_melbourne/onboarding_stage_v2.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_au_melbourne-v2.txt",
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nAsset type: Travary Melbourne city onboarding scenery, corrected master\nInput image: Image 1 is the generated Melbourne stage to edit.\nPrimary request: Correct this existing image for a completely uninhabited scenery plate. Remove EVERY tiny pedestrian/person/human silhouette from the station doorway, sidewalks, tram area, bridge and river promenade. Keep real architectural lamps, bridge posts, balustrades and clocks. Keep the green tram blank and empty. Also shorten/lower only the tallest distant skyscraper and antenna so its very top begins below about y=520 on this 851x1848 portrait (around28% down), leaving the central upper0-27% completely quiet petrol-teal paper sky. Preserve its plausible Melbourne city silhouette.\nInvariants: Keep the yellow Flinders Street Station facade and green copper dome, autumn plane trees, Princes Bridge, Yarra River, layered folded embossed cardstock, warm physical lighting, teal theatre wings with cream edging, portrait dimensions and floor boundary near65%. Keep the entire lower warm-cream control floor uninterrupted, preserve right foreground clearance for a separate Travi. Preserve all other scenery, camera, scale, colours and paper texture as closely as possible.\nAvoid: all people or character silhouettes/shadows, new props, lettering, signs, logos, labels, UI, folios, loose tickets, prices, flags, watermark, cropping or device frame. Output the single corrected opaque scenery image.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-f9b9445c-cd11-4979-9c9a-f9e721e64f41.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_nz_queenstown",
+    "batch": 6,
+    "sourceUrls": [
+      "https://www.queenstownnz.co.nz/stories/post/landscapes-of-queenstown/",
+      "https://www.queenstownnz.co.nz/things-to-do/sightseeing/scenic-cruises/"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Queenstown's lakeside town, Lake Wakatipu and jagged alpine range evoking the Remarkables; willows/poplar-like foliage and New Zealand flax; no ocean palms or volcano.",
+      "summary": "Queenstown alpine lake and folded mountain layers; clear floor.",
+      "notes": "Warm golden foliage reads as an early-autumn alpine impression rather than the prompt's late spring. Retained as a coherent seasonal scene; mountain snow is confined to higher distant ridges. Right foreground remains water.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-0cf8e0d7-31c4-4631-a736-ffc93dc50dbf.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_nz_queenstown/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_nz_queenstown.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Queenstown (NZ), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Lake Wakatipu's deep blue water, the jagged Remarkables mountain range beyond, low Queenstown lakeside buildings and willow/poplar foliage. Natural alpine lake setting with subtle distant snow, no ocean palms or volcano.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Queenstown (NZ) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_ca_vancouver",
+    "batch": 6,
+    "sourceUrls": [
+      "https://www.destinationvancouver.com/things-to-do/listings/canada-place",
+      "https://www.destinationvancouver.com/inspirations/city/things-to-do-near-canada-place-explore-vancouver-s-waterfront-on-foot"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Vancouver harbour/Burrard Inlet with Canada Place's five sail roofs, glass skyline, North Shore mountain layers and Pacific Northwest evergreens; no Toronto tower.",
+      "summary": "Vancouver sail roofs and evergreen harbour layers; clear floor.",
+      "notes": "Five sail roof peaks visually checked. Tiny harbour vessel is empty scenery, not a ticket or character prop. Symbolic harbour composition.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-e7f327b9-1de2-4a32-954c-cfd230a0cf3c.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_ca_vancouver/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_ca_vancouver.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Vancouver (CA), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Canada Place's five white sail roofs at left, layered glass city buildings by Burrard Inlet, North Shore mountains in distant middle depth, calm blue harbour and Pacific Northwest evergreens. No Toronto tower.\nLighting/mood: late summer, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Vancouver (CA) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_za_cape_town",
+    "batch": 6,
+    "sourceUrls": [
+      "https://www.capetown.travel/neighbourhood/the-va-waterfront/",
+      "https://www.capetown.travel/discover-cape-towns-signature-yellow-frames/",
+      "https://www.capetown.travel/explore-cape-towns-iconic-table-mountain/"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Cape Town harbour/waterfront with Table Mountain's flat summit, local protea/fynbos-like plants and layered city buildings; no tropical jungle or invented snow.",
+      "summary": "Table Mountain and fynbos harbour paper layers; clear floor.",
+      "notes": "Flat mountain profile, textured sandstone slopes and protea-like flowers checked. Harbour vessels and mast lines are fixed scenery; no visible people/type.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-ff852f84-5976-43c2-bfec-961c8e29897d.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_za_cape_town/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_za_cape_town.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Cape Town (ZA), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Table Mountain's recognisable flat summit and surrounding slopes, layered Cape Town waterfront buildings, calm Atlantic harbour water and restrained local fynbos vegetation. No tropical jungle or invented snow peaks.\nLighting/mood: spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Cape Town (ZA) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_mx_cancun",
+    "batch": 6,
+    "sourceUrls": [
+      "https://transparencia.cancun.gob.mx/uploads/24/28/Programa%20Municipal%20De%20Desarrollo%20Urbano%20De%20Benito%20Juarez%2C%20Quintana%20Roo%202018-2030.Pdf",
+      "https://calidaddelagua.cancun.gob.mx/listado"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Cancun Hotel Zone's barrier coast between Caribbean sea and Nichupte lagoon, sandy beach, resort strip, palms and sea-grape-like leaves; no inland Maya pyramid.",
+      "summary": "Cancun lagoon/barrier beach paper layers; clear floor.",
+      "notes": "Caribbean surf and calmer lagoon clearly separated by resort/beach barrier; right foreground kept largely open water. High left palm is peripheral; central headline field quiet. Official municipal planning source found via indexed primary PDF; direct browser open returned an error.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-91a85f8b-7505-42db-9178-87aa32c566cc.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_mx_cancun/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_mx_cancun.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Cancun (MX), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Cancun Hotel Zone's slender sandy barrier beach between brilliant Caribbean turquoise water and Nichupte lagoon, low distant resort silhouettes, locally appropriate palms and coastal sea-grape foliage. No inland Maya pyramid presented as a Cancun beach landmark.\nLighting/mood: dry season, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Cancun (MX) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  }
+]

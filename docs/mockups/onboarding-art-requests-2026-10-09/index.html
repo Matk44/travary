@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travary — 9 October art review</title>
+<style>
+:root{--ink:#122941;--teal:#06435a;--paper:#fff4df;--coral:#ed7957;--line:#ddcdb2}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+header{background:var(--teal);color:var(--paper);padding:36px max(24px,calc((100vw - 1240px)/2)) 34px;border-bottom:5px solid var(--coral)}
+.masthead{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font:700 28px Georgia,serif}.badge{border:1px solid #b1b7a1;border-radius:999px;padding:5px 13px;font-size:12px}
+h1{font:700 clamp(30px,4vw,52px)/1.08 Georgia,serif;margin:27px 0 13px;max-width:780px}header p{max-width:770px;color:#d6e4df;margin:0}
+main{max-width:1288px;margin:auto;padding:26px 24px 60px}.toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center;position:sticky;top:0;padding:12px 0;background:var(--paper);z-index:3}
+.filters{display:flex;gap:7px;flex-wrap:wrap}button,input{font:inherit}button{cursor:pointer;background:transparent;border:1px solid var(--line);border-radius:7px;padding:7px 11px;color:var(--ink)}button:hover,button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+input{width:230px;border:1px solid var(--line);border-radius:7px;padding:8px 11px;background:#fffaf0;color:var(--ink)}
+.notice{border-left:4px solid var(--coral);padding:13px 17px;background:#f4e6ce;margin:13px 0 25px;font-size:14px}.notice p{margin:0}.notice p+p{margin-top:6px}.notice a{color:var(--ink)}
+.section-head{display:flex;gap:12px;align-items:baseline;margin:30px 0 14px}h2{font:700 25px Georgia,serif;margin:0}.section-head span{font-size:13px;color:#61716e}.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}.card{min-width:0;border:1px solid var(--line);background:#fffaf0;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px #2c342808}
+.image-button{display:block;width:100%;border:0;border-radius:0;padding:0;background:#e7dbc6;position:relative;overflow:hidden}.image-button img{display:block;width:100%;height:auto;aspect-ratio:851/1848;object-fit:contain}.greens .image-button img{aspect-ratio:941/1672}.image-button:hover{background:#e7dbc6}.card-info{padding:12px}.card h3{font:700 18px Georgia,serif;margin:0 0 4px}.card p{font-size:12px;color:#64706c;margin:0 0 9px}.card a{color:var(--ink);font-size:12px}.small-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.small-actions button{font-size:12px;padding:4px 7px}.tag{position:absolute;bottom:9px;left:9px;padding:3px 8px;border-radius:4px;background:#fff4dfe8;color:var(--ink);font:11px system-ui,sans-serif}.empty{padding:50px 0;font-size:20px;text-align:center}footer{margin-top:30px;font-size:13px;color:#64706c}
+dialog{max-width:calc(100vw - 24px);width:1050px;max-height:calc(100vh - 24px);border:0;border-radius:14px;padding:0;background:#fffaf0;color:var(--ink)}dialog::backdrop{background:#071c30cf}.modal-head{display:flex;justify-content:space-between;gap:14px;padding:14px 20px;align-items:center;border-bottom:1px solid var(--line)}.modal-head h2{font-size:23px}.modal-body{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:22px;padding:18px}.large-frame{position:relative;height:72vh;max-height:760px;display:flex;justify-content:center;background:#e9dfcb;border-radius:8px;overflow:hidden}.large-frame .stack{position:relative;height:100%;width:auto;aspect-ratio:var(--aspect,851/1848)}.large-frame img{width:100%;height:100%;object-fit:contain;display:block}.large-frame .original{position:absolute;inset:0}.modal-side p{font-size:14px}.modal-side a{color:var(--ink);word-break:break-word}.modes{display:flex;gap:7px;flex-wrap:wrap}.modal-side .path{font:12px/1.6 ui-monospace,monospace;background:#f4e6ce;padding:10px;border-radius:6px}.navigation{display:flex;justify-content:space-between;margin-top:25px}.counter{font-size:12px;color:#64706c;padding-top:8px}
+.large-frame #generated-large{position:relative}
+[hidden]{display:none!important}@media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.modal-body{grid-template-columns:minmax(0,1fr) 220px}}@media(max-width:760px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.toolbar{position:static}input{width:100%}.modal-body{display:block}.large-frame{height:58vh}.modal-side{margin-top:15px}.card h3{font-size:16px}}@media(max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:15px}.badge{font-size:10px}.masthead{align-items:start}}
+</style>
+</head>
+<body>
+<header>
+ <div class="masthead"><div class="brand">Travary</div><span class="badge">New stills · approval pending</span></div>
+ <h1>One Travi. A whole world<br>of holidays.</h1>
+ <p>31 new stills for the next onboarding build: reusable green plates, a place-neutral fallback, 24 country stages and a clear-floor Kyoto. Select an image to inspect it at a larger size.</p>
+</header>
+<main>
+ <div class="toolbar"><div class="filters" aria-label="Filter artwork">
+ <button data-filter="all" aria-pressed="true">All 31</button><button data-filter="chroma_plate" aria-pressed="false">Travi plates</button><button data-filter="country_stage" aria-pressed="false">Countries</button><button data-filter="other" aria-pressed="false">Anywhere & Kyoto</button>
+ </div><input id="search" type="search" placeholder="Find a country or scene…" aria-label="Search artwork"></div>
+ <div class="notice"><p><strong>Review the stills before motion.</strong> No new videos have been generated. Country stages are symbolic country scenes; the selected destination name stays live in the app.</p><p>Green plates need flat-key cleanup and foreground registration validation. Proof is 940 × 1672; Greece is 851 × 1847. Masters are preserved unchanged. <a href="README.md">Claude handoff & exact prompt locations</a> · <a href="QA.json">Measured checks</a></p></div>
+ <div id="gallery" aria-live="polite">Loading artwork…</div>
+ <footer>Generated with built-in imagegen, 9 October 2026. These new masters are staged for owner review; they have not been copied into the native app or published.</footer>
+</main>
+<dialog id="viewer" aria-labelledby="viewer-title">
+ <div class="modal-head"><h2 id="viewer-title"></h2><button id="close" aria-label="Close image viewer">Close ×</button></div>
+ <div class="modal-body"><div class="large-frame"><div class="stack"><img class="original" id="original-large" alt="Original reference"><img id="generated-large" alt="New artwork"></div></div><div class="modal-side">
+ <div class="modes" id="modes"><button data-mode="generated" aria-pressed="true">Generated</button><button data-mode="original" aria-pressed="false">Original</button><button data-mode="overlay" aria-pressed="false">50% overlay</button></div>
+ <p id="dimensions"></p><p id="review-note"></p><p class="path" id="target-path"></p><p><a id="master-link" target="_blank" rel="noopener">Open PNG master ↗</a></p><p><a id="reference-link" target="_blank" rel="noopener">Open source reference ↗</a></p><p><a id="prompt-link" target="_blank" rel="noopener">Exact prompt & generation source ↗</a></p>
+ <div class="navigation"><button id="previous">← Previous</button><button id="next">Next →</button></div><p class="counter" id="counter"></p>
+ </div></div>
+</dialog>
+<script>
+const root='../../../';
+const url=path=>root+path.split('/').map(encodeURIComponent).join('/');
+const escapeHTML=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let items=[],visible=[],filter='all',query='',active=null;
+const gallery=document.querySelector('#gallery'), viewer=document.querySelector('#viewer');
+const names={'green-folio':'Booking folio','green-proof':'Booking saved','green-account':'Save your holiday','green-email':'Email invitation','green-pass':'Pass presentation','city_jp_kyoto':'Kyoto — clear floor'};
+const label=item=>item.label||names[item.id]||item.id;
+const sections=[['chroma_plate','Travi’s reusable plates','5 frames · compare each with its original'],['other','The fallback & the floor fix','Anywhere and prop-free Kyoto'],['country_stage','Country stages','24 countries · shared sky, stage and floor']];
+const isOther=item=>!['chroma_plate','country_stage'].includes(item.kind);
+function render(){
+ visible=items.filter(item=>(filter==='all'||(filter==='other'?isOther(item):item.kind===filter))&&(label(item)+' '+item.id).toLowerCase().includes(query));
+ gallery.innerHTML=sections.map(([kind,title,subtitle])=>{const group=visible.filter(item=>kind==='other'?isOther(item):item.kind===kind);if(!group.length)return '';
+ return `<section class="${kind==='chroma_plate'?'greens':''}"><div class="section-head"><h2>${title}</h2><span>${subtitle}</span></div><div class="grid">${group.map(item=>`<article class="card" data-id="${escapeHTML(item.id)}"><button class="image-button" data-open="${escapeHTML(item.id)}" aria-label="Inspect ${escapeHTML(label(item))}"><img src="${url(item.target)}" alt="${escapeHTML(label(item))}" decoding="async"><span class="tag">${item.kind==='chroma_plate'?'Key / alignment check':'Art review'}</span></button><div class="card-info"><h3>${escapeHTML(label(item))}</h3><p>${item.dimensions.join(' × ')} · ${escapeHTML(item.id)}</p><a href="${url(item.target)}" target="_blank" rel="noopener">PNG master ↗</a>${item.kind==='chroma_plate'?`<div class="small-actions"><button data-open="${item.id}" data-start="original">Original</button><button data-open="${item.id}" data-start="overlay">Compare</button></div>`:''}</div></article>`).join('')}</div></section>`;
+ }).join('')||'<div class="empty">No artwork matches that search.</div>';
+ gallery.querySelectorAll('[data-open]').forEach(button=>button.addEventListener('click',()=>openItem(button.dataset.open,button.dataset.start||'generated')));
+}
+function mode(value){
+ const original=document.querySelector('#original-large'),generated=document.querySelector('#generated-large');
+ original.hidden=value==='generated';generated.hidden=value==='original';generated.style.opacity=value==='overlay'?'.5':'1';
+ document.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',button.dataset.mode===value));
+}
+function openItem(id,start='generated'){
+ active=items.find(item=>item.id===id);if(!active)return;
+ document.querySelector('#viewer-title').textContent=label(active);
+ document.querySelector('#generated-large').src=url(active.target);
+ document.querySelector('#original-large').src=url(active.reference);
+ document.querySelector('.stack').style.setProperty('--aspect',active.dimensions.join('/'));
+ document.querySelector('#modes').hidden=active.kind!=='chroma_plate'&&active.id!=='city_jp_kyoto';
+ document.querySelector('#dimensions').textContent=active.dimensions.join(' × ')+' pixels · owner approval pending';
+ document.querySelector('#review-note').textContent=active.kind==='chroma_plate'?'Same performance and framing requested. The generator changed some foreground pixels and produced slight green variation. Use Original and Overlay to review; validate registration and a clean matte before film generation.':active.id==='city_jp_kyoto'?'The folio and loose tickets have been removed. Compare with the current Kyoto reference; native replacement remains a separate step.':'Quiet central sky, a colourful paper landscape, and an empty cream floor for the shared Travi and live controls. Review with native overlays before integration.';
+ document.querySelector('#target-path').textContent=active.target;
+ document.querySelector('#master-link').href=url(active.target);document.querySelector('#reference-link').href=url(active.reference);document.querySelector('#prompt-link').href=url(active.promptLog);
+ document.querySelector('#counter').textContent=(visible.findIndex(item=>item.id===id)+1)+' of '+visible.length+' in this view';
+ mode(start);if(!viewer.open)viewer.showModal();
+}
+document.querySelector('#close').addEventListener('click',()=>viewer.close());
+document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>mode(button.dataset.mode)));
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',b===button));render()}));
+document.querySelector('#search').addEventListener('input',event=>{query=event.target.value.toLowerCase();render()});
+function step(delta){if(!active||!visible.length)return;const i=visible.findIndex(item=>item.id===active.id);openItem(visible[(i+delta+visible.length)%visible.length].id)}
+document.querySelector('#previous').addEventListener('click',()=>step(-1));document.querySelector('#next').addEventListener('click',()=>step(1));
+document.addEventListener('keydown',event=>{if(viewer.open&&event.key==='ArrowRight')step(1);if(viewer.open&&event.key==='ArrowLeft')step(-1)});
+fetch('manifest.json').then(response=>{if(!response.ok)throw Error('manifest unavailable');return response.json()}).then(manifest=>{items=manifest.items;render()}).catch(error=>{gallery.textContent='Could not load the manifest. Open this gallery through the local review server. '+error.message});
+</script>
+</body>
+</html>

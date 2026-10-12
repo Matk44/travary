@@ -1,0 +1,38 @@
+{
+  "account": {
+    "source": "docs/mockups/onboarding-green-plates-v1/green-account-clean-v1.png",
+    "scale": 1.0047,
+    "offset": [
+      -5.3,
+      -3.6
+    ],
+    "out": "assets/onboarding/poses/account.webp"
+  },
+  "email": {
+    "source": "docs/mockups/onboarding-green-plates-v1/green-email-clean-v1.png",
+    "scale": 1.0047,
+    "offset": [
+      -5.3,
+      -3.6
+    ],
+    "out": "assets/onboarding/poses/email.webp"
+  },
+  "proof": {
+    "source": "docs/mockups/onboarding-green-plates-v1/green-proof-clean-v1.png",
+    "scale": 0.8183,
+    "offset": [
+      143.6,
+      58.2
+    ],
+    "out": "assets/onboarding/poses/proof.webp"
+  },
+  "present": {
+    "source": "docs/mockups/onboarding-green-plates-v1/green-pass-clean-v1.png",
+    "scale": 1.0799,
+    "offset": [
+      -76.1,
+      27.0
+    ],
+    "out": "assets/onboarding/poses/present.webp"
+  }
+}

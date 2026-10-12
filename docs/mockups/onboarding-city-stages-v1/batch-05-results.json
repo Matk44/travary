@@ -1,0 +1,185 @@
+[
+  {
+    "destinationId": "city_sg_singapore",
+    "batch": 5,
+    "sourceUrls": [
+      "https://www.visitsingapore.com/see-do-singapore/nature-wildlife/parks-gardens/gardens-by-the-bay/",
+      "https://www.visitsingapore.com/travel-tips/travelling-to-singapore/itineraries/24-hours-in-singapore/"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Singapore city-state: Marina Bay Sands, Gardens by the Bay Supertrees, ArtScience Museum and Marina Bay.",
+      "summary": "Singapore bay/Supertree paper layers; clear floor.",
+      "notes": "SG city-state override identifier; future resolver decision remains. Symbolic architectural grouping.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-e422cf02-48f8-47a5-888f-005c82ca0a66.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_sg_singapore/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_sg_singapore.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Singapore (SG), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Marina Bay Sands' three towers and ship-shaped rooftop in middle depth left, Gardens by the Bay Supertrees with recognisable branching canopies, layered blue Marina Bay water and restrained tropical foliage. Singapore city-state urban scene.\nLighting/mood: dry bright afternoon, warm light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Singapore (SG) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_my_kuala_lumpur",
+    "batch": 5,
+    "sourceUrls": [
+      "https://www.malaysia.travel/explore/top-places-to-visit-in-kuala-lumpur",
+      "https://www.malaysia.travel/explore/petronas-twin-tower-orig"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Kuala Lumpur city: Petronas Twin Towers and skybridge, KLCC park/fountain and KL Tower skyline cue.",
+      "summary": "Petronas/park layers; headline clearance corrected in v2.",
+      "notes": "Built-in v2 reduced twin towers together into middle band; current proportions remain recognisable. Urban inland park, no coastal cliffs.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": false,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-4dbf6b1a-0bdc-42e3-9264-f4632f975a46.png",
+        "selectedWorkspacePath": null,
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_my_kuala_lumpur.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Kuala Lumpur (MY), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Petronas Twin Towers with accurate paired stepped steel silhouettes and skybridge, layered city blocks and lush KLCC park trees; small warm geometric architectural accents. Urban inland Malaysia, no coastal cliffs.\nLighting/mood: clear warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Kuala Lumpur (MY) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.\nCritical skyline geometry: place the very TOP of all towers and antennas around 29-30% of the full portrait height (below about y=520 on the 1848-height reference). This is a fixed onboarding clearance requirement. Scale the tower/skyline group to fit entirely inside the middle 27-65% band while retaining recognisable proportions, fine architecture and expansive scenery. The upper 27% through the centre must contain teal paper sky only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      },
+      {
+        "version": 2,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-271f83f6-1b4b-47c2-8cef-2982cd3adb62.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_my_kuala_lumpur/onboarding_stage_v2.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_my_kuala_lumpur-v2.txt",
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nAsset type: clean Kuala Lumpur onboarding scenery plate revision\nPrimary request: Reduce ONLY the paired Petronas Twin Towers and their skybridge together, preserving matching heights, architecture and proportions, so BOTH antenna tips begin at approximately 30% from the top of the full portrait instead of their current high placement. Keep them left of centre and visually dominant within the middle city scenery. Fill vacated space above the towers with the existing quiet embossed petrol-teal paper sky. Do not change other buildings or add any taller skyline elements.\nInput 1: Kuala Lumpur scenery plate edit target.\nInvariants: preserve full portrait canvas/aspect, KLCC park/pond/fountain, surrounding city layers, warm physical light, lush foliage, dimensional folded paper material, curved teal stage wings, and cream floor boundary near65%; keep lower cream control floor calm and clear. Keep right foreground free for separate Travi.\nConstraints: no people, characters, character shadow, folio, loose tickets, lettering, signs, UI, prices, dates, labels, logos, flags, watermark or device frame. Output one complete opaque portrait plate.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-4dbf6b1a-0bdc-42e3-9264-f4632f975a46.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_ae_dubai",
+    "batch": 5,
+    "sourceUrls": [
+      "https://www.visitdubai.com/en/places-to-visit/burj-khalifa",
+      "https://www.visitdubai.com/explore-dubai/dubai-neighbourhoods/downtown-dubai"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Dubai city: stepped Burj Khalifa, sand-coloured waterfront buildings, modern tower skyline and date palms.",
+      "summary": "Dubai tower and warm stone layers; clear floor.",
+      "notes": "Symbolic city skyline includes a distant sail-like Burj Al Arab cue. Tall tip sits slightly above nominal27% at left; central headline sky clear.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-c204534f-7477-4db9-8a89-557c55b93b4d.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_ae_dubai/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_ae_dubai.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Dubai (AE), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Burj Khalifa's slender stepped taper in middle depth left, warm sand-coloured low city architecture and layered modern towers, restrained date palms and blue urban water accent. No mountains, fantasy dunes swallowing the city or unrelated mosque skyline.\nLighting/mood: winter, warm late-afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Dubai (AE) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.\nCritical skyline geometry: place the very TOP of all towers and antennas around 29-30% of the full portrait height (below about y=520 on the 1848-height reference). This is a fixed onboarding clearance requirement. Scale the tower/skyline group to fit entirely inside the middle 27-65% band while retaining recognisable proportions, fine architecture and expansive scenery. The upper 27% through the centre must contain teal paper sky only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_tr_istanbul",
+    "batch": 5,
+    "sourceUrls": [
+      "https://goturkiye.com/istanbul/hagia-sophia",
+      "https://goturkiye.com/istanbul/galata-tower",
+      "https://goturkiye.com/istanbul/bosphorus"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Istanbul city: Hagia Sophia dome/four minarets, Galata Tower, waterfront houses and Bosphorus water.",
+      "summary": "Hagia Sophia/Galata waterfront layers; clear floor.",
+      "notes": "Symbolic grouping of monuments on opposite urban areas; not a literal shared viewpoint. Side minaret enters upper band at far left; central headline remains calm.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-b9eac5a2-fbd7-4de2-aca3-670074ec4d06.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_tr_istanbul/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_tr_istanbul.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Istanbul (TR), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Hagia Sophia's great dome and four slender minarets at left, layered warm waterfront houses, Galata Tower in separate middle depth, a calm Bosphorus blue water band. Coherent symbolic Istanbul composition; no Balinese temples.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Istanbul (TR) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_au_sydney",
+    "batch": 5,
+    "sourceUrls": [
+      "https://www.sydney.com/destinations/sydney/sydney-city/circular-quay",
+      "https://www.sydney.com/articles/top-attractions-in-sydney"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Sydney city: Opera House shell sails, Harbour Bridge steel arch/granite pylons, city and harbour, eucalyptus.",
+      "summary": "Sydney harbour/sail-shell paper layers; clear floor.",
+      "notes": "Recognisable bridge geometry and botanical framing. Symbolic harbour camera; no Melbourne or country-wide Australian scene.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-c97bfe5a-433c-4bd8-a06f-87ec7aedb393.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_au_sydney/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_au_sydney.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Sydney (AU), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Sydney Opera House's white sculptural sail shells left of centre, Harbour Bridge's recognisable steel arch and granite pylons in middle depth, blue harbour water, low sandstone waterfront and restrained eucalyptus foliage. Symbolic harbour composition.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Sydney (AU) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  }
+]

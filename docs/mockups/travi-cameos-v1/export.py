@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""Exports Travi's cameos for the app (like onboarding-films-v2/export.py).
+
+- assets/travi/cameos/films/<film>.webp: animated WebP with alpha, cropped to
+  where he moves. Pop-ups at 24 fps; each '-down' is its pop-up played
+  backwards at double speed (every other frame); the lounge loop at 12 fps.
+- assets/travi/cameos/stills/<pose>.webp: each pose, keyed and cropped.
+- lib/logic/travi_cameo_assets.dart: what exists and where each sits on the
+  square canvas, generated.
+
+Run process.py --set cameos first (keyed/<film>/). Needs numpy, Pillow,
+cwebp and webpmux:
+    /tmp/kf/bin/python docs/mockups/travi-cameos-v1/export.py
+"""
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+HERE = Path(__file__).resolve().parent
+PROJECT = HERE.parent.parent.parent
+OUT = PROJECT / 'assets' / 'travi' / 'cameos'
+DART = PROJECT / 'lib' / 'logic' / 'travi_cameo_assets.dart'
+CANVAS = 480  # the processed films' square, kept
+QUALITY = 50
+
+# Peek reactions: Dart name -> (pop-up film, its still).
+PEEKS = {
+    'wave': ('wave-up', 'peek-wave'),
+    'cheer': ('cheer-up', 'peek-cheer'),
+    'packing': ('packing-up', 'peek-packing'),
+    'ready': ('ready-up', 'peek-ready'),
+    'today': ('today-up', 'peek-today'),
+}
+LOUNGE = ('lounge-idle', 'lounge')
+
+
+def keyed_still(name):
+    rgb = np.asarray(Image.open(HERE / 'registered' / f'{name}.png').convert('RGB')).astype(np.float32)
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    alpha = 1 - np.clip((g - np.maximum(r, b) - 30) / 50, 0, 1)
+    rgb[..., 1] = np.where(alpha < 0.98, np.minimum(g, np.maximum(r, b)), g)
+    return Image.fromarray(np.dstack([rgb, alpha * 255]).astype(np.uint8), 'RGBA').resize((CANVAS, CANVAS), Image.LANCZOS)
+
+
+def box_of(images):
+    alpha = np.zeros((CANVAS, CANVAS), bool)
+    for im in images:
+        alpha |= np.asarray(im)[..., 3] > 8
+    ys, xs = np.nonzero(alpha)
+    left, top = max(0, xs.min() - 4) // 2 * 2, max(0, ys.min() - 4) // 2 * 2
+    right, bottom = min(CANVAS, (xs.max() + 6) // 2 * 2), min(CANVAS, (ys.max() + 6) // 2 * 2)
+    return left, top, right - left, bottom - top
+
+
+def visible(im):
+    return (np.asarray(im)[..., 3] > 8).any()
+
+
+def encode(images, out, frame_ms):
+    """Animated WebP: each frame lossy with lossy alpha (cwebp), then muxed."""
+    with tempfile.TemporaryDirectory() as tmp:
+        args = []
+        for i, im in enumerate(images):
+            png, webp = Path(tmp) / f'{i:04d}.png', Path(tmp) / f'{i:04d}.webp'
+            im.save(png)
+            subprocess.run(['cwebp', '-quiet', '-q', str(QUALITY), '-alpha_q', '50', '-alpha_filter', 'best',
+                            '-m', '4', '-exact', str(png), '-o', str(webp)], check=True)
+            args += ['-frame', str(webp), f'+{frame_ms}+0+0+0-b']
+        subprocess.run(['webpmux', *args, '-loop', '0', '-o', str(out)], check=True, capture_output=True)
+
+
+def frames(film):
+    return [Image.open(p).convert('RGBA') for p in sorted((HERE / 'keyed' / film).glob('*.png'))]
+
+
+def export_film(name, images, frame_ms):
+    box = box_of(images)
+    l, t, w, h = box
+    out = OUT / 'films' / f'{name}.webp'
+    encode([im.crop((l, t, l + w, t + h)) for im in images], out, frame_ms)
+    seconds = round(len(images) * frame_ms / 1000, 2)
+    print(f'{name:14} {len(images):3} frames {seconds:5.2f} s {out.stat().st_size / 1e6:.2f} MB')
+    return {'id': name, 'box': box, 'seconds': seconds}
+
+
+def main():
+    for d in ('films', 'stills'):
+        shutil.rmtree(OUT / d, ignore_errors=True)
+        (OUT / d).mkdir(parents=True)
+    stills, peeks = {}, {}
+    for pose, (film, still) in PEEKS.items():
+        images = frames(film)
+        # Plain green before he appears: keep one empty frame.
+        first = next(i for i, im in enumerate(images) if visible(im))
+        up = images[max(0, first - 1):]
+        down = up[::-1][::2]
+        if down[-1] is not up[0]:
+            down.append(up[0])
+        peeks[pose] = {'up': export_film(f'{film}', up, 42), 'down': export_film(f'{film[:-3]}-down', down, 42)}
+        im = keyed_still(still)
+        l, t, w, h = box_of([im])
+        im.crop((l, t, l + w, t + h)).save(OUT / 'stills' / f'{still}.webp', quality=80, method=6)
+        stills[pose] = (l, t, w, h)
+    film, still = LOUNGE
+    lounge = export_film(film, frames(film)[::2], 83)
+    im = keyed_still(still)
+    l, t, w, h = box_of([im])
+    im.crop((l, t, l + w, t + h)).save(OUT / 'stills' / f'{still}.webp', quality=80, method=6)
+    lounge_still = (l, t, w, h)
+    total = sum(p.stat().st_size for p in (OUT / 'films').glob('*.webp'))
+    print(f'films: {total / 1e6:.1f} MB')
+    write_dart(stills, peeks, lounge, lounge_still)
+
+
+def box(b):
+    l, t, w, h = b
+    return f'(left: {l}, top: {t}, width: {w}, height: {h})'
+
+
+def clip(f):
+    return f"TraviClip('{f['id']}', {box(f['box'])}, seconds: {f['seconds']})"
+
+
+def write_dart(stills, peeks, lounge, lounge_still):
+    lines = [
+        '// GENERATED by docs/mockups/travi-cameos-v1/export.py from the reviewed',
+        '// cameo films and stills. Do not edit by hand.',
+        "part of 'travi_cameos.dart';",
+        '',
+        '/// The cameos\' square camera, in pixels: every clip and still sits on it.',
+        f'const traviCameoCanvas = {CANVAS};',
+        '',
+        '/// Each peek reaction: its still, popping up, and ducking back down.',
+        'const traviPeeks = <TraviPeek, TraviPeekReel>{',
+    ]
+    for pose, films in peeks.items():
+        still = PEEKS[pose][1]
+        lines.append(f"  TraviPeek.{pose}: TraviPeekReel(")
+        lines.append(f"    still: TraviStill('{still}', {box(stills[pose])}),")
+        lines.append(f"    up: {clip(films['up'])},")
+        lines.append(f"    down: {clip(films['down'])},")
+        lines.append('  ),')
+    lines += [
+        '};',
+        '',
+        '/// The free day: lounging in the deckchair, and one slow sip.',
+        f"const traviLoungeStill = TraviStill('{LOUNGE[1]}', {box(lounge_still)});",
+        f'const traviLoungeSip = {clip(lounge)};',
+        '',
+    ]
+    DART.write_text('\n'.join(lines))
+
+
+if __name__ == '__main__':
+    main()

@@ -1,5 +1,7 @@
 # Ticket Heritage: icon variants
 
+9 October update: this exploration was superseded by the owner's approved [Travi passport icon on turquoise](../travi-passport-app-icon-v1/README.md), now applied to iOS and Android launcher resources. The parked status below records the earlier decision.
+
 5 October 2026. The owner chose **B — Ticket Heritage** from the first icon board and asked to decide on a variant before applying it. Travi's coral ribbed spinner identity remains selected. **Icon work is parked at the owner's request while onboarding proceeds. No final icon variant is selected or applied.**
 
 ## Comparison board

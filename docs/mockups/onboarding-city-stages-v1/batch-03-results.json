@@ -1,0 +1,194 @@
+[
+  {
+    "destinationId": "city_cz_prague",
+    "batch": 3,
+    "sourceUrls": [
+      "https://prague.eu/en/objevujte/charles-bridge-karluv-most/",
+      "https://prague.eu/en/objevujte/prague-castle-prazsky-hrad/"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Prague city: Charles Bridge over Vltava, permanent bridge statues, Prague Castle and St Vitus.",
+      "summary": "Prague bridge/castle layers; pedestrians removed in v2.",
+      "notes": "Built-in v2 removed small tourists, preserving fixed historic statues and reference layout.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": false,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-6005d663-fb81-416c-bbda-8678a57b23c5.png",
+        "selectedWorkspacePath": null,
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_cz_prague.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Prague (CZ), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Charles Bridge's repeated stone arches across the Vltava, Prague Castle and St Vitus Cathedral's Gothic silhouette in background left, warm red roofs and a few broadleaf trees. Symbolic historic Prague composition.\nLighting/mood: early autumn, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Prague (CZ) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      },
+      {
+        "version": 2,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-f96a8f8e-3565-41b8-b00c-d681c64df92b.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_cz_prague/onboarding_stage_v2.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_cz_prague-v2.txt",
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nAsset type: clean city scenery plate revision\nPrimary request: Remove ONLY the small tourists/pedestrians and human silhouettes along the Charles Bridge walkway. The bridge walkway should be empty. Preserve the permanent large historical stone statues on their tall architectural pedestals; those are part of the actual monument. Do not add or change statues. Fill removed people with the existing bridge parapet and warm stone-paper surfaces.\nInput 1: existing city scenery plate edit target.\nInvariants: Preserve the original portrait canvas/aspect, city geography, rich dimensional folded cardstock, cut paper edges, embossing, warm physical light, quiet central teal upper sky, curved theatre side wings, EXACT existing cream floor boundary near 65% and all lower floor pixels. Keep close bulky objects clear of right foreground for the separate Travi. Do not change any unrelated element.\nConstraints: no added people, character, mascot, character shadow, folio, loose tickets, lettering, UI, prices, dates, labels, logos, flags or watermark. One complete opaque portrait plate.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-6005d663-fb81-416c-bbda-8678a57b23c5.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_gr_athens",
+    "batch": 3,
+    "sourceUrls": [
+      "https://accessibleroutes.thisisathens.org/en/mobility-ancient-athens-uncovered/sacred-rock-of-the-acropolis/"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Athens city: Parthenon on Acropolis limestone hill, Plaka and olive foliage.",
+      "summary": "Acropolis and olive-paper layers; clear floor.",
+      "notes": "Dense city/limestone setting; no island/coastal cues. Symbolic historic grouping.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-6542a144-2457-4708-a0c8-e14cad508f01.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_gr_athens/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_gr_athens.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Athens (GR), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Acropolis hill and recognisable Parthenon Doric colonnade at left, layered warm-white and ochre Plaka houses with terracotta roofs, olive trees, dry limestone landscape. Athens city only, not white-blue island villages or a coastal bay.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Athens (GR) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_us_new_york",
+    "batch": 3,
+    "sourceUrls": [
+      "https://s-media.nyc.gov/agencies/lpc/lp/2000.pdf",
+      "https://www.nyc.gov/site/mome/industries/location-library.page?id=76"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "New York City: Manhattan skyline, Empire State Building, Brooklyn Bridge and East River.",
+      "summary": "Manhattan/bridge layers; headline clearance corrected in v2.",
+      "notes": "Built-in v2 scales/lowers skyline so tallest spire starts near 27%; broad quiet sky retained. Symbolic skyline grouping, not one literal view.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": false,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-e5ab96bc-33c8-44f1-9226-a11757629af4.png",
+        "selectedWorkspacePath": null,
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_us_new_york.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for New York City (US), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Manhattan skyline with recognisable Empire State Building set left of centre, layered brick and stone city buildings, Brooklyn Bridge with Gothic stone towers and fine suspension cables, calm East River. Symbolic city composition.\nLighting/mood: early autumn, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is New York City (US) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      },
+      {
+        "version": 2,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-195843fc-9d18-4f8e-a4e7-717570f4defc.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_us_new_york/onboarding_stage_v2.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_us_new_york-v2.txt",
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nAsset type: clean city scenery plate revision\nPrimary request: Adjust ONLY the Manhattan skyline's scale/vertical placement within the middle scenery band so the TOP of the Empire State Building spire is at approximately 29% from the top, and every tall skyline landmark stays BELOW 27% from the top. Preserve the buildings' recognisable relative proportions, Empire State silhouette, other skyline cues, bridge and river. Restore the area above the reduced skyline with matching quiet embossed petrol-teal paper sky. Keep the skyline expansive across the middle theatre; do not turn it into a small postcard.\nInput 1: existing city scenery plate edit target.\nInvariants: Preserve the original portrait canvas/aspect, city geography, rich dimensional folded cardstock, cut paper edges, embossing, warm physical light, quiet central teal upper sky, curved theatre side wings, EXACT existing cream floor boundary near 65% and all lower floor pixels. Keep close bulky objects clear of right foreground for the separate Travi. Do not change any unrelated element.\nConstraints: no added people, character, mascot, character shadow, folio, loose tickets, lettering, UI, prices, dates, labels, logos, flags or watermark. One complete opaque portrait plate.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-e5ab96bc-33c8-44f1-9226-a11757629af4.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_us_san_francisco",
+    "batch": 3,
+    "sourceUrls": [
+      "https://www.sftravel.com/things-to-do/attractions/iconic-sf/golden-gate-bridge",
+      "https://www.sftravel.com/article/top-20-attractions-san-francisco",
+      "https://www.sftravel.com/things-to-do/attractions/iconic-sf/painted-ladies"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "San Francisco city: Golden Gate Bridge and headlands/bay, Victorian Painted Ladies and city skyline.",
+      "summary": "Golden Gate and Victorian layers; clear floor.",
+      "notes": "Victorian houses and bridge are intentionally staged symbolically, not a literal Alamo Square waterfront viewpoint.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-cf66e5f7-2a30-4036-993b-b7a29519ece2.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_us_san_francisco/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_us_san_francisco.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for San Francisco (US), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: orange-red Golden Gate Bridge with its two rectangular suspension towers in middle depth over blue bay, rolling green headlands and layered San Francisco Victorian houses at left. Symbolic city composition; no impossible road into bay.\nLighting/mood: late summer, clear warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is San Francisco (US) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_us_orlando",
+    "batch": 3,
+    "sourceUrls": [],
+    "qa": {
+      "inspected": true,
+      "geography": "Orlando visitor area: theme-park-style castle, observation wheel, landscaped lake and palms.",
+      "summary": "Orlando visitor-area lake stage; clear floor.",
+      "notes": "Matches existing local city reference. Castle/wheel/artificial waterfall are a symbolic amusement-area scene; not a literal downtown geography claim.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-5240d391-7666-4883-8711-85cd924571cb.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_us_orlando/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_us_orlando.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Orlando (US), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: central Florida lakefront and lush palms, an elegant playful theme-park-style castle with blue roofs at left and a distant observation wheel; treat amusement architecture as a symbolic visitor-area composition, not an exact downtown view. Flat subtropical geography, no cliffs or volcano.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Orlando (US) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_us_orlando/common/countdown_postcard.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  }
+]

@@ -1,5 +1,9 @@
 # Travary: Travi app-icon exploration
 
+12 October update: the owner requested a much closer top-half crop of Travi holding the passport. Current local launcher assets are recorded in [Travi close-up app icon](../travi-passport-app-icon-v2/README.md).
+
+9 October update: the owner approved waving Travi holding a passport on turquoise as the production app icon. The selected artwork and iOS/Android launcher integration are recorded in [Travi passport app icon](../travi-passport-app-icon-v1/README.md). The concepts and parked status below remain the earlier exploration record.
+
 5 October 2026. The owner has selected **coral Travi, ribbed spinner** as the mascot and **B — Ticket heritage** as the app-icon direction. [Ticket Heritage variants](TICKET_HERITAGE.md) explore refinements. **Icon work is parked at the owner's request while onboarding proceeds.** The final variant is still open; the owner requested a decision before applying an icon.
 
 ## Recommendation

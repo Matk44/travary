@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "city_us_orlando",
-  "version": 1,
+  "version": 2,
   "palette": {
     "id": "usa_navy_roadtrip",
     "anchors": {"ink": "#18375B", "paper": "#F4EFE4"},

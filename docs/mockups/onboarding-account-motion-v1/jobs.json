@@ -1,0 +1,80 @@
+{
+  "account-entry": {
+    "request": "account-entry",
+    "id": "dd34d2bf5ce7707c",
+    "task_id": "b3npgbats9rmr0d13p29ay41dc",
+    "status": "completed",
+    "seed": 510901,
+    "local_path": "1791496732663-2c260d4e961e46a0.mp4",
+    "error": null,
+    "provider": "replicate-seedance-2",
+    "updated_at": 1791496732667,
+    "source": "account-entry-source-v1.mp4",
+    "source_sha256": "0f9fa421c8105aa2dc75eb14318bf1edd2ed908b2ec9bb10b69bc4f892859a58"
+  },
+  "account-idle": {
+    "request": "account-idle",
+    "id": "e6fe4bed5b3d5b83",
+    "task_id": "569z8k395nrmt0d13p2b1ektkg",
+    "status": "completed",
+    "seed": 510902,
+    "local_path": "1791496902713-c73ce88a37e14fdf.mp4",
+    "error": null,
+    "provider": "replicate-seedance-2",
+    "updated_at": 1791496902717,
+    "source": "account-idle-source-v1.mp4",
+    "source_sha256": "06c27b15193558eb17e47e8b5de678a652fc355277dfe8a80a420e1bb50a32a4"
+  },
+  "account-success-pass": {
+    "request": "account-success-pass",
+    "id": "50a5153fb758513a",
+    "task_id": "q8q72dbpthrmy0d13p2b0npxcg",
+    "status": "completed",
+    "seed": 510903,
+    "local_path": "1791496904310-ff3c64e3d95334a9.mp4",
+    "error": null,
+    "provider": "replicate-seedance-2",
+    "updated_at": 1791496904311,
+    "source": "account-success-pass-source-v1.mp4",
+    "source_sha256": "26526ba44b46cf293e991e8bd7e70157ff44b8f5a6454c2e4543caaa50e7345f"
+  },
+  "account-guest-pass": {
+    "request": "account-guest-pass",
+    "id": "c40727cfa3f5a717",
+    "task_id": "26tsvzm3rnrmw0d13p2b39xtt0",
+    "status": "completed",
+    "seed": 510904,
+    "local_path": "1791496734512-b71d2edd043c991c.mp4",
+    "error": null,
+    "provider": "replicate-seedance-2",
+    "updated_at": 1791496734520,
+    "source": "account-guest-pass-source-v1.mp4",
+    "source_sha256": "07b7d241b05efd6854ffe748f0bae4b40318bf4765543aa51b7ac94ae5075dce"
+  },
+  "account-email-gesture": {
+    "request": "account-email-gesture",
+    "id": "beacde21dc4005f3",
+    "task_id": "9zs0gasbtxrmy0d13p3ajrhnbw",
+    "status": "completed",
+    "seed": 510905,
+    "local_path": "1791496904999-52d7c474cb9b7131.mp4",
+    "error": null,
+    "provider": "replicate-seedance-2",
+    "updated_at": 1791496905003,
+    "source": "account-email-gesture-source-v1.mp4",
+    "source_sha256": "fb48c9208d16223ed91e37c133715ed2830eeb1edd8b40be06d74a5c876ae3c1"
+  },
+  "account-email-idle": {
+    "request": "account-email-idle",
+    "id": "4bf847c9a45b26bb",
+    "task_id": "nt7px89s89rmr0d13p381mbc7m",
+    "status": "completed",
+    "seed": 510906,
+    "local_path": "1791496906720-72d69c53bc434533.mp4",
+    "error": null,
+    "provider": "replicate-seedance-2",
+    "updated_at": 1791496906724,
+    "source": "account-email-idle-source-v1.mp4",
+    "source_sha256": "afa7a43c03d40144cd9c13ad5d061ee8c1cbc97b0c843f43320347b9646a9f45"
+  }
+}

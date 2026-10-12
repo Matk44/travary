@@ -1,0 +1,1142 @@
+{
+  "date": "2026-10-09",
+  "request": "docs/onboarding/ART_REQUESTS_2026-10-09.md",
+  "mode": "built-in image_gen",
+  "status": "all_stills_generated_owner_review_pending",
+  "ownerApproval": "pending_for_new_stills",
+  "animationGenerated": false,
+  "items": [
+    {
+      "id": "green-folio",
+      "kind": "chroma_plate",
+      "reference": "docs/mockups/onboarding-booking-handoff-v1/folio-text-free-v1.png",
+      "target": "docs/mockups/onboarding-green-plates-v1/green-folio-v1.png",
+      "status": "generated",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-d4196b16-05bd-4260-b5c7-12999978a554.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "4e25c720700c17240d5603b271c38344b2f1532870f33cc272412ec298612edc",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-01.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "green-folio",
+        "path": "docs/mockups/onboarding-green-plates-v1/green-folio-v1.png",
+        "actualDimensions": [
+          941,
+          1672
+        ],
+        "requestedDimensions": [
+          941,
+          1672
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "greenSample": {
+          "boundsXYXY": [
+            200,
+            40,
+            600,
+            150
+          ],
+          "modeRGB": [
+            1,
+            179,
+            68
+          ],
+          "uniqueRGBCount": 55,
+          "exactRequestedRGBFraction": 0.0,
+          "maxChannelDeviationFromRequest": 6
+        },
+        "foregroundComparisonHeuristic": {
+          "overlapPixelsCompared": 1005541,
+          "meanAbsoluteRGBDifference": 3.607,
+          "exactRGBPixelFraction": 0.014934,
+          "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+        },
+        "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+      }
+    },
+    {
+      "id": "green-proof",
+      "kind": "chroma_plate",
+      "reference": "docs/mockups/onboarding-booking-handoff-v1/proof-text-free-v1.png",
+      "target": "docs/mockups/onboarding-green-plates-v1/green-proof-v1.png",
+      "status": "generated",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-3f4add0a-f2f3-4097-8b71-c7fe030349ee.png",
+      "dimensions": [
+        940,
+        1672
+      ],
+      "sha256": "2668ce320bcae061188907cf0d12b466619025d474f1c55be4b939d24fe5190a",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-01.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "green-proof",
+        "path": "docs/mockups/onboarding-green-plates-v1/green-proof-v1.png",
+        "actualDimensions": [
+          940,
+          1672
+        ],
+        "requestedDimensions": [
+          941,
+          1672
+        ],
+        "dimensionsMatchRequest": false,
+        "sourceCopyHashMatches": true,
+        "greenSample": {
+          "boundsXYXY": [
+            200,
+            40,
+            600,
+            150
+          ],
+          "modeRGB": [
+            2,
+            182,
+            67
+          ],
+          "uniqueRGBCount": 72,
+          "exactRequestedRGBFraction": 0.0,
+          "maxChannelDeviationFromRequest": 8
+        },
+        "foregroundComparisonHeuristic": {
+          "overlapPixelsCompared": 444448,
+          "meanAbsoluteRGBDifference": 5.809,
+          "exactRGBPixelFraction": 0.00787,
+          "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+        },
+        "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+      }
+    },
+    {
+      "id": "green-account",
+      "kind": "chroma_plate",
+      "reference": "docs/mockups/onboarding-account-motion-v1/account-text-free-v1.png",
+      "target": "docs/mockups/onboarding-green-plates-v1/green-account-v1.png",
+      "status": "generated",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-a69ea1ec-6cb9-4bc0-8c13-0364a27b63e9.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "33b889e73f30a96d21851e591137ee4e29268a9d7e0ff7db031ef8d116bd9417",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-02.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "green-account",
+        "path": "docs/mockups/onboarding-green-plates-v1/green-account-v1.png",
+        "actualDimensions": [
+          941,
+          1672
+        ],
+        "requestedDimensions": [
+          941,
+          1672
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "greenSample": {
+          "boundsXYXY": [
+            200,
+            40,
+            600,
+            150
+          ],
+          "modeRGB": [
+            1,
+            183,
+            68
+          ],
+          "uniqueRGBCount": 66,
+          "exactRequestedRGBFraction": 0.0,
+          "maxChannelDeviationFromRequest": 9
+        },
+        "foregroundComparisonHeuristic": {
+          "overlapPixelsCompared": 288935,
+          "meanAbsoluteRGBDifference": 5.549,
+          "exactRGBPixelFraction": 0.005735,
+          "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+        },
+        "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+      }
+    },
+    {
+      "id": "green-email",
+      "kind": "chroma_plate",
+      "reference": "docs/mockups/onboarding-account-motion-v1/email-text-free-v1.png",
+      "target": "docs/mockups/onboarding-green-plates-v1/green-email-v1.png",
+      "status": "generated",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-30f1884f-5744-4275-be8a-8e56b7c76fe0.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "e9fd63094f9c7c89c6be044201c1e747ce46f406f7067dc89de96895d46630ff",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-02.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "green-email",
+        "path": "docs/mockups/onboarding-green-plates-v1/green-email-v1.png",
+        "actualDimensions": [
+          941,
+          1672
+        ],
+        "requestedDimensions": [
+          941,
+          1672
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "greenSample": {
+          "boundsXYXY": [
+            200,
+            40,
+            600,
+            150
+          ],
+          "modeRGB": [
+            2,
+            182,
+            73
+          ],
+          "uniqueRGBCount": 56,
+          "exactRequestedRGBFraction": 0.0,
+          "maxChannelDeviationFromRequest": 11
+        },
+        "foregroundComparisonHeuristic": {
+          "overlapPixelsCompared": 287498,
+          "meanAbsoluteRGBDifference": 5.955,
+          "exactRGBPixelFraction": 0.006605,
+          "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+        },
+        "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+      }
+    },
+    {
+      "id": "green-pass",
+      "kind": "chroma_plate",
+      "reference": "docs/mockups/onboarding-booking-handoff-v1/pass-text-free-v1.png",
+      "target": "docs/mockups/onboarding-green-plates-v1/green-pass-v1.png",
+      "status": "generated",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-88ff5649-a72e-471b-b4ec-c1f8918f6c5f.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "8b0275f0ca0664e2294805b51f90b37f0c7524ae5154d35ac431b810b61e124d",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-02.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "green-pass",
+        "path": "docs/mockups/onboarding-green-plates-v1/green-pass-v1.png",
+        "actualDimensions": [
+          941,
+          1672
+        ],
+        "requestedDimensions": [
+          941,
+          1672
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "greenSample": {
+          "boundsXYXY": [
+            200,
+            40,
+            600,
+            150
+          ],
+          "modeRGB": [
+            1,
+            178,
+            64
+          ],
+          "uniqueRGBCount": 72,
+          "exactRequestedRGBFraction": 0.002227,
+          "maxChannelDeviationFromRequest": 4
+        },
+        "foregroundComparisonHeuristic": {
+          "overlapPixelsCompared": 614027,
+          "meanAbsoluteRGBDifference": 4.536,
+          "exactRGBPixelFraction": 0.007325,
+          "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+        },
+        "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+      }
+    },
+    {
+      "id": "anywhere",
+      "label": "Anywhere",
+      "kind": "neutral_stage",
+      "reference": "assets/art/common/trip_postcard_anywhere.png",
+      "target": "art_packs/pending/onboarding/anywhere/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-d4b6f439-2b8c-4fb6-b59c-ad9aef894c5d.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "a2a8ad8cfecedf40f622000b051029f06880216042a6b2c8ca835706f81e16e9",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-03.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "anywhere",
+        "path": "art_packs/pending/onboarding/anywhere/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_us",
+      "label": "United States",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_us/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_us/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-05666328-5ad5-438d-a976-e9269864ac9a.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "c59ca1897cfa6db080b135564d5e775ecafb4682f31c306b80c685c2bfd3e4ee",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-04.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_us",
+        "path": "art_packs/pending/onboarding/country_us/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_gb",
+      "label": "United Kingdom",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_gb/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_gb/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-ac4ba4cf-bc66-4377-99af-9855c06b4648.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "aee44acee1ec4c8019be801c211a725747117a6c1ecbfe727aac0ec7ae017dc1",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-04.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_gb",
+        "path": "art_packs/pending/onboarding/country_gb/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_fr",
+      "label": "France",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_fr/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_fr/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-7f329a0d-f2f4-419c-9d22-98258691752f.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "b52ebb59b2cb239048f5e70b23102205d5cad26943761ffd5b7902eae4622a02",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-04.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_fr",
+        "path": "art_packs/pending/onboarding/country_fr/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_it",
+      "label": "Italy",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_it/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_it/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-0849d193-b737-4022-ae86-7887e6325dbe.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "10a76a96dabc1f10d47a8ea193ecf7faefe2b52d406dfbf671676a86dd1b6668",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-04.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_it",
+        "path": "art_packs/pending/onboarding/country_it/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_es",
+      "label": "Spain",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_es/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_es/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-beda1a60-2ce9-4dd3-abf3-3e7d79d0e80c.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "e6b0189175aa0028a90c833d219246b88efe438d4c6af8f1dfc5b671264ffe57",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-05.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_es",
+        "path": "art_packs/pending/onboarding/country_es/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_jp",
+      "label": "Japan",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_jp/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_jp/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-c72094dc-ca5a-4d50-8c5f-70f61fbbf52d.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "7ed1c8071ca10e42521d34e0e62b6f9a87bce9b1dce90f4bf75a578e54d9f09a",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-05.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_jp",
+        "path": "art_packs/pending/onboarding/country_jp/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_au",
+      "label": "Australia",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_au/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_au/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-265fd4ce-90fe-4c34-abc7-220346ff3967.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "d80b4645759e9c2e273102aa54428ea254301f1682bf827f54184e25edd67a1a",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-05.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_au",
+        "path": "art_packs/pending/onboarding/country_au/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_mx",
+      "label": "Mexico",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_mx/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_mx/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-1ef6e181-52b3-4756-b5f9-326fd4481f26.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "318a201e50d2a5cf00fa111530030733b0312b73565fdf2e2491e621687dd457",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-05.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_mx",
+        "path": "art_packs/pending/onboarding/country_mx/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_th",
+      "label": "Thailand",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_th/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_th/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-794d195a-3d1a-40d5-a022-5ea27f9767c2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "bff722c6700c309570c9ad715d0af0d04d6abcb23a7a42a2fcd092ef8281706a",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-06.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_th",
+        "path": "art_packs/pending/onboarding/country_th/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_gr",
+      "label": "Greece",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_gr/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_gr/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-4f5780fa-a7d3-481f-b890-7b47004719e9.png",
+      "dimensions": [
+        851,
+        1847
+      ],
+      "sha256": "5a02cc8984b93851493e59e33824f3693685a11a3b2a1a963c8e35dd75869cbf",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-06.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_gr",
+        "path": "art_packs/pending/onboarding/country_gr/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1847
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": false,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_pt",
+      "label": "Portugal",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_pt/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_pt/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-0ff144f1-d62a-4160-b557-b3d45f642683.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "b698511ad9a0c2b16d1db65903b0ce4f19fb6b901a55a41f44c418932a143af0",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-06.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_pt",
+        "path": "art_packs/pending/onboarding/country_pt/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_de",
+      "label": "Germany",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_de/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_de/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-44d3ed35-700f-4acf-b2dc-32b086e51f86.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "7e7f017874a3695041ee53797f2b28cca174758cdf1c7fedf8637222d8d7e6bf",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-06.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_de",
+        "path": "art_packs/pending/onboarding/country_de/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_ca",
+      "label": "Canada",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_ca/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_ca/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-b1e2cd2e-0e73-41c5-8639-dc1810a99cac.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "3f6900ee83aee454705beda7d6c3324665649b6b3a5f0c3544d0f5f0e0494649",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-07.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_ca",
+        "path": "art_packs/pending/onboarding/country_ca/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_tr",
+      "label": "Turkey",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_tr/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_tr/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-40e4b696-427f-4e51-8a91-8e3b97788bba.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "1cc238186dcfad201f0a73eaa17fcf21cc1ca1bc3b09d51c23d0d7d215ccacc0",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-07.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_tr",
+        "path": "art_packs/pending/onboarding/country_tr/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_ae",
+      "label": "United Arab Emirates",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_ae/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_ae/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-d0fa7ece-3f27-4df1-8a7f-3b096c6b65ad.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "390ecb195728f519e813530b892237dcd4a0882f5c91f622a748d674d65eeab1",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-07.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_ae",
+        "path": "art_packs/pending/onboarding/country_ae/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_nl",
+      "label": "Netherlands",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_nl/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_nl/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-d46a2750-92c4-40e0-b519-f40d6f17ab0b.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "f6a5f3047af6fff633840fcaa5428e24cd43888e816d5d06dd73ca5c5e14a8bf",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-07.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_nl",
+        "path": "art_packs/pending/onboarding/country_nl/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_id",
+      "label": "Indonesia",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_id/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_id/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-6662288d-249f-40ec-8c14-e0f7c70d802b.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "c0670460c8da9ee6fb69c3eede55f9e2b02cbec9a969e309f3509e5b2310848f",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-08.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_id",
+        "path": "art_packs/pending/onboarding/country_id/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_nz",
+      "label": "New Zealand",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_nz/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_nz/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-5c136fd4-18e8-4f88-ae1c-f64f6fbd557d.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "fb49cfe6c849f578a42a236e2758ecb6165a86a6bfed842bb60422e5e7fcfcbd",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-08.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_nz",
+        "path": "art_packs/pending/onboarding/country_nz/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_kr",
+      "label": "South Korea",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_kr/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_kr/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-04f7a805-15be-4885-9024-bb1d3fc8111d.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "b9a70d2f4bd5ae530635a4a1aa76211ca91b7f8ecf4db3091321b1ccfe1e5299",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-08.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_kr",
+        "path": "art_packs/pending/onboarding/country_kr/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_ch",
+      "label": "Switzerland",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_ch/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_ch/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-2002fbee-d49d-4ea3-971f-a88c10c96e23.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "e92ef6ce8a008f6e58263faed4bd09be7900af62b8ece974b7ed85b47d35a396",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-08.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_ch",
+        "path": "art_packs/pending/onboarding/country_ch/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_in",
+      "label": "India",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_in/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_in/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-80c4ad0f-905e-4d06-bdf5-f01ab98496b2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "d2f093a2c5d6111082d91aa46cd21ad5973d6473c889b9360606c553fd555b7f",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-09.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_in",
+        "path": "art_packs/pending/onboarding/country_in/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_cn",
+      "label": "China",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_cn/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_cn/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-378abf55-a444-46ee-8e30-2f1e11ebdc9f.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "b3f46ce98912697d6cfc1fdae653169b70121e573709132df368b40f1572acce",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-09.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_cn",
+        "path": "art_packs/pending/onboarding/country_cn/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_br",
+      "label": "Brazil",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_br/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_br/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-521dd7be-c022-43f0-8d4b-39db399883e2.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "aa93147d2a8c6bccf6b0d1999cf2b802f9b78aaf014fff942981a39007091e9a",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-09.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_br",
+        "path": "art_packs/pending/onboarding/country_br/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "country_za",
+      "label": "South Africa",
+      "kind": "country_stage",
+      "reference": "art_packs/originals/country_za/common/countdown_postcard.png",
+      "target": "art_packs/pending/onboarding/country_za/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-e4f5a3a8-0702-4feb-8aed-21c83de165f3.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "3984ab752b29d4a524441d0e026820d31fddbf43dd2dfe383c029160b3c3b727",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-09.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "country_za",
+        "path": "art_packs/pending/onboarding/country_za/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    },
+    {
+      "id": "city_jp_kyoto",
+      "label": "Kyoto",
+      "kind": "prop_removal",
+      "reference": "assets/onboarding/kyoto-stage-v1.png",
+      "target": "art_packs/pending/onboarding/city_jp_kyoto/onboarding_stage_v1.png",
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-a41e25cc-d51b-45c0-8c9f-cf59cc250e54.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "sha256": "25754fa8c537360b3c8b7fe61d831818fc8692a19605d4c40dbeff71c8e68b3b",
+      "promptLog": "docs/mockups/onboarding-art-requests-2026-10-09/requests-03.json",
+      "ownerApproval": "pending",
+      "nativeIntegrated": false,
+      "animationGenerated": false,
+      "qa": {
+        "id": "city_jp_kyoto",
+        "path": "art_packs/pending/onboarding/city_jp_kyoto/onboarding_stage_v1.png",
+        "actualDimensions": [
+          851,
+          1848
+        ],
+        "requestedDimensions": [
+          851,
+          1848
+        ],
+        "dimensionsMatchRequest": true,
+        "sourceCopyHashMatches": true,
+        "productionStatus": "owner_review_then_native_overlay_checks"
+      }
+    }
+  ],
+  "generationComplete": true,
+  "generatedCount": 31,
+  "qaPath": "docs/mockups/onboarding-art-requests-2026-10-09/QA.json",
+  "reviewGalleryPath": "docs/mockups/onboarding-art-requests-2026-10-09/index.html"
+}

@@ -1,0 +1,5 @@
+{
+  "priority": 500,
+  "selectors": {"countryCodes": ["US"], "cities": ["chicago"]},
+  "minAppBuild": 1
+}

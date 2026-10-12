@@ -1,0 +1,110 @@
+<section class="tool-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Travary</a><span>›</span>Itinerary template</p>
+    <p class="tag-label">Free printable</p>
+    <h1>Holiday itinerary template</h1>
+    <p class="lede">A free, printable itinerary template, one page per trip, with a section for every day. Fill it in here, then print it or save it as a PDF. It keeps what you type in this browser, so you can come back to it.</p>
+  </div>
+</section>
+
+<div class="wrap tool" id="tpl">
+  <form class="tool-form paper noprint" id="tpl-form" autocomplete="off">
+    <div class="field">
+      <label for="tpl-name">Trip name</label>
+      <input id="tpl-name" type="text" maxlength="60" placeholder="Portugal, summer 2027">
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="tpl-start">First day</label><input id="tpl-start" type="date"></div>
+      <div class="field"><label for="tpl-end">Last day</label><input id="tpl-end" type="date"></div>
+    </div>
+    <div class="field">
+      <label for="tpl-who">Who's going</label>
+      <input id="tpl-who" type="text" maxlength="80" placeholder="Sam, Alex, Mia (8), Leo (5)">
+    </div>
+    <div class="field">
+      <label for="tpl-stay">Where we're staying</label>
+      <textarea id="tpl-stay" rows="2" maxlength="300" placeholder="Casa Azul, Rua das Flores 12, Lisbon · check in 3pm · ref CA-55821"></textarea>
+    </div>
+    <div class="field">
+      <label for="tpl-notes">Key numbers and notes</label>
+      <textarea id="tpl-notes" rows="3" maxlength="500" placeholder="Insurance 24h line · hire car desk · emergency number 112"></textarea>
+    </div>
+    <div class="tool-actions">
+      <button class="btn" type="button" id="tpl-print">Print or save as PDF</button>
+      <button class="btn ghost" type="button" id="tpl-blank">Blank 7-day template</button>
+    </div>
+    <p class="tool-msg" id="tpl-msg" role="status">Pick your dates and a day appears for each one.</p>
+  </form>
+
+  <div class="tpl-sheet">
+    <header class="tpl-head paper">
+      <p class="eyebrow">Holiday itinerary</p>
+      <h2 id="tpl-title">Your trip</h2>
+      <p id="tpl-sub">Add your dates</p>
+      <dl class="tpl-facts"><div><dt>Staying</dt><dd id="tpl-stay-out">—</dd></div><div><dt>Notes</dt><dd id="tpl-notes-out">—</dd></div></dl>
+    </header>
+    <div class="tpl-days" id="tpl-days"></div>
+  </div>
+</div>
+
+<section class="tool-content noprint">
+  <div class="wrap">
+    <div class="prose">
+      <div class="answer"><p class="eyebrow">The short answer</p><p>A good holiday itinerary template has one section per day, and in each day the timed things in order: what, when, where and the booking reference. Add where you're staying and the key phone numbers at the top, and leave space. Fill in the fixed bookings first, then the plans around them.</p></div>
+
+      <h2>How to fill in this itinerary template</h2>
+      <ol class="steps">
+        <li><strong>Set the dates first.</strong><p>Enter the first and last day. The template makes a section for each day, labelled with the weekday, because "Tuesday" is how you'll think about it on the trip.</p></li>
+        <li><strong>Put in everything with a fixed time.</strong><p>Flights, trains, check-in, tickets with an entry slot, restaurant tables. Use the time printed on the ticket, which is the local time where it happens.</p></li>
+        <li><strong>Add the references.</strong><p>The booking reference or confirmation number goes in the third column. At a desk, that's the thing they ask for.</p></li>
+        <li><strong>Then the loose plans.</strong><p>A morning at the beach, the market, a walk. Write "morning" or "afternoon" rather than a time: plans without a ticket should stay flexible.</p></li>
+        <li><strong>Leave gaps.</strong><p>If a day already has three timed things, it's full. A free afternoon is a plan too, and it's what rescues the day when a train is late.</p></li>
+        <li><strong>Print one, share one.</strong><p>Print a copy for the folder and save a PDF to your phone. Send the PDF to anyone at home who should know where you are.</p></li>
+      </ol>
+
+      <h2>What to include in a holiday itinerary</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Section</th><th>What goes in it</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Trip details</strong></td><td>Dates, who's going, where you're staying with the address and check-in time</td><td>Taxi drivers, border forms and hosts all ask for the address</td></tr>
+          <tr><td><strong>Key numbers</strong></td><td>Insurance helpline, hire car desk, the local emergency number, your accommodation</td><td>You'll need them exactly when your phone battery is low</td></tr>
+          <tr><td><strong>Each day</strong></td><td>Times, what, where, booking reference</td><td>One glance answers "where do we need to be next?"</td></tr>
+          <tr><td><strong>Travel days</strong></td><td>Departure and arrival times, terminal, bags, transfer to the hotel</td><td>The day most likely to go wrong deserves the most detail</td></tr>
+        </tbody>
+      </table></div>
+      <p>For the step-by-step version, with how much to plan per day and how to handle time zones, see <a href="/guides/how-to-make-a-travel-itinerary">how to make a travel itinerary</a>.</p>
+
+      <h2>An example day</h2>
+      <p>Here's a filled-in travel day for a family flying to Lisbon, to show the level of detail that helps on the day:</p>
+      <div class="day">
+        <div class="day-head"><span class="day-num">Day<b>1</b></span><div><h3>Saturday · Fly to Lisbon</h3><p>Travel day, keep it simple</p></div></div>
+        <ol class="rail">
+          <li class="kind-transport"><span class="time">7:15<small>am</small></span><span class="pin"></span><div class="card"><strong>Taxi to the airport</strong><p>Booked, ref TX-4410. Passports in the front pocket of the blue bag.</p></div></li>
+          <li class="kind-flight"><span class="time">10:40<small>am</small></span><span class="pin"></span><div class="card"><strong>Flight to Lisbon</strong><p>Terminal 2, two checked bags. Lands 1:20pm local time.</p></div></li>
+          <li class="kind-stay"><span class="time">3:00<small>pm</small></span><span class="pin"></span><div class="card"><strong>Check in at the apartment</strong><p>Key box code arrives by text on the morning. Ref CA-55821.</p></div></li>
+          <li class="kind-rest"><span class="time">Eve</span><span class="pin"></span><div class="card"><strong>Supper near the flat</strong><p>Nothing booked. Early night.</p></div></li>
+        </ol>
+      </div>
+
+      <h2>Paper, PDF or app?</h2>
+      <p>A printed itinerary never runs out of battery and is easy to hand to a grandparent. A PDF on your phone is easy to share. The weak point of both is that they're out of date the moment a booking changes, and they don't hold the tickets themselves.</p>
+      <p>That's the part an itinerary app handles better: it keeps the plan and the tickets together, updates when something changes, and shows the same thing to everyone on the trip.</p>
+
+      [[appbox|Travary builds this itinerary for you. Add each booking once and it lands on the right day in the right order, with its ticket on the row. Each morning opens on that day's plan, offline. When a time changes, there's nothing to reprint.|folioOpen|Skip the retyping]]
+
+      <section class="faq-block" aria-labelledby="faq"><h2 id="faq">Questions people ask</h2><div class="faq">{{faq}}</div></section>
+    </div>
+  </div>
+</section>
+{{band}}
+---faq---
+Q: Is this itinerary template free?
+A: Yes, completely. Fill it in on this page and print it or save it as a PDF. There's nothing to sign up for, and what you type stays in your browser.
+Q: How do I save my itinerary as a PDF?
+A: Tap "Print or save as PDF". On a computer, choose "Save as PDF" as the printer. On an iPhone, pinch out on the print preview to open the PDF, then share or save it. On Android, choose "Save as PDF" as the printer.
+Q: What should a travel itinerary include?
+A: The dates, who's going, where you're staying with the address, key phone numbers, and for each day the timed things in order with their booking references. Travel days need the most detail: terminals, bags and how you get from the airport to the hotel.
+Q: Should I use local time in my itinerary?
+A: Yes. Write every time as it's printed on the ticket, which is the local time where it happens. A flight that leaves at 10:40 in London and lands at 13:20 in Lisbon is written exactly like that.
+Q: Can I use this as a family holiday itinerary template?
+A: Yes. Add everyone in "Who's going", put the children's ages next to their names if it helps you plan, and print a copy for each adult. The family holiday checklist on this site covers the rest.

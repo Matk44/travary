@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-06",
+  "generator": "built-in imagegen",
+  "approvalReference": "docs/mockups/onboarding-pass-desk-v2/approved-reference.png",
+  "ownerDirection": "match approved full composition; prices/pass names native and remotely configurable; Holiday Pass 14.99 USD default",
+  "promptLog": "docs/mockups/onboarding-pass-desk-v2/PROMPTS.md",
+  "assets": [
+    {
+      "file": "docs/mockups/onboarding-pass-desk-v2/pass-desk-art-v2.png",
+      "originalPath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-f9f836c6-3a2e-4144-8bcb-a0aa2ee28223.png",
+      "runtimePath": "assets/onboarding/pass-desk-art-v2.png",
+      "role": "text_free_approved_atlas",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGB",
+      "sha256": "09935c9bb4ebb226aef6821eabbd091e6c342d4562eb9584815c15f64875eeba",
+      "copiedUnchanged": true
+    },
+    {
+      "file": "docs/mockups/onboarding-pass-desk-v2/pass-desk-foreground-v2.png",
+      "originalPath": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-773b9d90-edf1-42e0-ad64-ae77ddde159d.png",
+      "runtimePath": "assets/onboarding/pass-desk-foreground-v2.png",
+      "role": "shared_country_foreground",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "sha256": "72db41c5293b782d4625417ca843c7531405a86a347503340bb1c361b2a3a74a",
+      "copiedUnchanged": true,
+      "alphaBounds": [
+        0,
+        37,
+        851,
+        1774
+      ]
+    }
+  ],
+  "videoGenerated": false,
+  "runtimeExtraction": "Flutter clips atlas regions; originals are unchanged",
+  "geographicScope": "atlas hero Bali only; lower paper/tickets/button and foreground reusable across countries",
+  "verification": {
+    "fullFlutterSuitePassed": 734,
+    "finalOnboardingWidgetTestsPassed": 19,
+    "staticAnalysis": "clean",
+    "iosBuild": "success after freeing Travary Android intermediate cache",
+    "nativeDevice": "iPhone 17 Pro / iOS 26.1",
+    "nativeEvidence": [
+      "native-holiday-pass-v2.png",
+      "native-annual-pass-v2.png",
+      "native-back-preserves-booking-v2.png",
+      "native-free-holiday-v2.png"
+    ],
+    "liveRevenueCatVerified": false,
+    "productionBillingVerified": false,
+    "simulatorPointerScrollVerified": false,
+    "widgetScrollAndLargeTypeVerified": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "common": "IDENTITY: exactly the supplied Travi: a coral ribbed modern hard-shell spinner suitcase with navy zipper band, trim and corner guards, brass telescopic rails with a navy grip, a navy top carry handle, his own small cream luggage tag with a navy palm hanging from the handle, big friendly cartoon eyes and brows, and exactly TWO folded-paper arms with paper hands. Tactile handmade cut-paper craft, warm soft studio light. No extra limbs, no other characters, no melting or changing suitcase shape.\n\nSET AND CAMERA: a perfectly flat, evenly lit chroma-green background (#00B140) that stays exactly the same in every frame: no floor, wall, ledge, horizon, shadow, reflection, light change, vignette, texture or scenery ever appears. LOCKED frontal camera: no zoom, pan, cut, reframe or shake. Things he holds that could carry writing stay completely blank. No text, letters, numbers, logos, UI or watermark. Silent, no audio.\n\nMOTION: smooth, continuous, springy movement at the full frame rate: every frame moves a little, never held or repeated frames, no stutter, no sudden jumps between poses.",
+  "peek": "PEEK: the BOTTOM EDGE of the frame is an invisible wall Travi hides behind: it always cuts straight across his body, his wheels and lower body are never seen, and he rises and sinks only straight up and down behind it, never sliding sideways.",
+  "shots": {
+    "wave-up": {
+      "format": "peek",
+      "from": "peek-empty",
+      "to": "peek-wave",
+      "seed": 520102,
+      "seconds": 4,
+      "prompt": "ONE continuous four-second shot from the supplied first frame (plain green, nobody there) to the supplied last frame (Travi peeking up from behind the bottom edge, one paper hand raised in a cheerful wave, the other resting on the edge).\n0-0.2s: plain green.\n0.2-0.7s: the top of his handle, then his face, bob up from below the bottom edge, quick and springy, overshooting a touch and settling; one paper hand comes up and rests on the edge.\n0.7-1.3s: his other paper hand lifts and gives one cheerful wave at the viewer with an open happy smile, ending raised exactly as in the last frame.\nThen hold the EXACT supplied last frame perfectly still to the end of the shot."
+    },
+    "cheer-up": {
+      "format": "peek",
+      "from": "peek-empty",
+      "to": "peek-cheer",
+      "seed": 520111,
+      "seconds": 4,
+      "prompt": "ONE continuous four-second shot from the supplied first frame (plain green, nobody there) to the supplied last frame (Travi up from behind the bottom edge, both arms flung high in delight, eyes squeezed shut in a huge grin).\n0-0.2s: plain green.\n0.2-0.9s: he springs up from below the bottom edge with a little hop and throws both paper arms up high, squeezing his eyes shut in a huge grin, overshooting a touch and settling.\nThen hold the EXACT supplied last frame perfectly still to the end of the shot."
+    },
+    "packing-up": {
+      "format": "peek",
+      "from": "peek-empty",
+      "to": "peek-packing",
+      "seed": 520121,
+      "seconds": 4,
+      "prompt": "ONE continuous four-second shot from the supplied first frame (plain green, nobody there) to the supplied last frame (Travi up from behind the bottom edge, holding up a folded coral-striped swimsuit in one hand and a small cream sunhat in the other).\n0-0.2s: plain green.\n0.2-0.9s: he bobs up from below the bottom edge, busy and pleased, bringing the swimsuit and the sunhat up with him and lifting them into view to show the viewer, settling.\nThen hold the EXACT supplied last frame perfectly still to the end of the shot."
+    },
+    "ready-up": {
+      "format": "peek",
+      "from": "peek-empty",
+      "to": "peek-ready",
+      "seed": 520131,
+      "seconds": 4,
+      "prompt": "ONE continuous four-second shot from the supplied first frame (plain green, nobody there) to the supplied last frame (Travi up from behind the bottom edge in round navy sunglasses and a cream sunhat, giving a big thumbs-up, the other hand on the edge).\n0-0.2s: plain green.\n0.2-0.9s: he pops up from below the bottom edge already wearing the sunglasses and the sunhat, one hand landing on the edge and the other swinging into a big thumbs-up with a grin, settling.\nThen hold the EXACT supplied last frame perfectly still to the end of the shot."
+    },
+    "today-up": {
+      "format": "peek",
+      "from": "peek-empty",
+      "to": "peek-today",
+      "seed": 520141,
+      "seconds": 4,
+      "prompt": "ONE continuous four-second shot from the supplied first frame (plain green, nobody there) to the supplied last frame (Travi up from behind the bottom edge in round navy sunglasses, holding up a perfectly blank cream boarding pass with both hands, mouth open in excitement).\n0-0.2s: plain green.\n0.2-0.9s: he jumps up from below the bottom edge already wearing the sunglasses, bringing the blank boarding pass up with both hands and thrusting it toward the viewer, mouth open in excitement, settling. The pass stays completely blank.\nThen hold the EXACT supplied last frame perfectly still to the end of the shot."
+    },
+    "lounge-idle": {
+      "from": "lounge",
+      "to": "lounge",
+      "seed": 520151,
+      "seconds": 4,
+      "loop": true,
+      "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame: Travi lying back in the striped paper deckchair in round navy sunglasses, one hand behind his head, the other holding a coconut drink with a paper umbrella. He takes one slow, contented sip at about 1s, gives a lazy happy sigh, and a tiny wiggle of his wheels on the footrest at about 2.5s. By 3.5s everything is back exactly in the starting position and holds there to the end. The deckchair never moves; nothing else appears; the full figure and chair stay in frame.",
+      "palindrome": 1.42
+    }
+  },
+  "reversed": {
+    "wave-down": "wave-up",
+    "cheer-down": "cheer-up",
+    "packing-down": "packing-up",
+    "ready-down": "ready-up",
+    "today-down": "today-up"
+  }
+}

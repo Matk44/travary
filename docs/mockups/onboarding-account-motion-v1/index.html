@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Travary — Travi account animation review</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap');
+:root{color-scheme:light;--navy:#102d45;--paper:#fff1da;--coral:#ff805c}
+*{box-sizing:border-box}body{margin:0;background:#e8e8e4;color:var(--navy);font:14px/1.5 Inter,system-ui,sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ac541e;outline-offset:3px}[hidden]{display:none!important}
+main{display:flex;align-items:center;justify-content:center;gap:48px;padding:32px 20px;min-height:100vh}.notes{max-width:300px}.notes h1{font:700 34px/1.1 'Source Serif 4',Georgia,serif;margin:0 0 18px}.notes p{margin:0 0 18px}.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase}.tools{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.tool{border:1px solid #b3b9b6;border-radius:8px;padding:9px 12px;background:#f6f5f0;color:var(--navy)}.notes label{display:flex;gap:8px;align-items:center}.notes small{display:block;color:#53606a;margin-top:16px}.phone{align-self:flex-start;width:min(430px,100%);background:var(--paper);border-radius:26px;overflow:hidden;box-shadow:0 20px 60px #0b263525;flex-shrink:0;container-type:inline-size}.stage{position:relative;aspect-ratio:9/16;isolation:isolate}.plate,.film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}.film{opacity:0;visibility:hidden}.film.active{opacity:1;visibility:visible;transition:opacity .18s ease-out}.film.ending{opacity:0;visibility:visible;transition:opacity .6s cubic-bezier(.4,0,.2,1)}.withdrawal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(22% 4% 6% 7%);transform-origin:0 100%;pointer-events:none;z-index:2;animation:withdraw .65s cubic-bezier(.2,.7,.2,1) both}@keyframes withdraw{0%{opacity:1;transform:none}75%{opacity:1;transform:translate(3%,3%) scale(.32)}100%{opacity:0;transform:translate(3%,3%) scale(.32)}}.skip-pass{position:absolute;top:2%;right:3%;border:0;border-radius:18px;min-height:36px;padding:6px 10px;background:#043b4d99;color:var(--paper);font:500 11px/1.2 Inter,system-ui,sans-serif}.wordmark{position:absolute;top:3.3%;left:0;right:0;margin:0;text-align:center;color:var(--paper);font:700 6cqw/1 'Source Serif 4',Georgia,serif}.heading{position:absolute;top:9%;left:7%;right:7%;text-align:center;color:var(--paper)}h2{margin:0;font:700 10.7cqw/.99 'Source Serif 4',Georgia,serif;letter-spacing:-.035em}h2 span{display:block}h2 em{display:block;color:var(--coral);font-style:normal}.heading p{margin:3cqw 0 0;font:600 4.1cqw/1.2 'Source Serif 4',Georgia,serif}.tag{display:inline-block;margin-top:4cqw;padding:1.3cqw 3cqw;background:var(--paper);color:var(--navy);border-radius:4px;font:500 max(11px,3.15cqw)/1.4 Inter,system-ui,sans-serif}.saved-date{display:block;width:fit-content;margin:2cqw auto 0;padding:1cqw 2cqw;background:#083b4d99;border-radius:4px;font:400 max(11px,3.2cqw)/1.3 Inter,system-ui,sans-serif}
+.folio-copy{position:absolute;top:33%;left:14%;right:14%;color:var(--navy)}.folio-copy h2{font-size:9.5cqw;text-align:left}.folio-copy h2 em{color:#bc512f}.folio-copy>p{font-size:max(12px,3.6cqw);margin:3cqw 0 6cqw}.form-label{display:block;font-size:max(12px,3.2cqw);margin-bottom:1.5cqw}.field{display:block;width:100%;min-width:0;border:1px solid #c5b590;border-radius:5px;padding:2.2cqw;background:#fff8ed;color:var(--navy);font:600 max(16px,4.8cqw)/1.3 'Source Serif 4',Georgia,serif}.dates{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3cqw;margin-top:4cqw}.dates .field{font:400 max(13px,3.6cqw)/1.3 Inter,system-ui,sans-serif;padding:2cqw 1.6cqw}.error{color:#963d1d;font-size:12px}.review-submit{position:absolute;left:14%;right:14%;bottom:11%}.ticket-button{border:0;background:var(--navy);color:var(--paper);padding:3cqw 2cqw;width:100%;font:700 max(18px,6cqw)/1.1 'Source Serif 4',Georgia,serif;clip-path:polygon(4% 0,96% 0,100% 17%,100% 39%,98% 50%,100% 61%,100% 83%,96% 100%,4% 100%,0 83%,0 61%,2% 50%,0 39%,0 17%);min-height:44px}.proof-actions{position:absolute;bottom:5%;left:7%;right:7%;text-align:center}.link{border:0;background:none;color:var(--navy);font:600 max(14px,4.1cqw)/1.3 'Source Serif 4',Georgia,serif;text-decoration:underline;padding:12px 6px;min-height:44px}.proof-card{position:absolute;left:20%;top:52.3%;width:35%;height:14.5%;transform:rotate(-5deg) skewX(3deg);transform-origin:50% 50%;color:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2cqw;padding:2cqw;pointer-events:none}.proof-card .kind{font-size:max(11px,3cqw);letter-spacing:.09em}.proof-card strong{font:700 max(15px,4.7cqw)/1.05 'Source Serif 4',Georgia,serif;overflow-wrap:anywhere}.proof-card .range{font:600 max(12px,3.35cqw)/1.2 'Source Serif 4',Georgia,serif}.back{position:absolute;top:3%;left:4%;width:44px;height:44px;background:#043b4d70;color:var(--paper);border:0;border-radius:50%;font-size:30px}
+.offers{position:absolute;inset:0;pointer-events:none}.offer{position:absolute;left:6.8%;right:6.8%;height:9.8%;padding:1.3cqw 17% 1.2cqw 26%;text-align:left;border:0;color:var(--navy);background:none;pointer-events:auto;display:flex;flex-direction:column;justify-content:center;gap:.2cqw}.offer[data-offer="holiday"]{top:65.2%}.offer[data-offer="annual"]{top:76.2%}.offer strong{font:700 max(12px,4.2cqw)/1 'Source Serif 4',Georgia,serif}.offer .scope,.offer .terms{font:400 max(10px,2.75cqw)/1.15 'Source Serif 4',Georgia,serif}.offer .price{font:700 max(17px,5.6cqw)/1.1 'Source Serif 4',Georgia,serif}.offer .price small{font-size:65%}.selection{position:absolute;right:7%;top:27%;height:6.8cqw;width:6.8cqw;border:2px solid var(--navy);border-radius:50%;display:grid;place-items:center;font-size:5cqw;line-height:1;color:var(--navy)}.offer[aria-pressed="true"] .selection{background:#ed6b40;border-color:#ed6b40;color:var(--paper)}.pass-buy{position:absolute;left:7%;right:7%;top:87.6%;height:6.7%;pointer-events:auto;background:none;color:var(--paper);border:0;font:700 5.8cqw/1 'Source Serif 4',Georgia,serif}.footer{padding:0 24px 18px;text-align:center;color:var(--navy)}.footer p{margin:0 0 8px;font:600 max(11px,3.1cqw)/1.3 'Source Serif 4',Georgia,serif}.footer .link{display:block;margin:auto}.footer small{display:block;font-size:11px}.plan{position:absolute;inset:0;background:var(--paper);padding:16% 10% 8%;color:var(--navy)}.plan h2{font-size:10cqw}.plan article{margin:9cqw 0;padding:6cqw 4cqw;background:#fff9ee;border-top:2px solid #d0b587;border-bottom:2px solid #d0b587}.plan h3{font:700 7cqw/1.2 'Source Serif 4',Georgia,serif;margin:3cqw 0}.plan p{margin:3cqw 0}.plan-day{font-weight:600}.enter{animation:words .5s cubic-bezier(.2,.7,.2,1) both}.enter em{animation:words .5s .08s cubic-bezier(.2,.7,.2,1) both}.offers.enter{animation:ticket .6s .12s cubic-bezier(.4,0,.2,1) both}@keyframes words{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes ticket{from{opacity:0}to{opacity:1}}
+dialog{max-width:360px;border:0;border-radius:12px;background:var(--paper);color:var(--navy);padding:28px}dialog::backdrop{background:#09253688}dialog h3{font:700 24px/1.2 'Source Serif 4',Georgia,serif}
+@container(max-width:350px){.stage[data-scene="passes"]{aspect-ratio:auto;height:calc(177.778cqw + 100px)}.stage[data-scene="passes"] .plate,.stage[data-scene="passes"] .film{height:177.778cqw}.stage[data-scene="passes"] .heading{top:16cqw}.stage[data-scene="passes"] .wordmark{top:6cqw}.offers{top:115.55cqw;left:6.8%;right:6.8%;bottom:auto;background:var(--paper);display:grid;gap:8px}.offer{position:relative;left:auto;right:auto;top:auto!important;width:100%;height:96px;padding:8px 15% 8px 29%!important;gap:2px!important;background-image:url("../onboarding-booking-handoff-v1/pass-text-free-v1.png");background-size:115.74% 1020.4%}.offer[data-offer="holiday"]{background-position:50% 72.28%}.offer[data-offer="annual"]{background-position:50% 84.48%}.offer strong{font-size:13px!important}.offer .price{font-size:19px}.offer .scope,.offer .terms{font-size:11px!important;line-height:1.2}.selection{top:35%;right:7%}.pass-buy{position:relative;top:auto;left:auto;right:auto;width:100%;height:44px;background:var(--navy);font-size:18px;clip-path:polygon(4% 0,96% 0,100% 17%,100% 39%,98% 50%,100% 61%,100% 83%,96% 100%,4% 100%,0 83%,0 61%,2% 50%,0 39%,0 17%)}.folio-copy{top:30%}.folio-copy>p{margin:2cqw 0 3cqw}.dates{grid-template-columns:1fr;gap:1cqw;margin-top:2cqw}.dates .field{min-height:32px}.form-label{margin-bottom:1cqw}.review-submit{bottom:9%}.offer .scope,.offer .terms{font-size:10px}.offer strong{font-size:12px}.offer{padding-top:0;padding-bottom:0;gap:0}}
+@media(max-width:780px){main{flex-direction:column;gap:24px;padding:20px 12px}.notes{max-width:430px;width:100%;order:2}.phone{max-width:430px}.notes h1{font-size:28px}}@media(prefers-reduced-motion:reduce){.enter,.enter em,.offers.enter{animation:none}.film.active,.film.ending{transition:none}}
+</style>
+<link rel="stylesheet" href="account-motion.css"></head>
+<body>
+<main>
+<section class="phone" aria-label="Travary onboarding motion study">
+ <div class="stage" data-scene="review">
+  <img class="plate" src="../onboarding-booking-handoff-v1/folio-text-free-v1.png" alt="" aria-hidden="true">
+  <video class="film" muted playsinline preload="auto" aria-hidden="true"></video>
+  <img class="withdrawal" src="../onboarding-booking-handoff-v1/folio-text-free-v1.png" alt="" aria-hidden="true" hidden>
+  <p class="wordmark">Travary</p>
+  <div class="folio-copy">
+   <h2>Check your<em>booking.</em></h2><p>Check the details before adding it.</p>
+   <form id="booking-form">
+    <label class="form-label" for="hotel">Stay</label><input class="field" id="hotel" name="title" value="Lagoon Retreat" maxlength="36" required>
+    <div class="dates"><label class="form-label">Check-in<input class="field" type="date" name="start" value="2026-11-08" required></label><label class="form-label">Check-out<input class="field" type="date" name="end" value="2026-11-09" required></label></div>
+    <p class="error" role="alert" hidden></p>
+   </form>
+  </div>
+  <div class="review-submit"><button class="ticket-button" form="booking-form" type="submit">Add to my holiday</button></div>
+  <header class="heading" hidden><h2><span></span><em></em></h2><p class="subtitle"></p><div class="tag">Bali holiday · 8–15 Nov</div><span class="saved-date"></span></header>
+  <div class="proof-card" hidden><span class="kind">STAY</span><strong data-title></strong><span class="range" data-range></span></div>
+  <div class="proof-actions" hidden><button class="ticket-button" data-action="passes">Let’s sort the rest</button></div>
+  <div class="offers" hidden>
+   <button class="offer" data-offer="holiday" aria-pressed="true"><strong></strong><span class="scope"></span><span class="price"></span><span class="terms"></span><span class="selection" aria-hidden="true">✓</span></button>
+   <button class="offer" data-offer="annual" aria-pressed="false"><strong></strong><span class="scope"></span><span class="price"></span><span class="terms"></span><span class="selection" aria-hidden="true"></span></button>
+   <button class="pass-buy" data-action="buy">Get Holiday Pass</button>
+  </div>
+  <button class="back" data-action="back" aria-label="Back to saved booking" hidden>‹</button>
+  <button class="skip-pass" data-action="settle" hidden>Skip animation</button>
+  <section class="plan" hidden><h2>You’re off to<em>a good start.</em></h2><p>Bali holiday · 8–15 Nov</p><article><span class="plan-day"></span><h3 data-title></h3><p data-range></p></article><p>Your booking comes with you.</p><button class="link" data-action="back">Back to saved booking</button></section>
+ </div>
+ <div class="footer" hidden><p>Smart Import · Shared plans · Ticket backup</p><button class="link" data-action="free">Continue with free</button><button class="link" data-action="restore">Restore purchases</button><small>Motion study · example catalog · no charge</small></div>
+</section>
+<aside class="notes">
+ <p class="eyebrow">Approved account scene → motion review</p><h1>Your holiday.<br>Coming with you.</h1>
+ <p>Check and add the example booking. The folio withdraws and Travi straightens the card, then waits for you.</p>
+ <p>“Let’s sort the rest” lets Travi file the booking and offer sign-in. Try Apple, Google, the email-link example or guest continuation, then watch him present the passes.</p>
+ <div class="tools"><button class="tool" data-action="reset">Replay from booking</button><button class="tool" data-action="replay">Replay this reaction</button></div>
+ <label><input type="checkbox" id="still"> Use settled stills</label>
+ <p id="status" role="status" aria-live="polite">Check your example booking.</p>
+ <div class="account-tools"><label>Test sign-in result<select id="account-result"><option value="success">Success — simulated</option><option value="cancelled">Cancelled</option><option value="failure">Failure</option></select></label><button class="tool" id="replay-account">Replay account entrance</button></div><p class="account-legend">Animation preview only: no account is created, no email is sent and nothing is charged. Sign-in placement and email authentication are not yet wired in Flutter.</p>
+</aside>
+</main>
+<dialog><h3>Preview only</h3><p>No purchase or restore runs in this motion study.</p><button class="tool" data-action="close">Close</button></dialog>
+<script src="account-motion.js"></script><script>
+(() => {
+ const q=s=>document.querySelector(s),qa=s=>document.querySelectorAll(s);
+ const stage=q('.stage'),film=q('.film'),plate=q('.plate'),heading=q('.heading'),status=q('#status'),still=q('#still');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ ['../onboarding-booking-handoff-v1/folio-text-free-v1.png','../onboarding-booking-handoff-v1/proof-text-free-v1.png','../onboarding-booking-handoff-v1/pass-text-free-v1.png'].forEach(src=>{const image=new Image();image.src=src;});
+ const catalog={holiday:{title:'Holiday Pass',scope:'This holiday',amount:14.99,suffix:'once',terms:'One payment. No renewal.'},annual:{title:'Annual Pass',scope:'Holidays through the year',amount:34.99,suffix:'/ year',terms:'Renews yearly. Cancel anytime.'}};
+ let scene='review',booking={title:'Lagoon Retreat',start:'2026-11-08',end:'2026-11-09'},selected='holiday',generation=0,activeShot=null,timeout,blendTimeout;
+ const date=(v,weekday=false)=>new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',...(weekday?{weekday:'short'}:{}),timeZone:'UTC'}).format(new Date(v+'T12:00:00Z'));
+ const cancel=()=>{
+   generation++;clearTimeout(timeout);clearTimeout(blendTimeout);film.pause();film.classList.remove('active','ending');
+   film.onended=null;film.onerror=null;film.ontimeupdate=null;q('.withdrawal').hidden=true;
+ };
+ function copy(){qa('[data-title]').forEach(e=>e.textContent=booking.title);qa('[data-range]').forEach(e=>e.textContent=date(booking.start)+' → '+date(booking.end));q('.plan-day').textContent=date(booking.start,true);q('.saved-date').textContent='Saved to '+date(booking.start,true);}
+ function selectOffer(role){selected=role;qa('[data-offer]').forEach(b=>{const data=catalog[b.dataset.offer],active=b.dataset.offer===role;b.setAttribute('aria-pressed',String(active));b.querySelector('strong').textContent=data.title.toUpperCase();b.querySelector('.scope').textContent=data.scope;b.querySelector('.price').replaceChildren(document.createTextNode(new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(data.amount)+' '));const suffix=document.createElement('small');suffix.textContent=data.suffix;b.querySelector('.price').append(suffix);b.querySelector('.terms').textContent=data.terms;b.querySelector('.selection').textContent=active?'✓':'';});q('.pass-buy').textContent='Get '+catalog[role].title;}
+ function enter(element){element.classList.remove('enter');if(!still.checked&&!reduced.matches){void element.offsetWidth;element.classList.add('enter');}}
+ function show(next,presenting=false){
+   cancel();scene=next;stage.dataset.scene=next;stage.classList.toggle('presenting',presenting);
+   // Keep the proof plate under the film until its final pose. Never flash the paywall ahead of the acting.
+   plate.src=next==='review'?'../onboarding-booking-handoff-v1/folio-text-free-v1.png':next==='passes'&&!presenting?'../onboarding-booking-handoff-v1/pass-text-free-v1.png':'../onboarding-booking-handoff-v1/proof-text-free-v1.png';
+   q('.folio-copy').hidden=next!=='review';q('.review-submit').hidden=next!=='review';heading.hidden=presenting||!['proof','passes'].includes(next);
+   q('.proof-actions').hidden=next!=='proof';q('.proof-card').hidden=next!=='proof';q('.offers').hidden=next!=='passes'||presenting;
+   q('.back').hidden=next!=='passes';q('.skip-pass').hidden=!presenting;q('.footer').hidden=next!=='passes';q('.plan').hidden=next!=='free';
+   enter(heading);q('.offers').classList.remove('enter');
+   q('.heading h2 span').textContent=next==='passes'?'Shall I help':'That’s one';q('.heading h2 em').textContent=next==='passes'?'with the rest?':'bit handled.';
+   q('.subtitle').textContent=next==='passes'?'Less typing. More holiday.':'';q('.subtitle').hidden=next!=='passes';q('.tag').hidden=next==='passes';q('.saved-date').hidden=next==='passes';
+   status.textContent={review:'Check your example booking.',proof:'One example booking saved. Choose what happens next.',passes:'Compare example passes, or continue with free.',free:'The same example booking stays in your free holiday.'}[next];copy();
+ }
+ function settleDesk(message='Travi has presented your passes. Choose a pass or continue with free.',allowBlend=true){
+   if(scene!=='passes')return;
+   const blend=allowBlend&&film.classList.contains('active')&&!still.checked&&!reduced.matches;
+   cancel();stage.classList.remove('presenting');plate.src='../onboarding-booking-handoff-v1/pass-text-free-v1.png';
+   // Crossfade the last full video frame to the exact approved plate before comparing live offer text.
+   if(blend){film.classList.add('ending');blendTimeout=setTimeout(()=>film.classList.remove('ending'),600);}
+   heading.hidden=false;q('.offers').hidden=false;q('.skip-pass').hidden=true;enter(heading);enter(q('.offers'));status.textContent=message;
+ }
+ function presentDesk(){
+   const animated=!still.checked&&!reduced.matches;show('passes',animated);activeShot='pass-presentation';
+   if(animated){status.textContent='Travi files your booking and presents the passes. You can skip the animation or continue with free.';play('pass-presentation');}
+   else settleDesk('Settled artwork. Choose a pass or continue with free.');
+ }
+ async function play(shot){
+   activeShot=shot;
+   if(still.checked||reduced.matches){if(scene==='passes')settleDesk();else status.textContent='Settled version · your saved example booking.';return;}
+   const guard=generation;film.src=shot==='pass-presentation'?'../onboarding-booking-handoff-v1/pass-presentation-smooth-v2.mp4':'../onboarding-booking-handoff-v1/'+shot+'-v1.mp4';film.load();q('.proof-card').hidden=shot!=='card-reaction';
+   film.onended=()=>{
+     if(guard!==generation)return;
+     if(scene==='passes'){settleDesk();return;}
+     clearTimeout(timeout);film.classList.remove('active');q('.proof-card').hidden=scene!=='proof';status.textContent='Travi has finished. Your saved booking stays here until you choose.';
+   };
+   film.onerror=()=>{
+     if(guard!==generation)return;
+     if(scene==='passes'){settleDesk('Video unavailable; the approved artwork and pass choices are ready.');return;}
+     clearTimeout(timeout);film.classList.remove('active');q('.proof-card').hidden=scene!=='proof';status.textContent='Video unavailable; settled artwork and all actions remain available.';
+   };
+   film.ontimeupdate=()=>{if(guard===generation&&scene==='proof'&&film.currentTime>=3.8)q('.proof-card').hidden=false;};
+   timeout=setTimeout(()=>{if(guard===generation&&film.readyState<2)film.onerror?.();},10000);
+   try{await film.play();if(guard!==generation)return;film.classList.add('active');}catch(error){if(guard===generation)film.onerror?.();}
+ }
+ q('#booking-form').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.currentTarget),title=String(data.get('title')).trim(),start=String(data.get('start')),end=String(data.get('end'));if(!title||end<start){q('.error').hidden=false;q('.error').textContent='Check the name and date order.';return;}q('.error').hidden=true;booking={title,start,end};show('proof');if(!still.checked&&!reduced.matches){const cover=q('.withdrawal');cover.hidden=false;cover.onanimationend=()=>cover.hidden=true;}status.textContent='Example save confirmed. Travi straightens your booking.';play('card-reaction');});
+ document.addEventListener('click',e=>{
+   const offer=e.target.closest('[data-offer]');if(offer){selectOffer(offer.dataset.offer);return;}
+   const b=e.target.closest('[data-action]');if(!b)return;
+   switch(b.dataset.action){
+     case 'passes':presentDesk();break;
+     case 'settle':settleDesk(undefined,false);q('[data-offer]').focus({preventScroll:true});break;
+     case 'free':if(scene==='passes'){show('free');activeShot=null;}break;
+     case 'back':show('proof');activeShot='card-reaction';break;
+     case 'reset':show('review');activeShot=null;break;
+     case 'replay':if(scene==='proof'){show('proof');play('card-reaction');}else if(scene==='passes')presentDesk();else status.textContent='Add the example booking to see the first reaction.';break;
+     case 'buy':case 'restore':q('dialog').showModal();break;
+     case 'close':q('dialog').close();break;
+   }
+ });
+ still.addEventListener('change',()=>{
+   if(still.checked){if(scene==='passes')settleDesk('Settled stills. All pass choices are ready.');else{cancel();q('.proof-card').hidden=scene!=='proof';status.textContent='Settled stills. All actions remain available.';}}
+   else if(scene==='passes'&&activeShot==='pass-presentation')presentDesk();else if(activeShot&&scene==='proof')play(activeShot);
+ });
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)film.pause();else if(film.classList.contains('active')&&!film.ended&&!still.checked&&!reduced.matches)film.play().catch(()=>film.onerror?.());});
+ reduced.addEventListener('change',()=>{if(reduced.matches){if(scene==='passes')settleDesk();else{cancel();q('.proof-card').hidden=scene!=='proof';}}});
+ const account=TravaryAccountMotion.create({stage,plate,status,still,reduced,
+ proofPlate:'../onboarding-booking-handoff-v1/proof-text-free-v1.png',
+ passPlate:'../onboarding-booking-handoff-v1/pass-text-free-v1.png',
+ onEnter:()=>{show('account');activeShot=null;q('.back').hidden=false;},
+ onPassBegin:()=>{q('.footer').hidden=false;},
+ onPass:()=>{show('passes');activeShot=null;settleDesk('Your example pass choices are ready.',false);},
+ outcome:()=>q('#account-result').value,
+});
+q('#replay-account').addEventListener('click',()=>account.enter());
+selectOffer('holiday');show('proof');play('card-reaction');
+})();
+</script>
+</body>
+</html>

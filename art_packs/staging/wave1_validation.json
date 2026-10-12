@@ -1,0 +1,240 @@
+{
+  "verified_assets": 18,
+  "checks": "PNG RGBA; exact template canvas and alpha; protected barcode, left paper, reservation middle, cord and circular grommet region pixels",
+  "assets": [
+    {
+      "place": "orlando",
+      "role": "featured_ticket",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "4af3f5d6618d8826e054fc40e93554d46f40415504f3831028c52bf301bf40f8",
+      "bytes": 2400242
+    },
+    {
+      "place": "orlando",
+      "role": "room_card",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "ceab9784d7aca72df13b0282982b38a9c6683f510670200c46d491a7c2a9d331",
+      "bytes": 2079352
+    },
+    {
+      "place": "orlando",
+      "role": "reservation_card",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "532b15d247a82201c39cd04b47185b9fdc1ac32a5b6af7debb44edb192cc6cfa",
+      "bytes": 2040078
+    },
+    {
+      "place": "florida",
+      "role": "featured_ticket",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "f89db723cbe3675a92216e11ece236efa71663dd082142c8032d809ceb635c39",
+      "bytes": 2452038
+    },
+    {
+      "place": "florida",
+      "role": "room_card",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "1d2484a3d54fa1a735c5fe23252467ce4f6845f396f6f188b875fd7da92710f1",
+      "bytes": 2056625
+    },
+    {
+      "place": "florida",
+      "role": "reservation_card",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "b784d99959b3eeb9535690d2b368ba876308658bcf152ecc597e8c20ba581a37",
+      "bytes": 2038775
+    },
+    {
+      "place": "new_york",
+      "role": "featured_ticket",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "398e49ae87ff7079b8bba3ddc8bc601673c15eaada246f1f719813056b1c7f76",
+      "bytes": 2445219
+    },
+    {
+      "place": "new_york",
+      "role": "room_card",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "7991fa06b03395b71c7303f36cb96f3e648b2da63181979eca8c0ed98df210aa",
+      "bytes": 2065311
+    },
+    {
+      "place": "new_york",
+      "role": "reservation_card",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "ce36b5dfe0ebe1807e05a7a7caf5cf354490ec1083d7d33ed5c513ddefe179a4",
+      "bytes": 2010512
+    },
+    {
+      "place": "las_vegas",
+      "role": "featured_ticket",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "d6c7fc7df503cfb4a3c9703449bc9c3283a904f80415f6543c0ca446855cf68e",
+      "bytes": 2487368
+    },
+    {
+      "place": "las_vegas",
+      "role": "room_card",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "43b7ddaaf19e956916f3ba8a2314ea9e7d7bfc35cafd6153501b57a7c57ecd39",
+      "bytes": 2026183
+    },
+    {
+      "place": "las_vegas",
+      "role": "reservation_card",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "990dcbfa42173ae99c25524bf3891346b6b24799bda1d8e253e199fb4f85f117",
+      "bytes": 2059199
+    },
+    {
+      "place": "california",
+      "role": "featured_ticket",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "b0720afbcab49b45cce55504ccc8a6765ad929d1ea4c2b130c9ea9065fdfebfb",
+      "bytes": 2457572
+    },
+    {
+      "place": "california",
+      "role": "room_card",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "16e9f37ad237feb863dbcc5d428c607cb0e25ec2513e93ecdeb44e85f1be4e59",
+      "bytes": 2051699
+    },
+    {
+      "place": "california",
+      "role": "reservation_card",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "1ff050634d4a5232f835465f85bcc812085ac03048487e4835b10b28c8aa68d7",
+      "bytes": 2015809
+    },
+    {
+      "place": "hawaii",
+      "role": "featured_ticket",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "712722b2faa078b50e0a89f4ae8611351c6d226926a02367ff76c281e5671e72",
+      "bytes": 2446410
+    },
+    {
+      "place": "hawaii",
+      "role": "room_card",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "666d75bf6176f896a1356b6543727d572b0827aa8caad183d06c1d6bffabd36b",
+      "bytes": 2112471
+    },
+    {
+      "place": "hawaii",
+      "role": "reservation_card",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "5a6d4240296e780435ba08a856811a8c98210f9fda9764544d8870431a228daa",
+      "bytes": 2062171
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": 80,
-  "generatedAt": "2026-10-05T08:06:11.393864Z",
+  "catalogVersion": 94,
+  "generatedAt": "2026-10-11T10:11:28.569370Z",
   "packs": [
     {
       "id": "city_fr_paris",
@@ -56,8 +56,152 @@
       "minAppBuild": 1
     },
     {
-      "id": "city_us_orlando",
+      "id": "city_us_boston",
       "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "boston"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_boston/1/pack.zip",
+        "sha256": "4777d7079b6c876d5c59b8d846747be6c1ddeb2c2ee4ff54c5cb35ed0bec7ce1",
+        "compressedBytes": 2202459,
+        "uncompressedBytes": 2201701,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_chicago",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "chicago"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_chicago/1/pack.zip",
+        "sha256": "cefd8b488481d1f1cfa0af9d17e406f96b16e4afa12aea3f275ea8b8f97af868",
+        "compressedBytes": 2223756,
+        "uncompressedBytes": 2222998,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_las_vegas",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "las_vegas"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_las_vegas/1/pack.zip",
+        "sha256": "a7a47b30b8b40bc14c9e874091a6d882806ebb56947b98fe3b13bf1de9c89739",
+        "compressedBytes": 2213080,
+        "uncompressedBytes": 2212322,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_nashville",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "nashville"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_nashville/1/pack.zip",
+        "sha256": "84b88f188a38c88ed8d7b276e7aef23a843c013a95892521951892b0fcd7a7e8",
+        "compressedBytes": 2206010,
+        "uncompressedBytes": 2205252,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_new_orleans",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "new_orleans"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_new_orleans/1/pack.zip",
+        "sha256": "f663898bd4180f06df0a1daa276afe40a1fde2f10564dd299e770adec59a4632",
+        "compressedBytes": 2224380,
+        "uncompressedBytes": 2223622,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_new_york",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "new_york"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_new_york/1/pack.zip",
+        "sha256": "7b281448245cf2d5d5ba684fc3b4dca2568ec7295f101115561c357dba9da084",
+        "compressedBytes": 2178351,
+        "uncompressedBytes": 2177593,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_orlando",
+      "version": 2,
       "priority": 500,
       "selectors": {
         "countryCodes": [
@@ -71,11 +215,59 @@
         "subjects": []
       },
       "archive": {
-        "storagePath": "art-packs/city_us_orlando/1/pack.zip",
-        "sha256": "59f41f14dd8fb2bd91ab51819e39114117fff3f8bcabc3a88eb41c97e0c7e602",
-        "compressedBytes": 2424399,
-        "uncompressedBytes": 2423487,
+        "storagePath": "art-packs/city_us_orlando/2/pack.zip",
+        "sha256": "64e2c9cdcffe09e48c7fa445954d370c50f3bd2e86a60b11e79e00e64699af05",
+        "compressedBytes": 2341725,
+        "uncompressedBytes": 2340813,
         "fileCount": 7
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_seattle",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "seattle"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_seattle/1/pack.zip",
+        "sha256": "c2bc7220b73db3fb5ee3a5258f87fc389cbac45d13cd90b847a304f6f3473a80",
+        "compressedBytes": 2161400,
+        "uncompressedBytes": 2160642,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "city_us_washington_dc",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [],
+        "cities": [
+          "washington_dc"
+        ],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/city_us_washington_dc/1/pack.zip",
+        "sha256": "fb697a4554be718fa7bbd8efd5b003f8539565434c9f9905e3edc8110f2133dd",
+        "compressedBytes": 2173570,
+        "uncompressedBytes": 2172812,
+        "fileCount": 6
       },
       "minAppBuild": 1
     },
@@ -678,6 +870,128 @@
         "compressedBytes": 2574565,
         "uncompressedBytes": 2573653,
         "fileCount": 7
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_us_alaska",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [
+          "alaska"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_us_alaska/1/pack.zip",
+        "sha256": "e77890c049928975b3d57fce1b6b37103d8367cf527b3514db396af8697d445a",
+        "compressedBytes": 2197479,
+        "uncompressedBytes": 2196721,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_us_arizona",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [
+          "arizona"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_us_arizona/1/pack.zip",
+        "sha256": "23729ec7a3cfd951e2141542e184ccf57e939197e8bdb13a172cd15617ebe533",
+        "compressedBytes": 2215634,
+        "uncompressedBytes": 2214876,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_us_california",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [
+          "california"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_us_california/1/pack.zip",
+        "sha256": "877ce687a37f32f7a20e370522fd9ce3c35618e5de1ae9b5339a3b66b2cfaaaa",
+        "compressedBytes": 2194905,
+        "uncompressedBytes": 2194147,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_us_florida",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [
+          "florida",
+          "florida_keys"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_us_florida/1/pack.zip",
+        "sha256": "d6dd0278e68fe81a4efe352d57a5fbea7a2a885b2181835e7692aed73c541169",
+        "compressedBytes": 2198276,
+        "uncompressedBytes": 2197518,
+        "fileCount": 6
+      },
+      "minAppBuild": 1
+    },
+    {
+      "id": "region_us_hawaii",
+      "version": 1,
+      "priority": 500,
+      "selectors": {
+        "countryCodes": [
+          "US"
+        ],
+        "regions": [
+          "hawaii",
+          "maui"
+        ],
+        "cities": [],
+        "themes": [],
+        "subjects": []
+      },
+      "archive": {
+        "storagePath": "art-packs/region_us_hawaii/1/pack.zip",
+        "sha256": "6137c1c02f664296cbca4104ce958da3be8439d3a6fbb5f85161810563b84312",
+        "compressedBytes": 2219267,
+        "uncompressedBytes": 2218509,
+        "fileCount": 6
       },
       "minAppBuild": 1
     }

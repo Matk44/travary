@@ -1,0 +1,37 @@
+{
+  "peek-empty": {
+    "source": "docs/mockups/travi-cameos-v1/registered/peek-empty.png",
+    "sha256": "66237fd9ed9be4f7301ab912b9d54600ca74c18fd1ad7f870e2b9dffe950c4f6",
+    "image_path": "1791614134493-2752b485c8d1e0d1.png"
+  },
+  "peek-wave": {
+    "source": "docs/mockups/travi-cameos-v1/registered/peek-wave.png",
+    "sha256": "8006d31963aed600f79bddc98ef16af70bc63d8b0d706ae78ea5caa2802de098",
+    "image_path": "1791614134499-9b3f41c779e995d9.png"
+  },
+  "peek-cheer": {
+    "source": "docs/mockups/travi-cameos-v1/registered/peek-cheer.png",
+    "sha256": "19f73f416ed7ea1ee204d6fd2688a0f5505fe71341d1ca97a5f5ed4c8f04ffd8",
+    "image_path": "1791614137468-28bbd3a2aa38bce5.png"
+  },
+  "peek-packing": {
+    "source": "docs/mockups/travi-cameos-v1/registered/peek-packing.png",
+    "sha256": "02c69e11037ada9c6e00a553b380ff360203dec7f1d53ff4f70e906575fe85ae",
+    "image_path": "1791614138787-cedcdaab7e750fc4.png"
+  },
+  "peek-ready": {
+    "source": "docs/mockups/travi-cameos-v1/registered/peek-ready.png",
+    "sha256": "fb776ad92ce93fa661352f7e6054c92344037450a406a3c8ca0dd82fa89e137f",
+    "image_path": "1791614140122-4342d7016b4ca07f.png"
+  },
+  "peek-today": {
+    "source": "docs/mockups/travi-cameos-v1/registered/peek-today.png",
+    "sha256": "74ad09625c8f1f6dc7541ae5402293303b93e06ff60c3824c8ec67199a155844",
+    "image_path": "1791614140921-aeab6b60b46b80e7.png"
+  },
+  "lounge": {
+    "source": "docs/mockups/travi-cameos-v1/registered/lounge.png",
+    "sha256": "9d977f9ffe150af8f55122498a7f54a15072547a9d27452c7999e8e2c7e7b6f5",
+    "image_path": "1791614141692-156251c97871911e.png"
+  }
+}

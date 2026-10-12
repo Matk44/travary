@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Travary · Booking folio art review</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{color-scheme:light;--ink:#1c2a47;--paper:#f8f4ec;--coral:#e5785b}
+    *{box-sizing:border-box}body{margin:0;background:#e9e2d5;color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+    main{max-width:1120px;margin:0 auto;padding:32px;display:grid;grid-template-columns:minmax(260px,414px) minmax(280px,1fr);gap:48px;align-items:start}
+    .scene{display:block;width:100%;border-radius:20px;box-shadow:0 18px 50px #293c4130}
+    .eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#53717a}h1{font:500 38px/1.08 Georgia,serif;margin:14px 0}h2{font:500 23px/1.15 Georgia,serif;margin:0 0 8px}p{margin:12px 0;color:#53606d}
+    .assets{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}.asset{margin:0;border:1px solid #d8cfbf;border-radius:14px;background:var(--paper);overflow:hidden}.asset a{display:flex;align-items:center;justify-content:center;height:235px;padding:10px;background:var(--paper)}.asset img{width:100%;height:100%;object-fit:contain}.asset figcaption{padding:12px 14px;border-top:1px solid #e3dac9;font-size:13px;line-height:1.4}.asset strong{display:block;font-family:Georgia,serif;font-size:18px;margin-bottom:4px}
+    .review{border-left:3px solid var(--coral);padding:12px 16px;background:#f8f4ec}.review ul{padding-left:19px;margin:10px 0 0}.review li{margin:7px 0}.review p{font-size:13px}a{color:var(--ink);text-underline-offset:3px}.note{font-size:12px}nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;font-size:13px}
+    @media(max-width:760px){main{grid-template-columns:1fr;padding:20px;gap:24px;max-width:480px}h1{font-size:30px}.asset a{height:190px}}
+  </style>
+</head>
+<body>
+<main>
+  <a href="folio-opening-screen-v1.png" aria-label="Open the full booking folio scene image"><img class="scene" src="folio-opening-screen-v1.png" alt="Travary booking invitation in the colourful Bali paper world. Travi presents an open navy folio beneath Got a booking for me? with screenshot/PDF, manual booking and later choices."></a>
+  <section>
+    <span class="eyebrow">Travary · Scene 3 · Still art review</span>
+    <h1>Got a booking<br>for me?</h1>
+    <p>The same holiday world, with a new job for Travi: give your first booking a place to live. This frame shows the proposed scene; its buttons are part of the review image.</p>
+    <div class="assets">
+      <figure class="asset"><a href="open-folio-v2.png" aria-label="Open the transparent navy folio asset"><img src="open-folio-v2.png" alt="Open navy folio with brass snap, blank tickets and a clean cream page."></a><figcaption><strong>The open folio</strong>Transparent prop. Booking content will be live UI on its cream page.</figcaption></figure>
+      <figure class="asset"><a href="travi-receiving-v1.png" aria-label="Open Travi's transparent receiving pose"><img src="travi-receiving-v1.png" alt="Coral ribbed spinner Travi with eager eyes and open hands, ready to receive a booking."></a><figcaption><strong>Travi, ready to help</strong>Transparent receiving pose, preserving the selected suitcase identity.</figcaption></figure>
+    </div>
+    <div class="review">
+      <h2>For your approval</h2>
+      <ul><li>The folio's scale and place in the scene.</li><li>Travi's welcoming face and offered hand.</li><li>The headline and three clearly separated choices.</li></ul>
+      <p>After approval, the next performance will connect the completed date tag to the folio opening and Travi's invitation. No new video has been rendered for this review.</p>
+    </div>
+    <p class="note">The Bali/date tag and free-import line illustrate this opening state. In the app, destination, dates and remaining allowance will use the traveller's actual data. Countries remain the default scenery coverage; this scene reuses an existing prototype exception.</p>
+    <nav><a href="folio-opening-screen-v1.png">Full scene PNG</a><a href="README.md">Asset notes</a><a href="PROMPTS.md">Exact prompts</a></nav>
+  </section>
+</main>
+</body>
+</html>

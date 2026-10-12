@@ -1,0 +1,180 @@
+[
+  {
+    "destinationId": "city_fr_paris",
+    "batch": 1,
+    "sourceUrls": [],
+    "qa": {
+      "inspected": true,
+      "geography": "Paris city scenery: Eiffel Tower, Haussmann riverfront and Seine bridge; distant Montmartre cue in symbolic arrangement.",
+      "summary": "Paris landmarks, layered paper riverfront; clear floor.",
+      "notes": "Warm gold/green foliage is stylized. Symbolic Eiffel Tower/Montmartre grouping, not one literal viewpoint.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-560b4e74-95a1-4dd3-9404-908baf8e6b15.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_fr_paris/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_fr_paris.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Paris (FR), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Eiffel Tower left of centre, cream Haussmann facades with slate mansard roofs, a stone-arched Seine bridge and blue river, leafy plane trees and restrained coral geraniums. Paris city only; a symbolic composition, not a literal shared viewpoint.\nLighting/mood: late spring, warm late-afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Paris (FR) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_it_rome",
+    "batch": 1,
+    "sourceUrls": [
+      "https://www.turismoroma.it/en/places/parco-archeologico-del-colosseo",
+      "https://www.turismoroma.it/it/luoghi/basilica-di-san-pietro"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Rome visitor-city scenery: Colosseum, Forum ruins and umbrella pines; distant Vatican/St Peter's skyline cue.",
+      "summary": "Roman stone layers and pines; clear floor.",
+      "notes": "St Peter's dome is a background visitor-context cue in the Vatican enclave; scene is not a literal Forum-to-Vatican view.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-272851a5-5740-4294-8af4-19f83847798d.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_it_rome/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_it_rome.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Rome (IT), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Colosseum with its recognisable broken outer ring and stacked Roman arcades at left, fragments of the Roman Forum in middle depth, terracotta city roofs, umbrella pines and cypress. No canals or coastal scenery.\nLighting/mood: early autumn, golden late-afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Rome (IT) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_it_venice",
+    "batch": 1,
+    "sourceUrls": [
+      "https://www.veneziaunica.it/it/cosa-fare-a-venezia/monumenti-e-teatri/ponte-di-rialto"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Venice city scenery: Rialto Bridge, Grand Canal, waterfront palazzi and distant San Marco campanile cue.",
+      "summary": "Rialto/canal layers; people removed in v2.",
+      "notes": "Initial v1 had tiny human silhouettes on bridge. Built-in targeted v2 removes them; selected v2 preserves composition. Symbolic campanile grouping.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": false,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-ab873abf-51cc-4aed-a11f-49454ee651fe.png",
+        "selectedWorkspacePath": null,
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_it_venice.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Venice (IT), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: single-arch stone Rialto Bridge spanning the Grand Canal, ornate Venetian waterfront palazzi in warm cream, rose and ochre, slender mooring poles, a small empty gondola and layered turquoise canal water. Do not add roads, cars, cliffs or mountains.\nLighting/mood: late spring, warm late-afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Venice (IT) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      },
+      {
+        "version": 2,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-e24d06ab-d4ef-4867-a465-7d4505ba93f7.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_it_venice/onboarding_stage_v2.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_it_venice-v2.txt",
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nAsset type: clean Venice onboarding scenery plate revision\nPrimary request: Remove every tiny person/human silhouette from the Rialto Bridge walkway and its central opening. Fill those spots with the existing architectural railing, arch interior and warm paper surfaces. Remove only those people.\nInput 1: Venice scenery plate edit target. Keep ALL other pixels and composition visually unchanged: bridge architecture, empty gondola, buildings, canal, fine folded cardstock, paper grain, teal quiet headline sky, theatre side wings, cream floor boundary and portrait proportions. Keep its geography and warm lighting.\nConstraints: no people, characters, character shadow, folio, loose tickets, lettering, UI, prices, labels, logos, flags or watermark. Output one complete opaque portrait plate, same canvas/aspect as input. Do not add anything.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-ab873abf-51cc-4aed-a11f-49454ee651fe.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_it_florence",
+    "batch": 1,
+    "sourceUrls": [
+      "https://www.feelflorence.it/en/points-interest/brunelleschis-dome",
+      "https://www.feelflorence.it/it/punti-di-interesse/ponte-vecchio-0"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "Florence city scenery: Brunelleschi dome, Giotto campanile, Ponte Vecchio and Arno.",
+      "summary": "Florentine dome/Arno; clear floor.",
+      "notes": "Dome top reaches slightly above nominal 27% at left; central headline space remains calm. Hills are a symbolic Tuscan backdrop.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-73d3692b-8780-4dfb-851d-fa25f8992ba1.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_it_florence/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_it_florence.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for Florence (IT), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Florence Cathedral's enormous terracotta ribbed Brunelleschi dome with cream-green marble detailing and Giotto's campanile, densely layered terracotta roofs, and Ponte Vecchio's shop-lined bridge over the Arno. Restrained cypress accents. Symbolic city composition.\nLighting/mood: early autumn, warm late-afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is Florence (IT) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  },
+  {
+    "destinationId": "city_gb_london",
+    "batch": 1,
+    "sourceUrls": [
+      "https://www.visitlondon.com/things-to-do/london-areas/westminster"
+    ],
+    "qa": {
+      "inspected": true,
+      "geography": "London city scenery: Palace of Westminster, Elizabeth Tower, Westminster Bridge and Thames.",
+      "summary": "Westminster/Thames paper scene; clear floor.",
+      "notes": "Decorative architectural clock face has small scale marks; no readable UI text. Landmark top slightly above nominal 27% at left; central text zone clear.",
+      "paperStyle": "passed",
+      "centralHeadlineSpace": "passed",
+      "creamFloor": "passed; boundary approximately 65%",
+      "traviClearance": "passed visually; live overlay/device QA remains",
+      "noBakedPropsOrType": "passed",
+      "ownerApproval": "pending"
+    },
+    "attempts": [
+      {
+        "version": 1,
+        "selected": true,
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a11575-03ec-7473-a859-5796c055bec9/exec-9f3bda6d-ce37-478a-a76d-ecf2e40ba3f4.png",
+        "selectedWorkspacePath": "art_packs/pending/onboarding/city_gb_london/onboarding_stage_v1.png",
+        "promptPath": "docs/mockups/onboarding-city-stages-v1/prompts/city_gb_london.txt",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean city-specific scenic stage for Travary mobile onboarding\nInput images: Image 1 is the approved prop-free Bali stage, the composition and material reference only, not the geographic subject. Any Image 2 is the city's existing postcard as a geographic content reference only; discard its border and lettering.\nPrimary request: Create one NEW standalone opaque portrait scenery plate for London (GB), a deliberate city override. Replace Bali's entire landscape with the city scene below while preserving the approved stage camera, curved petrol-teal side wings with fine cream edging, warm cream floor and tactile richness.\nScene/backdrop: Elizabeth Tower and Palace of Westminster with accurate Gothic silhouette on the left, Westminster Bridge across the Thames, restrained riverfront stone buildings and deciduous trees. No continental domes or Paris tower.\nLighting/mood: late spring, warm afternoon light. Lavish handmade miniature theatre, delightful and warm.\nStyle/medium: richly layered and folded sculpted cardstock, embossed paper grain, visible cut edges, finely modelled architecture, convincing miniature depth, cast shadows BETWEEN scenery layers, warm physical light; rich local colours rather than a flat poster, illustration or glossy plastic.\nComposition/framing: Match the very tall 851 x 1848 reference proportions (width/height approximately 0.4605), aiming for that size/aspect, one full uncropped portrait. Upper 0-27%: quiet solid petrol-teal embossed paper sky through the centre, no landmarks there. Middle 27-65%: expansive recognisable city scenery filling the theatre width, several rich depth layers; tall landmark tops start BELOW 27%. Lower 65-100%: uninterrupted calm warm-cream paper stage/control floor with the same perspective and gentle floor light as the reference, no scenery spilling onto it. Right foreground around x=62-92%, y=42-71% stays unobstructed for the separately composited coral Travi: background scenery may continue but keep close bulky landmarks and protruding objects to the left. No character or character shadow. Landscape finishes at the floor boundary near 65%.\nConstraints: geographic subject is London (GB) only. Symbolic staged arrangements of real city cues are acceptable; do not pretend multiple remote landmarks form one literal viewpoint. Remove ALL Bali temples, terraces, volcano, tropical cliffs and vegetation unless actually appropriate for this city. Keep Travi, folio, tickets, dates, prices and animations as separate shared assets. No painted UI or text.\nAvoid: people, characters, mascot, character shadow, folio, book, loose tickets, luggage tags, UI, lettering, signs, numbers, prices, dates, labels, logos, flags, watermark, device frame, postcard border, fantasy landmarks, glossy plastic. Output one scenery plate only.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png"
+        ],
+        "transparentBackground": false
+      }
+    ]
+  }
+]

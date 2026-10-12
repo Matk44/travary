@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-09",
+  "purpose": "Connected local onboarding review, now with approved pre-paywall account motion",
+  "sources": [
+    "onboarding-journey-v1",
+    "onboarding-folio-motion-v2",
+    "onboarding-booking-handoff-v1",
+    "onboarding-account-motion-v1"
+  ],
+  "media": "Approved originals and reviewed derivatives; new account films recorded in onboarding-account-motion-v1/jobs.json and processing.json",
+  "newArtOrVideo": true,
+  "boundary": "Browser example state only; simulated sign-in/email/purchases, not native services, RevenueCat or production billing"
+}

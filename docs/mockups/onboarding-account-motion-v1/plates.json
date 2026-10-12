@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-09",
+  "tool": "built-in imagegen",
+  "approval": "Derived technical plates from the owner-approved account/email stills; all text/buttons removed",
+  "assets": [
+    {
+      "path": "account-text-free-v1.png",
+      "sha256": "f2cfef45be53cb397b444660a7833bd9c4d196c015b908b80df4ecf1d1db2caf"
+    },
+    {
+      "path": "email-text-free-v1.png",
+      "sha256": "582e2b66aad5a7a0f3a6cf3b1e3264a27806a681a3498a9ee1b7bdafb75e3304"
+    }
+  ]
+}

@@ -14,6 +14,8 @@ and [asset register](../docs/onboarding/DESTINATION_ART_REGISTER.md). Reuse the 
 stage template and the destination's own references; log each needed stage there. The proposed
 `onboarding_stage` key is not yet integrated or published. New onboarding masters remain in
 `pending/onboarding/<destination-id>/` until a deliberate app/pack integration task.
+The owner selected **country-first coverage**: country stages are the primary queue;
+city/region stages are optional additions, not requirements for every selected city.
 
 The five portrait countdown postcards, their five landscape Trips
 companions and the five Documents destination stamps live in complete city

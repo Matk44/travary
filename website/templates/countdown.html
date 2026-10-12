@@ -1,0 +1,94 @@
+<section class="tool-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Travary</a><span>›</span>Holiday countdown</p>
+    <p class="tag-label">Free tool</p>
+    <h1>Holiday countdown</h1>
+    <p class="lede">How many days until your holiday? Pick the date and where you're going, and your countdown appears on a postcard from the place, with a luggage tag counting the days. Copy the link to share it with everyone coming.</p>
+  </div>
+</section>
+
+<div class="wrap tool">
+  <form class="tool-form paper" id="cd-form" data-places="{{places}}" autocomplete="off">
+    <div class="field">
+      <label for="cd-trip">Trip name</label>
+      <input id="cd-trip" name="n" type="text" maxlength="40" placeholder="Japan with the kids">
+    </div>
+    <div class="field">
+      <label for="cd-place">Where you're going</label>
+      <select id="cd-place" name="p">{{options}}</select>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="cd-start">First day</label>
+        <input id="cd-start" name="d" type="date" required>
+      </div>
+      <div class="field">
+        <label for="cd-end">Last day (optional)</label>
+        <input id="cd-end" name="e" type="date">
+      </div>
+    </div>
+    <div class="tool-actions">
+      <button class="btn" type="button" id="cd-share">Copy share link</button>
+      <button class="btn ghost" type="reset" id="cd-reset">Start again</button>
+    </div>
+    <p class="tool-msg" id="cd-msg" role="status"></p>
+    <div class="field"><span class="label">Still to go</span>
+    <div class="cd-live" aria-hidden="true">
+      <span><b id="cd-wk">0</b>weeks</span><span><b id="cd-hr">0</b>hours</span><span><b id="cd-min">0</b>minutes</span><span><b id="cd-sec">0</b>seconds</span>
+    </div></div>
+  </form>
+
+  <div class="cd-stage is-new" id="cd-stage" aria-live="polite">
+    [[countdown|city_jp_kyoto|A postcard from Kyoto|postcard-img]]
+    <div class="lug">[[ephemera|countdown_luggage_tag|]]<div class="lug-copy"><p class="eyebrow" id="cd-eyebrow">Next trip</p><strong id="cd-days">—</strong><span id="cd-unit">days to go</span><em id="cd-name">Kyoto</em><small id="cd-dates">Pick a date</small></div></div>
+  </div>
+</div>
+
+<section class="tool-content">
+  <div class="wrap">
+    <div class="prose">
+      <div class="answer"><p class="eyebrow">The short answer</p><p>To work out how many days until your holiday, count the calendar days from today to the first day of the trip: a holiday on Saturday is one day away on Friday, whatever the time. The countdown above does exactly that, then shows the weeks, hours and minutes as well.</p></div>
+
+      <h2>How the countdown counts</h2>
+      <p>It counts <strong>calendar days</strong>, not 24-hour blocks. If you fly on 14 July and today is 13 July, that's one day to go, whether it's 7am or 11pm. That's how people actually think about a holiday, and it's how the countdown in the Travary app works: the number only changes at midnight, and a clock change or a time zone can't nudge it.</p>
+      <p>The smaller numbers under the postcard are the live part: the weeks, then the hours, minutes and seconds left until midnight at the start of your first day, in your own time zone.</p>
+      <p>Nothing you type is sent anywhere. The countdown runs in your browser, and the share link simply carries the trip name, place and dates in the address, so whoever opens it sees the same postcard.</p>
+
+      <h2>Ways to make the wait part of the holiday</h2>
+      <p>The weeks before a trip are some of the best bits of it, especially with children. A few that work:</p>
+      <ul>
+        <li><strong>A paper chain.</strong> One link per day, torn off each morning. Cheap, satisfying, and it makes "how many sleeps?" answer itself.</li>
+        <li><strong>Milestone days.</strong> Pick a few dates to look forward to on the way: 30 days (book the airport parking), 14 days (check the passports, order currency), 7 days (start the packing pile), 1 day (check in online).</li>
+        <li><strong>A taste of the place.</strong> Cook something from where you're going on the 10-day mark, or watch a film set there. It gets children asking questions you'd want them asking anyway.</li>
+        <li><strong>Let everyone see it.</strong> A countdown on the family group chat, or the fridge, keeps everyone pointed at the same date, which makes the logistics easier too.</li>
+      </ul>
+      <p>For the to-do side of those milestones, our <a href="/guides/things-to-do-before-going-on-holiday">checklist of things to do before going on holiday</a> sorts them by how far ahead you need to do them.</p>
+
+      <h2>Counting down to Disney World, a cruise or a first flight</h2>
+      <p>The bigger the trip, the longer the countdown tends to run. A theme park holiday is often booked a year out, so the number starts in the hundreds; a cruise has a fixed sailing date, so the first day is easy. For a first flight with small children, a short countdown (two weeks or so) usually works better than a long one, because a hundred days means nothing to a four-year-old.</p>
+      <p>If you're going to Orlando, the <a href="/itineraries/orlando-itinerary-with-kids">Orlando itinerary with kids</a> lays out a week at a pace children can manage, and it's a good thing to read on day 30.</p>
+
+      <h2>A countdown on your phone</h2>
+      <p>You can bookmark this page with your link and add it to your home screen: in Safari, tap Share, then Add to Home Screen; in Chrome on Android, open the menu and choose Add to Home screen. It opens straight onto your postcard.</p>
+      <p>Your phone's calendar can count down too: add the trip as an all-day event and most calendar widgets show the days until it. It's plain, but it works.</p>
+
+      [[appbox|In the Travary app, the countdown builds itself. Add your first booking and, between trips, Today becomes a postcard from wherever you're going next, with the luggage tag counting the days. It knows the dates because it knows your bookings, so it's never out of date.|tag|The countdown, built in]]
+
+      <section class="faq-block" aria-labelledby="faq"><h2 id="faq">Questions people ask</h2><div class="faq">{{faq}}</div></section>
+    </div>
+  </div>
+</section>
+{{band}}
+---faq---
+Q: How many days until my holiday?
+A: Count the calendar days from today to the first day of your trip. Put your first day into the countdown above and it shows the number on a postcard from your destination, plus the weeks, hours and minutes.
+Q: Does the countdown include today?
+A: No. It counts the days between today and your first day, so the day before you travel shows "1 day to go". On the day itself it says it's today.
+Q: Can I share my holiday countdown?
+A: Yes. Tap "Copy share link" and send it to anyone coming. The link carries the trip name, place and dates, so it opens on the same postcard and counts down on their phone too.
+Q: Is my trip saved anywhere?
+A: Only in your browser and in the link you copy. Nothing is sent to Travary or anyone else.
+Q: How do I put a holiday countdown on my iPhone home screen?
+A: Open your countdown link in Safari, tap Share, then Add to Home Screen. The Travary app also counts down to your next trip on its Today screen.
+Q: What's the best holiday countdown app?
+A: One that already knows your dates. A countdown inside your holiday organiser updates itself when plans change, which a separate countdown app can't. Travary's counts down to your next trip automatically from your bookings.

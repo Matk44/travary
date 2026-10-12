@@ -1,0 +1,19 @@
+[
+  {
+    "id": "anywhere",
+    "refs": [
+      "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+      "/Users/khairofamily/AndroidStudioProjects/Travary/assets/art/common/trip_postcard_anywhere.png"
+    ],
+    "prompt": "Use case: compositing. Asset type: clean place-neutral Anywhere scenic stage for Travary onboarding.\nInput 1 is the approved prop-free Bali stage, authoritative for exactly 851 × 1848 portrait framing, quiet petrol-teal central headline sky from 0–27%, navy-teal paper theatre wings, warm cream control floor whose boundary is about 65% down, lighting and handmade dimensional folded-cardstock texture. Input 2 is the Anywhere postcard, a mood reference only: remove its border, airplane, palm trees, buildings and flat poster rendering.\nKeep Input 1's exact stage geometry and floor line. Replace ONLY its country landscape with a beautiful expansive place-neutral paper holiday: softly layered rolling green hills, a winding road, a bright blue sea, a warm coral sun, cream folded-paper clouds, small generic rounded bushes. No single-country landmarks, flags, buildings, architecture styles or geographically distinctive plants. No Bali temples, volcano, rice terraces or tropical palms. The landscape occupies the whole middle band edge to edge, around 27–65%, with the reference's rich dimensional layers and warm sunlight. Keep all scenery above the exact reference floor boundary. Preserve blank calm teal sky above and an empty continuous cream floor below. Clear right foreground for separately composited Travi. No characters, shadows, folio, cards, loose tickets, text, UI, logo, watermark, device frame or postcard frame. Output one 851 × 1848 RGB portrait PNG with the same framing as Input 1.",
+    "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-d4b6f439-2b8c-4fb6-b59c-ad9aef894c5d.png"
+  },
+  {
+    "id": "city_jp_kyoto",
+    "refs": [
+      "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/kyoto-stage-v1.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Input 1 is the existing approved Kyoto stage, 851 × 1848 portrait.\nRemove ONLY the navy folio and the small stack of cream loose tickets at the lower-left floor, including their cast shadows. Fill their footprints by continuing the adjacent warm cream paper floor seamlessly. Preserve every other part of Input 1 exactly: same dimensions, camera, framing, theatre wings, teal headline sky, Japanese autumn maple foliage, pagoda, roofs, torii, steps, sunset, grain, lighting and scenery/floor boundary. Do not redraw, crop, shift, resize or redesign the scene. Do not add anything. No character, folio, tickets, text, logo, UI or watermark. Output 851 × 1848 RGB PNG, the same framing as Input 1.",
+    "source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-a41e25cc-d51b-45c0-8c9f-cf59cc250e54.png"
+  }
+]

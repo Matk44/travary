@@ -1,0 +1,581 @@
+{
+  "date": "2026-10-09",
+  "imagesModified": false,
+  "items": [
+    {
+      "id": "green-folio",
+      "path": "docs/mockups/onboarding-green-plates-v1/green-folio-v1.png",
+      "actualDimensions": [
+        941,
+        1672
+      ],
+      "requestedDimensions": [
+        941,
+        1672
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "greenSample": {
+        "boundsXYXY": [
+          200,
+          40,
+          600,
+          150
+        ],
+        "modeRGB": [
+          1,
+          179,
+          68
+        ],
+        "uniqueRGBCount": 55,
+        "exactRequestedRGBFraction": 0.0,
+        "maxChannelDeviationFromRequest": 6
+      },
+      "foregroundComparisonHeuristic": {
+        "overlapPixelsCompared": 1005541,
+        "meanAbsoluteRGBDifference": 3.607,
+        "exactRGBPixelFraction": 0.014934,
+        "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+      },
+      "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+    },
+    {
+      "id": "green-proof",
+      "path": "docs/mockups/onboarding-green-plates-v1/green-proof-v1.png",
+      "actualDimensions": [
+        940,
+        1672
+      ],
+      "requestedDimensions": [
+        941,
+        1672
+      ],
+      "dimensionsMatchRequest": false,
+      "sourceCopyHashMatches": true,
+      "greenSample": {
+        "boundsXYXY": [
+          200,
+          40,
+          600,
+          150
+        ],
+        "modeRGB": [
+          2,
+          182,
+          67
+        ],
+        "uniqueRGBCount": 72,
+        "exactRequestedRGBFraction": 0.0,
+        "maxChannelDeviationFromRequest": 8
+      },
+      "foregroundComparisonHeuristic": {
+        "overlapPixelsCompared": 444448,
+        "meanAbsoluteRGBDifference": 5.809,
+        "exactRGBPixelFraction": 0.00787,
+        "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+      },
+      "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+    },
+    {
+      "id": "green-account",
+      "path": "docs/mockups/onboarding-green-plates-v1/green-account-v1.png",
+      "actualDimensions": [
+        941,
+        1672
+      ],
+      "requestedDimensions": [
+        941,
+        1672
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "greenSample": {
+        "boundsXYXY": [
+          200,
+          40,
+          600,
+          150
+        ],
+        "modeRGB": [
+          1,
+          183,
+          68
+        ],
+        "uniqueRGBCount": 66,
+        "exactRequestedRGBFraction": 0.0,
+        "maxChannelDeviationFromRequest": 9
+      },
+      "foregroundComparisonHeuristic": {
+        "overlapPixelsCompared": 288935,
+        "meanAbsoluteRGBDifference": 5.549,
+        "exactRGBPixelFraction": 0.005735,
+        "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+      },
+      "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+    },
+    {
+      "id": "green-email",
+      "path": "docs/mockups/onboarding-green-plates-v1/green-email-v1.png",
+      "actualDimensions": [
+        941,
+        1672
+      ],
+      "requestedDimensions": [
+        941,
+        1672
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "greenSample": {
+        "boundsXYXY": [
+          200,
+          40,
+          600,
+          150
+        ],
+        "modeRGB": [
+          2,
+          182,
+          73
+        ],
+        "uniqueRGBCount": 56,
+        "exactRequestedRGBFraction": 0.0,
+        "maxChannelDeviationFromRequest": 11
+      },
+      "foregroundComparisonHeuristic": {
+        "overlapPixelsCompared": 287498,
+        "meanAbsoluteRGBDifference": 5.955,
+        "exactRGBPixelFraction": 0.006605,
+        "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+      },
+      "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+    },
+    {
+      "id": "green-pass",
+      "path": "docs/mockups/onboarding-green-plates-v1/green-pass-v1.png",
+      "actualDimensions": [
+        941,
+        1672
+      ],
+      "requestedDimensions": [
+        941,
+        1672
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "greenSample": {
+        "boundsXYXY": [
+          200,
+          40,
+          600,
+          150
+        ],
+        "modeRGB": [
+          1,
+          178,
+          64
+        ],
+        "uniqueRGBCount": 72,
+        "exactRequestedRGBFraction": 0.002227,
+        "maxChannelDeviationFromRequest": 4
+      },
+      "foregroundComparisonHeuristic": {
+        "overlapPixelsCompared": 614027,
+        "meanAbsoluteRGBDifference": 4.536,
+        "exactRGBPixelFraction": 0.007325,
+        "note": "Unregistered same-coordinate RGB comparison using broad green exclusion; not a validated matte or alignment proof."
+      },
+      "productionStatus": "needs_flat_key_and_foreground_registration_validation"
+    },
+    {
+      "id": "anywhere",
+      "path": "art_packs/pending/onboarding/anywhere/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_us",
+      "path": "art_packs/pending/onboarding/country_us/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_gb",
+      "path": "art_packs/pending/onboarding/country_gb/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_fr",
+      "path": "art_packs/pending/onboarding/country_fr/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_it",
+      "path": "art_packs/pending/onboarding/country_it/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_es",
+      "path": "art_packs/pending/onboarding/country_es/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_jp",
+      "path": "art_packs/pending/onboarding/country_jp/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_au",
+      "path": "art_packs/pending/onboarding/country_au/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_mx",
+      "path": "art_packs/pending/onboarding/country_mx/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_th",
+      "path": "art_packs/pending/onboarding/country_th/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_gr",
+      "path": "art_packs/pending/onboarding/country_gr/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1847
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": false,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_pt",
+      "path": "art_packs/pending/onboarding/country_pt/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_de",
+      "path": "art_packs/pending/onboarding/country_de/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_ca",
+      "path": "art_packs/pending/onboarding/country_ca/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_tr",
+      "path": "art_packs/pending/onboarding/country_tr/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_ae",
+      "path": "art_packs/pending/onboarding/country_ae/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_nl",
+      "path": "art_packs/pending/onboarding/country_nl/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_id",
+      "path": "art_packs/pending/onboarding/country_id/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_nz",
+      "path": "art_packs/pending/onboarding/country_nz/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_kr",
+      "path": "art_packs/pending/onboarding/country_kr/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_ch",
+      "path": "art_packs/pending/onboarding/country_ch/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_in",
+      "path": "art_packs/pending/onboarding/country_in/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_cn",
+      "path": "art_packs/pending/onboarding/country_cn/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_br",
+      "path": "art_packs/pending/onboarding/country_br/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "country_za",
+      "path": "art_packs/pending/onboarding/country_za/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    },
+    {
+      "id": "city_jp_kyoto",
+      "path": "art_packs/pending/onboarding/city_jp_kyoto/onboarding_stage_v1.png",
+      "actualDimensions": [
+        851,
+        1848
+      ],
+      "requestedDimensions": [
+        851,
+        1848
+      ],
+      "dimensionsMatchRequest": true,
+      "sourceCopyHashMatches": true,
+      "productionStatus": "owner_review_then_native_overlay_checks"
+    }
+  ]
+}

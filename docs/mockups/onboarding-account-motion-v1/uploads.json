@@ -1,0 +1,22 @@
+{
+  "account": {
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/account-text-free-v1.png",
+    "sha256": "f2cfef45be53cb397b444660a7833bd9c4d196c015b908b80df4ecf1d1db2caf",
+    "image_path": "1791496571793-e4edeeb99c4be7d9.png"
+  },
+  "proof": {
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-handoff-v1/proof-text-free-v1.png",
+    "sha256": "077d3e1283105cf105f0d1f82bf079900f896a4afe2bcf6a90a4057e71d7b05a",
+    "image_path": "1791496571814-4374fd0ea4154653.png"
+  },
+  "pass": {
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-booking-handoff-v1/pass-text-free-v1.png",
+    "sha256": "5eb53ecf96c760567187233a0ae738551fc8477a0c4bb60da9f50734af595d18",
+    "image_path": "1791496571833-4a696b157f542849.png"
+  },
+  "email": {
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-account-motion-v1/email-text-free-v1.png",
+    "sha256": "582e2b66aad5a7a0f3a6cf3b1e3264a27806a681a3498a9ee1b7bdafb75e3304",
+    "image_path": "1791496691663-87019e388fd4089d.png"
+  }
+}

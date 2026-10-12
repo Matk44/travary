@@ -1,0 +1,298 @@
+{
+  "tag-toss": {
+    "frames": 67,
+    "seconds": 2.79,
+    "drift_first": 5.6,
+    "drift_last": 7.0,
+    "jumps": [
+      1.92,
+      1.96,
+      2.0,
+      2.04,
+      2.08,
+      2.12,
+      2.17
+    ],
+    "held_frames": 0
+  },
+  "folio-up": {
+    "frames": 58,
+    "seconds": 2.42,
+    "drift_first": 5.4,
+    "drift_last": 7.3,
+    "jumps": [
+      0.88,
+      0.96
+    ],
+    "held_frames": 7
+  },
+  "tag-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 5.3,
+    "drift_last": 6.9,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "folio-up-b": {
+    "frames": 54,
+    "seconds": 2.25,
+    "drift_first": 5.1,
+    "drift_last": 6.9,
+    "jumps": [],
+    "held_frames": 7
+  },
+  "roll-in": {
+    "frames": 75,
+    "seconds": 3.12,
+    "drift_first": 2.2,
+    "drift_last": 7.1,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "world": {
+    "frames": 71,
+    "seconds": 2.96,
+    "drift_first": 5.4,
+    "drift_last": 6.9,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "tag-out": {
+    "frames": 61,
+    "seconds": 2.54,
+    "drift_first": 4.9,
+    "drift_last": 7.1,
+    "jumps": [
+      1.04
+    ],
+    "held_frames": 0
+  },
+  "reading": {
+    "frames": 73,
+    "seconds": 3.04,
+    "drift_first": 5.0,
+    "drift_last": 7.5,
+    "jumps": [],
+    "held_frames": 3
+  },
+  "got-it": {
+    "frames": 67,
+    "seconds": 2.79,
+    "drift_first": 5.5,
+    "drift_last": 6.6,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "folio-in": {
+    "frames": 41,
+    "seconds": 1.71,
+    "drift_first": 5.5,
+    "drift_last": 14.7,
+    "jumps": [
+      0.58,
+      0.71,
+      0.83,
+      0.96,
+      1.08,
+      1.21,
+      1.33,
+      1.46,
+      1.54
+    ],
+    "held_frames": 1
+  },
+  "card-out": {
+    "frames": 61,
+    "seconds": 2.54,
+    "drift_first": 5.2,
+    "drift_last": 7.1,
+    "jumps": [],
+    "held_frames": 6
+  },
+  "card-toss": {
+    "frames": 47,
+    "seconds": 1.96,
+    "drift_first": 4.9,
+    "drift_last": 6.2,
+    "jumps": [
+      1.21,
+      1.33,
+      1.38,
+      1.42,
+      1.46,
+      1.5,
+      1.54,
+      1.58
+    ],
+    "held_frames": 0
+  },
+  "proud": {
+    "frames": 59,
+    "seconds": 2.46,
+    "drift_first": 5.2,
+    "drift_last": 7.3,
+    "jumps": [],
+    "held_frames": 3
+  },
+  "later": {
+    "frames": 64,
+    "seconds": 2.67,
+    "drift_first": 5.0,
+    "drift_last": 6.7,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "hello-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 4.8,
+    "drift_last": 6.1,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "folio-open-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 4.9,
+    "drift_last": 6.3,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "folio-full-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 13.4,
+    "drift_last": 13.9,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "reading-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 5.5,
+    "drift_last": 6.5,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "proud-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 4.8,
+    "drift_last": 6.1,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "id-tag": {
+    "frames": 63,
+    "seconds": 2.62,
+    "drift_first": 4.9,
+    "drift_last": 7.7,
+    "jumps": [],
+    "held_frames": 2
+  },
+  "envelope": {
+    "frames": 51,
+    "seconds": 2.12,
+    "drift_first": 5.4,
+    "drift_last": 7.1,
+    "jumps": [],
+    "held_frames": 6
+  },
+  "guest": {
+    "frames": 84,
+    "seconds": 3.5,
+    "drift_first": 5.3,
+    "drift_last": 6.9,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "finale": {
+    "frames": 77,
+    "seconds": 3.21,
+    "drift_first": 5.6,
+    "drift_last": 7.7,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "linked": {
+    "frames": 69,
+    "seconds": 2.88,
+    "drift_first": 5.6,
+    "drift_last": 6.5,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "envelope-linked": {
+    "frames": 71,
+    "seconds": 2.96,
+    "drift_first": 5.1,
+    "drift_last": 5.5,
+    "jumps": [],
+    "held_frames": 13
+  },
+  "to-desk": {
+    "frames": 60,
+    "seconds": 2.5,
+    "drift_first": 4.7,
+    "drift_last": 7.2,
+    "jumps": [],
+    "held_frames": 4
+  },
+  "cheer": {
+    "frames": 73,
+    "seconds": 3.04,
+    "drift_first": 4.9,
+    "drift_last": 6.5,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "wave-paid": {
+    "frames": 60,
+    "seconds": 2.5,
+    "drift_first": 4.8,
+    "drift_last": 7.4,
+    "jumps": [],
+    "held_frames": 6
+  },
+  "wave-free": {
+    "frames": 63,
+    "seconds": 2.62,
+    "drift_first": 5.1,
+    "drift_last": 7.2,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "oops": {
+    "frames": 48,
+    "seconds": 2.0,
+    "drift_first": 5.1,
+    "drift_last": 7.4,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "present-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 5.2,
+    "drift_last": 6.3,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "id-tag-idle": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 5.3,
+    "drift_last": 6.4,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "folio-open-idle-b": {
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 5.3,
+    "drift_last": 6.5,
+    "jumps": [],
+    "held_frames": 0
+  }
+}

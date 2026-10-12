@@ -1,0 +1,275 @@
+<div id="travary-folio-motion">
+  <div class="viz-row"><span class="text-small text-muted">Motion study · example holiday · nothing is uploaded or saved</span></div>
+  <div class="viz-dotted-background tf-preview">
+    <section class="tf-phone" aria-label="Travary folio transition rehearsal" data-scene="dates">
+      <img class="tf-world" src="__STAGE__" alt="" aria-hidden="true">
+      <div class="tf-veil" aria-hidden="true"></div>
+      <img class="tf-travi tf-greeting" src="__GREETING__" alt="" aria-hidden="true">
+      <img class="tf-travi tf-receiving" src="__RECEIVING__" alt="" aria-hidden="true">
+      <img class="tf-folio tf-closed" src="__CLOSED__" alt="" aria-hidden="true">
+      <img class="tf-folio tf-open" src="__OPEN__" alt="" aria-hidden="true">
+      <header class="tf-heading">
+        <p class="tf-brand">Travary</p>
+        <h2 class="tf-title"><span>Dates are</span><span>in the <em>bag.</em></span></h2>
+        <p class="tf-subtitle">Next, let's bring your plans together.</p>
+      </header>
+      <div class="tf-keepsake" aria-label="Example holiday: Bali, 12 to 19 December 2026">
+        <span class="tf-eyelet" aria-hidden="true"></span><small>Your holiday</small><strong>Bali</strong><span class="tf-date-range">12–19 Dec 2026</span><span class="tf-stamp">Dates set</span>
+      </div>
+      <div class="tf-date-actions"><button class="tf-ticket-button cursor-interaction" type="button" data-action="invite">Bring in a booking</button></div>
+      <div class="tf-invite-actions" hidden>
+        <button class="tf-ticket-button cursor-interaction" type="button" data-action="import"><i data-lucide="file-plus-2" aria-hidden="true"></i>Add a screenshot or PDF</button>
+        <p class="tf-allowance">Your first 3 Smart Imports are free.</p>
+        <button class="tf-paper-button cursor-interaction" type="button" data-action="manual">Enter a booking myself</button>
+        <button class="tf-link cursor-interaction" type="button" data-action="later">I'll add bookings later</button>
+      </div>
+      <button class="tf-back cursor-interaction" type="button" data-action="back" hidden>‹ Back</button>
+      <div class="tf-work" hidden>
+        <section class="tf-import" aria-label="Example Smart Import" hidden>
+          <span class="tf-paper-icon" aria-hidden="true"><i data-lucide="file-image"></i></span>
+          <h3>Drop in your booking.</h3>
+          <p>A screenshot or PDF is all Travi needs.</p>
+          <button class="tf-small-button cursor-interaction" type="button" data-action="sample">Use an example PDF</button>
+          <p class="tf-example-note">Preview only · no file picker or upload</p>
+        </section>
+        <section class="tf-reading" aria-label="Example import in progress" hidden><span class="tf-reading-paper" aria-hidden="true"><i data-lucide="file-text"></i></span><h3>Reading the example…</h3><p>Getting its details ready to check.</p></section>
+        <section class="tf-kinds" aria-label="Choose a booking type" hidden>
+          <h3>What shall we add?</h3>
+          <button class="tf-kind cursor-interaction" type="button" data-action="flight"><i data-lucide="plane" aria-hidden="true"></i><span>Flight<small>Find it by number and date</small></span><span aria-hidden="true">›</span></button>
+          <button class="tf-kind cursor-interaction" type="button" data-action="stay"><i data-lucide="bed-double" aria-hidden="true"></i><span>Stay<small>Give your check-in a home</small></span><span aria-hidden="true">›</span></button>
+          <button class="tf-kind cursor-interaction" type="button" data-action="activity"><i data-lucide="ticket" aria-hidden="true"></i><span>Activity<small>Something to look forward to</small></span><span aria-hidden="true">›</span></button>
+        </section>
+        <section class="tf-flight" aria-label="Example departures board" hidden>
+          <div class="tf-board"><p class="tf-board-caption">DEPARTURES · EXAMPLE DATA</p><label>FLIGHT NUMBER<input class="tf-flight-number" value="TV123" maxlength="8" autocomplete="off" spellcheck="false" aria-label="Example flight number"></label><label>DEPARTURE DATE<input class="tf-flight-date" type="date" value="2026-12-12" aria-label="Example flight departure date"></label><div class="tf-board-result" aria-live="polite"><p class="tf-board-status">READY TO FIND</p><div class="tf-flaps" aria-label="Waiting for flight details">------</div><p class="tf-route" hidden>SYD <span aria-hidden="true">→</span> DPS</p><p class="tf-schedule" hidden>09:20 Sydney · 12:40 Bali</p></div></div>
+          <button class="tf-small-button cursor-interaction" type="button" data-action="find">Preview finding a flight</button>
+          <button class="tf-link cursor-interaction" type="button" data-action="flight-manual">Enter flight manually</button>
+        </section>
+        <form class="tf-review" aria-label="Review the example booking" hidden>
+          <div class="tf-review-top"><span class="tf-review-kind">Stay</span><span class="tf-example-note">Example</span></div>
+          <h3>Let's check the details.</h3>
+          <label class="tf-field">Booking<input class="tf-booking-title" value="Palm Garden Stay" required maxlength="55"></label>
+          <div class="tf-field-row"><label class="tf-field">Date<input class="tf-booking-date" type="date" value="2026-12-12" required></label><label class="tf-field">Local time<input class="tf-booking-time" type="time" value="15:00" required></label></div>
+          <label class="tf-field">Location<input class="tf-booking-place" value="Ubud, Bali" required maxlength="55"></label>
+          <p class="tf-review-error" role="alert" hidden></p>
+          <button class="tf-small-button cursor-interaction" type="button" data-action="save">Add to my holiday</button>
+        </form>
+      </div>
+      <div class="tf-day" hidden><small class="tf-day-eyebrow">YOUR HOLIDAY · EXAMPLE</small><h3 class="tf-day-title">Saturday, 12 December</h3></div>
+      <article class="tf-booking-ticket" aria-label="Example booking card" hidden><div><span class="tf-card-kind">Stay</span><span class="tf-card-time">15:00</span></div><h3 class="tf-card-title">Palm Garden Stay</h3><p class="tf-card-place">Ubud, Bali</p><span class="tf-card-stamp">Added</span></article>
+      <div class="tf-done-actions" hidden><button class="tf-ticket-button cursor-interaction" type="button" data-action="open-booking">Open your booking</button><button class="tf-link cursor-interaction" type="button" data-action="invite">Try another route</button></div>
+      <div class="tf-later-actions" hidden><button class="tf-ticket-button cursor-interaction" type="button" data-action="invite">Add a booking whenever you're ready</button></div>
+    </section>
+  </div>
+  <div class="viz-controls"><button class="btn" type="button" data-review="replay">Replay transition</button><button class="btn btn-ghost" type="button" data-review="still" aria-pressed="false">Still version</button></div>
+  <div class="viz-row"><span class="text-small" role="status" aria-live="polite" data-motion-status>Completed dates → bring in a booking</span></div>
+</div>
+<style>
+#travary-folio-motion .tf-preview{padding:16px 0;display:flex;justify-content:center}
+#travary-folio-motion .tf-phone{--tf-ink:#102b46;--tf-paper:#fff1d9;--tf-coral:#fa815a;--tf-navy:#082238;--tf-pace:1;position:relative;width:min(354px,100%);aspect-ratio:851/1848;container-type:inline-size;isolation:isolate;overflow:hidden;border-radius:24px;background:#086078;color:var(--tf-paper);font-family:Georgia,'Times New Roman',serif;box-shadow:0 16px 36px #08223824}
+#travary-folio-motion .tf-phone *{box-sizing:border-box}
+#travary-folio-motion .tf-phone [hidden]{display:none!important}
+#travary-folio-motion .tf-world{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform calc(.7s * var(--tf-pace)),filter calc(.7s * var(--tf-pace))}
+#travary-folio-motion .tf-veil{position:absolute;inset:0;background:linear-gradient(180deg,#07304400 5%,#0d34461a 40%,#061b3505 80%);opacity:0;transition:opacity calc(.55s * var(--tf-pace))}
+#travary-folio-motion .tf-heading{position:absolute;z-index:4;left:5%;right:5%;top:3.8%;text-align:center;transition:transform calc(.65s * var(--tf-pace))}
+#travary-folio-motion .tf-brand{font-size:5cqw;margin:0 0 3cqw;font-weight:700;letter-spacing:-.035em}
+#travary-folio-motion .tf-title{font-size:12.7cqw;line-height:.99;letter-spacing:-.045em;font-weight:700;margin:0;text-shadow:0 2px 2px #06384b36}
+#travary-folio-motion .tf-title span{display:block}
+#travary-folio-motion .tf-title em{font-style:normal;color:var(--tf-coral)}
+#travary-folio-motion .tf-subtitle{font-size:3.9cqw;line-height:1.4;margin:3cqw auto 0;max-width:94%;text-wrap:balance}
+#travary-folio-motion .tf-travi{position:absolute;z-index:3;width:67%;left:33%;top:43%;object-fit:contain;transition:left calc(.85s * var(--tf-pace)),top calc(.85s * var(--tf-pace)),width calc(.85s * var(--tf-pace)),opacity calc(.45s * var(--tf-pace)),transform calc(.8s * var(--tf-pace));transform-origin:50% 85%}
+#travary-folio-motion .tf-receiving{opacity:0;width:43%;left:57%;top:47%}
+#travary-folio-motion .tf-folio{position:absolute;z-index:2;object-fit:contain;transform-origin:53% 78%;transition:width calc(.65s * var(--tf-pace)),left calc(.65s * var(--tf-pace)),top calc(.65s * var(--tf-pace)),opacity calc(.42s * var(--tf-pace)),transform calc(.65s * var(--tf-pace))}
+#travary-folio-motion .tf-closed{width:30%;left:-2%;top:57%;transform:rotate(-8deg)}
+#travary-folio-motion .tf-open{width:70%;left:0%;top:55%;opacity:0;transform:translateY(5cqw) rotate(-8deg) scaleX(.76)}
+#travary-folio-motion .tf-keepsake{position:absolute;z-index:5;top:74%;left:5%;width:90%;height:26cqw;display:flex;align-items:flex-start;justify-content:center;flex-direction:column;gap:.8cqw;padding:3cqw 5cqw 3cqw 11cqw;color:var(--tf-ink);background:linear-gradient(130deg,#fff6e7,#f4dfbf);clip-path:polygon(6% 0,94% 0,100% 12%,100% 88%,94% 100%,6% 100%,0 78%,0 22%);filter:drop-shadow(0 2px 3px #50351540);transition:top calc(.8s * var(--tf-pace)),left calc(.8s * var(--tf-pace)),width calc(.8s * var(--tf-pace)),height calc(.8s * var(--tf-pace)),padding calc(.8s * var(--tf-pace)),transform calc(.8s * var(--tf-pace))}
+#travary-folio-motion .tf-keepsake small{font-family:system-ui,sans-serif;font-size:3.1cqw;color:#655746}
+#travary-folio-motion .tf-keepsake strong{font-size:7.1cqw;line-height:1}
+#travary-folio-motion .tf-date-range{font-size:3.5cqw}
+#travary-folio-motion .tf-eyelet{position:absolute;left:4%;top:47%;width:3cqw;height:3cqw;border:2px solid #c99444;border-radius:50%;background:#76512c;box-shadow:inset 0 1px 2px #0008,0 0 0 1px #f9d99d}
+#travary-folio-motion .tf-stamp{position:absolute;right:4%;top:44%;font:700 3.6cqw system-ui,sans-serif;text-transform:uppercase;letter-spacing:.05em;border:2px solid #c4613e;color:#b75437;transform:rotate(-10deg);padding:1cqw}
+#travary-folio-motion .tf-date-actions{position:absolute;z-index:6;top:88%;left:5%;width:90%}
+#travary-folio-motion .tf-phone button{font-family:inherit;touch-action:manipulation}
+#travary-folio-motion .tf-ticket-button{width:100%;min-height:46px;display:flex;align-items:center;justify-content:center;gap:2cqw;background:var(--tf-ink);color:var(--tf-paper);padding:3.4cqw 3cqw;font-size:5.5cqw;font-weight:700;border:0;clip-path:polygon(4% 0,96% 0,100% 12%,100% 33%,98% 41%,98% 59%,100% 67%,100% 88%,96% 100%,4% 100%,0 88%,0 67%,2% 59%,2% 41%,0 33%,0 12%);filter:drop-shadow(0 3px 3px #66492540)}
+#travary-folio-motion .tf-phone button svg{width:5cqw;height:5cqw;flex-shrink:0}
+#travary-folio-motion .tf-paper-button{width:100%;min-height:44px;background:linear-gradient(130deg,#fff6e7,#f4dfbf);color:var(--tf-ink);border:0;padding:3cqw;font-size:5cqw;font-weight:700;clip-path:polygon(5% 0,95% 0,100% 18%,100% 82%,95% 100%,5% 100%,0 82%,0 18%);filter:drop-shadow(0 2px 3px #50351525)}
+#travary-folio-motion .tf-link{color:var(--tf-ink);background:transparent;border:0;min-height:44px;font-size:3.7cqw;padding:1.5cqw 2cqw;text-decoration:underline;text-underline-offset:3px}
+#travary-folio-motion .tf-invite-actions{position:absolute;z-index:6;left:5%;width:90%;top:73%;text-align:center}
+#travary-folio-motion .tf-allowance{color:#544a3e;font:3.2cqw system-ui,sans-serif;margin:2.2cqw 0 3cqw}
+#travary-folio-motion .tf-phone[data-scene="invite"] .tf-greeting{width:43%;left:59%;top:47%;opacity:0;transform:rotate(-3deg)}
+#travary-folio-motion .tf-phone[data-scene="invite"] .tf-receiving{opacity:1}
+#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-closed{left:7%;top:54%;opacity:0;transform:rotate(5deg) scale(.6)}
+#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-open{opacity:1;transform:rotate(-4deg)}
+#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-keepsake{top:28%;left:16%;width:68%;height:10.5cqw;padding:1.3cqw 4cqw 1.3cqw 9cqw;display:grid;grid-template-columns:auto 1fr;column-gap:2cqw;transform:rotate(-2deg)}
+#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-keepsake strong{font-size:4.1cqw;align-self:center}
+#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-keepsake .tf-date-range{font:3.2cqw system-ui,sans-serif;align-self:center;white-space:nowrap}
+#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-keepsake small,#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-stamp{display:none}
+#travary-folio-motion .tf-phone[data-scene="invite"].tf-entrance .tf-open{animation:tf-unfold calc(.9s * var(--tf-pace)) ease both}
+#travary-folio-motion .tf-phone[data-scene="invite"].tf-entrance .tf-title span{animation:tf-words calc(.45s * var(--tf-pace)) ease both;animation-delay:calc(.8s * var(--tf-pace))}
+#travary-folio-motion .tf-phone[data-scene="invite"].tf-entrance .tf-title span+span{animation-delay:calc(.95s * var(--tf-pace))}
+#travary-folio-motion .tf-phone[data-scene="invite"].tf-waiting .tf-receiving{animation:tf-idle 7s ease-in-out infinite}
+#travary-folio-motion .tf-phone.tf-focus .tf-world{transform:scale(1.025);filter:blur(.6px) saturate(.94)}
+#travary-folio-motion .tf-phone.tf-focus .tf-veil{opacity:1}
+#travary-folio-motion .tf-phone.tf-focus .tf-open{width:220%;left:-96%;top:27%;transform:rotate(0deg)}
+#travary-folio-motion .tf-phone.tf-focus .tf-greeting{opacity:0}
+#travary-folio-motion .tf-phone.tf-focus .tf-receiving{width:26%;left:74%;top:20%;opacity:1;transform:rotate(-5deg)}
+#travary-folio-motion .tf-phone.tf-focus .tf-keepsake{top:22%;left:6%;width:65%;height:9.5cqw;transform:rotate(-1deg)}
+#travary-folio-motion .tf-phone.tf-focus .tf-title{font-size:10.3cqw}
+#travary-folio-motion .tf-phone.tf-focus .tf-heading{top:4.5%}
+#travary-folio-motion .tf-phone.tf-focus .tf-brand{font-size:4.3cqw;margin-bottom:2cqw}
+#travary-folio-motion .tf-back{position:absolute;top:2.3%;left:3%;z-index:8;min-height:44px;min-width:44px;background:transparent;border:0;color:var(--tf-paper);font:3.5cqw system-ui,sans-serif;padding:1cqw 2cqw}
+#travary-folio-motion .tf-work{position:absolute;z-index:7;left:17.5%;width:69%;top:40%;color:var(--tf-ink);font-family:system-ui,sans-serif;font-size:3.7cqw;line-height:1.35}
+#travary-folio-motion .tf-phone[data-scene="flight"] .tf-work{top:35.5%}
+#travary-folio-motion .tf-work h3{font-family:Georgia,serif;font-size:6.2cqw;line-height:1.1;letter-spacing:-.025em;margin:0 0 3.5cqw;font-weight:700}
+#travary-folio-motion .tf-work p{margin:2cqw 0 5cqw;font-size:3.7cqw;line-height:1.4}
+#travary-folio-motion .tf-import{padding-top:10cqw;text-align:center}
+#travary-folio-motion .tf-paper-icon{display:inline-flex;align-items:center;justify-content:center;width:15cqw;height:18cqw;border-radius:3px;background:#fff9ed;color:var(--tf-ink);box-shadow:0 2px 9px #73583125;transform:rotate(-7deg);margin-bottom:7cqw}
+#travary-folio-motion .tf-paper-icon svg{width:8cqw;height:8cqw}
+#travary-folio-motion .tf-small-button{display:block;width:100%;border:0;border-radius:5px;color:var(--tf-paper);background:var(--tf-ink);min-height:44px;padding:2.8cqw 2cqw;font:500 3.8cqw system-ui,sans-serif}
+#travary-folio-motion .tf-work .tf-example-note{font-size:3.2cqw;color:#61523f;margin:2.5cqw 0}
+#travary-folio-motion .tf-reading{padding-top:11cqw;text-align:center}
+#travary-folio-motion .tf-reading-paper{display:inline-flex;align-items:center;justify-content:center;width:16cqw;height:20cqw;background:#fff8e9;box-shadow:0 2px 10px #6b55382c;margin-bottom:7cqw;animation:tf-reading calc(.8s * var(--tf-pace)) ease both}
+#travary-folio-motion .tf-reading-paper svg{width:8cqw;height:8cqw}
+#travary-folio-motion .tf-kinds{padding-top:3cqw}
+#travary-folio-motion .tf-kind{width:100%;min-height:65px;display:flex;align-items:center;gap:3cqw;border:0;border-bottom:1px solid #ac875940;color:var(--tf-ink);background:transparent;text-align:left;font:500 4.8cqw system-ui,sans-serif;padding:3cqw 0}
+#travary-folio-motion .tf-kind>span:nth-child(2){flex:1}
+#travary-folio-motion .tf-kind small{display:block;font-size:3.2cqw;font-weight:400;margin-top:1cqw;color:#655542}
+#travary-folio-motion .tf-board{background:linear-gradient(150deg,#19364b,#0b2236);border-radius:8px;padding:4cqw 3.3cqw;color:var(--tf-paper);box-shadow:0 2px 6px #4c371943;position:relative}
+#travary-folio-motion .tf-board:before,#travary-folio-motion .tf-board:after{content:'';position:absolute;top:1.5cqw;width:1.3cqw;height:1.3cqw;border-radius:50%;background:linear-gradient(120deg,#f8d390,#9b6e2f);box-shadow:0 0 2px #0008}
+#travary-folio-motion .tf-board:before{left:1.5cqw}#travary-folio-motion .tf-board:after{right:1.5cqw}
+#travary-folio-motion .tf-board label{display:block;font-size:3.1cqw;letter-spacing:.05em;margin:3cqw 0 0}
+#travary-folio-motion .tf-board .tf-board-caption{font-size:3.1cqw;letter-spacing:.065em;margin:0 0 4cqw;color:#eedeca}
+#travary-folio-motion .tf-board input{display:block;margin-top:1.7cqw;width:100%;min-width:0;border:0;border-radius:4px;background:#fff0d9;color:var(--tf-ink);font:500 16px system-ui,sans-serif;padding:2cqw 2.2cqw;min-height:42px}
+#travary-folio-motion .tf-board-result{margin-top:4cqw;padding-top:3cqw;border-top:1px solid #d8ceb42c}
+#travary-folio-motion .tf-board .tf-board-status{font-size:3.05cqw;color:#ecdcc5;letter-spacing:.06em;margin:0 0 2.5cqw}
+#travary-folio-motion .tf-flaps{display:flex;gap:1cqw;font:500 6.3cqw ui-monospace,SFMono-Regular,monospace;letter-spacing:.03em;perspective:350px}
+#travary-folio-motion .tf-flap{display:inline-flex;align-items:center;justify-content:center;width:8cqw;height:11cqw;border-radius:3px;background:linear-gradient(#061828 48%,#031420 49%,#203344 51%,#102335 53%);box-shadow:0 1px 2px #0006}
+#travary-folio-motion .tf-flap.tf-flipping{animation:tf-flap calc(.36s * var(--tf-pace)) ease both;animation-delay:calc(var(--tf-index) * .055s * var(--tf-pace));transform-origin:50% 50%}
+#travary-folio-motion .tf-board .tf-route{margin:3cqw 0 0;font:500 5.4cqw system-ui,sans-serif;letter-spacing:.025em;display:flex;gap:3cqw}
+#travary-folio-motion .tf-board .tf-schedule{font-size:3.2cqw;margin:2cqw 0 0;color:#e0d1bb}
+#travary-folio-motion .tf-flight>.tf-small-button{margin-top:4cqw}
+#travary-folio-motion .tf-flight>.tf-link{width:100%;margin-top:.5cqw}
+#travary-folio-motion .tf-review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3cqw}
+#travary-folio-motion .tf-review-kind{font:500 3.6cqw system-ui,sans-serif;letter-spacing:.02em;color:#705b40}
+#travary-folio-motion .tf-review .tf-example-note{margin:0}
+#travary-folio-motion .tf-field{display:block;font:400 3.2cqw system-ui,sans-serif;margin-bottom:3cqw}
+#travary-folio-motion .tf-field input{display:block;width:100%;min-width:0;margin-top:1.3cqw;min-height:42px;background:#fff8ec;color:var(--tf-ink);border:1px solid #bca38266;border-radius:4px;font:400 16px system-ui,sans-serif;padding:2cqw}
+#travary-folio-motion .tf-field-row{display:grid;grid-template-columns:1.24fr .76fr;gap:2cqw}
+#travary-folio-motion .tf-field-row input{font-size:clamp(12px,3.65cqw,16px);padding-left:1.2cqw;padding-right:.5cqw}
+#travary-folio-motion .tf-review .tf-small-button{margin-top:3cqw}
+#travary-folio-motion .tf-review .tf-review-error{margin:0 0 2cqw;color:#a03929;font-size:3.3cqw}
+#travary-folio-motion .tf-review .tf-review-error{font-size:max(11px,3.3cqw)}
+#travary-folio-motion .tf-day{position:absolute;z-index:5;top:32.5%;left:7%;right:7%;color:var(--tf-paper)}
+#travary-folio-motion .tf-day-eyebrow{font:500 3.1cqw system-ui,sans-serif;letter-spacing:.08em}
+#travary-folio-motion .tf-day-title{margin:2cqw 0 0;font-size:5.4cqw}
+#travary-folio-motion .tf-booking-ticket{position:absolute;z-index:8;left:7%;top:40%;width:86%;padding:5cqw 6cqw;background:linear-gradient(130deg,#fff8ed,#f7e5c8);color:var(--tf-ink);clip-path:polygon(3% 0,97% 0,100% 7%,100% 28%,98% 34%,98% 66%,100% 72%,100% 93%,97% 100%,3% 100%,0 93%,0 72%,2% 66%,2% 34%,0 28%,0 7%);filter:drop-shadow(0 3px 3px #12344245)}
+#travary-folio-motion .tf-booking-ticket>div{display:flex;justify-content:space-between;font:500 3.5cqw system-ui,sans-serif;color:#67543f}
+#travary-folio-motion .tf-booking-ticket h3{margin:3cqw 0 0;font-size:6cqw;line-height:1.12}
+#travary-folio-motion .tf-booking-ticket p{margin:2cqw 0 0;font:3.9cqw system-ui,sans-serif}
+#travary-folio-motion .tf-card-stamp{position:absolute;right:5%;bottom:4%;font:700 3cqw system-ui,sans-serif;text-transform:uppercase;border:1.5px solid #a95836;padding:.6cqw;color:#a95836;transform:rotate(-9deg)}
+#travary-folio-motion .tf-phone[data-scene="saved"].tf-entrance .tf-booking-ticket{animation:tf-ticket-home calc(.82s * var(--tf-pace)) cubic-bezier(.2,.75,.2,1) both}
+#travary-folio-motion .tf-phone[data-scene="saved"] .tf-open{width:63%;left:-7%;top:61%;opacity:.92;transform:rotate(-8deg)}
+#travary-folio-motion .tf-phone[data-scene="saved"] .tf-receiving,#travary-folio-motion .tf-phone[data-scene="later"] .tf-receiving{opacity:1;left:56%;top:57%;width:45%;transform:rotate(4deg)}
+#travary-folio-motion .tf-phone[data-scene="saved"] .tf-greeting,#travary-folio-motion .tf-phone[data-scene="later"] .tf-greeting{opacity:0}
+#travary-folio-motion .tf-done-actions,#travary-folio-motion .tf-later-actions{position:absolute;z-index:9;left:5%;width:90%;top:83%;text-align:center}
+#travary-folio-motion .tf-done-actions .tf-ticket-button{font-size:5.9cqw}
+#travary-folio-motion .tf-later-actions .tf-ticket-button{font-size:4.5cqw}
+#travary-folio-motion .tf-phone.tf-still *,#travary-folio-motion .tf-phone.tf-still *:before,#travary-folio-motion .tf-phone.tf-still *:after{animation:none!important;transition:none!important}
+@keyframes tf-unfold{0%{opacity:0;transform:translate(-5cqw,5cqw) rotate(-9deg) scaleX(.5)}40%{opacity:.8}85%{transform:rotate(-2deg)}100%{opacity:1;transform:rotate(-4deg)}}
+@keyframes tf-words{from{opacity:0;transform:translateY(3cqw)}to{opacity:1;transform:translateY(0)}}
+@keyframes tf-idle{0%,35%,100%{transform:rotate(0)}48%{transform:translateY(-.65cqw) rotate(-1.4deg)}65%{transform:translateY(0) rotate(.5deg)}}
+@keyframes tf-reading{from{transform:translate(-20cqw,-10cqw) rotate(-18deg);opacity:0}to{transform:rotate(-3deg);opacity:1}}
+@keyframes tf-flap{0%{transform:rotateX(-85deg);opacity:.15}100%{transform:rotateX(0);opacity:1}}
+@keyframes tf-ticket-home{0%{transform:translate(5cqw,20cqw) scale(.74) rotate(-4deg)}70%{transform:translateY(-1cqw) scale(1.012) rotate(.4deg)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){#travary-folio-motion .tf-phone *,#travary-folio-motion .tf-phone *:before,#travary-folio-motion .tf-phone *:after{animation:none!important;transition:none!important}}
+@media(max-width:360px){#travary-folio-motion .tf-phone{min-height:680px}#travary-folio-motion .tf-phone.tf-focus .tf-open{width:310%;left:-145%;top:19%}#travary-folio-motion .tf-subtitle,#travary-folio-motion .tf-phone:not([data-scene="dates"]) .tf-keepsake .tf-date-range,#travary-folio-motion .tf-keepsake small,#travary-folio-motion .tf-stamp,#travary-folio-motion .tf-day-eyebrow,#travary-folio-motion .tf-booking-ticket>div,#travary-folio-motion .tf-card-stamp{font-size:11px}}
+@media(max-width:360px){#travary-folio-motion .tf-phone{border-radius:16px}#travary-folio-motion .tf-allowance,#travary-folio-motion .tf-example-note,#travary-folio-motion .tf-work .tf-example-note,#travary-folio-motion .tf-kind small,#travary-folio-motion .tf-board label,#travary-folio-motion .tf-board .tf-board-status,#travary-folio-motion .tf-board .tf-board-caption,#travary-folio-motion .tf-board .tf-schedule,#travary-folio-motion .tf-field{font-size:11px}#travary-folio-motion .tf-work h3{font-size:19px}#travary-folio-motion .tf-field-row{grid-template-columns:1fr}#travary-folio-motion .tf-field-row .tf-field{margin-bottom:2cqw}#travary-folio-motion .tf-review{margin-top:-2cqw}#travary-folio-motion .tf-review h3{margin-bottom:2cqw}#travary-folio-motion .tf-field input{min-height:40px}#travary-folio-motion .tf-work{left:15%;width:72%}#travary-folio-motion .tf-board input{min-height:40px}#travary-folio-motion .tf-review .tf-field{margin-bottom:2cqw}}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('travary-folio-motion');
+  const phone=root.querySelector('.tf-phone');
+  const q=(s)=>root.querySelector(s);
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const tuning={pace:1,quietIdle:true};
+  const known=['dates','invite','import','reading','manual','flight','review','saved','later'];
+  let scene='dates',origin='import',kind='Stay',still=false,token=0,found=false;
+  const timers=new Set();
+  const cancel=()=>{token++;for(const t of timers)clearTimeout(t);timers.clear();};
+  const later=(fn,ms)=>{const guard=token;const t=setTimeout(()=>{timers.delete(t);if(guard===token)fn();},ms);timers.add(t);};
+  const isQuiet=()=>still||reduced.matches;
+  const titles={dates:['Dates are','in the <em>bag.</em>',"Next, let's bring your plans together."],invite:['Got a <em>booking</em>','for me?',"A flight, stay or activity—let's put your first booking in your plan."],import:['A little paper.','A big <em>holiday.</em>','Bring your booking into the folio.'],reading:['A little paper.','A big <em>holiday.</em>','Travi is making room for your plans.'],manual:['Your first','<em>booking.</em>','Flight, stay or something fun?'],flight:['Our holiday','takes <em>flight.</em>','Find the schedule. Check the details.'],review:['Make it','<em>yours.</em>','Check the details before adding it.'],saved:['One plan.','A real <em>start.</em>','Your booking, right where you need it.'],later:['Your holiday','has a <em>home.</em>','Add plans whenever you are ready.']};
+  const status={dates:'Completed dates → bring in a booking',invite:'Date tag kept · folio offered · choices ready',import:'Folio comes forward · preview the example PDF',reading:'Example paper enters the folio',manual:'Folio comes forward · choose Flight, Stay or Activity',flight:'Flight entry · split-flap details · example data',review:'Motion settles · editable review',saved:'The same example booking moves onto its date',later:'Holiday context kept · no booking required'};
+  const show=(s,b)=>q(s).hidden=!b;
+  function saveState(){if(!window.openai?.setWidgetState)return;Promise.resolve(window.openai.setWidgetState({modelContent:{motionStudy:'Travary folio',scene,route:origin,bookingKind:kind},privateContent:{scene,origin,kind,still,booking:{title:q('.tf-booking-title').value,place:q('.tf-booking-place').value,time:q('.tf-booking-time').value,date:q('.tf-booking-date').value}}})).catch(()=>{});}
+  function render(next,animate=true){
+    cancel();scene=known.includes(next)?next:'dates';
+    phone.dataset.scene=scene;
+    phone.classList.toggle('tf-focus',['import','reading','manual','flight','review'].includes(scene));
+    phone.classList.toggle('tf-still',isQuiet());
+    phone.classList.remove('tf-entrance','tf-waiting');
+    q('.tf-title').innerHTML=titles[scene].slice(0,2).map(x=>'<span>'+x+'</span>').join('');
+    q('.tf-subtitle').textContent=titles[scene][2];
+    show('.tf-date-actions',scene==='dates');show('.tf-invite-actions',scene==='invite');
+    show('.tf-back',['import','reading','manual','flight','review'].includes(scene));
+    show('.tf-work',['import','reading','manual','flight','review'].includes(scene));
+    for(const s of ['import','reading','kinds','flight','review'])show('.tf-'+s,scene===(s==='kinds'?'manual':s));
+    show('.tf-day',scene==='saved');show('.tf-booking-ticket',scene==='saved');show('.tf-done-actions',scene==='saved');show('.tf-later-actions',scene==='later');
+    q('[data-motion-status]').textContent=status[scene];
+    if(animate&&!isQuiet()){void phone.offsetWidth;phone.classList.add('tf-entrance');}
+    if(scene==='invite'&&tuning.quietIdle&&!isQuiet())later(()=>phone.classList.add('tf-waiting'),1500*tuning.pace);
+    if(scene==='reading')later(()=>{fillReview('Stay','Palm Garden Stay','Ubud, Bali','15:00','2026-12-12');render('review');saveState();},isQuiet()?150:1250*tuning.pace);
+    q('[data-review="still"]').setAttribute('aria-pressed',String(still));
+    phone.style.setProperty('--tf-pace',tuning.pace);
+  }
+  function fillReview(nextKind,title,place,time,date){kind=nextKind;q('.tf-review-kind').textContent=kind;q('.tf-booking-title').value=title;q('.tf-booking-place').value=place;q('.tf-booking-time').value=time;q('.tf-booking-date').value=date;q('.tf-review-error').hidden=true;}
+  function flaps(value,animate){const el=q('.tf-flaps');el.replaceChildren();el.setAttribute('aria-label',value);for(const [i,ch]of Array.from(value).entries()){const tile=document.createElement('span');tile.className='tf-flap'+(animate&&!isQuiet()?' tf-flipping':'');tile.style.setProperty('--tf-index',i);tile.textContent=ch;tile.setAttribute('aria-hidden','true');el.append(tile);}}
+  function resetFlight(){found=false;q('.tf-board-status').textContent='READY TO FIND';flaps('------',false);show('.tf-route',false);show('.tf-schedule',false);q('[data-action="find"]').textContent='Preview finding a flight';q('[data-action="find"]').disabled=false;}
+  function findFlight(){
+    const number=q('.tf-flight-number').value.trim().toUpperCase().replace(/\s/g,'');
+    const day=q('.tf-flight-date').value;
+    if(found){origin='flight';fillReview('Flight',number||'TV123','Sydney → Denpasar','09:20',day);render('review');saveState();return;}
+    if(!number||!day){q('.tf-board-status').textContent='ADD A NUMBER AND DATE';return;}
+    cancel();q('.tf-board-status').textContent='PREVIEWING EXAMPLE';q('[data-action="find"]').disabled=true;
+    later(()=>{found=true;flaps(number.slice(0,8),true);q('.tf-board-status').textContent='EXAMPLE FLIGHT FOUND';show('.tf-route',true);show('.tf-schedule',true);q('[data-action="find"]').textContent='Use this example flight';q('[data-action="find"]').disabled=false;q('[data-motion-status]').textContent='Example route settles · use it to open an editable draft';},isQuiet()?50:800*tuning.pace);
+  }
+  function useManual(nextKind){origin='manual';if(nextKind==='Flight')fillReview('Flight','My flight','Sydney → Denpasar','09:20',q('.tf-flight-date').value||'2026-12-12');else if(nextKind==='Activity')fillReview('Activity','Sunset boat trip','Bali','17:00','2026-12-13');else fillReview('Stay','Palm Garden Stay','Ubud, Bali','15:00','2026-12-12');render('review');saveState();}
+  root.addEventListener('click',(event)=>{
+    const button=event.target.closest('button');if(!button||!root.contains(button))return;
+    const action=button.dataset.action||button.dataset.review;
+    if(action==='invite'){render('invite');saveState();}
+    else if(action==='import'){origin='import';render('import');saveState();}
+    else if(action==='manual'){origin='manual';render('manual');saveState();}
+    else if(action==='sample'){render('reading');saveState();}
+    else if(action==='flight'){origin='flight';resetFlight();render('flight');saveState();}
+    else if(action==='find')findFlight();
+    else if(action==='stay')useManual('Stay');
+    else if(action==='activity')useManual('Activity');
+    else if(action==='flight-manual')useManual('Flight');
+    else if(action==='save')saveBooking();
+    else if(action==='back'){render(scene==='flight'||(scene==='review'&&origin==='manual')?'manual':scene==='review'&&origin==='flight'?'flight':scene==='review'&&origin==='import'?'import':'invite');saveState();}
+    else if(action==='later'){render('later');saveState();}
+    else if(action==='open-booking'){render('review',false);saveState();}
+    else if(action==='replay'){render('dates',false);later(()=>{render('invite');saveState();},isQuiet()?100:700);}
+    else if(action==='still'){still=!still;render(scene,false);saveState();}
+  });
+  function saveBooking(){
+    const day=q('.tf-booking-date').value;const title=q('.tf-booking-title').value.trim();const place=q('.tf-booking-place').value.trim();const time=q('.tf-booking-time').value;
+    const error=q('.tf-review-error');
+    if(!title||!place||!day||!time){error.textContent='Add the booking details first.';error.hidden=false;return;}
+    if(day<'2026-12-12'||day>'2026-12-19'){error.textContent='Outside this holiday. Choose 12–19 Dec to preview.';error.hidden=false;return;}
+    q('.tf-card-kind').textContent=kind;q('.tf-card-title').textContent=title;q('.tf-card-place').textContent=place;q('.tf-card-time').textContent=time;
+    const date=new Date(day+'T12:00:00');q('.tf-day-title').textContent=new Intl.DateTimeFormat('en-AU',{weekday:'long',day:'numeric',month:'long'}).format(date);
+    q('.tf-booking-ticket').setAttribute('aria-label',`Example ${kind.toLowerCase()}: ${title}, ${day}, ${time}, ${place}`);
+    render('saved');saveState();
+  }
+  q('.tf-review').addEventListener('submit',(e)=>{e.preventDefault();saveBooking();});
+  q('.tf-review').addEventListener('keydown',(e)=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();saveBooking();}});
+  for(const selector of ['.tf-flight-number','.tf-flight-date'])q(selector).addEventListener('input',()=>{cancel();resetFlight();});
+  reduced.addEventListener('change',()=>render(scene,false));
+  document.addEventListener('visibilitychange',()=>{phone.classList.toggle('tf-still',document.hidden||isQuiet());if(document.hidden&&scene!=='reading'){cancel();phone.classList.remove('tf-waiting');}else if(!document.hidden&&scene==='invite'&&tuning.quietIdle&&!isQuiet())phone.classList.add('tf-waiting');});
+  function restore(saved){const data=saved?.privateContent;if(!data||!known.includes(data.scene))return;if(data.scene===scene&&data.origin===origin&&data.kind===kind&&Boolean(data.still)===still)return;origin=['manual','flight','import'].includes(data.origin)?data.origin:'import';kind=['Stay','Activity','Flight'].includes(data.kind)?data.kind:'Stay';still=Boolean(data.still);const b=data.booking;if(b&&typeof b.title==='string'&&typeof b.place==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(b.date)&&/^\d{2}:\d{2}$/.test(b.time))fillReview(kind,b.title.slice(0,55),b.place.slice(0,55),b.time,b.date);else q('.tf-review-kind').textContent=kind;render(data.scene==='reading'?'import':data.scene==='saved'?'invite':data.scene,false);}
+  render('dates',false);restore(window.openai?.widgetState);
+  window.addEventListener('openai:set_globals',(event)=>restore(event.detail?.globals?.widgetState));
+  if(globalThis.Tweak){const tweak=new Tweak({container:phone,onChange:()=>{phone.style.setProperty('--tf-pace',tuning.pace);phone.classList.toggle('tf-waiting',scene==='invite'&&tuning.quietIdle&&!isQuiet());}});tweak.addSlider(tuning,'pace',{label:'Movement duration',min:.7,max:1.6,step:.1,unit:'×',reference:'motion.pace'});tweak.addToggle(tuning,'quietIdle',{label:'Quiet waiting motion',reference:'motion.quietIdle'});}
+})();
+</script>

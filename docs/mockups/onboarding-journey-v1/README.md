@@ -52,4 +52,4 @@ This is a local browser prototype, not an installed Flutter flow. It does not cr
 
 ## Next unit
 
-Build the **booking folio → review → first itinerary day** interaction with the actual product's import/manual-booking capabilities. Show a useful outcome before offering Holiday Pass or Annual Pass. Keep an honest free continuation. Once the connected story and motion are reviewed, port the approved flow into Flutter rather than embedding this HTML prototype.
+The [next-scene brief, “Got a booking for me?”](../../ONBOARDING_BOOKING_FOLIO.md), defines **booking folio → review → first itinerary day**, with screenshot/PDF, manual and later paths. Reuse the actual product's import/manual-booking capabilities. Show a useful outcome before offering Holiday Pass or Annual Pass. Keep an honest free continuation. Country scenery is the default expansion queue; selected city/region art is optional. Once the connected story and motion are reviewed, port the approved flow into Flutter rather than embedding this HTML prototype.

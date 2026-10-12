@@ -1,0 +1,281 @@
+{
+  "reference": {
+    "left": 479.0,
+    "right": 871.0,
+    "bottom": 1176.0,
+    "height": 634.0
+  },
+  "camera_scale": 0.95,
+  "01-empty": {
+    "folio": "canonical"
+  },
+  "02-hello": {
+    "footing": {
+      "left": 403.0,
+      "right": 793.0,
+      "bottom": 1145.0,
+      "height": 652.0
+    },
+    "scale": 0.9888,
+    "anchor": [
+      [
+        598.0,
+        1145.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "03-wow": {
+    "footing": {
+      "left": 620.0,
+      "right": 810.0,
+      "bottom": 1175.0,
+      "height": 641.0
+    },
+    "scale": 0.9891,
+    "anchor": [
+      [
+        810.0,
+        1175.0
+      ],
+      [
+        871.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "04-tag": {
+    "footing": {
+      "left": 437.0,
+      "right": 842.0,
+      "bottom": 1215.0,
+      "height": 687.0
+    },
+    "scale": 0.9454,
+    "anchor": [
+      [
+        639.5,
+        1215.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "05-toss": {
+    "footing": {
+      "left": 445.0,
+      "right": 805.0,
+      "bottom": 1154.0,
+      "height": 626.0
+    },
+    "scale": 1.0508,
+    "anchor": [
+      [
+        625.0,
+        1154.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "06-folio-open": {
+    "footing": {
+      "left": 400.0,
+      "right": 825.0,
+      "bottom": 1227.0,
+      "height": 767.0
+    },
+    "scale": 0.8745,
+    "anchor": [
+      [
+        612.5,
+        1227.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "carried"
+  },
+  "07-folio-full": {
+    "untouched": true
+  },
+  "08-reading": {
+    "footing": {
+      "left": 479.0,
+      "right": 871.0,
+      "bottom": 1175.0,
+      "height": 634.0
+    },
+    "scale": 1.0,
+    "anchor": [
+      [
+        675.0,
+        1175.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "09-card": {
+    "footing": {
+      "left": 477.0,
+      "right": 869.0,
+      "bottom": 1176.0,
+      "height": 654.0
+    },
+    "scale": 0.9847,
+    "anchor": [
+      [
+        673.0,
+        1176.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "10-proud": {
+    "footing": {
+      "left": 442.0,
+      "right": 847.0,
+      "bottom": 1167.0,
+      "height": 639.0
+    },
+    "scale": 0.98,
+    "anchor": [
+      [
+        644.5,
+        1167.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "id-tag": {
+    "camera_only": true
+  },
+  "11-envelope": {
+    "camera_only": true
+  },
+  "12-linked": {
+    "footing": {
+      "left": 413.0,
+      "right": 847.0,
+      "bottom": 1215.0,
+      "height": 696.0
+    },
+    "scale": 0.9071,
+    "anchor": [
+      [
+        630.0,
+        1215.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "carried"
+  },
+  "13-present": {
+    "footing": {
+      "left": 478.0,
+      "right": 870.0,
+      "bottom": 1174.0,
+      "height": 633.0
+    },
+    "scale": 1.0008,
+    "anchor": [
+      [
+        674.0,
+        1174.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "14-cheer": {
+    "footing": {
+      "left": 467.0,
+      "right": 843.0,
+      "bottom": 1174.0,
+      "height": 628.0
+    },
+    "scale": 1.0261,
+    "anchor": [
+      [
+        655.0,
+        1174.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  },
+  "15-wave": {
+    "footing": {
+      "left": 400.0,
+      "right": 762.0,
+      "bottom": 1179.0,
+      "height": 645.0
+    },
+    "scale": 1.0329,
+    "anchor": [
+      [
+        581.0,
+        1179.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "carried"
+  },
+  "16-oops": {
+    "footing": {
+      "left": 424.0,
+      "right": 822.0,
+      "bottom": 1175.0,
+      "height": 652.0
+    },
+    "scale": 0.9787,
+    "anchor": [
+      [
+        623.0,
+        1175.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
+  }
+}

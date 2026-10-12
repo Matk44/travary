@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-07",
+  "purpose": "Existing-art choreography review. No new artwork, film or native app change.",
+  "fragmentBytes": 503463,
+  "fragmentPath": "/Users/khairofamily/.codex/visualizations/2026/10/04/01a10645-84b8-7482-bc0f-5b5d42d880ca/travary-booking-handoff.html",
+  "masters": [
+    {
+      "path": "assets/onboarding/bali-stage-prop-free-v1.png",
+      "sha256": "f61b467542e131d32ecfe85d9a82555101a33f5837e275a7c141dc8f56dd5f44"
+    },
+    {
+      "path": "assets/onboarding/closed-folio-v1.png",
+      "sha256": "4633f83da86ea6f3fea7ce6f1999f48c88adec59716f8ad9f6a6ea60b6cc3abc"
+    },
+    {
+      "path": "assets/onboarding/travi-receiving-v1.png",
+      "sha256": "e407f2476a4c3fb5472dd6115c67dd8c772739f03c110e47a97f1b7e1f7c8a54"
+    },
+    {
+      "path": "assets/onboarding/travi-handoff-v1.png",
+      "sha256": "b9b06c6d5de10c730b73b3857a0271adc8c0b083303d339bf2dc870708169671"
+    },
+    {
+      "path": "assets/art/common/coastal_resort_room_card.png",
+      "sha256": "b55593f31ec02d8560eb17d0a1de18d12ea92227579b331a2e088ca779ff2221"
+    },
+    {
+      "path": "assets/onboarding/pass-desk-art-v2.png",
+      "sha256": "09935c9bb4ebb226aef6821eabbd091e6c342d4562eb9584815c15f64875eeba"
+    }
+  ],
+  "deliveries": [
+    {
+      "key": "STAGE",
+      "path": "docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.webp",
+      "bytes": 77020
+    },
+    {
+      "key": "CLOSED",
+      "path": "docs/mockups/onboarding-folio-motion-v1/closed-folio-v1.webp",
+      "bytes": 23464
+    },
+    {
+      "key": "RECEIVING",
+      "path": "docs/mockups/onboarding-folio-motion-v1/travi-receiving-delivery.webp",
+      "bytes": 52414
+    },
+    {
+      "key": "PROUD",
+      "path": "docs/mockups/onboarding-booking-handoff-v1/travi-proud-delivery.webp",
+      "bytes": 55062
+    },
+    {
+      "key": "ROOM",
+      "path": "docs/mockups/onboarding-booking-handoff-v1/room-card-delivery.webp",
+      "bytes": 28564
+    },
+    {
+      "key": "ATLAS",
+      "path": "docs/mockups/onboarding-booking-handoff-v1/pass-desk-delivery.webp",
+      "bytes": 113550
+    }
+  ],
+  "newDeliveryEncoding": "cwebp quality 82; proud pose width 660; atlas and room card width 720; original PNGs unchanged.",
+  "characterMotion": "Whole-layer translation/rotation and pose crossfade; not independently animated eyes/hands.",
+  "services": "Example data only. No import, actual save, live lookup, auth, RevenueCat or purchase."
+}

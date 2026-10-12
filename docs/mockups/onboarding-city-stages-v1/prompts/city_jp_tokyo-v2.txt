@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: clean Tokyo onboarding scenery plate revision
+Primary request: Reduce the scale and adjust the vertical position of ONLY Tokyo Tower within the city scenery, preserving the red-and-white lattice structure and its recognisable proportions, so the TOP of its antenna is at approximately 29% from the top of the full image (all tower details below 27%). Fill the vacated upper area with the same quiet embossed petrol-teal paper sky. Keep the tower left of centre and integrated plausibly with the city, still recognisable. Do not move the rest of the city.
+Input 1: Tokyo scenery plate edit target.
+Invariants: preserve full portrait canvas/aspect, cherry blossom branches, city/temple/river layers, warm physical light, dimensional folded paper materials, curved petrol-teal stage wings and cream floor boundary near 65%; keep the whole lower floor calm and clear. Preserve right foreground clearance for separate Travi.
+Constraints: no people, character, character shadow, folio, loose tickets, lettering, signs, UI, prices, dates, labels, logos, flags, watermark or device frame. One complete opaque portrait scenery plate.

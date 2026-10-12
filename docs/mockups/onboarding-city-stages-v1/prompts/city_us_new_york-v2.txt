@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: clean city scenery plate revision
+Primary request: Adjust ONLY the Manhattan skyline's scale/vertical placement within the middle scenery band so the TOP of the Empire State Building spire is at approximately 29% from the top, and every tall skyline landmark stays BELOW 27% from the top. Preserve the buildings' recognisable relative proportions, Empire State silhouette, other skyline cues, bridge and river. Restore the area above the reduced skyline with matching quiet embossed petrol-teal paper sky. Keep the skyline expansive across the middle theatre; do not turn it into a small postcard.
+Input 1: existing city scenery plate edit target.
+Invariants: Preserve the original portrait canvas/aspect, city geography, rich dimensional folded cardstock, cut paper edges, embossing, warm physical light, quiet central teal upper sky, curved theatre side wings, EXACT existing cream floor boundary near 65% and all lower floor pixels. Keep close bulky objects clear of right foreground for the separate Travi. Do not change any unrelated element.
+Constraints: no added people, character, mascot, character shadow, folio, loose tickets, lettering, UI, prices, dates, labels, logos, flags or watermark. One complete opaque portrait plate.

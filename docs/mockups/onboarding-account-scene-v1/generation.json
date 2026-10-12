@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-09",
+  "tool": "built-in image_gen.imagegen",
+  "status": "Owner approved 9 October 2026; motion authorized",
+  "runtime_changed": false,
+  "motion_generated": false,
+  "references": [
+    "../onboarding-booking-handoff-v1/proof-text-free-v1.png",
+    "../onboarding-booking-handoff-v1/pass-text-free-v1.png"
+  ],
+  "prompts": "PROMPTS.json",
+  "assets": [
+    {
+      "path": "account-invitation-v1.png",
+      "width": 941,
+      "height": 1672,
+      "sha256": "1c0da19d83c4b403c48d215fd924313fd69e076e5e24225092c39fcc32df6da6",
+      "generated_source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-7fe7a2f0-91bd-4395-ad5f-dc8d9c39bc98.png"
+    },
+    {
+      "path": "email-link-entry-v1.png",
+      "width": 853,
+      "height": 1844,
+      "sha256": "a3324d7d1126ca21c74b3d155963a110698124da7b52b589338ee8e405f2bfc2",
+      "generated_source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-a6fe23ff-8cd4-46fc-a91e-13d3455c8a76.png"
+    },
+    {
+      "path": "transition-keyframes-v1.png",
+      "width": 1881,
+      "height": 836,
+      "sha256": "57d077f410768302ec7eecc194e3304c787c04217d1889cd6b0bb7ac535c96a2",
+      "generated_source": "/Users/khairofamily/.codex/generated_images/01a10645-84b8-7482-bc0f-5b5d42d880ca/exec-0db9a9eb-a515-423e-b388-cd230d3a72e1.png"
+    }
+  ],
+  "approvalDate": "2026-10-09"
+}

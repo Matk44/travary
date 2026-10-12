@@ -1,0 +1,591 @@
+{
+  "wave": 2,
+  "date": "2026-10-11",
+  "mode": "built-in imagegen",
+  "brief": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_cards.md",
+  "templates": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references",
+  "mechanical_export": {
+    "script": "/Users/khairofamily/AndroidStudioProjects/Travary/tmp/imagegen/city-cards-wave2/export.cjs",
+    "notes": "Uses generated artwork with original template alpha and protected shell pixels; scenes uniformly fitted into blank-safe regions. Original decorative geometry retained and recoloured. Arizona reservation generated source width 1984; exported canvas stays template width 1983."
+  },
+  "records": [
+    {
+      "place": "washington_dc",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-4bb30aff-542e-4cd2-b4a1-c74bdfa8683a.png",
+      "palette": [
+        [
+          33,
+          70,
+          91
+        ],
+        [
+          195,
+          103,
+          115
+        ],
+        [
+          216,
+          164,
+          77
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Washington DC.\nPalette: navy and steel blue, cherry-blossom pink, warm ivory and gold.\nPrimary request: replace the original illustrated scene with the US Capitol dome within a balanced low skyline, the slender Washington Monument, the low classical Lincoln Memorial, abundant cherry blossom around the reflective Tidal Basin; integrated layered spring landscape, no flags on any building.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/washington_dc/featured_ticket.png"
+    },
+    {
+      "place": "washington_dc",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-f86d23b7-5be1-4411-914f-c89bb86d1c05.png",
+      "palette": [
+        [
+          33,
+          70,
+          91
+        ],
+        [
+          195,
+          103,
+          115
+        ],
+        [
+          216,
+          164,
+          77
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Washington DC.\nPalette: navy and steel blue, cherry-blossom pink, warm ivory and gold.\nPrimary request: replace the original illustrated scene with hotel view across the Tidal Basin, soft cherry-blossom branches, the Washington Monument on the distant bank and low Washington rooftops; warm low sun.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/washington_dc/room_card.png"
+    },
+    {
+      "place": "washington_dc",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-47db6b2b-b946-4e02-b4ce-59437d0fd740.png",
+      "palette": [
+        [
+          33,
+          70,
+          91
+        ],
+        [
+          195,
+          103,
+          115
+        ],
+        [
+          216,
+          164,
+          77
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Washington DC.\nPalette: navy and steel blue, cherry-blossom pink, warm ivory and gold.\nPrimary request: replace the original illustrated scene with the slender Washington Monument reflected in the Tidal Basin, framed by pink cherry-blossom branches.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/washington_dc/reservation_card.png"
+    },
+    {
+      "place": "chicago",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-8d59bbfd-a6d8-4e77-ad77-369a3260b100.png",
+      "palette": [
+        [
+          28,
+          70,
+          100
+        ],
+        [
+          185,
+          80,
+          47
+        ],
+        [
+          220,
+          165,
+          50
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Chicago.\nPalette: lake and steel blues, brick rust, golden sunlight and navy.\nPrimary request: replace the original illustrated scene with Chicago skyline with Willis Tower among other towers, Chicago River bridges, a small elevated train, Buckingham Fountain, and the Navy Pier Ferris wheel toward Lake Michigan; coherent layered city and lake montage; absolutely NO Cloud Gate sculpture.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/chicago/featured_ticket.png"
+    },
+    {
+      "place": "chicago",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-a00fe73f-b80a-4c06-9c7d-c88256086f55.png",
+      "palette": [
+        [
+          28,
+          70,
+          100
+        ],
+        [
+          185,
+          80,
+          47
+        ],
+        [
+          220,
+          165,
+          50
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Chicago.\nPalette: lake and steel blues, brick rust, golden sunlight and navy.\nPrimary request: replace the original illustrated scene with hotel view of a Chicago River bridge, the river between varied city towers including a modest Willis Tower in the skyline, a glimpse of blue Lake Michigan beyond, warm low sun.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/chicago/room_card.png"
+    },
+    {
+      "place": "chicago",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-f5618b56-2fee-4975-9e43-20e6abb218b4.png",
+      "palette": [
+        [
+          28,
+          70,
+          100
+        ],
+        [
+          185,
+          80,
+          47
+        ],
+        [
+          220,
+          165,
+          50
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Chicago.\nPalette: lake and steel blues, brick rust, golden sunlight and navy.\nPrimary request: replace the original illustrated scene with Buckingham Fountain with layered jets, the Chicago skyline and a glimpse of Lake Michigan behind; no Cloud Gate.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/chicago/reservation_card.png"
+    },
+    {
+      "place": "boston",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-6d309a8e-947b-4445-be16-2bac1cf8f8e2.png",
+      "palette": [
+        [
+          30,
+          74,
+          100
+        ],
+        [
+          176,
+          71,
+          48
+        ],
+        [
+          214,
+          157,
+          48
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Boston.\nPalette: harbour blue, brownstone brick red, autumn gold, ivory and navy.\nPrimary request: replace the original illustrated scene with Boston's Old North Church steeple among brick brownstones, Zakim Bridge, a tall ship in the harbour and golden autumn leaves; balanced layered harbour city montage.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/boston/featured_ticket.png"
+    },
+    {
+      "place": "boston",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-a9417608-342b-49bc-8326-4e9bb41ec66a.png",
+      "palette": [
+        [
+          30,
+          74,
+          100
+        ],
+        [
+          176,
+          71,
+          48
+        ],
+        [
+          214,
+          157,
+          48
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Boston.\nPalette: harbour blue, brownstone brick red, autumn gold, ivory and navy.\nPrimary request: replace the original illustrated scene with hotel view across brick brownstone rooftops and autumn trees toward the Old North Church steeple and harbour, a distant glimpse of Zakim Bridge.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/boston/room_card.png"
+    },
+    {
+      "place": "boston",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-8dc5d509-e751-41c2-bb09-88096da4ae16.png",
+      "palette": [
+        [
+          30,
+          74,
+          100
+        ],
+        [
+          176,
+          71,
+          48
+        ],
+        [
+          214,
+          157,
+          48
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Boston.\nPalette: harbour blue, brownstone brick red, autumn gold, ivory and navy.\nPrimary request: replace the original illustrated scene with a tall sailing ship in Boston harbour with the Zakim Bridge and small brick skyline behind; warm autumn light.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/boston/reservation_card.png"
+    },
+    {
+      "place": "new_orleans",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-bdb6437b-a5c0-4a9a-85fc-29e789ed271d.png",
+      "palette": [
+        [
+          21,
+          82,
+          74
+        ],
+        [
+          190,
+          82,
+          51
+        ],
+        [
+          218,
+          163,
+          57
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: New Orleans.\nPalette: deep evergreen, warm brick coral, gold, cream and navy.\nPrimary request: replace the original illustrated scene with St. Louis Cathedral's three steeples among French Quarter roofs and ornate iron balconies, a small green streetcar on the street, a paddle steamer on the Mississippi, warm low sun; balanced layered city and river montage.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/new_orleans/featured_ticket.png"
+    },
+    {
+      "place": "new_orleans",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-567020bf-66e9-4610-becc-8ad8d71ceb95.png",
+      "palette": [
+        [
+          21,
+          82,
+          74
+        ],
+        [
+          190,
+          82,
+          51
+        ],
+        [
+          218,
+          163,
+          57
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: New Orleans.\nPalette: deep evergreen, warm brick coral, gold, cream and navy.\nPrimary request: replace the original illustrated scene with hotel view past a French Quarter iron balcony toward warm historic rooftops and the distant St. Louis Cathedral, lush green accents and low golden sun; no room interior.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/new_orleans/room_card.png"
+    },
+    {
+      "place": "new_orleans",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-faac59bd-a20a-430b-9981-7f03e8832404.png",
+      "palette": [
+        [
+          21,
+          82,
+          74
+        ],
+        [
+          190,
+          82,
+          51
+        ],
+        [
+          218,
+          163,
+          57
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: New Orleans.\nPalette: deep evergreen, warm brick coral, gold, cream and navy.\nPrimary request: replace the original illustrated scene with a green streetcar passing French Quarter buildings with delicate iron balconies; streetcar destination boards, route plates and buildings completely blank.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/new_orleans/reservation_card.png"
+    },
+    {
+      "place": "nashville",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-d8f2eb0f-ec6f-4c73-bd9e-a7b522481931.png",
+      "palette": [
+        [
+          27,
+          68,
+          97
+        ],
+        [
+          183,
+          83,
+          104
+        ],
+        [
+          220,
+          157,
+          51
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Nashville.\nPalette: navy and steel blue, restrained rose neon, copper and warm gold.\nPrimary request: replace the original illustrated scene with Broadway at dusk with glowing abstract neon shapes WITHOUT words, a modest guitar motif integrated into the foreground, the pedestrian bridge crossing the Cumberland and a varied Nashville skyline behind; a balanced musical river city montage, no logos or readable signs.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/nashville/featured_ticket.png"
+    },
+    {
+      "place": "nashville",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-2243764b-2e86-47e5-ae8c-eb009f7ed09a.png",
+      "palette": [
+        [
+          27,
+          68,
+          97
+        ],
+        [
+          183,
+          83,
+          104
+        ],
+        [
+          220,
+          157,
+          51
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Nashville.\nPalette: navy and steel blue, restrained rose neon, copper and warm gold.\nPrimary request: replace the original illustrated scene with hotel view across the Cumberland River and pedestrian bridge to Nashville's varied skyline at warm dusk, distant rose and gold city lights, no readable neon or signage.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "correction_prompt": "Use case: precise-object-edit\nEdit the supplied finished Nashville hotel room key card. KEEP exactly the 1774 x 887 canvas, card shape, transparency, shadows, decorative stripe, blank end cap and Nashville river/bridge/skyline illustration.\nOnly correction: the paper from x=0 through x=749 must be completely EMPTY ivory textured paper at every height. Remove every trace of sky, orange cloud, tiny dots from scene fade, skyline, trees, reflection or ghost image in that left region. Blend clean matching ivory paper grain across it, without seams. Maintain the existing soft illustration edge to the right of x=750; retain the river/bridge scene at x=760..1484.\nNo text, letters, numbers, logos or flags. Return one card, exact same size.",
+      "previous_source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-2a2b1927-ee41-4786-9c51-2abd40ef05d0.png",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/nashville/room_card.png"
+    },
+    {
+      "place": "nashville",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-899c38d2-5126-416c-b7bc-64496e2108ce.png",
+      "palette": [
+        [
+          27,
+          68,
+          97
+        ],
+        [
+          183,
+          83,
+          104
+        ],
+        [
+          220,
+          157,
+          51
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Nashville.\nPalette: navy and steel blue, restrained rose neon, copper and warm gold.\nPrimary request: replace the original illustrated scene with a wooden acoustic guitar beside the Cumberland riverfront with the pedestrian bridge and small skyline behind; no lettering or maker's marks.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/nashville/reservation_card.png"
+    },
+    {
+      "place": "seattle",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-429018b3-6f28-4e31-a536-27eaff3cbb97.png",
+      "palette": [
+        [
+          24,
+          79,
+          83
+        ],
+        [
+          181,
+          87,
+          51
+        ],
+        [
+          217,
+          164,
+          57
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Seattle.\nPalette: sound blue, deep forest green, warm gold, muted terracotta and ivory.\nPrimary request: replace the original illustrated scene with snowy Mount Rainier over the sound, green-and-white ferries, Seattle's waterfront market buildings with blank awnings, and a modest varied city skyline; balanced mountain and harbour travel-poster montage; NO Space Needle anywhere and no market lettering.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/seattle/featured_ticket.png"
+    },
+    {
+      "place": "seattle",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-c29e4278-d47b-4883-a69d-16a85e42982f.png",
+      "palette": [
+        [
+          24,
+          79,
+          83
+        ],
+        [
+          181,
+          87,
+          51
+        ],
+        [
+          217,
+          164,
+          57
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Seattle.\nPalette: sound blue, deep forest green, warm gold, muted terracotta and ivory.\nPrimary request: replace the original illustrated scene with hotel view over the blue sound, a small green-and-white ferry, Mount Rainier in the distance and a sliver of Seattle's waterfront skyline; no Space Needle.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/seattle/room_card.png"
+    },
+    {
+      "place": "seattle",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-fae63eb5-cf35-4da4-8329-3a78ef884634.png",
+      "palette": [
+        [
+          24,
+          79,
+          83
+        ],
+        [
+          181,
+          87,
+          51
+        ],
+        [
+          217,
+          164,
+          57
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Seattle.\nPalette: sound blue, deep forest green, warm gold, muted terracotta and ivory.\nPrimary request: replace the original illustrated scene with a green-and-white ferry on the sound with snowy Mount Rainier beyond; no vessel name, lettering, flags or Space Needle.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/seattle/reservation_card.png"
+    },
+    {
+      "place": "arizona",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-3a12e539-9795-4032-a29a-50ddd164c598.png",
+      "palette": [
+        [
+          29,
+          78,
+          83
+        ],
+        [
+          198,
+          86,
+          48
+        ],
+        [
+          220,
+          159,
+          55
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Arizona.\nPalette: sandstone coral, desert gold, sage green and deep navy shadows.\nPrimary request: replace the original illustrated scene with the layered Grand Canyon at sunset, the river wrapping around Horseshoe Bend, saguaro cacti and an empty curving desert road; balanced regional montage of sandstone cliffs and blue river.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/arizona/featured_ticket.png"
+    },
+    {
+      "place": "arizona",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-0ebdb37d-dc69-41f1-a402-c0ca09e15e0d.png",
+      "palette": [
+        [
+          29,
+          78,
+          83
+        ],
+        [
+          198,
+          86,
+          48
+        ],
+        [
+          220,
+          159,
+          55
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Arizona.\nPalette: sandstone coral, desert gold, sage green and deep navy shadows.\nPrimary request: replace the original illustrated scene with hotel window landscape view over layered Grand Canyon terraces at sunset, warm low sun, distant blue-purple depth and unobtrusive desert scrub.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/arizona/room_card.png"
+    },
+    {
+      "place": "arizona",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-4d24bbad-93d2-41f8-871a-f2dfcb1af618.png",
+      "palette": [
+        [
+          29,
+          78,
+          83
+        ],
+        [
+          198,
+          86,
+          48
+        ],
+        [
+          220,
+          159,
+          55
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Arizona.\nPalette: sandstone coral, desert gold, sage green and deep navy shadows.\nPrimary request: replace the original illustrated scene with an empty desert road between saguaro cacti and layered sandstone formations at sunset, no road signs or markings with text.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/arizona/reservation_card.png"
+    },
+    {
+      "place": "alaska",
+      "role": "featured_ticket",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-2ee7ba12-372c-43b4-8738-018ece635cd7.png",
+      "palette": [
+        [
+          30,
+          87,
+          109
+        ],
+        [
+          181,
+          95,
+          69
+        ],
+        [
+          218,
+          166,
+          73
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Alaska.\nPalette: glacier and fjord blue, forest green, restrained sunset coral, ivory and gold.\nPrimary request: replace the original illustrated scene with Denali's snowy peak, a blue glacier meeting a fjord, a small cruise ship on the water and a bald eagle soaring above; balanced layered mountain and glacier landscape.\nAsset type: finished featured ticket shell, exactly 1774 x 887.\nComposition: picture only in the right-hand navy scene area, flowing toward the existing ivory barcode stub. Entire left 42% of canvas (x=0 through x=745) remains PLAIN EMPTY navy textured paper, at EVERY height, with no scenery or objects at bottom left. Scene starts softly to the RIGHT of x=746. Original ivory barcode stub and barcode remain exactly unchanged.\nRecolour existing narrow stars-and-chevron stripe to the place's palette, keeping pattern geometry and placement identical.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/alaska/featured_ticket.png"
+    },
+    {
+      "place": "alaska",
+      "role": "room_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-ccc2eced-fb69-4c0f-9ac5-ebb6a243a75f.png",
+      "palette": [
+        [
+          30,
+          87,
+          109
+        ],
+        [
+          181,
+          95,
+          69
+        ],
+        [
+          218,
+          166,
+          73
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Alaska.\nPalette: glacier and fjord blue, forest green, restrained sunset coral, ivory and gold.\nPrimary request: replace the original illustrated scene with hotel view over a blue glacier meeting a calm fjord, snowy mountains beyond and a small cruise ship far off, warm golden low sun and deep evergreen accents.\nAsset type: finished hotel room key card shell, exactly 1774 x 887.\nComposition: hotel window view as printed illustration only, no literal new window frame or room interior. Picture in right-hand view area ending at the original decorative stripe. Entire LEFT 62% of canvas (x=0 through x=1099) stays EMPTY ivory paper with grain: no clouds, foliage, buildings, sea or faint printing in this text area. View fades softly into ivory on its left edge. Keep original blank ivory right end cap.\nRecolour SAME existing stars-and-line stripe, keep exact pattern geometry and placement.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/alaska/room_card.png"
+    },
+    {
+      "place": "alaska",
+      "role": "reservation_card",
+      "source": "/Users/khairofamily/.codex/generated_images/01a12925-9049-7cb2-96c1-4d45c9234cac/exec-191de65c-27b2-4f91-a933-1b7ac6198c28.png",
+      "palette": [
+        [
+          30,
+          87,
+          109
+        ],
+        [
+          181,
+          95,
+          69
+        ],
+        [
+          218,
+          166,
+          73
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, a finished Travary card shell, not just inspiration.\nStyle: match template mid-century screen-printed travel poster, flat layered shapes, fine paper grain, warm low sun, original navy/ivory palette family. Never photographic.\nInvariants: same exact canvas dimensions and original card placement, silhouette, corners, notches, perforations, bevels, drop shadow and paper texture. Only the illustrated scene changes, plus recolouring the existing narrow stripe and tag. Existing stripe pattern geometry stays identical.\nOutside the card must be genuinely transparent. No added margin, crop, perspective shift, extra cards or new panels.\nNothing readable anywhere INSIDE OR OUTSIDE the card: no text, letters, numbers, signs, logos, flags, watermarks or recognisable human faces. Do not add captions or instructions.\nExclude Disney/Universal castles, rides and characters, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Famous buildings sit within a balanced skyline, never as one oversized hero.\nReturn exactly ONE finished card.\nPlace: Alaska.\nPalette: glacier and fjord blue, forest green, restrained sunset coral, ivory and gold.\nPrimary request: replace the original illustrated scene with a bald eagle soaring above a blue glacier and fjord, snowy mountain ridges behind; no readable markings on any vessel.\nAsset type: finished tagged reservation card shell, exactly 1983 x 793.\nComposition: replace ONLY the SMALL framed picture at the FAR RIGHT (x=1423..1948), keeping its frame and rounded right corners. Middle ivory paper remains completely blank and unchanged, no scene extending left of divider.\nTag: retain exact shape, tilt, cord and brass grommet. Recolour to a deep muted shade from the place's palette. REMOVE existing US flag entirely; tag becomes plain textured leather without stars, stripes, symbols, letters, graphics or markings. Recolour the same thin divider. Cord and brass grommet remain exactly unchanged.",
+      "output": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/alaska/reservation_card.png"
+    }
+  ]
+}

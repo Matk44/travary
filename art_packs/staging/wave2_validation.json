@@ -1,0 +1,343 @@
+{
+  "wave": 2,
+  "count": 24,
+  "visual_review": "All 24 exported cards inspected; no readable text or excluded landmarks; text zones blank.",
+  "results": [
+    {
+      "place": "washington_dc",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/washington_dc/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "b12325670d4b3978139b9b8cc38c9d10a23c0d387fad78172c640a5f2801c666",
+      "bytes": 2453258
+    },
+    {
+      "place": "washington_dc",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/washington_dc/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "09708474a875b288fa46b17008327317a2bd817a4dff1ef722f6b602291b44f6",
+      "bytes": 2105761
+    },
+    {
+      "place": "washington_dc",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/washington_dc/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "6d4542d6ff1035334aaf269a58bbc10dec937cf2b8c2c396df1819ae1ffd6e7f",
+      "bytes": 2030541
+    },
+    {
+      "place": "chicago",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/chicago/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "a213bc3caadec2d3fb3b2f41296c2b4c57b09d3fbe23b76801c15cd7d993c0f5",
+      "bytes": 2526308
+    },
+    {
+      "place": "chicago",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/chicago/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "c65c4d21595579c4a1b239239689918bec06d37c275acdc327f2883a746d0c80",
+      "bytes": 2081273
+    },
+    {
+      "place": "chicago",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/chicago/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "9c2052a54a99cef0b638fcdde2a7e8c0e49b6222965e23849480749a8f0d06c7",
+      "bytes": 2030019
+    },
+    {
+      "place": "boston",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/boston/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "da7d9a09366ea66ebe7d16e072374cfc4955d41bfb8198eced1fb5f5755e4b2f",
+      "bytes": 2457027
+    },
+    {
+      "place": "boston",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/boston/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "2cc819fe6f9c7f381d38c51c9308a4b43a1f8c218761ffc6e47d9a426043fb50",
+      "bytes": 2059349
+    },
+    {
+      "place": "boston",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/boston/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "20ea7288a992e76df598951b1f50b832a612b5ac24291471ebde4c59e20f1e5c",
+      "bytes": 2064483
+    },
+    {
+      "place": "new_orleans",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/new_orleans/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "740401d9ff94d3cb289ed3becc861d63a47c3954f88cc7b2dc0b9fe49ed13774",
+      "bytes": 2413966
+    },
+    {
+      "place": "new_orleans",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/new_orleans/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "dde8610e4889a864e448010957f318ed92f343b93ac5f8df855189163a24342b",
+      "bytes": 2114956
+    },
+    {
+      "place": "new_orleans",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/new_orleans/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "b5dada127dd3cf83817e4c7f3a4cf40c9483256c06431471e93355796d54e5ec",
+      "bytes": 2050797
+    },
+    {
+      "place": "nashville",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/nashville/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "b4e4537fe7844ef82bcb50ae659ce16454e0dd25f959d160534b4e05110fd233",
+      "bytes": 2495586
+    },
+    {
+      "place": "nashville",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/nashville/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "2d99fadbe43f4e0e6f42d4af69881a05c4820658f787cdb6ea38f058c9934847",
+      "bytes": 2062924
+    },
+    {
+      "place": "nashville",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/nashville/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "2577f05d77ddc922c03b69806f721d22d69b20258ca4a322fda2916b9d060ed5",
+      "bytes": 2032581
+    },
+    {
+      "place": "seattle",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/seattle/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "503605a3860c5c685c9c16f3d550d691ec7b63224997d38df8691c7a2934f408",
+      "bytes": 2399235
+    },
+    {
+      "place": "seattle",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/seattle/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "95cf58264ebf42427837f79b384a477b05cfdc5fca6bb2e71ca1fa7eb438f8d2",
+      "bytes": 2084091
+    },
+    {
+      "place": "seattle",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/seattle/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "2b5c63d6076b4196e8eb5648289be3751c9773f66439405b787cd0a996d3d9e6",
+      "bytes": 2010249
+    },
+    {
+      "place": "arizona",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/arizona/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "516209d4e46c4ae435170a8a65be2b3c98cc8e497d203debe19767f601006a9c",
+      "bytes": 2475510
+    },
+    {
+      "place": "arizona",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/arizona/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "abe9b2791f15df73587a40e7321a6480f2b077c6ab74b90a738a0b879a17bb63",
+      "bytes": 2108371
+    },
+    {
+      "place": "arizona",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/arizona/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "86507320dc99857af736b2a53d9d7b0f1553c812c2ff9bdd3ce0f4f74c77b02c",
+      "bytes": 2048784
+    },
+    {
+      "place": "alaska",
+      "role": "featured_ticket",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/alaska/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "6ea460a1e69b758cc566c204a05ef3fe5b170c83f25c468b6ec4c2a81a938d73",
+      "bytes": 2466187
+    },
+    {
+      "place": "alaska",
+      "role": "room_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/alaska/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "3f656f1e4afc7ef735375588ad7fea9dabd0204c291c681819bfabfee6c5e674",
+      "bytes": 2038867
+    },
+    {
+      "place": "alaska",
+      "role": "reservation_card",
+      "path": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/alaska/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_matches_template": true,
+      "protected_regions_match": true,
+      "sha256": "8448ece6bfc211f44bed1de2401f4864d4113b1ebda5f57c598b19602bb4182f",
+      "bytes": 2032493
+    }
+  ]
+}
