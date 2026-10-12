@@ -77,7 +77,7 @@ List<TripPlan> buildTripPlans(List<Trip> trips, List<Booking> bookings) {
 
 /// What the Today screen should focus on.
 class TodayFocus {
-  const TodayFocus({this.plan, required this.day, this.daysUntilStart});
+  const TodayFocus({this.plan, required this.day, this.daysUntilStart, this.undated});
 
   /// The trip being shown: the one happening now, else the next one.
   final TripPlan? plan;
@@ -87,6 +87,11 @@ class TodayFocus {
 
   /// Set when [plan] hasn't started yet.
   final int? daysUntilStart;
+
+  /// With no trip on or coming: the newest one with no dates yet (a holiday
+  /// started with "Dates not decided"), so Today keeps it in view instead of
+  /// saying nothing is coming.
+  final TripPlan? undated;
 
   bool get isCountdown => daysUntilStart != null;
 }
@@ -101,5 +106,7 @@ TodayFocus focusFor(List<TripPlan> plans, LocalDate today) {
     final next = upcoming.first;
     return TodayFocus(plan: next, day: next.start!, daysUntilStart: today.daysUntil(next.start!));
   }
-  return TodayFocus(day: today);
+  final undated = plans.where((p) => !p.hasDates).toList()
+    ..sort((a, b) => b.trip.createdAt.compareTo(a.trip.createdAt));
+  return TodayFocus(day: today, undated: undated.firstOrNull);
 }

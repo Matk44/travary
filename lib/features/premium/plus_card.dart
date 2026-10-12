@@ -30,7 +30,7 @@ class PlusCard extends StatelessWidget {
       final left = policy.freeSmartImportsLeft;
       title = 'Travary Plus';
       body =
-          'Smart Import, family sharing and ticket backup. '
+          'Everyone on your trips gets the plan and their own tickets, backed up and in sync. '
           '$left free Smart Import${left == 1 ? '' : 's'} left.';
     }
     final passes = [

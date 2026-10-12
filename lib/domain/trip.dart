@@ -1,5 +1,6 @@
 import 'checklist.dart';
 import 'country_codes.dart';
+import 'flight_status.dart';
 import 'local_date.dart';
 import 'premium.dart';
 import 'visual_profile.dart';
@@ -26,6 +27,8 @@ class Trip {
     this.premium,
     this.hiddenGaps = const {},
     this.checklist = const {},
+    this.packing = const {},
+    this.liveFlights = const {},
     required this.createdAt,
     required this.updatedAt,
   });
@@ -77,6 +80,19 @@ class Trip {
   /// .saveChecklistItem`), so two people ticking at once don't collide.
   final Map<String, ChecklistItem> checklist;
 
+  /// The packing list: things to take, ticked once packed. Shared and
+  /// changed an item at a time, like [checklist].
+  final Map<String, ChecklistItem> packing;
+
+  /// The latest on the trip's flights, by booking id, while flight alerts
+  /// watch them (paid trips). Server-written only.
+  final Map<String, FlightStatus> liveFlights;
+
+  Map<String, ChecklistItem> listOf(TripList list) => switch (list) {
+    TripList.checklist => checklist,
+    TripList.packing => packing,
+  };
+
   bool get isShared => memberIds.length > 1;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -104,6 +120,7 @@ class Trip {
     bool clearDestination = false,
     Set<String>? hiddenGaps,
     Map<String, ChecklistItem>? checklist,
+    Map<String, ChecklistItem>? packing,
     DateTime? updatedAt,
   }) {
     return Trip(
@@ -122,6 +139,8 @@ class Trip {
       premium: premium,
       hiddenGaps: hiddenGaps ?? this.hiddenGaps,
       checklist: checklist ?? this.checklist,
+      packing: packing ?? this.packing,
+      liveFlights: liveFlights,
       createdAt: createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -134,7 +153,7 @@ class Trip {
   /// Never the visual profile, which only the server writes, and the theme
   /// only when the traveller picked it: an automatic trip's theme belongs
   /// to the classifier, and this phone's copy may be seconds old. Nor the
-  /// checklist, which changes an item at a time.
+  /// checklist or packing list, which change an item at a time.
   Map<String, Object?> toEditableJson() => {
     'title': title,
     if (themeSource == ThemeSource.manual) 'theme': _themeWireName,
@@ -157,6 +176,7 @@ class Trip {
     'destination': ?destination?.toJson(),
     if (hiddenGaps.isNotEmpty) 'hiddenGaps': [...hiddenGaps]..sort(),
     if (checklist.isNotEmpty) 'checklist': {for (final item in checklist.values) item.id: item.toJson()},
+    if (packing.isNotEmpty) 'packing': {for (final item in packing.values) item.id: item.toJson()},
     'ownerId': ownerId,
     'memberIds': memberIds,
     'createdAt': createdAt.millisecondsSinceEpoch,
@@ -186,14 +206,28 @@ class Trip {
         for (final gap in json['hiddenGaps'] as List? ?? const [])
           if (gap is String && gap.length <= 40) gap,
       },
-      checklist: {
-        for (final entry in (json['checklist'] is Map ? json['checklist'] as Map : const {}).entries)
-          if (ChecklistItem.tryParse('${entry.key}', entry.value) case final item?) item.id: item,
-      },
+      checklist: _items(json['checklist']),
+      packing: _items(json['packing']),
+      liveFlights: _liveFlights(json['liveFlights']),
       createdAt: _millis(json['createdAt']),
       updatedAt: _millis(json['updatedAt']),
     );
   }
+
+  static Map<String, ChecklistItem> _items(Object? json) => {
+    for (final entry in (json is Map ? json : const {}).entries)
+      if (ChecklistItem.tryParse('${entry.key}', entry.value) case final item?) item.id: item,
+  };
+
+  /// Each flight's leg and when the server checked it (`checkedAt`, ms).
+  static Map<String, FlightStatus> _liveFlights(Object? json) => {
+    for (final MapEntry(:key, :value) in (json is Map ? json : const {}).entries)
+      if (value is Map && value['checkedAt'] is num)
+        '$key': FlightStatus.fromJson(
+          Map<String, Object?>.from(value),
+          checkedAt: DateTime.fromMillisecondsSinceEpoch((value['checkedAt'] as num).toInt()),
+        ),
+  };
 
   @override
   String toString() => 'Trip($id, $title)';

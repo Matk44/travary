@@ -143,6 +143,56 @@ void main() {
       expect(FlightState.fromWire('EnRoute'), FlightState.enRoute);
     });
   });
+
+  group('the live line under a flight\'s card on Today', () {
+    final flight = booking(
+      'out',
+      BookingKind.flight,
+      d(10, 4),
+      location: 'London Heathrow (LHR)',
+      details: {DetailKeys.flightNumber: 'BA 283'},
+    );
+
+    String? line(FlightStatus status, {DateTime? at}) => liveFlightLineFor(flight, status, at ?? now)?.text;
+
+    test('before take-off: how it stands, a new time, then the gate (or terminal)', () {
+      final delayed = liveFlightLineFor(flight, status(), now)!;
+      expect(delayed.text, 'Delayed 35 min · Leaves 11:05am · Gate B32');
+      expect(delayed.tone, FlightTone.bad);
+      expect(line(status(revised: '2026-10-04T10:30', gate: null)), 'On time · Terminal 5');
+      expect(line(status(state: FlightState.boarding, revised: '2026-10-04T10:30')), 'Boarding · Gate B32');
+      expect(line(status(revised: '2026-10-05T00:40')), 'Delayed 14 hr 10 min · Leaves 12:40am Mon 5 Oct · Gate B32');
+    });
+
+    test('in the air, when it lands; after, the belt', () {
+      expect(line(status(state: FlightState.enRoute)), 'In the air · Lands 1:45pm');
+      expect(line(status(state: FlightState.arrived)), 'Landed · Belt 7');
+      expect(line(status(state: FlightState.canceled)), 'Cancelled');
+      expect(liveFlightLineFor(flight, status(state: FlightState.canceled), now)!.tone, FlightTone.bad);
+    });
+
+    test('says when it was last checked once that\'s over an hour ago', () {
+      final old = status(revised: '2026-10-04T10:30', gate: null, checkedAt: DateTime(2026, 10, 4, 7, 5));
+      expect(line(old), 'On time · Terminal 5 · checked 7:05am');
+      expect(
+        line(status(state: FlightState.arrived, checkedAt: DateTime(2026, 10, 4, 7, 5))),
+        'Landed · Belt 7',
+        reason: 'a landed flight is done: no need to say',
+      );
+    });
+
+    test('only on the flight\'s days, and only with something to say', () {
+      expect(liveFlightLineFor(flight, null, now), isNull);
+      expect(liveFlightLineFor(flight, status(), DateTime(2026, 9, 20)), isNull);
+      final quiet = FlightStatus.fromJson({
+        'number': 'BA 283',
+        'status': 'Expected',
+        'departure': {'scheduled': '2026-10-04T10:30'},
+        'arrival': {'scheduled': '2026-10-04T13:45'},
+      }, checkedAt: now);
+      expect(liveFlightLineFor(flight, quiet, now), isNull, reason: '"Scheduled" alone says nothing new');
+    });
+  });
 }
 
 int _minutesBetween(String a, String b) => DateTime.parse(b).difference(DateTime.parse(a)).inMinutes;

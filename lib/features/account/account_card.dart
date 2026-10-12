@@ -8,9 +8,10 @@ import '../../design/trip_chrome.dart';
 import '../../design/widgets/sign_in_buttons.dart';
 import '../../domain/domain.dart';
 import '../../state/app_session.dart';
+import 'sign_in_sheet.dart';
 
-/// The account on Profile. A guest is invited to sign in with Apple or
-/// Google so their trips follow them to any phone; someone signed in sees
+/// The account on Profile. A guest is invited to sign in with Apple, Google
+/// or an email link so their trips follow them to any phone; someone signed in sees
 /// who they are, and can sign out or delete the account.
 class AccountCard extends StatelessWidget {
   const AccountCard({super.key});
@@ -49,10 +50,7 @@ class _DemoNotice extends StatelessWidget {
     children: [
       Text('Your account', style: TravaryText.title),
       const SizedBox(height: TravarySpace.xs),
-      Text(
-        'Signing in with Apple or Google works with trips saved to the cloud. This is the demo version.',
-        style: TravaryText.bodySoft,
-      ),
+      Text('Signing in works with trips saved to the cloud. This is the demo version.', style: TravaryText.bodySoft),
     ],
   );
 }
@@ -83,6 +81,12 @@ class _SignInState extends State<_SignIn> {
     }
   }
 
+  Future<void> _email(BuildContext context) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final message = await showSignInSheet(context, email: true);
+    if (message != null && mounted) messenger.showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context) {
     final busy = widget.session.isBusy;
@@ -98,16 +102,22 @@ class _SignInState extends State<_SignIn> {
             onPressed: busy ? null : () => _signIn(SignInMethod.google),
           )
         : null;
+    final email = widget.session.supports(SignInMethod.email)
+        ? EmailSignInButton(onPressed: busy ? null : () => _email(context))
+        : null;
     // Each platform's own sign-in first.
-    final buttons = defaultTargetPlatform == TargetPlatform.android ? [?google, ?apple] : [?apple, ?google];
+    final buttons = [
+      ...defaultTargetPlatform == TargetPlatform.android ? [?google, ?apple] : [?apple, ?google],
+      ?email,
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text('Keep your trips safe', style: TravaryText.title),
         const SizedBox(height: TravarySpace.xs),
         Text(
-          'Sign in and your trips and tickets are saved to your account, ready on any phone. '
-          'Everything you\'ve added stays as it is.',
+          'Sign in and your plans are linked to your account, ready on another phone. '
+          'Everything you\'ve added stays as it is on this phone.',
           style: TravaryText.bodySoft,
         ),
         const SizedBox(height: TravarySpace.lg),
@@ -126,7 +136,7 @@ class _SignedIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = TravaryChrome.of(context).colors;
-    final method = account.methods.contains(SignInMethod.apple) ? SignInMethod.apple : SignInMethod.google;
+    final method = SignInMethod.values.firstWhere(account.methods.contains, orElse: () => SignInMethod.email);
     final title = account.name ?? account.email ?? 'Signed in';
     final initial = title.characters.first.toUpperCase();
     return Column(
@@ -167,7 +177,7 @@ class _SignedIn extends StatelessWidget {
           ],
         ),
         const SizedBox(height: TravarySpace.sm),
-        Text('Your trips and tickets are saved to your account.', style: TravaryText.bodySoft),
+        Text('Your plans are linked to your account.', style: TravaryText.bodySoft),
         const SizedBox(height: TravarySpace.md),
         Wrap(
           spacing: TravarySpace.sm,

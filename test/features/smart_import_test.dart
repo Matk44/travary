@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:travary/data/attachment_store.dart';
 import 'package:travary/data/memory_travel_repository.dart';
 import 'package:travary/data/purchase_service.dart';
 import 'package:travary/data/smart_import_service.dart';
@@ -12,10 +14,12 @@ import 'package:travary/domain/domain.dart';
 import 'package:travary/features/booking/edit_booking_screen.dart';
 import 'package:travary/features/import/smart_import_screen.dart';
 import 'package:travary/logic/access.dart';
+import 'package:travary/logic/travi_cameos.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import '../helpers.dart';
+import '../support/travi.dart';
 
 class _FakeImport implements SmartImportService {
   _FakeImport(this.result);
@@ -23,13 +27,24 @@ class _FakeImport implements SmartImportService {
   final Object result;
   int calls = 0;
 
+  String? tripId;
+
   @override
-  Future<SmartImportResult> read(String path, {required LocalDate today}) async {
+  Future<SmartImportResult> read(String path, {required LocalDate today, String? tripId}) async {
     calls++;
+    this.tripId = tripId;
     final r = result;
     if (r is SmartImportException) throw r;
     return r as SmartImportResult;
   }
+}
+
+/// Still reading.
+class _SlowImport implements SmartImportService {
+  final reading = Completer<SmartImportResult>();
+
+  @override
+  Future<SmartImportResult> read(String path, {required LocalDate today, String? tripId}) => reading.future;
 }
 
 void main() {
@@ -117,6 +132,8 @@ void main() {
       AccessDecision access = const AccessDecision.freeUse(3),
       MemoryTravelRepository? repository,
       String? tripId,
+      AttachmentStore? attachments,
+      String? path,
     }) async {
       tester.view.physicalSize = const Size(1179, 2556);
       tester.view.devicePixelRatio = 3;
@@ -133,6 +150,7 @@ void main() {
               create: (_) => travel = TravelStore(
                 repository: repository ?? MemoryTravelRepository(),
                 artCatalog: const ArtCatalog.empty(),
+                attachments: attachments,
               ),
             ),
             ChangeNotifierProvider(create: (_) => premium = PremiumStore(purchases: TestPurchaseService())),
@@ -147,7 +165,7 @@ void main() {
                       outcome = await Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) => SmartImportScreen(
-                            filePath: filePath,
+                            filePath: path ?? filePath,
                             fileName: 'booking.pdf',
                             access: access,
                             tripId: tripId,
@@ -206,6 +224,32 @@ void main() {
       expect(travel.plans, hasLength(1));
     });
 
+    testWidgets('a file gone by the time they add them still adds the bookings, without it', (tester) async {
+      final directory = Directory.systemTemp.createTempSync('travary-files');
+      addTearDown(() => directory.deleteSync(recursive: true));
+      final (travel, _) = await pump(
+        tester,
+        _FakeImport(
+          SmartImportResult([
+            draft('London to Lisbon', BookingKind.flight, d(11, 3)),
+            draft('Lisbon to London', BookingKind.flight, d(11, 8)),
+          ]),
+        ),
+        attachments: AttachmentStore.at(directory),
+        path: '${directory.path}/no-longer-there.pdf',
+      );
+
+      // Copying the file is real disk work, so it runs outside the fake clock.
+      final dynamic add = tester.widget<FilledButton>(find.widgetWithText(FilledButton, 'Add 2 bookings')).onPressed;
+      await tester.runAsync(() async => await add());
+      await tester.pumpAndSettle();
+
+      expect(travel.bookings, hasLength(2));
+      expect(travel.bookings.every((b) => b.attachments.isEmpty), isTrue);
+      expect(find.text('Added without the file: it couldn’t be kept.'), findsOneWidget);
+      expect(find.byType(SmartImportScreen), findsNothing, reason: 'nothing left locked');
+    });
+
     testWidgets('opened from a trip, only bookings on its dates go into it', (tester) async {
       final repository = MemoryTravelRepository(userId: 'me')
         ..replaceAll([trip('japan', title: 'Japan holiday', plannedStart: d(10, 11), plannedEnd: d(10, 23))], const []);
@@ -233,18 +277,32 @@ void main() {
       expect(travel.plans, hasLength(2));
     });
 
+    testWidgets('while it reads, Travi studies it instead of a spinner', (tester) async {
+      final service = _SlowImport();
+      await pump(tester, service);
+
+      expect(find.text('Reading your booking…'), findsOneWidget);
+      expect(traviCameo(TraviMoment.reading), findsOneWidget);
+      expect(find.byType(LinearProgressIndicator), findsNothing);
+      service.reading.complete(const SmartImportResult([]));
+      await tester.pumpAndSettle();
+      expect(traviCameo(TraviMoment.reading), findsNothing);
+    });
+
     testWidgets('a failure explains itself and offers to type it in', (tester) async {
       await pump(tester, _FakeImport(const SmartImportException('That file is too big.')));
 
       expect(find.text('Couldn\'t read that'), findsOneWidget);
       expect(find.text('That file is too big.'), findsOneWidget);
       expect(find.text('Add it myself'), findsOneWidget);
+      expect(traviCameo(TraviMoment.oops), findsOneWidget);
     });
 
     testWidgets('finding nothing does not use a free import', (tester) async {
       final (_, premium) = await pump(tester, _FakeImport(const SmartImportResult([])));
 
       expect(find.text('No booking found'), findsOneWidget);
+      expect(traviCameo(TraviMoment.oops), findsOneWidget);
       expect(premium.policy.freeSmartImportsLeft, 3);
     });
   });

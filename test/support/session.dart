@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:provider/provider.dart';
 import 'package:travary/data/auth_service.dart';
+import 'package:travary/data/onboarding_record.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/state/app_session.dart';
 
@@ -33,8 +34,41 @@ class FakeAuthService implements AuthService {
   @override
   Stream<Account?> get changes => _changes.stream;
 
+  /// Methods this phone offers; all by default.
+  Set<SignInMethod> supported = {...SignInMethod.values};
+
   @override
-  bool supports(SignInMethod method) => true;
+  bool supports(SignInMethod method) => supported.contains(method);
+
+  /// Where the last sign-in link was sent, until it's used.
+  String? pending;
+
+  @override
+  Future<void> sendSignInLink(String email) async {
+    calls.add('sendSignInLink:$email');
+    final failure = failNext;
+    failNext = null;
+    if (failure != null) throw failure;
+    pending = email;
+  }
+
+  @override
+  Future<String?> pendingEmail() async => pending;
+
+  @override
+  bool isSignInLink(String link) => link.startsWith('https://links.test/');
+
+  @override
+  Future<SignInResult> signInWithLink(String link, {String? email}) async {
+    calls.add('signInWithLink');
+    final failure = failNext;
+    failNext = null;
+    if (failure != null) throw failure;
+    final address = email ?? pending;
+    if (address == null) throw const AuthFailure('Open the link on the phone you asked for it on.');
+    pending = null;
+    return signIn(SignInMethod.email);
+  }
 
   void _set(Account account) {
     _current = account;
@@ -70,6 +104,12 @@ class FakeAuthService implements AuthService {
 }
 
 /// The session for a test app: demo mode (no sign-in) unless [auth] is given.
-ChangeNotifierProvider<AppSession> appSessionProvider({AuthService? auth, String uid = 'me'}) => ChangeNotifierProvider(
-  create: (_) => AppSession(auth: auth, uid: auth?.current?.uid ?? uid),
+ChangeNotifierProvider<AppSession> appSessionProvider({
+  AuthService? auth,
+  String uid = 'me',
+  OnboardingRecord? onboardingRecord,
+  Stream<Uri>? links,
+}) => ChangeNotifierProvider(
+  create: (_) =>
+      AppSession(auth: auth, uid: auth?.current?.uid ?? uid, onboardingRecord: onboardingRecord, links: links),
 );

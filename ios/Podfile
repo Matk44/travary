@@ -1,6 +1,9 @@
 # Minimum iOS version set to 14.0 for cupertino_native support
 platform :ios, '15.0'
 
+# Firebase Analytics without the advertising identifier (Travary never tracks).
+$FirebaseAnalyticsWithoutAdIdSupport = true
+
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 

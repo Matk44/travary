@@ -38,7 +38,11 @@ const canonicalWeather = WeatherReport(temperature: 28, condition: WeatherCondit
 ///   Disney's Polynesian Resort, Room 2214 (staying)
 ///   Be Our Guest Restaurant, 12:30pm, table for 4
 ///   Ohana, 7:15pm
-({List<Trip> trips, List<Booking> bookings}) canonicalTodayData({String userId = 'me', TripVisualProfile? profile}) {
+({List<Trip> trips, List<Booking> bookings}) canonicalTodayData({
+  String userId = 'me',
+  TripVisualProfile? profile,
+  String title = 'Orlando',
+}) {
   final created = DateTime(2026, 1, 1);
   const tripId = 'orlando';
   final day1 = LocalDate.fromDateTime(canonicalNow).addDays(-2);
@@ -75,7 +79,7 @@ const canonicalWeather = WeatherReport(temperature: 28, condition: WeatherCondit
     trips: [
       Trip(
         id: tripId,
-        title: 'Orlando',
+        title: title,
         theme: ExperienceTheme.themepark,
         themeSource: profile == null ? ThemeSource.manual : ThemeSource.auto,
         visualProfile: profile,
@@ -124,10 +128,10 @@ const canonicalWeather = WeatherReport(temperature: 28, condition: WeatherCondit
 
 /// The app's home screen with the canonical content, bundled art and the
 /// reference forecast.
-Widget canonicalTodayApp({ArtCatalog? catalog, DateTime? now, TripVisualProfile? profile}) {
+Widget canonicalTodayApp({ArtCatalog? catalog, DateTime? now, TripVisualProfile? profile, String title = 'Orlando'}) {
   final clock = now ?? canonicalNow;
   final repository = MemoryTravelRepository(userId: 'me');
-  final data = canonicalTodayData(userId: repository.userId, profile: profile);
+  final data = canonicalTodayData(userId: repository.userId, profile: profile, title: title);
   repository.replaceAll(data.trips, data.bookings);
   return MultiProvider(
     providers: [

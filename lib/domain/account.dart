@@ -1,7 +1,10 @@
 /// Ways to sign in besides staying a guest.
 enum SignInMethod {
   apple('Apple', 'apple.com'),
-  google('Google', 'google.com');
+  google('Google', 'google.com'),
+
+  /// A link emailed to them (passwordless). Firebase calls it `password`.
+  email('email', 'password');
 
   const SignInMethod(this.label, this.providerId);
 
@@ -14,8 +17,8 @@ enum SignInMethod {
 }
 
 /// Who is using Travary on this phone: a guest (an anonymous account,
-/// kept until the app is deleted) or someone signed in with Apple or Google,
-/// whose trips follow them to any phone.
+/// kept until the app is deleted) or someone signed in with Apple, Google or
+/// an email link, whose trips follow them to any phone.
 class Account {
   const Account({required this.uid, this.methods = const {}, this.name, this.email});
 

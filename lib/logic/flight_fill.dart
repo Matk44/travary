@@ -1,4 +1,5 @@
 import '../domain/domain.dart';
+import 'day_plan.dart';
 import 'formatters.dart';
 
 /// "ba 283", "BA-283", "ezy8123" → "BA283", "EZY8123"; null when it isn't a
@@ -27,7 +28,8 @@ class FlightFill {
   final LocalDate startDate;
   final ClockTime? startTime;
 
-  /// Set only when it lands on a later day.
+  /// Set when it lands on a later day, or on the same day earlier by the
+  /// clock (east across the date line: [keptEndDate]).
   final LocalDate? endDate;
   final ClockTime? endTime;
 
@@ -48,7 +50,7 @@ FlightFill? flightFill(FlightStatus leg, {required String typedNumber}) {
     title: '${_place(leg.departure)} to ${_place(leg.arrival)}',
     startDate: departs.date,
     startTime: departs.time,
-    endDate: lands == null || lands.date == departs.date ? null : lands.date,
+    endDate: lands == null ? null : keptEndDate(departs.date, lands.date, startTime: departs.time, endTime: lands.time),
     endTime: lands?.time,
     location: _airport(leg.departure),
     flightNumber: leg.number.isEmpty ? typedNumber : leg.number,

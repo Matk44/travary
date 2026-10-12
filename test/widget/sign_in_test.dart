@@ -16,6 +16,9 @@ import 'package:travary/data/smart_import_service.dart';
 import 'package:travary/design/tokens.dart';
 import 'package:travary/design/widgets/nav_bar.dart';
 import 'package:travary/domain/domain.dart';
+import 'package:travary/features/onboarding/onboarding_account_screen.dart';
+import 'package:travary/features/onboarding/onboarding_pass_screen.dart';
+import 'package:travary/features/trips/trip_screen.dart';
 
 import '../helpers.dart';
 import '../support/art_pack_fixtures.dart';
@@ -49,12 +52,19 @@ void main() {
     return repository;
   }
 
-  Future<void> pumpApp(WidgetTester tester, FakeAuthService auth) async {
+  Future<void> pumpApp(WidgetTester tester, FakeAuthService auth, {bool adoptedHoliday = false}) async {
     tester.view.physicalSize = const Size(390 * 3, 844 * 3);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     final dependencies = Dependencies(
-      repositoryFor: repositoryFor,
+      repositoryFor: (uid) {
+        final repository = repositoryFor(uid);
+        if (adoptedHoliday && uid == 'other') {
+          // The auth/server adoption contract preserves the holiday ID.
+          repository.putTrip(trip('lisbon', title: 'Lisbon'));
+        }
+        return repository;
+      },
       initialUserId: auth.current!.uid,
       auth: auth,
       purchases: TestPurchaseService(),
@@ -172,6 +182,63 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('help-terms')));
     await tester.pumpAndSettle();
     expect(find.textContaining('travary_support/terms.html'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('onboarding account adoption rebuilds into the same holiday’s pass desk, then that holiday', (
+    tester,
+  ) async {
+    final auth = FakeAuthService()
+      ..existing[SignInMethod.google] = 'other'
+      ..guestTrips = 1;
+    await pumpApp(tester, auth, adoptedHoliday: true);
+    final navigator = tester.state<NavigatorState>(find.byType(Navigator).first);
+    navigator.push(
+      MaterialPageRoute<bool>(
+        builder: (_) => Scaffold(
+          body: OnboardingAccountPanel(tripId: 'lisbon', onSignedIn: () {}, onGuest: () {}),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('sign-in-google')));
+    await tester.tap(find.byKey(const ValueKey('sign-in-google')));
+    await tester.pumpAndSettle();
+    expect(find.byType(OnboardingAccountPanel), findsNothing);
+    // The sign-in came just before the offer, so the desk comes first.
+    expect(tester.widget<OnboardingPassScreen>(find.byType(OnboardingPassScreen)).tripId, 'lisbon');
+    // What happened is said on the desk, not in a snackbar over its buttons.
+    expect(find.text('Signed in with Google. 1 trip from this phone moved to your account.'), findsOneWidget);
+    expect(find.byType(SnackBar), findsNothing);
+    await tester.ensureVisible(find.byKey(const ValueKey('onboarding-pass-free')));
+    await tester.tap(find.byKey(const ValueKey('onboarding-pass-free')));
+    await tester.pumpAndSettle();
+    expect(tester.widget<TripScreen>(find.byType(TripScreen)).tripId, 'lisbon');
+    expect(auth.current!.uid, 'other');
+    expect(tester.takeException(), isNull);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.byType(TripScreen), findsNothing, reason: 'the handoff is consumed once');
+  });
+
+  testWidgets('an unavailable adopted holiday returns safely to saved plans', (tester) async {
+    final auth = FakeAuthService()..existing[SignInMethod.google] = 'other';
+    await pumpApp(tester, auth);
+    tester
+        .state<NavigatorState>(find.byType(Navigator).first)
+        .push(
+          MaterialPageRoute<bool>(
+            builder: (_) => Scaffold(
+              body: OnboardingAccountPanel(tripId: 'missing', onSignedIn: () {}, onGuest: () {}),
+            ),
+          ),
+        );
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('sign-in-google')));
+    await tester.tap(find.byKey(const ValueKey('sign-in-google')));
+    await tester.pumpAndSettle();
+    expect(find.byType(TripScreen), findsNothing);
+    expect(find.byType(TravaryNavBar), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }

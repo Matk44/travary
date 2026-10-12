@@ -87,8 +87,10 @@ String? checklistProgress(Iterable<ChecklistItem> items) {
   return '${items.where((item) => item.done).length} of $all done';
 }
 
-/// Under an empty checklist.
-const checklistHint = 'Visas, insurance, the dog sitter: anything to sort before you go.';
+/// Under an empty checklist: before the trip, or once it's under way.
+String checklistHintFor(TripPlan plan, LocalDate today) => plan.phaseOn(today) == TripPhase.upcoming
+    ? 'Visas, insurance, the dog sitter: anything to sort before you go.'
+    : 'Anything to sort out while you\'re away: tickets to collect, calls to make.';
 
 /// Whether a trip shows its checklist: always until it's over, and after
 /// that only if something is on it.

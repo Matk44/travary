@@ -28,7 +28,9 @@ class SmartImportException implements Exception {
 
 /// Reads a screenshot, photo or PDF of a booking into draft bookings.
 abstract interface class SmartImportService {
-  Future<SmartImportResult> read(String path, {required LocalDate today});
+  /// [tripId]: the trip whose pass allows this read, which the server
+  /// checks once the free ones are used (`AccessDecision.tripId`).
+  Future<SmartImportResult> read(String path, {required LocalDate today, String? tripId});
 }
 
 /// Largest file sent for reading (the server allows a little more).
@@ -58,7 +60,7 @@ class CloudSmartImportService implements SmartImportService {
   final FirebaseFunctions? _functions;
 
   @override
-  Future<SmartImportResult> read(String path, {required LocalDate today}) async {
+  Future<SmartImportResult> read(String path, {required LocalDate today, String? tripId}) async {
     final mimeType = smartImportMimeType(path);
     if (mimeType == null) {
       throw const SmartImportException('Use a photo, screenshot or PDF.');
@@ -80,6 +82,7 @@ class CloudSmartImportService implements SmartImportService {
           {'mimeType': mimeType, 'data': base64Encode(await file.readAsBytes())},
         ],
         'today': today.toIso(),
+        'tripId': ?tripId,
       });
       return smartImportResultFromJson(response.data);
     } on FirebaseFunctionsException catch (e) {

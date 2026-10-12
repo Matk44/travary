@@ -130,6 +130,67 @@ void main() {
       expect(await file!.readAsString(), 'from the family');
     });
 
+    test('a booking moved to another shared trip takes its ticket with it', () async {
+      repository
+        ..putTrip(sharedTrip())
+        ..putTrip(
+          Trip(
+            id: 'paris',
+            title: 'Paris',
+            ownerId: 'me',
+            memberIds: const ['me', 'kim'],
+            createdAt: DateTime(2026),
+            updatedAt: DateTime(2026),
+          ),
+        );
+      final ticket = await ticketFile('show.png');
+      final original = booking('show', BookingKind.event, d(10, 14), tripId: 'orlando').copyWith(attachments: [ticket]);
+      await store.saveBooking(original);
+      await pumpEventQueue();
+      await store.syncTickets();
+      await pumpEventQueue();
+      final before = store.booking('show')!;
+      expect(before.attachments.single.remotePath, 'trips/orlando/attachments/${ticket.fileName}');
+
+      await store.saveBooking(before.copyWith(tripId: 'paris'), previous: before);
+      await pumpEventQueue();
+      await store.syncTickets();
+      await pumpEventQueue();
+
+      final moved = store.booking('show')!.attachments.single;
+      expect(moved.remotePath, 'trips/paris/attachments/${ticket.fileName}', reason: 'Kim can read it');
+      expect(backup.cloud.keys, ['trips/paris/attachments/${ticket.fileName}'], reason: 'the Orlando copy is gone');
+    });
+
+    test('a moved ticket this phone never had is fetched from its old trip, then refiled', () async {
+      repository
+        ..putTrip(sharedTrip())
+        ..putTrip(
+          Trip(
+            id: 'paris',
+            title: 'Paris',
+            ownerId: 'me',
+            memberIds: const ['me', 'kim'],
+            createdAt: DateTime(2026),
+            updatedAt: DateTime(2026),
+          ),
+        );
+      // Sam added it on their phone; it's only in the cloud, under Orlando.
+      const old = 'trips/orlando/attachments/sam.png';
+      backup.cloud[old] = 'from Sam'.codeUnits;
+      const ticket = Attachment(id: 'sam', name: 'Tickets', fileName: 'sam.png', sizeBytes: 8, remotePath: old);
+      await repository.saveBooking(
+        booking('show', BookingKind.event, d(10, 14), tripId: 'paris').copyWith(attachments: [ticket]),
+      );
+      await pumpEventQueue();
+      await store.syncTickets();
+      await pumpEventQueue();
+
+      expect(store.booking('show')!.attachments.single.remotePath, 'trips/paris/attachments/sam.png');
+      expect(backup.cloud.keys, ['trips/paris/attachments/sam.png']);
+      expect(String.fromCharCodes(backup.cloud['trips/paris/attachments/sam.png']!), 'from Sam');
+    });
+
     test('removing a ticket removes its cloud copy', () async {
       repository.putTrip(sharedTrip());
       final ticket = await ticketFile('park.png');
@@ -199,6 +260,11 @@ void main() {
 
     testWidgets('the trip says who is coming; its details list them, with the organiser marked', (tester) async {
       await pumpTrip(tester, sharedTrip(members: const ['me', 'sam', 'kim']));
+      await tester.scrollUntilVisible(
+        find.text('Who\'s coming'),
+        200,
+        scrollable: find.descendant(of: find.byType(TripScreen), matching: find.byType(Scrollable)).first,
+      );
       expect(find.text('Who\'s coming'), findsOneWidget);
       expect(find.text('Invite more'), findsOneWidget);
 

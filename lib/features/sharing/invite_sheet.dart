@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../data/sharing_service.dart';
 import '../../design/tokens.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
+import '../../logic/invite_link.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/analytics.dart';
 import '../../state/app_session.dart';
@@ -79,10 +81,7 @@ class _InviteSheetState extends State<InviteSheet> {
     await SharePlus.instance.share(
       ShareParams(
         subject: 'Join our ${widget.plan.trip.title} trip',
-        text:
-            'Join our ${widget.plan.trip.title} trip on Travary! '
-            'Open Travary, tap Trips, then "New trip" and "Join a trip", and enter the code ${invite.code}. '
-            'You\'ll have the plan and tickets on your phone.',
+        text: inviteMessage(tripTitle: widget.plan.trip.title, code: invite.code),
       ),
     );
   }
@@ -122,11 +121,11 @@ class _InviteSheetState extends State<InviteSheet> {
                 child: Padding(padding: EdgeInsets.all(TravarySpace.xl), child: CircularProgressIndicator()),
               )
             else ...[
-              _CodeCard(code: invite.code),
+              _CodeCard(code: invite.code, link: inviteLinkFor(invite.code).toString()),
               const SizedBox(height: TravarySpace.sm),
               Text(
-                'Works until ${formatDate(LocalDate.fromDateTime(invite.expiresAt))}. '
-                'Anyone with the code can see this trip and its tickets.',
+                'Share the link, or let them scan the code with their camera. Works until '
+                '${formatDate(LocalDate.fromDateTime(invite.expiresAt))}; anyone with it can see this trip and its tickets.',
                 style: TravaryText.small,
                 textAlign: TextAlign.center,
               ),
@@ -138,11 +137,11 @@ class _InviteSheetState extends State<InviteSheet> {
               ),
               TextButton.icon(
                 onPressed: () {
-                  Clipboard.setData(ClipboardData(text: invite.code));
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Code copied')));
+                  Clipboard.setData(ClipboardData(text: inviteLinkFor(invite.code).toString()));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied')));
                 },
-                icon: const Icon(Icons.copy_rounded, size: 18),
-                label: const Text('Copy code'),
+                icon: const Icon(Icons.link_rounded, size: 18),
+                label: const Text('Copy link'),
               ),
             ],
             if (_error != null) ...[
@@ -161,11 +160,13 @@ class _InviteSheetState extends State<InviteSheet> {
   }
 }
 
-/// The code, big and spaced like a ticket number.
+/// The code, big and spaced like a ticket number, beside a QR code of the
+/// invite link for someone standing next to you to scan.
 class _CodeCard extends StatelessWidget {
-  const _CodeCard({required this.code});
+  const _CodeCard({required this.code, required this.link});
 
   final String code;
+  final String link;
 
   @override
   Widget build(BuildContext context) {
@@ -173,17 +174,41 @@ class _CodeCard extends StatelessWidget {
       label: 'Invite code ${code.split('').join(' ')}',
       excludeSemantics: true,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: TravarySpace.xl),
+        padding: const EdgeInsets.all(TravarySpace.lg),
         decoration: BoxDecoration(
           color: TravaryColors.paper,
           borderRadius: BorderRadius.circular(TravaryRadius.card),
           border: Border.all(color: TravaryColors.line),
         ),
-        child: Column(
+        child: Row(
           children: [
-            Text('INVITE CODE', style: TravaryText.eyebrow),
-            const SizedBox(height: TravarySpace.sm),
-            Text('${code.substring(0, 3)} ${code.substring(3)}', style: TravaryText.display.copyWith(letterSpacing: 6)),
+            Expanded(
+              child: Column(
+                children: [
+                  Text('INVITE CODE', style: TravaryText.eyebrow),
+                  const SizedBox(height: TravarySpace.sm),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '${code.substring(0, 3)} ${code.substring(3)}',
+                      style: TravaryText.display.copyWith(letterSpacing: 6),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: TravarySpace.md),
+            QrImageView(
+              key: const ValueKey('invite-qr'),
+              data: link,
+              size: 112,
+              padding: EdgeInsets.zero,
+              eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.square, color: TravaryColors.ink),
+              dataModuleStyle: const QrDataModuleStyle(
+                dataModuleShape: QrDataModuleShape.square,
+                color: TravaryColors.ink,
+              ),
+            ),
           ],
         ),
       ),

@@ -3,7 +3,15 @@ import 'dart:async';
 import '../domain/domain.dart';
 import 'latest_stream.dart';
 
-enum PurchaseOutcome { purchased, cancelled, failed }
+enum PurchaseOutcome {
+  purchased,
+  cancelled,
+  failed,
+
+  /// The store charged, but the server hasn't recorded it yet (offline, or
+  /// it's busy): it will be, on its own. Never tell them it failed.
+  pending,
+}
 
 /// Buying and knowing what's been bought.
 ///

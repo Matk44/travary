@@ -3,45 +3,67 @@ import 'package:provider/provider.dart';
 
 import '../../data/sharing_service.dart';
 import '../../design/tokens.dart';
+import '../../logic/invite_link.dart';
 import '../../state/analytics.dart';
 import '../../state/app_session.dart';
 import '../../state/travel_store.dart';
+import '../trips/trip_screen.dart';
 
-/// Join a trip someone shared: their invite code plus your name.
-/// Returns the trip's title once joined.
-Future<String?> showJoinTripSheet(BuildContext context) => showModalBottomSheet<String>(
+/// The trip someone joined.
+typedef JoinedTrip = ({String tripId, String title});
+
+/// Join a trip someone shared: their invite code (filled in from an invite
+/// link) plus your name. Returns the trip once joined.
+Future<JoinedTrip?> showJoinTripSheet(BuildContext context, {String? code}) => showModalBottomSheet<JoinedTrip>(
   context: context,
   isScrollControlled: true,
   showDragHandle: true,
   builder: (_) => Padding(
     padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-    child: const JoinTripSheet(),
+    child: JoinTripSheet(code: code),
   ),
 );
 
-/// Asks for an invite code, joins, and says which trip it was.
-Future<void> startJoinTrip(BuildContext context) async {
-  final title = await showJoinTripSheet(context);
-  if (title == null || !context.mounted) return;
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('You\'ve joined $title')));
+/// Asks for an invite code (or uses [code], from a link), joins, says so
+/// and opens the trip.
+Future<void> startJoinTrip(BuildContext context, {String? code}) async {
+  final joined = await showJoinTripSheet(context, code: code);
+  if (joined == null || !context.mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('You\'ve joined ${joined.title}')));
+  openJoinedTrip(context, joined.tripId);
+}
+
+/// Opens the trip just joined once it has arrived on this phone (its
+/// bookings come down a moment after joining).
+Future<void> openJoinedTrip(BuildContext context, String tripId) async {
+  final store = context.read<TravelStore>();
+  for (var wait = 0; wait < 20 && store.plan(tripId) == null; wait++) {
+    await Future<void>.delayed(const Duration(milliseconds: 250));
+    if (!context.mounted) return;
+  }
+  if (store.plan(tripId) == null || !context.mounted) return;
+  await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => TripScreen(tripId: tripId)));
 }
 
 class JoinTripSheet extends StatefulWidget {
-  const JoinTripSheet({super.key});
+  const JoinTripSheet({super.key, this.code});
+
+  /// From an invite link: filled in, so joining is one tap.
+  final String? code;
 
   @override
   State<JoinTripSheet> createState() => _JoinTripSheetState();
 }
 
 class _JoinTripSheetState extends State<JoinTripSheet> {
-  final _code = TextEditingController();
+  late final _code = TextEditingController(text: widget.code);
   // The account's name, when signed in.
   late final _name = TextEditingController(text: context.read<AppSession>().account?.name);
   String? _error;
   bool _busy = false;
 
-  String get _cleanCode => _code.text.toUpperCase().replaceAll(RegExp(r'[^A-Z0-9]'), '');
-  bool get _ready => _cleanCode.length == 6 && _name.text.trim().isNotEmpty;
+  String get _cleanCode => normaliseInviteCode(_code.text);
+  bool get _ready => _cleanCode.length == inviteCodeLength && _name.text.trim().isNotEmpty;
 
   @override
   void dispose() {
@@ -58,7 +80,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
     try {
       final joined = await context.read<TravelStore>().joinTrip(_cleanCode, name: _name.text.trim());
       track('trip_joined');
-      if (mounted) Navigator.of(context).pop(joined.title);
+      if (mounted) Navigator.of(context).pop((tripId: joined.tripId, title: joined.title));
     } on SharingException catch (e) {
       if (mounted) setState(() => _error = e.message);
     } finally {
@@ -88,7 +110,8 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
             TextField(
               controller: _code,
               enabled: available,
-              autofocus: available,
+              // From a link the code is in already: the name is what's left.
+              autofocus: available && widget.code == null,
               textCapitalization: TextCapitalization.characters,
               style: TravaryText.title.copyWith(letterSpacing: 4),
               decoration: const InputDecoration(labelText: 'Invite code', hintText: 'ABC 234'),
@@ -98,6 +121,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
             TextField(
               controller: _name,
               enabled: available,
+              autofocus: available && widget.code != null && _name.text.isEmpty,
               textCapitalization: TextCapitalization.words,
               decoration: const InputDecoration(labelText: 'Your name', hintText: 'How the family will see you'),
               onChanged: (_) => setState(() {}),

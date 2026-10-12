@@ -5,25 +5,28 @@ import 'pricing.dart';
 ///
 /// Rule of the house: a traveller's own tickets and bookings are never
 /// behind a paywall. Only these extras are.
+///
+/// Family first: what people pay for is everyone having the plan and their
+/// own tickets, and nothing lost with a phone. Smart Import is a bonus.
 enum PremiumFeature {
+  familySharing(
+    title: 'Family sharing',
+    benefit: 'Up to 6 people on the plan, each with their own tickets offline and the same packing list to tick',
+    pillar: PremiumPillar.together,
+  ),
+  ticketBackup(
+    title: 'Every ticket',
+    benefit: 'Attach every ticket and confirmation (free holidays keep 2), backed up and on any phone you sign in to',
+    pillar: PremiumPillar.peaceOfMind,
+  ),
   smartImport(
     title: 'Smart Import',
     benefit: 'Snap a screenshot or PDF and the booking fills itself in',
     pillar: PremiumPillar.time,
   ),
-  familySharing(
-    title: 'Family sharing',
-    benefit: 'Up to 6 people plan together, with tickets on every phone',
-    pillar: PremiumPillar.together,
-  ),
-  ticketBackup(
-    title: 'Ticket backup',
-    benefit: 'Tickets backed up and synced, even if you lose your phone',
-    pillar: PremiumPillar.peaceOfMind,
-  ),
   flightAlerts(
     title: 'Flight alerts',
-    benefit: 'Delays and gate changes the moment they happen',
+    benefit: 'Delays, new times and cancellations the moment they happen, on everyone\'s phone',
     pillar: PremiumPillar.peaceOfMind,
   );
 
@@ -37,15 +40,22 @@ enum PremiumFeature {
   /// released features (debug builds also show the rest, marked "Soon").
   bool get released => switch (this) {
     smartImport || familySharing || ticketBackup => true,
-    flightAlerts => false,
+    flightAlerts => flightAlertsReleased,
   };
 }
 
-/// The three reasons people pay, used to group the paywall.
+/// Flight alerts go on sale in release builds with
+/// `--dart-define=TRAVARY_FLIGHT_ALERTS=true`, once the server's checker is
+/// deployed and push is set up (the APNs key in Firebase). Debug builds
+/// show them regardless.
+const flightAlertsReleased = bool.fromEnvironment('TRAVARY_FLIGHT_ALERTS');
+
+/// The three reasons people pay, most important first, used to group the
+/// paywall.
 enum PremiumPillar {
-  time('Saves you time'),
   together('Keeps everyone together'),
-  peaceOfMind('Has your back');
+  peaceOfMind('Has your back'),
+  time('Saves you time');
 
   const PremiumPillar(this.label);
 
@@ -108,6 +118,38 @@ class Entitlements {
 
   /// Free Smart Imports used so far (only counts while on the free plan).
   final int smartImportsUsed;
+
+  /// What the server mirrored to `users/{uid}`: `plus` {expiresAt (ms),
+  /// willRenew}, `tripPasses` {tripId: {start, end}} (the dates each pass was
+  /// claimed for) and `smartImport.total`. Anything malformed is skipped.
+  static Entitlements fromUserRecord(Map<String, Object?>? json) {
+    if (json == null) return none;
+    final passes = <String, TripPass>{};
+    final rawPasses = json['tripPasses'];
+    if (rawPasses is Map) {
+      for (final MapEntry(:key, :value) in rawPasses.entries) {
+        if (value is! Map) continue;
+        final start = LocalDate.tryParse(value['start']);
+        final end = LocalDate.tryParse(value['end']);
+        if (start == null || end == null || end.isBefore(start)) continue;
+        passes['$key'] = TripPass(tripId: '$key', start: start, end: end);
+      }
+    }
+    final plus = json['plus'];
+    final expiresAt = plus is Map ? plus['expiresAt'] : null;
+    final usage = json['smartImport'];
+    final used = usage is Map ? usage['total'] : null;
+    return Entitlements(
+      plus: plus is Map && expiresAt is num
+          ? PlusSubscription(
+              expiresAt: DateTime.fromMillisecondsSinceEpoch(expiresAt.toInt()),
+              willRenew: plus['willRenew'] != false,
+            )
+          : null,
+      tripPasses: passes,
+      smartImportsUsed: used is num ? used.toInt() : 0,
+    );
+  }
 
   Entitlements copyWith({
     PlusSubscription? plus,

@@ -9,15 +9,20 @@ import '../../design/trip_chrome.dart';
 import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
+import '../../state/onboarding_store.dart';
+import '../../state/reminders_store.dart';
 import '../../state/travel_store.dart';
 import '../account/account_card.dart';
 import '../help/help_links.dart';
 import '../premium/plus_card.dart';
+import '../reminders/reminder_offer.dart';
 import '../travel_documents/document_actions.dart';
 import 'card_gallery_screen.dart';
 import 'flight_status_test_screen.dart';
+import 'travi_cameos_screen.dart';
 
-/// Account and settings: signing in, Travary Plus, travel documents.
+/// Account and settings: signing in, Travary Plus, travel documents,
+/// reminders.
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -51,6 +56,21 @@ class ProfileScreen extends StatelessWidget {
             trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () => openTravelDocuments(context),
           ),
+          if (context.watch<RemindersStore?>() case final reminders? when reminders.available) ...[
+            const SectionLabel('Reminders'),
+            SwitchListTile(
+              key: const ValueKey('profile-reminders'),
+              secondary: const Icon(Icons.notifications_none_rounded),
+              title: const Text('Reminders'),
+              subtitle: Text(
+                reminders.blocked
+                    ? 'Notifications are off for Travary. Turn them on in Settings.'
+                    : 'Your day’s plan each morning of a trip, and a nudge before each booking. Free.',
+              ),
+              value: reminders.on,
+              onChanged: (on) => on ? turnOnReminders(context) : reminders.turnOff(),
+            ),
+          ],
           const SectionLabel('Your data'),
           ListTile(
             leading: Icon(store.isDemo ? Icons.science_outlined : Icons.cloud_done_outlined),
@@ -71,11 +91,25 @@ class ProfileScreen extends StatelessWidget {
             const SectionLabel('Design tools'),
             const TestPlanSwitcher(),
             ListTile(
+              key: const ValueKey('design-restart-onboarding'),
+              leading: const Icon(Icons.replay_rounded),
+              title: const Text('Restart onboarding'),
+              subtitle: const Text('From Travi rolling in. Holidays it made before are kept.'),
+              onTap: () => context.read<OnboardingStore>().restart(),
+            ),
+            ListTile(
               leading: const Icon(Icons.style_outlined),
               title: const Text('Card gallery'),
               subtitle: const Text('Every card, size and state in any trip theme'),
               trailing: const Icon(Icons.chevron_right_rounded),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CardGalleryScreen())),
+            ),
+            ListTile(
+              leading: const Icon(Icons.luggage_outlined),
+              title: const Text('Travi cameos'),
+              subtitle: const Text('Where Travi turns up around the app'),
+              trailing: const Icon(Icons.chevron_right_rounded),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TraviCameosScreen())),
             ),
             if (store.flightStatus != null)
               ListTile(
@@ -85,6 +119,13 @@ class ProfileScreen extends StatelessWidget {
                 trailing: const Icon(Icons.chevron_right_rounded),
                 onTap: () =>
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FlightStatusTestScreen())),
+              ),
+            if (context.watch<RemindersStore?>() case final reminders? when reminders.on)
+              ListTile(
+                leading: const Icon(Icons.notifications_active_outlined),
+                title: const Text('Send a test reminder'),
+                subtitle: const Text('The next morning’s plan, in five seconds. Leave the app to see it.'),
+                onTap: reminders.sendTest,
               ),
             ListTile(
               leading: const Icon(Icons.more_time_rounded),

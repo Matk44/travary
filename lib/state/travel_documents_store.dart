@@ -59,9 +59,17 @@ class TravelDocumentsStore extends ChangeNotifier {
     _notify();
   }
 
-  /// Asks the phone's lock. True once the documents can be shown.
-  Future<bool> unlock() async {
-    if (_unlocked) return true;
+  /// Asks the phone's lock. True once the documents can be shown. A second
+  /// ask while the phone's prompt is up waits for that one rather than
+  /// stacking another prompt.
+  Future<bool> unlock() {
+    if (_unlocked) return Future.value(true);
+    return _unlocking ??= _askLock().whenComplete(() => _unlocking = null);
+  }
+
+  Future<bool>? _unlocking;
+
+  Future<bool> _askLock() async {
     final result = await _lock.unlock();
     _unlocked = result != UnlockResult.refused;
     _noLock = result == UnlockResult.noLock;

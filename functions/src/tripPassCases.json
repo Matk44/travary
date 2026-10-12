@@ -1,5 +1,5 @@
 {
-  "about": "Trip Pass coverage cases, run by both lib/logic/access.dart (test/logic/access_test.dart) and functions/src/tripPass.ts (tripPass.test.ts) so the app and the server agree. Dates are local calendar dates. trip null: the trip has no dates.",
+  "about": "Trip Pass coverage cases, run by both lib/logic/access.dart (test/logic/access_test.dart) and functions/src/tripPass.ts (tripPass.test.ts) so the app and the server agree. Dates are local calendar dates. trip null: the trip has no dates. lastDay null: the pass no longer covers the trip.",
   "cases": [
     { "why": "the flight home added after buying", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-10-12", "2026-10-24"], "lastDay": "2026-10-31" },
     { "why": "as bought", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-10-12", "2026-10-18"], "lastDay": "2026-10-25" },
@@ -10,6 +10,13 @@
     { "why": "moved to next year", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2027-03-01", "2027-03-10"], "lastDay": "2026-10-25" },
     { "why": "shrunk: never fewer days than bought", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-10-12", "2026-10-14"], "lastDay": "2026-10-25" },
     { "why": "no dates any more", "pass": ["2026-10-12", "2026-10-18"], "trip": null, "lastDay": "2026-10-25" },
-    { "why": "across the new year", "pass": ["2026-12-28", "2027-01-03"], "trip": ["2026-12-28", "2027-01-05"], "lastDay": "2027-01-12" }
+    { "why": "across the new year", "pass": ["2026-12-28", "2027-01-03"], "trip": ["2026-12-28", "2027-01-05"], "lastDay": "2027-01-12" },
+    { "why": "moved before its own dates: another holiday", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-09-01", "2026-09-07"], "lastDay": null },
+    { "why": "moved a little earlier, still overlapping", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-10-08", "2026-10-14"], "lastDay": "2026-10-25" },
+    { "why": "longer than a pass covers, but around its dates", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-10-01", "2026-11-05"], "lastDay": "2026-10-25" },
+    { "why": "stretched back months to cover other holidays", "pass": ["2027-12-31", "2027-12-31"], "trip": ["2026-10-11", "2027-12-31"], "lastDay": null },
+    { "why": "stretched months past its dates: as bought", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-10-12", "2027-02-01"], "lastDay": "2026-10-25" },
+    { "why": "moved a little earlier and longer than a pass covers", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-09-15", "2026-10-18"], "lastDay": "2026-10-25" },
+    { "why": "stretched back more than 30 days before its dates", "pass": ["2026-10-12", "2026-10-18"], "trip": ["2026-09-11", "2026-10-18"], "lastDay": null }
   ]
 }

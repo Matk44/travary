@@ -26,11 +26,11 @@ abstract interface class TravelRepository {
   /// Saves the traveller-editable fields of [trip] (title, theme, dates).
   Future<void> updateTrip(Trip trip);
 
-  /// Adds or changes one item on [tripId]'s checklist, leaving the rest as
-  /// they are (someone else may be ticking another).
-  Future<void> saveChecklistItem(String tripId, ChecklistItem item);
+  /// Adds or changes one item on [tripId]'s checklist (or packing list),
+  /// leaving the rest as they are (someone else may be ticking another).
+  Future<void> saveChecklistItem(String tripId, ChecklistItem item, {TripList list = TripList.checklist});
 
-  Future<void> deleteChecklistItem(String tripId, String itemId);
+  Future<void> deleteChecklistItem(String tripId, String itemId, {TripList list = TripList.checklist});
 
   /// Deletes [trip] and every one of its [bookings].
   Future<void> deleteTrip(Trip trip, Iterable<Booking> bookings);

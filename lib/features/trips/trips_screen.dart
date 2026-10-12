@@ -6,9 +6,11 @@ import '../../design/art/art_slots.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_theme_style.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/travi_cameo.dart';
 import '../../design/widgets/upcoming_trip_postcard.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
+import '../../logic/travi_cameos.dart';
 import '../../logic/trip_plan.dart';
 import '../../logic/trip_postcard_text.dart';
 import '../../state/travel_store.dart';
@@ -118,7 +120,7 @@ class TripsScreen extends StatelessWidget {
               hasScrollBody: false,
               child: Center(
                 child: EmptyState(
-                  icon: Icons.map_outlined,
+                  art: const TraviCameo(moment: TraviMoment.waiting),
                   title: 'No trips yet',
                   message: 'Start one here, or just add a booking and Travary makes the trip for you.',
                   actionLabel: 'New trip',

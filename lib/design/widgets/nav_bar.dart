@@ -283,9 +283,13 @@ class _NavTab extends StatelessWidget {
                             ),
                           ),
                         ),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(item.label, style: label, maxLines: 1),
+                        // Shrinks to the room left under the icon too, so
+                        // large text never spills out of the tab.
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(item.label, style: label, maxLines: 1),
+                          ),
                         ),
                       ],
                     ),

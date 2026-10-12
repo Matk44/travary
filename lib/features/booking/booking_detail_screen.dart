@@ -9,18 +9,24 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/ledger.dart';
 import '../../domain/domain.dart';
+import '../../logic/access.dart';
 import '../../logic/card_text.dart';
 import '../../logic/flight_status_text.dart';
+import '../../logic/price_text.dart';
+import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../premium/premium_gate.dart';
 import '../trips/trip_screen.dart';
 import 'attachment_viewer.dart';
 import 'booking_actions.dart';
 import 'edit_booking_screen.dart';
+import 'flight_alerts_row.dart';
 import 'flight_status_panel.dart';
 import 'ticket_file.dart';
 
-/// A booking's own page: its card, live flight status close to the day, the
-/// details on a paper panel (copy the reference, open the place in maps),
+/// A booking's own page: its card, live flight status close to the day and
+/// flight alerts (asking for notifications on a paid trip), the details on
+/// a paper panel (copy the reference, open the place in maps),
 /// its tickets, and the trip it's part of.
 class BookingDetailScreen extends StatelessWidget {
   const BookingDetailScreen({super.key, required this.bookingId});
@@ -58,6 +64,10 @@ class _Page extends StatelessWidget {
     final spec = booking.kind.spec;
     final trip = store.plan(booking.tripId)?.trip;
     final today = LocalDate.fromDateTime(store.now);
+    final ticketsLeft = context.watch<PremiumStore?>()?.policy.ticketFilesLeft(
+      store.plan(booking.tripId),
+      kept: ticketFilesIn(store.plan(booking.tripId)),
+    );
     final flightStatus = store.flightStatus;
     final flightLookup = flightStatus == null ? null : flightLookupFor(booking, today);
     final reference = booking.reference;
@@ -139,6 +149,8 @@ class _Page extends StatelessWidget {
                 padding: const EdgeInsets.only(top: TravarySpace.md),
                 child: Text(flightStatusComesLaterText, style: TravaryText.small),
               ),
+            if (FlightAlertsRow.showsFor(context, booking, today))
+              FlightAlertsRow(booking: booking, plan: store.plan(booking.tripId), now: store.now),
             const SizedBox(height: TravarySpace.lg),
             PaperPanel(
               child: Column(
@@ -169,7 +181,7 @@ class _Page extends StatelessWidget {
                   PaperRow(
                     key: const ValueKey('attach-ticket'),
                     title: booking.attachments.isEmpty ? 'Attach your ticket' : 'Attach another',
-                    subtitle: booking.attachments.isEmpty ? 'A photo or PDF, ready even offline' : null,
+                    subtitle: booking.attachments.isEmpty || ticketsLeft != null ? attachTicketHint(ticketsLeft) : null,
                     titleStyle: TravaryText.label.copyWith(fontSize: 16),
                     leading: const RowIcon(IconSlot.attach),
                     onTap: () => _addAttachment(context, store),
@@ -196,6 +208,9 @@ class _Page extends StatelessWidget {
   }
 
   Future<void> _addAttachment(BuildContext context, TravelStore store) async {
+    final plan = store.plan(booking.tripId);
+    final room = await requireTicketRoom(context, plan, kept: ticketFilesIn(plan), source: 'attach_ticket');
+    if (!room || !context.mounted) return;
     final attachment = await pickAttachment(context);
     if (attachment == null) return;
     await store.saveBooking(booking.copyWith(attachments: [...booking.attachments, attachment]), previous: booking);

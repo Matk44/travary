@@ -121,6 +121,53 @@ FlightStatusText describeFlightStatus(FlightStatus status, DateTime now) {
   );
 }
 
+/// A flight's live state as one short line under its card on Today, while
+/// flight alerts watch it (`Trip.liveFlights`).
+class LiveFlightLine {
+  const LiveFlightLine({required this.text, required this.tone});
+
+  /// "Delayed 45 min · Leaves 10:15am · Gate 12", "In the air · Lands
+  /// 2:30pm", "Landed · Belt 7", "On time · checked 6:10am".
+  final String text;
+  final FlightTone tone;
+}
+
+/// [status] as [booking]'s live line at [now]: the headline, then what
+/// matters next (the new time and the gate before take-off, the landing
+/// time in the air, the belt after). When it was last checked shows once
+/// that's over an hour ago (checks paused or failing). Null outside the
+/// flight's days ([flightLookupFor]), or when there's nothing to say yet.
+LiveFlightLine? liveFlightLineFor(Booking booking, FlightStatus? status, DateTime now) {
+  if (status == null || flightLookupFor(booking, LocalDate.fromDateTime(now)) == null) return null;
+  final (headline, tone) = _headline(status);
+  final departure = status.departure;
+  final arrival = status.arrival;
+  final details = <String?>[];
+  switch (status.state) {
+    case FlightState.canceled || FlightState.canceledUncertain || FlightState.diverted:
+      break;
+    case FlightState.arrived:
+      details.add(_prefixed('Belt', arrival.baggageBelt));
+    case FlightState.departed || FlightState.enRoute || FlightState.approaching:
+      final lands = arrival.revised ?? arrival.scheduled;
+      if (lands != null) details.add('Lands ${_time(lands, departure.scheduled)}');
+    default:
+      final revised = departure.revised;
+      if (revised != null && departure.scheduled != null && revised != departure.scheduled) {
+        details.add('Leaves ${_time(revised, departure.scheduled)}');
+      }
+      details.add(_prefixed('Gate', departure.gate) ?? _prefixed('Terminal', departure.terminal));
+  }
+  const over = {FlightState.arrived, FlightState.canceled, FlightState.diverted};
+  if (!over.contains(status.state) && now.difference(status.checkedAt) > const Duration(hours: 1)) {
+    details.add('checked ${formatClock(ClockTime.fromDateTime(status.checkedAt))}');
+  }
+  final present = details.whereType<String>().toList();
+  // "Scheduled" on its own says nothing the ticket doesn't.
+  if (tone == FlightTone.neutral && present.isEmpty) return null;
+  return LiveFlightLine(text: [headline, ...present].join(' · '), tone: tone);
+}
+
 /// "35 min", "1 hr", "1 hr 20 min".
 String formatDelay(int minutes) {
   final hours = minutes ~/ 60;

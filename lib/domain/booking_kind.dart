@@ -191,7 +191,8 @@ const _note = KindSpec(
   titleHint: 'Pack sunscreen',
   startLabel: 'When',
   locationLabel: 'Where',
-  typicalDuration: Duration.zero,
+  // A reminder stays up for a while once it's due, not gone the minute it is.
+  typicalDuration: Duration(hours: 1),
   startEvent: 'Note',
   endEvent: 'Note',
 );

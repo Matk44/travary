@@ -4,13 +4,21 @@ import 'package:provider/provider.dart';
 import '../data/art_pack_service.dart';
 import '../data/smart_import_service.dart';
 import '../data/visual_profile_service.dart';
+import '../data/onboarding_repository.dart';
+import '../data/reminder_settings.dart';
+import '../data/travi_greeting_record.dart';
 import '../design/tokens.dart';
 import '../state/app_session.dart';
+import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
+import '../state/reminders_store.dart';
+import '../state/share_inbox.dart';
 import '../state/travel_documents_store.dart';
 import '../state/travel_store.dart';
+import '../state/onboarding_store.dart';
+import '../state/travi_greetings.dart';
+import '../features/onboarding/onboarding_gate.dart';
 import 'bootstrap.dart';
-import 'home_shell.dart';
 import 'route_observer.dart';
 import 'trip_chrome_scope.dart';
 
@@ -32,8 +40,17 @@ class TravaryApp extends StatelessWidget {
           create: (_) =>
               TravelDocumentsStore(repository: dependencies.travelDocuments, lock: dependencies.documentLock),
         ),
+        // Travi greets at most once a day on this phone.
+        Provider<TraviGreetings?>(create: (_) => TraviGreetings(LocalTraviGreetingRecord())),
+        // A file shared in waits here, whatever the account, until home reads it.
+        ChangeNotifierProvider(create: (_) => ShareInbox(dependencies.sharedFiles)..start()),
         ChangeNotifierProvider(
-          create: (_) => AppSession(auth: dependencies.auth, uid: dependencies.initialUserId),
+          create: (_) => AppSession(
+            auth: dependencies.auth,
+            uid: dependencies.initialUserId,
+            onboardingRecord: dependencies.onboardingRecord,
+            links: dependencies.signInLinks,
+          ),
         ),
       ],
       // Everything that holds a traveller's data starts afresh for a new
@@ -59,10 +76,37 @@ class TravaryApp extends StatelessWidget {
               ChangeNotifierProvider(
                 create: (context) {
                   final travel = context.read<TravelStore>();
+                  final accountPurchases = dependencies.purchasesFor?.call(uid);
                   // Shares the travel clock, so "Preview a different time"
                   // also previews Plus and Trip Pass expiry.
-                  return PremiumStore(purchases: dependencies.purchases, clock: () => travel.now);
+                  return PremiumStore(
+                    purchases: accountPurchases ?? dependencies.purchases,
+                    ownsPurchases: accountPurchases != null,
+                    clock: () => travel.now,
+                    offerLoader: dependencies.offerLoaderFor?.call(uid),
+                  );
                 },
+              ),
+              // Flight alerts reach this phone for this account.
+              ChangeNotifierProvider(
+                create: (_) => NotificationsStore(push: dependencies.push, userId: uid)..start(),
+              ),
+              // Reminders for this account's trips; on or off for this phone.
+              ChangeNotifierProvider(
+                create: (context) => RemindersStore(
+                  scheduler: dependencies.reminders,
+                  settings: LocalReminderSettings(),
+                  travel: context.read<TravelStore>(),
+                )..start(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => OnboardingStore(
+                  repository: context.read<TravelStore>().isDemo
+                      ? MemoryOnboardingRepository()
+                      : LocalOnboardingRepository(userId: uid),
+                  record: dependencies.onboardingRecord,
+                  userId: uid,
+                )..load(),
               ),
             ],
             child: MaterialApp(
@@ -72,7 +116,7 @@ class TravaryApp extends StatelessWidget {
               // Every screen, pushed ones included, shares the trip's palette.
               builder: (context, child) => TripChromeScope(child: child!),
               navigatorObservers: [appRouteObserver],
-              home: const HomeShell(),
+              home: const OnboardingGate(),
             ),
           ),
         ),
@@ -82,11 +126,28 @@ class TravaryApp extends StatelessWidget {
 }
 
 /// Shown instead of the app when startup fails, with a hint for fixing it.
-class StartupErrorApp extends StatelessWidget {
-  const StartupErrorApp({super.key, required this.message, this.hint});
+class StartupErrorApp extends StatefulWidget {
+  const StartupErrorApp({super.key, required this.message, this.hint, this.onRetry});
 
   final String message;
   final String? hint;
+
+  /// Starts again from the top (never a dead end: the alternative is
+  /// closing the app by hand).
+  final Future<void> Function()? onRetry;
+
+  @override
+  State<StartupErrorApp> createState() => _StartupErrorAppState();
+}
+
+class _StartupErrorAppState extends State<StartupErrorApp> {
+  bool _retrying = false;
+
+  Future<void> _retry() async {
+    setState(() => _retrying = true);
+    await widget.onRetry!();
+    if (mounted) setState(() => _retrying = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,10 +164,18 @@ class StartupErrorApp extends StatelessWidget {
               children: [
                 const Icon(Icons.cloud_off_rounded, size: 40, color: TravaryColors.coral),
                 const SizedBox(height: TravarySpace.lg),
-                Text(message, style: TravaryText.title),
-                if (hint != null) ...[
+                Text(widget.message, style: TravaryText.title),
+                if (widget.hint case final hint?) ...[
                   const SizedBox(height: TravarySpace.sm),
-                  Text(hint!, style: TravaryText.bodySoft),
+                  Text(hint, style: TravaryText.bodySoft),
+                ],
+                if (widget.onRetry != null) ...[
+                  const SizedBox(height: TravarySpace.xl),
+                  FilledButton(
+                    key: const ValueKey('startup-retry'),
+                    onPressed: _retrying ? null : _retry,
+                    child: Text(_retrying ? 'Trying…' : 'Try again'),
+                  ),
                 ],
               ],
             ),

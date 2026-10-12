@@ -74,4 +74,35 @@ void main() {
       }
     }
   });
+
+  test('United States city and region packs keep the country pack and both postcards, and bring their own shells', () {
+    PackManifest manifest(String id) =>
+        PackManifest.parse(File(p.join('art_packs', 'sources', id, artPackManifestName)).readAsBytesSync());
+
+    // A trip downloads one destination pack, so each stands in for the
+    // country's: its postcards and palette stay, its three shells are new.
+    const shells = ['common/featured_ticket.webp', 'common/room_card.webp', 'common/reservation_card.webp'];
+    final country = manifest('country_us');
+    final usPlacePacks = [
+      for (final dir in Directory('art_packs/sources').listSync().whereType<Directory>())
+        if (p.basename(dir.path).startsWith('city_us_') || p.basename(dir.path).startsWith('region_us_'))
+          p.basename(dir.path),
+    ]..sort();
+    expect(usPlacePacks, hasLength(14));
+
+    for (final id in usPlacePacks) {
+      final place = manifest(id);
+      expect(place.files.toSet(), containsAll(country.files), reason: '$id must not be a sparse pack');
+      expect(place.files, containsAll(shells), reason: id);
+      expect(place.palette, country.palette, reason: '$id keeps the trip\'s interface colours');
+
+      final entry =
+          jsonDecode(File(p.join('art_packs', 'sources', id, 'catalog-entry.json')).readAsStringSync())
+              as Map<String, Object?>;
+      final selectors = entry['selectors']! as Map<String, Object?>;
+      expect(selectors['countryCodes'], ['US'], reason: id);
+      expect(selectors[id.startsWith('city_') ? 'cities' : 'regions'], isNotEmpty, reason: id);
+      expect(selectors[id.startsWith('city_') ? 'regions' : 'cities'], isNull, reason: '$id is one scope only');
+    }
+  });
 }

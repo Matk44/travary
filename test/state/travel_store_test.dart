@@ -87,6 +87,17 @@ void main() {
     expect(store.plan('orlando')!.trip.checklist, isEmpty);
   });
 
+  test('the same words twice add one item; the packing list is its own list', () async {
+    final plan = store.plan('orlando')!;
+    final first = await store.addChecklistItem(plan, 'Sun cream', list: TripList.packing);
+    await pumpEventQueue();
+    final again = await store.addChecklistItem(store.plan('orlando')!, ' sun  CREAM ', list: TripList.packing);
+    await pumpEventQueue();
+    expect(again?.id, first?.id);
+    expect(store.plan('orlando')!.trip.packing, hasLength(1));
+    expect(store.plan('orlando')!.trip.checklist, isEmpty);
+  });
+
   test('a full checklist takes no more', () async {
     repository.putTrip(
       store
@@ -130,6 +141,20 @@ void main() {
     await store.deleteBooking(store.bookings.single);
     await pumpEventQueue();
     expect(store.plans, isEmpty);
+  });
+
+  test('an automatic trip with a Holiday Pass keeps its dates when its last booking goes', () async {
+    store.keepWhenEmpty = (plan) => plan.id == 'orlando';
+    await store.deleteBooking(store.bookings.single);
+    await pumpEventQueue();
+    final kept = store.plan('orlando')!;
+    expect((kept.trip.plannedStart, kept.trip.plannedEnd), (d(10, 12), d(10, 18)));
+
+    // Booked again on those dates: it joins the same trip, pass and all.
+    final again = await store.saveBooking(
+      booking('hotel2', BookingKind.stay, d(10, 12), tripId: '', endDate: d(10, 18)),
+    );
+    expect(again.booking.tripId, 'orlando');
   });
 
   test('a trip with planned dates stays when its last booking goes', () async {

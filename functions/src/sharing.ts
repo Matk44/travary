@@ -2,6 +2,8 @@ import { FieldValue, getFirestore, Timestamp, Transaction } from 'firebase-admin
 import { logger } from 'firebase-functions';
 import { HttpsError, onCall } from 'firebase-functions/https';
 
+import { revenueCatApiKey } from './params';
+import { hasPremium, revenueCatApi } from './purchases';
 import {
   cleanName, INVITE_DAYS, MAX_MEMBERS, newInviteCode, normaliseCode, withMember, withoutMember,
 } from './sharingLogic';
@@ -27,11 +29,20 @@ function body(data: unknown): Record<string, unknown> {
   return data && typeof data === 'object' ? (data as Record<string, unknown>) : {};
 }
 
-/** Creates (or reuses) the trip's invite code. Any member can invite. */
-export const createTripInvite = onCall(async (request) => {
+/**
+ * Creates (or reuses) the trip's invite code. Any member can invite, with
+ * premium on the trip (their Plus, or the trip's pass): checked here as well
+ * as in the app. Joining with a code never needs it.
+ */
+export const createTripInvite = onCall({ secrets: [revenueCatApiKey] }, async (request) => {
   const uid = requireUid(request.auth);
   const { tripId, name } = body(request.data);
-  if (typeof tripId !== 'string' || !tripId) throw new HttpsError('invalid-argument', 'Which trip?');
+  if (typeof tripId !== 'string' || !tripId || tripId.includes('/')) {
+    throw new HttpsError('invalid-argument', 'Which trip?');
+  }
+  if (!(await hasPremium(db(), revenueCatApi(revenueCatApiKey.value()), uid, tripId))) {
+    throw new HttpsError('permission-denied', 'Inviting family to this trip needs Travary Plus or a Holiday Pass for it.');
+  }
 
   const tripRef = db().collection('trips').doc(tripId);
   return db().runTransaction(async (tx) => {

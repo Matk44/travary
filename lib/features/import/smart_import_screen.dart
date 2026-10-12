@@ -7,10 +7,15 @@ import '../../data/smart_import_service.dart';
 import '../../design/cards/booking_card.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/onboarding_folio.dart';
+import '../../design/widgets/travi_cameo.dart';
 import '../../domain/domain.dart';
+import '../../domain/onboarding.dart';
 import '../../logic/access.dart';
 import '../../logic/booking_form_text.dart';
 import '../../logic/card_text.dart';
+import '../../logic/price_text.dart';
+import '../../logic/travi_cameos.dart';
 import '../../logic/trip_assignment.dart';
 import '../../logic/trip_plan.dart';
 import '../../logic/trip_window.dart';
@@ -21,10 +26,13 @@ import '../booking/edit_booking_screen.dart';
 
 /// What happened, for the "Added to Orlando" message.
 class SmartImportOutcome {
-  const SmartImportOutcome({this.added = 0, this.trips = const {}, this.addManually = false});
+  const SmartImportOutcome({this.added = 0, this.trips = const {}, this.addManually = false, this.results = const []});
 
   final int added;
   final Set<String> trips;
+
+  /// Actual saved identities for handing the same booking into onboarding.
+  final List<SaveResult> results;
 
   /// The traveller chose to type the booking in instead.
   final bool addManually;
@@ -40,6 +48,8 @@ class SmartImportScreen extends StatefulWidget {
     required this.fileName,
     required this.access,
     this.tripId,
+    this.onboardingHoliday,
+    this.initialResult,
   });
 
   final String filePath;
@@ -51,6 +61,11 @@ class SmartImportScreen extends StatefulWidget {
   /// The trip it was opened from. Bookings on its dates go into it; the
   /// rest find their own trip.
   final String? tripId;
+  final OnboardingHoliday? onboardingHoliday;
+
+  /// Already read (onboarding reads on its stage while Travi studies the
+  /// file): straight to checking it.
+  final SmartImportResult? initialResult;
 
   @override
   State<SmartImportScreen> createState() => _SmartImportScreenState();
@@ -65,6 +80,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
   final _selected = <int>{};
   final _saved = <int>{};
   final _trips = <String>{};
+  final _results = <SaveResult>[];
   bool _saving = false;
 
   List<BookingDraft> get _drafts => _result?.drafts ?? const [];
@@ -72,7 +88,18 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
   @override
   void initState() {
     super.initState();
-    _read();
+    final read = widget.initialResult;
+    if (read == null) {
+      _read();
+    } else {
+      // Shown as found from the first frame; counted and opened just after.
+      _result = read;
+      _phase = read.drafts.isEmpty ? _Phase.empty : _Phase.review;
+      _selected.addAll(List.generate(read.drafts.length, (i) => i));
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _found(read, context.read<PremiumStore>());
+      });
+    }
   }
 
   Future<void> _read() async {
@@ -81,26 +108,8 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     final today = context.read<TravelStore>().today;
     final premium = context.read<PremiumStore>();
     try {
-      final result = await service.read(widget.filePath, today: today);
-      if (!mounted) return;
-      track('smart_import_read', {'bookings': result.drafts.length});
-      if (result.drafts.isEmpty) {
-        setState(() {
-          _result = result;
-          _phase = _Phase.empty;
-        });
-        return;
-      }
-      await premium.countSmartImport(widget.access);
-      if (!mounted) return;
-      setState(() {
-        _result = result;
-        _selected
-          ..clear()
-          ..addAll(List.generate(result.drafts.length, (i) => i));
-        _phase = _Phase.review;
-      });
-      if (result.drafts.length == 1) await _checkOne(0, closeAfter: true);
+      final result = await service.read(widget.filePath, today: today, tripId: widget.access.tripId);
+      if (mounted) await _found(result, premium);
     } on SmartImportException catch (e) {
       track('smart_import_failed', {'reason': e.message});
       if (!mounted) return;
@@ -109,6 +118,27 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
         _phase = _Phase.failed;
       });
     }
+  }
+
+  Future<void> _found(SmartImportResult result, PremiumStore premium) async {
+    track('smart_import_read', {'bookings': result.drafts.length});
+    if (result.drafts.isEmpty) {
+      setState(() {
+        _result = result;
+        _phase = _Phase.empty;
+      });
+      return;
+    }
+    await premium.countSmartImport(widget.access);
+    if (!mounted) return;
+    setState(() {
+      _result = result;
+      _selected
+        ..clear()
+        ..addAll(List.generate(result.drafts.length, (i) => i));
+      _phase = _Phase.review;
+    });
+    if (result.drafts.length == 1) await _checkOne(0, closeAfter: true);
   }
 
   /// Opens the pre-filled form for one draft.
@@ -122,6 +152,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
           tripId: widget.tripId,
           sourceFilePath: widget.filePath,
           sourceFileName: widget.fileName,
+          onboardingHoliday: widget.onboardingHoliday,
         ),
       ),
     );
@@ -131,6 +162,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
         _saved.add(index);
         _selected.remove(index);
         _trips.add(result.tripTitle);
+        _results.add(result);
       });
     }
     if (closeAfter || _saved.length == _drafts.length) _finish();
@@ -154,31 +186,99 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     setState(() => _saving = true);
     final store = context.read<TravelStore>();
     final trip = widget.tripId == null ? null : store.plan(widget.tripId!);
+    final policy = context.read<PremiumStore?>()?.policy;
+    final messenger = ScaffoldMessenger.of(context);
     final bookings = <Booking>[];
+    // The file becomes each booking's ticket while its holiday has room
+    // (free holidays keep Pricing.freeTicketFiles; this one file counts
+    // once per holiday, however many bookings it holds).
+    final keptIn = <String>{};
+    var notKept = 0;
+    // The file may be gone by now (a share cleared from the cache): the
+    // bookings are still saved, without it, rather than nothing at all.
+    var fileLost = false;
     for (final index in _selected.toList()..sort()) {
-      final attachment = await store.attachments?.import(widget.filePath, name: widget.fileName);
-      bookings.add(
-        _drafts[index].booking.copyWith(
-          id: store.repository.newId(),
-          tripId: _fitsTrip(_drafts[index].booking, trip) ? trip!.id : '',
-          attachments: [?attachment],
-        ),
-      );
+      final draft = _drafts[index].booking;
+      final tripId = _fitsTrip(draft, trip) ? trip!.id : '';
+      final target = tripId.isEmpty ? findTripFor(draft.startDate, draft.lastDate, store.plans) : trip;
+      final key = target?.id ?? '';
+      final room =
+          policy == null || keptIn.contains(key) || policy.canAttachTickets(target, kept: ticketFilesIn(target));
+      Attachment? attachment;
+      if (room && !fileLost) {
+        try {
+          attachment = await store.attachments?.import(widget.filePath, name: widget.fileName);
+          keptIn.add(key);
+        } on FileSystemException {
+          fileLost = true;
+        }
+      } else if (!room) {
+        notKept++;
+      }
+      bookings.add(draft.copyWith(id: store.repository.newId(), tripId: tripId, attachments: [?attachment]));
     }
-    final results = await store.saveBookings(bookings);
+    final List<SaveResult> results;
+    try {
+      results = await store.saveBookings(bookings);
+    } catch (_) {
+      if (mounted) setState(() => _saving = false);
+      messenger.showSnackBar(const SnackBar(content: Text('Couldn’t add those bookings. Please try again.')));
+      return;
+    }
+    if (fileLost) {
+      messenger.showSnackBar(const SnackBar(content: Text('Added without the file: it couldn’t be kept.')));
+    } else if (notKept > 0) {
+      messenger.showSnackBar(SnackBar(content: Text(ticketsNotKeptText(notKept))));
+    }
     if (!mounted) return;
     _trips.addAll(results.map((r) => r.tripTitle));
+    _results.addAll(results);
     _saved.addAll(_selected);
     _selected.clear();
     _finish();
   }
 
   void _finish() {
-    Navigator.of(context).pop(SmartImportOutcome(added: _saved.length, trips: _trips));
+    Navigator.of(
+      context,
+    ).pop(SmartImportOutcome(added: _saved.length, trips: _trips, results: List.unmodifiable(_results)));
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.onboardingHoliday != null) {
+      return OnboardingFolio(
+        body: _phase == _Phase.review
+            ? _review(context)
+            : ListView(
+                padding: const EdgeInsets.all(TravarySpace.gutter),
+                children: [
+                  OnboardingFolioHeading(
+                    holiday: widget.onboardingHoliday!,
+                    title: _phase == _Phase.reading ? 'Reading your' : 'Let’s try',
+                    accent: _phase == _Phase.reading ? 'booking.' : 'again.',
+                    subtitle: _phase == _Phase.reading
+                        ? 'Getting the details ready for you to check.'
+                        : 'Your holiday is still here.',
+                  ),
+                  if (_phase == _Phase.reading)
+                    const Center(child: CircularProgressIndicator())
+                  else ...[
+                    Text(
+                      _error ?? _result?.warning ?? 'No booking found. Try a clearer screenshot, or enter it yourself.',
+                      style: TravaryText.body,
+                    ),
+                    const SizedBox(height: TravarySpace.lg),
+                    if (_phase == _Phase.failed) FilledButton(onPressed: _read, child: const Text('Try again')),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(const SmartImportOutcome(addManually: true)),
+                      child: const Text('Enter a booking myself'),
+                    ),
+                  ],
+                ],
+              ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(title: const Text('Smart Import')),
       body: switch (_phase) {
@@ -335,12 +435,8 @@ class _Reading extends StatelessWidget {
           const SizedBox(height: TravarySpace.sm),
           Text('This usually takes a few seconds.', style: TravaryText.bodySoft, textAlign: TextAlign.center),
           const SizedBox(height: TravarySpace.lg),
-          const Center(
-            child: SizedBox(
-              width: 160,
-              child: LinearProgressIndicator(color: TravaryColors.coral, backgroundColor: TravaryColors.paperEdge),
-            ),
-          ),
+          // Travi studies it in place of a spinner.
+          const Center(child: TraviCameo(moment: TraviMoment.reading)),
         ],
       ),
     );
@@ -361,7 +457,11 @@ class _Problem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            EmptyState(icon: Icons.document_scanner_outlined, title: title, message: message),
+            EmptyState(
+              art: const TraviCameo(moment: TraviMoment.oops),
+              title: title,
+              message: message,
+            ),
             if (onRetry != null) OutlinedButton(onPressed: onRetry, child: const Text('Try again')),
             const SizedBox(height: TravarySpace.sm),
             FilledButton(

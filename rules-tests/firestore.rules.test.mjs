@@ -148,3 +148,67 @@ test('a checklist is a map, of at most 100 items, for members only', async () =>
   await assertFails(updateDoc(trip, { checklist: many }));
   await assertFails(updateDoc(doc(db('mallory'), 'trips/t1'), { 'checklist.c1': { text: 'x', done: false, createdAt: 1 } }));
 });
+
+test('the packing list: members tick and add items one at a time; a map of at most 100', async () => {
+  const item = { text: 'Sun cream', done: false, createdAt: 1 };
+  await assertSucceeds(updateDoc(doc(db('bob'), 'trips/t1'), { 'packing.p1': item }));
+  await assertSucceeds(updateDoc(doc(db('alice'), 'trips/t1'), { 'packing.p1.done': true }));
+  await assertSucceeds(updateDoc(doc(db('alice'), 'trips/t1'), { 'packing.p1': deleteField() }));
+  const trip = doc(db('bob'), 'trips/t1');
+  await assertFails(updateDoc(trip, { packing: ['Sun cream'] }));
+  const many = Object.fromEntries(Array.from({ length: 101 }, (_, i) => [`p${i}`, item]));
+  await assertFails(updateDoc(trip, { packing: many }));
+  await assertFails(updateDoc(doc(db('mallory'), 'trips/t1'), { 'packing.p1': item }));
+});
+
+test('purchases are the server\'s: travellers read their own mirror and nothing else', async () => {
+  await env.withSecurityRulesDisabled(async (admin) => {
+    await setDoc(doc(admin.firestore(), 'users/bob'), { tripPasses: { t1: { start: '2026-11-02', end: '2026-11-12' } } });
+    await setDoc(doc(admin.firestore(), 'tripPasses/rc1'), { uid: 'bob', tripId: 't1' });
+  });
+  await assertSucceeds(getDoc(doc(db('bob'), 'users/bob')));
+  await assertFails(getDoc(doc(db('alice'), 'users/bob')));
+  await assertFails(setDoc(doc(db('bob'), 'users/bob'), { plus: { expiresAt: 4102444800000 } }));
+  await assertFails(updateDoc(doc(db('bob'), 'users/bob'), { 'tripPasses.t2': { start: '2026-01-01', end: '2026-12-31' } }));
+  await assertFails(getDoc(doc(db('bob'), 'tripPasses/rc1')));
+  await assertFails(setDoc(doc(db('bob'), 'tripPasses/rc2'), { uid: 'bob', tripId: 't1' }));
+  await assertFails(updateDoc(doc(db('bob'), 'trips/t1'), { premium: { grantedBy: 'bob', until: 4102444800000 } }));
+});
+
+test('onboarding: travellers record their own completion, and nothing else on users/{uid}', async () => {
+  const done = () => ({ onboardingCompleted: true, onboardingCompletedAt: serverTimestamp() });
+  // A new account has no document yet; a merge creates it.
+  await assertSucceeds(setDoc(doc(db('carol'), 'users/carol'), done(), { merge: true }));
+  await assertSucceeds(getDoc(doc(db('carol'), 'users/carol')));
+  // Next to the server's purchases, and again (another sign-in).
+  await env.withSecurityRulesDisabled(async (admin) => {
+    await setDoc(doc(admin.firestore(), 'users/dave'), { plus: { expiresAt: 4102444800000, willRenew: true } });
+  });
+  await assertSucceeds(setDoc(doc(db('dave'), 'users/dave'), done(), { merge: true }));
+  await assertSucceeds(setDoc(doc(db('dave'), 'users/dave'), done(), { merge: true }));
+  // Only true, only the server's clock, only these fields, only their own.
+  await assertFails(setDoc(doc(db('erin'), 'users/erin'), { onboardingCompleted: false, onboardingCompletedAt: serverTimestamp() }));
+  await assertFails(setDoc(doc(db('erin'), 'users/erin'), { onboardingCompleted: true, onboardingCompletedAt: new Date(0) }));
+  await assertFails(setDoc(doc(db('erin'), 'users/erin'), { ...done(), plus: { expiresAt: 4102444800000 } }));
+  await assertFails(setDoc(doc(db('dave'), 'users/dave'), { ...done(), smartImport: { total: 0 } }, { merge: true }));
+  await assertFails(updateDoc(doc(db('dave'), 'users/dave'), { 'plus.expiresAt': 1 }));
+  await assertFails(setDoc(doc(db('mallory'), 'users/carol'), done(), { merge: true }));
+});
+
+test('flight alerts are the server\'s: members read their flights\' live state, nobody writes it', async () => {
+  const live = { status: 'Delayed', number: 'BA 2037', checkedAt: 1 };
+  await env.withSecurityRulesDisabled(async (admin) => {
+    await updateDoc(doc(admin.firestore(), 'trips/t1'), { 'liveFlights.b1': live });
+    await setDoc(doc(admin.firestore(), 'watchedFlights/BA2037_2026-10-14'), { number: 'BA2037', tripIds: ['t1'] });
+    await setDoc(doc(admin.firestore(), 'pushTokens/abc'), { uid: 'bob', token: 'secret' });
+  });
+  const trip = (await getDoc(doc(db('bob'), 'trips/t1'))).data();
+  if (trip.liveFlights.b1.status !== 'Delayed') throw new Error('members read the live state');
+  await assertFails(updateDoc(doc(db('bob'), 'trips/t1'), { 'liveFlights.b1.status': 'Landed' }));
+  await assertFails(updateDoc(doc(db('bob'), 'trips/t1'), { liveFlights: deleteField() }));
+  await assertFails(setDoc(doc(db('carol'), 'trips/t9'), newTrip('carol', { liveFlights: { b1: live } })));
+  for (const path of ['watchedFlights/BA2037_2026-10-14', 'pushTokens/abc', 'flightUsage/2026-10-01', 'config/flightAlerts']) {
+    await assertFails(getDoc(doc(db('bob'), path)));
+    await assertFails(setDoc(doc(db('bob'), path), { uid: 'bob' }));
+  }
+});

@@ -176,7 +176,7 @@ class _Details extends StatelessWidget {
                   title: pass == null ? 'Plus covers this trip' : 'A Trip Pass covers this trip',
                   subtitle: pass == null
                       ? 'Smart Import, family sharing and ticket backup for everyone on it'
-                      : '${tripPassCoversText(tripPassLastDay(pass, plan.start, plan.end))}. '
+                      : '${tripPassCoversText(tripPassLastDay(pass, plan.start, plan.end)!)}. '
                             'Smart Import, family sharing and ticket backup for everyone on it',
                   leading: const Icon(Icons.workspace_premium_rounded, color: TravaryColors.mustard),
                   trailing: const SizedBox.shrink(),
@@ -233,14 +233,20 @@ class _Details extends StatelessWidget {
 
   Future<void> _delete(BuildContext context, TravelStore store, TripPlan plan) async {
     final count = plan.bookings.length;
+    final premium = context.read<PremiumStore>();
+    // A pass belongs to its trip: say so before it goes with it.
+    final hasPass = !premium.hasPlus && premium.policy.hasTripPass(plan);
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Delete ${plan.trip.title}?'),
         content: Text(
-          count == 0
-              ? 'This trip has no bookings.'
-              : 'Its $count ${count == 1 ? 'booking' : 'bookings'} and their tickets will be deleted too.',
+          [
+            count == 0
+                ? 'This trip has no bookings.'
+                : 'Its $count ${count == 1 ? 'booking' : 'bookings'} and their tickets will be deleted too.',
+            if (hasPass) 'Its Trip Pass goes with it: a pass can\'t be moved to another trip.',
+          ].join('\n\n'),
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),

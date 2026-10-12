@@ -8,6 +8,7 @@ import '../art/card_shells.dart';
 import '../kind_style.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
+import '../widgets/live_flight_strip.dart';
 import 'card_parts.dart';
 import 'document_stamp_card.dart';
 import 'ledger_row_card.dart';
@@ -48,7 +49,8 @@ enum CardSize {
 /// window), the look's admission ticket, a key card or note paper; in the
 /// day's list, the hotel key card for stays, note paper for notes, and a
 /// tagged reservation card for everything else; in the Documents list, a
-/// paper row with a postmark and one of three stamps (`DocumentArt`). Only
+/// paper row with a postmark and one of three stamps (`DocumentArt`). A
+/// flight's live state ([CardText.live]) sits under its card. Only
 /// if a trip has no shell at all (the art is missing from the build) does
 /// a plain panel stand in, with no imitation of the material.
 class BookingCard extends StatelessWidget {
@@ -73,6 +75,21 @@ class BookingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final card = _card();
+    final live = text.live;
+    if (live == null || size == CardSize.document || size == CardSize.ledger) return card;
+    // A flight's live state, tucked under its ticket.
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        card,
+        LiveFlightStrip(line: live),
+      ],
+    );
+  }
+
+  Widget _card() {
     final shells = art.shells;
     switch (size) {
       case CardSize.hero:

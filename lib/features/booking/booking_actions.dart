@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/attachment_store.dart';
+import '../../data/shared_files.dart';
 import '../../design/art/art_slots.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
@@ -51,17 +52,26 @@ Future<void> startAddBooking(BuildContext context, {LocalDate? date, String? tri
 }
 
 /// Straight to the form for [kind] (e.g. "Add your flights" on a new trip),
-/// then says where the booking went.
+/// then says where the booking went. [file]: a file shared in, kept as its
+/// ticket.
 Future<void> addBookingOfKind(
   BuildContext context,
   BookingKind kind, {
   LocalDate? date,
   LocalDate? endDate,
   String? tripId,
+  SharedFile? file,
 }) async {
   final result = await Navigator.of(context).push<SaveResult>(
     MaterialPageRoute(
-      builder: (_) => EditBookingScreen(kind: kind, initialDate: date, initialEndDate: endDate, tripId: tripId),
+      builder: (_) => EditBookingScreen(
+        kind: kind,
+        initialDate: date,
+        initialEndDate: endDate,
+        tripId: tripId,
+        sourceFilePath: file?.path,
+        sourceFileName: file?.name,
+      ),
     ),
   );
   if (result == null || !context.mounted) return;
@@ -92,14 +102,20 @@ class TravelDocumentChoice extends AddChoice {
   const TravelDocumentChoice();
 }
 
-/// Smart Import: premium, with a few free uses. Pick a file, it's read in
-/// the cloud, and the traveller checks what was found before it's saved.
-Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
+/// Smart Import: premium, with a few free uses. Pick a file (or the one
+/// shared in), it's read in the cloud, and the traveller checks what was
+/// found before it's saved.
+Future<void> _startSmartImport(
+  BuildContext context, {
+  String? tripId,
+  SharedFile? shared,
+  String source = 'add_sheet',
+}) async {
   final travel = context.read<TravelStore>();
   final plan = tripId == null ? travel.focus.plan : travel.plan(tripId);
-  final access = await requirePremium(context, PremiumFeature.smartImport, trip: plan, source: 'add_sheet');
+  final access = await requirePremium(context, PremiumFeature.smartImport, trip: plan, source: source);
   if (access == null || !context.mounted) return;
-  final file = await pickFile(context, title: 'What shall we read?');
+  final file = shared ?? await pickFile(context, title: 'What shall we read?');
   if (file == null || !context.mounted) return;
   final outcome = await Navigator.of(context).push<SmartImportOutcome>(
     MaterialPageRoute(
@@ -108,6 +124,8 @@ Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
   );
   if (outcome == null || !context.mounted) return;
   if (outcome.addManually) {
+    // A shared file stays with the booking they type in.
+    if (shared != null) return _addSharedByHand(context, shared);
     await startAddBooking(context, tripId: tripId);
     return;
   }
@@ -116,6 +134,38 @@ Future<void> _startSmartImport(BuildContext context, {String? tripId}) async {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text(outcome.added == 1 ? 'Added to $where' : 'Added ${outcome.added} bookings to $where')),
   );
+}
+
+/// A screenshot, photo or PDF shared into Travary from another app: read
+/// like "Snap a booking" while Smart Import can; otherwise (never a paywall
+/// out of the blue) the add sheet, where typing it in keeps the file as the
+/// booking's ticket.
+Future<void> importSharedFile(BuildContext context, SharedFile file) async {
+  final travel = context.read<TravelStore>();
+  final premium = context.read<PremiumStore>();
+  if (premium.decide(PremiumFeature.smartImport, trip: travel.focus.plan).allowed) {
+    return _startSmartImport(context, shared: file, source: 'share_sheet');
+  }
+  await _addSharedByHand(context, file);
+}
+
+Future<void> _addSharedByHand(BuildContext context, SharedFile file) async {
+  final choice = await showModalBottomSheet<AddChoice>(
+    context: context,
+    backgroundColor: TravaryColors.linen,
+    showDragHandle: true,
+    isScrollControlled: true,
+    builder: (_) => KindPickerSheet(sharedFile: file),
+  );
+  if (choice == null || !context.mounted) return;
+  switch (choice) {
+    case ManualChoice(:final kind):
+      await addBookingOfKind(context, kind, file: file);
+    case SmartImportChoice():
+      await _startSmartImport(context, shared: file, source: 'share_sheet');
+    case TravelDocumentChoice():
+      break;
+  }
 }
 
 void openBooking(BuildContext context, Booking booking) {
@@ -194,7 +244,11 @@ Future<Attachment?> pickAttachment(BuildContext context) async {
 /// types", and passports and other travel documents (kept on this phone)
 /// at the end.
 class KindPickerSheet extends StatefulWidget {
-  const KindPickerSheet({super.key});
+  const KindPickerSheet({super.key, this.sharedFile});
+
+  /// A file shared in: the sheet adds a booking for it, and it stays with
+  /// the booking as its ticket (no passports here).
+  final SharedFile? sharedFile;
 
   /// The kinds shown straight away; the rest wait under "More booking types".
   static const common = [BookingKind.flight, BookingKind.stay, BookingKind.attraction, BookingKind.dining];
@@ -230,7 +284,12 @@ class _KindPickerSheetState extends State<KindPickerSheet> {
           children: [
             Row(
               children: [
-                Expanded(child: Text('Add a booking', style: TravaryText.ledgerHeading)),
+                Expanded(
+                  child: Text(
+                    widget.sharedFile == null ? 'Add a booking' : 'Add this booking',
+                    style: TravaryText.ledgerHeading,
+                  ),
+                ),
                 IconButton(
                   tooltip: 'Close',
                   onPressed: () => Navigator.pop(context),
@@ -238,6 +297,11 @@ class _KindPickerSheetState extends State<KindPickerSheet> {
                 ),
               ],
             ),
+            if (widget.sharedFile case final file?)
+              Padding(
+                padding: const EdgeInsets.only(top: TravarySpace.xs),
+                child: Text('${file.name} stays with it as the ticket.', style: TravaryText.bodySoft),
+              ),
             const SizedBox(height: TravarySpace.md),
             if (PremiumFeature.smartImport.released || kDebugMode) ...[
               const _SnapRow(),
@@ -271,20 +335,22 @@ class _KindPickerSheetState extends State<KindPickerSheet> {
                 ],
               ),
             ),
-            const SizedBox(height: TravarySpace.lg),
-            PaperPanel(
-              child: PaperRow(
-                key: const ValueKey('add-travel-document'),
-                title: 'Passport & documents',
-                subtitle: 'Passport, visa or insurance, kept on this phone only',
-                leading: RowPicture(
-                  image: chrome.slots.surface(SurfaceSlot.addPassport),
-                  fallback: Icons.menu_book_rounded,
-                  size: 72,
+            if (widget.sharedFile == null) ...[
+              const SizedBox(height: TravarySpace.lg),
+              PaperPanel(
+                child: PaperRow(
+                  key: const ValueKey('add-travel-document'),
+                  title: 'Passport & documents',
+                  subtitle: 'Passport, visa or insurance, kept on this phone only',
+                  leading: RowPicture(
+                    image: chrome.slots.surface(SurfaceSlot.addPassport),
+                    fallback: Icons.menu_book_rounded,
+                    size: 72,
+                  ),
+                  onTap: () => Navigator.pop(context, const TravelDocumentChoice()),
                 ),
-                onTap: () => Navigator.pop(context, const TravelDocumentChoice()),
               ),
-            ),
+            ],
           ],
         ),
       ),

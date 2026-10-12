@@ -1,13 +1,16 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../logic/countdown_text.dart';
+import '../../logic/travi_cameos.dart';
 import '../art/art_catalog.dart';
 import '../art/art_slots.dart';
 import '../cards/card_parts.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
+import 'travi_clip_player.dart';
 
 /// Measured on the supplied rasters (docs/COUNTDOWN_HANGING_TAG_HANDOFF.md).
 abstract final class CountdownGeometry {
@@ -25,6 +28,13 @@ abstract final class CountdownGeometry {
   /// 0.93–0.98).
   static const postcardCardRight = 0.966;
   static const postcardCardBottom = 0.96;
+
+  /// The card's left edge, the margin mirrored.
+  static const postcardCardLeft = 1 - postcardCardRight;
+
+  /// Where the card's top edge is inside the image, as a share of its
+  /// height (0.05 to 0.06 over the drawn postcards).
+  static const postcardCardTop = 0.05;
 
   /// `common/countdown_luggage_tag.png` is 1024 × 1536. Its card is
   /// `SurfaceSlot.countdownTag.body`.
@@ -51,8 +61,22 @@ abstract final class CountdownGeometry {
 /// left and right from its eyelet, and comes to rest. The postcard and tag
 /// are raster material, resolved for the trip like every other surface;
 /// every word is live text over them.
+///
+/// Travi hides behind the postcard's top right corner. Once the entry has
+/// settled he may pop up to wave ([greet], at most once a day), and tapping
+/// the tag brings him up with how he feels about the days left
+/// ([reaction]); he ducks back down after each.
 class CountdownTripHero extends StatefulWidget {
-  const CountdownTripHero({super.key, required this.text, required this.postcard, required this.onOpen, this.replay});
+  const CountdownTripHero({
+    super.key,
+    required this.text,
+    required this.postcard,
+    required this.onOpen,
+    this.replay,
+    this.reaction,
+    this.greet,
+    this.note,
+  });
 
   final CountdownText text;
 
@@ -64,6 +88,17 @@ class CountdownTripHero extends StatefulWidget {
   /// Notifies when Today comes back into view (its tab, the app, a screen
   /// closed over it): the entry plays again.
   final Listenable? replay;
+
+  /// Travi's reaction to a tap on the tag (`countdownReactionFor`). Without
+  /// one, the tag opens the trip like the rest of the postcard.
+  final TraviPeek? reaction;
+
+  /// Asked once the entry settles: true if Travi pops up to wave.
+  final Future<bool> Function()? greet;
+
+  /// A line under the postcard, beside the tag (the packing list), with a
+  /// tap of its own.
+  final CountdownNote? note;
 
   /// As wide as [available] allows, up to [CountdownLayout.postcardMaxWidth],
   /// with the postcard and the tag hanging below it no taller than
@@ -102,14 +137,42 @@ class CountdownTripHero extends StatefulWidget {
 }
 
 class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTickerProviderStateMixin {
-  late final AnimationController _entry = AnimationController(vsync: this, duration: CountdownLayout.entryDuration);
+  late final AnimationController _entry = AnimationController(vsync: this, duration: CountdownLayout.entryDuration)
+    ..addStatusListener(_settled);
   bool _started = false;
   bool _pressed = false;
+
+  // Travi's peek: what he plays, and a count that starts it.
+  List<TraviShot> _peek = const [];
+  int _cue = 0;
+  bool _peeking = false;
 
   @override
   void initState() {
     super.initState();
     widget.replay?.addListener(_play);
+  }
+
+  /// The entry has settled: he may wave (never with reduced motion).
+  Future<void> _settled(AnimationStatus status) async {
+    if (status != AnimationStatus.completed || _peeking || widget.greet == null) return;
+    if (MediaQuery.disableAnimationsOf(context)) return;
+    if (await widget.greet!() && mounted) _popUp(TraviPeek.wave);
+  }
+
+  void _react() {
+    HapticFeedback.selectionClick();
+    _popUp(widget.reaction!);
+  }
+
+  /// Up, a moment, and back down; a tap while he's up waits for him.
+  void _popUp(TraviPeek peek) {
+    if (_peeking) return;
+    setState(() {
+      _peeking = true;
+      _peek = traviPeekScript(peek);
+      _cue++;
+    });
   }
 
   @override
@@ -201,11 +264,12 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
     final tagHeight = stage.tagHeight;
     final tagLeft = left + stage.tagLeft;
     final tagTop = stage.tagTop;
+    final travi = stage.traviSize;
     final body = SurfaceSlot.countdownTag.body!;
     const eyelet = CountdownGeometry.eyelet;
     final cardCentre = Alignment(body.left + body.right - 1, body.top + body.bottom - 1);
 
-    return Semantics(
+    final hero = Semantics(
       button: true,
       label: widget.text.semanticLabel,
       excludeSemantics: true,
@@ -226,6 +290,21 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
             child: Stack(
               clipBehavior: Clip.none,
               children: [
+                // Behind the postcard: it covers him below its top edge.
+                Positioned(
+                  left: left + stage.traviLeft,
+                  top: stage.traviTop,
+                  width: travi,
+                  height: travi,
+                  child: IgnorePointer(
+                    child: TraviClipPlayer(
+                      key: const ValueKey('countdown-travi'),
+                      script: _peek,
+                      cue: _cue,
+                      onDone: () => setState(() => _peeking = false),
+                    ),
+                  ),
+                ),
                 Positioned(
                   left: left,
                   top: -rise,
@@ -286,7 +365,114 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
                         ),
                       );
                     },
-                    child: _CountdownTag(text: widget.text),
+                    child: widget.reaction == null
+                        ? CountdownLuggageTag(text: widget.text)
+                        : GestureDetector(
+                            key: const ValueKey('countdown-tag'),
+                            behavior: HitTestBehavior.opaque,
+                            onTap: _react,
+                            child: CountdownLuggageTag(text: widget.text),
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final note = widget.note;
+    if (note == null) return hero;
+    // Under the card's bottom left, clear of the tag even as it swings.
+    final noteLeft = left + width * CountdownGeometry.postcardCardLeft + CountdownLayout.noteInset;
+    final tagCardLeft = tagLeft + body.left * tagWidth;
+    final tagLean = body.height * tagHeight * math.sin(CountdownLayout.noteClearDegrees * math.pi / 180);
+    final noteRight = tagCardLeft - tagLean - TravarySpace.sm;
+    // Laid out in the stack (not positioned), so a note that wraps on a
+    // small phone with large text makes the countdown taller rather than
+    // hanging out of it.
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        hero,
+        Padding(
+          padding: EdgeInsets.only(
+            left: noteLeft,
+            top: -rise + height * CountdownGeometry.postcardCardBottom + TravarySpace.sm,
+          ),
+          child: SizedBox(
+            width: math.max(0, noteRight - noteLeft),
+            child: FadeTransition(
+              opacity: CurvedAnimation(parent: _entry, curve: CountdownTripHero._postcardIn),
+              child: _CountdownNoteLink(note: note),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// A line written under the countdown postcard (the packing list: "Packing
+/// list · Start yours"), already worded.
+class CountdownNote {
+  const CountdownNote({required this.title, required this.detail, required this.semanticLabel, required this.onTap});
+
+  final String title;
+  final String detail;
+  final String semanticLabel;
+  final VoidCallback onTap;
+}
+
+/// The note as a small link: a suitcase, its title in ink, its state
+/// underneath with an arrow.
+class _CountdownNoteLink extends StatelessWidget {
+  const _CountdownNoteLink({required this.note});
+
+  final CountdownNote note;
+
+  @override
+  Widget build(BuildContext context) {
+    final chrome = TravaryChrome.of(context);
+    final ink = chrome.colors.ink;
+    return Semantics(
+      button: true,
+      label: note.semanticLabel,
+      excludeSemantics: true,
+      child: InkWell(
+        key: const ValueKey('countdown-note'),
+        onTap: note.onTap,
+        borderRadius: BorderRadius.circular(TravaryRadius.small),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 48),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: TravarySpace.xs),
+            child: Row(
+              children: [
+                SlotIcon(icon: chrome.slots.icon(IconSlot.countdownBookings), color: ink, size: 28),
+                const SizedBox(width: TravarySpace.sm),
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        note.title,
+                        style: TravaryText.label.copyWith(color: ink),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          text: note.detail,
+                          children: const [TextSpan(text: ' \u203A')],
+                        ),
+                        style: TravaryText.small.copyWith(color: ink.withValues(alpha: 0.75)),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -328,12 +514,22 @@ class _Stage {
 
   /// Down to the postcard's bottom, or the tag's if it hangs lower.
   double get height => math.max(postcardHeight - rise, tagTop + tagHeight);
+
+  /// Travi's square, behind the card's top right: he stands
+  /// [CountdownLayout.traviSink] of it below the card's top edge, so the
+  /// card covers where he's cut off.
+  double get traviSize => width * CountdownLayout.traviWidth;
+  double get traviLeft => width * CountdownLayout.traviRight - traviSize;
+  double get traviTop =>
+      -rise + postcardHeight * CountdownGeometry.postcardCardTop + traviSize * CountdownLayout.traviSink - traviSize;
 }
 
 /// The luggage tag with the countdown written on it: the raster (or a
 /// plain card while it's missing) with live words in its copy area.
-class _CountdownTag extends StatelessWidget {
-  const _CountdownTag({required this.text});
+/// The countdown's luggage tag: its shell with the trip's countdown written
+/// on it. Today hangs it on the postcard; onboarding hangs it on the stage.
+class CountdownLuggageTag extends StatelessWidget {
+  const CountdownLuggageTag({super.key, required this.text});
 
   final CountdownText text;
 

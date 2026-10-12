@@ -29,6 +29,8 @@ enum IconSlot {
   weatherRain('weather_rain', Icons.umbrella_rounded),
   weatherSnow('weather_snow', Icons.ac_unit_rounded),
   calendar('calendar', Icons.calendar_today_rounded),
+
+  /// A suitcase: the packing list (on the countdown and the trip).
   countdownBookings('countdown_bookings', Icons.luggage_rounded),
 
   /// The ledger screens (trip, add sheet, forms): a paperclip for tickets,

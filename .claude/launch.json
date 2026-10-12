@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "travary-website",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["website/serve.py", "8787"],
+      "port": 8787
+    },
+    {
+      "name": "travary-website-functions",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd website && CLOUDFLARE_ACCOUNT_ID=1b63e91f9618e2482f550906703a747f npx --yes wrangler@latest pages dev --port 8788"],
+      "port": 8788
+    }
+  ]
+}

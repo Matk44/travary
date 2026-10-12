@@ -19,12 +19,13 @@ view-only; parsing errors erode trust; the category looks dated.
 
 ## Tiers (starting point, A/B test via RevenueCat)
 
-| | Free | Trip Pass $7.99 (per trip) | Plus $34.99/yr |
+| | Free | Holiday Pass $14.99 (per trip) | Plus $34.99/yr |
 |---|---|---|---|
 | Unlimited trips + manual bookings, Today, Wallet, offline tickets | ✓ | ✓ | ✓ |
 | Travel documents (passports, visas, insurance) on this phone, behind Face ID, with expiry checks | ✓ | ✓ | ✓ |
 | Countdown widget, read-only share link | ✓ | ✓ | ✓ |
 | Smart Import (screenshot / PDF / email) | 3 total | ✓ that trip | ✓ unlimited |
+| Ticket files (photos, PDFs) attached to bookings | 2 per holiday | ✓ that trip | ✓ unlimited |
 | Family co-planning, tickets on everyone's phone (up to 6) | – | ✓ that trip | ✓ |
 | Cloud backup and sync of tickets | – | ✓ that trip | ✓ |
 | Flight alerts, Live Activity, "leave by" reminders | – | ✓ that trip | ✓ |
@@ -33,6 +34,26 @@ view-only; parsing errors erode trust; the category looks dated.
 - No monthly plan (the Trip Pass replaces it). Trip Pass holders get annual at
   $26.99 for the first year ("your pass counts toward Plus").
 - Optional founding lifetime at $79.99, launch only, capped.
+
+## Upsell proposition (owner, 11 Oct 2026)
+
+Practicality and family sharing sell; Smart Import is a bonus, never the
+headline. Free is "your holiday, on your phone" (everything a solo planner
+needs, tickets never locked). Paid is "your holiday, on everyone's phone":
+one pass covers everyone on the trip, up to 6, and only one person buys.
+
+- Paywall order: Keeps everyone together (family sharing: the plan, their
+  own tickets offline, the same packing list), Has your back (ticket
+  backup), then Saves you time (Smart Import). Holiday Pass: "one payment
+  for up to 6 people, no subscription".
+- Hooks where the need is real: "Who's coming" reads the bookings
+  ("Tickets for 4: give everyone theirs"); the packing list offers "Pack
+  together"; Invite opens the paywall for that trip.
+- Next, in order: a free "Send the plan" read-only share (growth loop, and
+  the step up to live sharing); reminders (the evening before, check-in);
+  live flight status as a paid extra; a shared-trip activity line ("Sam
+  added Lagoon Grill"); the pass desk defaulting to the Holiday Pass inside
+  a trip (A/B in RevenueCat); "your pass counts toward Plus".
 
 ## Paywall moments
 
@@ -76,7 +97,10 @@ videos (stub tear-off, ticket "printing" on import).
 
 ## Decisions
 
-- Prices confirmed: Plus $34.99/yr, Trip Pass $7.99. No free trial (decided
+- Prices: Plus $34.99/yr; owner changed Holiday Pass to $14.99 USD on
+  2026-10-06. These are preview/launch defaults. Store prices and available
+  packages come from RevenueCat; names and scope can use offering metadata
+  ([configuration](REVENUECAT_OFFER_CATALOG.md)). No free trial (decided
   2026-10-04): premium features sell themselves where they're needed.
 - Trip Pass (decided 2026-10-04, refined 2026-10-06): one trip of at most
   30 days, bought for the dates it had then, until 7 days after it ends. It

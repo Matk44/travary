@@ -69,6 +69,7 @@ class MemoryTravelRepository implements TravelRepository {
       premium: existing.premium,
       hiddenGaps: trip.hiddenGaps,
       checklist: existing.checklist,
+      packing: existing.packing,
       createdAt: existing.createdAt,
       updatedAt: trip.updatedAt,
     );
@@ -76,20 +77,25 @@ class MemoryTravelRepository implements TravelRepository {
   }
 
   @override
-  Future<void> saveChecklistItem(String tripId, ChecklistItem item) async {
+  Future<void> saveChecklistItem(String tripId, ChecklistItem item, {TripList list = TripList.checklist}) async {
     final trip = _trips[tripId];
     if (trip == null) return;
-    _trips[tripId] = trip.copyWith(checklist: {...trip.checklist, item.id: item});
+    _trips[tripId] = _withList(trip, list, {...trip.listOf(list), item.id: item});
     _tripsController.add(trips);
   }
 
   @override
-  Future<void> deleteChecklistItem(String tripId, String itemId) async {
+  Future<void> deleteChecklistItem(String tripId, String itemId, {TripList list = TripList.checklist}) async {
     final trip = _trips[tripId];
     if (trip == null) return;
-    _trips[tripId] = trip.copyWith(checklist: {...trip.checklist}..remove(itemId));
+    _trips[tripId] = _withList(trip, list, {...trip.listOf(list)}..remove(itemId));
     _tripsController.add(trips);
   }
+
+  static Trip _withList(Trip trip, TripList list, Map<String, ChecklistItem> items) => switch (list) {
+    TripList.checklist => trip.copyWith(checklist: items),
+    TripList.packing => trip.copyWith(packing: items),
+  };
 
   /// Replaces a trip wholesale, members included (tests and demo tools).
   void putTrip(Trip trip) {

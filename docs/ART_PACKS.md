@@ -120,6 +120,45 @@ and stamp; the windowed boarding pass, restaurant and travel tickets
 key tag. A pack may still override any of these by name, in the same
 ranks.
 
+### City and region cards (United States)
+
+Thirteen US places have their own featured ticket, key card and tagged
+reservation card (mid-century poster scenes on the shared templates, made
+from `art_packs/prompts/city_cards.md`), as small place packs on top of
+the country's:
+
+| Pack | Scope | Selectors |
+|---|---|---|
+| `city_us_orlando` (v2) | city | `orlando` |
+| `city_us_new_york`, `_las_vegas`, `_washington_dc`, `_chicago`, `_boston`, `_new_orleans`, `_nashville`, `_seattle` | city | `new_york`, `las_vegas`, `washington_dc`, `chicago`, `boston`, `new_orleans`, `nashville`, `seattle` |
+| `region_us_florida` | region | `florida`, `florida_keys` |
+| `region_us_california` | region | `california` |
+| `region_us_hawaii` | region | `hawaii`, `maui` |
+| `region_us_arizona`, `region_us_alaska` | region | `arizona`, `alaska` |
+
+A trip downloads **one** destination pack, so each of these carries what
+`country_us` has (both postcards and its palette) beside its three new
+shells: a New York trip never loses the US postcard or colours. Orlando's
+city pack outranks Florida's; every other Florida city (Miami, Tampa, the
+Keys) gets Florida's, every California city (San Francisco included) gets
+California's, and a US place with neither (Texas, Austin, Denver) stays on
+the country's cards. A verified or traveller-chosen place is needed, as
+everywhere (`test/logic/us_place_packs_test.dart` pins every case, for the
+classifier's places and for "Where to?"). Only Orlando has a Documents
+stamp.
+
+Adding a place: put its three PNGs in a new `art_packs/sources/<pack-id>/common/`
+with `country_us`'s postcards, a `pack.json` (version 1, the country's
+palette, PNG names for the shells), a `catalog-entry.json`, then
+`webp` and `build` as below. Replacing a published pack's shells needs a new
+version (Orlando went 1 → 2). The WebP step moves each PNG to
+`art_packs/originals/<pack-id>/common/`, **replacing a master of the same
+name**: keep an old master in git (or copy it away) first.
+`test/visual_qa/us_city_cards_test.dart` renders Today on each place's
+shells with the real fonts (`tool/visual_qa.sh`,
+`build/visual_qa/us_cards_<place>.png`) and checks each card is drawn on the
+pack's shells with its live text inside their text zones.
+
 ### The countdown postcard
 
 Between trips, Today counts down to the next one on its destination's
@@ -330,8 +369,10 @@ stored in the repository. `--dry-run` reads and writes nothing remote.
 
 Published so far (3 October 2026, catalog v30): 25 country packs, the
 Paris, Kyoto and Orlando city packs, and the Lake District and Bali region
-packs, all in WebP. `seed_themepark` is for tests and local development
-only and is never published.
+packs, all in WebP. Built into `art_packs/catalog.json` (v94) but **not yet
+published**: Orlando v2 and the 13 US city and region packs above; the
+`publish --dry-run` lists their archives as ready. `seed_themepark` is for
+tests and local development only and is never published.
 
 ## Local development with the emulators
 

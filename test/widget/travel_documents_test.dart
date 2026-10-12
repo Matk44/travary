@@ -127,6 +127,38 @@ void main() {
     expect(find.byKey(const ValueKey('documents-locked')), findsOneWidget);
     expect(find.byType(TravelDocumentCard), findsNothing);
     expect(find.text('Your travel documents stay locked.'), findsOneWidget);
+
+    // Without the passcode there's always a way out.
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.byType(TravelDocumentsScreen), findsNothing);
+    expect(entry(), findsOneWidget);
+  });
+
+  testWidgets('a document locked in the background can be left without unlocking', (tester) async {
+    final lock = FixedDocumentLock();
+    await pumpApp(tester, documents: [passport()], lock: lock);
+    await openTab(tester, 'Documents');
+    await tester.tap(entry());
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TravelDocumentCard));
+    await tester.pumpAndSettle();
+
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+    await tester.pump();
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pump();
+    expect(find.text('Locked'), findsOneWidget);
+
+    lock.result = UnlockResult.refused;
+    await tester.tap(find.byKey(const ValueKey('documents-locked-leave')));
+    await tester.pumpAndSettle();
+    expect(find.byType(TravelDocumentScreen), findsNothing);
+    expect(find.byType(TravelDocumentsScreen), findsOneWidget);
   });
 
   testWidgets('a passport too close to the next trip is flagged, even on the locked pill', (tester) async {

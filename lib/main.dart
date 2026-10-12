@@ -16,11 +16,18 @@ import 'app/bootstrap.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await _start();
+}
+
+/// Starts the app, or says why it couldn't with a way to try again (the
+/// first open needs the internet, and a plane or a busy airport may not
+/// have it).
+Future<void> _start() async {
   try {
     runApp(TravaryApp(dependencies: await bootstrap()));
   } on StartupException catch (e) {
-    runApp(StartupErrorApp(message: e.message, hint: e.hint));
+    runApp(StartupErrorApp(message: e.message, hint: e.hint, onRetry: _start));
   } catch (e) {
-    runApp(StartupErrorApp(message: 'Travary couldn\'t start.', hint: '$e'));
+    runApp(StartupErrorApp(message: 'Travary couldn\'t start.', hint: '$e', onRetry: _start));
   }
 }

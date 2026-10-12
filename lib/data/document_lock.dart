@@ -30,10 +30,11 @@ class DeviceDocumentLock implements DocumentLock {
   Future<UnlockResult> unlock() async {
     try {
       if (!await _auth.isDeviceSupported()) return UnlockResult.noLock;
-      final ok = await _auth.authenticate(
-        localizedReason: 'Unlock your travel documents',
-        persistAcrossBackgrounding: true,
-      );
+      // Not persisted across backgrounding: that re-opens the prompt every
+      // time the app comes back and never answers until someone unlocks,
+      // so a traveller without the passcode couldn't leave the screen. The
+      // documents lock in the background anyway; leaving is a refusal.
+      final ok = await _auth.authenticate(localizedReason: 'Unlock your travel documents');
       return ok ? UnlockResult.unlocked : UnlockResult.refused;
     } on LocalAuthException catch (e) {
       return e.code == LocalAuthExceptionCode.noCredentialsSet ? UnlockResult.noLock : UnlockResult.refused;

@@ -54,6 +54,16 @@ test('a same-day end date is dropped', () => {
   assert.equal(bookings[0].endTime, '16:00');
 });
 
+test('a same-day end date is kept when it lands earlier by the clock (east across the date line)', () => {
+  const { bookings } = normaliseBookings({
+    bookings: [{
+      kind: 'flight', title: 'Tokyo to Honolulu', startDate: '2026-10-12', startTime: '17:00',
+      endDate: '2026-10-12', endTime: '06:00',
+    }],
+  });
+  assert.equal(bookings[0].endDate, '2026-10-12');
+});
+
 test('only known uncertain fields pass through', () => {
   const { bookings } = normaliseBookings({
     bookings: [{ kind: 'stay', title: 'Hotel', startDate: '2026-10-14', uncertain: ['startTime', 'details.room', 'hack'] }],

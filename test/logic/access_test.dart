@@ -20,6 +20,13 @@ void main() {
   AccessPolicy policy(Entitlements e, [DateTime? at]) => AccessPolicy(e, at ?? now);
 
   group('free plan', () {
+    test('as many free Smart Imports as the server allows', () {
+      final server = RegExp(
+        r'FREE_SMART_IMPORTS = (\d+);',
+      ).firstMatch(File('functions/src/purchasesLogic.ts').readAsStringSync())!;
+      expect(Pricing.freeSmartImports, int.parse(server.group(1)!));
+    });
+
     test('Smart Import has a few free uses, then locks', () {
       expect(policy(Entitlements.none).decide(PremiumFeature.smartImport).freeUsesLeft, 3);
       const used = Entitlements(smartImportsUsed: 3);
@@ -54,8 +61,9 @@ void main() {
     // Bought for Orlando as it was: 12–18 Oct.
     final pass = Entitlements(tripPasses: {'orlando': newTripPassFor(orlando)});
 
-    test('unlocks its own trip only', () {
+    test('unlocks its own trip only, and says which (the server checks the same trip)', () {
       expect(policy(pass).decide(PremiumFeature.familySharing, trip: orlando).allowed, isTrue);
+      expect(policy(pass).decide(PremiumFeature.smartImport, trip: orlando).tripId, 'orlando');
       expect(policy(pass).decide(PremiumFeature.familySharing, trip: paris).allowed, isFalse);
     });
 
@@ -122,6 +130,29 @@ void main() {
       expect(policy(pass, march).canBuyTripPassFor(italy), isTrue);
     });
 
+    test('can\'t be carried back to other holidays while it\'s on', () {
+      // Bought for a single day far ahead, then the trip is stretched back
+      // over everything until then: not covered.
+      final far = Entitlements(
+        tripPasses: {
+          'orlando': TripPass(tripId: 'orlando', start: LocalDate(2027, 12, 31), end: LocalDate(2027, 12, 31)),
+        },
+      );
+      final season = TripPlan(trip('orlando', plannedStart: d(10, 11), plannedEnd: LocalDate(2027, 12, 31)), const []);
+      expect(policy(far).hasTripPass(season), isFalse);
+      expect(policy(far).decide(PremiumFeature.familySharing, trip: season).allowed, isFalse);
+
+      // Brought forward to before the dates it was bought for: another
+      // holiday, which can have a pass of its own.
+      final earlier = TripPlan(trip('orlando', plannedStart: d(9, 1), plannedEnd: d(9, 7)), const []);
+      expect(policy(pass, DateTime(2026, 8, 20)).hasTripPass(earlier), isFalse);
+      expect(policy(pass, DateTime(2026, 8, 20)).canBuyTripPassFor(earlier), isTrue);
+      expect(
+        tripPassEndsText(newTripPassFor(orlando), d(9, 1), d(9, 7)),
+        'Your Trip Pass is for 12–18 Oct, so it won\'t cover a trip on these dates.',
+      );
+    });
+
     test('is bought for the trip\'s dates as they are', () {
       final bought = newTripPassFor(orlando);
       expect(bought.tripId, 'orlando');
@@ -143,6 +174,44 @@ void main() {
       expect(policy(Entitlements.none).isTooLongForTripPass(month), isFalse);
       expect(policy(Entitlements.none).canBuyTripPassFor(longer), isFalse);
       expect(policy(Entitlements.none).isTooLongForTripPass(longer), isTrue);
+    });
+  });
+
+  group('ticket files', () {
+    Attachment file(String id, String name, {int size = 100}) =>
+        Attachment(id: id, name: name, fileName: '$id.pdf', sizeBytes: size);
+    Booking withFiles(String id, List<Attachment> files) => Booking(
+      id: id,
+      tripId: 'orlando',
+      kind: BookingKind.attraction,
+      title: id,
+      startDate: d(10, 13),
+      attachments: files,
+      createdAt: now,
+      updatedAt: now,
+    );
+
+    test('a holiday counts each file once, however many bookings keep it', () {
+      final plan = TripPlan(trip('orlando'), [
+        withFiles('a', [file('1', 'Park.pdf')]),
+        withFiles('b', [file('2', 'Park.pdf')]),
+        withFiles('c', [file('3', 'Dinner.png', size: 7)]),
+      ]);
+      expect(ticketFilesIn(plan), 2);
+      expect(ticketFilesIn(plan, except: 'c'), 1);
+      expect(ticketFilesIn(plan, except: 'c', also: [file('4', 'Hotel.pdf')]), 2);
+      expect(ticketFilesIn(null), 0);
+    });
+
+    test('free holidays keep two; a pass or Plus any number; the ones kept stay', () {
+      expect(policy(Entitlements.none).canAttachTickets(orlando, kept: 0, adding: 2), isTrue);
+      expect(policy(Entitlements.none).canAttachTickets(orlando, kept: 1), isTrue);
+      expect(policy(Entitlements.none).canAttachTickets(orlando, kept: 2), isFalse);
+      expect(policy(Entitlements.none).ticketFilesLeft(orlando, kept: 5), 0);
+      expect(policy(Entitlements.none).canAttachTickets(null, kept: 0), isTrue, reason: 'a new holiday starts empty');
+      final pass = Entitlements(tripPasses: {'orlando': newTripPassFor(orlando)});
+      expect(policy(pass).ticketFilesLeft(orlando, kept: 9), isNull);
+      expect(policy(pass).canAttachTickets(paris, kept: 2), isFalse, reason: 'only on the trip it\'s for');
     });
   });
 

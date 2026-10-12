@@ -2,5 +2,7 @@
 <resources>
     <!-- Travary linen, shown while the app starts. -->
     <color name="travary_linen">#EFE8DC</color>
-    <color name="ic_launcher_background">#031227</color>
+    <color name="ic_launcher_background">#35C5DA</color>
+    <!-- Flight alerts' accent in the notification shade: Travary teal. -->
+    <color name="travary_notification">#1E5B70</color>
 </resources>

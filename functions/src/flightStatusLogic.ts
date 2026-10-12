@@ -22,6 +22,9 @@ export interface FlightMovement {
   scheduled: string | null;
   /** Actual or estimated time, when the airline has given one. */
   revised: string | null;
+  /** The same two moments in UTC (ISO), for timing checks and comparing times across zones. */
+  scheduledUtc: string | null;
+  revisedUtc: string | null;
   /** Minutes late (negative when early), from the revised time. */
   delayMinutes: number | null;
   terminal: string | null;
@@ -103,6 +106,8 @@ function movement(value: unknown): FlightMovement {
     city: text(airport.municipalityName),
     scheduled: localTime(m.scheduledTime),
     revised: localTime(m.revisedTime),
+    scheduledUtc: scheduledMs == null ? null : new Date(scheduledMs).toISOString(),
+    revisedUtc: revisedMs == null ? null : new Date(revisedMs).toISOString(),
     delayMinutes: scheduledMs != null && revisedMs != null ? Math.round((revisedMs - scheduledMs) / 60_000) : null,
     terminal: text(m.terminal),
     gate: text(m.gate),

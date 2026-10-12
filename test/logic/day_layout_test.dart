@@ -52,6 +52,22 @@ void main() {
     expect(describe(plan, layout), ['park ●↓', 'lunch* ↑●↓', 'hotel |', 'dinner ↑●']);
   });
 
+  test('the evening you arrive, the hotel stays after check-in, never under Earlier', () {
+    final arrival = d(10, 12);
+    final flight = booking(
+      'flight',
+      BookingKind.flight,
+      arrival,
+      at: const ClockTime(10, 0),
+      until: const ClockTime(14, 30),
+    );
+    final supper = booking('supper', BookingKind.dining, arrival, at: const ClockTime(20, 0));
+    final plan = buildDayPlan(arrival, [flight, hotel, supper], DateTime(2026, 10, 12, 18));
+    final layout = layOutDay(plan, arrival);
+    expect(describe(plan, layout), ['supper* ●', 'hotel']);
+    expect(ids(plan, layout.earlier), ['flight']);
+  });
+
   test('finished entries fold away under Earlier, off the rail', () {
     final plan = buildDayPlan(today, day, DateTime(2026, 10, 14, 15));
     final layout = layOutDay(plan, today);

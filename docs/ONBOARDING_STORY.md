@@ -14,6 +14,20 @@ The traveller is the protagonist. Travi is the eager, capable porter for their p
 
 **Anticipation → personal ownership → useful proof → confidence → shared excitement.**
 
+**Owner-approved conversion refinement, 7 October 2026:** keep this short arc,
+make the first real booking visibly useful, and connect that success to help
+with the remaining confirmations. Travi celebrates the saved booking, the
+traveller can open its attached source, and “Let’s sort the rest” leads to the
+approved pass desk, where “Continue with free” remains available. The owner’s
+8 October update removes the success-screen free bypass and brings postponed
+booking setup and Explore through the desk too. The owner's **9 October**
+request moves the account invitation **before** the paywall and adds email;
+[new stills/choreography](ONBOARDING_ACCOUNT_SCENE.md) were approved on 9 October
+and their generated acting now connects the browser review. Native account
+placement remains after the choice with Apple/Google only; email is not wired.
+[Continuing decision memory and research](ONBOARDING_CONVERSION.md)
+take precedence over the earlier optional-link prototype described below.
+
 There are two important reveals. The destination unfolding makes the holiday feel personal. The first booking arriving in the actual day plan proves what Travary does. The purchase offer comes after that practical proof, and the sendoff works for free users too. A single saved booking is a good beginning; it does not mean every holiday task is complete.
 
 ## The story, controls and motion are one sequence
@@ -23,13 +37,17 @@ These are narrative beats within a continuous scene, not a requirement for six f
 | Beat | Copy and action | Travi and the stage | Actual outcome |
 |---|---|---|---|
 | Meet your porter | “Where are we off to?” Destination input is already available | Travi rolls in, brakes a little too eagerly, recovers and offers a tag | A clear holiday setup route; joining/import-first alternatives |
-| Give the holiday a world | Confirm a destination; then “When do we leave?” | His lid opens; that destination unfolds around him. Selected dates become a stamped departure tag | A personal holiday draft; a real dated trip once validly saved |
+| Give the holiday a world | Confirm a destination; then “When do we leave?” | The selected coral spinner presents the paper world opening behind him. Selected dates become a stamped departure tag | A personal holiday draft; a real dated trip once validly saved |
 | Bring a plan in | “Got a booking for me?” Select screenshot/PDF, enter manually, or postpone | He brings a small folio onto the desk in the same world. Selected paper enters it while the real import runs | A reviewable draft; no claim of a saved booking yet |
 | See it come together | Check the details and confirm; “There. One less thing to juggle.” | He straightens the confirmed booking card. That SAME card moves into its date on the day rail | One real saved booking, visible in its actual day, with its source accessible |
 | Bring others along | Optional group/share context | One folio unfolds towards companion cases. For solo travellers, the scene stays personal | A clear sharing preview; actual invitations use the normal covered/purchase/account flow |
 | Carry it into your holiday | “You're off to a good start.” Enter the real trip | The landscape settles into the trip's postcard; Travi hands over its folio | The same destination, dates and booking remain in the product |
 
 The workshop, folio, tag and ticket have continuing roles. They do not disappear after a beautiful cinematic opening. The suitcase world gives way to a recognisable trip postcard; the ticket becomes a recognisable booking card; the departure tag becomes a useful countdown. This is how the story carries into the actual app.
+
+**Latest next-scene brief:** after destination and dates, [“Got a booking for me?”](ONBOARDING_BOOKING_FOLIO.md) opens the same folio for a screenshot/PDF, manual booking or later continuation. The checked, saved booking then moves into its actual itinerary day. **Scenery coverage is country-first**, with selected city/region exceptions; follow the [destination guide and register](ONBOARDING_DESTINATION_ART.md) rather than generating every city.
+
+**Next scene:** the [Travi pass desk](ONBOARDING_PASS_DESK.md), after the real saved-booking payoff, asks “Shall I help with the rest?” New shared stills and a working native prototype use the actual holiday and existing offers. Still review comes before richer acting/new film; the country queue is unchanged.
 
 ## Where the existing films fit
 
@@ -66,7 +84,7 @@ After the traveller has seen their first booking in a real day, Travi can open h
 
 The offer extends the useful behaviour they have just experienced: Smart Import for more bookings, shared plans for companions and booking-file backup. Two paper passes express the scope clearly: **this holiday** or **holidays through the year**. Prices, renewal and benefits stay readable and motionless while being compared. The existing pricing research remains a separate discussion; this story proposal does not change store offerings.
 
-The departure world and character remain welcoming after “Continue with free.” If someone skipped booking setup, let them continue building the holiday and introduce the offer at a relevant later action. A covered invitee enters their organiser's trip rather than buying already-covered benefits.
+The departure world and character remain welcoming after “Continue with free.” If someone postpones booking setup, the desk still offers available passes before free continuation; do not invent a saved booking or claim completed assistance. A covered invitee enters their organiser's trip rather than buying already-covered benefits.
 
 ## Character directions
 
@@ -89,6 +107,6 @@ Someone with unknown dates keeps an explicit draft or imports a booking to estab
 
 ## The next creative unit
 
-Build a small playable prototype of **arrival → destination choice → unfolding → date selection → one booking review/save → actual day handoff**. Include an optional offer and free continuation. That will answer whether the character feels like a companion and whether the motion helps people understand the product.
+Build a small playable prototype of **arrival → destination choice → unfolding → date selection → one booking review/save → actual day handoff**. Include the pass desk with optional purchase and free continuation. That will answer whether the character feels like a companion and whether the motion helps people understand the product.
 
 With Travi's coral ribbed spinner design selected, review the interaction mapping before commissioning more shot sequences. The next film assets should be derived from real task states, framing and timing, rather than expanding the cinematic reel independently.

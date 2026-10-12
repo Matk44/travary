@@ -7,13 +7,16 @@ import 'package:travary/domain/domain.dart';
 import 'package:travary/features/sharing/join_trip_sheet.dart';
 import 'package:travary/features/trips/trip_details_sheet.dart';
 import 'package:travary/features/trips/trip_screen.dart';
+import 'package:travary/features/trips/trips_screen.dart';
 import 'package:travary/logic/access.dart';
+import 'package:travary/logic/travi_cameos.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import '../helpers.dart';
 import '../support/countdown_today.dart';
 import '../support/open_tab.dart';
+import '../support/travi.dart';
 
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
@@ -31,22 +34,42 @@ void main() {
   TravelStore storeOf(WidgetTester tester) =>
       Provider.of<TravelStore>(tester.element(find.byType(Scaffold).first), listen: false);
 
-  /// Types [start] and [end] (MM/DD/YYYY) into the date range picker.
+  /// Taps [day] in the dates sheet, scrolling its months up or down to it.
+  Future<void> tapDay(WidgetTester tester, LocalDate day) async {
+    final target = find.byKey(ValueKey('date-${day.toIso()}'));
+    final months = find
+        .descendant(of: find.byKey(const ValueKey('holiday-dates-months')), matching: find.byType(Scrollable))
+        .first;
+    if (target.evaluate().isEmpty) {
+      final shown = tester
+          .widgetList<GestureDetector>(find.byType(GestureDetector))
+          .map((g) => g.key)
+          .whereType<ValueKey<String>>()
+          .map((k) => k.value)
+          .where((k) => k.startsWith('date-'))
+          .map((k) => LocalDate.parse(k.substring(5)))
+          .first;
+      await tester.scrollUntilVisible(target, day.isBefore(shown) ? -300 : 300, scrollable: months);
+    }
+    await tester.ensureVisible(target);
+    await tester.pumpAndSettle();
+    await tester.tap(target);
+    await tester.pumpAndSettle();
+  }
+
+  /// Chooses [start] and [end] (MM/DD/YYYY) in the dates sheet.
   Future<void> pickDates(WidgetTester tester, String start, String end) async {
+    LocalDate parse(String text) {
+      final [month, day, year] = text.split('/').map(int.parse).toList();
+      return LocalDate(year, month, day);
+    }
+
     await tester.tap(find.byKey(const ValueKey('trip-dates')));
     await tester.pumpAndSettle();
-    // Flutter's own calendar header ("Start Date – End Date") overflows with
-    // the test font's wide glyphs; with the app's fonts it fits at 320–430.
-    expect(
-      tester.takeException(),
-      anyOf(isNull, isA<FlutterError>().having((e) => '$e', 'error', contains('overflowed'))),
-    );
-    await tester.tap(find.byTooltip('Switch to input'));
-    await tester.pumpAndSettle();
-    await tester.enterText(find.widgetWithText(TextField, 'Start Date'), start);
-    await tester.enterText(find.widgetWithText(TextField, 'End Date'), end);
-    final confirm = find.text('OK').evaluate().isNotEmpty ? find.text('OK') : find.text('Save');
-    await tester.tap(confirm);
+    expect(tester.takeException(), isNull);
+    await tapDay(tester, parse(start));
+    await tapDay(tester, parse(end));
+    await tester.tap(find.byKey(const ValueKey('holiday-dates-confirm')));
     await tester.pumpAndSettle();
   }
 
@@ -56,6 +79,13 @@ void main() {
     await tester.tap(find.descendant(of: find.byType(EmptyState), matching: find.text('New trip')));
     await tester.pumpAndSettle();
     expect(find.byType(TripDetailsSheet), findsOneWidget);
+
+    // Travi pops up over the sheet's top edge, waving.
+    await tester.pump(TraviCameoLayout.popUpDelay);
+    await tester.pump();
+    final peek = find.byKey(const ValueKey('new-trip-travi'));
+    expect(find.descendant(of: peek, matching: find.byKey(const ValueKey('travi-still-peek-wave'))), findsOneWidget);
+    expect(tester.getRect(peek).bottom, moreOrLessEquals(tester.getRect(find.byType(TripDetailsSheet)).top));
 
     // Both are needed.
     await tester.tap(find.text('Create trip'));
@@ -72,6 +102,18 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(TripDetailsSheet), findsNothing);
     expect(find.byType(TripScreen), findsOneWidget);
+
+    // He cheers it in from behind its plan, then ducks out of sight.
+    final cheer = find.descendant(
+      of: find.byKey(const ValueKey('trip-travi')),
+      matching: find.byKey(const ValueKey('travi-still-peek-cheer')),
+    );
+    await tester.pump(TraviCameoLayout.popUpDelay);
+    await tester.pump();
+    expect(cheer, findsOneWidget);
+    await tester.pump(traviPeekHold);
+    await tester.pump();
+    expect(cheer, findsNothing);
     expect(find.descendant(of: find.byType(TripScreen), matching: find.text('Paris')), findsOneWidget);
     expect(find.text('12–18 Oct 2026'), findsOneWidget);
     // Its plan is empty, and it suggests what a holiday usually needs
@@ -112,6 +154,11 @@ void main() {
     await pumpApp(tester);
     await openTab(tester, 'Trips');
     expect(find.text('No trips yet'), findsOneWidget);
+    expect(
+      find.descendant(of: find.byType(TripsScreen), matching: traviCameo(TraviMoment.waiting)),
+      findsOneWidget,
+      reason: 'Travi holds his folio open for a booking',
+    );
     await tester.tap(find.widgetWithText(TextButton, 'Join a trip'));
     await tester.pumpAndSettle();
     expect(find.byType(JoinTripSheet), findsOneWidget);
@@ -133,6 +180,9 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('trip-hero-tag')));
     await tester.pumpAndSettle();
     expect(find.widgetWithText(TextField, 'Rome'), findsOneWidget);
+    // Travi only pops up for a new trip, and an opened trip isn't cheered.
+    expect(find.byKey(const ValueKey('new-trip-travi')), findsNothing);
+    expect(find.byKey(const ValueKey('trip-travi')), findsNothing);
     await tester.enterText(find.widgetWithText(TextField, 'Where to?'), 'Roma');
     await tester.tap(find.text('Save'));
     await tester.pumpAndSettle();

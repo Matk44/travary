@@ -43,6 +43,28 @@ class GoogleSignInButton extends StatelessWidget {
   );
 }
 
+/// "Continue with email": outlined in navy with an envelope, quieter than
+/// Apple and Google.
+class EmailSignInButton extends StatelessWidget {
+  const EmailSignInButton({super.key, required this.onPressed, this.busy = false});
+
+  final VoidCallback? onPressed;
+  final bool busy;
+
+  @override
+  Widget build(BuildContext context) => _SignInButton(
+    key: const ValueKey('sign-in-email'),
+    label: 'Continue with email',
+    background: Colors.transparent,
+    foreground: OnboardingColors.navy,
+    border: OnboardingColors.navy,
+    borderWidth: 1.5,
+    logo: const Icon(Icons.mail_outline_rounded, size: 22, color: OnboardingColors.navy),
+    onPressed: onPressed,
+    busy: busy,
+  );
+}
+
 class _SignInButton extends StatelessWidget {
   const _SignInButton({
     super.key,
@@ -53,12 +75,14 @@ class _SignInButton extends StatelessWidget {
     required this.onPressed,
     required this.busy,
     this.border,
+    this.borderWidth = 1,
   });
 
   final String label;
   final Color background;
   final Color foreground;
   final Color? border;
+  final double borderWidth;
   final Widget logo;
   final VoidCallback? onPressed;
   final bool busy;
@@ -67,7 +91,7 @@ class _SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(TravaryRadius.small),
-      side: border == null ? BorderSide.none : BorderSide(color: border!),
+      side: border == null ? BorderSide.none : BorderSide(color: border!, width: borderWidth),
     );
     return Semantics(
       button: true,

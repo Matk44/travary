@@ -6,13 +6,21 @@ import '../../design/tokens.dart';
 import '../../domain/domain.dart';
 import '../../logic/checklist.dart';
 import '../../logic/formatters.dart';
+import '../../logic/packing.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/travel_store.dart';
 
 /// Adds something to do to [plan]'s checklist, or edits [editing]: its
 /// words, an optional "by" date and, when editing, removing it (with an
-/// undo). Ideas fill the words in with one tap.
-Future<void> showChecklistItemSheet(BuildContext context, TripPlan plan, {ChecklistItem? editing}) {
+/// undo). Ideas fill the words in with one tap. On the packing [list]
+/// there's no date, and the keyboard's return adds one thing after
+/// another without closing.
+Future<void> showChecklistItemSheet(
+  BuildContext context,
+  TripPlan plan, {
+  ChecklistItem? editing,
+  TripList list = TripList.checklist,
+}) {
   final messenger = ScaffoldMessenger.of(context);
   return showModalBottomSheet<void>(
     context: context,
@@ -21,16 +29,23 @@ Future<void> showChecklistItemSheet(BuildContext context, TripPlan plan, {Checkl
     backgroundColor: TravaryColors.linen,
     builder: (context) => Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-      child: ChecklistItemSheet(plan: plan, editing: editing, messenger: messenger),
+      child: ChecklistItemSheet(plan: plan, editing: editing, list: list, messenger: messenger),
     ),
   );
 }
 
 class ChecklistItemSheet extends StatefulWidget {
-  const ChecklistItemSheet({super.key, required this.plan, this.editing, required this.messenger});
+  const ChecklistItemSheet({
+    super.key,
+    required this.plan,
+    this.editing,
+    this.list = TripList.checklist,
+    required this.messenger,
+  });
 
   final TripPlan plan;
   final ChecklistItem? editing;
+  final TripList list;
 
   /// The trip screen's, for "Removed · Undo" once the sheet has closed.
   final ScaffoldMessengerState messenger;
@@ -47,6 +62,8 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
   bool _saving = false;
 
   bool get _isEditing => widget.editing != null;
+  bool get _packing => widget.list == TripList.packing;
+  String get _question => _packing ? 'What to pack?' : 'What needs doing?';
 
   @override
   void initState() {
@@ -75,17 +92,20 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
     if (picked != null && mounted) setState(() => _due = LocalDate.fromDateTime(picked));
   }
 
-  Future<void> _save() async {
+  /// [keepOpen]: the packing list's return key, ready for the next thing.
+  Future<void> _save({bool keepOpen = false}) async {
     final text = cleanChecklistText(_text.text);
     if (text == null) {
-      setState(() => _error = 'What needs doing?');
+      if (keepOpen) return Navigator.of(context).pop();
+      setState(() => _error = _question);
       return;
     }
     setState(() => _saving = true);
     final store = context.read<TravelStore>();
+    final plan = store.plan(widget.plan.id) ?? widget.plan;
     final editing = widget.editing;
     if (editing == null) {
-      final added = await store.addChecklistItem(widget.plan, text, due: _due, idea: _fromIdea);
+      final added = await store.addChecklistItem(plan, text, due: _due, idea: _fromIdea, list: widget.list);
       if (added == null && mounted) {
         setState(() {
           _saving = false;
@@ -93,8 +113,20 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
         });
         return;
       }
+      if (keepOpen && mounted) {
+        setState(() {
+          _saving = false;
+          _fromIdea = false;
+          _text.clear();
+        });
+        return;
+      }
     } else {
-      await store.saveChecklistItem(widget.plan, editing.copyWith(text: text, due: _due, clearDue: _due == null));
+      await store.saveChecklistItem(
+        plan,
+        editing.copyWith(text: text, due: _due, clearDue: _due == null),
+        list: widget.list,
+      );
     }
     if (mounted) Navigator.of(context).pop();
   }
@@ -103,20 +135,30 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
     final item = widget.editing!;
     final store = context.read<TravelStore>();
     final plan = widget.plan;
-    await store.deleteChecklistItem(plan, item);
+    final list = widget.list;
+    await store.deleteChecklistItem(plan, item, list: list);
     if (!mounted) return;
     Navigator.of(context).pop();
     widget.messenger.showSnackBar(
       SnackBar(
         content: Text('Removed "${item.text}"'),
-        action: SnackBarAction(label: 'Undo', onPressed: () => store.saveChecklistItem(plan, item)),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () => store.saveChecklistItem(plan, item, list: list),
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final ideas = _isEditing ? const <String>[] : checklistIdeas(widget.plan.trip.checklist.values);
+    // What's on the list now, with anything added while the sheet is open.
+    final items = (context.watch<TravelStore>().plan(widget.plan.id) ?? widget.plan).trip.listOf(widget.list).values;
+    final ideas = _isEditing
+        ? const <String>[]
+        : _packing
+        ? packingIdeas(items)
+        : checklistIdeas(items);
     final due = _due;
     return SafeArea(
       child: SingleChildScrollView(
@@ -125,19 +167,24 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(_isEditing ? 'Edit to-do' : 'Something to do', style: TravaryText.headline),
+            Text(
+              _packing
+                  ? (_isEditing ? 'Edit item' : 'Something to pack')
+                  : (_isEditing ? 'Edit to-do' : 'Something to do'),
+              style: TravaryText.headline,
+            ),
             const SizedBox(height: TravarySpace.lg),
             TextField(
               key: const ValueKey('checklist-text'),
               controller: _text,
               autofocus: !_isEditing,
               textCapitalization: TextCapitalization.sentences,
-              textInputAction: TextInputAction.done,
+              textInputAction: _packing && !_isEditing ? TextInputAction.next : TextInputAction.done,
               inputFormatters: [LengthLimitingTextInputFormatter(ChecklistItem.maxText)],
               style: TravaryText.title,
               decoration: InputDecoration(
-                labelText: 'What needs doing?',
-                hintText: 'Apply for the visa',
+                labelText: _question,
+                hintText: _packing ? 'Sun cream' : 'Apply for the visa',
                 hintStyle: TravaryText.bodySoft,
                 errorText: _error,
               ),
@@ -145,7 +192,10 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
                 _error = null;
                 _fromIdea = false;
               }),
-              onSubmitted: (_) => _save(),
+              // Adding to the packing list, return keeps the keyboard up
+              // for the next thing instead of moving on.
+              onEditingComplete: _packing && !_isEditing ? () {} : null,
+              onSubmitted: (_) => _save(keepOpen: _packing && !_isEditing),
             ),
             if (ideas.isNotEmpty) ...[
               const SizedBox(height: TravarySpace.md),
@@ -169,28 +219,30 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
                 ],
               ),
             ],
-            const SizedBox(height: TravarySpace.md),
-            InkWell(
-              key: const ValueKey('checklist-due'),
-              onTap: _pickDue,
-              borderRadius: BorderRadius.circular(TravaryRadius.small),
-              child: InputDecorator(
-                decoration: InputDecoration(
-                  labelText: 'By when? (optional)',
-                  suffixIcon: due == null
-                      ? const Icon(Icons.event_outlined)
-                      : IconButton(
-                          tooltip: 'No date',
-                          icon: const Icon(Icons.close_rounded),
-                          onPressed: () => setState(() => _due = null),
-                        ),
-                ),
-                child: Text(
-                  due == null ? 'Any time' : formatDate(due),
-                  style: due == null ? TravaryText.bodySoft : TravaryText.body,
+            if (!_packing) ...[
+              const SizedBox(height: TravarySpace.md),
+              InkWell(
+                key: const ValueKey('checklist-due'),
+                onTap: _pickDue,
+                borderRadius: BorderRadius.circular(TravaryRadius.small),
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    labelText: 'By when? (optional)',
+                    suffixIcon: due == null
+                        ? const Icon(Icons.event_outlined)
+                        : IconButton(
+                            tooltip: 'No date',
+                            icon: const Icon(Icons.close_rounded),
+                            onPressed: () => setState(() => _due = null),
+                          ),
+                  ),
+                  child: Text(
+                    due == null ? 'Any time' : formatDate(due),
+                    style: due == null ? TravaryText.bodySoft : TravaryText.body,
+                  ),
                 ),
               ),
-            ),
+            ],
             const SizedBox(height: TravarySpace.xl),
             FilledButton(
               key: const ValueKey('checklist-save'),

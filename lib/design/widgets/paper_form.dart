@@ -202,11 +202,19 @@ class SpanLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
     children: [
       const Expanded(child: Divider(color: TravaryColors.line, thickness: 1)),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: TravarySpace.md),
-        child: Text(text, style: TravaryText.body.copyWith(color: TravaryChrome.of(context).colors.ink)),
+      Flexible(
+        flex: 4,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: TravarySpace.md),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TravaryText.body.copyWith(color: TravaryChrome.of(context).colors.ink),
+          ),
+        ),
       ),
       const Expanded(child: Divider(color: TravaryColors.line, thickness: 1)),
     ],

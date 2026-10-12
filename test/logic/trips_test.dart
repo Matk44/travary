@@ -93,6 +93,26 @@ void main() {
       final focus = focusFor([active], d(11, 21));
       expect(focus.plan, isNull);
       expect(focus.day, d(11, 21));
+      expect(focus.undated, isNull);
+    });
+
+    test('a holiday with no dates yet stays in view, the newest first', () {
+      Trip undated(String id, int day) => Trip(
+        id: id,
+        title: id,
+        ownerId: 'me',
+        memberIds: const ['me'],
+        createdAt: DateTime(2026, 10, day),
+        updatedAt: DateTime(2026, 10, day),
+      );
+      final older = TripPlan(undated('japan', 1), const []);
+      final newer = TripPlan(undated('bali', 5), const []);
+      final focus = focusFor([active, older, newer], d(11, 21));
+      expect(focus.plan, isNull);
+      expect(focus.undated?.id, 'bali');
+      // A dated trip on or coming still comes first.
+      expect(focusFor([active, newer], d(10, 14)).undated, isNull);
+      expect(focusFor([next, newer], d(11, 21)).plan?.id, 'b');
     });
   });
 

@@ -84,6 +84,8 @@ test('a real answer becomes gate, terminal, desk and delay', () => {
     city: 'London',
     scheduled: '2026-10-04T10:30',
     revised: '2026-10-04T11:05',
+    scheduledUtc: '2026-10-04T09:30:00.000Z',
+    revisedUtc: '2026-10-04T10:05:00.000Z',
     delayMinutes: 35,
     terminal: '5',
     gate: 'B32',

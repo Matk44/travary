@@ -8,6 +8,7 @@ export 'country_codes.dart';
 export 'flight_status.dart';
 export 'links.dart';
 export 'local_date.dart';
+export 'notifications.dart';
 export 'palette.dart';
 export 'premium.dart';
 export 'pricing.dart';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/flight_status_service.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/departure_board.dart';
+import '../../design/widgets/live_flight_strip.dart';
 import '../../domain/domain.dart';
 import '../../logic/flight_status_text.dart';
 
@@ -153,7 +154,7 @@ class _Status extends StatelessWidget {
                       Container(
                         width: 12,
                         height: 12,
-                        decoration: BoxDecoration(color: _toneColour(text.tone), shape: BoxShape.circle),
+                        decoration: BoxDecoration(color: flightToneColour(text.tone), shape: BoxShape.circle),
                       ),
                       const SizedBox(width: TravarySpace.sm),
                       Flexible(child: Text(text.headline, style: TravaryText.boardRoute.copyWith(fontSize: 22))),
@@ -182,13 +183,6 @@ class _Status extends StatelessWidget {
       ],
     );
   }
-
-  static Color _toneColour(FlightTone tone) => switch (tone) {
-    FlightTone.good => TravaryColors.sage,
-    FlightTone.notice => TravaryColors.mustard,
-    FlightTone.bad => TravaryColors.coral,
-    FlightTone.neutral => Colors.white54,
-  };
 }
 
 class _End extends StatelessWidget {

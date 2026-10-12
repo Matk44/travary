@@ -169,7 +169,9 @@ void main() {
 
     // The catalog arrives; the current trip wants the pack; it installs.
     await tester.runAsync(packs.refreshCatalog);
-    await until(tester, () => packs.installed.isNotEmpty);
+    // Installation can finish between frames. Wait for the visible render,
+    // not just the manager's state, before inspecting its image.
+    await until(tester, () => find.byType(Image).evaluate().isNotEmpty);
     final image = tester.widget<Image>(find.byType(Image));
     expect(
       image.image,

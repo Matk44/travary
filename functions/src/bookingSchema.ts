@@ -51,7 +51,7 @@ export const responseSchema = {
           title: text('Short name a traveller would use: "London to Orlando", "Lagoon Resort", "Sunshine Park".'),
           startDate: text('YYYY-MM-DD'),
           startTime: text('24-hour HH:mm, local time exactly as printed. Omit if there is no time.'),
-          endDate: text('YYYY-MM-DD. Omit if the booking ends the same day.'),
+          endDate: text('YYYY-MM-DD. Omit if the booking ends the same day, unless it ends at an earlier clock time than it starts (a flight crossing the date line).'),
           endTime: text('24-hour HH:mm, local time exactly as printed. Omit if not shown.'),
           location: text('The most useful place: hotel address, departure airport, venue, meeting point.'),
           reference: text('Booking or confirmation reference exactly as printed.'),
@@ -139,9 +139,12 @@ export function normaliseBookings(raw: unknown): { bookings: DraftBooking[]; war
       endDate = undefined;
       uncertain.add('endDate');
     }
-    if (endDate === b.startDate) endDate = undefined;
     const endTime = isValidTime(b.endTime) ? b.endTime : undefined;
     if (b.endTime !== undefined && !endTime) uncertain.add('endTime');
+    // Same day: no end date, unless it ends earlier by the clock (a flight
+    // east across the date line), which the app would read as next morning.
+    // Mirrors keptEndDate in lib/logic/day_plan.dart.
+    if (endDate === b.startDate && !(startTime && endTime && endTime < startTime)) endDate = undefined;
 
     const details: Partial<Record<DetailKey, string>> = {};
     const rawDetails = (b.details && typeof b.details === 'object' ? b.details : {}) as Record<string, unknown>;

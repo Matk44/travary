@@ -39,6 +39,25 @@ abstract final class TravarySpace {
   static const gutter = 20.0;
 }
 
+/// The approved paper-theatre onboarding has a fixed stage palette.
+abstract final class OnboardingColors {
+  static const navy = Color(0xFF102B46);
+  static const binding = Color(0xFF0B263B);
+  static const paper = Color(0xFFFFF1D9);
+  static const cream = Color(0xFFFFF7E9);
+  static const coral = Color(0xFFFA815A);
+  static const coralInk = Color(0xFFB85132);
+  static const brass = Color(0xFFD1AB68);
+  static const teal = Color(0xFF086078);
+  static const secondary = Color(0xFF655440);
+
+  /// The stages' cream floor, below the artwork on tall phones.
+  static const floor = Color(0xFFFBE8D3);
+
+  /// The stages' petrol sky, above a stage that's been lowered.
+  static const sky = Color(0xFF014D6E);
+}
+
 abstract final class TravaryRadius {
   static const card = 16.0;
   static const chip = 999.0;
@@ -104,6 +123,10 @@ abstract final class TravaryText {
 
   /// Card titles.
   static TextStyle get title => _serif(21, FontWeight.w700, TravaryColors.ink);
+
+  /// Regular serif copy on the illustrated onboarding paper. Resolve its own
+  /// font face; changing a bold Google Fonts style's weight retains that face.
+  static TextStyle get onboardingCopy => _serif(21, FontWeight.w400, OnboardingColors.navy, height: 1.06);
 
   /// Title on the featured (hero) card.
   static TextStyle get heroTitle => _serif(30, FontWeight.w700, TravaryColors.paper, height: 1.05);
@@ -203,6 +226,9 @@ abstract final class TravaryText {
   static TextStyle get boardLabel => _sans(10.5, FontWeight.w700, TravaryColors.paper, height: 1.2, letterSpacing: 2.2);
   static TextStyle get boardFlap => _sans(30, FontWeight.w800, TravaryColors.paper, height: 1.0);
   static TextStyle get boardRoute => _serif(24, FontWeight.w600, TravaryColors.paper, height: 1.1);
+
+  /// A flight's live line under its card on Today: "Delayed 45 min · Gate 12".
+  static TextStyle get liveLine => _sans(13, FontWeight.w600, TravaryColors.paper, height: 1.2, letterSpacing: 0.2);
 
   // ---- Trips: the tag on a coming trip's postcard ------------------------
   // Sized for the tag's copy area at TripPostcardLayout.tagCopyWidth; the
@@ -387,6 +413,12 @@ abstract final class CountdownLayout {
   /// The tag hangs this far clockwise, shell and words together.
   static const tagAngleDegrees = 6.0;
 
+  /// The note under the postcard (the packing list): in from the card's
+  /// left edge, and kept clear of the tag as if it leant this far (its
+  /// resting angle and most of its swing).
+  static const noteInset = 2.0;
+  static const noteClearDegrees = 10.0;
+
   /// The tag's words are laid out at this width, then scaled to the tag.
   static const tagCopyWidth = 140.0;
 
@@ -416,6 +448,14 @@ abstract final class CountdownLayout {
 
   /// The postcard sinks a little under a finger.
   static const pressScale = 0.98;
+
+  /// Travi peeking from behind the postcard's top right: his square as a
+  /// share of the postcard's width (90 points on a 390-point phone), its
+  /// right edge at [traviRight] of the postcard, sunk [traviSink] of
+  /// himself below the card's top edge.
+  static const traviWidth = 0.24;
+  static const traviRight = 0.88;
+  static const traviSink = 0.07;
 }
 
 /// The Documents list's stamp rows (`DocumentStampCard`), tuned on a
@@ -540,6 +580,24 @@ abstract final class LedgerLayout {
   static const flapTile = Size(34, 48);
   static const flapStagger = Duration(milliseconds: 35);
   static const flapDuration = Duration(milliseconds: 260);
+}
+
+/// Travi's peeks outside Today's countdown (`TraviPopUp`).
+abstract final class TraviCameoLayout {
+  /// His square, as on the countdown on a 390-point phone.
+  static const peekSize = 88.0;
+
+  /// Over the New trip sheet: his square's right edge this far in from the
+  /// sheet's, clear of its rounded corner.
+  static const sheetRight = 28.0;
+
+  /// Over a new trip's plan: his square's left edge in from the panel's,
+  /// and how far he's sunk behind its top edge.
+  static const planLeft = 12.0;
+  static const planSink = 6.0;
+
+  /// He pops up once the sheet or screen has slid in.
+  static const popUpDelay = Duration(milliseconds: 350);
 }
 
 abstract final class TripPostcardLayout {

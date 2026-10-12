@@ -2,13 +2,17 @@
 
 Created 5 October 2026 after approval of the connected Travi onboarding. This is the working guide for every destination we add. The [asset register](onboarding/DESTINATION_ART_REGISTER.md) tracks what exists, what needs generating and what has reached the app; its [JSON ledger](onboarding/destination-art-registry.json) holds the paths and place selectors.
 
-**One new destination needs one new clean scenic stage image.** Travi, his performance, the theatre reveal, the headline, date tags, folio interaction and pass presentation are shared. A destination-specific video is not required.
+**Country-first coverage is the owner's decision (5 October 2026). Generate one broad scenic stage per country as the default, covering the cities and regions selected within it.** City/region-specific stages are optional selected additions, not a prerequisite for supporting those destinations. Keep the existing Bali and Kyoto prototype scenes as exceptions. Travi, his performance, the theatre reveal, headline, date tags, folio interaction and pass presentation are shared. A destination-specific video is not required.
+
+**9 October 2026 art update:** All [31 requested stills](mockups/onboarding-art-requests-2026-10-09/README.md) now exist: 24 country stages, a place-neutral Anywhere fallback, prop-free Kyoto and five shared green foreground drafts. New owner approval and native integration are pending. Singapore reuses its already integrated city stage; the 30 authorized city overrides are already bundled. The green drafts need colour cleanup and foreground registration validation before the shared films. This current status supersedes the historical queue descriptions below; use the register for actual coverage.
 
 ## The visual reference
 
 Use the **clean Bali plate** below as the authoritative layout/material reference, and the chosen place's own artwork as the content reference. Kyoto is the second example of the same stage architecture with a different landscape. Preserve the richness and scale: the destination fills the theatre, rather than sitting in a small framed postcard.
 
-![Approved clean Bali stage: quiet teal headline sky, full colourful paper scenery, cream control floor](mockups/onboarding-journey-v1/bali-stage-v1.png)
+**Folio-scene preparation, 6 October:** the [prop-free Bali reference](mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png) and [matching closed folio cutout](mockups/onboarding-folio-motion-v1/closed-folio-v1.png) now exist for the [native motion rehearsal](mockups/onboarding-folio-motion-v1/README.md). Use the prop-free reference for future country plates. The older plate below remains the approved scene-layout history and contains the closed folio and loose tickets. Keep both folio states/tickets in shared foreground layers so one country plate works throughout the story; the old Kyoto prototype still needs prop separation during integration.
+
+![Prop-free Bali motion reference: quiet teal headline sky, full colourful paper scenery, cream control floor](mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png)
 
 [Bali in the live interface](mockups/onboarding-journey-v1/journey-bali-preview-v1.jpg) · [Kyoto clean stage](mockups/onboarding-journey-v1/kyoto-stage-v1.png) · [Shared transparent Travi](mockups/onboarding-journey-v1/travi-cutout-v2.png) · [Exact selected generation prompts](mockups/onboarding-journey-v1/PROMPTS.md).
 
@@ -16,7 +20,8 @@ Use the **clean Bali plate** below as the authoritative layout/material referenc
 
 | Asset | Needed for this onboarding? | Specification |
 |---|---|---|
-| **Clean destination stage** | **Yes: one per supported scenic destination** | Portrait RGB PNG master; current approved reference is **851 × 1848**. Same camera, theatre wings, lighting and floor. No character, lettering or UI. |
+| **Clean country stage** | **Yes: one per country in the baseline scenery library** | Portrait RGB PNG master; current approved reference is **851 × 1848**. Same camera, theatre wings, lighting and floor. No character, lettering or UI. |
+| City/region-specific stage | Optional selected exception | Same contract; generate only when explicitly prioritised. It is not required for each city a traveller can select. |
 | Destination reference/brief | Yes as an input; reuse what exists | The place's own postcard or approved reference, plus a short list of correct architecture, landscape, vegetation and season. Log source paths and geographic scope. |
 | Separate scenery layers | Optional, when a planned effect needs them | Authored foreground/middle/background pieces with alpha and coherent alignment. A flat plate cannot supply independent parallax or unfolding buildings. |
 | Destination video | No | Reuse the shared reveal and Travi performance. |
@@ -32,7 +37,7 @@ The current reference is a tall portrait, approximately **0.4605 width / height*
 |---|---|
 | **0–27%** | Quiet petrol-teal paper sky, especially through the centre, for the wordmark and two-line live headline. Side foliage may frame it; detailed landmarks must not compete with the words. |
 | **About 27–65%** | Rich, expansive destination scenery: dimensional folded cardstock, recognisable local shapes, layered depths, warm light and fine paper grain. Fill the stage edge to edge. |
-| **About 65–100%** | Warm cream stage/control floor. Keep the lower centre calm for date tags, departure tag and the primary button. Preserve the closed navy folio and blank tickets at lower left, matching the reference. |
+| **About 65–100%** | Warm cream stage/control floor. Keep the lower centre calm for date tags, departure tag and the primary button. Match the reference floor and allow shared folio/ticket props at lower left; future country plates keep those props separate. |
 | **Right foreground, roughly 42–71%** | Space for the shared transparent Travi pose. Do not paint a character, wheels or a character shadow into the background. The landscape continues naturally behind him. |
 
 These are composition guides for the current prototype, not fixed production UI coordinates. Check short/tall phones, safe areas, larger text and an open keyboard before final integration.
@@ -49,9 +54,11 @@ Asset type: clean [DESTINATION] scenic stage for Travary onboarding.
 
 Input 1 is the approved clean Bali stage. It is the authoritative reference
 for portrait proportions, camera, quiet teal sky, theatre wings, cream floor,
-closed navy folio and blank tickets, lighting and dimensional paper material.
-Input 2 is [DESTINATION REFERENCE PATH]. It is the content reference for
-[EXACT CITY / REGION / COUNTRY, INCLUDING COUNTRY CODE].
+lighting and dimensional paper material. Remove any baked-in folio or loose
+tickets from the template; those will be shared foreground props.
+Input 2 is [COUNTRY REFERENCE PATH]. It is the content reference for
+[COUNTRY, INCLUDING COUNTRY CODE]. Country is the default scope. Specify a
+city/region only when this asset is an explicitly chosen exception.
 
 Replace only the destination landscape with a rich layered-paper world of
 [DESTINATION]. Include [CORRECT LANDMARKS / ARCHITECTURE / LANDSCAPE / PLANTS],
@@ -68,21 +75,22 @@ available for a separately composited character.
 
 Output one complete clean portrait scenery plate, matching the reference
 layout and aspect ratio. No character, character shadow, text, place label,
-UI, dates, button, logo, flag, watermark or device frame. No glossy plastic.
+folio, loose tickets, UI, dates, button, logo, flag, watermark or device frame.
+No glossy plastic.
 ```
 
 ## Coverage beyond the first two places
 
-The current connected browser prototype resolves only Bali and Kyoto; other names use the neutral workshop. The repository has **30 place packs with postcard references: 25 countries, three cities and two regions**. The register marks **two onboarding stages ready in the prototype** and **28 still needed**. This is a local file inventory, not proof of remote publication or installation.
+The connected browser prototype and [first native integration](ONBOARDING_NATIVE.md) resolve Bali and Kyoto; other names use the neutral workshop until their country plate exists. The repository has **30 place packs with postcard references: 25 countries, three cities and two regions**. The next baseline art queue is **25 country stages**. The two existing Bali/Kyoto stages are integrated selected-place exceptions; the remaining three specific-place gaps are **deferred optional additions**, not required coverage work. This is a local file inventory, not proof of remote publication or installation.
 
-For production, use structured place identity and a compatible stage in this order:
+For production, map a selected city/region to its country and use that country's stage by default. This does not change the traveller's destination label: their chosen city remains live text, while the art represents its country. If a deliberately selected specific-place stage already exists, it may override the country scene. The optional override lookup can follow the product's existing structure:
 
 1. Exact **city** plus country.
 2. Matching **region** plus country.
 3. A geographically and visually appropriate **country** stage.
 4. The shared **place-neutral workshop** when no suitable stage is available, offline or loading fails.
 
-The traveller can still choose any supported destination and continue. Artwork availability must not block holiday setup. Keep their actual destination name in live UI. A broad country scene is a symbolic country composition, not a claim to depict the selected city's exact view; skip it when its setting conflicts with that place. Never show Kyoto as Tokyo or Bali as another country. Ambiguous or unverified place input uses the neutral stage until identity is resolved.
+Lookup precedence is not generation priority: **build country coverage first; do not turn the city/region override slots into a city-by-city generation backlog.** The traveller can still choose any supported destination and continue. Artwork availability must not block holiday setup. A broad country scene is a symbolic country composition, not a claim to depict the selected city's exact view. Compose it to suit broad country coverage; use neutral scenery when it conflicts with the selected place. Never relabel Kyoto-specific art as Tokyo or Bali-specific art as another country. Ambiguous or unverified place input uses the neutral stage until identity is resolved.
 
 Reuse the product's country/region/city conventions, with country codes attached to region/city selectors. Avoid growing a hard-coded list of free-text name matches. The proposed stage key is **`onboarding_stage`**; it has not been wired into the app or published in the existing packs. Guest access also needs a deliberate delivery path: current downloadable packs require signed-in Storage reads, so onboarding must have bundled fallback art and a guest-compatible way to load extra stages. Do not assume the existing signed-in pack downloader already covers this flow.
 
@@ -93,7 +101,8 @@ These are reusable across **all** destinations; track them once in the register.
 | Next story beat | Image work to brief | Current state |
 |---|---|---|
 | Arrival and destination | Entrance/idle keyframes and films; excited transparent coral spinner | Existing prototype assets |
-| Booking folio | An **open navy folio shell** with blank paper/ticket spaces; a separate Travi **offering/receiving a booking** pose | To brief when building the booking beat |
+| Booking folio | An **open navy folio shell** with blank paper/ticket spaces; a separate Travi **offering/receiving a booking** pose | Generated; [stills pending owner approval](mockups/onboarding-booking-folio-v1/README.md) |
+| Folio transition | Matching closed folio cutout and a prop-free stage reference; future country plates use separate foreground props | Prepared for motion review; hinged rig and production integration remain |
 | Detail review | Travi **checking a ticket attentively**, with the same identity and scale | To brief; all actual booking details stay live UI |
 | First itinerary day | Travi **proudly presenting the organised folio** | To brief; the actual itinerary remains real UI |
 | Pass invitation | Reuse the folio/presentation pose initially; new artwork only if the reviewed composition needs it | Not a required separate art set yet |
@@ -103,8 +112,8 @@ Do not generate the entire shared queue speculatively. Brief each asset against 
 
 ## Adding a destination and keeping the log current
 
-1. **Add its ledger entry before generation.** Record canonical ID, label, country/region/city selectors, geographic scope and source reference paths. New places without an existing pack can be added; the current 30 rows are an inventory, not a permitted-destination list.
-2. **Record the gap and tell the owner.** For example: “Paris needs one clean portrait stage; its postcards already exist. Travi and the video can be reused.” Add any genuinely necessary shared asset to the shared queue, with its story beat.
+1. **Check country coverage first, then add a ledger entry if art is needed.** A new city under an already-covered country needs a place-to-country mapping, not another generated stage. Record canonical ID, label, country/region/city selectors, geographic scope, coverage tier and reference paths. New countries without an existing pack can be added; the current 30 rows are an inventory, not a permitted-destination list.
+2. **Record the gap and tell the owner.** For example: “France needs one clean country stage; its postcards already exist. Paris and other French destinations can use it. Travi and the video can be reused.” City/region art remains deferred unless specifically prioritised. Add any genuinely necessary shared asset to the shared queue, with its story beat.
 3. **Generate and retain provenance.** Keep the editable/PNG master and the exact prompt, input references, generation mode and selected source path. Stage new masters under `art_packs/pending/onboarding/<destination-id>/onboarding_stage_v1.png` until integration; pending art is not built or published. Current prototype assets retain their existing paths.
 4. **Review in the live composition.** Check geography, template alignment, character clearance, lighting, no baked-in UI/character, readability, floor continuity, reveal/idle, neutral fallback and reduced motion. Review actual destination selection rather than only the image in isolation.
 5. **Update status and owner-facing register.** Use `needed → generated → review_ready → approved → integrated → published`, recording the relevant paths and evidence at each change. Existing Bali/Kyoto use `prototype_ready`: that does not imply Flutter integration. A copied file is not a published pack.
@@ -112,4 +121,4 @@ Do not generate the entire shared queue speculatively. Brief each asset against 
 
 **Working rule for subsequent onboarding work:** keep this guide's register and JSON ledger in sync whenever a destination or shared image requirement changes, and mention newly needed images in the user update. No background monitoring or automatic generation is implied.
 
-Prioritise new scenic plates using actual upcoming destination additions or observed demand. Paris, Orlando and the Lake District already have specific local references if we want another art-review batch; the 25 country references provide broader expansion material. We do not need to generate every city in the world before launch.
+Prioritise countries using actual upcoming destination additions or observed demand, starting from the 25 existing country references. Paris, Orlando and the Lake District retain their reference rows but are deferred optional scenic additions. Do not commission a separate image for every city. New city/region selections should benefit from their country's coverage.

@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/tokens.dart';
+import '../../design/widgets/common.dart';
+import '../../design/widgets/holiday_dates_sheet.dart';
+import '../../design/widgets/travi_cameo.dart';
 import '../../domain/domain.dart';
 import '../../logic/destinations.dart';
 import '../../logic/formatters.dart';
 import '../../logic/price_text.dart';
 import '../../logic/trip_plan.dart';
+import '../../logic/travi_cameos.dart';
 import '../../logic/trip_window.dart';
 import '../../state/analytics.dart';
 import '../../state/premium_store.dart';
@@ -22,7 +26,12 @@ Future<void> startNewTrip(BuildContext context) async {
   final outcome = await _showSheet(context, const TripDetailsSheet());
   if (outcome == null || !context.mounted) return;
   switch (outcome) {
-    case _Created(:final tripId) || _OpenInstead(:final tripId):
+    case _Created(:final tripId):
+      // Travi cheers the new holiday in.
+      await Navigator.of(
+        context,
+      ).push(MaterialPageRoute<void>(builder: (_) => TripScreen(tripId: tripId, celebrate: true)));
+    case _OpenInstead(:final tripId):
       await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => TripScreen(tripId: tripId)));
     case _JoinInstead():
       await startJoinTrip(context);
@@ -38,7 +47,9 @@ Future<void> editTripDetails(BuildContext context, TripPlan plan) =>
 Future<_Outcome?> _showSheet(BuildContext context, TripDetailsSheet sheet) => showModalBottomSheet<_Outcome>(
   context: context,
   isScrollControlled: true,
-  showDragHandle: true,
+  // The sheet draws its own handle: the built-in one would clip Travi,
+  // who peeks over the top edge.
+  showDragHandle: false,
   backgroundColor: TravaryColors.linen,
   builder: (context) => Padding(
     padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
@@ -168,18 +179,21 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
 
   Future<void> _pickDates() async {
     final today = context.read<TravelStore>().today;
-    final picked = await showDateRangePicker(
-      context: context,
-      initialDateRange: _start == null ? null : DateTimeRange(start: _start!.toDateTime(), end: _end!.toDateTime()),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-      currentDate: today.toDateTime(),
-      helpText: 'When are you away?',
+    final picked = await showHolidayDates(
+      context,
+      today: today,
+      start: _start,
+      end: _end,
+      // It opens on this month (or the trip's); a trip under way, or one
+      // being tidied up afterwards, can still reach back a year.
+      first: LocalDate.min(_start ?? today, today).addDays(-365),
+      title: 'When are you away?',
+      confirm: 'Done',
     );
     if (picked == null || !mounted) return;
     setState(() {
-      _start = LocalDate.fromDateTime(picked.start);
-      _end = LocalDate.fromDateTime(picked.end);
+      _start = picked.start;
+      _end = picked.end;
       _datesChanged = true;
       _datesError = null;
     });
@@ -245,13 +259,14 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
         ? tripPassEndsText(pass, start, end!)
         : null;
 
-    return SafeArea(
+    final form = SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SheetHandle(),
             Text(_isEditing ? 'Edit trip' : 'New trip', style: TravaryText.headline),
             if (!_isEditing) ...[
               const SizedBox(height: TravarySpace.xs),
@@ -368,6 +383,21 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
           ],
         ),
       ),
+    );
+    if (_isEditing) return form;
+    // A new trip: Travi pops up over the sheet's top edge and waves.
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        form,
+        Positioned(
+          right: TraviCameoLayout.sheetRight,
+          top: -TraviCameoLayout.peekSize,
+          width: TraviCameoLayout.peekSize,
+          height: TraviCameoLayout.peekSize,
+          child: const TraviPopUp(key: ValueKey('new-trip-travi'), peek: TraviPeek.wave),
+        ),
+      ],
     );
   }
 }

@@ -31,6 +31,23 @@ Future<AccessDecision?> requirePremium(
   return after.allowed ? after : null;
 }
 
+/// Room on [plan] for [adding] more ticket files, which keeps [kept]
+/// already (`ticketFilesIn`): free holidays keep [Pricing.freeTicketFiles],
+/// a pass or Plus any number. Opens the paywall once they're used. True
+/// when the files can be added. Files already attached are never touched.
+Future<bool> requireTicketRoom(
+  BuildContext context,
+  TripPlan? plan, {
+  required int kept,
+  int adding = 1,
+  required String source,
+}) async {
+  final premium = context.read<PremiumStore?>();
+  if (premium == null || premium.policy.canAttachTickets(plan, kept: kept, adding: adding)) return true;
+  final bought = await showPaywall(context, feature: PremiumFeature.ticketBackup, tripId: plan?.id, source: source);
+  return bought && premium.policy.canAttachTickets(plan, kept: kept, adding: adding);
+}
+
 /// Opens the paywall. Returns true if something was bought.
 Future<bool> showPaywall(
   BuildContext context, {

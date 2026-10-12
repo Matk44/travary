@@ -133,6 +133,64 @@ void main() {
       expect(tester.takeException(), isNull);
     },
   );
+
+  for (final (width, height) in [(320.0, 568.0), (390.0, 844.0), (430.0, 932.0)]) {
+    for (final scale in [1.0, 1.6]) {
+      testWidgets('the packing note fits under the postcard beside the tag: $width × $height at ${scale}x text', (
+        tester,
+      ) async {
+        const dpr = 3.0;
+        tester.view.physicalSize = Size(width * dpr, height * dpr);
+        tester.view.devicePixelRatio = dpr;
+        tester.view.padding = const FakeViewPadding(top: 47 * dpr, bottom: 34 * dpr);
+        tester.view.viewPadding = const FakeViewPadding(top: 47 * dpr, bottom: 34 * dpr);
+        tester.platformDispatcher.textScaleFactorTestValue = scale;
+        addTearDown(tester.view.reset);
+        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+
+        await tester.runAsync(
+          () => _preloadFiles(countdownPostcardSourcePacks().map((pack) => pack.common.values.first.path)),
+        );
+        final boundary = GlobalKey();
+        await tester.pumpWidget(RepaintBoundary(key: boundary, child: countdownTodayApp()));
+        await tester.pumpAndSettle();
+        await _precacheImages(tester);
+
+        final note = tester.getRect(find.byKey(const ValueKey('countdown-note')));
+        final card = tester.getRect(find.byKey(const ValueKey('countdown-postcard')));
+        expect(note.left, greaterThanOrEqualTo(card.left), reason: 'under the postcard');
+        final raster = tester.renderObject<RenderBox>(find.byKey(const ValueKey('countdown-tag-raster')));
+        final body = SurfaceSlot.countdownTag.body!;
+        final tagLeft = [
+          for (final y in [body.top, body.bottom])
+            raster.localToGlobal(Offset(body.left * raster.size.width, y * raster.size.height)).dx,
+        ].reduce(math.min);
+        expect(note.right, lessThanOrEqualTo(tagLeft), reason: 'clear of the tag');
+        // Inside the countdown, so it scrolls into view with it; on a
+        // phone tall enough for the countdown, above the tabs.
+        final hero = tester.getRect(find.byType(CountdownTripHero));
+        expect(note.bottom, lessThanOrEqualTo(hero.bottom), reason: 'inside the countdown');
+        if (height >= 844 && scale == 1) {
+          expect(note.bottom, lessThan(tester.getRect(find.byType(TravaryNavBar)).top), reason: 'above the tabs');
+        }
+        expect(find.text('Packing list'), findsOneWidget);
+
+        if (qa) {
+          final actual = await tester.runAsync(() async {
+            final render = boundary.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+            return render.toImage(pixelRatio: 2);
+          });
+          await tester.runAsync(() async {
+            final png = await actual!.toByteData(format: ui.ImageByteFormat.png);
+            await File(
+              p.join(outDir, 'countdown_note_${width.round()}_${scale}x.png'),
+            ).writeAsBytes(png!.buffer.asUint8List());
+          });
+        }
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
 }
 
 Future<void> _loadFonts(String dir) async {

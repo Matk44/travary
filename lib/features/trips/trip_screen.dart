@@ -10,17 +10,24 @@ import '../../design/trip_chrome.dart';
 import '../../design/widgets/checklist_row.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/plan_gap_row.dart';
+import '../../design/widgets/travi_cameo.dart';
 import '../../design/widgets/trip_hero.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/checklist.dart';
 import '../../logic/day_plan.dart';
+import '../../logic/packing.dart';
+import '../../logic/sharing_pitch.dart';
+import '../../logic/travi_cameos.dart';
 import '../../logic/trip_gaps.dart';
 import '../../logic/trip_hero_text.dart';
 import '../../logic/trip_plan.dart';
+import '../../state/reminders_store.dart';
 import '../../state/travel_store.dart';
+import '../reminders/reminder_offer.dart';
 import '../booking/booking_actions.dart';
 import 'checklist_item_sheet.dart';
+import 'packing_list_screen.dart';
 import 'trip_details_screen.dart';
 import 'trip_details_sheet.dart';
 
@@ -31,9 +38,12 @@ import 'trip_details_sheet.dart';
 /// at the bottom; everything about the trip itself (its name and dates,
 /// family, card style, deleting it) is under "Trip details".
 class TripScreen extends StatelessWidget {
-  const TripScreen({super.key, required this.tripId});
+  const TripScreen({super.key, required this.tripId, this.celebrate = false});
 
   final String tripId;
+
+  /// Just created: Travi pops up from behind its plan, cheering, and ducks.
+  final bool celebrate;
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +59,16 @@ class TripScreen extends StatelessWidget {
     return TravaryChrome(
       colors: TripColors.of(store.paletteFor(plan)),
       slots: store.chromeArtFor(plan),
-      child: _TripBody(plan: plan),
+      child: _TripBody(plan: plan, celebrate: celebrate),
     );
   }
 }
 
 class _TripBody extends StatelessWidget {
-  const _TripBody({required this.plan});
+  const _TripBody({required this.plan, required this.celebrate});
 
   final TripPlan plan;
+  final bool celebrate;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +76,7 @@ class _TripBody extends StatelessWidget {
     final chrome = TravaryChrome.of(context);
     final addDate = plan.contains(store.today) ? store.today : plan.start;
     final gaps = planGaps(plan);
+    final offersReminders = context.watch<RemindersStore?>()?.offersFor(plan) ?? false;
 
     return LinenBackground(
       child: Scaffold(
@@ -110,9 +122,27 @@ class _TripBody extends StatelessWidget {
               onTag: () => editTripDetails(context, plan),
             ),
             const SizedBox(height: TravarySpace.lg),
-            _Plan(plan: plan),
+            if (celebrate)
+              // Behind the plan, which covers him below its top edge.
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const Positioned(
+                    left: TraviCameoLayout.planLeft,
+                    top: TraviCameoLayout.planSink - TraviCameoLayout.peekSize,
+                    width: TraviCameoLayout.peekSize,
+                    height: TraviCameoLayout.peekSize,
+                    child: TraviPopUp(key: ValueKey('trip-travi'), peek: TraviPeek.cheer, duck: true),
+                  ),
+                  _Plan(plan: plan),
+                ],
+              )
+            else
+              _Plan(plan: plan),
             for (final gap in gaps) ...[const SizedBox(height: TravarySpace.md), _GapRow(plan: plan, gap: gap)],
+            if (offersReminders) ...[const SizedBox(height: TravarySpace.lg), const ReminderOffer()],
             if (showsChecklist(plan, store.today)) ...[const SizedBox(height: TravarySpace.lg), _Checklist(plan: plan)],
+            if (showsPacking(plan, store.today)) ...[const SizedBox(height: TravarySpace.lg), _Packing(plan: plan)],
             if (PremiumFeature.familySharing.released || kDebugMode) ...[
               const SizedBox(height: TravarySpace.lg),
               _Travellers(plan: plan),
@@ -267,7 +297,7 @@ class _Checklist extends StatelessWidget {
           if (items.isEmpty)
             Padding(
               padding: const EdgeInsets.fromLTRB(TravarySpace.lg, 0, TravarySpace.lg, TravarySpace.md),
-              child: Text(checklistHint, style: TravaryText.bodySoft),
+              child: Text(checklistHintFor(plan, store.today), style: TravaryText.bodySoft),
             ),
           for (final item in items) ...[
             const PaperDivider(indent: 0),
@@ -302,6 +332,29 @@ class _Checklist extends StatelessWidget {
   }
 }
 
+/// The packing list, folded to one row: how it stands, opening the list.
+class _Packing extends StatelessWidget {
+  const _Packing({required this.plan});
+
+  final TripPlan plan;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = TravaryChrome.of(context).colors;
+    final progress = packingProgress(plan.trip.packing.values);
+    return PaperPanel(
+      child: PaperRow(
+        key: const ValueKey('trip-packing'),
+        title: 'Packing list',
+        subtitle: progress ?? 'Everything to take, ticked off as it goes in',
+        leading: const RowIcon(IconSlot.countdownBookings),
+        trailing: Icon(Icons.chevron_right_rounded, color: colors.ink),
+        onTap: () => openPackingList(context, plan),
+      ),
+    );
+  }
+}
+
 /// Who's going: an initial for each traveller and a way to invite more.
 class _Travellers extends StatelessWidget {
   const _Travellers({required this.plan});
@@ -319,7 +372,7 @@ class _Travellers extends StatelessWidget {
       child: PaperRow(
         key: const ValueKey('trip-travellers'),
         title: 'Who\'s coming',
-        subtitle: members.length <= 1 ? 'Just you so far' : names.join(', '),
+        subtitle: travellersLine(plan, names),
         leading: SizedBox(
           width: 34.0 + 18 * (shown.length - 1).clamp(0, 3),
           height: 34,

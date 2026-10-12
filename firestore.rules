@@ -3,12 +3,16 @@ rules_version = '2';
 // Travary security rules.
 //
 //   trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[],
-//                                         checklist{} (shared to-dos, any member)
-//                                         visualProfile* (server only)
+//                                         checklist{}, packing{} (shared lists, any member)
+//                                         visualProfile*, liveFlights{} (server only)
 //   trips/{tripId}/bookings/{bookingId}   one booking + a copy of memberIds[]
 //
-//   users/{userId}                        purchases, mirrored by the server
+//   users/{userId}                        purchases, mirrored by the server;
+//                                         onboardingCompleted(At), the app's own
 //   invites/{code}                        family invites, server only
+//   tripPasses/{purchaseId}               claimed Holiday Passes, server only
+//   watchedFlights, flightStatus, flightUsage, pushTokens, config
+//                                         flight alerts and lookups, server only
 //
 // A trip (and everything in it) is visible only to its members. Only the
 // owner can delete a trip or change who's on it. Only the server grants
@@ -25,11 +29,12 @@ service cloud.firestore {
       return signedIn() && request.auth.uid in tripData.memberIds;
     }
 
-    // Written only by the server: premium, membership, invites, and the
-    // classifyTripVisuals function's profile, timestamp and request marker.
+    // Written only by the server: premium, membership, invites, the
+    // classifyTripVisuals function's profile, timestamp and request marker,
+    // and flight alerts' live state of the trip's flights.
     function serverOnlyTripFields() {
       return ['premium', 'memberNames', 'invite',
-              'visualProfile', 'visualProfileUpdatedAt', 'visualProfileRequest'];
+              'visualProfile', 'visualProfileUpdatedAt', 'visualProfileRequest', 'liveFlights'];
     }
 
     // The look stays the traveller's to choose: a theme name, and who picks
@@ -55,10 +60,11 @@ service cloud.firestore {
           && shortText(data.destination, 'city', 120) && shortText(data.destination, 'citySlug', 64));
     }
 
-    // "Before you go": shared to-dos by id, changed one at a time by any
-    // member. A map, and not an endless one.
+    // "Before you go" and the packing list: shared items by id, changed one
+    // at a time by any member. Maps, and not endless ones.
     function validChecklist(data) {
-      return !('checklist' in data) || (data.checklist is map && data.checklist.size() <= 100);
+      return (!('checklist' in data) || (data.checklist is map && data.checklist.size() <= 100))
+        && (!('packing' in data) || (data.packing is map && data.packing.size() <= 100));
     }
 
     match /trips/{tripId} {
@@ -103,9 +109,22 @@ service cloud.firestore {
     }
 
     // A traveller's purchases (Plus, Trip Passes, free imports used),
-    // mirrored here by the server from the store. Read-only for the app.
+    // mirrored here by the server from the store. The app may only record
+    // that this account has been through onboarding (so another phone skips
+    // it): those two fields, set to true and the server's time, nothing else.
     match /users/{userId} {
       allow read: if signedIn() && request.auth.uid == userId;
+      allow create: if signedIn() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['onboardingCompleted', 'onboardingCompletedAt'])
+        && validOnboarding(request.resource.data);
+      allow update: if signedIn() && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['onboardingCompleted', 'onboardingCompletedAt'])
+        && validOnboarding(request.resource.data);
+    }
+
+    function validOnboarding(data) {
+      return data.onboardingCompleted == true && data.onboardingCompletedAt == request.time;
     }
 
     // Reads, including the app's collection-group query over all bookings,

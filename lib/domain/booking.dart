@@ -77,7 +77,14 @@ class Booking {
     return value == null || value.isEmpty ? null : value;
   }
 
-  Booking copyWith({String? id, String? tripId, List<Attachment>? attachments, String? artKey, DateTime? updatedAt}) {
+  Booking copyWith({
+    String? id,
+    String? tripId,
+    LocalDate? endDate,
+    List<Attachment>? attachments,
+    String? artKey,
+    DateTime? updatedAt,
+  }) {
     return Booking(
       id: id ?? this.id,
       tripId: tripId ?? this.tripId,
@@ -85,7 +92,7 @@ class Booking {
       title: title,
       startDate: startDate,
       startTime: startTime,
-      endDate: endDate,
+      endDate: endDate ?? this.endDate,
       endTime: endTime,
       location: location,
       reference: reference,

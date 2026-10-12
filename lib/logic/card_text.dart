@@ -1,6 +1,7 @@
 import '../domain/domain.dart';
 import 'art_subjects.dart';
 import 'day_plan.dart';
+import 'flight_status_text.dart';
 import 'formatters.dart';
 
 /// Every string a booking card can show, already worded and formatted.
@@ -22,6 +23,7 @@ class CardText {
     this.badgeCaption,
     this.day,
     this.month,
+    this.live,
   });
 
   /// Small uppercase label above the title: "NEXT UP", "LUNCH", "CHECK-OUT".
@@ -55,6 +57,27 @@ class CardText {
   /// The date on two lines, for a postmark: "26" over "Sep".
   final String? day;
   final String? month;
+
+  /// A flight's live state, under its card on Today (flight alerts).
+  final LiveFlightLine? live;
+
+  /// This wording with [live] under the card.
+  CardText withLive(LiveFlightLine? live) => CardText(
+    eyebrow: eyebrow,
+    title: title,
+    when: when,
+    detail: detail,
+    place: place,
+    stub: stub,
+    reference: reference,
+    footnote: footnote,
+    action: action,
+    badge: badge,
+    badgeCaption: badgeCaption,
+    day: day,
+    month: month,
+    live: live,
+  );
 
   /// [when] and [detail] joined for one-line layouts.
   String? get whenAndDetail {

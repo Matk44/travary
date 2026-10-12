@@ -52,6 +52,9 @@ String formatDayMonthRange(LocalDate start, LocalDate end) {
   return '${start.day}–${formatDayMonth(end)}';
 }
 
+/// "November 2026": a calendar month's heading.
+String formatMonthYear(LocalDate month) => DateFormat('MMMM y').format(month.toDateTime());
+
 /// "1 night", "4 nights".
 String formatNights(int nights) => nights == 1 ? '1 night' : '$nights nights';
 

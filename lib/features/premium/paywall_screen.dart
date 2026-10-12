@@ -67,6 +67,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text('That didn\'t go through. You haven\'t been charged.')));
+      case PurchaseOutcome.pending:
+        // Paid: closing stops a second purchase. It switches on by itself.
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(passPendingText)));
+        Navigator.of(context).pop(false);
     }
   }
 
@@ -132,7 +136,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       selected: selected == pass,
                       title: 'Just ${plan!.trip.title}',
                       price: '${priceOf(pass)} once',
-                      detail: 'Trip Pass · no subscription · ${perDay(pass, plan.dayCount)} a day',
+                      detail:
+                          'One payment for up to ${Pricing.familySize} people · no subscription · '
+                          '${perDay(pass, plan.dayCount)} a day',
                       onTap: () => setState(() => _selected = OfferKind.tripPass),
                     ),
                   ],
@@ -179,10 +185,14 @@ class _PaywallCopy {
       'Every ticket backed up and on all your devices, even if your phone goes missing.',
     ),
     PremiumFeature.flightAlerts => const _PaywallCopy(
-      'Never miss a gate change',
-      'Delays and gate changes the moment they happen.',
+      'Know the moment your flight changes',
+      'Delays, new times and cancellations, on everyone\'s phone the moment they happen.',
     ),
-    null => const _PaywallCopy('Holidays, handled', 'Less admin, everyone in sync, and your tickets always safe.'),
+    null => const _PaywallCopy(
+      'Your holiday, on everyone\'s phone',
+      'One pass covers everyone on the trip: the plan, their own tickets and the packing list on every phone, '
+          'backed up and in sync.',
+    ),
   };
 }
 
@@ -350,7 +360,8 @@ class _PassSummary extends StatelessWidget {
       decoration: BoxDecoration(color: TravaryColors.paper, borderRadius: BorderRadius.circular(TravaryRadius.card)),
       child: Text(
         'One payment, no subscription. Unlocks Plus on ${plan.trip.title} '
-        '(${formatDayMonthRange(pass.start, pass.end)}) for everyone on the trip, until ${formatDate(pass.lastDay)}.',
+        '(${formatDayMonthRange(pass.start, pass.end)}) for everyone on the trip, until ${formatDate(pass.lastDay)}. '
+        'Only one of you needs to buy it.',
         style: TravaryText.bodySoft,
       ),
     );

@@ -7,3 +7,9 @@ export { classifyTripVisuals, purgeExpiredPlaceCoordinates } from './classifyTri
 export { createTripInvite, joinTrip, removeTripMember } from './sharing';
 export { adoptGuestTripsCall as adoptGuestTrips, deleteAccountCall as deleteAccount } from './account';
 export { flightStatus } from './flightStatus';
+export {
+  checkWatchedFlights, registerPushToken, watchFlightsOnBookingChange, watchFlightsOnTripChange, watchFlightsOnUserChange,
+} from './flightAlerts';
+export {
+  claimTripPass, syncPurchases, revenueCatWebhook, restampTripOnTripChange, restampTripOnBookingChange,
+} from './purchases';

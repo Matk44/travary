@@ -76,16 +76,21 @@ class InfoPill extends StatelessWidget {
 class EmptyState extends StatelessWidget {
   const EmptyState({
     super.key,
-    required this.icon,
+    this.icon,
+    this.art,
     required this.title,
     required this.message,
     this.actionLabel,
     this.onAction,
     this.secondaryLabel,
     this.onSecondary,
-  });
+  }) : assert(icon != null || art != null);
 
-  final IconData icon;
+  final IconData? icon;
+
+  /// A picture in place of the icon: Travi making a cameo.
+  final Widget? art;
+
   final String title;
   final String message;
   final String? actionLabel;
@@ -100,7 +105,7 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 48, color: TravaryColors.kraft),
+          art ?? Icon(icon, size: 48, color: TravaryColors.kraft),
           const SizedBox(height: TravarySpace.lg),
           Text(title, style: TravaryText.title, textAlign: TextAlign.center),
           const SizedBox(height: TravarySpace.sm),
@@ -117,4 +122,31 @@ class EmptyState extends StatelessWidget {
       ),
     );
   }
+}
+
+/// A bottom sheet's drag handle, drawn by the sheet itself (as Material's
+/// own: a 32 × 4 bar in a 48-point band), for sheets that let something
+/// stand over their top edge.
+class SheetHandle extends StatelessWidget {
+  const SheetHandle({super.key});
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    button: true,
+    onTap: () => Navigator.of(context).maybePop(),
+    child: SizedBox(
+      height: kMinInteractiveDimension,
+      child: Center(
+        child: Container(
+          width: 32,
+          height: 4,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+      ),
+    ),
+  );
 }

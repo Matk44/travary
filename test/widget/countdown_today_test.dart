@@ -16,10 +16,12 @@ import 'package:travary/domain/domain.dart';
 import 'package:travary/features/trips/trip_screen.dart';
 import 'package:travary/logic/art_pack_selection.dart';
 import 'package:travary/logic/countdown_text.dart';
+import 'package:travary/logic/travi_cameos.dart';
 import 'package:travary/logic/trip_plan.dart';
 
 import '../support/canonical_today.dart';
 import '../support/countdown_today.dart';
+import '../support/travi.dart';
 
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
@@ -171,7 +173,7 @@ void main() {
       handle.dispose();
     });
 
-    testWidgets('tapping the postcard, or its tag, opens the trip', (tester) async {
+    testWidgets('tapping the postcard opens the trip; its tag brings Travi up instead', (tester) async {
       await pump(tester, countdownTodayApp());
 
       // The picture itself, left of the tag.
@@ -182,10 +184,33 @@ void main() {
       await tester.pageBack();
       await tester.pumpAndSettle();
 
-      // The tag is part of the hero.
+      // 58 days to go: he pops up from behind the card, cheering, and ducks.
+      Finder travi(String still) => find.descendant(
+        of: find.byKey(const ValueKey('countdown-travi')),
+        matching: find.byKey(ValueKey('travi-still-$still')),
+      );
+      expect(travi('peek-cheer'), findsNothing);
       await tester.tap(find.text('58'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(travi('peek-cheer'), findsOneWidget);
+      expect(find.byType(TripScreen), findsNothing);
+      await tester.pump(traviPeekHold);
       await tester.pumpAndSettle();
-      expect(tester.widget<TripScreen>(find.byType(TripScreen)).tripId, 'lakes');
+      expect(travi('peek-cheer'), findsNothing);
+      expect(find.byType(TripScreen), findsNothing);
+    });
+
+    testWidgets('Travi sits behind the postcard\'s top right, under the card', (tester) async {
+      await pump(tester, countdownTodayApp());
+      final card = tester.getRect(find.byKey(const ValueKey('countdown-postcard')));
+      final travi = tester.getRect(find.byKey(const ValueKey('countdown-travi')));
+      // Cut off just below the card's top edge, in its right half.
+      final cardTop = card.top + card.height * CountdownGeometry.postcardCardTop;
+      expect(travi.bottom, greaterThan(cardTop));
+      expect(travi.bottom, lessThan(cardTop + 10));
+      expect(travi.center.dx, greaterThan(card.center.dx));
+      expect(travi.right, lessThan(card.right));
     });
 
     testWidgets('it gives a little under a finger', (tester) async {
@@ -274,6 +299,13 @@ void main() {
       expect(find.byType(CountdownTripHero), findsNothing);
       expect(find.text('A free day'), findsOneWidget);
       expect(find.text('Day 3 of 5 · Cornwall'), findsOneWidget);
+      // Travi lounges in his deckchair; a tap and he sips (no films in tests).
+      final lounge = find.byKey(const ValueKey('travi-lounge'));
+      expect(find.descendant(of: lounge, matching: find.byKey(const ValueKey('travi-still-lounge'))), findsOneWidget);
+      await tester.tap(lounge);
+      await tester.pumpAndSettle();
+      expect(find.descendant(of: lounge, matching: find.byKey(const ValueKey('travi-still-lounge'))), findsOneWidget);
+      expect(tester.takeException(), isNull);
     });
 
     String postcardShown(WidgetTester tester) {
@@ -331,11 +363,13 @@ void main() {
       );
       expect(find.byType(CountdownTripHero), findsNothing);
       expect(find.text('Nothing coming up'), findsOneWidget);
+      expect(traviCameo(TraviMoment.waiting), findsOneWidget);
 
       await pump(tester, countdownTodayApp(catalog: withPostcards, data: (trips: const [], bookings: const [])));
       expect(find.byType(CountdownTripHero), findsNothing);
       expect(find.text('Where are you off to?'), findsOneWidget);
       expect(find.byType(EmptyState), findsOneWidget);
+      expect(traviCameo(TraviMoment.waiting), findsOneWidget);
     });
   });
 
@@ -440,6 +474,44 @@ void main() {
       expect(tagAngle(tester), closeTo(CountdownLayout.tagAngleDegrees, 0.01));
     });
 
+    testWidgets('once the entry settles, Travi pops up to wave, if it\'s his first today', (tester) async {
+      tester.view.physicalSize = const Size(390 * 3, 844 * 3);
+      tester.view.devicePixelRatio = 3;
+      addTearDown(tester.view.reset);
+      var asked = 0;
+      Widget hero(bool firstToday) => heroAlone(
+        ArtCatalog.fromAssetPaths(bundledArtPaths()),
+        greet: () async {
+          asked++;
+          return firstToday;
+        },
+      );
+      Finder wave() => find.byKey(const ValueKey('travi-still-peek-wave'));
+      // Through the entry, then a frame for him to come up.
+      Future<void> entry() async {
+        for (var t = Duration.zero; t <= CountdownLayout.entryDuration; t += const Duration(milliseconds: 100)) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        await tester.pump();
+        await tester.pump();
+      }
+
+      await tester.pumpWidget(hero(true));
+      await entry();
+      expect(asked, 1);
+      expect(wave(), findsOneWidget);
+      await tester.pump(traviPeekHold);
+      await tester.pump();
+      expect(wave(), findsNothing, reason: 'he ducks back down');
+
+      // Already greeted today: the entry plays, he stays hidden.
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpWidget(hero(false));
+      await entry();
+      expect(asked, 2);
+      expect(wave(), findsNothing);
+    });
+
     testWidgets('with reduced motion everything is in place at once', (tester) async {
       tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
         disableAnimations: true,
@@ -529,7 +601,7 @@ void expectPostcardFits(WidgetTester tester, double width) {
 }
 
 /// Just the hero for the Lake District, on the bundled tag.
-Widget heroAlone(ArtCatalog catalog) {
+Widget heroAlone(ArtCatalog catalog, {Future<bool> Function()? greet}) {
   final data = countdownTodayData();
   final plan = TripPlan(data.trips.first, data.bookings.where((b) => b.tripId == 'lakes'));
   return MaterialApp(
@@ -543,6 +615,7 @@ Widget heroAlone(ArtCatalog catalog) {
             text: countdownTextFor(plan, LocalDate.fromDateTime(countdownNow))!,
             postcard: FileArtImage(countdownPostcardSource('region_gb_lake_district')),
             onOpen: () {},
+            greet: greet,
           ),
         ),
       ),

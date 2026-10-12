@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travary/data/document_lock.dart';
 import 'package:travary/data/memory_travel_document_repository.dart';
@@ -58,6 +60,24 @@ void main() {
     expect(store.documents, isEmpty);
   });
 
+  test('asking again while the phone\'s prompt is up waits for it, never a second prompt', () async {
+    final pending = _PendingLock();
+    final waiting = TravelDocumentsStore(repository: repository, lock: pending);
+    addTearDown(waiting.dispose);
+    final first = waiting.unlock();
+    final second = waiting.unlock();
+    expect(pending.asked, 1);
+    pending.answer(UnlockResult.refused);
+    expect(await first, isFalse);
+    expect(await second, isFalse);
+
+    // Once it's answered, the next ask is a new prompt.
+    final third = waiting.unlock();
+    expect(pending.asked, 2);
+    pending.answer(UnlockResult.unlocked);
+    expect(await third, isTrue);
+  });
+
   test('a phone without a passcode opens them, and says so', () async {
     lock.result = UnlockResult.noLock;
     expect(await store.unlock(), isTrue);
@@ -97,4 +117,18 @@ void main() {
     expect(store.needingAttention(today: LocalDate(2026, 10, 3), nextTrip: japan), 1);
     expect(store.needingAttention(today: LocalDate(2026, 10, 3)), 0);
   });
+}
+
+/// A lock whose prompt stays up until [answer].
+class _PendingLock implements DocumentLock {
+  var asked = 0;
+  Completer<UnlockResult>? _prompt;
+
+  @override
+  Future<UnlockResult> unlock() {
+    asked++;
+    return (_prompt = Completer()).future;
+  }
+
+  void answer(UnlockResult result) => _prompt!.complete(result);
 }

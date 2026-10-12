@@ -4,6 +4,8 @@ import { getStorage } from 'firebase-admin/storage';
 import { logger } from 'firebase-functions';
 import { HttpsError, onCall } from 'firebase-functions/https';
 
+import { deletePushTokens } from './flightAlerts';
+import { deleteTripPasses, moveTripPasses, restampTrip } from './purchases';
 import { replaceMember, tripFateOnAccountDeletion } from './sharingLogic';
 
 /**
@@ -75,6 +77,10 @@ export async function adoptGuestTrips(
   }
   const invites = await db.collection('invites').where('createdBy', '==', guest).get();
   for (const invite of invites.docs) await invite.ref.update({ createdBy: uid });
+  // Holiday Passes the guest bought go with them (their trips are restamped).
+  for (const tripId of await moveTripPasses(db, guest, uid)) await restampTrip(db, tripId);
+  // The phone registers again as the account it switched to.
+  await deletePushTokens(db, guest);
 
   try {
     await auth.deleteUser(guest);
@@ -87,7 +93,8 @@ export async function adoptGuestTrips(
 
 /**
  * Removes [uid] from every trip (handing shared trips on, deleting their
- * own), deletes their purchases and usage record, then the account itself.
+ * own), deletes their purchases (claimed Holiday Passes too), usage record
+ * and push tokens, then the account itself.
  */
 export async function deleteAccountData(
   db: Firestore,
@@ -96,6 +103,8 @@ export async function deleteAccountData(
   uid: string,
 ): Promise<{ deleted: number; handedOver: number; left: number }> {
   const counts = { deleted: 0, handedOver: 0, left: 0 };
+  // Their Holiday Passes go too; the trips they covered are restamped below.
+  const passTrips = await deleteTripPasses(db, uid);
   const trips = await db.collection('trips').where('memberIds', 'array-contains', uid).get();
   for (const doc of trips.docs) {
     const fate = tripFateOnAccountDeletion(
@@ -122,6 +131,8 @@ export async function deleteAccountData(
     if (fate.action === 'hand-over') counts.handedOver++;
     else counts.left++;
   }
+  for (const tripId of new Set(passTrips)) await restampTrip(db, tripId);
+  await deletePushTokens(db, uid);
   await db.doc(`users/${uid}`).delete();
   await auth.deleteUser(uid);
   logger.info('account_deleted', { uid, ...counts });

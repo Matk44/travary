@@ -6,8 +6,10 @@ import { defineString } from 'firebase-functions/params';
 
 import { normaliseBookings, responseSchema } from './bookingSchema';
 import { geminiRetryPlan, generateWithRetry, RETRYABLE_STATUSES } from './geminiRetry';
-import { geminiApiKey } from './params';
+import { geminiApiKey, revenueCatApiKey } from './params';
 import { SYSTEM_PROMPT, userPrompt } from './prompt';
+import { hasPremium, revenueCatApi } from './purchases';
+import { FREE_SMART_IMPORTS } from './purchasesLogic';
 
 /** Change without a code edit: `SMART_IMPORT_MODEL=...` in functions/.env. */
 const model = defineString('SMART_IMPORT_MODEL', { default: 'gemini-3.8-flash' });
@@ -23,8 +25,9 @@ const MAX_TOTAL_BYTES = 15 * 1024 * 1024;
 
 /**
  * Per-traveller daily cap. Protects the Gemini bill from abuse; far above
- * what anyone needs. (Free vs Plus allowances are enforced in the app for
- * now and move server-side with RevenueCat.)
+ * what anyone needs. Past the free ones (FREE_SMART_IMPORTS, counted in
+ * `smartImport.total`) it takes premium: Plus, or a pass on the trip the
+ * app names (`tripId`), checked here as well as in the app.
  */
 const DAILY_LIMIT = 25;
 
@@ -36,6 +39,8 @@ interface ImportFile {
 interface ImportRequest {
   files: ImportFile[];
   today: string;
+  /** The trip whose pass allows this one, when it's a pass that does. */
+  tripId?: string;
 }
 
 /**
@@ -43,12 +48,13 @@ interface ImportRequest {
  * bookings. The app shows them for the traveller to check before saving.
  */
 export const smartImport = onCall(
-  { secrets: [geminiApiKey], memory: '512MiB', timeoutSeconds: 120, maxInstances: 20 },
+  { secrets: [geminiApiKey, revenueCatApiKey], memory: '512MiB', timeoutSeconds: 120, maxInstances: 20 },
   async (request) => {
     const uid = request.auth?.uid;
     if (!uid) throw new HttpsError('unauthenticated', 'Sign in to use Smart Import.');
 
     const input = parseRequest(request.data);
+    await requireAllowance(uid, input.tripId);
     await reserveDailyUse(uid);
 
     const ai = new GoogleGenAI({ apiKey: geminiApiKey.value() });
@@ -128,7 +134,20 @@ function parseRequest(data: unknown): ImportRequest {
   if (totalBytes > MAX_TOTAL_BYTES) {
     throw new HttpsError('invalid-argument', 'That file is too big. Try a screenshot instead.');
   }
-  return { files: parsed, today };
+  const tripId = typeof body.tripId === 'string' && body.tripId && !body.tripId.includes('/') ? body.tripId : undefined;
+  return { files: parsed, today, tripId };
+}
+
+/** A free one, or premium (see DAILY_LIMIT). */
+async function requireAllowance(uid: string, tripId: string | undefined): Promise<void> {
+  const db = getFirestore();
+  const used = (await db.doc(`users/${uid}`).get()).get('smartImport.total');
+  if (typeof used !== 'number' || used < FREE_SMART_IMPORTS) return;
+  if (await hasPremium(db, revenueCatApi(revenueCatApiKey.value()), uid, tripId)) return;
+  throw new HttpsError(
+    'permission-denied',
+    'You\'ve used your free Smart Imports. Travary Plus, or a Holiday Pass for this trip, brings in as many as you like.',
+  );
 }
 
 async function reserveDailyUse(uid: string): Promise<void> {

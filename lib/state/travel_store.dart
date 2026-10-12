@@ -21,6 +21,7 @@ import '../logic/art_pack_selection.dart';
 import '../logic/art_subjects.dart';
 import '../logic/checklist.dart';
 import '../logic/day_plan.dart';
+import '../logic/packing.dart';
 import '../logic/destinations.dart';
 import '../logic/trip_assignment.dart';
 import '../logic/trip_gaps.dart';
@@ -125,6 +126,11 @@ class TravelStore extends ChangeNotifier {
   /// Which trips get their tickets backed up. The app sets this from
   /// Travary Plus; shared trips always do, so everyone has the tickets.
   bool Function(TripPlan plan) shouldBackUp = (plan) => plan.trip.isShared;
+
+  /// Whether a trip that formed from its bookings stays when the last one
+  /// leaves: one with a Holiday Pass, which belongs to the trip (set by the
+  /// home screen, which knows the passes).
+  bool Function(TripPlan plan) keepWhenEmpty = (_) => false;
   final DateTime Function() _clock;
 
   final _subscriptions = <StreamSubscription<Object?>>[];
@@ -184,6 +190,9 @@ class TravelStore extends ChangeNotifier {
     }
     return null;
   }
+
+  /// [booking]'s latest from flight alerts (paid trips), if they watch it.
+  FlightStatus? liveFlightFor(Booking booking) => plan(booking.tripId)?.trip.liveFlights[booking.id];
 
   /// The look [booking]'s cards use: its trip's, or classic outside a trip.
   ExperienceTheme themeOf(Booking booking) =>
@@ -311,7 +320,7 @@ class TravelStore extends ChangeNotifier {
   /// dates say, because the traveller chose one). Pass [previous] when
   /// editing.
   Future<SaveResult> saveBooking(Booking booking, {Booking? previous, bool newTrip = false}) async {
-    var saved = booking.copyWith(updatedAt: DateTime.now());
+    var saved = withOvernightEnd(booking).copyWith(updatedAt: DateTime.now());
     var created = false;
     String tripTitle;
 
@@ -370,7 +379,8 @@ class TravelStore extends ChangeNotifier {
   }
 
   Future<List<SaveResult>> _saveBatch(List<Booking> bookings) async {
-    final ordered = [...bookings]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+    final ordered = [for (final booking in bookings) withOvernightEnd(booking)]
+      ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
     final createdHere = <_NewTrip>[];
     final results = <SaveResult>[];
     for (var booking in ordered) {
@@ -414,6 +424,7 @@ class TravelStore extends ChangeNotifier {
   /// Creates a trip. Its look is automatic unless a [theme] is given.
   Future<Trip> createTrip(
     String title, {
+    String? id,
     ExperienceTheme? theme,
     LocalDate? start,
     LocalDate? end,
@@ -421,7 +432,7 @@ class TravelStore extends ChangeNotifier {
   }) async {
     final stamp = DateTime.now();
     final trip = Trip(
-      id: repository.newId(),
+      id: id ?? repository.newId(),
       title: title,
       theme: theme ?? ExperienceTheme.classicTravel,
       themeSource: theme == null ? ThemeSource.auto : ThemeSource.manual,
@@ -474,33 +485,71 @@ class TravelStore extends ChangeNotifier {
 
   // -------------------------------------------------------------- checklist
 
-  /// Adds "[text]" to [plan]'s checklist, by [due] if given. Null when
-  /// there's nothing to add or the list is full. [idea]: it was one of the
-  /// suggestions (for analytics; the words themselves are never sent).
-  Future<ChecklistItem?> addChecklistItem(TripPlan plan, String text, {LocalDate? due, bool idea = false}) async {
+  /// Adds "[text]" to [plan]'s checklist (or packing list), by [due] if
+  /// given. Null when there's nothing to add or the list is full; the same
+  /// words already on it (still to do) give that item back. [idea]: it
+  /// was one of the suggestions (for analytics; the words themselves are
+  /// never sent).
+  Future<ChecklistItem?> addChecklistItem(
+    TripPlan plan,
+    String text, {
+    LocalDate? due,
+    bool idea = false,
+    TripList list = TripList.checklist,
+  }) async {
     final clean = cleanChecklistText(text);
-    if (clean == null || plan.trip.checklist.length >= maxChecklistItems) return null;
+    final items = plan.trip.listOf(list);
+    if (clean == null) return null;
+    // The same words again (a double tap, typed twice): the one already there.
+    final same = items.values.where((i) => !i.done && i.text.toLowerCase() == clean.toLowerCase()).firstOrNull;
+    if (same != null) return same;
+    if (items.length >= maxChecklistItems) return null;
     final item = ChecklistItem(id: repository.newId(), text: clean, due: due, createdAt: DateTime.now());
-    await repository.saveChecklistItem(plan.id, item);
-    track('checklist_item_added', {'idea': idea, 'due': due != null, 'count': plan.trip.checklist.length + 1});
+    await repository.saveChecklistItem(plan.id, item, list: list);
+    track('${_event(list)}_item_added', {'idea': idea, 'due': due != null, 'count': items.length + 1});
     return item;
   }
 
   /// Saves a changed (or deleted and brought back) [item].
-  Future<void> saveChecklistItem(TripPlan plan, ChecklistItem item) async {
+  Future<void> saveChecklistItem(TripPlan plan, ChecklistItem item, {TripList list = TripList.checklist}) async {
     final clean = cleanChecklistText(item.text);
     if (clean == null) return;
-    await repository.saveChecklistItem(plan.id, item.copyWith(text: clean));
+    await repository.saveChecklistItem(plan.id, item.copyWith(text: clean), list: list);
   }
 
   /// Ticks [item], or unticks it.
-  Future<void> toggleChecklistItem(TripPlan plan, ChecklistItem item) async {
-    await repository.saveChecklistItem(plan.id, item.copyWith(done: !item.done));
-    if (!item.done) track('checklist_item_done');
+  Future<void> toggleChecklistItem(TripPlan plan, ChecklistItem item, {TripList list = TripList.checklist}) async {
+    await repository.saveChecklistItem(plan.id, item.copyWith(done: !item.done), list: list);
+    if (!item.done) track('${_event(list)}_item_done');
   }
 
-  Future<void> deleteChecklistItem(TripPlan plan, ChecklistItem item) =>
-      repository.deleteChecklistItem(plan.id, item.id);
+  Future<void> deleteChecklistItem(TripPlan plan, ChecklistItem item, {TripList list = TripList.checklist}) =>
+      repository.deleteChecklistItem(plan.id, item.id, list: list);
+
+  /// Starts [plan]'s packing list from [from]'s: every item, unticked, that
+  /// isn't on it already, up to the most a list keeps. How many were added.
+  Future<int> copyPackingList(TripPlan from, TripPlan plan) async {
+    final have = {for (final item in plan.trip.packing.values) item.text.toLowerCase()};
+    var count = plan.trip.packing.length;
+    var added = 0;
+    for (final item in orderedPacking(from.trip.packing.values)) {
+      if (count >= maxChecklistItems || have.contains(item.text.toLowerCase())) continue;
+      // A moment apart, so they keep their order.
+      final copy = ChecklistItem(
+        id: repository.newId(),
+        text: item.text,
+        createdAt: DateTime.now().add(Duration(microseconds: added)),
+      );
+      await repository.saveChecklistItem(plan.id, copy, list: TripList.packing);
+      have.add(item.text.toLowerCase());
+      count++;
+      added++;
+    }
+    track('packing_list_copied', {'count': added});
+    return added;
+  }
+
+  static String _event(TripList list) => list == TripList.packing ? 'packing' : 'checklist';
 
   /// Checks for new art packs if it's been a while (e.g. back from the
   /// background). Never throws.
@@ -553,8 +602,11 @@ class TravelStore extends ChangeNotifier {
     }
   }
 
-  /// Uploads [bookingId]'s tickets that aren't backed up yet, if its trip
-  /// should be. Failures are left for the next sync.
+  /// Uploads [bookingId]'s tickets that aren't backed up with its trip yet,
+  /// if its trip should be. That includes a ticket still filed under the
+  /// trip the booking moved from, which the new trip's family can't read:
+  /// it's fetched if this phone hasn't got it, filed under the new trip and
+  /// the old copy removed. Failures are left for the next sync.
   Future<void> _backUp(String bookingId) async {
     final backup = this.backup;
     final store = attachments;
@@ -562,32 +614,44 @@ class TravelStore extends ChangeNotifier {
     if (backup == null || store == null || booking == null) return;
     final plan = this.plan(booking.tripId);
     if (plan == null || !shouldBackUp(plan)) return;
-    final pending = booking.attachments.where((a) => a.remotePath == null).toList();
+    bool filedHere(Attachment a) => a.remotePath?.startsWith('trips/${booking.tripId}/') ?? false;
+    final pending = booking.attachments.where((a) => !filedHere(a)).toList();
     if (pending.isEmpty || !_syncing.add(bookingId)) return;
     try {
       final uploaded = <String, String>{};
+      final refiled = <Attachment>[];
       for (final attachment in pending) {
-        final file = store.fileFor(attachment);
-        if (!await file.exists()) continue;
+        // On this phone, or fetched from where it was filed before.
+        final file = await ticketFile(attachment);
+        if (file == null) continue;
         try {
           uploaded[attachment.id] = await backup.upload(booking.tripId, attachment, file);
+          if (attachment.remotePath != null) refiled.add(attachment);
         } catch (error) {
           // Offline or not allowed yet: the next sync tries again.
           if (kDebugMode) debugPrint('Ticket backup failed (will retry): $error');
         }
       }
       if (uploaded.isEmpty) return;
-      // Re-read: the traveller may have edited the booking meanwhile.
+      // Re-read: the traveller may have edited the booking meanwhile. If it
+      // moved trips again, the next sync files it there.
       final latest = this.booking(bookingId);
-      if (latest == null) return;
+      if (latest == null || latest.tripId != booking.tripId) return;
       await repository.saveBooking(
         latest.copyWith(
           attachments: [
             for (final a in latest.attachments)
-              uploaded.containsKey(a.id) && a.remotePath == null ? a.withRemotePath(uploaded[a.id]!) : a,
+              uploaded.containsKey(a.id) && !filedHere(a) ? a.withRemotePath(uploaded[a.id]!) : a,
           ],
         ),
       );
+      for (final old in refiled) {
+        try {
+          await backup.delete(old);
+        } catch (_) {
+          // A stray copy under the old trip is harmless.
+        }
+      }
     } finally {
       _syncing.remove(bookingId);
     }
@@ -643,11 +707,17 @@ class TravelStore extends ChangeNotifier {
 
   /// Trips form automatically, so they should also go away on their own:
   /// once the last booking leaves a trip that has no planned dates, the
-  /// empty trip is removed.
+  /// empty trip is removed. One with a Holiday Pass ([keepWhenEmpty]) keeps
+  /// the dates it had instead, so the pass isn't lost and bookings on those
+  /// dates join it again.
   Future<void> _dropTripIfEmptied(String tripId, {required String removing}) async {
     final plan = this.plan(tripId);
     if (plan == null || plan.trip.plannedStart != null || !isOwner(plan)) return;
     if (plan.bookings.every((b) => b.id == removing)) {
+      if (plan.hasDates && keepWhenEmpty(plan)) {
+        await updateTrip(plan.trip.copyWith(plannedStart: plan.start, plannedEnd: plan.end));
+        return;
+      }
       await repository.deleteTrip(plan.trip, const []);
     }
   }

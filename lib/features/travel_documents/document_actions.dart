@@ -44,11 +44,13 @@ void openTravelDocuments(BuildContext context) =>
 
 /// Shown in place of a document's screen while the documents are locked
 /// (the app went to the background), until the traveller unlocks them.
+/// "Not now" always leaves, so nobody is stuck without the passcode.
 class DocumentsLockedView extends StatelessWidget {
   const DocumentsLockedView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(TravarySpace.xl),
@@ -70,6 +72,14 @@ class DocumentsLockedView extends StatelessWidget {
               icon: const Icon(Icons.lock_open_rounded),
               label: const Text('Unlock'),
             ),
+            if (navigator.canPop()) ...[
+              const SizedBox(height: TravarySpace.sm),
+              TextButton(
+                key: const ValueKey('documents-locked-leave'),
+                onPressed: () => navigator.maybePop(),
+                child: const Text('Not now'),
+              ),
+            ],
           ],
         ),
       ),

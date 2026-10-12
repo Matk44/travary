@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -7,15 +9,22 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/paper_form.dart';
+import '../../design/widgets/onboarding_folio.dart';
 import '../../domain/domain.dart';
+import '../../domain/onboarding.dart';
+import '../../logic/access.dart';
 import '../../logic/booking_form_text.dart';
+import '../../logic/day_plan.dart';
 import '../../logic/flight_fill.dart';
 import '../../logic/formatters.dart';
+import '../../logic/price_text.dart';
 import '../../logic/trip_assignment.dart';
 import '../../logic/trip_plan.dart';
 import '../../logic/trip_window.dart';
 import '../../state/analytics.dart';
+import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../premium/premium_gate.dart';
 import 'booking_actions.dart';
 import 'flight_finder.dart';
 
@@ -42,6 +51,7 @@ class EditBookingScreen extends StatefulWidget {
     this.tripId,
     this.sourceFilePath,
     this.sourceFileName,
+    this.onboardingHoliday,
   });
 
   final BookingKind kind;
@@ -61,6 +71,7 @@ class EditBookingScreen extends StatefulWidget {
   /// The file a draft was read from, attached as the booking's ticket.
   final String? sourceFilePath;
   final String? sourceFileName;
+  final OnboardingHoliday? onboardingHoliday;
 
   @override
   State<EditBookingScreen> createState() => _EditBookingScreenState();
@@ -145,17 +156,57 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     if (widget.sourceFilePath != null) _attachSource();
   }
 
+  /// The file Smart Import read becomes the ticket, while the holiday has
+  /// room for it (free holidays keep [Pricing.freeTicketFiles]); otherwise
+  /// the form offers to attach it ([_sourceWaiting]).
   Future<void> _attachSource() async {
-    final attachment = await _store.attachments?.import(widget.sourceFilePath!, name: widget.sourceFileName);
+    final policy = context.read<PremiumStore?>()?.policy;
+    if (policy != null && !policy.canAttachTickets(_targetPlan, kept: _ticketsKept)) {
+      // Called from initState: the first build shows it.
+      _sourceWaiting = true;
+      return;
+    }
+    final attachment = await _importSource();
     if (attachment == null) return;
     if (!mounted) {
       await _store.attachments?.delete(attachment);
       return;
     }
     setState(() {
+      _sourceWaiting = false;
       _attachments.add(attachment);
       _addedAttachments.add(attachment);
     });
+  }
+
+  /// The scanned file the holiday had no free room for, on request.
+  Future<void> _attachWaitingSource() async {
+    final room = await requireTicketRoom(context, _targetPlan, kept: _ticketsKept, source: 'attach_ticket');
+    if (!room || !mounted) return;
+    setState(() => _sourceWaiting = false);
+    await _attachSourceFile();
+  }
+
+  Future<void> _attachSourceFile() async {
+    final attachment = await _importSource();
+    if (attachment == null || !mounted) return;
+    setState(() {
+      _attachments.add(attachment);
+      _addedAttachments.add(attachment);
+    });
+  }
+
+  bool _sourceWaiting = false;
+
+  /// A copy of the file Smart Import read, or null if it's gone by now: the
+  /// booking still saves, just without it.
+  Future<Attachment?> _importSource() async {
+    try {
+      return await _store.attachments?.import(widget.sourceFilePath!, name: widget.sourceFileName);
+    } on FileSystemException {
+      if (mounted) _showMessage('The file couldn’t be kept. You can still add the booking.');
+      return null;
+    }
   }
 
   @override
@@ -184,7 +235,13 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     end: end ?? _endDate ?? _startDate,
     plans: store.plans,
     tripId: _tripId,
-    chosen: _tripChosen,
+    // An undated onboarding holiday is an explicit destination choice,
+    // not an automatic single-booking group to merge into an older trip.
+    chosen:
+        _tripChosen ||
+        (widget.onboardingHoliday != null &&
+            widget.tripId == _tripId &&
+            store.plan(_tripId)?.trip.plannedStart == null),
     editing: widget.existing?.id,
     datesChanged: _datesChanged,
     // Smart Import's dates come off the ticket, so a trip that formed on
@@ -236,7 +293,18 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     return picked == null ? null : ClockTime(picked.hour, picked.minute);
   }
 
+  /// The trip this booking is going into, as the form stands.
+  TripPlan? get _targetPlan {
+    final placed = _placement(_store).plan;
+    return placed == null ? null : _store.plan(placed.id) ?? placed;
+  }
+
+  /// Ticket files the trip would keep with this booking as the form stands.
+  int get _ticketsKept => ticketFilesIn(_targetPlan, except: widget.existing?.id, also: _attachments);
+
   Future<void> _addAttachment() async {
+    final room = await requireTicketRoom(context, _targetPlan, kept: _ticketsKept, source: 'attach_ticket');
+    if (!room || !mounted) return;
     final attachment = await pickAttachment(context);
     if (attachment == null || !mounted) return;
     setState(() {
@@ -339,7 +407,9 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     if (endDate == null && _endTime != null && _startTime != null && _endTime!.compareTo(_startTime!) < 0) {
       endDate = _startDate.addDays(1);
     }
-    if (endDate == _startDate) endDate = null;
+    // Same day: no end date, unless it lands earlier by the clock (east
+    // across the date line), which would otherwise read as next morning.
+    endDate = keptEndDate(_startDate, endDate, startTime: _startTime, endTime: _endTime);
 
     final store = _store;
     final placement = _placement(store, end: endDate ?? _startDate);
@@ -357,13 +427,19 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     // of its own, not back into the one it left.
     final newTrip = tripId.isEmpty && _tripId.isNotEmpty;
     setState(() => _saving = true);
-    final result = await store.saveBooking(
-      _booking(id: widget.existing?.id ?? store.repository.newId(), endDate: endDate, tripId: tripId),
-      previous: widget.existing,
-      newTrip: newTrip,
-    );
-    _saved = true;
-    if (mounted) Navigator.of(context).pop(result);
+    try {
+      final result = await store.saveBooking(
+        _booking(id: widget.existing?.id ?? store.repository.newId(), endDate: endDate, tripId: tripId),
+        previous: widget.existing,
+        newTrip: newTrip,
+      );
+      _saved = true;
+      if (mounted) Navigator.of(context).pop(result);
+    } catch (_) {
+      if (mounted) _showMessage('Couldn’t save the booking. Your details are still here. Please try again.');
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
   }
 
   /// Before a booking stretches a trip that formed from its bookings well
@@ -444,6 +520,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   }
 
   Widget _screen(BuildContext context, TravelStore store, TripPlan? plan) {
+    if (widget.onboardingHoliday != null) return _folioScreen(context, store, plan);
     final colors = TravaryChrome.of(context).colors;
     final text = bookingFormText(widget.kind, editing: _isEditing);
     final existing = widget.existing;
@@ -517,13 +594,49 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     );
   }
 
-  Widget _ticket(BuildContext context, TravelStore store, BookingFormText text, TripPlan? plan) {
+  Widget _folioScreen(BuildContext context, TravelStore store, TripPlan? plan) {
+    final checking = widget.draft != null || _fromSchedule;
+    final heading = OnboardingFolioHeading(
+      holiday: widget.onboardingHoliday!,
+      title: _finding
+          ? 'Find your'
+          : checking
+          ? 'Check your'
+          : 'Add your',
+      accent: _isFlight ? 'flight.' : 'booking.',
+      subtitle: _finding ? 'Flight number and the day it leaves.' : 'Check the details before adding it.',
+    );
+    return OnboardingFolio(
+      body: _finding
+          ? ListView(
+              padding: const EdgeInsets.all(TravarySpace.gutter),
+              children: [
+                heading,
+                FlightFinder(
+                  service: store.flightStatus!,
+                  number: _details[DetailKeys.flightNumber]!,
+                  date: _startDate,
+                  onPickDate: () async {
+                    final picked = await _pickDate(_startDate);
+                    if (picked != null) _changeStartDate(picked);
+                  },
+                  onUse: _useFlight,
+                  onManual: () => setState(() => _finding = false),
+                ),
+              ],
+            )
+          : _ticket(context, store, bookingFormText(widget.kind, editing: _isEditing), plan, heading: heading),
+    );
+  }
+
+  Widget _ticket(BuildContext context, TravelStore store, BookingFormText text, TripPlan? plan, {Widget? heading}) {
     final colors = TravaryChrome.of(context).colors;
     final span = bookingSpanLabel(widget.kind, _startDate, _endDate);
     final preview = _booking(id: widget.existing?.id ?? 'draft', tripId: plan?.id ?? '');
     return ListView(
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.xxl),
       children: [
+        if (heading != null) heading,
         if (widget.draft != null)
           const _Banner(
             text:
@@ -651,10 +764,23 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
                 ),
                 const PaperDivider(),
               ],
+              if (_sourceWaiting) ...[
+                PaperRow(
+                  key: const ValueKey('attach-scanned'),
+                  title: 'Keep ${widget.sourceFileName ?? 'the scanned file'} as the ticket',
+                  subtitle: attachTicketHint(0),
+                  titleStyle: TravaryText.label.copyWith(fontSize: 16),
+                  leading: const RowIcon(IconSlot.attach),
+                  onTap: _attachWaitingSource,
+                ),
+                const PaperDivider(),
+              ],
               PaperRow(
                 key: const ValueKey('attach-ticket'),
                 title: _attachments.isEmpty ? 'Attach your ticket' : 'Attach another',
-                subtitle: 'A photo or PDF, ready even offline',
+                subtitle: attachTicketHint(
+                  context.watch<PremiumStore?>()?.policy.ticketFilesLeft(_targetPlan, kept: _ticketsKept),
+                ),
                 titleStyle: TravaryText.label.copyWith(fontSize: 16),
                 leading: const RowIcon(IconSlot.attach),
                 onTap: _addAttachment,
@@ -663,7 +789,12 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
           ),
         ),
         const SizedBox(height: TravarySpace.xl),
-        TicketButton(key: const ValueKey('save-booking'), label: text.button, busy: _saving, onPressed: _save),
+        TicketButton(
+          key: const ValueKey('save-booking'),
+          label: widget.onboardingHoliday == null ? text.button : 'Add to my holiday',
+          busy: _saving,
+          onPressed: _save,
+        ),
       ],
     );
   }
@@ -691,7 +822,12 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     final end = TicketDateBox(
       key: const ValueKey('date-end'),
       label: _spec.endLabel!,
-      date: _endDate == null ? 'SAME DAY' : formatTicketDate(_endDate!),
+      // No date: the same day, or the next when it ends before it starts.
+      date: _endDate != null
+          ? formatTicketDate(_endDate!)
+          : _endTime != null && _startTime != null && _endTime!.compareTo(_startTime!) < 0
+          ? 'NEXT DAY'
+          : 'SAME DAY',
       time: _endTime == null ? null : formatClock(_endTime!),
       checkDate: _highlight.contains('endDate') && _endDate != null,
       checkTime: _highlight.contains('endTime') && _endTime != null,

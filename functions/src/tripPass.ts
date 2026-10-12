@@ -6,7 +6,9 @@
  *
  * A pass is bought for the trip's dates at the time. It grows with the same
  * holiday (the flight home added later), up to 30 days, until a week after
- * it ends; moving the trip to another time never takes the pass along.
+ * it ends; moving the trip to another time never takes the pass along,
+ * and a trip moved or stretched back before those dates isn't covered at
+ * all (a far-off pass would otherwise cover every trip until then).
  */
 
 export const TRIP_PASS_GRACE_DAYS = 7;
@@ -32,15 +34,18 @@ function fromDay(day: number): string {
 
 /**
  * The last day [pass] keeps Plus on its trip, which now runs [trip] (null
- * when it has no dates).
+ * when it has no dates), or null when the trip now covers other holidays
+ * while the pass is on: moved to before the dates bought for, or stretched
+ * back more than 30 days before them.
  */
-export function tripPassLastDay(pass: DateSpan, trip: DateSpan | null): string {
+export function tripPassLastDay(pass: DateSpan, trip: DateSpan | null): string | null {
   const passStart = toDay(pass.start);
   const passEnd = toDay(pass.end);
   const bought = fromDay(passEnd + TRIP_PASS_GRACE_DAYS);
   if (trip === null) return bought;
   const start = toDay(trip.start);
   const end = toDay(trip.end);
+  if (end < passStart || start < passStart - TRIP_PASS_MAX_DAYS) return null;
   if (end <= passEnd) return bought;
   const overlaps = start <= passEnd && end >= passStart;
   const sameHoliday = overlaps && end - start + 1 <= TRIP_PASS_MAX_DAYS;

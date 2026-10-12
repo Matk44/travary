@@ -38,7 +38,9 @@ class DayPlan {
   final List<DayEntry> entries;
 
   /// Multi-day bookings you're in the middle of (the hotel you're staying
-  /// at, the hire car you have). Shown as slim strips, not timeline entries.
+  /// at, the hire car you have): on the days in between, and on today once
+  /// its first day's check-in or pick-up has passed. Shown as their key card
+  /// or tag, not timeline entries.
   final List<Booking> ongoing;
 
   /// Index into [entries] of the card to feature: what's happening now,
@@ -47,6 +49,29 @@ class DayPlan {
 
   DayEntry? get highlight => highlightIndex == null ? null : entries[highlightIndex!];
   bool get isEmpty => entries.isEmpty && ongoing.isEmpty;
+}
+
+/// [booking] ending the next day when it has no end date and ends before
+/// it starts ("departs 22:40, lands 06:10"): the form's rule, for bookings
+/// saved without the form (several at once from Smart Import). An end date
+/// on its start day is kept as it is ([keptEndDate]).
+Booking withOvernightEnd(Booking booking) {
+  final start = booking.startTime;
+  final end = booking.endTime;
+  if (booking.endDate != null || start == null || end == null || end.compareTo(start) >= 0) return booking;
+  return booking.copyWith(endDate: booking.startDate.addDays(1));
+}
+
+/// The end date a booking keeps from a form, a found flight or Smart
+/// Import. None when it ends on its start day, as then an end time earlier
+/// than the start time means the next morning ([withOvernightEnd]). A
+/// same-day date is kept for just that case: a flight east across the date
+/// line lands on the day it left, earlier by the clock (Tokyo 17:00,
+/// Honolulu 06:00, both on the 12th).
+LocalDate? keptEndDate(LocalDate start, LocalDate? end, {ClockTime? startTime, ClockTime? endTime}) {
+  if (end != start) return end;
+  final earlier = startTime != null && endTime != null && endTime.compareTo(startTime) < 0;
+  return earlier ? end : null;
 }
 
 /// Lays out [bookings] for [date], judging done/now/upcoming against [now].
@@ -67,6 +92,13 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
     } else if (date == booking.startDate) {
       role = EntryRole.start;
       time = booking.startTime;
+      // Checked in, picked up: for the rest of today it's something you
+      // have, as on the days in between, not something finished. The hotel
+      // stays on Today the evening you arrive.
+      if (date == today && _statusOf(booking, role, date, time, today, now) == EntryStatus.done) {
+        ongoing.add(booking);
+        continue;
+      }
     } else if (date == booking.lastDate) {
       role = EntryRole.end;
       time = booking.endTime;

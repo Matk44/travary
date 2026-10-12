@@ -1,20 +1,18 @@
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
-import { logger } from 'firebase-functions';
 import { HttpsError, onCall } from 'firebase-functions/https';
 
+import { billingPeriod } from './flightAlertsLogic';
+import { aeroDataBox, FlightProviderError } from './flightProvider';
 import {
   cacheLifetimeMs,
   cleanAirport,
   cleanFlightDate,
   cleanFlightNumber,
   FlightStatusResult,
-  normaliseFlightLegs,
   pickLeg,
 } from './flightStatusLogic';
-import { aeroDataBoxKey } from './params';
-
-/** AeroDataBox through API.Market (where the key was issued). */
-const GATEWAY = 'https://prod.api.market/api/v1/aedbx/aerodatabox';
+import { recordFlightUnits } from './flightUsage';
+import { aeroDataBoxKey, flightBillingDay } from './params';
 
 /**
  * Lookups per traveller per day that miss the shared cache. Protects the
@@ -26,7 +24,8 @@ const DAILY_LIMIT = 40;
  * One flight number on one day: its schedule (filling in a new flight) and,
  * close to the day, its live status (gate, terminal, check-in desk, baggage
  * belt and delays). Returns the traveller's leg and every leg. Answers are cached in `flightStatus/{number_date}`
- * (server-only) and shared by everyone on that flight.
+ * (server-only) and shared by everyone on that flight; flight alerts keep
+ * the cache fresh for the flights they watch.
  */
 export const flightStatus = onCall(
   { secrets: [aeroDataBoxKey], timeoutSeconds: 30, maxInstances: 10 },
@@ -53,37 +52,21 @@ export const flightStatus = onCall(
     }
 
     await reserveDailyLookup(uid);
-    const legs = normaliseFlightLegs(await fetchFlight(number, date));
+    const provider = aeroDataBox(aeroDataBoxKey.value());
+    let legs: FlightStatusResult[];
+    try {
+      legs = await provider.flightLegs(number, date);
+    } catch (e) {
+      if (!(e instanceof FlightProviderError)) throw e;
+      if (e.reason === 'not-a-flight') throw new HttpsError('invalid-argument', 'That flight couldn\'t be found on that day.');
+      throw new HttpsError('unavailable', 'Live flight status isn\'t available right now. Try again soon.');
+    } finally {
+      await recordFlightUnits(db, billingPeriod(nowMs, flightBillingDay.value()), provider.unitsPerLookup, 'page');
+    }
     await ref.set({ legs, checkedAt: Timestamp.fromMillis(nowMs) });
     return { flight: pickLeg(legs, from), legs, checkedAt: new Date(nowMs).toISOString() };
   },
 );
-
-async function fetchFlight(number: string, date: string): Promise<unknown> {
-  // The date is the day it leaves (the ticket's date, the form's "Flying
-  // on"), not one it might land on.
-  const url = `${GATEWAY}/flights/number/${number}/${date}?withAircraftImage=false&withLocation=false&dateLocalRole=Departure`;
-  for (let attempt = 1; ; attempt++) {
-    const started = Date.now();
-    const response = await fetch(url, {
-      headers: { 'x-api-market-key': aeroDataBoxKey.value(), Accept: 'application/json' },
-    });
-    // Status and timing only: which flight someone takes stays out of the logs.
-    logger.info('flight_status', { http: response.status, ms: Date.now() - started, attempt });
-    if (response.status === 204 || response.status === 404) return [];
-    if (response.ok) return response.json();
-    // The free plan allows one request a second.
-    if (response.status === 429 && attempt < 3) {
-      await new Promise((resolve) => setTimeout(resolve, 1100 * attempt));
-      continue;
-    }
-    if (response.status === 400) {
-      throw new HttpsError('invalid-argument', 'That flight couldn\'t be found on that day.');
-    }
-    logger.error('flight_status_failed', { http: response.status, detail: (await response.text()).slice(0, 300) });
-    throw new HttpsError('unavailable', 'Live flight status isn\'t available right now. Try again soon.');
-  }
-}
 
 async function reserveDailyLookup(uid: string): Promise<void> {
   const db = getFirestore();

@@ -1,9 +1,23 @@
 import 'local_date.dart';
 
+/// A trip's two shared lists of [ChecklistItem]s: "Before you go" (things
+/// to sort out) and the packing list (things to take). Each is a map on
+/// the trip, changed an item at a time.
+enum TripList {
+  checklist('checklist'),
+  packing('packing');
+
+  const TripList(this.field);
+
+  /// Its map on the trip's document.
+  final String field;
+}
+
 /// Something to sort out for a trip that isn't a booking: "Apply for the
 /// visa", "Book the dog sitter". Shared with everyone on the trip, kept on
 /// the trip (`Trip.checklist`), and never on a day of it: it may well be
-/// due before the trip starts.
+/// due before the trip starts. Things to pack are items too
+/// (`Trip.packing`), ticked once they're in the case, without a date.
 class ChecklistItem {
   const ChecklistItem({required this.id, required this.text, this.done = false, this.due, required this.createdAt});
 

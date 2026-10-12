@@ -36,6 +36,15 @@ void main() {
     expect(fill.endTime, const ClockTime(6, 10));
   });
 
+  test('east across the date line it lands the day it left, earlier by the clock', () {
+    final fill = flightFill(
+      ba283(departs: '2026-11-08T17:00', lands: '2026-11-08T06:00'),
+      typedNumber: 'BA283',
+    )!;
+    expect(fill.endDate, d(11, 8), reason: 'kept, or it would read as the next morning');
+    expect(fill.endTime, const ClockTime(6, 0));
+  });
+
   test('"Is this your flight?" wording', () {
     final text = describeFoundFlight(ba283());
     expect(text.heading, 'BA 283 · British Airways');

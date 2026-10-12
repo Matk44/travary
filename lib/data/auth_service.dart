@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 import '../domain/domain.dart';
 
@@ -35,7 +38,7 @@ class SignInResult {
 }
 
 /// Accounts: everyone starts as a guest; signing in links the guest to
-/// Apple or Google so their trips follow them to any phone.
+/// Apple, Google or an email address so their trips follow them to any phone.
 abstract interface class AuthService {
   Account? get current;
 
@@ -44,9 +47,25 @@ abstract interface class AuthService {
 
   bool supports(SignInMethod method);
 
-  /// Links the guest to [method] (or switches to that account if it
+  /// Links the guest to Apple or Google (or switches to that account if it
   /// already exists, bringing the guest's trips). Throws [AuthFailure].
+  /// Email uses [sendSignInLink] and [signInWithLink] instead.
   Future<SignInResult> signIn(SignInMethod method);
+
+  /// Emails [email] a link that signs in on this phone, and remembers the
+  /// address for when the link comes back. Throws [AuthFailure].
+  Future<void> sendSignInLink(String email);
+
+  /// The address a link was last sent to, until it's used.
+  Future<String?> pendingEmail();
+
+  /// Whether [link] is one of those links.
+  bool isSignInLink(String link);
+
+  /// Signs in with a link sent to [email] (the pending address if omitted):
+  /// links the guest, or switches to that account if it already exists.
+  /// Throws [AuthFailure].
+  Future<SignInResult> signInWithLink(String link, {String? email});
 
   /// Signs out; Travary carries on as a new guest on this phone.
   Future<void> signOut();
@@ -57,14 +76,32 @@ abstract interface class AuthService {
 }
 
 /// Firebase Auth with Apple (Firebase's own provider flow: native on iOS,
-/// a web sheet on Android) and Google (google_sign_in).
+/// a web sheet on Android), Google (google_sign_in) and passwordless email
+/// links.
+///
+/// Email links open the app from the project's Firebase Hosting domain
+/// (`travary-444.firebaseapp.com`, or a custom one in
+/// `TRAVARY_EMAIL_LINK_DOMAIN`) once that domain is an Associated Domain on
+/// iOS and an App Link on Android. Until then email isn't offered: turn it
+/// on with `--dart-define=TRAVARY_EMAIL_LINKS=true` (docs/EMAIL_LINK_SIGN_IN.md).
 class FirebaseAuthService implements AuthService {
-  FirebaseAuthService({required this.ensureSignedIn, FirebaseFunctions? functions}) : _functions = functions {
+  FirebaseAuthService({
+    required this.ensureSignedIn,
+    FirebaseFunctions? functions,
+    this.emailLinks = const bool.fromEnvironment('TRAVARY_EMAIL_LINKS'),
+    this.emailLinkDomain = const String.fromEnvironment('TRAVARY_EMAIL_LINK_DOMAIN'),
+  }) : _functions = functions {
     unawaited(_start());
   }
 
   final Future<String> Function() ensureSignedIn;
   final FirebaseFunctions? _functions;
+
+  /// Email links are set up for this build.
+  final bool emailLinks;
+
+  /// A custom Hosting domain for the links; empty for the project's own.
+  final String emailLinkDomain;
   final _changes = StreamController<Account?>.broadcast();
   Account? _current;
   bool _googleReady = false;
@@ -96,12 +133,13 @@ class FirebaseAuthService implements AuthService {
 
   @override
   bool supports(SignInMethod method) => switch (defaultTargetPlatform) {
-    TargetPlatform.iOS || TargetPlatform.android => true,
+    TargetPlatform.iOS || TargetPlatform.android => method != SignInMethod.email || emailLinks,
     _ => false,
   };
 
   @override
   Future<SignInResult> signIn(SignInMethod method) async {
+    if (method == SignInMethod.email) throw const AuthFailure('Enter your email to get a sign-in link.');
     await ensureSignedIn();
     final user = _auth.currentUser!;
     final guestToken = user.isAnonymous ? await user.getIdToken() : null;
@@ -133,6 +171,70 @@ class FirebaseAuthService implements AuthService {
       throw AuthFailure('Google sign-in didn\'t work (${e.code.name}). Try again.');
     }
   }
+
+  /// The project's own Hosting domain, already authorised for sign-in.
+  static const _projectLinkDomain = 'travary-444.firebaseapp.com';
+
+  ActionCodeSettings get _linkSettings => ActionCodeSettings(
+    url: 'https://${emailLinkDomain.isEmpty ? _projectLinkDomain : emailLinkDomain}/sign-in',
+    handleCodeInApp: true,
+    iOSBundleId: 'com.travary.app',
+    androidPackageName: 'com.travary.app',
+    androidInstallApp: true,
+    // Only a custom domain is named; the project's own is the default.
+    linkDomain: emailLinkDomain.isEmpty ? null : emailLinkDomain,
+  );
+
+  @override
+  Future<void> sendSignInLink(String email) async {
+    if (!emailLinks) throw const AuthFailure('Email sign-in isn\'t available yet.');
+    await ensureSignedIn();
+    try {
+      await _auth.sendSignInLinkToEmail(email: email.trim(), actionCodeSettings: _linkSettings);
+    } on FirebaseAuthException catch (e) {
+      throw _failure(e, SignInMethod.email);
+    }
+    await _pendingEmail.write(email.trim());
+  }
+
+  @override
+  Future<String?> pendingEmail() => _pendingEmail.read();
+
+  @override
+  bool isSignInLink(String link) => emailLinks && _auth.isSignInWithEmailLink(link);
+
+  @override
+  Future<SignInResult> signInWithLink(String link, {String? email}) async {
+    final address = email ?? await _pendingEmail.read();
+    if (address == null) {
+      throw const AuthFailure('Open the link on the phone you asked for it on, or send a new one.');
+    }
+    await ensureSignedIn();
+    final user = _auth.currentUser!;
+    final guestToken = user.isAnonymous ? await user.getIdToken() : null;
+    try {
+      await user.linkWithCredential(EmailAuthProvider.credentialWithLink(email: address, emailLink: link));
+      await _pendingEmail.clear();
+      await _auth.currentUser?.reload();
+      return SignInResult(account: _refresh());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use' || e.code == 'credential-already-in-use') {
+        // That address is already Travary's (another phone): switch to it and
+        // bring this guest's trips, as for Apple and Google.
+        try {
+          await _auth.signInWithEmailLink(email: address, emailLink: link);
+        } on FirebaseAuthException catch (e) {
+          throw _failure(e, SignInMethod.email);
+        }
+        await _pendingEmail.clear();
+        final moved = guestToken == null ? 0 : await _adopt(guestToken);
+        return SignInResult(account: _refresh(), switched: true, movedTrips: moved);
+      }
+      throw _failure(e, SignInMethod.email);
+    }
+  }
+
+  final _pendingEmail = _PendingEmailFile();
 
   @override
   Future<void> signOut() async {
@@ -226,6 +328,9 @@ class FirebaseAuthService implements AuthService {
       'That email already has a Travary account with another sign-in. Use that one instead.',
     ),
     'network-request-failed' => const AuthFailure('You\'re offline. Connect and try again.'),
+    'invalid-email' => const AuthFailure('That email address doesn\'t look right. Check it and try again.'),
+    'invalid-action-code' ||
+    'expired-action-code' => const AuthFailure('That sign-in link has expired or was already used. Send a new one.'),
     'provider-already-linked' => const AuthFailure('You\'re already signed in with that.'),
     'requires-recent-login' => const AuthFailure('Please sign in again, then try once more.'),
     _ => AuthFailure('Sign-in didn\'t work (${e.code}). Try again.'),
@@ -242,5 +347,33 @@ class FirebaseAuthService implements AuthService {
       name: (user.displayName?.isNotEmpty ?? false) ? user.displayName : first((i) => i.displayName),
       email: (user.email?.isNotEmpty ?? false) ? user.email : first((i) => i.email),
     );
+  }
+}
+
+/// The address an email link was sent to, on this phone only, until the link
+/// comes back (possibly after the app was closed). Never sent anywhere.
+class _PendingEmailFile {
+  Future<File> _file() async =>
+      File(p.join((await getApplicationSupportDirectory()).path, 'auth', 'pending_email.txt'));
+
+  Future<String?> read() async {
+    try {
+      final text = (await (await _file()).readAsString()).trim();
+      return text.isEmpty ? null : text;
+    } on Object catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> write(String email) async {
+    final file = await _file();
+    await file.parent.create(recursive: true);
+    await file.writeAsString(email, flush: true);
+  }
+
+  Future<void> clear() async {
+    try {
+      await (await _file()).delete();
+    } on Object catch (_) {}
   }
 }

@@ -19,6 +19,7 @@ import 'package:travary/design/widgets/today_header.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/booking/booking_detail_screen.dart';
 import 'package:travary/features/today/today_screen.dart';
+import 'package:travary/features/trips/trip_details_sheet.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
@@ -513,6 +514,106 @@ void main() {
 
     final selectedTab = tester.widget<DecoratedBox>(find.byKey(const ValueKey('tab-fallback')).first);
     expect((selectedTab.decoration as BoxDecoration).color, const Color(0xFF2D6A4F));
+  });
+
+  testWidgets('a holiday with no dates yet stays on Today, a booking or its dates away', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final repository = MemoryTravelRepository(userId: 'me')
+      ..putTrip(
+        Trip(
+          id: 'bali',
+          title: 'Bali holiday',
+          ownerId: 'me',
+          memberIds: const ['me'],
+          createdAt: DateTime(2026, 10, 6),
+          updatedAt: DateTime(2026, 10, 6),
+        ),
+      );
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => TravelStore(
+              repository: repository,
+              artCatalog: const ArtCatalog.empty(),
+              clock: () => DateTime(2026, 10, 12, 9),
+            ),
+          ),
+          ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
+        ],
+        child: MaterialApp(
+          theme: buildTravaryTheme(),
+          home: const Scaffold(body: TodayScreen()),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Nothing coming up'), findsNothing);
+    expect(find.text('Bali holiday · dates to come'), findsOneWidget);
+    expect(find.text('Bali holiday'), findsOneWidget);
+    expect(find.text('Add a booking'), findsOneWidget);
+    await tester.tap(find.text('Set the dates'));
+    await tester.pumpAndSettle();
+    expect(find.byType(TripDetailsSheet), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a day browsed to is forgotten once the real day moves on', (tester) async {
+    tester.view.physicalSize = const Size(430, 932);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    Booking on(String title, int day) => Booking(
+      id: title,
+      tripId: 'trip',
+      kind: BookingKind.dining,
+      title: title,
+      startDate: LocalDate(2026, 10, day),
+      createdAt: DateTime(2026, 10, 1),
+      updatedAt: DateTime(2026, 10, 1),
+    );
+    final repository = MemoryTravelRepository(userId: 'me')
+      ..replaceAll(
+        [
+          Trip(
+            id: 'trip',
+            title: 'Test holiday',
+            plannedStart: const LocalDate(2026, 10, 12),
+            plannedEnd: const LocalDate(2026, 10, 16),
+            ownerId: 'me',
+            memberIds: const ['me'],
+            createdAt: DateTime(2026, 10, 1),
+            updatedAt: DateTime(2026, 10, 1),
+          ),
+        ],
+        [on('Monday booking', 12), on('Tuesday booking', 13), on('Wednesday booking', 14)],
+      );
+    final store = TravelStore(
+      repository: repository,
+      artCatalog: const ArtCatalog.empty(),
+      clock: () => DateTime(2026, 10, 12, 8),
+    );
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: store,
+        child: MaterialApp(
+          theme: buildTravaryTheme(),
+          home: const Scaffold(body: TodayScreen()),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.fling(find.byType(CustomScrollView), const Offset(-350, 0), 1000);
+    await tester.pumpAndSettle();
+    expect(find.text('Tuesday booking'), findsOneWidget);
+    // Left open overnight: by Wednesday morning, Today is Wednesday again.
+    store.previewNow = DateTime(2026, 10, 14, 8);
+    await tester.pumpAndSettle();
+    expect(find.text('Wednesday booking'), findsOneWidget);
+    expect(find.text('Tuesday booking'), findsNothing);
+    await tester.pumpWidget(const SizedBox());
+    store.dispose();
   });
 
   testWidgets('the demo trip, all kinds of card, at 320 points and large text: no overflow', (tester) async {

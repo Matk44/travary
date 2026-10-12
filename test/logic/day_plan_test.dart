@@ -83,6 +83,13 @@ void main() {
       expect(plan.entries.single.status, EntryStatus.now);
     });
 
+    test('a timed reminder stays up for an hour once it is due', () {
+      final medicine = booking('medicine', BookingKind.note, today, at: const ClockTime(8, 0));
+      expect(buildDayPlan(today, [medicine], at(8)).highlight?.status, EntryStatus.now);
+      expect(buildDayPlan(today, [medicine], at(8, 45)).highlight?.booking.id, 'medicine');
+      expect(buildDayPlan(today, [medicine], at(9)).entries.single.status, EntryStatus.done);
+    });
+
     test('all-day entries are never the highlight', () {
       final plan = buildDayPlan(today, [note], at(8));
       expect(plan.entries.single.status, EntryStatus.now);
@@ -106,11 +113,107 @@ void main() {
     });
   });
 
+  group('ending before it starts', () {
+    test('lands the next morning: a red-eye saved without the form', () {
+      final redEye = booking(
+        'f',
+        BookingKind.flight,
+        d(10, 12),
+        at: const ClockTime(22, 40),
+        until: const ClockTime(6, 10),
+      );
+      final fixed = withOvernightEnd(redEye);
+      expect(fixed.endDate, d(10, 13));
+      expect(buildDayPlan(d(10, 13), [fixed], DateTime(2026, 10, 13, 5)).entries.single.role, EntryRole.end);
+    });
+
+    test('east across the date line: landing on the day it left, earlier by the clock', () {
+      // Sydney 11:00 on the 12th, Los Angeles 06:00 on the 12th.
+      final transpacific = booking(
+        'f',
+        BookingKind.flight,
+        d(10, 12),
+        at: const ClockTime(11, 0),
+        endDate: d(10, 12),
+        until: const ClockTime(6, 0),
+      );
+      expect(withOvernightEnd(transpacific).endDate, d(10, 12));
+      expect(buildDayPlan(d(10, 12), [transpacific], DateTime(2026, 10, 12, 8)).entries.single.role, EntryRole.single);
+      expect(buildDayPlan(d(10, 13), [transpacific], DateTime(2026, 10, 12, 8)).entries, isEmpty);
+    });
+
+    test('the end date a form, found flight or import keeps', () {
+      const departs = ClockTime(11, 0);
+      expect(keptEndDate(d(10, 12), null, startTime: departs, endTime: const ClockTime(6, 0)), isNull);
+      expect(keptEndDate(d(10, 12), d(10, 12), startTime: departs, endTime: const ClockTime(14, 0)), isNull);
+      expect(keptEndDate(d(10, 12), d(10, 12)), isNull);
+      expect(keptEndDate(d(10, 12), d(10, 12), startTime: departs, endTime: const ClockTime(6, 0)), d(10, 12));
+      expect(keptEndDate(d(10, 12), d(10, 14), startTime: departs, endTime: const ClockTime(6, 0)), d(10, 14));
+    });
+
+    test('leaves everything else as it is', () {
+      final lunch = booking(
+        'l',
+        BookingKind.dining,
+        d(10, 12),
+        at: const ClockTime(12, 0),
+        until: const ClockTime(14, 0),
+      );
+      final stay = booking(
+        's',
+        BookingKind.stay,
+        d(10, 12),
+        at: const ClockTime(15, 0),
+        endDate: d(10, 14),
+        until: const ClockTime(11, 0),
+      );
+      final untimed = booking('u', BookingKind.activity, d(10, 12), until: const ClockTime(9, 0));
+      for (final b in [lunch, stay, untimed]) {
+        expect(withOvernightEnd(b).endDate, b.endDate, reason: b.id);
+      }
+    });
+  });
+
   group('multi-day bookings', () {
     test('check-in on the first day', () {
       final entry = buildDayPlan(d(10, 12), [hotel], at(8)).entries.single;
       expect(entry.role, EntryRole.start);
       expect(entry.time, const ClockTime(16, 0));
+    });
+
+    test('on its first day, the hotel is checked in, not finished, from check-in on', () {
+      final arrival = d(10, 12);
+      DateTime on(int hour) => arrival.toDateTime(ClockTime(hour, 0));
+      final before = buildDayPlan(arrival, [hotel], on(14));
+      expect(before.entries.single.status, EntryStatus.upcoming);
+      expect(before.ongoing, isEmpty);
+      for (final hour in [16, 21, 23]) {
+        final after = buildDayPlan(arrival, [hotel], on(hour));
+        expect(after.entries, isEmpty, reason: '$hour:00');
+        expect(after.ongoing.single.id, 'hotel', reason: '$hour:00');
+      }
+    });
+
+    test('a hire car is the pick-up for its first hour, then a car you have', () {
+      final car = booking(
+        'car',
+        BookingKind.transport,
+        today,
+        at: const ClockTime(10, 0),
+        endDate: d(10, 18),
+        until: const ClockTime(9, 0),
+      );
+      final pickingUp = buildDayPlan(today, [car], at(10, 30));
+      expect(pickingUp.entries.single.status, EntryStatus.now);
+      expect(pickingUp.highlight?.booking.id, 'car');
+      final driving = buildDayPlan(today, [car, dinner], at(14));
+      expect(driving.ongoing.single.id, 'car');
+      expect(driving.highlight?.booking.id, 'dinner');
+    });
+
+    test('looking back at a first day, check-in is an entry like any other', () {
+      final entry = buildDayPlan(d(10, 12), [hotel], at(8)).entries.single;
+      expect((entry.role, entry.status), (EntryRole.start, EntryStatus.done));
     });
 
     test('ongoing strip on the days in between', () {

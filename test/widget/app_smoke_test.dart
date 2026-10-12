@@ -153,20 +153,20 @@ void main() {
       await tester.tap(find.text('Just Orlando'));
       await tester.pumpAndSettle();
 
-      // 8-day trip: $7.99 / 8 = $1.00 a day.
-      expect(find.textContaining(r'$1.00 a day'), findsOneWidget);
-      expect(find.text(r'Get Trip Pass · $7.99'), findsOneWidget);
+      // 8-day trip: $14.99 / 8 = $1.87 a day.
+      expect(find.textContaining(r'$1.87 a day'), findsOneWidget);
+      expect(find.text(r'Get Trip Pass · $14.99'), findsOneWidget);
       // It says which dates it covers: the trip's now, which later edits
       // never move.
       expect(
         find.text(
           'One payment, no subscription. Unlocks Plus on Orlando (12–19 Oct) for everyone on the trip, '
-          'until 26 Oct 2026.',
+          'until 26 Oct 2026. Only one of you needs to buy it.',
         ),
         findsOneWidget,
       );
 
-      await tester.tap(find.text(r'Get Trip Pass · $7.99'));
+      await tester.tap(find.text(r'Get Trip Pass · $14.99'));
       await tester.pumpAndSettle();
       final premium = Provider.of<PremiumStore>(tester.element(find.byType(HomeShell)), listen: false);
       final pass = premium.entitlements.tripPasses.values.single;

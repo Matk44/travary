@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FlutterDeepLinkingEnabled</key>
+	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Attach photos and screenshots of your tickets so they're ready offline.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+	<false/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Travary uses Face ID to keep your passports and travel documents private.</string>
 	<key>CFBundleURLTypes</key>
@@ -19,7 +23,19 @@
 				<string>com.googleusercontent.apps.315160115482-liqv57p5mjrp94cfstl0ldbcgmvq44hp</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- The share extension opens the app on a shared file (receive_sharing_intent). -->
+				<string>ShareMedia-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			</array>
+		</dict>
 	</array>
+	<!-- Where the share extension leaves shared files. -->
+	<key>AppGroupId</key>
+	<string>$(CUSTOM_GROUP_ID)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Itinerary App - Travary</string>
 	<key>CFBundleExecutable</key>

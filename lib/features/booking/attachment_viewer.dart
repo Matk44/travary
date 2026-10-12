@@ -75,7 +75,11 @@ class _AttachmentViewerState extends State<AttachmentViewer> {
                         child: Padding(
                           padding: const EdgeInsets.all(TravarySpace.xl),
                           child: Text(
-                            'This ticket isn\'t on this phone yet. It will download when you\'re online.',
+                            // Only a backed-up ticket can come down later.
+                            attachment.remotePath == null
+                                ? 'This ticket was added on another phone and isn\'t backed up, so it isn\'t here. '
+                                      'Add it again from your confirmation email or the booking site.'
+                                : 'This ticket isn\'t on this phone yet. It will download when you\'re online.',
                             style: TravaryText.bodySoft,
                             textAlign: TextAlign.center,
                           ),

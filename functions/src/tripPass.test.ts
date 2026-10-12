@@ -9,7 +9,7 @@ interface Case {
   why: string;
   pass: [string, string];
   trip: [string, string] | null;
-  lastDay: string;
+  lastDay: string | null;
 }
 
 const { cases } = JSON.parse(readFileSync(join(__dirname, '..', 'src', 'tripPassCases.json'), 'utf8')) as {

@@ -12,7 +12,17 @@ import 'analytics.dart';
 /// [decide] before using a premium feature; the rules live in
 /// [AccessPolicy].
 class PremiumStore extends ChangeNotifier {
-  PremiumStore({required this.purchases, DateTime Function()? clock}) : _clock = clock ?? DateTime.now {
+  /// [ownsPurchases]: [purchases] was made for this account alone, so it's
+  /// disposed with the store.
+  PremiumStore({
+    required this.purchases,
+    DateTime Function()? clock,
+    Future<List<Offer>> Function()? offerLoader,
+    bool ownsPurchases = false,
+  }) : _clock = clock ?? DateTime.now,
+       _offerLoader = offerLoader,
+       _ownsPurchases = ownsPurchases,
+       _offers = offerLoader == null ? Pricing.defaults : const [] {
     _subscription = purchases.watchEntitlements().listen((entitlements) {
       _entitlements = entitlements;
       notifyListeners();
@@ -22,17 +32,26 @@ class PremiumStore extends ChangeNotifier {
 
   final PurchaseService purchases;
   final DateTime Function() _clock;
+  final Future<List<Offer>> Function()? _offerLoader;
+  final bool _ownsPurchases;
   late final StreamSubscription<Entitlements> _subscription;
 
   Entitlements _entitlements = Entitlements.none;
-  List<Offer> _offers = Pricing.defaults;
+  List<Offer> _offers;
   bool _busy = false;
+  bool _disposed = false;
+  int _offerRequest = 0;
+  bool _offersLoading = true;
+  String? _offersError;
 
   Entitlements get entitlements => _entitlements;
   AccessPolicy get policy => AccessPolicy(_entitlements, _clock());
   bool get hasPlus => policy.hasPlus;
   bool get busy => _busy;
   bool get isTestStore => purchases is TestPurchaseService;
+  bool get offersLoading => _offersLoading;
+  String? get offersError => _offersError;
+  Future<void> refreshOffers() => _loadOffers();
 
   Offer? offer(OfferKind kind) {
     for (final offer in _offers) {
@@ -85,11 +104,23 @@ class PremiumStore extends ChangeNotifier {
   }
 
   Future<void> _loadOffers() async {
+    final request = ++_offerRequest;
+    _offersLoading = true;
+    _offersError = null;
     try {
-      _offers = await purchases.loadOffers();
-      notifyListeners();
+      final offers = await (_offerLoader?.call() ?? purchases.loadOffers());
+      if (_disposed || request != _offerRequest) return;
+      _offers = offers;
     } catch (_) {
-      // Keep the defaults; the paywall still works with them.
+      if (_disposed || request != _offerRequest) return;
+      // A configured remote catalog never invents a USD price after failure.
+      if (_offerLoader != null) _offers = const [];
+      _offersError = 'Couldn’t load passes. Try again or continue with free.';
+    } finally {
+      if (!_disposed && request == _offerRequest) {
+        _offersLoading = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -100,7 +131,9 @@ class PremiumStore extends ChangeNotifier {
 
   @override
   void dispose() {
+    _disposed = true;
     _subscription.cancel();
+    if (_ownsPurchases) unawaited(purchases.dispose());
     super.dispose();
   }
 }

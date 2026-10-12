@@ -57,3 +57,17 @@ legacy_v0_*.zip
 # Scratch output from image generation and measuring (not project files)
 /tmp/
 /output/
+
+# Local build settings (RevenueCat public SDK keys): --dart-define-from-file
+/config/*.local.json
+
+# Onboarding films: keyed frames are rebuilt from source/ by process.py
+docs/mockups/onboarding-films-v2/keyed/
+docs/mockups/travi-cameos-v1/keyed/
+
+# Website build output and image cache (rebuilt by website/build.py)
+/website/public/
+/website/.cache/
+
+# Local Cloudflare state (wrangler pages dev, local D1)
+/website/.wrangler/

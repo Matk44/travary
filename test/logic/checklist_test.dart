@@ -29,6 +29,12 @@ void main() {
     ]);
   });
 
+  test('the empty list\'s hint: before you go, then while you\'re away', () {
+    final japan = TripPlan(trip('japan', plannedStart: d(10, 11), plannedEnd: d(10, 23)), const []);
+    expect(checklistHintFor(japan, d(10, 5)), contains('before you go'));
+    expect(checklistHintFor(japan, d(10, 12)), contains('while you\'re away'));
+  });
+
   group('a row says when it\'s due', () {
     String? due(ChecklistItem i) => checklistItemText(i, today).due;
 
