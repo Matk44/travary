@@ -21,11 +21,16 @@ void main() {
   });
 
   test('how long it lasts, between its dates', () {
-    expect(bookingSpanLabel(BookingKind.stay, d(10, 12), d(10, 14)), '2 nights');
-    expect(bookingSpanLabel(BookingKind.stay, d(10, 12), d(10, 13)), '1 night');
-    expect(bookingSpanLabel(BookingKind.transport, d(10, 12), d(10, 14)), '3 days');
-    expect(bookingSpanLabel(BookingKind.stay, d(10, 12), null), isNull);
-    expect(bookingSpanLabel(BookingKind.stay, d(10, 12), d(10, 12)), isNull);
+    String? span(BookingKind kind, LocalDate end, {String title = 'Booking'}) =>
+        bookingSpanLabel(booking('b', kind, d(10, 12), title: title, endDate: end));
+    expect(span(BookingKind.stay, d(10, 14)), '2 nights');
+    expect(span(BookingKind.stay, d(10, 13)), '1 night');
+    expect(span(BookingKind.transport, d(10, 14), title: 'Car hire'), '3 days');
+    expect(span(BookingKind.transport, d(10, 13), title: 'Tokyo to Sapporo'), 'Overnight');
+    expect(span(BookingKind.transport, d(10, 14), title: 'Night train'), '2 nights');
+    expect(span(BookingKind.flight, d(10, 13), title: 'London to Tokyo'), 'Overnight');
+    expect(span(BookingKind.stay, d(10, 12)), isNull);
+    expect(bookingSpanLabel(booking('b', BookingKind.stay, d(10, 12))), isNull);
   });
 
   test('the trip it goes into', () {

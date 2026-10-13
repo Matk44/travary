@@ -636,8 +636,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
 
   Widget _ticket(BuildContext context, TravelStore store, BookingFormText text, TripPlan? plan, {Widget? heading}) {
     final colors = TravaryChrome.of(context).colors;
-    final span = bookingSpanLabel(widget.kind, _startDate, _endDate);
     final preview = _booking(id: widget.existing?.id ?? 'draft', tripId: plan?.id ?? '');
+    final span = bookingSpanLabel(preview);
     return ListView(
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.xxl),
       children: [

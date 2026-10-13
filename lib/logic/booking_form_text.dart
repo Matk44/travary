@@ -1,5 +1,6 @@
 import '../domain/domain.dart';
 import 'formatters.dart';
+import 'transport.dart';
 import 'trip_plan.dart';
 
 /// The add or edit form's own wording for a kind of booking: its title,
@@ -43,13 +44,16 @@ String onboardingFormSubtitle({required bool finding, required bool checking}) {
   return checking ? 'Check the details before adding it.' : 'A name and a day are all it needs.';
 }
 
-/// What a booking spanning [start] to [end] lasts, between its two dates
-/// on the form: "2 nights" for a stay, "3 days" for anything else. Null on
-/// a single day.
-String? bookingSpanLabel(BookingKind kind, LocalDate start, LocalDate? end) {
-  if (end == null || !end.isAfter(start)) return null;
-  final days = start.daysUntil(end);
-  if (kind == BookingKind.stay) return formatNights(days);
+/// What [booking] lasts, between its two dates on the form: "2 nights" for
+/// a stay, "Overnight" for a flight or journey into the next day (a
+/// sleeper train isn't a two-day booking), "3 days" for anything else.
+/// Null on a single day.
+String? bookingSpanLabel(Booking booking) {
+  final end = booking.endDate;
+  if (end == null || !end.isAfter(booking.startDate)) return null;
+  final days = booking.startDate.daysUntil(end);
+  if (booking.kind == BookingKind.stay) return formatNights(days);
+  if (booking.kind == BookingKind.flight || isJourney(booking)) return days == 1 ? 'Overnight' : formatNights(days);
   return '${days + 1} days';
 }
 

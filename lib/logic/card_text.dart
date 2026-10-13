@@ -254,14 +254,15 @@ CardText ongoingCardText(Booking booking, LocalDate date) {
 /// The names of [booking]'s two ends, for one that spans days: its kind's
 /// ("Check-in" / "Check-out", "Pick-up" / "Drop-off" for a hire car), or
 /// for a journey "Departs" / "Arrives" (a sleeper train isn't picked up)
-/// and for a pass "Pass starts" / "Pass ends".
+/// and for a pass "Starts" / "Ends" (its name says it's a pass, and a key
+/// tag has room for little more: "ENDS IN 6 DAYS").
 ({String start, String end}) bookingEvents(Booking booking) {
   if (booking.kind == BookingKind.transport) {
     switch (transportSortOf(booking)) {
       case TransportSort.journey:
         return (start: 'Departs', end: 'Arrives');
       case TransportSort.pass:
-        return (start: 'Pass starts', end: 'Pass ends');
+        return (start: 'Starts', end: 'Ends');
       case TransportSort.hire:
         break;
     }

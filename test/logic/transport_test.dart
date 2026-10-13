@@ -42,9 +42,9 @@ void main() {
   test('each reads its own way at its two ends', () {
     expect(bookingEvents(car), (start: 'Pick-up', end: 'Drop-off'));
     expect(bookingEvents(sleeper), (start: 'Departs', end: 'Arrives'));
-    expect(bookingEvents(pass), (start: 'Pass starts', end: 'Pass ends'));
-    expect(ongoingText(pass, d(11, 5)).subtitle, 'Pass ends in 5 days');
-    expect(ongoingCardText(pass, d(11, 5)).footnote, 'PASS ENDS IN 5 DAYS');
+    expect(bookingEvents(pass), (start: 'Starts', end: 'Ends'));
+    expect(ongoingText(pass, d(11, 5)).subtitle, 'Ends in 5 days');
+    expect(ongoingCardText(pass, d(11, 5)).footnote, 'ENDS IN 5 DAYS');
   });
 
   test('a sleeper train that has left is finished, not held like a hire car or a pass', () {

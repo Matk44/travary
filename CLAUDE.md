@@ -263,8 +263,9 @@ days; days in between show an `OngoingStrip`. A stay or hire car you've
 checked in to stays on Today the evening you arrive; a flight or journey
 that has left (a sleeper train) is finished, not a key tag (`buildDayPlan`).
 Transport is a hire car, a journey or a pass (`transportSortOf`), each
-with its own ends: "Pick-up"/"Drop-off", "Departs"/"Arrives", "Pass
-starts"/"Pass ends" (`bookingEvents`). Times follow the phone's 12 or
+with its own ends: "Pick-up"/"Drop-off", "Departs"/"Arrives",
+"Starts"/"Ends" (`bookingEvents`); a key tag drops the company before it
+cuts the countdown short. Times follow the phone's 12 or
 24-hour setting (`ClockStyle`, set at the app's root from
 `MediaQuery.alwaysUse24HourFormatOf`); dates are day-first and Monday-first
 everywhere, the date pickers included (`showTravaryDatePicker`).
