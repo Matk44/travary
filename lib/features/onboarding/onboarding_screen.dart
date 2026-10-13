@@ -21,6 +21,7 @@ import '../../logic/day_plan.dart';
 import '../../logic/onboarding_art.dart';
 import '../../logic/onboarding_films.dart';
 import '../../logic/onboarding_journey.dart';
+import '../../logic/onboarding_rules.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/analytics.dart';
 import '../../state/app_session.dart';
@@ -69,6 +70,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   String? _error;
   _Offer? _offer;
   bool _email = false;
+
+  /// The desk came straight after the booking: no sign-in was offered.
+  bool _signInSkipped = false;
 
   // Travi's side of the story.
   TraviPose? _resting;
@@ -355,6 +359,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         SignInMethod.values.any(session.supports);
     setState(() {
       _offer = ask ? _Offer.account : _Offer.desk;
+      _signInSkipped = !ask;
       _email = false;
       _misread = null;
       _fresh = false;
@@ -383,6 +388,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       _offer = null;
       _email = false;
     });
+  }
+
+  /// Whether the phone's Back button has a step to go to here: the dates
+  /// and booking steps, before a booking is saved.
+  bool _stepsBack(OnboardingDraft draft, Booking? saved) =>
+      _offer == null && saved == null && stepBackFrom(draft.step) != null;
+
+  /// One step toward the start. A booking that couldn't be read goes back
+  /// to asking for one.
+  Future<void> _stepBack() async {
+    if (_busy || _reading) return;
+    if (_misread != null) return setState(() => _misread = null);
+    await _run(() async => await _setup.stepBack(_travel));
   }
 
   Future<void> _completeHoliday() async {
@@ -439,17 +457,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
     final arrival = beat == OnboardingBeat.arrival;
     final tagBeats = const {OnboardingBeat.booking, OnboardingBeat.reading, OnboardingBeat.misread};
+    final stepsBack = _stepsBack(draft, saved);
     return PopScope(
-      canPop: _offer == null,
+      canPop: _offer == null && !stepsBack,
       onPopInvokedWithResult: (popped, _) {
-        if (!popped && (_offer == _Offer.account || _offer == _Offer.desk)) _back();
+        if (popped) return;
+        if (_offer == _Offer.account || _offer == _Offer.desk) {
+          _back();
+        } else if (stepsBack) {
+          _stepBack();
+        }
       },
       child: OnboardingStageLayout(
         scene: OnboardingScene(
           stage: arrival ? onboardingWorkshopStage : onboardingStage(destination),
           cues: _folioUp
-              ? const [(pose: TraviPose.folioFull, hold: Duration.zero)]
-              : traviCuesFor(beat, bought: _bought, fresh: _fresh),
+              ? const [(pose: TraviPose.folioFull, hold: Duration.zero, direct: false)]
+              : traviCuesFor(beat, bought: _bought, fresh: _fresh, signInSkipped: _signInSkipped),
           start: _rollIn ? TraviPose.empty : null,
           // He holds still under sheets and screens.
           active: ModalRoute.isCurrentOf(context) ?? true,
@@ -585,7 +609,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ?error,
             TicketButton(
               key: const ValueKey('onboarding-import'),
-              label: 'Add a screenshot or PDF',
+              label: 'Smart Import',
               icon: Icons.file_present_outlined,
               busy: _busy,
               onPressed: _import,
@@ -654,7 +678,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             TicketButton(
               key: const ValueKey('onboarding-see-passes'),
-              label: covered ? 'Continue' : 'Let’s sort the rest',
+              // Says where it goes: the passes (after the optional sign-in).
+              label: covered ? 'Continue' : 'See how I can help',
               busy: _busy,
               onPressed: _sortTheRest,
             ),
@@ -821,16 +846,35 @@ class _BookingKinds extends StatefulWidget {
 class _BookingKindsState extends State<_BookingKinds> {
   bool _opening = false;
 
+  /// "Something else": the rest of the kinds, in the same list.
+  bool _more = false;
+
+  static const _first = [
+    (BookingKind.flight, Icons.flight_takeoff_outlined, 'Find it by number and date'),
+    (BookingKind.stay, Icons.bed_outlined, 'Give your check-in a home'),
+    (BookingKind.activity, Icons.confirmation_number_outlined, 'Something to look forward to'),
+  ];
+
+  static const _rest = [
+    (BookingKind.attraction, Icons.attractions_outlined, 'Park, museum or sight tickets'),
+    (BookingKind.dining, Icons.restaurant_outlined, 'A table you’ve booked'),
+    (BookingKind.transport, Icons.directions_transit_outlined, 'A transfer, train or hire car'),
+    (BookingKind.event, Icons.theater_comedy_outlined, 'A show, match or concert'),
+    (BookingKind.note, Icons.sticky_note_2_outlined, 'Anything to remember'),
+  ];
+
   Future<void> _choose(BookingKind kind) async {
     if (_opening) return;
     setState(() => _opening = true);
     final reduced = MediaQuery.disableAnimationsOf(context);
+    final dates = firstBookingDates(kind, start: widget.initialDate, end: widget.holiday.end);
     final result = await Navigator.of(context).push<SaveResult>(
       PageRouteBuilder(
         pageBuilder: (_, _, _) => EditBookingScreen(
           kind: kind,
           tripId: widget.tripId,
-          initialDate: widget.initialDate,
+          initialDate: dates.start,
+          initialEndDate: dates.end,
           onboardingHoliday: widget.holiday,
         ),
         transitionDuration: reduced ? Duration.zero : const Duration(milliseconds: 200),
@@ -852,11 +896,7 @@ class _BookingKindsState extends State<_BookingKinds> {
           accent: 'booking.',
           subtitle: 'Flight, stay or something fun?',
         ),
-        for (final (kind, icon, subtitle) in [
-          (BookingKind.flight, Icons.flight_takeoff_outlined, 'Find it by number and date'),
-          (BookingKind.stay, Icons.bed_outlined, 'Give your check-in a home'),
-          (BookingKind.activity, Icons.confirmation_number_outlined, 'Something to look forward to'),
-        ]) ...[
+        for (final (kind, icon, subtitle) in [..._first, if (_more) ..._rest]) ...[
           ListTile(
             key: ValueKey('onboarding-kind-${kind.name}'),
             contentPadding: EdgeInsets.zero,
@@ -868,6 +908,16 @@ class _BookingKindsState extends State<_BookingKinds> {
           ),
           const Divider(),
         ],
+        if (!_more)
+          ListTile(
+            key: const ValueKey('onboarding-kind-more'),
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.more_horiz),
+            title: Text('Something else', style: TravaryText.title),
+            subtitle: const Text('Tickets, a table, transport, a show or a note'),
+            trailing: const Icon(Icons.expand_more),
+            onTap: _opening ? null : () => setState(() => _more = true),
+          ),
       ],
     ),
   );

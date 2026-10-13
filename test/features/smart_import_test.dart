@@ -201,7 +201,7 @@ void main() {
       expect(find.byType(EditBookingScreen), findsOneWidget);
       final title = tester.widget<TextField>(find.byType(TextField).first);
       expect(title.controller!.text, 'Lagoon Grill');
-      expect(premium.policy.freeSmartImportsLeft, 2);
+      expect(premium.policy.freeSmartImportsLeft, 1);
     });
 
     testWidgets('several bookings can be added together', (tester) async {
@@ -303,7 +303,7 @@ void main() {
 
       expect(find.text('No booking found'), findsOneWidget);
       expect(traviCameo(TraviMoment.oops), findsOneWidget);
-      expect(premium.policy.freeSmartImportsLeft, 3);
+      expect(premium.policy.freeSmartImportsLeft, 2);
     });
   });
 }

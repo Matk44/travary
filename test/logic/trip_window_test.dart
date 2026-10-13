@@ -243,4 +243,49 @@ void main() {
     expect(overlappingTrip(d(10, 15), d(10, 20), plans, except: 'japan'), isNull);
     expect(overlapText(japan()), 'These dates overlap Japan holiday (11–23 Oct).');
   });
+
+  group('a flight home on the form', () {
+    test('finds the trip it ends, as saving it will', () {
+      final home = booking('home', BookingKind.flight, d(10, 24), tripId: '', title: 'Osaka to London');
+      final trips = [
+        TripPlan(trip('tokyo', title: 'Tokyo'), [
+          booking('out', BookingKind.flight, d(10, 11), tripId: 'tokyo', title: 'London to Tokyo'),
+          booking('hotel', BookingKind.stay, d(10, 11), tripId: 'tokyo', endDate: d(10, 15)),
+        ]),
+      ];
+      expect(placeBooking(start: home.startDate, end: home.lastDate, plans: trips).plan, isNull);
+      expect(placeBooking(start: home.startDate, end: home.lastDate, plans: trips, booking: home).plan?.id, 'tokyo');
+    });
+  });
+
+  group('one file\'s bookings', () {
+    Booking item(String id, LocalDate date, {String tripId = '', String title = 'Booking', LocalDate? until}) =>
+        booking(id, BookingKind.activity, date, tripId: tripId, title: title, endDate: until);
+
+    test('a new trip for bookings near no trip, shared within a few weeks', () {
+      final places = placeImport([item('a', d(11, 1)), item('b', d(11, 20)), item('c', d(12, 31))], const []);
+      expect(places.map((p) => p.key), ['new:0', 'new:0', 'new:1']);
+    });
+
+    test('the trip they belong to; then the rest of the file follows it', () {
+      final places = placeImport([item('a', d(10, 14)), item('b', d(10, 26))], [tokyo()]);
+      expect(places.map((p) => p.key), ['tokyo', 'tokyo']);
+    });
+
+    test('but never outside a trip\'s planned dates', () {
+      final places = placeImport([item('a', d(10, 20)), item('b', d(11, 5))], [japan()]);
+      expect(places.map((p) => p.key), ['japan', 'new:0']);
+    });
+
+    test('a booking with a trip keeps it; a flight home finds the trip it ends', () {
+      final home = booking('home', BookingKind.flight, d(10, 24), tripId: '', title: 'Osaka to London');
+      final trips = [
+        TripPlan(trip('tokyo', title: 'Tokyo'), [
+          booking('out', BookingKind.flight, d(10, 11), tripId: 'tokyo', title: 'London to Tokyo'),
+        ]),
+        TripPlan(trip('winter', title: 'Winter', plannedStart: d(12, 1), plannedEnd: d(12, 5)), const []),
+      ];
+      expect(placeImport([item('x', d(12, 1), tripId: 'winter'), home], trips).map((p) => p.key), ['winter', 'tokyo']);
+    });
+  });
 }

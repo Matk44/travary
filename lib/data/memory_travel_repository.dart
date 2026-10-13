@@ -63,6 +63,7 @@ class MemoryTravelRepository implements TravelRepository {
       plannedStart: trip.plannedStart,
       plannedEnd: trip.plannedEnd,
       destination: trip.destination,
+      autoName: trip.autoName,
       ownerId: existing.ownerId,
       memberIds: existing.memberIds,
       memberNames: existing.memberNames,
@@ -72,6 +73,19 @@ class MemoryTravelRepository implements TravelRepository {
       packing: existing.packing,
       createdAt: existing.createdAt,
       updatedAt: trip.updatedAt,
+    );
+    _tripsController.add(trips);
+  }
+
+  @override
+  Future<void> renameTrip(String tripId, {required String title, TripDestination? destination}) async {
+    final trip = _trips[tripId];
+    if (trip == null) return;
+    _trips[tripId] = trip.copyWith(
+      title: title,
+      destination: destination,
+      clearDestination: destination == null,
+      updatedAt: DateTime.now(),
     );
     _tripsController.add(trips);
   }

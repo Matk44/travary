@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../design/cards/travel_document_card.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/date_picker.dart';
 import '../../domain/domain.dart';
 import '../../logic/destinations.dart';
 import '../../logic/formatters.dart';
@@ -84,8 +85,8 @@ class _EditTravelDocumentScreenState extends State<EditTravelDocumentScreen> {
 
   Future<void> _pickExpiry() async {
     final today = context.read<TravelStore>().today;
-    final picked = await showDatePicker(
-      context: context,
+    final picked = await showTravaryDatePicker(
+      context,
       initialDate: (_expires ?? addMonths(today, 12)).toDateTime(),
       firstDate: DateTime(1990),
       lastDate: DateTime(2100),

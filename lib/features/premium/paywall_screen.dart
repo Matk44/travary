@@ -1,32 +1,29 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/purchase_service.dart';
-import '../../design/tokens.dart';
+import '../../design/widgets/onboarding_scene.dart';
 import '../../domain/domain.dart';
-import '../../logic/access.dart';
-import '../../logic/formatters.dart';
-import '../../logic/price_text.dart';
-import '../../logic/trip_plan.dart';
+import '../../logic/onboarding_art.dart';
+import '../../logic/onboarding_films.dart';
+import '../../logic/onboarding_journey.dart';
 import '../../state/analytics.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
-import '../help/help_links.dart';
+import '../onboarding/onboarding_pass_screen.dart';
+import '../onboarding/onboarding_stage_layout.dart';
 
-/// Travary Plus / Trip Pass paywall.
-///
-/// Built on the plan in docs/PRODUCT_PLAN.md: Plus preselected, a Trip Pass
-/// when there's a trip to attach it to, prices framed per month and per day,
-/// no free trial (premium sells itself where it's needed), and an easy way
-/// out. Returns true from the route when something was bought.
+/// The paywall is the pass desk from onboarding: Travi presenting Travary
+/// Plus and the Holiday Pass on the trip's own stage, its headline for what
+/// the traveller reached for ([feature]), the benefits family first, and
+/// "Not now" one tap away. No free trial: premium sells itself where it's
+/// needed. Pops true when something was bought.
 class PaywallScreen extends StatefulWidget {
   const PaywallScreen({super.key, this.feature, this.tripId, required this.source});
 
   /// What the traveller tried to use (shapes the headline).
   final PremiumFeature? feature;
 
-  /// The trip in context, which makes a Trip Pass possible.
+  /// The trip in context, which makes a Holiday Pass possible.
   final String? tripId;
 
   /// Where the paywall was opened from, for funnel analytics.
@@ -37,8 +34,6 @@ class PaywallScreen extends StatefulWidget {
 }
 
 class _PaywallScreenState extends State<PaywallScreen> {
-  OfferKind _selected = OfferKind.plusAnnual;
-
   @override
   void initState() {
     super.initState();
@@ -50,398 +45,31 @@ class _PaywallScreenState extends State<PaywallScreen> {
     Navigator.of(context).pop(false);
   }
 
-  Future<void> _buy(Offer offer, TripPlan? plan) async {
-    final premium = context.read<PremiumStore>();
-    final outcome = await premium.purchase(
-      offer,
-      tripPass: offer.kind == OfferKind.tripPass && plan != null && plan.hasDates ? newTripPassFor(plan) : null,
-      source: widget.source,
-    );
-    if (!mounted) return;
-    switch (outcome) {
-      case PurchaseOutcome.purchased:
-        Navigator.of(context).pop(true);
-      case PurchaseOutcome.cancelled:
-        break;
-      case PurchaseOutcome.failed:
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('That didn\'t go through. You haven\'t been charged.')));
-      case PurchaseOutcome.pending:
-        // Paid: closing stops a second purchase. It switches on by itself.
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(passPendingText)));
-        Navigator.of(context).pop(false);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final premium = context.watch<PremiumStore>();
-    final travel = context.watch<TravelStore>();
-    final plan = widget.tripId == null ? null : travel.plan(widget.tripId!);
-    final plus = premium.offer(OfferKind.plusAnnual);
-    final pass = premium.offer(OfferKind.tripPass);
-    final canPass = pass != null && premium.policy.canBuyTripPassFor(plan);
-    final selected = canPass && _selected == OfferKind.tripPass ? pass : plus;
-    final copy = _PaywallCopy.forFeature(widget.feature);
-
-    return Scaffold(
-      backgroundColor: TravaryColors.linen,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.sm),
-              child: Row(
-                children: [
-                  IconButton(tooltip: 'Close', icon: const Icon(Icons.close_rounded), onPressed: _close),
-                  const Spacer(),
-                  TextButton(onPressed: premium.busy ? null : premium.restore, child: const Text('Restore purchases')),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
-                children: [
-                  Text('TRAVARY PLUS', style: TravaryText.eyebrow.copyWith(color: TravaryColors.coral)),
-                  const SizedBox(height: TravarySpace.sm),
-                  Text(copy.headline, style: TravaryText.display.copyWith(fontSize: 32)),
-                  const SizedBox(height: TravarySpace.sm),
-                  Text(copy.subtitle, style: TravaryText.bodySoft),
-                  const SizedBox(height: TravarySpace.xl),
-                  // Plans first: price and choice sit next to the button
-                  // without scrolling. The details follow below.
-                  if (plus != null)
-                    _PlanOption(
-                      selected: selected == plus,
-                      title: 'Travary Plus',
-                      badge: 'Best value',
-                      price: '${priceOf(plus)}/year',
-                      detail: '${perMonth(plus)} a month · everyone on your trips, up to ${Pricing.familySize}',
-                      onTap: () => setState(() => _selected = OfferKind.plusAnnual),
-                    ),
-                  if (pass != null && plan != null && premium.policy.isTooLongForTripPass(plan)) ...[
-                    const SizedBox(height: TravarySpace.md),
-                    Text(
-                      'A Trip Pass covers trips of up to ${Pricing.tripPassMaxDays} days, so Plus is the one for '
-                      '${plan.trip.title}.',
-                      key: const ValueKey('pass-too-long'),
-                      style: TravaryText.small,
-                    ),
-                  ],
-                  if (canPass) ...[
-                    const SizedBox(height: TravarySpace.md),
-                    _PlanOption(
-                      selected: selected == pass,
-                      title: 'Just ${plan!.trip.title}',
-                      price: '${priceOf(pass)} once',
-                      detail:
-                          'One payment for up to ${Pricing.familySize} people · no subscription · '
-                          '${perDay(pass, plan.dayCount)} a day',
-                      onTap: () => setState(() => _selected = OfferKind.tripPass),
-                    ),
-                  ],
-                  const SizedBox(height: TravarySpace.xl),
-                  if (selected != null && selected.kind == OfferKind.tripPass && plan != null) _PassSummary(plan: plan),
-                  const SizedBox(height: TravarySpace.xl),
-                  Text('WHAT YOU GET', style: TravaryText.eyebrow),
-                  const SizedBox(height: TravarySpace.md),
-                  _Benefits(highlight: widget.feature),
-                ],
-              ),
-            ),
-            _Footer(
-              offer: selected,
-              busy: premium.busy,
-              testStore: premium.isTestStore,
-              onBuy: selected == null ? null : () => _buy(selected, plan),
-              onNotNow: _close,
-            ),
-          ],
+    final plan = context.watch<TravelStore>().plan(widget.tripId ?? '');
+    return PopScope(
+      canPop: !premium.busy,
+      child: OnboardingStageLayout(
+        scene: OnboardingScene(stage: onboardingStage(plan?.trip.destination), cues: traviCuesFor(OnboardingBeat.desk)),
+        words: paywallWordsFor(widget.feature),
+        wordsKey: 'paywall-${widget.feature?.name}',
+        onBack: _close,
+        backEnabled: !premium.busy,
+        backTooltip: 'Close',
+        backKey: 'paywall-close',
+        floor: OnboardingPassPanel(
+          // A trip that's gone (or none) offers the Annual Pass only.
+          tripId: plan?.id,
+          feature: widget.feature,
+          freeLabel: 'Not now',
+          source: widget.source,
+          onDone: (outcome) {
+            if (outcome == OnboardingPassOutcome.free) return _close();
+            Navigator.of(context).pop(true);
+          },
         ),
-      ),
-    );
-  }
-}
-
-class _PaywallCopy {
-  const _PaywallCopy(this.headline, this.subtitle);
-
-  final String headline;
-  final String subtitle;
-
-  static _PaywallCopy forFeature(PremiumFeature? feature) => switch (feature) {
-    PremiumFeature.smartImport => const _PaywallCopy(
-      'Skip the typing',
-      'Snap a screenshot or PDF of any booking and Travary fills it in for you.',
-    ),
-    PremiumFeature.familySharing => const _PaywallCopy(
-      'Everyone on the same page',
-      'Invite the family. Everyone gets the plan, the updates and their own tickets.',
-    ),
-    PremiumFeature.ticketBackup => const _PaywallCopy(
-      'Your tickets, safe',
-      'Every ticket backed up and on all your devices, even if your phone goes missing.',
-    ),
-    PremiumFeature.flightAlerts => const _PaywallCopy(
-      'Know the moment your flight changes',
-      'Delays, new times and cancellations, on everyone\'s phone the moment they happen.',
-    ),
-    null => const _PaywallCopy(
-      'Your holiday, on everyone\'s phone',
-      'One pass covers everyone on the trip: the plan, their own tickets and the packing list on every phone, '
-          'backed up and in sync.',
-    ),
-  };
-}
-
-class _Benefits extends StatelessWidget {
-  const _Benefits({this.highlight});
-
-  final PremiumFeature? highlight;
-
-  @override
-  Widget build(BuildContext context) {
-    final features = [
-      for (final f in PremiumFeature.values)
-        if (f.released || kDebugMode) f,
-    ];
-    return Column(
-      children: [
-        for (final pillar in PremiumPillar.values)
-          if (features.any((f) => f.pillar == pillar))
-            Padding(
-              padding: const EdgeInsets.only(bottom: TravarySpace.lg),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: const BoxDecoration(color: TravaryColors.paper, shape: BoxShape.circle),
-                    child: Icon(_pillarIcon(pillar), color: TravaryColors.teal, size: 22),
-                  ),
-                  const SizedBox(width: TravarySpace.md),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(pillar.label, style: TravaryText.label),
-                        for (final feature in features.where((f) => f.pillar == pillar))
-                          Padding(
-                            padding: const EdgeInsets.only(top: 2),
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: '${feature.title}: ',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: feature == highlight ? TravaryColors.coral : null,
-                                    ),
-                                  ),
-                                  TextSpan(text: feature.benefit),
-                                  if (!feature.released) const TextSpan(text: '  (soon)'),
-                                ],
-                              ),
-                              style: TravaryText.bodySoft,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-      ],
-    );
-  }
-
-  IconData _pillarIcon(PremiumPillar pillar) => switch (pillar) {
-    PremiumPillar.time => Icons.bolt_rounded,
-    PremiumPillar.together => Icons.family_restroom_rounded,
-    PremiumPillar.peaceOfMind => Icons.verified_user_outlined,
-  };
-}
-
-class _PlanOption extends StatelessWidget {
-  const _PlanOption({
-    required this.selected,
-    required this.title,
-    required this.price,
-    required this.detail,
-    required this.onTap,
-    this.badge,
-  });
-
-  final bool selected;
-  final String title;
-  final String price;
-  final String detail;
-  final String? badge;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      selected: selected,
-      button: true,
-      child: Material(
-        color: TravaryColors.paper,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(TravaryRadius.card),
-          side: BorderSide(color: selected ? TravaryColors.ink : TravaryColors.line, width: selected ? 2 : 1),
-        ),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(TravaryRadius.card),
-          child: Padding(
-            padding: const EdgeInsets.all(TravarySpace.lg),
-            child: Row(
-              children: [
-                Icon(
-                  selected ? Icons.radio_button_checked_rounded : Icons.radio_button_off_rounded,
-                  color: selected ? TravaryColors.ink : TravaryColors.inkFaint,
-                ),
-                const SizedBox(width: TravarySpace.md),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Flexible(child: Text(title, style: TravaryText.title.copyWith(fontSize: 19))),
-                          if (badge != null) ...[
-                            const SizedBox(width: TravarySpace.sm),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: TravaryColors.coral,
-                                borderRadius: BorderRadius.circular(TravaryRadius.chip),
-                              ),
-                              child: Text(
-                                badge!.toUpperCase(),
-                                style: TravaryText.eyebrow.copyWith(
-                                  color: TravaryColors.paper,
-                                  fontSize: 9.5,
-                                  letterSpacing: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Text(price, style: TravaryText.label),
-                      Text(detail, style: TravaryText.small),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PassSummary extends StatelessWidget {
-  const _PassSummary({required this.plan});
-
-  final TripPlan plan;
-
-  @override
-  Widget build(BuildContext context) {
-    final pass = newTripPassFor(plan);
-    return Container(
-      padding: const EdgeInsets.all(TravarySpace.lg),
-      decoration: BoxDecoration(color: TravaryColors.paper, borderRadius: BorderRadius.circular(TravaryRadius.card)),
-      child: Text(
-        'One payment, no subscription. Unlocks Plus on ${plan.trip.title} '
-        '(${formatDayMonthRange(pass.start, pass.end)}) for everyone on the trip, until ${formatDate(pass.lastDay)}. '
-        'Only one of you needs to buy it.',
-        style: TravaryText.bodySoft,
-      ),
-    );
-  }
-}
-
-final _legalLink = TextButton.styleFrom(
-  foregroundColor: TravaryColors.inkSoft,
-  textStyle: TravaryText.small.copyWith(fontSize: 12, decoration: TextDecoration.underline),
-  visualDensity: VisualDensity.compact,
-);
-
-class _Footer extends StatelessWidget {
-  const _Footer({
-    required this.offer,
-    required this.busy,
-    required this.testStore,
-    required this.onBuy,
-    required this.onNotNow,
-  });
-
-  final Offer? offer;
-  final bool busy;
-  final bool testStore;
-  final VoidCallback? onBuy;
-  final VoidCallback onNotNow;
-
-  @override
-  Widget build(BuildContext context) {
-    final offer = this.offer;
-    final label = switch (offer) {
-      null => 'Unavailable',
-      Offer(kind: OfferKind.plusAnnual) => 'Get Travary Plus · ${priceOf(offer)}/year',
-      Offer(kind: OfferKind.tripPass) => 'Get Trip Pass · ${priceOf(offer)}',
-    };
-    final smallPrint = offer?.kind == OfferKind.tripPass
-        ? 'One-off purchase. Doesn\'t renew.'
-        : 'Plus renews yearly until you cancel. Cancel any time in your App Store or Google Play settings.';
-
-    return Container(
-      padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.sm),
-      decoration: const BoxDecoration(
-        color: TravaryColors.linen,
-        border: Border(top: BorderSide(color: TravaryColors.line)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          FilledButton(
-            onPressed: busy ? null : onBuy,
-            child: busy
-                ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                : Text(label),
-          ),
-          TextButton(onPressed: onNotNow, child: const Text('Not now')),
-          Text(
-            testStore ? '$smallPrint\nTest store: nothing is charged.' : smallPrint,
-            style: TravaryText.small.copyWith(fontSize: 11.5),
-            textAlign: TextAlign.center,
-          ),
-          // Apple asks for these beside any subscription.
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: [
-              TextButton(
-                key: const ValueKey('paywall-terms'),
-                onPressed: () => openTravaryPage(context, TravaryLinks.terms),
-                style: _legalLink,
-                child: const Text('Terms of Use'),
-              ),
-              TextButton(
-                key: const ValueKey('paywall-privacy'),
-                onPressed: () => openTravaryPage(context, TravaryLinks.privacy),
-                style: _legalLink,
-                child: const Text('Privacy Policy'),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }

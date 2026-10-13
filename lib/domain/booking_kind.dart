@@ -34,6 +34,10 @@ abstract final class DetailKeys {
   static const guests = 'guests';
   static const partySize = 'partySize';
   static const company = 'company';
+
+  /// Where a flight or journey arrives: "Tokyo Haneda (HND)", "Tokyo
+  /// Station" (its address is where it leaves from).
+  static const arrivesAt = 'arrivesAt';
 }
 
 /// One optional extra field on the booking form.
@@ -97,6 +101,7 @@ const _flight = KindSpec(
   locationLabel: 'Departure airport',
   fields: [
     DetailField(DetailKeys.flightNumber, 'Flight number', hint: 'BA 2037'),
+    DetailField(DetailKeys.arrivesAt, 'Arrival airport', hint: 'Orlando (MCO)'),
     DetailField(DetailKeys.seats, 'Seats', hint: '14A, 14B'),
   ],
   typicalDuration: Duration(hours: 3),
@@ -153,7 +158,10 @@ const _transport = KindSpec(
   startLabel: 'Departs / pick-up',
   endLabel: 'Arrives / drop-off',
   locationLabel: 'Pick-up point',
-  fields: [DetailField(DetailKeys.company, 'Company', hint: 'Alamo')],
+  fields: [
+    DetailField(DetailKeys.company, 'Company', hint: 'Alamo'),
+    DetailField(DetailKeys.arrivesAt, 'Arrival or drop-off', hint: 'Kyoto Station'),
+  ],
   typicalDuration: Duration(hours: 1),
   startEvent: 'Pick-up',
   endEvent: 'Drop-off',

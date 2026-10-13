@@ -7,6 +7,7 @@ import '../data/onboarding_repository.dart';
 import '../domain/domain.dart';
 import '../domain/onboarding.dart';
 import '../logic/destinations.dart';
+import '../logic/onboarding_rules.dart';
 import 'travel_store.dart';
 
 class OnboardingStore extends ChangeNotifier {
@@ -89,6 +90,26 @@ class OnboardingStore extends ChangeNotifier {
       start: _draft.start,
       end: _draft.end,
     );
+  }
+
+  /// The phone's Back button: one step toward the start. Going back from
+  /// the booking step lets go of the holiday made for it, so the new dates
+  /// make a fresh one; a holiday that already has bookings stays. False:
+  /// nowhere to go back to.
+  Future<bool> stepBack(TravelStore travel) async {
+    final to = stepBackFrom(_draft.step);
+    if (to == null) return false;
+    var next = _draft.copyWith(step: to);
+    final known = _draft.tripId;
+    if (_draft.step == OnboardingStep.booking && known != null) {
+      final plan = travel.plan(known);
+      if (plan != null && plan.bookings.isNotEmpty) return false;
+      if (plan != null) await travel.deleteTrip(plan);
+      _createdTrip = null;
+      next = next.copyWith(clearTripId: true);
+    }
+    await save(next);
+    return true;
   }
 
   Future<void> recordBooking(SaveResult result, TravelStore travel, {OnboardingBookingSource? source}) async {

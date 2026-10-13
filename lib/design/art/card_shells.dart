@@ -423,6 +423,18 @@ class CardShells {
   /// The key tag for something in progress that isn't a stay.
   final ShellArt? ongoing;
 
+  /// These shells with [reservation] as the tagged reservation card.
+  CardShells withReservation(ShellArt? reservation) => CardShells(
+    featured: featured,
+    room: room,
+    reservation: reservation,
+    boardingPass: boardingPass,
+    featuredReservation: featuredReservation,
+    travelTicket: travelTicket,
+    note: note,
+    ongoing: ongoing,
+  );
+
   /// The featured "next up" card for a booking of [kind]: a flight's
   /// boarding pass, a restaurant's reservation card, transport's travel
   /// ticket, a note's paper, a stay's key card, and the look's admission

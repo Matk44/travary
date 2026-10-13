@@ -25,9 +25,19 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   "Disney World") by `logic/destinations.dart`: every country plus
   well-known regions and cities, offline, with suggestions for a half-typed
   place and a picker; never required (a "Grandma's" trip is left to the
-  classifier and its bookings). Trips started by a booking get the same
-  detection from their suggested name. Only title + date are required on
-  any form.
+  classifier and its bookings). A trip that forms from its bookings is
+  named after where they go (`readTripPlace` in `logic/trip_route.dart`:
+  where the traveller stays, else where transfers go, never home or a
+  stopover: London→Dubai→Osaka is "Osaka"), and its name and place keep
+  following them (`Trip.autoName`: "Osaka" becomes "Japan" once Kyoto and
+  Tokyo are booked) until the traveller changes either; that rename writes
+  only the name and place (`TravelRepository.renameTrip`), never the dates
+  a Holiday Pass goes by. A flight home from another city of the trip
+  joins it (`findReturnFlightTrip`: in to Osaka, home from Tokyo). Flights
+  and transport keep where they arrive (`DetailKeys.arrivesAt`, from the
+  departures board and Smart Import); airports are read as the places they
+  serve (`logic/airports.dart`: Kansai is Osaka). Only title + date are
+  required on any form.
 - **Today is the product.** Opens on today during a trip, else the first day of
   the next trip: the greeting, then the day's cards down a time rail (each
   timed card's time and a dot on its left, joined by a line): the featured
@@ -43,13 +53,16 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   it opens the trip). Each time Today comes into view (its tab, back from
   the background, a screen closed over it: `HomeShell` ticks `shown`) the
   postcard lifts in and the tag is slapped on, swings and settles. On the Trips tab a
-  coming trip with a landscape postcard shows on it with the same tag
-  (`UpcomingTripPostcard`); other rows stay plain.
+  trip you're on or coming to, with a landscape postcard, shows on it with
+  the same tag (`UpcomingTripPostcard`: "DAYS TO GO", or "DAYS LEFT" and
+  "Day 3 of 7" for the trip you're on); other rows stay plain.
 - **Inside a trip** (C2 "refined ledger", `docs/ART_DIRECTION_SCREENS.md`,
   mockup `docs/mockups/trip-ledger-c2/`): its postcard with the luggage tag,
   "Your plan" as ledger rows by date (`CardSize.ledger`, tickets on the
   row), what it still needs as dashed rows with Add and "Not needed"
-  (`logic/trip_gaps.dart`), "Before you go" (the trip's shared checklist:
+  (`logic/trip_gaps.dart`: a flight within the trip, Osaka to Sapporo, is
+  neither the flight out nor home; a night on a sleeper train needs no
+  stay), "Before you go" (the trip's shared checklist:
   to-dos that aren't bookings, like the visa or the dog sitter, with an
   optional "by" date that may be before the trip, `logic/checklist.dart`),
   the packing list (one row opening `PackingListScreen`: things to take,
@@ -101,6 +114,9 @@ lib/
 │               flight_status_text (when live flight status shows, its wording, the live line),
 │               flight_alerts (which flights alerts cover, when to ask, the page row),
 │               flight_fill (a found flight → the add-flight form, board wording),
+│               trip_route (where each booking is: its city by day, the trip's own
+│               place for art, where a trip goes for its name), airports (codes and
+│               names as the places they serve), transport (hire car, journey or pass),
 │               trip_window (the days a trip's bookings may use, where a booking
 │               goes: placeBooking, trip dates that leave bookings out, overlaps),
 │               checklist ("Before you go": order, wording, ideas),
@@ -173,11 +189,16 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    a test keeps them equal). Downloaded **art packs** add destination and
    experience art (`docs/ART_PACKS.md`; sources are WebP, converted with
    `dart run tool/art_packs.dart webp`, PNG masters in `art_packs/originals/`;
-   30 destination packs are published; Orlando v2 and 13 US city and region
-   packs are built, awaiting publish). `ArtResolver` takes a
+   catalog v96 is published: 43 packs, including Orlando v2, the 13 US city
+   and region packs, `country_us` v4 and the Lake District v2). `ArtResolver` takes a
    `TripArtContext` and tries the subject from the city → region → country
    pack → the trip's look → secondary look → core, then generics, stable per
-   booking and never repeating side by side. Pictures are `ArtImageRef`s
+   booking and never repeating side by side. Each booking's context is at
+   the place it's in (`TravelStore.artContextOf`, `TripRoute.placeOf`): on
+   Osaka, Kyoto and Tokyo, Kyoto's days take the Kyoto pack then Japan's,
+   the others Japan's; the trip's own art is at `tripArtLocation` (the
+   country when it stays in several places nobody chose). Downloads take
+   every place's pack and each country's to fall back on. Pictures are `ArtImageRef`s
    (bundled or file); `ArtPanel` draws both and shows the placeholder if a
    file can't load. Featured cards and Documents use the scene, normal
    cards the vignette; each format is picked separately by those ranks, so
@@ -193,7 +214,13 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    (`standardFor`): stays on the key card (`room_card`), notes on
    `note_paper`, everything else on a tagged reservation card (the look's
    complete `reservation_card`, else `reservation_card_blank` + the
-   booking's vignette). A hire car in progress is on the `ongoing_tag`. In
+   booking's vignette). A complete tagged card has its picture printed on
+   it, so beside another on the same shell the later card takes the blank
+   shell and its own vignette (`ArtResolver.resolveAll`, which Today feeds
+   in the order the cards are shown, `tagged` saying which are tagged
+   cards). A hire car in progress is on the `ongoing_tag`. A button on a
+   shell keeps a 48-point tap target but draws its face at the anchor's own
+   size (`ShellAnchor`), so it never covers the line above. In
    the Documents list (`CardSize.document`, `DocumentStampCard`): a paper
    row drawn in Flutter with the live date in the `documents_postmark`
    ring, its `documents_cancel_lines`, and one of three stamp frames
@@ -232,12 +259,21 @@ Bookings use **floating local time** (the time printed on the ticket, no zone):
 arrival, so comparing with the device clock is right during the trip. No start
 time = all day. `endDate` after `startDate` = multi-day (check-in/out,
 pick-up/drop-off, overnight flights): start and end appear as entries on their
-days; days in between show an `OngoingStrip`.
+days; days in between show an `OngoingStrip`. A stay or hire car you've
+checked in to stays on Today the evening you arrive; a flight or journey
+that has left (a sleeper train) is finished, not a key tag (`buildDayPlan`).
+Transport is a hire car, a journey or a pass (`transportSortOf`), each
+with its own ends: "Pick-up"/"Drop-off", "Departs"/"Arrives", "Pass
+starts"/"Pass ends" (`bookingEvents`). Times follow the phone's 12 or
+24-hour setting (`ClockStyle`, set at the app's root from
+`MediaQuery.alwaysUse24HourFormatOf`); dates are day-first and Monday-first
+everywhere, the date pickers included (`showTravaryDatePicker`).
 
 ### Data (Firestore)
 
 ```
-trips/{tripId}                        title, theme, themeSource, destination, ownerId, memberIds[], plannedStart/End,
+trips/{tripId}                        title, theme, themeSource, destination, autoName (the app named it:
+                                      name and place follow the bookings), ownerId, memberIds[], plannedStart/End,
                                       hiddenGaps[] (plan gaps marked "Not needed", for everyone),
                                       checklist{} (to-dos by id: text, done, due, createdAt; any
                                       member, one item per write via `checklist.<id>`, max 100),
@@ -288,7 +324,7 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 | Real purchases | add `--dart-define-from-file=config/revenuecat.local.json` | RevenueCat's public SDK keys (git-ignored); without them, purchases are simulated |
 | Email sign-in | add `--dart-define=TRAVARY_EMAIL_LINKS=true` | Passwordless links on `travary-444.firebaseapp.com` (or `TRAVARY_EMAIL_LINK_DOMAIN`); off until the app opens them (`docs/EMAIL_LINK_SIGN_IN.md`) |
 | Analytics in debug | add `--dart-define=TRAVARY_ANALYTICS=true` | Debug runs send nothing otherwise; release builds always send (`docs/ANALYTICS.md`) |
-| Flight alerts on sale | add `--dart-define=TRAVARY_FLIGHT_ALERTS=true` | Release builds only sell them with it (debug always shows); see Flight alerts |
+| Flight alerts off | add `--dart-define=TRAVARY_FLIGHT_ALERTS=false` | They're on in every build by default; this hides them (a build-time kill switch); see Flight alerts |
 
 Cloud mode starts as an anonymous guest (enabled in the Firebase console for
 `travary-444`); rules and index are deployed. Signing in (Apple, Google,
@@ -352,11 +388,21 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   mirrored in `functions/src/tripPass.ts`; both run
   `functions/src/tripPassCases.json`);
   a trip stamped `premium` by the server unlocks it for everyone on it ("Plus
-  travels with the trip"); free gets 3 Smart Imports and 2 ticket files per
-  holiday (`Pricing.freeTicketFiles`, `canAttachTickets`, `ticketFilesIn`:
+  travels with the trip"); free gets 2 Smart Imports (lifetime,
+  `Pricing.freeSmartImports`, mirrored by `FREE_SMART_IMPORTS` on the server)
+  and 2 ticket files per holiday (the files attached to bookings: photos and
+  PDFs, not the bookings or notes themselves, which are unlimited; the two
+  numbers match because each import keeps its file;
+  `Pricing.freeTicketFiles`, `canAttachTickets`, `ticketFilesIn`:
   one file kept on several bookings counts once). Files already attached
-  always stay; adding more goes through `requireTicketRoom`, and a Smart
-  Import past the limit saves the booking without its file and says so.
+  always stay; adding more goes through `requireTicketRoom`, counted
+  against the trip saving will put the booking in (the form's
+  `placeBooking(booking:)`, Smart Import's `TravelStore.importPlaces`, the
+  same `placeImport` the batch save uses), and a Smart Import past the
+  limit saves the booking without its file and says so.
+  The 2 free files are the owner's call (13 Oct 2026) to lift conversion,
+  kept on purpose: raising the limit later is easy, taking files back isn't.
+  Travel documents are never counted: they have no limit.
 - **Gate every premium entry point with `requirePremium()`**
   (`features/premium/premium_gate.dart`): it returns the decision or opens
   the paywall. Never check entitlements ad hoc in a screen.
@@ -425,11 +471,15 @@ paywall's Terms and Privacy links. Support email `dreamprayer.dev@gmail.com`.
 When the app starts collecting something new (analytics, a new provider),
 update `privacy.html` there before releasing.
 
-**Before launch:** `privacy.html` and the store privacy forms updated for
-analytics (Google Analytics is linked to `travary-444`) (`docs/ANALYTICS.md`); the Annual Pass priced
-in App Store Connect; and a sandbox purchase of each pass checked end to end
-on both stores. (Purchase functions, secrets, webhook and Play credentials
-are done.)
+**Before launch:** the store privacy forms updated for analytics and push
+tokens (`docs/ANALYTICS.md`; Google Analytics is linked to `travary-444`);
+the Annual Pass priced in App Store Connect; and a sandbox purchase of each
+pass checked end to end on both stores. (Purchase functions, secrets,
+webhook and Play credentials are done; `privacy.html` was updated 13 Oct
+2026 for analytics, flight alerts and notifications, and still needs the
+Analytics retention period written in. `terms.html`, `index.html` and
+`delete-account.html` in `travary_support` still use "Travary Plus" and
+"Trip Pass".)
 
 ## Accounts (Sign in with Apple / Google / email)
 
@@ -532,8 +582,10 @@ the app. Project `travary-444` is on the Blaze plan.
   `gcloud logging read 'resource.labels.service_name="smartimport"' --project travary-444`
   (`firebase functions:log` lags).
 - Trip grouping for imports: bookings from one file share a trip within
-  30 days; a return flight ("Lisbon to London") joins the trip its outbound
-  flight started.
+  30 days (a trip already there that the file joins included), a new one
+  named after where the whole file goes; a return flight ("Lisbon to
+  London", or home from another city of the trip) joins the trip its
+  outbound flight started.
 - **Automatic looks** (`classifyTripVisuals`, `docs/VISUAL_PROFILES.md`):
   deployed with its Places key secret; a separate Gemini call classifies a
   whole trip into an experience theme,
@@ -609,8 +661,10 @@ and belts are a bonus shown and announced only when the data has them
   (`tight`), keeps only the last 3 hours and the flight itself under 10%
   (`low`), and stops below a reserve for the flight page (`out`). Params in
   `functions/.env`: `FLIGHT_ALERTS_ENABLED`, `FLIGHT_UNITS_PER_MONTH`
-  (5000), `FLIGHT_RATE_PER_SECOND` (1), `FLIGHT_BILLING_DAY` (the day the
-  plan renews). Kill switch without a deploy: Firestore
+  (5000), `FLIGHT_RATE_PER_SECOND` (1), `FLIGHT_BILLING_DAY` (the day of
+  the month the paid plan starts and renews, 1–28; it only paces the unit
+  budget, so 1 does no harm until the plan starts). Kill switch without a
+  deploy: Firestore
   `config/flightAlerts` `{paused: true}`.
 - **App:** `data/push_service.dart` (`firebase_messaging`, registers this
   phone with `registerPushToken`), `state/notifications_store.dart`. The
@@ -621,9 +675,17 @@ and belts are a bonus shown and announced only when the data has them
   under its ticket (`LiveFlightStrip`, `liveFlightLineFor`). A tapped alert
   opens its flight (`HomeShell`); on Android one arriving in the app shows
   as a snackbar. Free users keep the flight page's on-demand status.
-- **On sale** in release builds with `--dart-define=TRAVARY_FLIGHT_ALERTS=true`
-  (`flightAlertsReleased`) once the functions are deployed and the APNs key
-  is in Firebase; debug builds always show it.
+- **On sale** in every build (`flightAlertsReleased` defaults to true;
+  `--dart-define=TRAVARY_FLIGHT_ALERTS=false` hides it). Functions and rules
+  were deployed 13 Oct 2026 (`checkWatchedFlights`, `registerPushToken` and
+  the three `watchFlightsOn…` triggers). The APNs key is in Firebase (13 Oct
+  2026: the team's key `8PPPQAD22W`, in both the Development and Production
+  slots of `com.travary.app`; Push Notifications is on its App ID), so iOS
+  builds, TestFlight included, can receive alerts; Android needs nothing
+  more. Not yet tried on a real iPhone. The AeroDataBox
+  trial has ended: lookups and alerts only work again once the paid base
+  plan ($7.50, 5,000 units) is bought, near launch. Then set
+  `FLIGHT_BILLING_DAY` to the day it starts and redeploy.
 - Native: iOS `aps-environment` in `Runner.entitlements` (Push
   Notifications capability on the App ID); Android `POST_NOTIFICATIONS`,
   the `flight_changes` channel (made in `MainActivity`) and
@@ -636,8 +698,9 @@ and belts are a bonus shown and announced only when the data has them
   morning (8:00, or an hour before an earlier start, never before 6:00) and
   a nudge before each timed booking (flights 3 h, notes at their time, most
   others 1 h; stays and the ends of things are in the morning's plan).
-  Floating times on the phone's clock; nothing is set past the next
-  flight's landing, and everything is set again when the app returns to
+  Floating times on the phone's clock; nothing is set past the landing of
+  the next flight that may change the clock (not one within a country on
+  one time zone: `keepsTheClock`), and everything is set again when the app returns to
   the foreground, so they follow the traveller across time zones. At most
   50, two weeks ahead.
 - Asked for only from the trip page's `ReminderOffer` (Travi waving, once a
@@ -648,7 +711,7 @@ and belts are a bonus shown and announced only when the data has them
   foreground (`AppDelegate`); Android uses the `reminders` channel and
   `ic_stat_reminder`, kept from shrinking by `res/raw/keep.xml`.
 - **Sharing in**: a booking's screenshot, photo or PDF shared from another
-  app is read like "Snap a booking" (`importSharedFile`); with no Smart
+  app is read like Smart Import (`importSharedFile`); with no Smart
   Import left it opens the add sheet ("Add this booking"), never the
   paywall, and the file stays as the ticket. `receive_sharing_intent` is
   pinned to **1.8.1** (1.9 is Swift Package Manager only); its Java target
@@ -678,7 +741,16 @@ and belts are a bonus shown and announced only when the data has them
   folio/manual/import/flight review → actual saved card/day/confirmation →
   “Let’s sort the rest” → optional sign-in (“Keep your holiday with you.”,
   guests in cloud mode) → pass desk → pass/free choice → holiday
-  (`OnboardingOfferFlow`). Bookings later and Explore take the same route. Manual/import proof is distinct;
+  (`OnboardingOfferFlow`). Bookings later and Explore take the same route.
+  On Android the system Back button steps back, dates → destination and
+  booking → dates (`stepBackFrom`, `OnboardingStore.stepBack`, which lets
+  go of the holiday's empty trip so the new dates make a fresh one); it
+  leaves the app only from the first screen or once a booking is saved.
+  The first booking offers Flight, Stay and Activity and "Something else"
+  (the other five kinds); a stay starts on the holiday's dates
+  (`firstBookingDates`); a typed-in form doesn't ask to be checked
+  (`onboardingFormSubtitle`); with no sign-in offered Travi goes straight
+  to the desk without taking out the ID tag (`TraviCue.direct`). Manual/import proof is distinct;
   a saved booking is a start, not a claim of a complete holiday. Native services
   and premium decisions are reused. Controls never wait for decorative motion.
 - Owner update 8 Oct 2026: remove the free bypass from booking success. All
@@ -687,10 +759,21 @@ and belts are a bonus shown and announced only when the data has them
   ready state, and returning-account/shared-invite entry retains its own flow.
 - The optional purchase at the pass desk (`OnboardingPassScreen`) uses the actual
   holiday and saved booking when present, with Back/free/restore outcomes.
-  No holiday yet means Annual only; do not fabricate dates or a Holiday Pass. Its shared proud pose and blank paper passes are review assets;
-  see `docs/ONBOARDING_PASS_DESK.md`. Other gates keep the generic paywall.
-- Keep the owner-approved full paywall artwork with live RevenueCat titles,
-  scope and localized prices; Holiday Pass defaults to USD $14.99. No fixed
+  No holiday yet means the Annual Pass only; do not fabricate dates or a Holiday Pass. Its shared proud pose and blank paper passes are review assets;
+  see `docs/ONBOARDING_PASS_DESK.md`.
+- **The paywall is the pass desk** (owner, 12 Oct 2026): `PaywallScreen`
+  puts `OnboardingPassPanel` on the trip's onboarding stage with Travi
+  presenting, a headline for the feature reached for (`paywallWordsFor`),
+  the benefits family first (`passBenefits`) and "Not now". Profile opens it
+  for the trip on now or coming next.
+- **Two names only** (owner, changed 13 Oct 2026: "Annual Pass" says plainly
+  that it's a yearly subscription, so it replaces the "Travary Plus" chosen
+  on 12 Oct): **Annual Pass** (the yearly plan, `travary_annual_pass`) and
+  **Holiday Pass** (one holiday, `holiday_pass`). `Offer.displayTitle`
+  always says these, whatever the store's product titles; never "Trip
+  Pass", "Travary Plus" or "Plus" alone in the app (code names like
+  `tripPass` and `plus` stay). Scope and localized prices
+  stay live from RevenueCat; Holiday Pass defaults to USD $14.99. No fixed
   “US”, fake savings, invented testimonials, trial or ticket-access lock.
 - Sign-in sits immediately before the paywall (owner, 9 Oct 2026; stills
   and choreography in `docs/ONBOARDING_ACCOUNT_SCENE.md`). Keep it optional;
@@ -716,7 +799,8 @@ and belts are a bonus shown and announced only when the data has them
   with `TraviPlayer.playback = false` (`test/flutter_test_config.dart`).
 - **Cameos around the app** (`docs/onboarding/HANDOVER_2026-10-10.md`):
   small, never delaying content, never on tickets, flight status, travel
-  documents, a busy Today or paywalls outside onboarding.
+  documents or a busy Today. On the paywall he presents the passes, as at
+  the onboarding desk.
   `logic/travi_cameos.dart` holds the rules. Onboarding's poses
   (`TraviMoment`, `TraviCameo`): reading in Smart Import (the only one that
   moves: it's the progress), folio open on the empty Today and Trips
@@ -767,6 +851,9 @@ and belts are a bonus shown and announced only when the data has them
 
 ## Conventions
 
+- **One name for it: Smart Import** (the + sheet's row, the onboarding
+  button, the paywall, errors). Never "Snap a booking" or "Add a
+  screenshot or PDF" as a name; those words describe the input.
 - snake_case files, PascalCase classes, `_private` members, `const` wherever possible.
 - New booking wording → `logic/card_text.dart` with a test in `test/logic/`.
 - New rule about time/trips → `logic/` with a unit test. Keep `logic/` pure.
@@ -805,7 +892,8 @@ and belts are a bonus shown and announced only when the data has them
   onboarding now has its first native integration; richer rigged acting
   and launch/device checks remain.
   See `docs/PRODUCT_PLAN.md`.
-- **Built, not deployed:** flight alerts (see Flight alerts).
+- **Flight alerts:** server deployed 13 Oct 2026 and the APNs key is in
+  Firebase; the real billing day is still to do (see Flight alerts).
 - **Later:** a gate source for flight alerts, Live Activity / widgets, email-forward import,
   memories and recap, referrals.
 - Bundle ID / Android application ID: `com.travary.app` (Firebase apps

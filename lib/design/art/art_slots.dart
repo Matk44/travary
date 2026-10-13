@@ -113,7 +113,7 @@ enum SurfaceSlot {
   /// The ticket-shaped "View trip" button under the countdown.
   countdownButton('countdown_button'),
 
-  /// The add sheet's "Snap a booking" picture (768 × 768, transparent): a
+  /// The add sheet's "Smart Import" picture (768 × 768, transparent): a
   /// polaroid snapshot of a ticket. A glyph on paper stands in.
   addSnap('add_snap'),
 

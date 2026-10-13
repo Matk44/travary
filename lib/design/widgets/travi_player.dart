@@ -213,7 +213,7 @@ class _TraviPlayerState extends State<TraviPlayer> with SingleTickerProviderStat
       if (at != cue.pose) {
         final route = _films ? traviRoute(at, cue.pose) : null;
         // A long way round would keep the traveller waiting: dissolve.
-        if (route == null || route.length > 2) {
+        if (cue.direct || route == null || route.length > 2) {
           steps.add(_Dissolve(cue.pose));
         } else {
           steps.addAll(route.map(_Play.new));

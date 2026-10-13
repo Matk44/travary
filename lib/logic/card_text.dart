@@ -3,6 +3,7 @@ import 'art_subjects.dart';
 import 'day_plan.dart';
 import 'flight_status_text.dart';
 import 'formatters.dart';
+import 'transport.dart';
 
 /// Every string a booking card can show, already worded and formatted.
 ///
@@ -96,15 +97,14 @@ class CardText {
 /// Wording for [entry] on a day timeline.
 CardText cardTextForEntry(DayEntry entry, {bool highlighted = false}) {
   final booking = entry.booking;
-  final spec = booking.kind.spec;
 
   final String eyebrow;
   if (highlighted) {
     eyebrow = entry.status == EntryStatus.now ? 'HAPPENING NOW' : 'NEXT UP';
   } else if (entry.role == EntryRole.start) {
-    eyebrow = spec.startEvent.toUpperCase();
+    eyebrow = bookingEvents(booking).start.toUpperCase();
   } else if (entry.role == EntryRole.end) {
-    eyebrow = spec.endEvent.toUpperCase();
+    eyebrow = bookingEvents(booking).end.toUpperCase();
   } else {
     eyebrow = _kindEyebrow(booking, entry.time);
   }
@@ -226,7 +226,7 @@ CardText cardTextForReview(Booking booking) {
     BookingKind.transport => booking.detail(DetailKeys.company),
     _ => null,
   };
-  return (title: [booking.title, ?extra].join(' · '), subtitle: '${booking.kind.spec.endEvent} ${relativeDays(days)}');
+  return (title: [booking.title, ?extra].join(' · '), subtitle: '${bookingEvents(booking).end} ${relativeDays(days)}');
 }
 
 /// Card wording for a multi-day booking you're in the middle of on [date]
@@ -246,9 +246,28 @@ CardText ongoingCardText(Booking booking, LocalDate date) {
     place: _nonEmpty(booking.location),
     stub: _stub(booking),
     reference: _nonEmpty(booking.reference),
-    footnote: '${booking.kind.spec.endEvent} ${relativeDays(days)}'.toUpperCase(),
+    footnote: '${bookingEvents(booking).end} ${relativeDays(days)}'.toUpperCase(),
     action: _action(booking),
   );
+}
+
+/// The names of [booking]'s two ends, for one that spans days: its kind's
+/// ("Check-in" / "Check-out", "Pick-up" / "Drop-off" for a hire car), or
+/// for a journey "Departs" / "Arrives" (a sleeper train isn't picked up)
+/// and for a pass "Pass starts" / "Pass ends".
+({String start, String end}) bookingEvents(Booking booking) {
+  if (booking.kind == BookingKind.transport) {
+    switch (transportSortOf(booking)) {
+      case TransportSort.journey:
+        return (start: 'Departs', end: 'Arrives');
+      case TransportSort.pass:
+        return (start: 'Pass starts', end: 'Pass ends');
+      case TransportSort.hire:
+        break;
+    }
+  }
+  final spec = booking.kind.spec;
+  return (start: spec.startEvent, end: spec.endEvent);
 }
 
 /// A card's stop on the day's time rail: "9:00" over "am", beside the

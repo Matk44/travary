@@ -1,7 +1,9 @@
 import '../domain/domain.dart';
+import 'card_text.dart';
 import 'day_plan.dart';
 import 'formatters.dart';
 import 'trip_plan.dart';
+import 'trip_route.dart';
 
 /// Reminders on this phone, free for everyone (flight alerts are the paid
 /// live ones): each trip day's plan in the morning, and a nudge before
@@ -9,8 +11,10 @@ import 'trip_plan.dart';
 ///
 /// Times are floating, like the bookings: 8:00 is 8:00 wherever the phone
 /// is. A phone only learns it's somewhere new when it lands, so nothing is
-/// set past the next flight's landing ([remindersFor]); the app sets the
-/// rest when it next opens, on the new clock.
+/// set past the landing of the next flight that may change its clock
+/// ([remindersFor]); the app sets the rest when it next opens, on the new
+/// clock. A flight within a country on one time zone (Osaka to Sapporo)
+/// doesn't stop them.
 class Reminder {
   const Reminder({required this.at, required this.title, required this.body, required this.opens});
 
@@ -78,10 +82,12 @@ List<Reminder> remindersFor(List<TripPlan> plans, DateTime now) {
 
 /// When the next flight in the air or still to leave lands, on the clock
 /// printed on its ticket: the phone may be in another time zone from then.
-/// Null without one.
+/// Null without one. Flights that keep the clock ([keepsTheClock]) don't
+/// count.
 DateTime? nextLanding(Iterable<Booking> bookings, DateTime now) {
   DateTime? next;
   for (final flight in bookings.where((b) => b.kind == BookingKind.flight)) {
+    if (keepsTheClock(flight)) continue;
     final lands = switch ((flight.endTime, flight.startTime)) {
       (final end?, _) => flight.lastDate.toDateTime(end),
       (null, final start?) => flight.startDate.toDateTime(start).add(BookingKind.flight.spec.typicalDuration),
@@ -91,6 +97,29 @@ DateTime? nextLanding(Iterable<Booking> bookings, DateTime now) {
   }
   return next;
 }
+
+/// Whether [flight] certainly lands on the clock it left on: both ends in
+/// one country with a single time zone (Osaka to Sapporo, London to
+/// Edinburgh). Anything else may change it, including ends the app can't
+/// place.
+bool keepsTheClock(Booking flight) {
+  final route = routeOf(flight);
+  if (route == null) return false;
+  final from = transferPlace(route.from);
+  final to = transferPlace(route.to);
+  return from != null &&
+      to != null &&
+      from.countryCode == to.countryCode &&
+      !severalTimeZones.contains(from.countryCode);
+}
+
+/// Countries whose places don't all keep the same clock (the Canaries are
+/// an hour behind Madrid, the Azores behind Lisbon, Galápagos behind
+/// Quito), so a flight within one may still change it.
+const severalTimeZones = {
+  'AQ', 'AU', 'BR', 'CA', 'CD', 'CL', 'EC', 'ES', 'FM', 'GL', 'ID', 'KI', 'KZ', 'MN', 'MX', 'NZ', //
+  'PF', 'PG', 'PT', 'RU', 'UM', 'US',
+};
 
 /// When the morning plan comes on a day: [reminderMorning], or an hour
 /// before a day that starts before 9:00, though never before 6:00.
@@ -120,11 +149,10 @@ Reminder _morning(TripPlan plan, DayPlan day) {
 /// "9:00am Sunshine Park", "11:00am Check-out, Lagoon Resort".
 String _line(DayEntry entry) {
   final booking = entry.booking;
-  final spec = booking.kind.spec;
   final what = switch (entry.role) {
     EntryRole.single => booking.title,
-    EntryRole.start => '${spec.startEvent}, ${booking.title}',
-    EntryRole.end => '${spec.endEvent}, ${booking.title}',
+    EntryRole.start => '${bookingEvents(booking).start}, ${booking.title}',
+    EntryRole.end => '${bookingEvents(booking).end}, ${booking.title}',
   };
   return entry.time == null ? what : '${formatClock(entry.time!)} $what';
 }
@@ -139,7 +167,7 @@ Reminder? _nudge(DayEntry entry, LocalDate day) {
   final body = switch (booking.kind) {
     BookingKind.flight => 'Departs at $clock, in 3 hours.${booking.hasTickets ? ' Tickets are one tap away.' : ''}',
     BookingKind.note => _nonEmpty(booking.notes) ?? clock,
-    _ when entry.role == EntryRole.start => '${booking.kind.spec.startEvent} in an hour, at $clock.',
+    _ when entry.role == EntryRole.start => '${bookingEvents(booking).start} in an hour, at $clock.',
     _ => 'In an hour, at $clock.${_nonEmpty(booking.location) == null ? '' : ' ${booking.location!.trim()}'}',
   };
   return Reminder(

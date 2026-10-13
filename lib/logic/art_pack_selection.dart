@@ -50,8 +50,11 @@ class TrustedDestination {
 /// - conflict or skipped (or no profile): nothing.
 ///
 /// City and region always need a country too (place names repeat).
-TrustedDestination trustedDestinationOf(Trip trip) {
-  final location = trip.effectiveLocation;
+TrustedDestination trustedDestinationOf(Trip trip) => trustedDestinationAt(trip.effectiveLocation);
+
+/// What of [location] may pick art packs, by the rules of
+/// [trustedDestinationOf].
+TrustedDestination trustedDestinationAt(TripLocationHint? location) {
   final country = location?.countryCode;
   if (location == null || country == null) return TrustedDestination.none;
   return switch (location.verification) {
@@ -189,11 +192,12 @@ String? destinationName(TripLocationHint location, ArtRank rank) => switch (rank
   ArtRank.primary || ArtRank.secondary || ArtRank.core => null,
 };
 
-/// The art context for [trip], given the packs installed on this phone.
-TripArtContext artContextFor(Trip trip, Iterable<ArtPackRef> installed) {
+/// The art context for [trip], given the packs installed on this phone: at
+/// its own place, or at [location] (one of its cities: `TripRoute`).
+TripArtContext artContextFor(Trip trip, Iterable<ArtPackRef> installed, {TripLocationHint? location}) {
   final theme = trip.effectiveTheme;
   final secondary = secondaryThemesOf(trip);
-  final destination = trustedDestinationOf(trip);
+  final destination = trustedDestinationAt(location ?? trip.effectiveLocation);
   return TripArtContext(
     theme: theme,
     secondaryThemes: secondary,
@@ -206,41 +210,54 @@ TripArtContext artContextFor(Trip trip, Iterable<ArtPackRef> installed) {
   );
 }
 
-/// The packs to download for [trip] from [available] (the remote catalog):
-/// the smallest set that covers it, which is one destination pack (city,
-/// else region, else country) and one pack for its look, in the order
-/// they should arrive. Conflicting or unconfirmed places get no
-/// destination pack; bundled classic art needs no download.
+/// The packs to download for [trip] from [available] (the remote catalog),
+/// in the order they should arrive: for its place ([location] if given,
+/// else its own) the best destination pack (city, else region, else
+/// country) and one pack for its look; then each of its other places'
+/// ([stops]: the cities its bookings are in) best destination pack; and
+/// the country pack of every one of them, for what a city's pack doesn't
+/// draw. Conflicting or unconfirmed places get no destination pack;
+/// bundled classic art needs no download.
 ///
 /// [subjects] are the trip's picture subjects, used to prefer the pack that
 /// covers more of them when several fit equally.
-List<ArtPackRef> packsToDownload(Trip trip, Iterable<ArtPackRef> available, {Set<String> subjects = const {}}) {
+List<ArtPackRef> packsToDownload(
+  Trip trip,
+  Iterable<ArtPackRef> available, {
+  Set<String> subjects = const {},
+  TripLocationHint? location,
+  List<TripLocationHint> stops = const [],
+}) {
   final theme = trip.effectiveTheme;
-  final destination = trustedDestinationOf(trip);
-  ArtPackRef? bestDestination;
-  ArtRank? bestDestinationRank;
-  ArtPackRef? bestExperience;
+  final destination = trustedDestinationAt(location ?? trip.effectiveLocation);
 
-  for (final pack in available) {
-    final rank = packRankFor(pack, theme: theme, destination: destination);
-    if (rank == null) continue;
-    if (rank.index <= ArtRank.country.index) {
-      if (bestDestination == null ||
-          rank.index < bestDestinationRank!.index ||
-          (rank == bestDestinationRank && _better(pack, bestDestination, theme, subjects))) {
-        bestDestination = pack;
-        bestDestinationRank = rank;
+  /// The best pack of [ranks] for [place].
+  ArtPackRef? best(TrustedDestination place, Set<ArtRank> ranks) {
+    ArtPackRef? found;
+    ArtRank? foundRank;
+    for (final pack in available) {
+      final rank = packRankFor(pack, theme: theme, destination: place);
+      if (rank == null || !ranks.contains(rank)) continue;
+      if (found == null ||
+          rank.index < foundRank!.index ||
+          (rank == foundRank && _better(pack, found, theme, subjects))) {
+        found = pack;
+        foundRank = rank;
       }
-    } else if (rank == ArtRank.primary) {
-      if (bestExperience == null || _better(pack, bestExperience, theme, subjects)) bestExperience = pack;
     }
+    return found;
   }
 
-  return [
-    if (destination.experienceFirst) ?bestExperience,
-    ?bestDestination,
-    if (!destination.experienceFirst) ?bestExperience,
-  ];
+  final places = [destination, for (final stop in stops) trustedDestinationAt(stop)];
+  final experience = best(TrustedDestination.none, const {ArtRank.primary});
+  final picked = {
+    if (destination.experienceFirst) ?experience,
+    ?best(destination, destinationRanks.toSet()),
+    if (!destination.experienceFirst) ?experience,
+    for (final place in places.skip(1)) ?best(place, destinationRanks.toSet()),
+    for (final place in places) ?best(place, const {ArtRank.country}),
+  };
+  return picked.toList();
 }
 
 /// Among equally placed packs: drawn for the trip's look, then the

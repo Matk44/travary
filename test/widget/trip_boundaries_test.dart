@@ -72,7 +72,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  /// Types [date] (MM/DD/YYYY) into the open date picker and confirms it.
+  /// Types [date] (DD/MM/YYYY) into the open date picker and confirms it.
   Future<void> typeDate(WidgetTester tester, String date) async {
     await tester.tap(find.byTooltip('Switch to input'));
     await tester.pumpAndSettle();
@@ -117,7 +117,7 @@ void main() {
     await pump(tester, const TripScreen(tripId: 'japan'), trips: [japan]);
     await addFromTrip(tester, BookingKind.attraction);
     await openStartPicker(tester, '11 OCT 2026');
-    await typeDate(tester, '10/15/2026');
+    await typeDate(tester, '15/10/2026');
     await tester.tap(dateIn('end', 'SAME DAY'));
     await tester.pumpAndSettle();
     expect(tester.widget<CalendarDatePicker>(find.byType(CalendarDatePicker)).firstDate, DateTime(2026, 10, 15));
@@ -166,13 +166,13 @@ void main() {
     Booking sushi() => store.bookings.singleWhere((b) => b.title == 'Sushi Saito');
 
     testWidgets('takes what\'s near it without asking', (tester) async {
-      await addDinnerOn(tester, '10/12/2026');
+      await addDinnerOn(tester, '12/10/2026');
       expect(find.byKey(const ValueKey('stretch-trip')), findsNothing);
       expect(sushi().tripId, 'tokyo');
     });
 
     testWidgets('asks before stretching well past them, and can start a new trip', (tester) async {
-      await addDinnerOn(tester, '11/20/2026');
+      await addDinnerOn(tester, '20/11/2026');
       expect(find.text('Add to Tokyo?'), findsOneWidget);
       expect(
         find.text('Tokyo runs 11 Oct so far. This is on 20 Nov, so the trip would run 11 Oct – 20 Nov.'),
@@ -186,7 +186,7 @@ void main() {
     });
 
     testWidgets('or stretch it, when that\'s what they meant', (tester) async {
-      await addDinnerOn(tester, '10/20/2026');
+      await addDinnerOn(tester, '20/10/2026');
       await tester.tap(find.byKey(const ValueKey('stretch-keep')));
       await tester.pumpAndSettle();
       expect(sushi().tripId, 'tokyo');
@@ -230,7 +230,7 @@ void main() {
     expect(tripLine(tester), 'Shinjuku · 11–23 Nov');
 
     await openStartPicker(tester, '11 NOV 2026');
-    await typeDate(tester, '10/11/2026');
+    await typeDate(tester, '11/10/2026');
     expect(dateIn('end', '23 OCT 2026'), findsOneWidget);
     expect(tripLine(tester), 'Moves to Japan holiday · 11–23 Oct');
 

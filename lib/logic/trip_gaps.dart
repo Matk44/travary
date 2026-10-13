@@ -1,6 +1,8 @@
 import '../domain/domain.dart';
 import 'formatters.dart';
+import 'transport.dart';
 import 'trip_plan.dart';
+import 'trip_route.dart';
 
 /// What a trip seems to be missing.
 enum PlanGapKind { flightOut, stay, flightHome }
@@ -46,10 +48,13 @@ class PlanGap {
 /// - A trip with nothing booked suggests its flight out and somewhere to
 ///   stay for the whole trip.
 /// - Every night between the first and last day needs a stay, unless a
-///   stay or an overnight flight covers it.
+///   stay, an overnight flight or an overnight journey (a sleeper train, a
+///   night ferry) covers it.
 /// - Flights are only suggested once the trip flies: one at the start and
-///   none at the end means a flight home (and the other way round). A trip
-///   without flights may well be a road trip.
+///   none at the end means a flight home (and the other way round). A
+///   flight within the trip ([isInternalFlight]: Osaka to Sapporo) is
+///   neither, and a trip with only those needs both. A trip without
+///   flights may well be a road trip.
 List<PlanGap> planGaps(TripPlan plan) {
   final start = plan.start;
   final end = plan.end;
@@ -63,17 +68,21 @@ List<PlanGap> planGaps(TripPlan plan) {
   if (plan.bookings.isEmpty) {
     gaps.add(PlanGap(kind: PlanGapKind.flightOut, start: start));
   } else if (plan.dayCount >= 3 && flights.isNotEmpty) {
-    final out = flights.any((f) => !f.startDate.isAfter(start.addDays(1)));
-    final home = flights.any((f) => !f.startDate.isBefore(end.addDays(-1)));
-    if (out && !home) gaps.add(PlanGap(kind: PlanGapKind.flightHome, start: end));
-    if (home && !out) gaps.add(PlanGap(kind: PlanGapKind.flightOut, start: start));
+    final ends = [
+      for (final f in flights)
+        if (!isInternalFlight(f, plan.bookings)) f,
+    ];
+    final out = ends.any((f) => !f.startDate.isAfter(start.addDays(1)));
+    final home = ends.any((f) => !f.startDate.isBefore(end.addDays(-1)));
+    if ((out || ends.isEmpty) && !home) gaps.add(PlanGap(kind: PlanGapKind.flightHome, start: end));
+    if ((home || ends.isEmpty) && !out) gaps.add(PlanGap(kind: PlanGapKind.flightOut, start: start));
   }
 
   // Nights are the dates you go to sleep on: the first day to the day
   // before the last.
   final covered = <LocalDate>{};
   for (final booking in plan.bookings) {
-    if (booking.kind != BookingKind.stay && booking.kind != BookingKind.flight) continue;
+    if (booking.kind != BookingKind.stay && booking.kind != BookingKind.flight && !isJourney(booking)) continue;
     if (booking.kind == BookingKind.stay && !booking.spansDays) covered.add(booking.startDate);
     for (var night = booking.startDate; night.isBefore(booking.lastDate); night = night.addDays(1)) {
       covered.add(night);
@@ -95,6 +104,21 @@ List<PlanGap> planGaps(TripPlan plan) {
     for (final gap in gaps..sort((a, b) => a.start.compareTo(b.start)))
       if (!hidden.contains(gap.id)) gap,
   ];
+}
+
+/// Whether [flight] is one within the trip, not its flight out or home:
+/// both ends in one country, with somewhere to stay booked from before it
+/// leaves until after the day it lands (Osaka, then Sapporo). A flight
+/// whose ends the app can't place counts as an end of the trip.
+bool isInternalFlight(Booking flight, Iterable<Booking> bookings) {
+  final route = routeOf(flight);
+  if (route == null) return false;
+  final from = transferPlace(route.from);
+  final to = transferPlace(route.to);
+  if (from == null || to == null || from.countryCode != to.countryCode) return false;
+  final stays = bookings.where((b) => b.kind == BookingKind.stay);
+  return stays.any((s) => s.startDate.isBefore(flight.startDate)) &&
+      stays.any((s) => s.lastDate.isAfter(flight.lastDate));
 }
 
 /// The first gap a booking of [kind] would fill in [plan], leaving out

@@ -137,7 +137,7 @@ Future<void> _startSmartImport(
 }
 
 /// A screenshot, photo or PDF shared into Travary from another app: read
-/// like "Snap a booking" while Smart Import can; otherwise (never a paywall
+/// like Smart Import while it can; otherwise (never a paywall
 /// out of the blue) the add sheet, where typing it in keeps the file as the
 /// booking's ticket.
 Future<void> importSharedFile(BuildContext context, SharedFile file) async {
@@ -239,7 +239,7 @@ Future<Attachment?> pickAttachment(BuildContext context) async {
   return attachments.import(file.path, name: file.name);
 }
 
-/// "Add a booking": Snap a booking (Smart Import) first, then the four
+/// "Add a booking": Smart Import first, then the four
 /// kinds people add most, the other four folded under "More booking
 /// types", and passports and other travel documents (kept on this phone)
 /// at the end.
@@ -358,7 +358,7 @@ class _KindPickerSheetState extends State<KindPickerSheet> {
   }
 }
 
-/// "Snap a booking": Smart Import, with how many free uses are left.
+/// Smart Import, with how many free uses are left.
 class _SnapRow extends StatelessWidget {
   const _SnapRow();
 
@@ -370,16 +370,16 @@ class _SnapRow extends StatelessWidget {
     final decision = premium.decide(PremiumFeature.smartImport, trip: travel.focus.plan);
     final String status;
     if (!decision.allowed) {
-      status = 'Travary Plus';
+      status = 'Annual Pass';
     } else if (decision.isFreeUse) {
       status = '${decision.freeUsesLeft} free to try';
     } else {
-      status = 'Included with Plus';
+      status = 'Included with your pass';
     }
     return PaperPanel(
       child: PaperRow(
         key: const ValueKey('add-snap'),
-        title: 'Snap a booking',
+        title: 'Smart Import',
         subtitle: 'Photo, screenshot or PDF\n$status',
         leading: RowPicture(
           image: chrome.slots.surface(SurfaceSlot.addSnap),

@@ -228,10 +228,12 @@ void main() {
     ];
     await tester.element(find.byType(OnboardingPassScreen)).read<PremiumStore>().refreshOffers();
     await tester.pumpAndSettle();
-    expect(find.text('ADVENTURE PASS'), findsOneWidget);
+    // The price and scope come from the store; the name is always the app's.
+    expect(find.text('HOLIDAY PASS'), findsOneWidget);
+    expect(find.text('ADVENTURE PASS'), findsNothing);
     expect(find.text('Your upcoming escape'), findsOneWidget);
     expect(find.text('22,49 € once'), findsOneWidget);
-    expect(find.text('Get Adventure Pass'), findsOneWidget);
+    expect(find.text('Get Holiday Pass'), findsOneWidget);
     expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsNothing);
     expect(find.textContaining('US'), findsNothing);
     await tap(tester, 'onboarding-pass-buy');
@@ -307,7 +309,7 @@ void main() {
       ),
     );
     expect(find.byType(OnboardingPaperPass), findsNothing);
-    expect(find.text('This holiday already has Plus.'), findsOneWidget);
+    expect(find.text('This holiday is already covered.'), findsOneWidget);
     await tap(tester, 'onboarding-pass-buy');
     expect(result, OnboardingPassOutcome.upgraded);
     expect(purchases.calls, isEmpty);
@@ -354,7 +356,7 @@ void main() {
     expect(tester.widget<OnboardingPaperPass>(find.byKey(const ValueKey('onboarding-pass-annual'))).selected, isFalse);
     expect(find.text('Choose a pass'), findsOneWidget);
     expect(tester.widget<TextButton>(find.byKey(const ValueKey('onboarding-pass-free'))).onPressed, isNotNull);
-    expect(find.textContaining('Your longer holiday can use Annual Pass.'), findsOneWidget);
+    expect(find.textContaining('Your longer holiday can use the Annual Pass.'), findsOneWidget);
     await tap(tester, 'onboarding-pass-buy');
     expect(purchases.calls, isEmpty);
     await tap(tester, 'onboarding-pass-annual');

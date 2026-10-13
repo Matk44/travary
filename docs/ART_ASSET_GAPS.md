@@ -26,16 +26,16 @@ below account for most of the remaining difference.
 
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
-| `common/leather.png` (`leather`) | 1536 × 1024, tiles left to right, stitching 12% from the top | The strip under the home tabs, filling the bottom safe area (34 pt on the reference phone), `BoxFit.cover`, top-aligned | Nothing is drawn. Per the spec the strip appears only when the raster exists (**visible**: tabs run to the screen edge) | Make it |
-| `common/pill.png` (`pill`) | 1536 × 512 (3:1), raised cream pill, empty | Header weather or countdown pill, drawn 35 pt tall at its own aspect | Flat cream pill with a soft shadow (**visible**) | Make it |
+| `common/leather.png` (`leather`) | 1536 × 1024, tiles left to right, stitching 12% from the top | The strip under the home tabs, filling the bottom safe area (34 pt on the reference phone), `BoxFit.cover`, top-aligned | Nothing is drawn. Per the spec the strip appears only when the raster exists (**visible**: tabs run to the screen edge) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
+| `common/pill.png` (`pill`) | 1536 × 512 (3:1), raised cream pill, empty | Header weather or countdown pill, drawn 35 pt tall at its own aspect | Flat cream pill with a soft shadow (**visible**) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
 | `icons/nav_wallet.png` (`nav_wallet`) | 1024 × 1024, one-colour navy ink, transparent, content ≈ 50% of the canvas like `nav_today` | Documents tab (the ticket wallet) | Supplied letterpress document icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
 | `icons/nav_profile.png` (`nav_profile`) | as above | Profile tab | Supplied letterpress person icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
 | `icons/nav_add.png` (`nav_add`) | as above, a bold plus | Add tab | Supplied letterpress plus icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
-| `icons/weather_sunny.png` (`weather_sunny`) | 1024 × 1024, full colour allowed (drawn untinted) | Header pill when a forecast is given ("28° Sunny") | Material sun glyph in coral (**visible**) | Make it; also `weather_cloudy`, `weather_rain`, `weather_snow` |
+| `icons/weather_sunny.png` (`weather_sunny`) | 1024 × 1024, full colour allowed (drawn untinted) | Header pill when a forecast is given ("28° Sunny") | Material sun glyph in coral (**visible**) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
 | `icons/timeline_stop.png` (`timeline_stop`) | 256 × 256, one-colour ink dot, tinted `ui.secondary` | Day timeline stops | Plain round dot (**visible**, matches the reference closely) | Optional |
 | `icons/timeline_now.png` (`timeline_now`) | 256 × 256, one-colour ring, tinted `ui.highlight` | The stop happening now | Plain dot with a halo (not in the morning reference) | Optional |
-| `dining/themepark_castle_01_vignette.png` (+ `_scene`) | 1024 × 1024 transparent (scene 1536 × 1024) | "Be Our Guest Restaurant" (subject `castle`) on a theme-park trip | The generic `dining/any_bistro_01_vignette.png` (**visible**: the reference shows a castle) | In the brief's start list |
-| `dining/themepark_grill_01_vignette.png` | as above | "Ohana" (subject `grill`) on a theme-park trip: palm, low sun, waves | The bistro vignette (**visible**). Its scene exists and is used on featured cards and in Documents | Make it |
+| `dining/themepark_castle_01_vignette.png` (+ `_scene`) | 1024 × 1024 transparent (scene 1536 × 1024) | "Be Our Guest Restaurant" (subject `castle`) on a theme-park trip | The generic `dining/any_bistro_01_vignette.png` (**visible**: the reference shows a castle) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
+| `dining/themepark_grill_01_vignette.png` | as above | "Ohana" (subject `grill`) on a theme-park trip: palm, low sun, waves | The bistro vignette (**visible**). Its scene exists and is used on featured cards and in Documents | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
 
 Present and used: the woven `linen` (tiled behind the four home tabs) and
 the home tabs `tab`, `tab_selected` (finished petrol teal, drawn as it is
@@ -55,7 +55,7 @@ status bar).
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
 | `common/countdown_postcard.png` (`countdown_postcard`), per destination pack | 1122 × 1402 | The postcard | Only place packs carry one (Lake District, Orlando, Kyoto, Paris and Bali so far). Any other trip counts down on the neutral postcard below | A postcard per destination pack: prompts and per-country scenes in `art_packs/prompts/postcards.md` |
-| `common/countdown_postcard_anywhere` (`countdown_postcard_anywhere`), bundled | 1122 × 1402 | The postcard for a trip whose place has none | **A stand-in**: the bundled plane scene inside the Lake District postcard's frame (visible) | The real neutral postcard (prompt in `art_packs/prompts/postcards.md`) |
+| `common/countdown_postcard_anywhere` (`countdown_postcard_anywhere`), bundled | 1122 × 1402 | The postcard for a trip whose place has none | **A stand-in**: the bundled plane scene inside the Lake District postcard's frame (visible) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
 
 Since 3 October 2026 the countdown shows only the postcard and its tag:
 the fact tickets (`countdown_fact_duration`, `countdown_fact_bookings`,
@@ -233,5 +233,5 @@ generation prompts and checks are in
 | `icons/look.png` (`IconSlot.look`) | 1024 × 1024, transparent | Card style (Trip details) | Supplied letterpress perforated stamp | **Supplied** |
 | `icons/clock.png` (`IconSlot.clock`) | 1024 × 1024, transparent | Times on the form ticket | Supplied letterpress clock at 10:10 | **Supplied** |
 | `icons/passport.png` (`IconSlot.passport`) | 1024 × 1024, transparent | Travel documents rows | Supplied letterpress passport booklet | **Supplied** |
-| `icons/checklist.png` (`IconSlot.checklist`) | 1024 × 1024, transparent, one-colour navy ink like `passport` | "Add something to do" on a trip's "Before you go" checklist | Material checklist glyph in the trip's ink (**visible**) | Make it: a letterpress luggage label or note with two ticked lines, matching the other C2 icons |
+| `icons/checklist.png` (`IconSlot.checklist`) | 1024 × 1024, transparent, one-colour navy ink like `passport` | "Add something to do" on a trip's "Before you go" checklist | Material checklist glyph in the trip's ink (**visible**) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
 | Country packs' `common/trip_postcard` | 1536 × 1024 | Trip headers and Trips rows for the 25 countries | The place's countdown postcard, cropped | **Published** 5 Oct 2026 (packs v3, catalog v80) |

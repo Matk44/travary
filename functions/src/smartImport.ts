@@ -146,7 +146,7 @@ async function requireAllowance(uid: string, tripId: string | undefined): Promis
   if (await hasPremium(db, revenueCatApi(revenueCatApiKey.value()), uid, tripId)) return;
   throw new HttpsError(
     'permission-denied',
-    'You\'ve used your free Smart Imports. Travary Plus, or a Holiday Pass for this trip, brings in as many as you like.',
+    'You\'ve used your free Smart Imports. The Annual Pass, or a Holiday Pass for this trip, brings in as many as you like.',
   );
 }
 

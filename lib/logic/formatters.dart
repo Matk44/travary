@@ -2,18 +2,29 @@ import 'package:intl/intl.dart';
 
 import '../domain/domain.dart';
 
-/// "9:00am", "7:15pm".
+/// How the app writes the time of day: the phone's own choice of a
+/// twenty-four-hour clock. Set from the phone's setting at the app's root
+/// (`TravaryApp`), so every ticket and card follows it.
+abstract final class ClockStyle {
+  static bool use24Hour = false;
+}
+
+/// "9:00am", "7:15pm", or "09:00", "19:15" on a twenty-four-hour phone.
 String formatClock(ClockTime time) => '${formatClockShort(time)}${formatClockPeriod(time)}';
 
 /// "9:00", "7:15": twelve-hour, no am/pm, for the day's time rail (the
-/// am/pm goes underneath).
+/// am/pm goes underneath). "09:00", "19:15" on a twenty-four-hour phone.
 String formatClockShort(ClockTime time) {
+  if (ClockStyle.use24Hour) return formatClock24(time);
   final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
   return '$hour:${time.minute.toString().padLeft(2, '0')}';
 }
 
-/// "am" or "pm".
-String formatClockPeriod(ClockTime time) => time.hour < 12 ? 'am' : 'pm';
+/// "am" or "pm"; nothing on a twenty-four-hour phone.
+String formatClockPeriod(ClockTime time) {
+  if (ClockStyle.use24Hour) return '';
+  return time.hour < 12 ? 'am' : 'pm';
+}
 
 /// "28° Sunny": a forecast for the header pill.
 String formatWeather(WeatherReport report) => '${report.temperature}° ${report.condition.label}';
@@ -39,7 +50,7 @@ String formatDate(LocalDate date) => DateFormat('d MMM y').format(date.toDateTim
 /// "14 OCT 2026", for a date printed in a ticket's box.
 String formatTicketDate(LocalDate date) => DateFormat('d MMM y').format(date.toDateTime()).toUpperCase();
 
-/// "20:55": a departures board's twenty-four-hour clock.
+/// "20:55": always twenty-four-hour (a departures board's clock).
 String formatClock24(ClockTime time) =>
     '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
 

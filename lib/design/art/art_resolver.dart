@@ -49,6 +49,19 @@ class ArtChoice {
   /// own frame is `documents.stampFor(variant)`.
   final DocumentArt documents;
 
+  /// This choice drawn on [shells] instead.
+  ArtChoice withShells(CardShells shells) => ArtChoice(
+    kind: kind,
+    theme: theme,
+    subject: subject,
+    variant: variant,
+    scene: scene,
+    vignette: vignette,
+    shells: shells,
+    icon: icon,
+    documents: documents,
+  );
+
   ArtAsset? get asset => scene ?? vignette;
 
   ArtAsset? preferring(ArtFormat format) => format == ArtFormat.scene ? (scene ?? vignette) : (vignette ?? scene);
@@ -103,19 +116,42 @@ class ArtResolver {
     return _choice(booking.kind, context, subject, variant, pick(ArtFormat.scene), pick(ArtFormat.vignette));
   }
 
-  /// Resolves a run of cards shown together, avoiding repeats side by side.
-  List<ArtChoice> resolveAll(List<Booking> bookings, TripArtContext Function(Booking) contextOf) {
+  /// Resolves a run of cards shown together, in the order they're shown,
+  /// avoiding repeats side by side. [tagged] says whether the card at an
+  /// index is drawn as a tagged reservation card (the day's list), the one
+  /// shell that carries a picture of its own; by default every card is.
+  List<ArtChoice> resolveAll(
+    List<Booking> bookings,
+    TripArtContext Function(Booking) contextOf, {
+    bool Function(int index)? tagged,
+  }) {
     final choices = <ArtChoice>[];
-    for (final booking in bookings) {
+    for (final (index, booking) in bookings.indexed) {
       final context = contextOf(booking);
       var choice = resolve(booking, context);
       final previous = choices.isEmpty ? null : choices.last;
       if (previous != null && previous.kind == choice.kind && booking.artKey == null) {
         choice = _differentFrom(previous, choice, booking, context);
       }
+      if (previous != null && (tagged?.call(index) ?? true) && (tagged?.call(index - 1) ?? true)) {
+        choice = _shellApart(previous, choice, context);
+      }
       choices.add(choice);
     }
     return choices;
+  }
+
+  /// A complete tagged card has its picture printed on it, the same for
+  /// every booking of the trip: next to another one on the same shell, the
+  /// later card takes the blank shell and its own vignette instead.
+  ArtChoice _shellApart(ArtChoice previous, ArtChoice choice, TripArtContext context) {
+    final theirs = previous.shells.standardFor(previous.kind);
+    final mine = choice.shells.standardFor(choice.kind);
+    if (mine == null || theirs == null) return choice;
+    if (mine.role != ShellRole.reservationCard || theirs.role != ShellRole.reservationCard) return choice;
+    if (mine.image != theirs.image) return choice;
+    final blank = ShellResolver(catalog).shell(ShellRole.reservationBlank, context);
+    return blank == null ? choice : choice.withShells(choice.shells.withReservation(blank));
   }
 
   /// The best tier's keys among pictures that come in [format].

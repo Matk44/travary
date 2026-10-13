@@ -21,6 +21,7 @@ class Trip {
     this.plannedStart,
     this.plannedEnd,
     this.destination,
+    this.autoName = false,
     required this.ownerId,
     required this.memberIds,
     this.memberNames = const {},
@@ -56,6 +57,12 @@ class Trip {
   /// Where the traveller said the trip goes ("Where to?"). Wins over the
   /// classifier's reading of the itinerary.
   final TripDestination? destination;
+
+  /// The app named this trip after its bookings (it formed from them), and
+  /// its name and [destination] keep following them ("Dubai" becomes
+  /// "Osaka" once the flight on from Dubai is added) until the traveller
+  /// changes either.
+  final bool autoName;
 
   /// Who created the trip. Only they can delete it.
   final String ownerId;
@@ -100,8 +107,22 @@ class Trip {
   bool get isAutomaticLook => themeSource == ThemeSource.auto;
 
   /// The destination that chooses place art: the traveller's, else the
-  /// classifier's.
-  TripLocationHint? get effectiveLocation => destination?.location ?? visualProfile?.location;
+  /// classifier's. The app's own reading of the bookings ([autoName]) gives
+  /// way to a verified one in another country: "Naples, FL" read offline is
+  /// Naples, Italy.
+  TripLocationHint? get effectiveLocation {
+    final chosen = destination;
+    final classified = visualProfile?.location;
+    if (chosen == null) return classified;
+    if (autoName &&
+        classified != null &&
+        classified.verification == LocationVerification.verified &&
+        classified.countryCode != null &&
+        classified.countryCode != chosen.countryCode) {
+      return classified;
+    }
+    return chosen.location;
+  }
 
   /// The look the cards use: the classifier's choice for an automatic trip
   /// (as soon as its profile arrives), the traveller's for a manual one.
@@ -118,6 +139,7 @@ class Trip {
     LocalDate? plannedEnd,
     TripDestination? destination,
     bool clearDestination = false,
+    bool? autoName,
     Set<String>? hiddenGaps,
     Map<String, ChecklistItem>? checklist,
     Map<String, ChecklistItem>? packing,
@@ -133,6 +155,7 @@ class Trip {
       plannedStart: plannedStart ?? this.plannedStart,
       plannedEnd: plannedEnd ?? this.plannedEnd,
       destination: clearDestination ? null : destination ?? this.destination,
+      autoName: autoName ?? this.autoName,
       ownerId: ownerId,
       memberIds: memberIds,
       memberNames: memberNames,
@@ -161,6 +184,7 @@ class Trip {
     'plannedStart': plannedStart?.toIso(),
     'plannedEnd': plannedEnd?.toIso(),
     'destination': destination?.toJson(),
+    'autoName': autoName,
     'hiddenGaps': [...hiddenGaps]..sort(),
     'updatedAt': updatedAt.millisecondsSinceEpoch,
   };
@@ -174,6 +198,7 @@ class Trip {
     'plannedStart': plannedStart?.toIso(),
     'plannedEnd': plannedEnd?.toIso(),
     'destination': ?destination?.toJson(),
+    if (autoName) 'autoName': true,
     if (hiddenGaps.isNotEmpty) 'hiddenGaps': [...hiddenGaps]..sort(),
     if (checklist.isNotEmpty) 'checklist': {for (final item in checklist.values) item.id: item.toJson()},
     if (packing.isNotEmpty) 'packing': {for (final item in packing.values) item.id: item.toJson()},
@@ -196,6 +221,7 @@ class Trip {
       plannedStart: LocalDate.tryParse(json['plannedStart']),
       plannedEnd: LocalDate.tryParse(json['plannedEnd']),
       destination: TripDestination.tryParse(json['destination']),
+      autoName: json['autoName'] == true,
       ownerId: json['ownerId'] as String? ?? '',
       memberIds: [for (final m in json['memberIds'] as List? ?? const []) '$m'],
       memberNames: {

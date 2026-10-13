@@ -9,7 +9,7 @@ import '../domain/domain.dart';
 /// Keeps ticket and document files inside the app, so they open offline.
 ///
 /// Files are copied into `<app documents>/attachments/`. Cloud backup of
-/// these files is a Travary Plus feature (not built yet).
+/// these files is an Annual Pass feature (not built yet).
 class AttachmentStore {
   AttachmentStore._(this._directory);
 

@@ -150,6 +150,24 @@ void main() {
     expect(remindersFor([past, undated], at(10, 13, 20)), isEmpty);
   });
 
+  test('a flight within a country on one clock doesn\'t stop them; one that may change it does', () {
+    Booking flight(String title) => booking(
+      'f',
+      BookingKind.flight,
+      d(10, 14),
+      title: title,
+      at: const ClockTime(10, 0),
+      until: const ClockTime(11, 30),
+    );
+    final now = DateTime(2026, 10, 13, 20);
+    expect(nextLanding([flight('Osaka to Sapporo')], now), isNull);
+    expect(nextLanding([flight('London to Edinburgh')], now), isNull);
+    expect(nextLanding([flight('Tokyo to London')], now), DateTime(2026, 10, 14, 11, 30));
+    expect(nextLanding([flight('New York to Los Angeles')], now), isNotNull, reason: 'six time zones');
+    expect(nextLanding([flight('Madrid to Tenerife')], now), isNotNull, reason: 'the Canaries are an hour behind');
+    expect(nextLanding([flight('BA 7')], now), isNotNull, reason: 'nowhere the app can place');
+  });
+
   test('when the next flight lands', () {
     final red = booking(
       'red',

@@ -275,7 +275,7 @@ void main() {
     // Six weeks is longer than a pass covers.
     await pickDates(tester, '11/10/2026', '12/20/2026');
     expect(
-      find.text('A Trip Pass covers trips of up to 30 days, so Plus on this trip ends on 21 Nov 2026.'),
+      find.text('A Holiday Pass covers trips of up to 30 days, so it covers this trip until 21 Nov 2026.'),
       findsOneWidget,
     );
     await tester.tap(find.byKey(const ValueKey('save-trip')));

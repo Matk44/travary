@@ -15,7 +15,7 @@ import '../helpers.dart';
 void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
 
-  testWidgets('a trip longer than a Trip Pass covers is offered Plus only, and told why', (tester) async {
+  testWidgets('a trip longer than a Holiday Pass covers is offered the Annual Pass only, and told why', (tester) async {
     tester.view.physicalSize = const Size(390 * 3, 844 * 3);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
@@ -43,9 +43,15 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Travary Plus'), findsOneWidget);
-    expect(find.text('Just Gap year'), findsNothing);
-    expect(find.text('A Trip Pass covers trips of up to 30 days, so Plus is the one for Gap year.'), findsOneWidget);
+    // The pass desk, on the paywall: family sharing leads its benefits.
+    expect(find.text('Bring everyone\nalong?', findRichText: true), findsOneWidget);
+    expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsOneWidget);
+    expect(find.byKey(const ValueKey('onboarding-pass-holiday')), findsNothing);
+    expect(
+      find.text('Holiday Pass covers trips of up to 30 days. Your longer holiday can use the Annual Pass.'),
+      findsOneWidget,
+    );
+    expect(find.text('Not now'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }

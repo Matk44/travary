@@ -34,7 +34,11 @@ manifest) and ad personalisation signals. No user ID is set.
    purchases, renewals, cancellations and refunds appear in Firebase next to
    the funnel. The app already gives RevenueCat its analytics ID.
 3. Update the public pages and store forms below **before** the release
-   that sends anything.
+   that sends anything. Done 13 Oct 2026 for `privacy.html` (usage
+   statistics, flight alerts, notifications; `travary_support` commit
+   `1049de7`). Still to do: the store forms, and the exact Analytics
+   retention period in `privacy.html` ("Usage statistics" under "How long we
+   keep it").
 
 ## Privacy page wording (for `privacy.html`, to review)
 

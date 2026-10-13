@@ -20,6 +20,7 @@ class FlightFill {
     this.endDate,
     this.endTime,
     this.location,
+    this.arrival,
     required this.flightNumber,
   });
 
@@ -37,6 +38,9 @@ class FlightFill {
   /// leg: "London Heathrow (LHR)".
   final String? location;
 
+  /// The arrival airport, the same way: "Los Angeles (LAX)".
+  final String? arrival;
+
   /// As the airline writes it: "BA 283".
   final String flightNumber;
 }
@@ -53,6 +57,7 @@ FlightFill? flightFill(FlightStatus leg, {required String typedNumber}) {
     endDate: lands == null ? null : keptEndDate(departs.date, lands.date, startTime: departs.time, endTime: lands.time),
     endTime: lands?.time,
     location: _airport(leg.departure),
+    arrival: _airport(leg.arrival),
     flightNumber: leg.number.isEmpty ? typedNumber : leg.number,
   );
 }

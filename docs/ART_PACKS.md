@@ -136,9 +136,10 @@ the country's:
 | `region_us_hawaii` | region | `hawaii`, `maui` |
 | `region_us_arizona`, `region_us_alaska` | region | `arizona`, `alaska` |
 
-A trip downloads **one** destination pack, so each of these carries what
-`country_us` has (both postcards and its palette) beside its three new
-shells: a New York trip never loses the US postcard or colours. Orlando's
+Each of these carries what `country_us` has (both postcards and its
+palette) beside its three new shells, so a New York trip never loses the US
+postcard or colours even before `country_us` (now downloaded beside it, to
+fall back on) arrives. Orlando's
 city pack outranks Florida's; every other Florida city (Miami, Tampa, the
 Keys) gets Florida's, every California city (San Francisco included) gets
 California's, and a US place with neither (Texas, Austin, Denver) stays on
@@ -282,12 +283,26 @@ For each current or coming trip (`lib/logic/art_pack_selection.dart`):
 | `unverified` (location confidence ≥ 0.8) | country only | the look's pack first |
 | `conflict`, `skipped`, no profile | none | |
 
-It downloads the smallest set that covers the trip: one destination pack and
-one pack for the trip's look (ties: drawn for the look, then priority, then
-subjects covered, then ID). Classic art is bundled and never downloaded. A
-pack matches only at its own scope, so a Kyoto pack never stands in for
-Tokyo. Cards then resolve city → region → country → look → secondary look
-→ core, by subject first, then generic (`lib/design/art/art_resolver.dart`).
+It downloads, in order: the trip's best destination pack and one pack for
+its look (ties: drawn for the look, then priority, then subjects covered,
+then ID), then the best destination pack of every other place its bookings
+are in, then the country pack of each, for what a city's or region's pack
+doesn't draw. Classic art is bundled and never downloaded. A pack matches
+only at its own scope, so a Kyoto pack never stands in for Tokyo. Cards then
+resolve city → region → country → look → secondary look → core, by subject
+first, then generic (`lib/design/art/art_resolver.dart`).
+
+**A trip through several places.** Each card's ranks are at the place its
+booking is in (`TripRoute.placeOf`, `lib/logic/trip_route.dart`): where a
+transfer arrives, else its address or name, else where the traveller is
+staying at its time (a move splits its day at the train's arrival or the
+hotel's check-in). On Osaka, Kyoto and Tokyo, Kyoto's days take
+`city_jp_kyoto` then `country_jp`, and Osaka's and Tokyo's `country_jp`
+until they have packs. Only places in the trip's own country count, or
+another that two of its bookings name. The trip's own art (postcards,
+palette, Documents stamp) is at `tripArtLocation`: the trip's place, or the
+country (or the one region they share) when it stays in several places
+there and the traveller didn't choose one.
 Card shells, icons and interface surfaces follow the same ranks
 (`ArtCatalog.commonArt`/`iconArt`, `ShellResolver`): a destination pack's
 `featured_ticket` replaces the bundled ticket, and bundled shells are
@@ -369,10 +384,13 @@ stored in the repository. `--dry-run` reads and writes nothing remote.
 
 Published so far (3 October 2026, catalog v30): 25 country packs, the
 Paris, Kyoto and Orlando city packs, and the Lake District and Bali region
-packs, all in WebP. Built into `art_packs/catalog.json` (v94) but **not yet
-published**: Orlando v2 and the 13 US city and region packs above; the
-`publish --dry-run` lists their archives as ready. `seed_themepark` is for
-tests and local development only and is never published.
+packs, all in WebP. Catalog **v96 published 13 October 2026** (43 packs):
+Orlando v2, the 13 US city and region packs above, `country_us` v4 and
+`region_gb_lake_district` v2. `publish` needs every archive in the bucket or
+in `build/art_packs/`, and `build` regenerates a missing archive from its
+source without changing the catalog (the zips are reproducible).
+`seed_themepark` is for tests and local development only and is never
+published.
 
 ## Local development with the emulators
 

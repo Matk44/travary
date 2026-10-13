@@ -270,7 +270,18 @@ class _TodayScreenState extends State<TodayScreen> {
 
   List<Widget> _daySlivers(BuildContext context, TravelStore store, DayPlan dayPlan) {
     final layout = layOutDay(dayPlan, store.today);
-    final art = store.artForAll([for (final e in dayPlan.entries) e.booking]);
+    // Art is chosen in the order the cards are shown (the layout moves the
+    // untimed ones after the featured card): neighbours never repeat, and
+    // only the day's tagged cards share a printed picture.
+    final shown = [
+      for (final row in layout.rows)
+        if (row is EntryRow) row,
+    ];
+    final order = [for (final row in shown) row.index, ...layout.earlier];
+    final picked = store.artForAll([
+      for (final i in order) dayPlan.entries[i].booking,
+    ], tagged: (k) => k < shown.length && !shown[k].featured && dayPlan.entries[order[k]].status != EntryStatus.done);
+    final art = {for (final (k, i) in order.indexed) i: picked[k]};
 
     Widget card(int index, {bool featured = false}) {
       final entry = dayPlan.entries[index];
@@ -279,7 +290,7 @@ class _TodayScreenState extends State<TodayScreen> {
       final live = liveFlightLineFor(entry.booking, store.liveFlightFor(entry.booking), store.now);
       return BookingCard(
         text: cardTextForEntry(entry, highlighted: featured).withLive(live),
-        art: art[index],
+        art: art[index]!,
         size: size,
         status: entry.status,
         onTap: () => openBooking(context, entry.booking),

@@ -14,7 +14,7 @@ void main() {
   test("a coming trip's tag, already worded", () {
     final text = tripPostcardTextFor(lakes(), d(9, 28))!;
     expect(text.days, '58');
-    expect(text.daysLabel, 'DAYS');
+    expect(text.daysLabel, 'DAYS TO GO');
     expect(text.place, 'Lake District');
     expect(text.dates, '25–28 Nov 2026');
     expect(text.facts, ['4 days', '3 bookings']);
@@ -25,7 +25,7 @@ void main() {
   test('tomorrow is 1 DAY; one booking; nothing booked yet', () {
     final tomorrow = tripPostcardTextFor(lakes(bookings: 1), d(11, 24))!;
     expect(tomorrow.days, '1');
-    expect(tomorrow.daysLabel, 'DAY');
+    expect(tomorrow.daysLabel, 'DAY TO GO');
     expect(tomorrow.factsLine, '4 days · 1 booking');
     expect(tomorrow.semanticLabel, startsWith('Lake District, 1 day to go, '));
 
@@ -34,8 +34,22 @@ void main() {
     expect(planned.semanticLabel, 'Lake District, 58 days to go, 25 to 28 November 2026. 4 days.');
   });
 
-  test('none once the trip has started, or without dates', () {
-    expect(tripPostcardTextFor(lakes(), d(11, 25)), isNull);
+  test('a trip you are on counts the days left, today included, and says which day it is', () {
+    final first = tripPostcardTextFor(lakes(), d(11, 25))!;
+    expect((first.days, first.daysLabel), ('4', 'DAYS LEFT'));
+    expect(first.facts, ['Day 1 of 4', '3 bookings']);
+    expect(first.semanticLabel, 'Lake District, 4 days left, 25 to 28 November 2026. Day 1 of 4, 3 bookings.');
+
+    final last = tripPostcardTextFor(lakes(bookings: 1), d(11, 28))!;
+    expect((last.days, last.daysLabel), ('1', 'DAY LEFT'));
+    expect(last.factsLine, 'Day 4 of 4 · 1 booking');
+    expect(last.semanticLabel, startsWith('Lake District, 1 day left, '));
+
+    expect(tripPostcardTextFor(lakes(bookings: 0), d(11, 26))!.facts, ['Day 2 of 4']);
+  });
+
+  test('none once the trip is over, or without dates', () {
+    expect(tripPostcardTextFor(lakes(), d(11, 29)), isNull);
     expect(tripPostcardTextFor(lakes(), d(12, 1)), isNull);
     expect(tripPostcardTextFor(TripPlan(trip('undated'), const []), d(9, 28)), isNull);
   });

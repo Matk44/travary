@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travary/domain/domain.dart';
+import 'package:travary/logic/destinations.dart';
 import 'package:travary/logic/trip_assignment.dart';
 import 'package:travary/logic/trip_plan.dart';
 
@@ -166,6 +167,100 @@ void main() {
 
     test('falls back to the month', () {
       expect(suggestTripTitle(booking('h', BookingKind.stay, d(10, 12))), 'October trip');
+    });
+
+    test('a flight home from another city of the trip joins it too', () {
+      final japan = buildTripPlans(
+        [trip('japan')],
+        [
+          booking('out', BookingKind.flight, d(11, 1), tripId: 'japan', title: 'London to Osaka'),
+          booking('stay', BookingKind.stay, d(11, 2), tripId: 'japan', endDate: d(11, 5), location: 'Osaka'),
+        ],
+      );
+      Booking flight(String title) => booking('home', BookingKind.flight, d(11, 14), title: title);
+      expect(
+        findReturnFlightTrip(flight('Tokyo to London'), japan)?.id,
+        'japan',
+        reason: 'in to Osaka, home from Tokyo',
+      );
+      expect(findReturnFlightTrip(flight('Paris to London'), japan), isNull, reason: 'another trip');
+      expect(findReturnFlightTrip(flight('Manchester to London'), japan), isNull, reason: 'home\'s own country');
+    });
+
+    test('so does the first leg home by way of the stopover', () {
+      final japan = buildTripPlans(
+        [trip('japan')],
+        [
+          booking('a', BookingKind.flight, d(11, 1), tripId: 'japan', title: 'London to Dubai'),
+          booking('b', BookingKind.flight, d(11, 1), tripId: 'japan', title: 'Dubai to Osaka'),
+        ],
+      );
+      final first = booking('c', BookingKind.flight, d(11, 14), title: 'Tokyo to Dubai');
+      expect(findReturnFlightTrip(first, japan)?.id, 'japan');
+    });
+  });
+
+  group('naming a trip', () {
+    final viaDubai = [
+      booking('a', BookingKind.flight, d(11, 1), title: 'London to Dubai', at: const ClockTime(9, 0)),
+      booking('b', BookingKind.flight, d(11, 1), title: 'Dubai to Osaka', at: const ClockTime(21, 0)),
+    ];
+
+    test('after where its bookings go, with that place', () {
+      final name = suggestTripName(viaDubai);
+      expect(name.title, 'Osaka');
+      expect(name.destination, detectPlace('Osaka')!.destination);
+      expect(
+        suggestTripName([booking('f', BookingKind.flight, d(10, 12), title: 'London to orlando')]).title,
+        'Orlando',
+      );
+    });
+
+    test('somewhere the app doesn\'t know: the old way, with no place', () {
+      final name = suggestTripName([booking('h', BookingKind.stay, d(10, 12), location: 'Grandma\'s')]);
+      expect((name.title, name.destination), ('Grandma\'s', null));
+    });
+
+    group('an automatic name follows the bookings', () {
+      final dubai = Trip(
+        id: 't',
+        title: 'Dubai',
+        destination: detectPlace('Dubai')!.destination,
+        autoName: true,
+        ownerId: 'me',
+        memberIds: const ['me'],
+        createdAt: DateTime(2026),
+        updatedAt: DateTime(2026),
+      );
+
+      test('to where they go now', () {
+        final renamed = followBookings(dubai, viaDubai)!;
+        expect((renamed.title, renamed.destination?.name, renamed.autoName), ('Osaka', 'Osaka', true));
+        final kyoto = booking('k', BookingKind.stay, d(11, 2), title: 'Hotel Granvia Kyoto', endDate: d(11, 5));
+        final tokyo = booking('t', BookingKind.stay, d(11, 5), endDate: d(11, 9), location: 'Minato, Tokyo');
+        expect(followBookings(renamed, [...viaDubai, kyoto, tokyo])?.title, 'Japan');
+      });
+
+      test('nothing when they still say the same', () {
+        expect(followBookings(dubai, [viaDubai.first]), isNull);
+      });
+
+      test('several countries: the name stays, the place goes', () {
+        final europe = [
+          booking('p', BookingKind.stay, d(6, 1), endDate: d(6, 5), location: 'Paris'),
+          booking('r', BookingKind.stay, d(6, 5), endDate: d(6, 8), location: 'Rome'),
+        ];
+        final mixed = followBookings(dubai, europe)!;
+        expect((mixed.title, mixed.destination), ('Dubai', null));
+      });
+
+      test('bookings that name nowhere change nothing', () {
+        expect(followBookings(dubai, [booking('l', BookingKind.dining, d(11, 3), title: 'Lunch')]), isNull);
+      });
+
+      test('a name the traveller gave never changes', () {
+        expect(followBookings(dubai.copyWith(autoName: false), viaDubai), isNull);
+      });
     });
   });
 }

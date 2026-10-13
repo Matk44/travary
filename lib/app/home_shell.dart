@@ -200,7 +200,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
     if (notifications.takeToOpen() case final alert?) _openBooking(alert.bookingId);
   }
 
-  /// A screenshot or PDF shared into Travary: read like "Snap a booking",
+  /// A screenshot or PDF shared into Travary: read like Smart Import,
   /// over whatever is open, once the trips have loaded.
   Future<void> _readShare() async {
     final shares = _shares;

@@ -46,7 +46,7 @@ String ticketsNotKeptText(int bookings) =>
 
 /// What a Trip Pass covers, on the trip's details: "Trip Pass, until 30
 /// Oct 2026" ([lastDay] from `tripPassLastDay`).
-String tripPassCoversText(LocalDate lastDay) => 'Trip Pass, until ${formatDate(lastDay)}';
+String tripPassCoversText(LocalDate lastDay) => 'Holiday Pass, until ${formatDate(lastDay)}';
 
 /// Under a trip's new dates, [start] to [end], when its Trip Pass won't
 /// stretch to them (too long a trip, or another time altogether): when Plus
@@ -54,12 +54,32 @@ String tripPassCoversText(LocalDate lastDay) => 'Trip Pass, until ${formatDate(l
 String? tripPassEndsText(TripPass pass, LocalDate start, LocalDate end) {
   final lastDay = tripPassLastDay(pass, start, end);
   if (lastDay == null) {
-    return 'Your Trip Pass is for ${formatDayMonthRange(pass.start, pass.end)}, so it won\'t cover a trip on these dates.';
+    return 'Your Holiday Pass is for ${formatDayMonthRange(pass.start, pass.end)}, so it won\'t cover a trip on these dates.';
   }
   if (!end.addDays(Pricing.tripPassGraceDays).isAfter(lastDay)) return null;
-  final ends = 'so Plus on this trip ends on ${formatDate(lastDay)}.';
+  final ends = 'so it covers this trip until ${formatDate(lastDay)}.';
   if (start.daysUntil(end) + 1 > Pricing.tripPassMaxDays) {
-    return 'A Trip Pass covers trips of up to ${Pricing.tripPassMaxDays} days, $ends';
+    return 'A Holiday Pass covers trips of up to ${Pricing.tripPassMaxDays} days, $ends';
   }
-  return 'Your Trip Pass is for ${formatDayMonthRange(pass.start, pass.end)}, $ends';
+  return 'Your Holiday Pass is for ${formatDayMonthRange(pass.start, pass.end)}, $ends';
+}
+
+/// What the Annual Pass or a Holiday Pass adds, on the pass desk and the
+/// paywall: family first, then every ticket, then Smart Import, and flight
+/// alerts once they're on sale. [first]: the one they just reached for,
+/// moved to the top.
+List<String> passBenefits({PremiumFeature? first, bool flightAlerts = false}) {
+  final lines = <PremiumFeature, String>{
+    PremiumFeature.familySharing: 'Everyone coming gets the plan and their own tickets',
+    PremiumFeature.ticketBackup:
+        'Every ticket and confirmation kept and backed up (free keeps ${Pricing.freeTicketFiles})',
+    PremiumFeature.smartImport: 'I\'ll read the rest of your confirmations for you',
+    if (flightAlerts) PremiumFeature.flightAlerts: 'Delays and new times on everyone\'s phone',
+  };
+  final top = lines[first];
+  return [
+    ?top,
+    for (final entry in lines.entries)
+      if (entry.key != first) entry.value,
+  ];
 }

@@ -50,7 +50,8 @@ void main() {
     expect(offers.first.productId, 'store_summer_holiday');
     expect(offers.first.packageId, 'summer_holiday');
     expect(offers.first.offeringId, 'onboarding');
-    expect(offers.first.displayTitle, 'Family Holiday Pass');
+    expect(offers.first.title, 'Family Holiday Pass');
+    expect(offers.first.displayTitle, 'Holiday Pass', reason: 'the app names its plans itself');
     expect(offers.first.displayScope, 'This trip, together');
     expect(priceOf(offers.first), '14,99 €');
     expect(offers.first.amount, 14.99);
@@ -88,6 +89,7 @@ void main() {
   test('an annual package can use its store title when no custom metadata exists', () {
     final offers = offersFromRevenueCat(offering(const {}, [package('yearly', annual: true)]));
     expect(offers.single.kind, OfferKind.plusAnnual);
-    expect(offers.single.displayTitle, 'Store title');
+    expect(offers.single.title, 'Store title');
+    expect(offers.single.displayTitle, 'Annual Pass', reason: 'the app names its plans itself');
   });
 }

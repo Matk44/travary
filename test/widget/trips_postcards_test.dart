@@ -77,8 +77,8 @@ void main() {
 
       expect(find.byType(UpcomingTripPostcard), findsNWidgets(3));
       for (final (trip, lines, facts) in [
-        ('lakes', ['58', 'DAYS', 'Lake District', '25–28 Nov 2026'], ['4 days', '3 bookings']),
-        ('kyoto', ['194', 'DAYS', 'Kyoto', '10–16 Apr 2027'], ['7 days', '2 bookings']),
+        ('lakes', ['58', 'DAYS TO GO', 'Lake District', '25–28 Nov 2026'], ['4 days', '3 bookings']),
+        ('kyoto', ['194', 'DAYS TO GO', 'Kyoto', '10–16 Apr 2027'], ['7 days', '2 bookings']),
       ]) {
         for (final line in lines) {
           expect(inPostcard(trip, find.text(line)), findsOneWidget, reason: '$trip: $line');
@@ -168,16 +168,39 @@ void main() {
       expect(tester.widget<TripScreen>(find.byType(TripScreen)).tripId, 'kyoto');
     });
 
-    testWidgets('tomorrow reads 1 DAY, counted by the calendar at any hour', (tester) async {
+    testWidgets('tomorrow reads 1 DAY TO GO, counted by the calendar at any hour', (tester) async {
       for (final now in [DateTime(2026, 11, 24, 0, 5), DateTime(2026, 11, 24, 23, 55)]) {
         await pumpTrips(tester, now: now);
         expect(inPostcard('lakes', find.text('1')), findsOneWidget, reason: '$now');
-        expect(inPostcard('lakes', find.text('DAY')), findsOneWidget);
+        expect(inPostcard('lakes', find.text('DAY TO GO')), findsOneWidget);
       }
       // 25 October 2026: UK clocks go back, a 25-hour day.
       await pumpTrips(tester, now: DateTime(2026, 10, 25, 23, 30));
       expect(inPostcard('lakes', find.text('31')), findsOneWidget);
-      expect(inPostcard('lakes', find.text('DAYS')), findsOneWidget);
+      expect(inPostcard('lakes', find.text('DAYS TO GO')), findsOneWidget);
+    });
+  });
+
+  group('happening now', () {
+    testWidgets('the trip you are on is on its postcard too, with the days left and which day it is', (tester) async {
+      // The Lake District's second day: the 26th of 25–28 November.
+      await pumpTrips(tester, now: DateTime(2026, 11, 26, 9));
+
+      expect(postcard('lakes'), findsOneWidget);
+      for (final line in ['3', 'DAYS LEFT', 'Lake District', '25–28 Nov 2026']) {
+        expect(inPostcard('lakes', find.text(line)), findsOneWidget, reason: line);
+      }
+      expectFacts('lakes', ['Day 2 of 4', '3 bookings']);
+      expect(find.text('HAPPENING NOW'), findsOneWidget);
+      expect(find.text('COMING UP'), findsOneWidget, reason: 'Kyoto and the rest are still ahead');
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('the last day says 1 DAY LEFT', (tester) async {
+      await pumpTrips(tester, now: DateTime(2026, 11, 28, 20));
+      expect(inPostcard('lakes', find.text('1')), findsOneWidget);
+      expect(inPostcard('lakes', find.text('DAY LEFT')), findsOneWidget);
+      expectFacts('lakes', ['Day 4 of 4', '3 bookings']);
     });
   });
 
@@ -360,7 +383,7 @@ void main() {
 void _expectOnTagCard(
   WidgetTester tester,
   String tripId, {
-  List<String> lines = const ['58', 'DAYS', 'Lake District', '25–28 Nov 2026'],
+  List<String> lines = const ['58', 'DAYS TO GO', 'Lake District', '25–28 Nov 2026'],
 }) {
   final row = find.byKey(ValueKey('trip-postcard-$tripId'));
   final tagFinder = find.descendant(of: row, matching: find.byKey(const ValueKey('trip-tag-raster')));

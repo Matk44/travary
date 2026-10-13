@@ -162,28 +162,42 @@ class _TicketButton extends StatelessWidget {
       ),
     );
 
+    // The stamp or paper button is drawn at its anchor's own size: the tap
+    // target around it may be bigger, but the picture mustn't cover the
+    // line above it.
+    final anchor = ShellAnchor.maybeOf(context);
+    Widget sized(Widget child) => anchor == null
+        ? child
+        : Center(
+            child: SizedBox(width: anchor.width, height: anchor.height, child: child),
+          );
+
     final Widget face;
     if (framed) {
       face = Center(child: words);
     } else if (stamp != null) {
-      face = Stack(
-        fit: StackFit.expand,
-        children: [
-          // `common/stamp.png` is made at the frame's 3.3:1; never stretched.
-          Image(image: artImageProvider(stamp), fit: BoxFit.contain),
-          Center(child: words),
-        ],
+      face = sized(
+        Stack(
+          fit: StackFit.expand,
+          children: [
+            // `common/stamp.png` is made at the frame's 3.3:1; never stretched.
+            Image(image: artImageProvider(stamp), fit: BoxFit.contain),
+            Center(child: words),
+          ],
+        ),
       );
     } else {
       // Missing `common/stamp.png` (docs/ART_ASSET_GAPS.md).
-      face = DecoratedBox(
-        key: const ValueKey('stamp-fallback'),
-        decoration: BoxDecoration(
-          color: TravaryColors.paper,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: colors.ink, width: 2),
+      face = sized(
+        DecoratedBox(
+          key: const ValueKey('stamp-fallback'),
+          decoration: BoxDecoration(
+            color: TravaryColors.paper,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: colors.ink, width: 2),
+          ),
+          child: Center(child: words),
         ),
-        child: Center(child: words),
       );
     }
 

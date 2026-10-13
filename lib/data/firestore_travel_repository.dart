@@ -72,6 +72,15 @@ class FirestoreTravelRepository implements TravelRepository {
   @override
   Future<void> updateTrip(Trip trip) async => _sync(_trips.doc(trip.id).update(trip.toEditableJson()));
 
+  @override
+  Future<void> renameTrip(String tripId, {required String title, TripDestination? destination}) async => _sync(
+    _trips.doc(tripId).update({
+      'title': title,
+      'destination': destination?.toJson(),
+      'updatedAt': DateTime.now().millisecondsSinceEpoch,
+    }),
+  );
+
   /// One field of the trip's checklist (or packing) map, so items others
   /// change at the same moment are kept.
   @override

@@ -1,7 +1,7 @@
 import 'local_date.dart';
 import 'pricing.dart';
 
-/// Everything Travary Plus (or a Trip Pass) unlocks.
+/// Everything the Annual Pass (or a Holiday Pass) unlocks.
 ///
 /// Rule of the house: a traveller's own tickets and bookings are never
 /// behind a paywall. Only these extras are.
@@ -44,11 +44,11 @@ enum PremiumFeature {
   };
 }
 
-/// Flight alerts go on sale in release builds with
-/// `--dart-define=TRAVARY_FLIGHT_ALERTS=true`, once the server's checker is
-/// deployed and push is set up (the APNs key in Firebase). Debug builds
-/// show them regardless.
-const flightAlertsReleased = bool.fromEnvironment('TRAVARY_FLIGHT_ALERTS');
+/// Flight alerts are on sale in every build (the server's checker is
+/// deployed). `--dart-define=TRAVARY_FLIGHT_ALERTS=false` hides them, a
+/// build-time kill switch. iOS needs the APNs key in Firebase before a build
+/// reaches anyone, or its phones are sold alerts that never arrive.
+const flightAlertsReleased = bool.fromEnvironment('TRAVARY_FLIGHT_ALERTS', defaultValue: true);
 
 /// The three reasons people pay, most important first, used to group the
 /// paywall.
@@ -62,7 +62,7 @@ enum PremiumPillar {
   final String label;
 }
 
-/// A Travary Plus subscription (annual, no free trial: premium features
+/// An Annual Pass subscription (yearly, no free trial: premium features
 /// sell themselves where they're needed).
 class PlusSubscription {
   const PlusSubscription({required this.expiresAt, this.willRenew = true});

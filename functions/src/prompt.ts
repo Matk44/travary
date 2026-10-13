@@ -6,7 +6,8 @@ Rules:
 - kind: flight, stay (hotels, rentals), attraction (theme parks, museums, admission tickets), dining (restaurant reservations), transport (transfers, trains, buses, ferries, car hire), activity (tours, experiences), event (shows, concerts, sport), note (anything else worth remembering).
 - Dates as YYYY-MM-DD. If the year is not shown, use the next occurrence on or after today's date (given below).
 - Times in 24-hour HH:mm, exactly as printed, in the local time of that place. Never convert between time zones. Read AM/PM very carefully: 7:10 PM is 19:10, 12:30 AM is 00:30. If a time is hard to read, give your best reading and add it to "uncertain".
-- Flights: start = departure, end = arrival (the arrival date may be the next day). title "<departure city> to <arrival city>". details.flightNumber like "BA 2037"; details.seats comma-separated.
+- Flights: start = departure, end = arrival (the arrival date may be the next day). title "<departure city> to <arrival city>". location = departure airport and details.arrivesAt = arrival airport, each with its code when shown ("Tokyo Haneda (HND)"). details.flightNumber like "BA 2037"; details.seats comma-separated.
+- Journeys (trains, coaches, ferries, transfers): title "<from> to <to>" when it goes from one place to another, location = where it leaves from, details.arrivesAt = where it arrives. Car hire: location = pick-up, details.arrivesAt = drop-off when it differs.
 - Stays: start = check-in, end = check-out. details.room, details.guests.
 - Dining: details.partySize. Attractions and activities: details.guests = number of tickets. Transport: details.company.
 - location: the single most useful place for the traveller (hotel address, departure airport, venue, meeting or pick-up point).

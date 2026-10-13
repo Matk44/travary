@@ -186,6 +186,17 @@ class TripLocationHint {
   final LocationVerification verification;
   final String? placeId;
 
+  /// The wider area this place is in: its country, or its region when
+  /// [keepRegion]. Trusted exactly as much as the place itself.
+  TripLocationHint widened({bool keepRegion = false}) => TripLocationHint(
+    countryCode: countryCode,
+    countryName: countryName,
+    region: keepRegion ? region : null,
+    regionSlug: keepRegion ? regionSlug : null,
+    confidence: confidence,
+    verification: verification,
+  );
+
   static TripLocationHint? tryParse(Object? json) {
     if (json is! Map) return null;
     String? text(String key, int max) {

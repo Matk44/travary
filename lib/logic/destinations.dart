@@ -88,6 +88,12 @@ final List<Place> places = List.unmodifiable(_buildPlaces());
 /// The country's own entry.
 Place countryPlace(String countryCode) => _countries[countryCode]!;
 
+/// The place whose own name is exactly [name] ("Nice", "Kyoto"), even one
+/// never detected on its own, or null.
+Place? placeNamed(String name) => _byName[name];
+
+final Map<String, Place> _byName = {for (final place in places.reversed) place.name: place};
+
 /// Lower case, no accents or punctuation, single spaces: how names are
 /// compared ("Côte d’Ivoire" → "cote d ivoire").
 String foldPlaceText(String text) {
@@ -217,7 +223,10 @@ class _Hit {
   bool overlaps(_Hit other) => at < other.at + other.length && other.at < at + length;
 }
 
-/// Whether [outer] is a wider place that [inner] lies in.
+/// Whether [outer] is a wider place that [inner] lies in: Japan holds
+/// Kyoto, England the Lake District.
+bool placeContains(Place outer, Place inner) => _contains(outer, inner);
+
 bool _contains(Place outer, Place inner) {
   if (outer.countryCode != inner.countryCode) return false;
   if (outer.isCountry) return !inner.isCountry;

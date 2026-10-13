@@ -24,11 +24,11 @@ class PlusCard extends StatelessWidget {
     final String body;
     if (policy.hasPlus && plus != null) {
       final date = formatDate(LocalDate.fromDateTime(plus.expiresAt));
-      title = 'Travary Plus';
+      title = 'Annual Pass';
       body = plus.willRenew ? 'Renews on $date.' : 'Ends on $date.';
     } else {
       final left = policy.freeSmartImportsLeft;
-      title = 'Travary Plus';
+      title = 'Annual Pass';
       body =
           'Everyone on your trips gets the plan and their own tickets, backed up and in sync. '
           '$left free Smart Import${left == 1 ? '' : 's'} left.';
@@ -73,13 +73,15 @@ class PlusCard extends StatelessWidget {
               for (final trip in passes)
                 Padding(
                   padding: const EdgeInsets.only(top: TravarySpace.xs),
-                  child: Text('Trip Pass: $trip', style: TravaryText.label),
+                  child: Text('Holiday Pass: $trip', style: TravaryText.label),
                 ),
               if (!policy.hasPlus) ...[
                 const SizedBox(height: TravarySpace.md),
                 FilledButton(
-                  onPressed: () => showPaywall(context, source: 'profile'),
-                  child: const Text('See Travary Plus'),
+                  // The trip on now or coming next: its Holiday Pass is on offer too.
+                  onPressed: () =>
+                      showPaywall(context, tripId: context.read<TravelStore>().focus.plan?.id, source: 'profile'),
+                  child: const Text('See the Annual Pass'),
                 ),
               ],
               TextButton(

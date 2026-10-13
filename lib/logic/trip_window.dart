@@ -96,7 +96,9 @@ class TripPlacement {
 /// [editing]: the booking being edited, left out of every trip's dates;
 /// with [datesChanged] false it stays where it is. [looseMarginDays]: how
 /// far from a formed trip's bookings still fits it (wider for Smart
-/// Import, whose dates come off the ticket).
+/// Import, whose dates come off the ticket). [booking]: the booking as the
+/// form stands, so a flight home finds the trip it ends
+/// ([findReturnFlightTrip]), as saving it will.
 TripPlacement placeBooking({
   required LocalDate start,
   required LocalDate end,
@@ -106,10 +108,15 @@ TripPlacement placeBooking({
   String? editing,
   bool datesChanged = true,
   int looseMarginDays = tripMarginDays,
+  Booking? booking,
 }) {
   final trips = editing == null ? plans : [for (final plan in plans) withoutBooking(plan, editing)];
   final asked = tripId.isEmpty ? null : trips.where((p) => p.id == tripId).firstOrNull;
-  if (asked == null) return TripPlacement(findTripFor(start, end, trips));
+  if (asked == null) {
+    return TripPlacement(
+      findTripFor(start, end, trips) ?? (booking == null ? null : findReturnFlightTrip(booking, trips)),
+    );
+  }
   if (chosen || !datesChanged || fitsTrip(start, end, asked, looseMarginDays: looseMarginDays)) {
     // Alone in a trip of its own: new dates inside another trip join it.
     if (!chosen && datesChanged && asked.bookings.isEmpty && asked.trip.plannedStart == null) {
@@ -183,3 +190,83 @@ TripPlan? overlappingTrip(LocalDate start, LocalDate end, List<TripPlan> plans, 
 /// Japan holiday (11–23 Oct)."
 String overlapText(TripPlan other) =>
     'These dates overlap ${other.trip.title} (${formatDayMonthRange(other.start!, other.end!)}).';
+
+/// Where one of a file's bookings goes (everything Smart Import found in
+/// it, saved together): a trip that's there already, or the file's n-th
+/// new trip.
+class ImportPlace {
+  const ImportPlace.trip(String this.tripId) : group = null;
+  const ImportPlace.newTrip(int this.group) : tripId = null;
+
+  final String? tripId;
+  final int? group;
+
+  /// The same for every booking going to the same trip: its ID, or
+  /// `new:<n>`.
+  String get key => tripId ?? 'new:$group';
+}
+
+/// Where each of one file's [bookings] (in date order, as they're saved)
+/// goes among [plans], in their order. One that has a trip keeps it; one
+/// whose dates, or route home ([findReturnFlightTrip]), belong to a trip
+/// joins it; the rest join a trip the file has already put bookings in,
+/// within [sameSourceMarginDays] of them and inside its planned dates if it
+/// has any ([bookingWindowFor]), else make a new trip.
+///
+/// What saves them (`TravelStore.saveBookings`) and what checks a free
+/// holiday's room for their file first (Smart Import) both go by this, so
+/// a file never lands in a trip it wasn't counted against.
+List<ImportPlace> placeImport(List<Booking> bookings, List<TripPlan> plans) {
+  final spans = <_FileSpan>[];
+  var newTrips = 0;
+  final places = <ImportPlace>[];
+  for (final booking in bookings) {
+    final start = booking.startDate;
+    final end = booking.lastDate;
+    final ImportPlace place;
+    if (booking.tripId.isNotEmpty) {
+      place = ImportPlace.trip(booking.tripId);
+    } else if ((findTripFor(start, end, plans) ?? findReturnFlightTrip(booking, plans)) case final match?) {
+      place = ImportPlace.trip(match.id);
+    } else {
+      place = spans.where((span) => span.takes(start, end)).firstOrNull?.place ?? ImportPlace.newTrip(newTrips++);
+    }
+    final span = spans.where((span) => span.place.key == place.key).firstOrNull;
+    if (span != null) {
+      span.stretch(start, end);
+    } else {
+      final plan = plans.where((p) => p.id == place.tripId).firstOrNull;
+      final booked = plan != null && plan.hasDates;
+      spans.add(
+        _FileSpan(
+          place,
+          booked ? LocalDate.min(plan.start!, start) : start,
+          booked ? LocalDate.max(plan.end!, end) : end,
+          plan == null ? null : bookingWindowFor(plan),
+        ),
+      );
+    }
+    places.add(place);
+  }
+  return places;
+}
+
+/// A trip a file is putting bookings in, and the days it covers so far.
+class _FileSpan {
+  _FileSpan(this.place, this.start, this.end, this.window);
+
+  final ImportPlace place;
+  LocalDate start;
+  LocalDate end;
+
+  /// Its planned days, if it keeps to them.
+  final DateWindow? window;
+
+  bool takes(LocalDate from, LocalDate to) =>
+      gapBetween(from, to, start, end) <= sameSourceMarginDays && (window?.covers(from, to) ?? true);
+
+  void stretch(LocalDate from, LocalDate to) {
+    start = LocalDate.min(start, from);
+    end = LocalDate.max(end, to);
+  }
+}

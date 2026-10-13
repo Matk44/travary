@@ -170,10 +170,10 @@ class _Details extends StatelessWidget {
               ),
             ),
             if (covered) ...[
-              heading('Travary Plus'),
+              heading('Your pass'),
               PaperPanel(
                 child: PaperRow(
-                  title: pass == null ? 'Plus covers this trip' : 'A Trip Pass covers this trip',
+                  title: pass == null ? 'Annual Pass covers this trip' : 'A Holiday Pass covers this trip',
                   subtitle: pass == null
                       ? 'Smart Import, family sharing and ticket backup for everyone on it'
                       : '${tripPassCoversText(tripPassLastDay(pass, plan.start, plan.end)!)}. '
@@ -245,7 +245,7 @@ class _Details extends StatelessWidget {
             count == 0
                 ? 'This trip has no bookings.'
                 : 'Its $count ${count == 1 ? 'booking' : 'bookings'} and their tickets will be deleted too.',
-            if (hasPass) 'Its Trip Pass goes with it: a pass can\'t be moved to another trip.',
+            if (hasPass) 'Its Holiday Pass goes with it: a pass can\'t be moved to another trip.',
           ].join('\n\n'),
         ),
         actions: [

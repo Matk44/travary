@@ -41,7 +41,7 @@ export const createTripInvite = onCall({ secrets: [revenueCatApiKey] }, async (r
     throw new HttpsError('invalid-argument', 'Which trip?');
   }
   if (!(await hasPremium(db(), revenueCatApi(revenueCatApiKey.value()), uid, tripId))) {
-    throw new HttpsError('permission-denied', 'Inviting family to this trip needs Travary Plus or a Holiday Pass for it.');
+    throw new HttpsError('permission-denied', 'Inviting family to this trip needs the Annual Pass or a Holiday Pass for it.');
   }
 
   const tripRef = db().collection('trips').doc(tripId);

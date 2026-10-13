@@ -52,15 +52,25 @@ class TraviFilm {
 String traviStillAsset(TraviPose pose) => 'assets/onboarding/travi/stills/${pose.name}.webp';
 
 /// A pose to reach and how long to hold it before the next one. The last
-/// cue holds until the beat changes, looping its idle.
-typedef TraviCue = ({TraviPose pose, Duration hold});
+/// cue holds until the beat changes, looping its idle. [direct]: dissolve
+/// there instead of playing the films between, when they'd act out
+/// something that isn't happening (the ID tag, with no sign-in offered).
+typedef TraviCue = ({TraviPose pose, Duration hold, bool direct});
 
-TraviCue _cue(TraviPose pose, [Duration hold = Duration.zero]) => (pose: pose, hold: hold);
+TraviCue _cue(TraviPose pose, [Duration hold = Duration.zero, bool direct = false]) =>
+    (pose: pose, hold: hold, direct: direct);
 
 /// What Travi does at [beat]. [bought]: a pass was just bought (he cheers
 /// first). [fresh]: the booking was saved just now, so he shows its card
 /// before tossing it into the plan; coming back to it, he's simply proud.
-List<TraviCue> traviCuesFor(OnboardingBeat beat, {bool bought = false, bool fresh = false}) => switch (beat) {
+/// [signInSkipped]: the desk comes straight after the booking, with no
+/// sign-in offered, so he doesn't take out the ID tag on the way.
+List<TraviCue> traviCuesFor(
+  OnboardingBeat beat, {
+  bool bought = false,
+  bool fresh = false,
+  bool signInSkipped = false,
+}) => switch (beat) {
   OnboardingBeat.arrival => [_cue(TraviPose.hello)],
   OnboardingBeat.dates => [_cue(TraviPose.tag)],
   OnboardingBeat.booking => [_cue(TraviPose.folioOpen)],
@@ -71,6 +81,7 @@ List<TraviCue> traviCuesFor(OnboardingBeat beat, {bool bought = false, bool fres
   OnboardingBeat.account => [_cue(TraviPose.idTag)],
   OnboardingBeat.email => [_cue(TraviPose.envelope)],
   OnboardingBeat.signedIn => [_cue(TraviPose.linked)],
+  OnboardingBeat.desk when signInSkipped => [_cue(TraviPose.present, Duration.zero, true)],
   OnboardingBeat.desk => [_cue(TraviPose.present)],
   OnboardingBeat.sendoff when bought => [_cue(TraviPose.cheer), _cue(TraviPose.wave), _cue(TraviPose.folioFull)],
   OnboardingBeat.sendoff => [_cue(TraviPose.wave), _cue(TraviPose.folioFull)],

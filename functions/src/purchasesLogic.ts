@@ -19,7 +19,7 @@ export const HOLIDAY_PASS_PRODUCT = 'holiday_pass';
  * `Pricing.freeSmartImports` in lib/domain/pricing.dart (a test keeps them
  * equal).
  */
-export const FREE_SMART_IMPORTS = 3;
+export const FREE_SMART_IMPORTS = 2;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const ISO_DAY = /^\d{4}-\d{2}-\d{2}$/;

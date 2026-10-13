@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { normaliseBookings } from './bookingSchema';
+import { DETAIL_KEYS, normaliseBookings } from './bookingSchema';
 
 test('keeps a well-formed booking', () => {
   const { bookings } = normaliseBookings({
@@ -17,6 +17,20 @@ test('keeps a well-formed booking', () => {
     endTime: '14:55', reference: 'X7K2PQ',
     details: { flightNumber: 'BA 2037', seats: '22A, 22B' }, uncertain: [],
   });
+});
+
+test('keeps where a flight or journey arrives, and the app\'s detail keys', () => {
+  const { bookings } = normaliseBookings({
+    bookings: [
+      {
+        kind: 'transport', title: 'Kyoto to Tokyo', startDate: '2026-11-09', location: 'Kyoto Station',
+        details: { company: 'JR Central', arrivesAt: '  Tokyo   Station ', bogus: 'x' },
+      },
+    ],
+  });
+  assert.deepEqual(bookings[0].details, { company: 'JR Central', arrivesAt: 'Tokyo Station' });
+  // Mirrors DetailKeys in lib/domain/booking_kind.dart.
+  assert.deepEqual([...DETAIL_KEYS], ['flightNumber', 'seats', 'room', 'guests', 'partySize', 'company', 'arrivesAt']);
 });
 
 test('drops bookings without a real start date', () => {

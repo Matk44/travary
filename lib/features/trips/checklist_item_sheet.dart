@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/tokens.dart';
+import '../../design/widgets/date_picker.dart';
 import '../../domain/domain.dart';
 import '../../logic/checklist.dart';
 import '../../logic/formatters.dart';
@@ -81,8 +82,8 @@ class _ChecklistItemSheetState extends State<ChecklistItemSheet> {
   Future<void> _pickDue() async {
     final store = context.read<TravelStore>();
     final today = store.today;
-    final picked = await showDatePicker(
-      context: context,
+    final picked = await showTravaryDatePicker(
+      context,
       initialDate: (_due ?? today).toDateTime(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100, 12, 31),

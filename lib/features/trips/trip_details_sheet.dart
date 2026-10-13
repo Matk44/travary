@@ -221,13 +221,16 @@ class _TripDetailsSheetState extends State<TripDetailsSheet> {
       if (mounted) Navigator.of(context).pop(_Created(trip.id));
       return;
     }
+    final before = editing.trip;
     await store.updateTrip(
-      editing.trip.copyWith(
+      before.copyWith(
         title: title,
         plannedStart: _datesChanged ? _start : null,
         plannedEnd: _datesChanged ? _end : null,
         destination: _destination,
         clearDestination: _destination == null,
+        // A name or place the traveller gave stays theirs.
+        autoName: before.autoName && title == before.title && _destination == before.destination,
       ),
     );
     if (mounted) Navigator.of(context).pop(const _Saved());

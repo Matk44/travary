@@ -156,7 +156,8 @@ void main() {
       final vignette = tester.widget<TrimmedArt>(
         find.descendant(of: lunch, matching: find.byKey(const ValueKey('card-vignette'))),
       );
-      expect(vignette.image, const BundledArtImage('assets/art/dining/any_bistro_01_vignette.png'));
+      // Lunch is at Castle Square: the theme park's castle dining picture.
+      expect(vignette.image, const BundledArtImage('assets/art/dining/themepark_castle_01_vignette.png'));
       expect(find.descendant(of: lunch, matching: find.byKey(const ValueKey('icon-raster-dining'))), findsOneWidget);
       // Nav icons: every tab's raster is supplied.
       for (final key in ['nav_today', 'nav_trips', 'nav_wallet', 'nav_profile']) {

@@ -208,10 +208,9 @@ void main() {
       final choice = ArtResolver(bundled).resolve(booking, look(ExperienceTheme.themepark));
       expect(choice.shells.featured?.art.fileKey, 'featured_ticket');
       expect(choice.icon?.image, const BundledArtImage('assets/art/icons/dining.png'));
-      expect(choice.vignette?.group, 'any_bistro_01', reason: 'no dining castle art yet: the generic dining picture');
-      // The theme park's own dining scene, drawn without a vignette, is
-      // for featured cards and Documents only.
-      expect(choice.scene?.group, 'themepark_generic_02');
+      expect(choice.vignette?.group, 'themepark_castle_01', reason: 'the theme park\'s castle dining picture');
+      // Its scene, for featured cards and Documents.
+      expect(choice.scene?.group, 'themepark_castle_01');
     });
   });
 

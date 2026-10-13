@@ -44,7 +44,7 @@ void main() {
   test('only free Smart Imports are counted', () async {
     await store.countSmartImport(store.decide(PremiumFeature.smartImport));
     await pumpEventQueue();
-    expect(store.policy.freeSmartImportsLeft, 2);
+    expect(store.policy.freeSmartImportsLeft, 1);
 
     purchases.set(store.entitlements.copyWith(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 30)))));
     await pumpEventQueue();
@@ -84,7 +84,7 @@ void main() {
       ),
     ]);
     await refresh;
-    expect(remote.offer(OfferKind.tripPass)?.displayTitle, 'New Holiday Pass');
+    expect(remote.offer(OfferKind.tripPass)?.title, 'New Holiday Pass');
     first.complete(Pricing.defaults);
     await pumpEventQueue();
     expect(remote.offer(OfferKind.tripPass)?.productId, 'new');

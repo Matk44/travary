@@ -9,6 +9,7 @@ import 'package:travary/data/purchase_service.dart';
 import 'package:travary/design/art/art_catalog.dart';
 import 'package:travary/design/tokens.dart';
 import 'package:travary/domain/domain.dart';
+import 'package:travary/features/premium/paywall_screen.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
@@ -104,7 +105,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Add a booking'), findsOneWidget);
-    expect(find.text('Snap a booking'), findsOneWidget);
+    expect(find.text('Smart Import'), findsOneWidget);
     expect(find.text('Flight'), findsOneWidget);
     expect(find.text('Passport & documents'), findsOneWidget);
   });
@@ -115,59 +116,61 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      expect(find.textContaining('3 free to try'), findsOneWidget);
+      expect(find.textContaining('2 free to try'), findsOneWidget);
 
-      await tester.tap(find.text('Snap a booking'));
+      await tester.tap(find.text('Smart Import'));
       await tester.pumpAndSettle();
       expect(find.text('What shall we read?'), findsOneWidget);
     });
 
-    testWidgets('after the free imports, the paywall offers Plus and a Trip Pass, and buying unlocks it', (
+    /// The pass desk's control [key], scrolled into view and tapped.
+    Future<void> tapDesk(WidgetTester tester, String key) async {
+      await tester.ensureVisible(find.byKey(ValueKey(key)));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(ValueKey(key)));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('after the free imports, the paywall is the pass desk: the Annual Pass or a Holiday Pass', (
       tester,
     ) async {
-      await pumpApp(tester, DateTime(2026, 10, 14, 11, 0), entitlements: const Entitlements(smartImportsUsed: 3));
+      await pumpApp(tester, DateTime(2026, 10, 14, 11, 0), entitlements: const Entitlements(smartImportsUsed: 2));
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Snap a booking'));
+      await tester.tap(find.text('Smart Import'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Skip the typing'), findsOneWidget);
-      expect(find.text(r'$34.99/year'), findsOneWidget);
-      expect(find.text('Just Orlando'), findsOneWidget);
+      expect(find.byType(PaywallScreen), findsOneWidget);
+      expect(find.text('Shall I read\nthe rest?', findRichText: true), findsOneWidget);
+      expect(find.byKey(const ValueKey('onboarding-pass-holiday')), findsOneWidget);
+      expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsOneWidget);
+      // What they reached for leads the benefits; family follows.
+      expect(find.text("I'll read the rest of your confirmations for you"), findsOneWidget);
+      expect(find.text('Everyone coming gets the plan and their own tickets'), findsOneWidget);
       expect(find.textContaining('free trial', findRichText: true), findsNothing);
-      expect(find.text(r'Get Travary Plus · $34.99/year'), findsOneWidget);
 
-      await tester.tap(find.text(r'Get Travary Plus · $34.99/year'));
-      await tester.pumpAndSettle();
+      await tapDesk(tester, 'onboarding-pass-annual');
+      expect(find.text('Get Annual Pass'), findsOneWidget);
+      await tapDesk(tester, 'onboarding-pass-buy');
+      expect(find.byType(PaywallScreen), findsNothing);
       expect(find.text('What shall we read?'), findsOneWidget);
     });
 
-    testWidgets('choosing the Trip Pass explains it and prices it per day', (tester) async {
+    testWidgets('a Holiday Pass says which holiday and dates it covers, and unlocks that trip', (tester) async {
       await pumpApp(tester, DateTime(2026, 10, 14, 11, 0), entitlements: const Entitlements(smartImportsUsed: 3));
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Snap a booking'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Just Orlando'));
+      await tester.tap(find.text('Smart Import'));
       await tester.pumpAndSettle();
 
-      // 8-day trip: $14.99 / 8 = $1.87 a day.
-      expect(find.textContaining(r'$1.87 a day'), findsOneWidget);
-      expect(find.text(r'Get Trip Pass · $14.99'), findsOneWidget);
-      // It says which dates it covers: the trip's now, which later edits
-      // never move.
-      expect(
-        find.text(
-          'One payment, no subscription. Unlocks Plus on Orlando (12–19 Oct) for everyone on the trip, '
-          'until 26 Oct 2026. Only one of you needs to buy it.',
-        ),
-        findsOneWidget,
-      );
+      // Preselected when there's a holiday to attach it to.
+      expect(find.text('Get Holiday Pass'), findsOneWidget);
+      expect(find.textContaining('Orlando · 12–19 Oct. It covers this holiday until 26 Oct 2026.'), findsOneWidget);
+      expect(find.textContaining('Holiday Pass is one payment of'), findsOneWidget);
 
-      await tester.tap(find.text(r'Get Trip Pass · $14.99'));
-      await tester.pumpAndSettle();
+      await tapDesk(tester, 'onboarding-pass-buy');
       final premium = Provider.of<PremiumStore>(tester.element(find.byType(HomeShell)), listen: false);
       final pass = premium.entitlements.tripPasses.values.single;
       expect((pass.start, pass.end), (LocalDate(2026, 10, 12), LocalDate(2026, 10, 19)));
@@ -178,7 +181,7 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Snap a booking'));
+      await tester.tap(find.text('Smart Import'));
       await tester.pumpAndSettle();
 
       final opened = <Object?>[];
@@ -195,10 +198,8 @@ void main() {
           null,
         ),
       );
-      await tester.tap(find.byKey(const ValueKey('paywall-terms')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('paywall-privacy')));
-      await tester.pumpAndSettle();
+      await tapDesk(tester, 'onboarding-pass-terms');
+      await tapDesk(tester, 'onboarding-pass-privacy');
       expect(opened, [
         'https://matk44.github.io/travary_support/terms.html',
         'https://matk44.github.io/travary_support/privacy.html',
@@ -210,12 +211,11 @@ void main() {
 
       await tester.tap(find.bySemanticsLabel('Add a booking'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Snap a booking'));
+      await tester.tap(find.text('Smart Import'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Not now'));
-      await tester.pumpAndSettle();
+      await tapDesk(tester, 'onboarding-pass-free');
 
-      expect(find.text('Skip the typing'), findsNothing);
+      expect(find.byType(PaywallScreen), findsNothing);
       expect(find.text('What shall we read?'), findsNothing);
     });
   });

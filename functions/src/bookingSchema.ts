@@ -9,7 +9,7 @@ import { describeArtSubjects, isArtSubject } from './artSubjects';
 export const KINDS = ['flight', 'stay', 'attraction', 'dining', 'transport', 'activity', 'event', 'note'] as const;
 export type Kind = (typeof KINDS)[number];
 
-export const DETAIL_KEYS = ['flightNumber', 'seats', 'room', 'guests', 'partySize', 'company'] as const;
+export const DETAIL_KEYS = ['flightNumber', 'seats', 'room', 'guests', 'partySize', 'company', 'arrivesAt'] as const;
 type DetailKey = (typeof DETAIL_KEYS)[number];
 
 /** Fields Gemini may flag as uncertain. The app highlights them. */
@@ -65,6 +65,7 @@ export const responseSchema = {
               guests: text('Number of guests or tickets, digits only'),
               partySize: text('Table size, digits only'),
               company: text('Transport company, e.g. "Alamo", "Eurostar"'),
+              arrivesAt: text('Where a flight or journey arrives, e.g. "Tokyo Haneda (HND)", "Kyoto Station"'),
             },
           },
           artSubject: text(

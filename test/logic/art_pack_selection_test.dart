@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travary/data/art_pack_catalog.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/logic/art_pack_selection.dart';
+import 'package:travary/logic/destinations.dart';
 
 import '../support/art_pack_fixtures.dart';
 
@@ -168,13 +169,56 @@ void main() {
     });
   });
 
+  group('a trip through several cities', () {
+    // The traveller's "Japan holiday", through Osaka, Kyoto and Tokyo.
+    final japan = kyotoTrip(withProfile: false).copyWith(destination: detectPlace('Japan')!.destination);
+    TripLocationHint at(String place) => detectPlace(place)!.destination.location;
+
+    test('each city takes its own pack, then the country\'s; never another city\'s', () {
+      final kyoto = artContextFor(japan, all, location: at('Kyoto'));
+      expect(kyoto.packRanks['city_jp_kyoto'], ArtRank.city);
+      expect(kyoto.packRanks['region_jp_kansai'], ArtRank.region);
+      expect(kyoto.packRanks['country_jp'], ArtRank.country);
+      expect(kyoto.packRanks.containsKey('city_jp_tokyo'), isFalse);
+
+      final osaka = artContextFor(japan, all, location: at('Osaka'));
+      expect(osaka.packRanks.containsKey('city_jp_kyoto'), isFalse);
+      expect(osaka.packRanks['region_jp_kansai'], ArtRank.region, reason: 'Osaka is in Kansai too');
+      expect(osaka.packRanks['country_jp'], ArtRank.country);
+
+      expect(artContextFor(japan, all).packRanks.keys, isNot(contains('city_jp_kyoto')), reason: 'the trip: Japan');
+    });
+
+    test('downloads the trip\'s pack and look, then each city\'s, then the country\'s', () {
+      final stops = [at('Osaka'), at('Kyoto'), at('Tokyo')];
+      expect(
+        packsToDownload(japan, [city, otherCity, country, heritage], stops: stops).map((p) => p.id),
+        ['country_jp', 'city_jp_kyoto', 'city_jp_tokyo'],
+        reason: 'Osaka has no pack of its own: Japan\'s is its',
+      );
+      expect(packsToDownload(japan, [city, country], location: at('Kyoto'), stops: [at('Tokyo')]).map((p) => p.id), [
+        'city_jp_kyoto',
+        'country_jp',
+      ]);
+    });
+  });
+
   group('what to download', () {
-    test('one destination pack (the most specific) and one experience pack', () {
-      expect(packsToDownload(kyotoTrip(), all).map((p) => p.id), ['city_jp_kyoto', 'theme_urban_heritage']);
+    test('the most specific destination pack, one experience pack, then the country\'s to fall back on', () {
+      expect(packsToDownload(kyotoTrip(), all).map((p) => p.id), [
+        'city_jp_kyoto',
+        'theme_urban_heritage',
+        'country_jp',
+      ]);
       expect(packsToDownload(kyotoTrip(), [region, country, heritage]).map((p) => p.id), [
         'region_jp_kansai',
         'theme_urban_heritage',
+        'country_jp',
       ]);
+      expect(packsToDownload(kyotoTrip(), [city, heritage]).map((p) => p.id), [
+        'city_jp_kyoto',
+        'theme_urban_heritage',
+      ], reason: 'no country pack to fall back on');
       expect(packsToDownload(kyotoTrip(), [country, modern]).map((p) => p.id), [
         'country_jp',
       ], reason: 'secondary packs aren\'t downloaded');
@@ -235,7 +279,11 @@ void main() {
     );
     expect(catalog.packs, hasLength(all.length));
     final refs = [for (final p in catalog.packs) p.ref];
-    expect(packsToDownload(kyotoTrip(), refs).map((p) => p.id), ['city_jp_kyoto', 'theme_urban_heritage']);
+    expect(packsToDownload(kyotoTrip(), refs).map((p) => p.id), [
+      'city_jp_kyoto',
+      'theme_urban_heritage',
+      'country_jp',
+    ]);
     expect(artContextFor(kyotoTrip(), refs).packRanks['region_jp_kansai'], ArtRank.region);
   });
 }

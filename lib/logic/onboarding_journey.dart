@@ -1,3 +1,5 @@
+import '../domain/premium.dart';
+
 /// The beats of onboarding, one stage throughout: what Travi is doing and
 /// what the words say at each. Screens only lay these out.
 enum OnboardingBeat {
@@ -91,8 +93,34 @@ OnboardingWords onboardingWordsFor(
   OnboardingBeat.desk when covered => (
     text: 'Your holiday.\n',
     accent: 'Ready to go.',
-    subtitle: 'This holiday already has Plus.',
+    subtitle: 'This holiday is already covered.',
   ),
-  OnboardingBeat.desk => (text: 'Shall I help\n', accent: 'with the rest?', subtitle: 'Less typing. More holiday.'),
+  OnboardingBeat.desk => (text: 'Shall I help\n', accent: 'with the rest?', subtitle: 'For you and everyone coming.'),
   OnboardingBeat.sendoff => (text: '${place ?? 'Your holiday'},\n', accent: 'here we come!', subtitle: null),
+};
+
+/// The paywall's words: the pass desk on the same stage, its headline for
+/// what the traveller reached for ([feature]; null from Profile).
+OnboardingWords paywallWordsFor(PremiumFeature? feature) => switch (feature) {
+  PremiumFeature.familySharing => (
+    text: 'Bring everyone\n',
+    accent: 'along?',
+    subtitle: 'The plan and their own tickets on every phone.',
+  ),
+  PremiumFeature.ticketBackup => (
+    text: 'Every ticket,\n',
+    accent: 'kept safe?',
+    subtitle: 'Backed up, and on any phone you sign in to.',
+  ),
+  PremiumFeature.smartImport => (
+    text: 'Shall I read\n',
+    accent: 'the rest?',
+    subtitle: 'Send me a screenshot or PDF and I\'ll fill it in.',
+  ),
+  PremiumFeature.flightAlerts => (
+    text: 'Shall I watch\n',
+    accent: 'your flights?',
+    subtitle: 'Delays and new times the moment they happen.',
+  ),
+  null => (text: 'Shall I help\n', accent: 'with the rest?', subtitle: 'For you and everyone coming.'),
 };

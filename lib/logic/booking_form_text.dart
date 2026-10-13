@@ -35,6 +35,14 @@ BookingFormText bookingFormText(BookingKind kind, {bool editing = false}) {
   );
 }
 
+/// The line under the first-booking form's heading in onboarding. Only a
+/// booking read from a file or the airline's schedule asks to be checked;
+/// one typed in is the traveller's own.
+String onboardingFormSubtitle({required bool finding, required bool checking}) {
+  if (finding) return 'Flight number and the day it leaves.';
+  return checking ? 'Check the details before adding it.' : 'A name and a day are all it needs.';
+}
+
 /// What a booking spanning [start] to [end] lasts, between its two dates
 /// on the form: "2 nights" for a stay, "3 days" for anything else. Null on
 /// a single day.

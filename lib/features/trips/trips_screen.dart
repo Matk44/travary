@@ -18,9 +18,10 @@ import '../sharing/join_trip_sheet.dart';
 import 'trip_details_sheet.dart';
 import 'trip_screen.dart';
 
-/// Every trip: happening now, coming up, and past. A coming trip whose
-/// destination has a postcard shows on it, with its countdown on a
-/// hanging tag ([UpcomingTripPostcard]); the rest are plain rows. "New
+/// Every trip: happening now, coming up, and past. A trip you're on or
+/// coming to, whose destination has a postcard, shows on it, with its
+/// countdown (or days left) on a hanging tag ([UpcomingTripPostcard]); the
+/// rest are plain rows. "New
 /// trip" starts one before anything is booked (or joins someone's).
 class TripsScreen extends StatelessWidget {
   const TripsScreen({super.key});
@@ -57,8 +58,8 @@ class TripsScreen extends StatelessWidget {
       ],
     );
 
-    // Coming up: the trip's postcard when one suits it, else its row.
-    Widget upcomingSection(List<TripPlan> plans) {
+    // The trip's postcard when one suits it, else its row.
+    Widget postcardSection(String label, List<TripPlan> plans) {
       final rows = [
         for (final plan in plans)
           if ((tripPostcardTextFor(plan, today), store.tripPostcardFor(plan)) case (final text?, final art?))
@@ -78,7 +79,7 @@ class TripsScreen extends StatelessWidget {
       ];
       return SliverMainAxisGroup(
         slivers: [
-          SliverToBoxAdapter(child: SectionLabel('Coming up')),
+          SliverToBoxAdapter(child: SectionLabel(label)),
           SliverList.builder(
             itemCount: rows.length,
             itemBuilder: (context, i) {
@@ -130,8 +131,8 @@ class TripsScreen extends StatelessWidget {
                 ),
               ),
             ),
-          if (active.isNotEmpty) section('Happening now', active),
-          if (upcoming.isNotEmpty) upcomingSection(upcoming),
+          if (active.isNotEmpty) postcardSection('Happening now', active),
+          if (upcoming.isNotEmpty) postcardSection('Coming up', upcoming),
           if (past.isNotEmpty) section('Past trips', past.reversed.toList()),
           const SliverToBoxAdapter(child: SizedBox(height: TravarySpace.xxl)),
         ],

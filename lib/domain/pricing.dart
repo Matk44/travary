@@ -28,13 +28,17 @@ class Offer {
   /// Store-formatted price, never reconstructed with a hard-coded "$" or prefix.
   final String? localizedPrice;
 
-  /// Remote offering metadata (or the store product title).
+  /// Remote offering metadata (or the store product title). The app names
+  /// the two plans itself ([displayTitle]), whatever the store calls them.
   final String? title;
   final String? scope;
   final String? packageId;
   final String? offeringId;
-  String get displayTitle => title ?? (kind == OfferKind.tripPass ? 'Holiday Pass' : 'Annual Pass');
-  String get displayScope => scope ?? (kind == OfferKind.tripPass ? 'This holiday' : 'Holidays through the year');
+
+  /// "Annual Pass" (the yearly plan) or "Holiday Pass" (one holiday):
+  /// the same two names everywhere in the app.
+  String get displayTitle => kind == OfferKind.tripPass ? 'Holiday Pass' : 'Annual Pass';
+  String get displayScope => scope ?? (kind == OfferKind.tripPass ? 'This holiday' : 'Every holiday for a year');
 }
 
 /// Launch pricing (USD). Stores localise it per country.
@@ -54,11 +58,13 @@ abstract final class Pricing {
   /// Everyone on a Plus organiser's trips, including them.
   static const familySize = 6;
 
-  /// Smart Imports on the free plan, lifetime.
-  static const freeSmartImports = 3;
+  /// Smart Imports on the free plan, lifetime. Each one keeps its source file
+  /// as the booking's ticket, so this matches [freeTicketFiles].
+  static const freeSmartImports = 2;
 
-  /// Ticket files (photos and PDFs) a holiday keeps on the free plan. The
-  /// ones already attached always stay; only adding more needs a pass.
+  /// Files (photos and PDFs) a holiday keeps on the free plan: the "tickets"
+  /// attached to bookings. The ones already attached always stay; only adding
+  /// more needs a pass.
   static const freeTicketFiles = 2;
 
   /// A Trip Pass keeps the trip unlocked this long after it ends.

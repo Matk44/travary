@@ -240,6 +240,20 @@ void main() {
       expect(buildDayPlan(today, [flight], at(8)).entries.single.role, EntryRole.start);
       expect(buildDayPlan(d(10, 15), [flight], at(8)).entries.single.time, const ClockTime(7, 10));
     });
+
+    test('an overnight flight that has left is a finished entry, not a key tag you hold', () {
+      final flight = booking(
+        'flight',
+        BookingKind.flight,
+        today,
+        at: const ClockTime(18, 40),
+        endDate: d(10, 15),
+        until: const ClockTime(7, 10),
+      );
+      final inTheAir = buildDayPlan(today, [flight], at(22));
+      expect(inTheAir.ongoing, isEmpty);
+      expect(inTheAir.entries.single.status, EntryStatus.done);
+    });
   });
 
   group('a booking as a whole, for a trip\'s plan', () {

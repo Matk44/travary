@@ -15,10 +15,25 @@ class ShellOverlay {
 
   /// Receives taps itself (a button); everything else lets taps through
   /// to the card. Interactive overlays grow around their anchor to at
-  /// least [minTarget] points each way.
+  /// least [minTarget] points each way; what they draw stays the anchor's
+  /// size ([ShellAnchor]).
   final bool interactive;
 
   static const minTarget = 48.0;
+}
+
+/// The size of the anchor an interactive overlay was placed at, for the
+/// overlay's visible face: the tap target around it may be larger, but a
+/// button's drawn face never grows over the text beside it.
+class ShellAnchor extends InheritedWidget {
+  const ShellAnchor({super.key, required this.size, required super.child});
+
+  final Size size;
+
+  static Size? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<ShellAnchor>()?.size;
+
+  @override
+  bool updateShouldNotify(ShellAnchor oldWidget) => oldWidget.size != size;
 }
 
 /// Draws a raster shell at the width it's given, never stretched: the
@@ -131,7 +146,9 @@ class ShellFrame extends StatelessWidget {
                       for (final overlay in overlays)
                         Positioned.fromRect(
                           rect: overlay.interactive ? _atLeastTarget(place(overlay.rect)) : place(overlay.rect),
-                          child: overlay.interactive ? overlay.child : IgnorePointer(child: overlay.child),
+                          child: overlay.interactive
+                              ? ShellAnchor(size: place(overlay.rect).size, child: overlay.child)
+                              : IgnorePointer(child: overlay.child),
                         ),
                     ],
                   );

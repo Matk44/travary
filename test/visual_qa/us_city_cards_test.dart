@@ -158,9 +158,10 @@ void main() {
       expect(tagged, findsNWidgets(2));
       expect(tester.widget<FeaturedTicketCard>(ticket).shell.art.pack?.id, place.packId);
       expect(tester.widget<RoomKeyCard>(key).shell.art.pack?.id, place.packId);
-      for (final card in tagged.evaluate()) {
-        expect((card.widget as TaggedReservationCard).shell.art.pack?.id, place.packId);
-      }
+      // The complete shell has its picture printed on it: the card beside
+      // it takes the blank shell and its own vignette instead.
+      expect(tester.widget<TaggedReservationCard>(tagged.first).shell.art.pack?.id, place.packId);
+      expect(tester.widget<TaggedReservationCard>(tagged.last).shell.role, ShellRole.reservationBlank);
       expect(find.text(place.name.toUpperCase()), findsNothing, reason: 'the shells print no place name');
 
       // The live text is inside each shell's text zone.
@@ -207,9 +208,7 @@ void main() {
       );
       expect(tester.widget<FeaturedTicketCard>(find.byType(FeaturedTicketCard)).shell.art.pack?.id, packId);
       expect(tester.widget<RoomKeyCard>(find.byType(RoomKeyCard)).shell.art.pack?.id, packId);
-      for (final card in find.byType(TaggedReservationCard).evaluate()) {
-        expect((card.widget as TaggedReservationCard).shell.art.pack?.id, packId);
-      }
+      expect(tester.widget<TaggedReservationCard>(find.byType(TaggedReservationCard).first).shell.art.pack?.id, packId);
       expect(tester.takeException(), isNull);
     }
 
@@ -241,9 +240,10 @@ void main() {
     await save(tester, boundary, 'us_cards_country_us.png');
     expect(tester.widget<FeaturedTicketCard>(find.byType(FeaturedTicketCard)).shell.art.pack?.id, 'country_us');
     expect(tester.widget<RoomKeyCard>(find.byType(RoomKeyCard)).shell.art.pack?.id, 'country_us');
-    for (final card in find.byType(TaggedReservationCard).evaluate()) {
-      expect((card.widget as TaggedReservationCard).shell.art.pack?.id, 'country_us');
-    }
+    expect(
+      tester.widget<TaggedReservationCard>(find.byType(TaggedReservationCard).first).shell.art.pack?.id,
+      'country_us',
+    );
     expect(tester.takeException(), isNull);
   });
 }

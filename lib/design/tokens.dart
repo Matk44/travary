@@ -631,6 +631,9 @@ abstract final class TripPostcardLayout {
   static const tagCopyWidth = 112.0;
 }
 
+/// The face of a time picker's dial and unselected hour and minute boxes.
+const _pickerFace = Color(0xFFE7DCC9);
+
 ThemeData buildTravaryTheme() {
   final base = ThemeData(
     useMaterial3: true,
@@ -696,8 +699,56 @@ ThemeData buildTravaryTheme() {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.card)),
     ),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: TravaryColors.linen),
-    datePickerTheme: const DatePickerThemeData(backgroundColor: TravaryColors.paper),
-    timePickerTheme: const TimePickerThemeData(backgroundColor: TravaryColors.paper),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: TravaryColors.paper,
+      surfaceTintColor: Colors.transparent,
+      headerForegroundColor: TravaryColors.ink,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.card)),
+      dayForegroundColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.paper : TravaryColors.ink,
+      ),
+      dayBackgroundColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.ink : null,
+      ),
+      todayForegroundColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.paper : TravaryColors.coral,
+      ),
+      todayBorder: const BorderSide(color: TravaryColors.coral),
+      yearForegroundColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.paper : TravaryColors.ink,
+      ),
+      yearBackgroundColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.ink : null,
+      ),
+      confirmButtonStyle: TextButton.styleFrom(foregroundColor: TravaryColors.ink),
+      cancelButtonStyle: TextButton.styleFrom(foregroundColor: TravaryColors.inkSoft),
+    ),
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: TravaryColors.paper,
+      hourMinuteColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.ink : _pickerFace,
+      ),
+      hourMinuteTextColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.paper : TravaryColors.ink,
+      ),
+      dayPeriodColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.ink : Colors.transparent,
+      ),
+      dayPeriodTextColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.paper : TravaryColors.ink,
+      ),
+      dayPeriodBorderSide: const BorderSide(color: TravaryColors.line),
+      dialBackgroundColor: _pickerFace,
+      dialHandColor: TravaryColors.ink,
+      dialTextColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected) ? TravaryColors.paper : TravaryColors.ink,
+      ),
+      entryModeIconColor: TravaryColors.inkSoft,
+      helpTextStyle: TravaryText.small.copyWith(color: TravaryColors.inkSoft),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TravaryRadius.card)),
+      confirmButtonStyle: TextButton.styleFrom(foregroundColor: TravaryColors.ink),
+      cancelButtonStyle: TextButton.styleFrom(foregroundColor: TravaryColors.inkSoft),
+    ),
     snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating, backgroundColor: TravaryColors.ink),
   );
 }

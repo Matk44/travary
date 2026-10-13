@@ -1,7 +1,11 @@
 # Flight alerts: plan and provider brief
 
-Status: **built 12 Oct 2026, not deployed** (see "As built" below and the
-Flight alerts section of CLAUDE.md). Launched on AeroDataBox Pro behind
+Status: **built 12 Oct 2026; functions, rules and index deployed 13 Oct 2026**.
+On sale in every build by default (13 Oct 2026; `TRAVARY_FLIGHT_ALERTS=false`
+hides it). Still to do before an iOS build reaches anyone: the APNs key in
+Firebase, and the privacy page and store forms. Flight lookups work again
+once the paid AeroDataBox plan starts, when `FLIGHT_BILLING_DAY` is set
+(see "As built" below and the Flight alerts section of CLAUDE.md). Launched on AeroDataBox Pro behind
 the `FlightProvider` interface; gates and belts are shown and announced
 only when the data has them.
 
@@ -36,14 +40,15 @@ Differences from the plan below, and why:
 - **Permission:** asked the first time a flight on a paid trip is opened,
   once; the flight page's "Flight alerts" row shows where things stand
   (or sells alerts on a free trip).
-- **On sale** in release builds only with `--dart-define=TRAVARY_FLIGHT_ALERTS=true`.
+- **On sale** in release builds only with `--dart-define=TRAVARY_FLIGHT_ALERTS=true`
+  (changed 13 Oct 2026: on by default, `=false` hides it).
 
 Before turning it on: deploy functions, rules and index
 (`firebase deploy --only functions,firestore`), upload an APNs auth key
 to Firebase (Cloud Messaging), enable Push Notifications on the App ID,
-set `FLIGHT_BILLING_DAY` to the day the API.Market plan renews, update
-`privacy.html` and the store forms (`docs/ANALYTICS.md`), then build with
-`TRAVARY_FLIGHT_ALERTS=true`. Mark accounts `tester: true` to try it
+set `FLIGHT_BILLING_DAY` to the day the paid API.Market plan starts (it only
+paces the unit budget), update `privacy.html` and the store forms
+(`docs/ANALYTICS.md`), then build. Mark accounts `tester: true` to try it
 without a purchase.
 
 ## The plan (11 Oct 2026)

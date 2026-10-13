@@ -43,6 +43,36 @@ void main() {
     expect(chosen.effectiveLocation?.verification, LocationVerification.verified);
   });
 
+  test('a name the app gave is remembered, and a trip saved before is the traveller\'s', () {
+    final named = trip('t', title: 'Kyoto').copyWith(destination: kyoto, autoName: true);
+    expect(Trip.fromJson('t', named.toJson()).autoName, isTrue);
+    expect(Trip.fromJson('t', named.toEditableJson()).autoName, isTrue);
+    expect(named.copyWith(autoName: false).toEditableJson()['autoName'], isFalse);
+    expect(trip('t').toJson().containsKey('autoName'), isFalse);
+    expect(Trip.fromJson('t', const {'title': 'Old'}).autoName, isFalse);
+  });
+
+  test('the app\'s own reading gives way to a verified one in another country', () {
+    // "Naples, FL" read offline is Naples, Italy; the classifier checked.
+    final florida = Trip.fromJson('t', {
+      'title': 'Naples',
+      'visualProfile': {
+        'primaryTheme': 'beach_resort',
+        'confidence': 0.9,
+        'sourceHash': 'a' * 64,
+        'location': {'countryCode': 'US', 'confidence': 0.9, 'verificationStatus': 'verified'},
+      },
+    });
+    const naples = TripDestination(countryCode: 'IT', countryName: 'Italy', city: 'Naples', citySlug: 'naples');
+    expect(florida.copyWith(destination: naples, autoName: true).effectiveLocation?.countryCode, 'US');
+    expect(florida.copyWith(destination: naples).effectiveLocation?.countryCode, 'IT', reason: 'the traveller\'s');
+    // The same country: the app's reading, which may name the city.
+    expect(
+      florida.copyWith(destination: kyoto.copyWithCountry('US'), autoName: true).effectiveLocation?.citySlug,
+      'kyoto',
+    );
+  });
+
   test('anything but a real country is ignored', () {
     expect(TripDestination.tryParse({'countryCode': 'XX', 'countryName': 'Nowhere'}), isNull);
     expect(TripDestination.tryParse({'countryCode': 'JP'}), isNull);
@@ -50,4 +80,15 @@ void main() {
     final odd = TripDestination.tryParse({'countryCode': 'jp', 'countryName': 'Japan', 'citySlug': 'Not A Slug'})!;
     expect((odd.countryCode, odd.citySlug), ('JP', null));
   });
+}
+
+extension on TripDestination {
+  TripDestination copyWithCountry(String code) => TripDestination(
+    countryCode: code,
+    countryName: countryName,
+    region: region,
+    regionSlug: regionSlug,
+    city: city,
+    citySlug: citySlug,
+  );
 }

@@ -1,4 +1,5 @@
 import '../domain/domain.dart';
+import 'transport.dart';
 
 /// Which part of a booking an entry represents on a given day.
 enum EntryRole {
@@ -94,8 +95,9 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
       time = booking.startTime;
       // Checked in, picked up: for the rest of today it's something you
       // have, as on the days in between, not something finished. The hotel
-      // stays on Today the evening you arrive.
-      if (date == today && _statusOf(booking, role, date, time, today, now) == EntryStatus.done) {
+      // stays on Today the evening you arrive. (A flight that's left, or
+      // tickets used, are finished: the key tag is for what you hold.)
+      if (date == today && _isHeld(booking) && _statusOf(booking, role, date, time, today, now) == EntryStatus.done) {
         ongoing.add(booking);
         continue;
       }
@@ -130,6 +132,11 @@ DayPlan buildDayPlan(LocalDate date, Iterable<Booking> bookings, DateTime now) {
     highlightIndex: highlight,
   );
 }
+
+/// A stay, a hire car or a pass: something you have for days, not an
+/// event. A journey that's left, even overnight, is finished.
+bool _isHeld(Booking booking) =>
+    booking.kind == BookingKind.stay || (booking.kind == BookingKind.transport && !isJourney(booking));
 
 /// Where [booking] as a whole stands at [now], for a list of a trip's
 /// bookings: done once its last day's entry is done (a stay after

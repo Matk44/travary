@@ -197,11 +197,19 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     // The file may be gone by now (a share cleared from the cache): the
     // bookings are still saved, without it, rather than nothing at all.
     var fileLost = false;
-    for (final index in _selected.toList()..sort()) {
-      final draft = _drafts[index].booking;
-      final tripId = _fitsTrip(draft, trip) ? trip!.id : '';
-      final target = tripId.isEmpty ? findTripFor(draft.startDate, draft.lastDate, store.plans) : trip;
-      final key = target?.id ?? '';
+    final picked = [
+      for (final index in _selected.toList()..sort())
+        _drafts[index].booking.copyWith(
+          id: store.repository.newId(),
+          tripId: _fitsTrip(_drafts[index].booking, trip) ? trip!.id : '',
+        ),
+    ];
+    // Where saving will put each one (a new trip for some, perhaps), so
+    // the file is counted against the holiday it actually lands in.
+    final places = store.importPlaces(picked);
+    for (final (i, booking) in picked.indexed) {
+      final key = places[i];
+      final target = store.plan(key);
       final room =
           policy == null || keptIn.contains(key) || policy.canAttachTickets(target, kept: ticketFilesIn(target));
       Attachment? attachment;
@@ -215,7 +223,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
       } else if (!room) {
         notKept++;
       }
-      bookings.add(draft.copyWith(id: store.repository.newId(), tripId: tripId, attachments: [?attachment]));
+      bookings.add(booking.copyWith(attachments: [?attachment]));
     }
     final List<SaveResult> results;
     try {

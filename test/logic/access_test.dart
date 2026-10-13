@@ -28,8 +28,8 @@ void main() {
     });
 
     test('Smart Import has a few free uses, then locks', () {
-      expect(policy(Entitlements.none).decide(PremiumFeature.smartImport).freeUsesLeft, 3);
-      const used = Entitlements(smartImportsUsed: 3);
+      expect(policy(Entitlements.none).decide(PremiumFeature.smartImport).freeUsesLeft, 2);
+      const used = Entitlements(smartImportsUsed: 2);
       expect(policy(used).decide(PremiumFeature.smartImport).allowed, isFalse);
     });
 
@@ -149,7 +149,7 @@ void main() {
       expect(policy(pass, DateTime(2026, 8, 20)).canBuyTripPassFor(earlier), isTrue);
       expect(
         tripPassEndsText(newTripPassFor(orlando), d(9, 1), d(9, 7)),
-        'Your Trip Pass is for 12–18 Oct, so it won\'t cover a trip on these dates.',
+        'Your Holiday Pass is for 12–18 Oct, so it won\'t cover a trip on these dates.',
       );
     });
 

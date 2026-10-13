@@ -496,6 +496,83 @@ void main() {
     expect(repository.bookings.single.id, saved.id);
   });
 
+  testWidgets('"Something else" leads to every kind of booking', (tester) async {
+    // Tall enough to build every row of the list.
+    await pump(tester, draft: holiday(), size: const Size(390, 1400));
+    await tap(tester, 'onboarding-manual');
+    for (final kind in [BookingKind.flight, BookingKind.stay, BookingKind.activity]) {
+      expect(find.byKey(ValueKey('onboarding-kind-${kind.name}')), findsOneWidget, reason: kind.name);
+    }
+    expect(find.byKey(const ValueKey('onboarding-kind-dining')), findsNothing);
+    await tap(tester, 'onboarding-kind-more');
+    expect(find.byKey(const ValueKey('onboarding-kind-more')), findsNothing);
+    for (final kind in BookingKind.values) {
+      expect(find.byKey(ValueKey('onboarding-kind-${kind.name}')), findsOneWidget, reason: kind.name);
+    }
+    await tap(tester, 'onboarding-kind-dining');
+    expect(tester.widget<EditBookingScreen>(find.byType(EditBookingScreen)).kind, BookingKind.dining);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a stay starts on the holiday’s dates; a typed-in form does not ask to be checked', (tester) async {
+    await pump(tester, draft: holiday());
+    await tap(tester, 'onboarding-manual');
+    await tap(tester, 'onboarding-kind-stay');
+    expect(find.text('8 NOV 2026'), findsOneWidget, reason: 'check-in on the first day');
+    expect(find.text('15 NOV 2026'), findsOneWidget, reason: 'check-out on the last');
+    expect(find.text('Check the details before adding it.'), findsNothing);
+    expect(find.text('A name and a day are all it needs.'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Back steps from the dates to the destination', (tester) async {
+    await pump(
+      tester,
+      draft: OnboardingDraft(step: OnboardingStep.dates, destination: detectPlace('Bali')!.destination),
+    );
+    expect(find.byKey(const ValueKey('onboarding-choose-dates')), findsOneWidget);
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    expect(setup.draft.step, OnboardingStep.destination);
+    expect(setup.draft.destination, isNotNull, reason: 'the choice is kept to change');
+    expect(find.byKey(const ValueKey('onboarding-destination')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Back from the booking lets go of its empty holiday, so new dates make a fresh one', (tester) async {
+    await pump(
+      tester,
+      draft: OnboardingDraft(step: OnboardingStep.dates, destination: detectPlace('Bali')!.destination),
+    );
+    await tap(tester, 'onboarding-no-dates');
+    final first = repository.trips.single.id;
+    expect(setup.draft.step, OnboardingStep.booking);
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    expect(setup.draft.step, OnboardingStep.dates);
+    expect(setup.draft.tripId, isNull);
+    expect(repository.trips, isEmpty, reason: 'nothing was booked: no stray holiday is left behind');
+    expect(find.byKey(const ValueKey('onboarding-choose-dates')), findsOneWidget);
+
+    await tap(tester, 'onboarding-no-dates');
+    expect(repository.trips, hasLength(1));
+    expect(repository.trips.single.id, isNot(first));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('the landed booking card is not a button, so it has no chevron', (tester) async {
+    final saved = firstBooking();
+    await pump(
+      tester,
+      draft: holiday().copyWith(bookingId: saved.id),
+      saved: saved,
+    );
+    final card = find.byKey(ValueKey('onboarding-landed-${saved.id}'));
+    expect(card, findsOneWidget);
+    expect(find.descendant(of: card, matching: find.byIcon(Icons.chevron_right_rounded)), findsNothing);
+  });
+
   testWidgets('email: a sent link is not a sign-in; opening it signs in and goes on to the desk', (tester) async {
     final auth = FakeAuthService();
     final links = StreamController<Uri>();

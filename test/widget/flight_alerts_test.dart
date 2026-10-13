@@ -208,7 +208,7 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('flight-alerts')));
       await tester.pumpAndSettle();
       expect(find.byType(PaywallScreen), findsOneWidget);
-      expect(find.text('Know the moment your flight changes'), findsOneWidget);
+      expect(find.text('Shall I watch\nyour flights?', findRichText: true), findsOneWidget);
     });
 
     testWidgets('without notifications (demo mode) there\'s no row', (tester) async {

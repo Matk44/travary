@@ -22,10 +22,11 @@ import '../logic/art_subjects.dart';
 import '../logic/checklist.dart';
 import '../logic/day_plan.dart';
 import '../logic/packing.dart';
-import '../logic/destinations.dart';
 import '../logic/trip_assignment.dart';
 import '../logic/trip_gaps.dart';
 import '../logic/trip_plan.dart';
+import '../logic/trip_route.dart';
+import '../logic/trip_window.dart';
 import '../logic/visual_profile_request.dart';
 import 'analytics.dart';
 import 'art_catalog_controller.dart';
@@ -119,12 +120,13 @@ class TravelStore extends ChangeNotifier {
   final ArtCatalogController _artCatalogs;
   late ArtResolver _art;
   final _artContexts = <String, TripArtContext>{};
+  final _routes = <String, TripRoute>{};
 
   /// Automatic looks (cloud mode only: the server classifies saved trips).
   VisualProfileCoordinator? _classifier;
 
   /// Which trips get their tickets backed up. The app sets this from
-  /// Travary Plus; shared trips always do, so everyone has the tickets.
+  /// the Annual Pass; shared trips always do, so everyone has the tickets.
   bool Function(TripPlan plan) shouldBackUp = (plan) => plan.trip.isShared;
 
   /// Whether a trip that formed from its bookings stays when the last one
@@ -205,17 +207,34 @@ class TravelStore extends ChangeNotifier {
   ArtResolver get art => _art;
 
   /// What [booking]'s trip means for its artwork: look, secondary themes and
-  /// the installed packs that suit it.
+  /// the installed packs that suit it, at the place the booking is in
+  /// ([TripRoute.placeOf]): a Kyoto day's cards take Kyoto's pack, then
+  /// Japan's, and a Tokyo day's Japan's while Tokyo has none.
   TripArtContext artContextOf(Booking booking) {
     final plan = this.plan(booking.tripId);
     if (plan == null) return TripArtContext.forTheme(ExperienceTheme.classicTravel);
-    return artContextForPlan(plan);
+    final place = routeFor(plan).placeOf(booking);
+    if (place == null) return artContextForPlan(plan);
+    final at = place.destination;
+    return _artContexts.putIfAbsent(
+      '${plan.id}@${at.countryCode}/${at.regionSlug}/${at.citySlug}',
+      () => artContextFor(plan.trip, _art.catalog.packs, location: at.location),
+    );
   }
 
-  /// [plan]'s art context (cached until the trip or the installed packs
-  /// change).
-  TripArtContext artContextForPlan(TripPlan plan) =>
-      _artContexts.putIfAbsent(plan.id, () => artContextFor(plan.trip, _art.catalog.packs));
+  /// [plan]'s art context for the trip as a whole: its postcards, palette
+  /// and interface art, at [tripArtLocation] (cached until the trip or the
+  /// installed packs change).
+  TripArtContext artContextForPlan(TripPlan plan) => _artContexts.putIfAbsent(
+    plan.id,
+    () => artContextFor(plan.trip, _art.catalog.packs, location: tripArtLocation(plan.trip, routeFor(plan))),
+  );
+
+  /// Where [plan]'s bookings are (cached until trips or bookings change).
+  TripRoute routeFor(TripPlan plan) => _routes.putIfAbsent(
+    plan.id,
+    () => TripRoute.of(plan.bookings, countryCode: trustedDestinationOf(plan.trip).countryCode),
+  );
 
   /// The interface palette for [plan]: the best-ranked installed pack's,
   /// else Travary's own. One palette per trip screen.
@@ -259,7 +278,7 @@ class TravelStore extends ChangeNotifier {
   /// country pack supplies one, for a verified place; never a look pack or
   /// bundled art, so null rather than another place's stamp.
   ({SharedArtRef art, String place})? destinationStampFor(TripPlan plan) {
-    final location = plan.trip.effectiveLocation;
+    final location = tripArtLocation(plan.trip, routeFor(plan));
     if (location == null || !_hasVerifiedLocation(plan)) return null;
     final context = artContextForPlan(plan);
     final own = TripArtContext(
@@ -292,7 +311,10 @@ class TravelStore extends ChangeNotifier {
 
   ArtChoice artFor(Booking booking) => _art.resolve(booking, artContextOf(booking));
 
-  List<ArtChoice> artForAll(List<Booking> bookings) => _art.resolveAll(bookings, artContextOf);
+  /// The art for [bookings] as they're shown, in that order ([tagged]: see
+  /// [ArtResolver.resolveAll]).
+  List<ArtChoice> artForAll(List<Booking> bookings, {bool Function(int index)? tagged}) =>
+      _art.resolveAll(bookings, artContextOf, tagged: tagged);
 
   /// Bookings matching [query] (title, place, reference, notes, trip name,
   /// details), optionally of one [kind]. Unsorted.
@@ -319,7 +341,20 @@ class TravelStore extends ChangeNotifier {
   /// or a new trip is created for it ([newTrip]: a new trip whatever its
   /// dates say, because the traveller chose one). Pass [previous] when
   /// editing.
-  Future<SaveResult> saveBooking(Booking booking, {Booking? previous, bool newTrip = false}) async {
+  Future<SaveResult> saveBooking(Booking booking, {Booking? previous, bool newTrip = false}) =>
+      _saveOne(booking, previous: previous, newTrip: newTrip);
+
+  /// [saveBooking], naming a new trip after [nameFrom] (everything in one
+  /// file that will join it) rather than the booking alone. [follow]: an
+  /// automatic trip's name follows its bookings now (a batch does it once,
+  /// at the end).
+  Future<SaveResult> _saveOne(
+    Booking booking, {
+    Booking? previous,
+    bool newTrip = false,
+    List<Booking>? nameFrom,
+    bool follow = true,
+  }) async {
     var saved = withOvernightEnd(booking).copyWith(updatedAt: DateTime.now());
     var created = false;
     String tripTitle;
@@ -332,8 +367,8 @@ class TravelStore extends ChangeNotifier {
         saved = saved.copyWith(tripId: match.id);
         tripTitle = match.trip.title;
       } else {
-        final title = suggestTripTitle(saved);
-        final trip = await createTrip(title, destination: detectPlace(title)?.destination);
+        final name = suggestTripName(nameFrom ?? [saved]);
+        final trip = await createTrip(name.title, destination: name.destination, autoName: true);
         saved = saved.copyWith(tripId: trip.id);
         tripTitle = trip.title;
         created = true;
@@ -342,11 +377,16 @@ class TravelStore extends ChangeNotifier {
       tripTitle = plan(saved.tripId)?.trip.title ?? 'your trip';
     }
 
-    if (previous != null && previous.tripId != saved.tripId) {
+    final moved = previous != null && previous.tripId != saved.tripId;
+    if (moved) {
       await repository.moveBooking(saved, previous.tripId);
       await _dropTripIfEmptied(previous.tripId, removing: saved.id);
     } else {
       await repository.saveBooking(saved);
+    }
+    if (follow) {
+      if (!created) tripTitle = await _followBookings(saved.tripId, adding: [saved]) ?? tripTitle;
+      if (moved) await _followBookings(previous.tripId, removing: saved.id);
     }
 
     // A new trip was scheduled when it was created.
@@ -379,42 +419,101 @@ class TravelStore extends ChangeNotifier {
   }
 
   Future<List<SaveResult>> _saveBatch(List<Booking> bookings) async {
-    final ordered = [for (final booking in bookings) withOvernightEnd(booking)]
-      ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
-    final createdHere = <_NewTrip>[];
-    final results = <SaveResult>[];
-    for (var booking in ordered) {
-      if (booking.tripId.isEmpty &&
-          findTripFor(booking.startDate, booking.lastDate, _plans) == null &&
-          findReturnFlightTrip(booking, _plans) == null) {
-        for (final trip in createdHere) {
-          if (gapBetween(booking.startDate, booking.lastDate, trip.start, trip.end) <= sameSourceMarginDays) {
-            booking = booking.copyWith(tripId: trip.id);
-            break;
-          }
-        }
-      }
-      final result = await saveBooking(booking);
-      final saved = result.booking;
-      final known = createdHere.where((t) => t.id == saved.tripId).firstOrNull;
-      if (result.newTrip) {
-        createdHere.add(_NewTrip(saved.tripId, result.tripTitle, saved.startDate, saved.lastDate));
-        results.add(result);
-      } else if (known != null) {
-        known.stretch(saved.startDate, saved.lastDate);
-        // The new trip may not have come back from the cloud yet, so use
+    final ordered = _inSavingOrder(bookings);
+    final places = placeImport(ordered, _plans);
+    // The first booking of each new trip, which made it.
+    final made = <int, SaveResult>{};
+    var results = <SaveResult>[];
+    for (final (i, booking) in ordered.indexed) {
+      final ImportPlace(:tripId, :group) = places[i];
+      if (tripId != null) {
+        results.add(await _saveOne(booking.copyWith(tripId: tripId), follow: false));
+      } else if (made[group] case final first?) {
+        final result = await _saveOne(booking.copyWith(tripId: first.booking.tripId), follow: false);
+        // A trip made moments ago may not be back from the cloud yet, so use
         // the title it was created with.
-        results.add(SaveResult(saved, known.title, newTrip: false));
+        results.add(SaveResult(result.booking, first.tripTitle, newTrip: false));
       } else {
+        // A new trip: named after where the whole file goes, not its first
+        // leg ("London to Dubai" on the way to Osaka).
+        final result = await _saveOne(
+          booking,
+          newTrip: true,
+          follow: false,
+          nameFrom: [
+            for (final (j, other) in ordered.indexed)
+              if (places[j].group == group) other,
+          ],
+        );
+        made[group!] = result;
         results.add(result);
       }
     }
+    // Trips that were there already follow their new bookings once, with
+    // all of them in.
+    final created = {for (final result in made.values) result.booking.tripId};
+    final joined = {
+      for (final result in results)
+        if (!created.contains(result.booking.tripId)) result.booking.tripId,
+    };
+    for (final tripId in joined) {
+      final title = await _followBookings(
+        tripId,
+        adding: [
+          for (final result in results)
+            if (result.booking.tripId == tripId) result.booking,
+        ],
+      );
+      if (title == null) continue;
+      results = [
+        for (final result in results)
+          result.booking.tripId == tripId ? SaveResult(result.booking, title, newTrip: result.newTrip) : result,
+      ];
+    }
     return results;
+  }
+
+  /// Where each of [bookings] (one file's) will go when saved together with
+  /// [saveBookings], in their order: the ID of the trip it joins, or
+  /// `new:<n>` for the n-th trip they'll make ([placeImport]). For checking
+  /// a holiday's room for their file before saving.
+  List<String> importPlaces(List<Booking> bookings) {
+    final ordered = _inSavingOrder(bookings);
+    final places = placeImport(ordered, _plans);
+    final byBooking = {for (final (i, booking) in ordered.indexed) booking.id: places[i].key};
+    return [for (final booking in bookings) byBooking[booking.id]!];
+  }
+
+  /// [bookings] as a batch saves them: with their overnight ends, by start.
+  static List<Booking> _inSavingOrder(List<Booking> bookings) =>
+      [for (final booking in bookings) withOvernightEnd(booking)]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+
+  /// Renames [tripId] after its bookings if the app named it
+  /// ([followBookings]): those it has, less [removing], plus [adding] (just
+  /// saved, perhaps not back from the cloud yet). The new title, or null
+  /// when nothing changed.
+  Future<String?> _followBookings(String tripId, {List<Booking> adding = const [], String? removing}) async {
+    final plan = this.plan(tripId);
+    if (plan == null || !plan.trip.autoName) return null;
+    final added = {for (final booking in adding) booking.id};
+    final bookings = [
+      for (final booking in plan.bookings)
+        if (booking.id != removing && !added.contains(booking.id)) booking,
+      ...adding,
+    ];
+    if (bookings.isEmpty) return null;
+    final renamed = followBookings(plan.trip, bookings);
+    if (renamed == null) return null;
+    // Only the name and place: never the dates a Holiday Pass goes by.
+    await repository.renameTrip(tripId, title: renamed.title, destination: renamed.destination);
+    if (renamed.title != plan.trip.title) _classifier?.schedule(tripId);
+    return renamed.title;
   }
 
   Future<void> deleteBooking(Booking booking) async {
     await repository.deleteBooking(booking);
     await _dropTripIfEmptied(booking.tripId, removing: booking.id);
+    await _followBookings(booking.tripId, removing: booking.id);
     _classifier?.schedule(booking.tripId);
     for (final attachment in booking.attachments) {
       await _deleteFiles(attachment);
@@ -422,6 +521,8 @@ class TravelStore extends ChangeNotifier {
   }
 
   /// Creates a trip. Its look is automatic unless a [theme] is given.
+  /// [autoName]: the app named it after its bookings, and the name follows
+  /// them ([Trip.autoName]).
   Future<Trip> createTrip(
     String title, {
     String? id,
@@ -429,6 +530,7 @@ class TravelStore extends ChangeNotifier {
     LocalDate? start,
     LocalDate? end,
     TripDestination? destination,
+    bool autoName = false,
   }) async {
     final stamp = DateTime.now();
     final trip = Trip(
@@ -439,6 +541,7 @@ class TravelStore extends ChangeNotifier {
       plannedStart: start,
       plannedEnd: end,
       destination: destination,
+      autoName: autoName,
       ownerId: repository.userId,
       memberIds: [repository.userId],
       createdAt: stamp,
@@ -725,6 +828,7 @@ class TravelStore extends ChangeNotifier {
   void _rebuild() {
     _plans = buildTripPlans(_trips, _bookings);
     _artContexts.clear();
+    _routes.clear();
     _syncArtPacks();
     notifyListeners();
     if (backup != null) {
@@ -756,16 +860,21 @@ class TravelStore extends ChangeNotifier {
     final pinned = <String>{};
     final used = <String>{};
     for (final plan in _plans) {
-      final context = artContextFor(plan.trip, installed);
-      used.addAll(context.packRanks.keys);
+      // The trip's own place and every city its bookings are in.
+      final location = tripArtLocation(plan.trip, routeFor(plan));
+      final stops = [for (final place in routeFor(plan).places) place.destination.location];
+      final ranked = {
+        for (final at in [location, ...stops]) ...artContextFor(plan.trip, installed, location: at).packRanks.keys,
+      };
+      used.addAll(ranked);
       if (plan.phaseOn(today) == TripPhase.past) continue;
-      pinned.addAll(context.packRanks.keys);
+      pinned.addAll(ranked);
       for (final booking in plan.bookings) {
         final key = booking.artKey;
         if (key != null && key.contains(':')) pinned.add(key.substring(0, key.indexOf(':')));
       }
       final subjects = {for (final booking in plan.bookings) ?artSubjectFor(booking)};
-      for (final ref in packsToDownload(plan.trip, available, subjects: subjects)) {
+      for (final ref in packsToDownload(plan.trip, available, subjects: subjects, location: location, stops: stops)) {
         final pack = catalog?.pack(ref.id);
         if (pack != null) wanted[pack.id] = pack;
       }
@@ -792,20 +901,5 @@ class TravelStore extends ChangeNotifier {
       subscription.cancel();
     }
     super.dispose();
-  }
-}
-
-/// A trip created during a batch save, before the repository echoes it back.
-class _NewTrip {
-  _NewTrip(this.id, this.title, this.start, this.end);
-
-  final String id;
-  final String title;
-  LocalDate start;
-  LocalDate end;
-
-  void stretch(LocalDate from, LocalDate to) {
-    start = LocalDate.min(start, from);
-    end = LocalDate.max(end, to);
   }
 }

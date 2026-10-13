@@ -1,4 +1,21 @@
+import '../domain/domain.dart';
 import '../domain/onboarding.dart';
+
+/// Where the phone's Back button goes from [step], or null from the first
+/// screen (where Back leaves the app).
+OnboardingStep? stepBackFrom(OnboardingStep step) => switch (step) {
+  OnboardingStep.destination => null,
+  OnboardingStep.dates => OnboardingStep.destination,
+  OnboardingStep.booking => OnboardingStep.dates,
+};
+
+/// The dates a first booking's form starts on, from the holiday's own: its
+/// first day, and for a stay its last day too (check-out), when it has more
+/// than one. Otherwise the form picks its own default (a stay: one night).
+({LocalDate? start, LocalDate? end}) firstBookingDates(BookingKind kind, {LocalDate? start, LocalDate? end}) {
+  final stays = kind == BookingKind.stay && start != null && end != null && end.isAfter(start);
+  return (start: start, end: stays ? end : null);
+}
 
 /// Whether first-run setup shows for this account on this phone.
 ///

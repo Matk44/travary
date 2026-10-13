@@ -21,7 +21,7 @@ import 'card_gallery_screen.dart';
 import 'flight_status_test_screen.dart';
 import 'travi_cameos_screen.dart';
 
-/// Account and settings: signing in, Travary Plus, travel documents,
+/// Account and settings: signing in, the Annual Pass, travel documents,
 /// reminders.
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

@@ -84,7 +84,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.enterText(
       find.descendant(of: find.byType(DatePickerDialog), matching: find.byType(TextField)),
-      '10/09/2026',
+      '09/10/2026',
     );
     await tester.tap(find.text('OK'));
     await tester.pumpAndSettle();

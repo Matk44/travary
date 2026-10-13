@@ -50,7 +50,7 @@ class TraviCameo extends StatelessWidget {
               top: -window.top * k,
               width: traviCanvas.width * k,
               height: traviCanvas.height * k,
-              child: TraviPlayer(cues: [(pose: moment.pose, hold: Duration.zero)], moves: moment.moves),
+              child: TraviPlayer(cues: [(pose: moment.pose, hold: Duration.zero, direct: false)], moves: moment.moves),
             ),
           ],
         ),

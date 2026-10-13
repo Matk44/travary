@@ -26,6 +26,11 @@ abstract interface class TravelRepository {
   /// Saves the traveller-editable fields of [trip] (title, theme, dates).
   Future<void> updateTrip(Trip trip);
 
+  /// Changes only [tripId]'s name and place ([Trip.autoName] following its
+  /// bookings): nothing this phone's copy may have a few seconds old, such
+  /// as dates someone else just changed.
+  Future<void> renameTrip(String tripId, {required String title, TripDestination? destination});
+
   /// Adds or changes one item on [tripId]'s checklist (or packing list),
   /// leaving the rest as they are (someone else may be ticking another).
   Future<void> saveChecklistItem(String tripId, ChecklistItem item, {TripList list = TripList.checklist});

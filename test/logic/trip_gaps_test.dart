@@ -36,6 +36,51 @@ void main() {
     expect(gaps, [PlanGap(kind: PlanGapKind.stay, start: d(10, 13), end: d(10, 15))]);
   });
 
+  group('flights within the trip', () {
+    Booking route(String id, LocalDate date, String title) =>
+        booking(id, BookingKind.flight, date, tripId: 'jp', title: title);
+    final out = route('out', d(10, 11), 'London to Osaka');
+    final stays = [stay('osaka', d(10, 11), d(10, 13)), stay('sapporo', d(10, 13), d(10, 16))];
+
+    test('one the day before the end isn\'t the flight home', () {
+      final gaps = planGaps(japan([out, ...stays, route('in', d(10, 15), 'Osaka to Sapporo')]));
+      expect(gaps, [PlanGap(kind: PlanGapKind.flightHome, start: d(10, 16))]);
+    });
+
+    test('one the day after the start isn\'t the flight out: with only those, both are needed', () {
+      final gaps = planGaps(japan([stay('osaka', d(10, 11), d(10, 16)), route('in', d(10, 12), 'Osaka to Tokyo')]));
+      expect(gaps, [
+        PlanGap(kind: PlanGapKind.flightOut, start: d(10, 11)),
+        PlanGap(kind: PlanGapKind.flightHome, start: d(10, 16)),
+      ]);
+    });
+
+    test('a domestic trip\'s own flights are still its flights out and home', () {
+      final uk = [
+        route('out', d(10, 11), 'London to Edinburgh'),
+        stay('edinburgh', d(10, 11), d(10, 16)),
+        route('home', d(10, 16), 'Edinburgh to London'),
+      ];
+      expect(planGaps(japan(uk)), isEmpty);
+      expect(planGaps(japan(uk.sublist(0, 2))), [PlanGap(kind: PlanGapKind.flightHome, start: d(10, 16))]);
+    });
+  });
+
+  test('a night on a sleeper train or a night ferry needs no stay; a hire car or a pass does', () {
+    Booking transport(String id, String title, LocalDate from, LocalDate to) =>
+        booking(id, BookingKind.transport, from, tripId: 'jp', title: title, endDate: to);
+    final trip = [
+      flight('out', d(10, 11)),
+      stay('tokyo', d(10, 11), d(10, 13)),
+      stay('sapporo', d(10, 14), d(10, 16)),
+      flight('home', d(10, 16)),
+    ];
+    expect(planGaps(japan([...trip, transport('night', 'Tokyo to Sapporo', d(10, 13), d(10, 14))])), isEmpty);
+    expect(planGaps(japan([...trip, transport('pass', 'Japan Rail Pass', d(10, 11), d(10, 16))])), [
+      PlanGap(kind: PlanGapKind.stay, start: d(10, 13), end: d(10, 14)),
+    ]);
+  });
+
   test('an overnight flight covers the night on the plane', () {
     final gaps = planGaps(
       japan([

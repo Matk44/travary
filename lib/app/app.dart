@@ -8,6 +8,7 @@ import '../data/onboarding_repository.dart';
 import '../data/reminder_settings.dart';
 import '../data/travi_greeting_record.dart';
 import '../design/tokens.dart';
+import '../logic/formatters.dart';
 import '../state/app_session.dart';
 import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
@@ -114,7 +115,11 @@ class TravaryApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: buildTravaryTheme(),
               // Every screen, pushed ones included, shares the trip's palette.
-              builder: (context, child) => TripChromeScope(child: child!),
+              builder: (context, child) {
+                // Times are written the way the phone is set to show them.
+                ClockStyle.use24Hour = MediaQuery.alwaysUse24HourFormatOf(context);
+                return TripChromeScope(child: child!);
+              },
               navigatorObservers: [appRouteObserver],
               home: const OnboardingGate(),
             ),

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../design/art/art_slots.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
+import '../../design/widgets/date_picker.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/paper_form.dart';
 import '../../design/widgets/onboarding_folio.dart';
@@ -247,6 +248,9 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     // Smart Import's dates come off the ticket, so a trip that formed on
     // its own keeps what's within a few weeks of it.
     looseMarginDays: widget.draft == null ? tripMarginDays : sameSourceMarginDays,
+    // A flight home joins the trip it ends when saved: say so, and count
+    // its tickets there.
+    booking: _isFlight ? _booking(id: widget.existing?.id ?? 'draft', tripId: '', endDate: end) : null,
   );
 
   /// The trip as the traveller sees it (with this booking, if it's in it),
@@ -275,8 +279,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     if (notBefore != null && notBefore.isAfter(first)) first = notBefore;
     if (first.isAfter(last)) first = last;
     final range = DateWindow(first, last);
-    final picked = await showDatePicker(
-      context: context,
+    final picked = await showTravaryDatePicker(
+      context,
       initialDate: range.clamp(initial).toDateTime(),
       firstDate: first.toDateTime(),
       lastDate: last.toDateTime(),
@@ -384,6 +388,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     _endDate = fill.endDate;
     _endTime = fill.endTime;
     if (fill.location != null) _location.text = fill.location!;
+    if (fill.arrival != null) _details[DetailKeys.arrivesAt]!.text = fill.arrival!;
     _details[DetailKeys.flightNumber]!.text = fill.flightNumber;
     _finding = false;
     _fromSchedule = true;
@@ -604,7 +609,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
           ? 'Check your'
           : 'Add your',
       accent: _isFlight ? 'flight.' : 'booking.',
-      subtitle: _finding ? 'Flight number and the day it leaves.' : 'Check the details before adding it.',
+      subtitle: onboardingFormSubtitle(finding: _finding, checking: checking),
     );
     return OnboardingFolio(
       body: _finding
