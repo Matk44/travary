@@ -144,8 +144,11 @@ and never remove it afterwards.
 
 ## Rules for the content
 
-- Never claim a feature the release build doesn't have (no flight alerts,
-  widgets or email forwarding yet).
+- Never claim a feature the release build doesn't have (no widgets or email
+  forwarding yet). Flight alerts are claimed because every build has them on
+  by default: never promise gates or baggage belts, only delays, new times,
+  cancellations, boarding and landing. The plans are called the Annual Pass
+  and the Holiday Pass, never "Travary Plus".
 - Facts about other apps: checked against their own listings, dated, with the
   disclosure that we make Travary.
 - Passport and entry rules: cite the official source and the date checked.

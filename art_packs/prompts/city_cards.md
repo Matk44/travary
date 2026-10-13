@@ -5,7 +5,7 @@
 Waves 1 and 2 are drawn (`art_packs/staging/<folder>/`, with the generation and
 validation records beside them) and integrated as packs: see "City and region
 cards (United States)" in `docs/ART_PACKS.md`. Built into the catalog, not yet
-published. The Lake District is still to do; San Francisco uses California's.
+published. The Lake District's cards were drawn on 13 October (`art_packs/staging/lake_district/`, pack v2), with place-neutral United States cards (`country_us` v4, no Golden Gate); built, not yet published. San Francisco uses California's.
 
 ## The message to send
 

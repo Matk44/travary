@@ -21,8 +21,9 @@ everyone on it."** The things a search visitor can't get elsewhere:
 | 30 destination postcards + 57 onboarding stages + Travi films | Unique, beautiful art nobody else can use: every page looks unlike the SERP |
 
 Not shipped at launch, so the site never claims them: live flight status in
-release builds, flight alerts, widgets / Live Activities, email forwarding,
-share-sheet import.
+release builds, widgets / Live Activities, email forwarding, share-sheet
+import. (Flight alerts now ship at launch, 13 Oct 2026: delays and changes,
+never gates or belts.)
 
 ## 2. What the DreamPrayer site taught us
 

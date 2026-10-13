@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": 94,
-  "generatedAt": "2026-10-11T10:11:28.569370Z",
+  "catalogVersion": 96,
+  "generatedAt": "2026-10-13T01:49:47.918647Z",
   "packs": [
     {
       "id": "city_fr_paris",
@@ -783,7 +783,7 @@
     },
     {
       "id": "country_us",
-      "version": 3,
+      "version": 4,
       "priority": 500,
       "selectors": {
         "countryCodes": [
@@ -795,10 +795,10 @@
         "subjects": []
       },
       "archive": {
-        "storagePath": "art-packs/country_us/3/pack.zip",
-        "sha256": "7db7c2624e4aaf051e58a6cb6960c17010b9e4b517e5c75d4facf0c3077db12c",
-        "compressedBytes": 2315271,
-        "uncompressedBytes": 2314513,
+        "storagePath": "art-packs/country_us/4/pack.zip",
+        "sha256": "0cd6821727df3a6b97792953c54234c238a294a912774dd5d4782f9faad79dd2",
+        "compressedBytes": 2151913,
+        "uncompressedBytes": 2151155,
         "fileCount": 6
       },
       "minAppBuild": 1
@@ -827,7 +827,7 @@
     },
     {
       "id": "region_gb_lake_district",
-      "version": 1,
+      "version": 2,
       "priority": 500,
       "selectors": {
         "countryCodes": [
@@ -841,10 +841,10 @@
         "subjects": []
       },
       "archive": {
-        "storagePath": "art-packs/region_gb_lake_district/1/pack.zip",
-        "sha256": "fb57d18f75f6ee1d67d7a56ce43a80e0cf3b4feb66047e49050fc736feb81ae0",
-        "compressedBytes": 2458717,
-        "uncompressedBytes": 2457805,
+        "storagePath": "art-packs/region_gb_lake_district/2/pack.zip",
+        "sha256": "76744ad49d0c0337d3d0b09f2ccbeedf39464126456e073bfe930a3917c4eac9",
+        "compressedBytes": 2296713,
+        "uncompressedBytes": 2295801,
         "fileCount": 7
       },
       "minAppBuild": 1

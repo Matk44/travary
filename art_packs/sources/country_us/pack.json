@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "country_us",
-  "version": 3,
+  "version": 4,
   "palette": {
     "id": "usa_navy_roadtrip",
     "anchors": {"ink": "#18375B", "paper": "#F4EFE4"},
