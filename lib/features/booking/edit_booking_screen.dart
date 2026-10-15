@@ -658,6 +658,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
             service: store.flightStatus!,
             number: _details[DetailKeys.flightNumber]!,
             date: _searchDate,
+            today: store.today,
             onPickDate: () async {
               final picked = await _pickDate(_searchDate);
               if (picked != null) _changeSearchDate(picked);

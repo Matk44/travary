@@ -179,10 +179,10 @@ void main() {
       findsOneWidget,
     );
 
-    service.failure = const FlightStatusException('Flights can be looked up up to a year ahead.');
+    service.failure = const FlightStatusException('Live flight status isn\'t available right now. Try again soon.');
     await tester.enterText(number, 'BA 998');
     await settle(tester);
-    expect(find.text('Flights can be looked up up to a year ahead.'), findsOneWidget);
+    expect(find.text('Live flight status isn\'t available right now. Try again soon.'), findsOneWidget);
 
     final title = find.descendant(of: find.byKey(const ValueKey('field-title')), matching: find.byType(TextField));
     await tester.enterText(title, 'Home');
@@ -190,6 +190,35 @@ void main() {
     await tester.pumpAndSettle();
     expect(repo.bookings.single.title, 'Home');
     expect(repo.bookings.single.detail(DetailKeys.flightNumber), 'BA 998', reason: 'what was typed is kept');
+  });
+
+  testWidgets('a date past the schedule says so and asks nothing; the ticket can be filled in by hand', (tester) async {
+    final service = FakeFlightStatusService()..legs = [ba283()];
+    // 4 Oct 2026 is today, so 20 Apr 2027 is 198 days ahead.
+    final far = Builder(
+      builder: (context) => Scaffold(
+        body: Center(
+          child: TextButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) =>
+                    EditBookingScreen(kind: BookingKind.flight, initialDate: LocalDate(2027, 4, 20), tripId: 'la'),
+              ),
+            ),
+            child: const Text('Add a flight'),
+          ),
+        ),
+      ),
+    );
+    await pump(tester, far, service: service);
+    await openForm(tester);
+    await tester.enterText(number, 'BA 283');
+    await settle(tester);
+    expect(service.calls, isEmpty, reason: 'the plan refuses it, so it isn\'t asked');
+    expect(find.text('SCHEDULE NOT OUT YET'), findsOneWidget);
+    expect(find.textContaining('about six months ahead'), findsOneWidget);
+    expect(find.text('NOT FOUND'), findsNothing);
+    expect(find.byKey(const ValueKey('form-ticket')), findsOneWidget, reason: 'the ticket is still there to fill in');
   });
 
   testWidgets('without the service the flight number heads the ticket', (tester) async {

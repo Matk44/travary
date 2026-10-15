@@ -6,6 +6,23 @@ import '../helpers.dart';
 import '../support/flight_status.dart';
 
 void main() {
+  test('the schedule is only asked about as far ahead as the plan reaches', () {
+    final today = LocalDate(2026, 10, 4);
+    expect(flightLookupDaysAhead, 180, reason: 'mirrors FLIGHT_LOOKUP_DAYS_AHEAD on the server');
+    expect(flightLookupReaches(today, today: today), isTrue);
+    expect(flightLookupReaches(LocalDate(2027, 4, 2), today: today), isTrue, reason: 'the 180th day');
+    expect(flightLookupReaches(LocalDate(2027, 4, 3), today: today), isFalse);
+    expect(
+      flightLookupReaches(LocalDate(2026, 9, 30), today: today),
+      isTrue,
+      reason: 'a past day is the server\'s call',
+    );
+    expect(
+      flightTooFarAheadText('BA283', 'Sat 3 Apr'),
+      contains('about six months ahead, so BA283 on Sat 3 Apr isn\'t on the board yet'),
+    );
+  });
+
   test('only a whole flight number is looked up', () {
     expect(cleanFlightNumber('ba 283'), 'BA283');
     expect(cleanFlightNumber('EZY 8123'), 'EZY8123');

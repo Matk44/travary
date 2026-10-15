@@ -51,8 +51,16 @@ export function cleanFlightNumber(input: unknown): string | null {
 }
 
 /**
+ * How far ahead the plan's schedules reach: AeroDataBox's Pro plan refuses
+ * a later date with a 400 (the trial's Basic plan allowed 365). Mirrored by
+ * `flightLookupDaysAhead` in `lib/logic/flight_fill.dart`; a bigger plan
+ * raises both.
+ */
+export const FLIGHT_LOOKUP_DAYS_AHEAD = 180;
+
+/**
  * The flight's local date, "YYYY-MM-DD", if it can be looked up: from a
- * week ago (a flight just taken) to a year ahead (AeroDataBox's schedules).
+ * week ago (a flight just taken) to [FLIGHT_LOOKUP_DAYS_AHEAD] ahead.
  * Live status only exists close to the day; further ahead the answer is
  * the airline's schedule, which is what fills in a new flight.
  */
@@ -62,7 +70,7 @@ export function cleanFlightDate(input: unknown, nowMs: number): string | null {
   if (Number.isNaN(day)) return null;
   const today = Date.parse(new Date(nowMs).toISOString().slice(0, 10) + 'T00:00:00Z');
   const days = Math.round((day - today) / 86_400_000);
-  return days >= -7 && days <= 365 ? input : null;
+  return days >= -7 && days <= FLIGHT_LOOKUP_DAYS_AHEAD ? input : null;
 }
 
 /** IATA airport code from the app ("LHR"), else null. */

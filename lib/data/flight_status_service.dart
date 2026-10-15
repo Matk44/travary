@@ -17,7 +17,8 @@ class FlightStatusException implements Exception {
 /// AeroDataBox key and shares answers between travellers.
 abstract interface class FlightStatusService {
   /// Every leg flown as [flightNumber] on [date] (usually one), with the
-  /// airline's schedule: up to a year ahead. Empty when there's none.
+  /// airline's schedule: up to `flightLookupDaysAhead` days ahead (the plan's
+  /// limit). Empty when there's none.
   Future<List<FlightStatus>> find({required String flightNumber, required LocalDate date});
 
   /// [flightNumber] as the ticket prints it ("BA 283"), [date] the local

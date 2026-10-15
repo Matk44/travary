@@ -10,6 +10,22 @@ String? cleanFlightNumber(String input) {
   return RegExp(r'^(?:[A-Z]{3}|[A-Z0-9]{2})\d{1,4}[A-Z]?$').hasMatch(clean) ? clean : null;
 }
 
+/// How far ahead an airline's schedule can be looked up: the provider's
+/// plan (AeroDataBox Pro) refuses a later date. Mirrors
+/// `FLIGHT_LOOKUP_DAYS_AHEAD` in `functions/src/flightStatusLogic.ts`; a
+/// bigger plan raises both.
+const flightLookupDaysAhead = 180;
+
+/// Whether the board can ask about a flight leaving on [date], seen from
+/// [today]. A date already past is the server's to judge.
+bool flightLookupReaches(LocalDate date, {required LocalDate today}) => today.daysUntil(date) <= flightLookupDaysAhead;
+
+/// Under the board when [number] leaves too far ahead to be in the
+/// schedule: [day] as the board words it ("Sun 8 Nov").
+String flightTooFarAheadText(String number, String day) =>
+    'Airlines publish their schedules about six months ahead, so $number on $day isn\'t on the board yet. '
+    'Fill in the ticket yourself; we\'ll check it nearer the day.';
+
 /// What a found flight fills in on the add-flight form, from the airline's
 /// schedule: the times printed on the ticket, not today's delays.
 class FlightFill {

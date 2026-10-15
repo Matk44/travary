@@ -36,9 +36,10 @@ const AERODATABOX = 'https://prod.api.market/api/v1/aedbx/aerodatabox';
 /**
  * AeroDataBox's flight status by number (Tier 2: 2 units a call on the Pro
  * plan, 5,000 a month, 1 request a second). Live status (revised times,
- * statuses, terminals) close to the day, the airline's schedule up to a
- * year ahead. Gates, check-in desks and belts only where the airport
- * shares them.
+ * statuses, terminals) close to the day, the airline's schedule up to 180
+ * days ahead (`FLIGHT_LOOKUP_DAYS_AHEAD`: the Pro plan refuses later
+ * dates). Gates, check-in desks and belts only where the airport shares
+ * them.
  */
 export function aeroDataBox(key: string): FlightProvider {
   return {

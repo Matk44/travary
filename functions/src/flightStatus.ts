@@ -37,7 +37,7 @@ export const flightStatus = onCall(
     if (!number) throw new HttpsError('invalid-argument', 'That doesn\'t look like a flight number.');
     const nowMs = Date.now();
     const date = cleanFlightDate(data.date, nowMs);
-    if (!date) throw new HttpsError('invalid-argument', 'Flights can be looked up up to a year ahead.');
+    if (!date) throw new HttpsError('invalid-argument', 'Airlines publish their schedules about six months ahead. Fill in the ticket yourself; we\'ll check it nearer the day.');
     const from = cleanAirport(data.from);
 
     const db = getFirestore();

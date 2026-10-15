@@ -6,6 +6,7 @@ import {
   cleanAirport,
   cleanFlightDate,
   cleanFlightNumber,
+  FLIGHT_LOOKUP_DAYS_AHEAD,
   localTime,
   normaliseFlightLegs,
   pickLeg,
@@ -54,12 +55,13 @@ test('flight numbers are forgiving to type', () => {
   assert.equal(cleanFlightNumber(283), null);
 });
 
-test('flights can be looked up from a week ago to a year ahead', () => {
+test('flights can be looked up from a week ago to the plan\'s 180 days ahead', () => {
   const now = Date.parse('2026-10-04T12:00:00Z');
   assert.equal(cleanFlightDate('2026-10-04', now), '2026-10-04');
   assert.equal(cleanFlightDate('2026-09-27', now), '2026-09-27');
-  assert.equal(cleanFlightDate('2027-10-04', now), '2027-10-04', 'schedules go a year ahead');
-  assert.equal(cleanFlightDate('2027-10-05', now), null);
+  assert.equal(FLIGHT_LOOKUP_DAYS_AHEAD, 180, 'AeroDataBox Pro refuses a date later than 180 days ahead');
+  assert.equal(cleanFlightDate('2027-04-02', now), '2027-04-02', 'schedules go 180 days ahead');
+  assert.equal(cleanFlightDate('2027-04-03', now), null);
   assert.equal(cleanFlightDate('2026-09-26', now), null);
   assert.equal(cleanFlightDate('4 Oct', now), null);
   assert.equal(cleanAirport(' lhr '), 'LHR');

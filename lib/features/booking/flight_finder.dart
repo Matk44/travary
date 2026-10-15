@@ -23,6 +23,7 @@ class FlightFinder extends StatefulWidget {
     required this.service,
     required this.number,
     required this.date,
+    required this.today,
     required this.onPickDate,
     required this.onFound,
   });
@@ -34,6 +35,9 @@ class FlightFinder extends StatefulWidget {
 
   /// The day it leaves, as searched.
   final LocalDate date;
+
+  /// Today, to tell a date the schedule doesn't reach yet ([flightLookupDaysAhead]).
+  final LocalDate today;
   final VoidCallback onPickDate;
 
   /// The flight on the board for the ticket: the chosen leg once found,
@@ -54,6 +58,9 @@ class _FlightFinderState extends State<FlightFinder> {
   /// "BA283|2026-11-08": the search shown (or under way).
   String? _key;
   bool _searching = false;
+
+  /// The date is further ahead than the schedule goes: nothing was asked.
+  bool _tooFar = false;
   List<FlightStatus>? _legs;
   String? _error;
 
@@ -80,7 +87,7 @@ class _FlightFinderState extends State<FlightFinder> {
       oldWidget.number.removeListener(_typed);
       widget.number.addListener(_typed);
     }
-    if (oldWidget.date != widget.date) _changed();
+    if (oldWidget.date != widget.date || oldWidget.today != widget.today) _changed();
   }
 
   @override
@@ -108,14 +115,16 @@ class _FlightFinderState extends State<FlightFinder> {
     if (key == _key) return false;
     _timer?.cancel();
     _handed = false;
+    final reaches = flightLookupReaches(widget.date, today: widget.today);
     setState(() {
       _key = key;
       _legs = null;
       _error = null;
       _chosen = 0;
-      _searching = number != null;
+      _tooFar = number != null && !reaches;
+      _searching = number != null && reaches;
     });
-    if (number != null) _timer = Timer(_typingPause, () => _search(number, widget.date, key!));
+    if (number != null && reaches) _timer = Timer(_typingPause, () => _search(number, widget.date, key!));
     return true;
   }
 
@@ -244,6 +253,15 @@ class _FlightFinderState extends State<FlightFinder> {
         FlapText('------', color: Colors.white.withValues(alpha: 0.35)),
         const SizedBox(height: 10),
         Text('Type the flight number from your booking and we\'ll fill in the ticket below.', style: caption),
+      ]);
+    }
+    if (_tooFar) {
+      return column([
+        const BoardLabel('SCHEDULE NOT OUT YET'),
+        const SizedBox(height: 10),
+        FlapText(typed),
+        const SizedBox(height: 10),
+        Text(flightTooFarAheadText(typed, day), style: caption),
       ]);
     }
     if (_searching) {
