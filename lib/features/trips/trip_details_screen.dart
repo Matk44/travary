@@ -12,11 +12,13 @@ import '../../design/trip_theme_style.dart';
 import '../../design/widgets/ledger.dart';
 import '../../domain/domain.dart';
 import '../../logic/access.dart';
+import '../../logic/ai_consent.dart';
 import '../../logic/formatters.dart';
 import '../../logic/price_text.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../ai/ai_consent_sheet.dart';
 import '../premium/premium_gate.dart';
 import '../sharing/invite_sheet.dart';
 import 'trip_details_sheet.dart';
@@ -201,6 +203,9 @@ class _Details extends StatelessWidget {
   /// failed classification only means the current look stays for now.
   Future<void> _useAutomaticLook(BuildContext context, TravelStore store, TripPlan plan) async {
     final messenger = ScaffoldMessenger.of(context);
+    // Automatic looks come from Google's AI: their OK first (the demo has
+    // none, and says so).
+    if (store.automaticLooksAvailable && !await askAiConsent(context, AiAsk.tripLooks)) return;
     try {
       await store.useAutomaticLook(plan);
     } on VisualProfileException catch (e) {

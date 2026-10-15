@@ -1,0 +1,23 @@
+{
+  "provider": "replicate-seedance-2",
+  "prompt": "A single locked-camera, full-body studio shot of Travi, the exact adorable coral-orange folded-paper suitcase mascot in the supplied first and last frames. This is a very subtle four-second seamless pleading idle animation for a small mobile-app card. Preserve his exact orange paper facets, navy handle and trim, brass fittings, palm-tree luggage tag, four wheels, huge glossy puppy-dog eyes, little smile, and clasped folded-paper hands. His hands stay together in the same pleading pose for the entire shot. Over the middle two seconds he very gently lifts his clasped hands a tiny amount toward his chest, raises his inner eyebrows a little with a hopeful please expression, makes one soft slow blink, and relaxes back to the exact starting pose. A tiny natural breathing movement only; this is a restrained cute imploring gesture, not dancing. Wheels remain planted on the same marks; the suitcase does not roll, bounce, turn, grow or shrink. Keep his eyes large and looking hopefully up toward the viewer. Return gently to the identical first-frame pose and hold for the last half-second so the loop joins cleanly. The entire character including handle, tag, hands and all wheels stays visible with the exact same framing. Background stays perfectly flat solid chroma green RGB 0,177,64, without shadows, floor line, gradients, lighting changes or objects. Camera absolutely static: no zoom, pan, cuts or reframing. No text, speech bubble, words, extra hands, new accessories, mouth talking or audio. Preserve the exact reference identity and paper material.",
+  "idea": "Travary Profile Annual Pass: subtle clasped-hands puppy-eyes plea, approved owner still 15 October 2026",
+  "cast_image_paths": [],
+  "first_frame_path": "1792059408149-fda12aeb66da8912.png",
+  "last_frame_path": "1792059408149-fda12aeb66da8912.png",
+  "aspect_ratio": "1:1",
+  "resolution": "720p",
+  "duration_seconds": 4,
+  "generate_audio": false,
+  "seed": 15102026,
+  "shot_card": {
+    "title": "Travi Profile Annual Pass plea",
+    "raw_prompt": "A single locked-camera, full-body studio shot of Travi, the exact adorable coral-orange folded-paper suitcase mascot in the supplied first and last frames. This is a very subtle four-second seamless pleading idle animation for a small mobile-app card. Preserve his exact orange paper facets, navy handle and trim, brass fittings, palm-tree luggage tag, four wheels, huge glossy puppy-dog eyes, little smile, and clasped folded-paper hands. His hands stay together in the same pleading pose for the entire shot. Over the middle two seconds he very gently lifts his clasped hands a tiny amount toward his chest, raises his inner eyebrows a little with a hopeful please expression, makes one soft slow blink, and relaxes back to the exact starting pose. A tiny natural breathing movement only; this is a restrained cute imploring gesture, not dancing. Wheels remain planted on the same marks; the suitcase does not roll, bounce, turn, grow or shrink. Keep his eyes large and looking hopefully up toward the viewer. Return gently to the identical first-frame pose and hold for the last half-second so the loop joins cleanly. The entire character including handle, tag, hands and all wheels stays visible with the exact same framing. Background stays perfectly flat solid chroma green RGB 0,177,64, without shadows, floor line, gradients, lighting changes or objects. Camera absolutely static: no zoom, pan, cuts or reframing. No text, speech bubble, words, extra hands, new accessories, mouth talking or audio. Preserve the exact reference identity and paper material.",
+    "first_frame_path": "1792059408149-fda12aeb66da8912.png",
+    "last_frame_path": "1792059408149-fda12aeb66da8912.png",
+    "camera_move": "none",
+    "duration_seconds": 4,
+    "generate_audio": false,
+    "rationale": "Owner supplied and approved this pleading pose and explicitly requested slight animation and Profile integration."
+  }
+}

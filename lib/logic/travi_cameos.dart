@@ -77,6 +77,11 @@ bool greetsToday({required LocalDate today, LocalDate? lastGreeted}) => lastGree
 /// How long a reaction holds before he ducks back down.
 const traviPeekHold = Duration(milliseconds: 700);
 
+/// The blank card Travi holds up in [TraviPeek.today], on the cameo
+/// canvas (measured from its still): where words written on it go, clear
+/// of his hands, and how far it tilts (clockwise).
+const traviTodayCard = (x: 228.0, y: 425.0, width: 168.0, height: 50.0, turnDegrees: 6.8);
+
 /// A cameo film (`assets/travi/cameos/films/`), played once, at its [box]
 /// on the square [traviCameoCanvas].
 class TraviClip {

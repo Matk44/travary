@@ -17,6 +17,7 @@ import '../design/art/art_catalog.dart';
 import '../design/art/art_resolver.dart';
 import '../design/art/art_slots.dart';
 import '../domain/domain.dart';
+import '../logic/ai_consent.dart';
 import '../logic/art_pack_selection.dart';
 import '../logic/art_subjects.dart';
 import '../logic/checklist.dart';
@@ -28,6 +29,7 @@ import '../logic/trip_plan.dart';
 import '../logic/trip_route.dart';
 import '../logic/trip_window.dart';
 import '../logic/visual_profile_request.dart';
+import 'ai_consent_store.dart';
 import 'analytics.dart';
 import 'art_catalog_controller.dart';
 import 'visual_profile_coordinator.dart';
@@ -55,8 +57,10 @@ class TravelStore extends ChangeNotifier {
     this.backup,
     this.sharing,
     this.flightStatus,
+    AiConsentStore? aiConsent,
     DateTime Function()? clock,
-  }) : _artCatalogs = ArtCatalogController(bundled: artCatalog, packs: artPacks),
+  }) : _aiConsent = aiConsent,
+       _artCatalogs = ArtCatalogController(bundled: artCatalog, packs: artPacks),
        _clock = clock ?? DateTime.now {
     _art = ArtResolver(_artCatalogs.catalog);
     _artCatalogs.addListener(_artCatalogChanged);
@@ -64,6 +68,7 @@ class TravelStore extends ChangeNotifier {
     if (visualProfiles != null) {
       _classifier = VisualProfileCoordinator(
         service: visualProfiles,
+        allowed: aiConsent == null ? null : () => aiConsent.allowed,
         debounce: classificationDebounce,
         snapshot: (tripId) {
           final plan = this.plan(tripId);
@@ -71,6 +76,7 @@ class TravelStore extends ChangeNotifier {
         },
       );
     }
+    aiConsent?.addListener(_aiConsentChanged);
     _subscriptions.addAll([
       repository.watchTrips().listen(
         (trips) {
@@ -125,6 +131,10 @@ class TravelStore extends ChangeNotifier {
   /// Automatic looks (cloud mode only: the server classifies saved trips).
   VisualProfileCoordinator? _classifier;
 
+  /// Whether trips may go to Google's AI for their looks (on this phone).
+  /// Null (tests that build only this store): nothing holds them back.
+  final AiConsentStore? _aiConsent;
+
   /// Which trips get their tickets backed up. The app sets this from
   /// the Annual Pass; shared trips always do, so everyone has the tickets.
   bool Function(TripPlan plan) shouldBackUp = (plan) => plan.trip.isShared;
@@ -159,6 +169,31 @@ class TravelStore extends ChangeNotifier {
   String get userId => repository.userId;
   bool get sharingAvailable => sharing != null;
   bool get automaticLooksAvailable => _classifier != null;
+
+  /// Whether [plan]'s page offers automatic looks, which need the
+  /// traveller's OK to use Google's AI (`logic/ai_consent.dart`).
+  bool offersLooksFor(TripPlan plan) {
+    final consent = _aiConsent;
+    return consent != null &&
+        consent.loaded &&
+        offersTripLooks(
+          consent: consent.consent,
+          available: automaticLooksAvailable,
+          trip: plan.trip,
+          bookings: plan.bookings,
+        );
+  }
+
+  /// Allowed: every trip gets its look now. Either way, a trip's page
+  /// stops or starts offering.
+  void _aiConsentChanged() {
+    if (_aiConsent?.allowed ?? false) {
+      for (final plan in _plans) {
+        _classifier?.schedule(plan.trip.id);
+      }
+    }
+    notifyListeners();
+  }
 
   bool isOwner(TripPlan plan) => plan.trip.ownerId == userId;
 
@@ -582,7 +617,7 @@ class TravelStore extends ChangeNotifier {
         'Automatic looks work with trips saved to the cloud. This is the demo version.',
       );
     }
-    if (!hasEnoughToClassify(trip, plan.bookings)) return;
+    if (!hasEnoughToClassify(trip, plan.bookings) || !(_aiConsent?.allowed ?? true)) return;
     await classifier.classifyNow(trip.id);
   }
 
@@ -893,6 +928,7 @@ class TravelStore extends ChangeNotifier {
     _ticker?.cancel();
     _syncTimer?.cancel();
     _classifier?.dispose();
+    _aiConsent?.removeListener(_aiConsentChanged);
     artPacks?.removeListener(_syncArtPacks);
     _artCatalogs
       ..removeListener(_artCatalogChanged)

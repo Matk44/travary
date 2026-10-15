@@ -183,7 +183,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('help-terms')));
     await tester.pumpAndSettle();
-    expect(find.textContaining('travary_support/terms.html'), findsOneWidget);
+    expect(find.textContaining('travary.app/terms'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

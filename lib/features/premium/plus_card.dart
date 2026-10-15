@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../design/tokens.dart';
 import '../../design/widgets/profile_stationery.dart';
+import '../../design/widgets/profile_travi.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/premium_store.dart';
@@ -80,10 +81,15 @@ class PlusCard extends StatelessWidget {
                           ],
                         ],
                       );
-                      // The owner supplies the animation later. This is a real
-                      // empty layout slot, with no placeholder or still loaded.
-                      const travi = SizedBox(key: ValueKey('profile-travi-slot'), width: 112, height: 124);
-                      if (box.maxWidth < 285 || MediaQuery.textScalerOf(context).scale(14) > 19) {
+                      const travi = SizedBox(
+                        key: ValueKey('profile-travi-slot'),
+                        width: 112,
+                        height: 124,
+                        child: ProfileTravi(),
+                      );
+                      // Keep the copy readable on small phones and at large
+                      // text sizes. Pleading belongs only on the free upsell.
+                      if (policy.hasPlus || box.maxWidth < 285 || MediaQuery.textScalerOf(context).scale(14) > 19) {
                         return benefits;
                       }
                       return Row(

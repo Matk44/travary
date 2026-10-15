@@ -121,6 +121,7 @@ lib/
 │               trip_window (the days a trip's bookings may use, where a booking
 │               goes: placeBooking, trip dates that leave bookings out, overlaps),
 │               checklist ("Before you go": order, wording, ideas),
+│               ai_consent (asking before anything goes to Google's Gemini: wording, offers),
 │               packing (the packing list: wording, ideas, which list to reuse),
 │               trip_gaps (what a trip still needs: nights without a stay, the
 │               flight home), trip_hero_text (a trip's tag), booking_form_text,
@@ -138,6 +139,7 @@ lib/
 │               push_service (flight alerts: permission, this phone's token, taps);
 │               reminder_scheduler + reminder_settings (local reminders, this phone);
 │               shared_files (files shared in from other apps);
+│               ai_consent_record (the answer about Google's AI, this phone);
 │               auth_service (guest, Apple/Google/email-link sign-in, delete account);
 │               onboarding_record (users/{uid}.onboardingCompleted, every phone)
 ├── state/      TravelStore (ChangeNotifier): the single source of truth for screens;
@@ -145,7 +147,8 @@ lib/
 │               ArtCatalogController (bundled + installed packs), VisualProfileCoordinator,
 │               TravelDocumentsStore (documents + lock), AppSession (account + uid),
 │               NotificationsStore (flight alerts on this phone),
-│               RemindersStore (free reminders), ShareInbox (a shared file waiting)
+│               RemindersStore (free reminders), ShareInbox (a shared file waiting),
+│               AiConsentStore (may Smart Import and trip looks use Google's AI)
 ├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
 │               TaggedReservationCard on ShellFrame, DocumentStampCard, LedgerRowCard),
@@ -163,7 +166,8 @@ lib/
 │               booking (form, flight finder, detail, viewer), profile,
 │               travel_documents (list, form, document, the tab's entry pill),
 │               account (Profile's sign-in card, sign-in sheet, email-link form),
-│               onboarding (Travi scenes, sign-in before the pass desk, home gate)
+│               onboarding (Travi scenes, sign-in before the pass desk, home gate),
+│               ai (the consent sheet, the trip page's looks offer)
 └── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
 tool/           art_packs.dart: builds, validates and publishes art packs, and converts
                 bundled art to WebP (`bundled-webp`) (operator only)
@@ -617,6 +621,18 @@ the app. Project `travary-444` is on the Blaze plan.
   `firebase deploy --only functions`. Read logs with
   `gcloud logging read 'resource.labels.service_name="smartimport"' --project travary-444`
   (`firebase functions:log` lags).
+- **Asked first** (Apple 5.1.2(i): explicit permission before personal
+  data goes to a third-party AI): nothing goes to Gemini, from Smart
+  Import or automatic looks, until the traveller allows it on the sheet
+  (`askAiConsent`, `features/ai/ai_consent_sheet.dart`: a ticket saying
+  what's sent and what never is, Travi popping up over it holding a "MAY
+  I?" card). One answer on this phone covers both (`AiConsentStore`,
+  `logic/ai_consent.dart`). Asked at Smart Import before the file is
+  chosen (a declined shared file can still be typed in), by a trip page's
+  offer (`TripLooksOffer`, ahead of the reminders offer), at Trip details'
+  "Automatic", and from Profile's switch; never at launch. Until it's
+  allowed, `VisualProfileCoordinator` sends nothing and trips keep their
+  look; allowing it schedules every trip.
 - Trip grouping for imports: bookings from one file share a trip within
   30 days (a trip already there that the file joins included), a new one
   named after where the whole file goes; a return flight ("Lisbon to
@@ -639,7 +655,9 @@ the app. Project `travary-444` is on the Blaze plan.
   `FlightProvider` interface (`functions/src/flightProvider.ts`) so it can
   be swapped or joined by a gate source. Callable `flightStatus`
   (`functions/src/flightStatus.ts`, pure logic in `flightStatusLogic.ts`)
-  takes a flight number, local departure date (a week back to a year ahead)
+  takes a flight number, local departure date (a week back to 180 days ahead:
+  the Pro plan refuses later dates, `FLIGHT_LOOKUP_DAYS_AHEAD`, mirrored by
+  `flightLookupDaysAhead`)
   and optional departure IATA. It returns the traveller's leg and every leg:
   airports, cities, schedule, and close to the day the gate, terminal,
   check-in desk, baggage belt and delays, all as airport-local times. Predicted times are AeroDataBox's guess, so
@@ -653,7 +671,8 @@ the app. Project `travary-444` is on the Blaze plan.
   right under it and editable all along (owner, 14 Oct 2026: the number at
   the top fills in the rest, typing by hand still works). The flight
   number and departure date find the flight in the airline's schedule (up
-  to a year ahead, by departure date) and flip it onto split-flap tiles;
+  to 180 days ahead, by departure date; further out the board says the
+  schedule isn't out yet and asks nothing) and flip it onto split-flap tiles;
   the found flight fills in the ticket at once: the title ("London to
   Tokyo"), departure and landing times, and both airports with their codes
   (`logic/flight_fill.dart`). `refillFlight` keeps whatever the traveller
@@ -723,10 +742,11 @@ and belts are a bonus shown and announced only when the data has them
   2026: the team's key `8PPPQAD22W`, in both the Development and Production
   slots of `com.travary.app`; Push Notifications is on its App ID), so iOS
   builds, TestFlight included, can receive alerts; Android needs nothing
-  more. Not yet tried on a real iPhone. The AeroDataBox
-  trial has ended: lookups and alerts only work again once the paid base
-  plan ($7.50, 5,000 units) is bought, near launch. Then set
-  `FLIGHT_BILLING_DAY` to the day it starts and redeploy.
+  more. A test push reached the iOS simulator (15 Oct 2026); not yet
+  tried on a real iPhone. The AeroDataBox Pro plan ($7.50, 5,000 units, 1
+  request a second, schedules 180 days ahead) was bought on API.Market
+  (15 Oct 2026) and the key works. `FLIGHT_BILLING_DAY=15` is set in
+  `functions/.env`; it takes effect when the functions are next deployed.
 - Native: iOS `aps-environment` in `Runner.entitlements` (Push
   Notifications capability on the App ID); Android `POST_NOTIFICATIONS`,
   the `flight_changes` channel (made in `MainActivity`) and

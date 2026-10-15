@@ -15,6 +15,7 @@ import '../../design/widgets/onboarding_scene.dart';
 import '../../design/widgets/travi_player.dart';
 import '../../domain/domain.dart';
 import '../../domain/onboarding.dart';
+import '../../logic/ai_consent.dart';
 import '../../logic/card_text.dart';
 import '../../logic/countdown_text.dart';
 import '../../logic/day_plan.dart';
@@ -29,6 +30,7 @@ import '../../state/onboarding_store.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../account/sign_in_sheet.dart';
+import '../ai/ai_consent_sheet.dart';
 import '../booking/booking_actions.dart';
 import '../booking/edit_booking_screen.dart';
 import '../import/smart_import_screen.dart';
@@ -279,6 +281,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       source: 'onboarding',
     );
     if (access == null || !mounted) return;
+    // Nothing goes to Google's AI without their OK (Travi is already on
+    // the stage, so the sheet comes without him).
+    if (again == null && !await askAiConsent(context, AiAsk.smartImport, travi: false)) return;
+    if (!mounted) return;
     // Opens immediately; no animation delay before the platform picker.
     final file = again ?? await pickFile(context, title: 'Bring in your booking');
     if (file == null || !mounted) return;

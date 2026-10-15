@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../data/ai_consent_record.dart';
 import '../data/art_pack_service.dart';
 import '../data/smart_import_service.dart';
 import '../data/visual_profile_service.dart';
@@ -9,6 +10,7 @@ import '../data/reminder_settings.dart';
 import '../data/travi_greeting_record.dart';
 import '../design/tokens.dart';
 import '../logic/formatters.dart';
+import '../state/ai_consent_store.dart';
 import '../state/app_session.dart';
 import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
@@ -41,6 +43,9 @@ class TravaryApp extends StatelessWidget {
           create: (_) =>
               TravelDocumentsStore(repository: dependencies.travelDocuments, lock: dependencies.documentLock),
         ),
+        // Whether Smart Import and trip looks may use Google's AI: asked on
+        // this phone, whoever is signed in.
+        ChangeNotifierProvider(create: (_) => AiConsentStore(LocalAiConsentRecord())),
         // Travi greets at most once a day on this phone.
         Provider<TraviGreetings?>(create: (_) => TraviGreetings(LocalTraviGreetingRecord())),
         // A file shared in waits here, whatever the account, until home reads it.
@@ -72,6 +77,7 @@ class TravaryApp extends StatelessWidget {
                   backup: dependencies.backup,
                   sharing: dependencies.sharing,
                   flightStatus: dependencies.flightStatus,
+                  aiConsent: context.read<AiConsentStore>(),
                 ),
               ),
               ChangeNotifierProvider(

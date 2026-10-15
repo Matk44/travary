@@ -24,6 +24,7 @@ import '../../logic/trip_hero_text.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/reminders_store.dart';
 import '../../state/travel_store.dart';
+import '../ai/trip_looks_offer.dart';
 import '../reminders/reminder_offer.dart';
 import '../booking/booking_actions.dart';
 import 'checklist_item_sheet.dart';
@@ -76,7 +77,9 @@ class _TripBody extends StatelessWidget {
     final chrome = TravaryChrome.of(context);
     final addDate = plan.contains(store.today) ? store.today : plan.start;
     final gaps = planGaps(plan);
-    final offersReminders = context.watch<RemindersStore?>()?.offersFor(plan) ?? false;
+    // One offer at a time: the trip's look first, then reminders.
+    final offersLooks = store.offersLooksFor(plan);
+    final offersReminders = !offersLooks && (context.watch<RemindersStore?>()?.offersFor(plan) ?? false);
 
     return LinenBackground(
       child: Scaffold(
@@ -140,6 +143,7 @@ class _TripBody extends StatelessWidget {
             else
               _Plan(plan: plan),
             for (final gap in gaps) ...[const SizedBox(height: TravarySpace.md), _GapRow(plan: plan, gap: gap)],
+            if (offersLooks) ...[const SizedBox(height: TravarySpace.lg), const TripLooksOffer()],
             if (offersReminders) ...[const SizedBox(height: TravarySpace.lg), const ReminderOffer()],
             if (showsChecklist(plan, store.today)) ...[const SizedBox(height: TravarySpace.lg), _Checklist(plan: plan)],
             if (showsPacking(plan, store.today)) ...[const SizedBox(height: TravarySpace.lg), _Packing(plan: plan)],

@@ -2,6 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Firebase Analytics without the advertising ID: Travary never tracks. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" tools:node="remove" />
+    <!-- open_filex asks for every photo, video and audio file; Travary never
+         needs them (tickets come through the system picker, shared files
+         with their own access), and Google Play only allows them for apps
+         built around a photo library. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
     <!-- Flight alerts (paid trips) and reminders (everyone). Asked for on a
          flight's page or the reminders offer, never at launch. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />

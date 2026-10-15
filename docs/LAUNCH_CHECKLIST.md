@@ -94,21 +94,16 @@ work, accounts, money); everything else can be done in this repo.
   photo and video access for apps built around a photo library. What's
   left: internet, notifications, restart (reminders), biometrics (travel
   documents), billing and push.
-- [ ] **Apple 5.1.2(i): ask before sending anything to AI.** Apple now
-  requires apps to say clearly when personal data goes to a third-party
-  AI and to get explicit permission first. Smart Import sends the chosen
-  file to Google's Gemini with no word of it in the app (only the privacy
-  policy says so), and automatic trip looks (`classifyTripVisuals`) send
-  booking names and places to Gemini in the background. Likeliest App
-  Review rejection on the list. Recommended: one sheet, asked once, before
-  the first Smart Import or automatic look ("Travary uses Google's Gemini
-  AI to read files you import and to pick each trip's look from its
-  bookings' names and places. Your files aren't kept on our servers.";
-  Allow / Not now). Without it, Smart Import isn't offered and looks come
-  from the place detection on the phone (`logic/destinations.dart`).
-
-## 5. Store listings
-
+- [x] **Apple 5.1.2(i): ask before sending anything to AI** (built 15
+  Oct). Apple requires apps to say clearly when personal data goes to a
+  third-party AI and to get explicit permission first. Nothing goes to
+  Google's Gemini (Smart Import's file, or trips' and bookings' names and
+  places for automatic looks) until the traveller taps Allow on the
+  consent sheet: at Smart Import before the file is chosen, from a trip
+  page's "Dress up this trip?" offer, at Trip details' "Automatic", or
+  from Profile's switch. The privacy policy's source says so too
+  (`website/content/legal/privacy.html`); **redeploy travary.app** for it
+  to show. In the App Review notes, mention the sheet.
 - [ ] **Closed test first (confirmed 14 Oct).** "Dream Prayer Developer"
   is a personal account, and Travary's dashboard says it must finish
   setting up, **complete a closed test** (at least 12 testers for 14 days

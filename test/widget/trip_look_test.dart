@@ -12,6 +12,7 @@ import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import '../helpers.dart';
+import '../support/ai_consent.dart';
 
 class _FailingService implements VisualProfileService {
   int calls = 0;
@@ -62,6 +63,7 @@ void main() {
             ),
           ),
           ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
+          aiConsentProvider(consent: AiConsent.allowed),
         ],
         child: MaterialApp(
           theme: buildTravaryTheme(),

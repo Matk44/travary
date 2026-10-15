@@ -20,15 +20,23 @@ typedef TripSnapshot = ({Trip trip, List<Booking> bookings});
 /// - Failures never block anything: the trip keeps its look. A trip that
 ///   hasn't reached the server yet, or is cooling down, is retried a few
 ///   times; anything else waits for the next meaningful edit.
+/// - Nothing is sent until the traveller has [allowed] Google's AI
+///   (`logic/ai_consent.dart`); the owner schedules every trip once they do.
 class VisualProfileCoordinator {
   VisualProfileCoordinator({
     required this.service,
     required this.snapshot,
+    this.allowed,
     this.debounce = const Duration(seconds: 4),
     this.notSyncedRetries = const [Duration(seconds: 5), Duration(seconds: 20)],
   });
 
   final VisualProfileService service;
+
+  /// Whether trips may go to the classifier (Google's Gemini) now. Null:
+  /// always (tests of the classifier itself).
+  final bool Function()? allowed;
+  bool get _allowed => allowed?.call() ?? true;
 
   /// The trip and its bookings now, or null if the trip is gone.
   final TripSnapshot? Function(String tripId) snapshot;
@@ -75,6 +83,12 @@ class VisualProfileCoordinator {
   /// Throws [VisualProfileException] with a friendly message on failure.
   Future<TripVisualProfile> classifyNow(String tripId) async {
     _timers.remove(tripId)?.cancel();
+    if (!_allowed) {
+      throw const VisualProfileException(
+        VisualProfileFailure.failed,
+        'Automatic looks use Google’s AI. You can allow it in Profile.',
+      );
+    }
     final current = snapshot(tripId);
     if (current == null) {
       throw const VisualProfileException(VisualProfileFailure.failed, 'This trip has been deleted.');
@@ -86,7 +100,7 @@ class VisualProfileCoordinator {
   }
 
   Future<void> _run(String tripId) async {
-    if (_disposed) return;
+    if (_disposed || !_allowed) return;
     if (_running.contains(tripId)) {
       _dirty.add(tripId);
       return;

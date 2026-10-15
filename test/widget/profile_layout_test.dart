@@ -19,6 +19,8 @@ import 'package:travary/design/tokens.dart';
 import 'package:travary/design/art/art_bounds.dart';
 import 'package:travary/design/cards/card_parts.dart';
 import 'package:travary/design/widgets/profile_stationery.dart';
+import 'package:travary/design/widgets/profile_travi.dart';
+import 'package:travary/design/widgets/travi_player.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/premium/paywall_screen.dart';
 import 'package:travary/features/profile/profile_screen.dart';
@@ -163,15 +165,40 @@ void main() {
 
   Finder profileScroll() => find.descendant(of: find.byType(ProfileScreen), matching: find.byType(Scrollable));
 
+  testWidgets('pleading Travi honours Reduce Motion and pauses under a hidden tab', (tester) async {
+    final playback = TraviPlayer.playback;
+    TraviPlayer.playback = true;
+    addTearDown(() => TraviPlayer.playback = playback);
+    Future<void> show({required bool reduced}) => tester.pumpWidget(
+      MediaQuery(
+        data: MediaQueryData(disableAnimations: reduced),
+        child: const Directionality(
+          textDirection: TextDirection.ltr,
+          child: TickerMode(
+            enabled: false,
+            child: Center(child: SizedBox(width: 112, height: 124, child: ProfileTravi())),
+          ),
+        ),
+      ),
+    );
+    await show(reduced: true);
+    expect((tester.widget<Image>(find.byType(Image)).image as AssetImage).assetName, ProfileTravi.stillAsset);
+    await show(reduced: false);
+    expect((tester.widget<Image>(find.byType(Image)).image as AssetImage).assetName, ProfileTravi.animationAsset);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
-    'approved profile keeps its animation slot empty and opens the pass desk',
+    'profile shows the approved pleading Travi and opens the pass desk',
     (tester) async {
       final boundary = await pumpProfile(tester);
       await capture(tester, boundary, 'profile_guest');
       final slot = find.byKey(const ValueKey('profile-travi-slot'));
       await tester.scrollUntilVisible(slot, 150, scrollable: profileScroll());
       expect(tester.getSize(slot).height, 124);
-      expect(find.descendant(of: slot, matching: find.byType(Image)), findsNothing);
+      final travi = tester.widget<Image>(find.descendant(of: slot, matching: find.byType(Image)));
+      expect((travi.image as AssetImage).assetName, ProfileTravi.stillAsset);
       await capture(tester, boundary, 'profile_pass');
       final buy = find.byKey(const ValueKey('profile-annual-pass'));
       await tester.scrollUntilVisible(buy, 100, scrollable: profileScroll());
@@ -209,6 +236,7 @@ void main() {
     'small phone with double text keeps sign-in, restore and documents reachable',
     (tester) async {
       final boundary = await pumpProfile(tester, size: const Size(320, 568), scale: 2);
+      expect(find.byType(ProfileTravi), findsNothing);
       for (final key in ['sign-in-apple', 'sign-in-google', 'profile-restore-purchases', 'profile-travel-documents']) {
         final action = find.byKey(ValueKey(key));
         await tester.scrollUntilVisible(action, 100, scrollable: profileScroll());
@@ -293,6 +321,7 @@ void main() {
       await Scrollable.ensureVisible(tester.element(restore), alignment: 0.5);
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('profile-annual-pass')), findsNothing);
+      expect(find.byType(ProfileTravi), findsNothing);
       expect(find.textContaining('Renews on'), findsOneWidget);
       await tester.tap(restore);
       await tester.pumpAndSettle();

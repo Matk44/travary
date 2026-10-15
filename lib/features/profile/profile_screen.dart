@@ -7,11 +7,14 @@ import '../../design/widgets/common.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/profile_stationery.dart';
 import '../../domain/domain.dart';
+import '../../logic/ai_consent.dart';
 import '../../logic/formatters.dart';
+import '../../state/ai_consent_store.dart';
 import '../../state/onboarding_store.dart';
 import '../../state/reminders_store.dart';
 import '../../state/travel_store.dart';
 import '../account/account_card.dart';
+import '../ai/ai_consent_sheet.dart';
 import '../help/help_links.dart';
 import '../premium/plus_card.dart';
 import '../reminders/reminder_offer.dart';
@@ -66,6 +69,21 @@ class ProfileScreen extends StatelessWidget {
                     onChanged: (on) => on ? turnOnReminders(context) : reminders.turnOff(),
                   ),
                 ],
+              ),
+            ),
+          ],
+          if (context.watch<AiConsentStore?>() case final ai?) ...[
+            const SectionLabel('Google’s AI'),
+            ProfilePaperCard(
+              key: const ValueKey('profile-ai-card'),
+              kind: ProfilePaperKind.memo,
+              child: SwitchListTile(
+                key: const ValueKey('profile-ai'),
+                secondary: const Icon(Icons.auto_awesome_outlined),
+                title: const Text(aiSettingTitle),
+                subtitle: const Text(aiSettingCopy),
+                value: ai.allowed,
+                onChanged: (on) => on ? askAiConsent(context, AiAsk.settings) : ai.decline(AiAsk.settings),
               ),
             ),
           ],

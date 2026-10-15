@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/material.dart';
@@ -131,17 +132,68 @@ class _TraviLoungeState extends State<TraviLounge> {
 /// Travi popping up once from behind whatever lies under his square's
 /// bottom edge (a sheet's top, a panel), as soon as he's shown: [peek], then
 /// he stays up, or ducks back down if [duck].
-class TraviPopUp extends StatelessWidget {
-  const TraviPopUp({super.key, required this.peek, this.duck = false});
+///
+/// With [sign] ([TraviPeek.today], staying up), the blank card he holds
+/// carries those words once he's up: the prop becomes live UI, as in
+/// onboarding.
+class TraviPopUp extends StatefulWidget {
+  const TraviPopUp({super.key, required this.peek, this.duck = false, this.sign});
 
   final TraviPeek peek;
   final bool duck;
+  final String? sign;
 
   @override
-  Widget build(BuildContext context) => IgnorePointer(
-    child: TraviClipPlayer(
+  State<TraviPopUp> createState() => _TraviPopUpState();
+}
+
+class _TraviPopUpState extends State<TraviPopUp> {
+  bool _up = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final sign = widget.sign;
+    final player = TraviClipPlayer(
       playOnStart: true,
-      script: traviPeekScript(peek, duck: duck, delay: TraviCameoLayout.popUpDelay),
-    ),
-  );
+      script: traviPeekScript(widget.peek, duck: widget.duck, delay: TraviCameoLayout.popUpDelay),
+      onDone: sign == null
+          ? null
+          : () {
+              if (mounted) setState(() => _up = true);
+            },
+    );
+    if (sign == null) return IgnorePointer(child: player);
+    return IgnorePointer(
+      child: LayoutBuilder(
+        builder: (context, box) {
+          final k = box.maxWidth / traviCameoCanvas;
+          const card = traviTodayCard;
+          return Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned.fill(child: player),
+              Positioned(
+                left: (card.x - card.width / 2) * k,
+                top: (card.y - card.height / 2) * k,
+                width: card.width * k,
+                height: card.height * k,
+                child: Transform.rotate(
+                  angle: card.turnDegrees * math.pi / 180,
+                  child: AnimatedOpacity(
+                    opacity: _up ? 1 : 0,
+                    duration: const Duration(milliseconds: 180),
+                    child: FittedBox(
+                      key: const ValueKey('travi-sign'),
+                      fit: BoxFit.scaleDown,
+                      child: Text(sign, style: TravaryText.traviSign),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 }

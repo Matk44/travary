@@ -1,0 +1,22 @@
+{
+  "source_frames_at_12fps": 49,
+  "crop": [
+    90,
+    25,
+    400,
+    450
+  ],
+  "size": [
+    310,
+    425
+  ],
+  "source_endpoint_drift_rgb": [
+    3.5021064281463623,
+    4.332241058349609
+  ],
+  "source_max_frame_change_rgb": 5.587409019470215,
+  "source_median_frame_change_rgb": 0.37839120626449585,
+  "loop_join_rgba_max": 0,
+  "seconds": 6.067,
+  "animation_bytes": 942976
+}

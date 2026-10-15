@@ -178,6 +178,9 @@ abstract final class TravaryText {
   /// The "Show tickets" stamp.
   static TextStyle get stamp => _serif(18, FontWeight.w700, TravaryColors.ink, height: 1.0);
 
+  /// Words on the card Travi holds up, in his navy trim.
+  static TextStyle get traviSign => _serif(20, FontWeight.w700, OnboardingColors.navy, height: 1.0, letterSpacing: 1.2);
+
   /// A stop on the time rail: "9:00" over "am".
   static TextStyle get railTime => _sans(14, FontWeight.w700, TravaryColors.ink, height: 1.2);
   static TextStyle get railPeriod => _sans(12, FontWeight.w400, TravaryColors.inkSoft, height: 1.15);
@@ -609,6 +612,10 @@ abstract final class TraviCameoLayout {
 
   /// He pops up once the sheet or screen has slid in.
   static const popUpDelay = Duration(milliseconds: 350);
+
+  /// Holding up a card with words on it (the AI question): larger, so the
+  /// words can be read.
+  static const signSize = 132.0;
 }
 
 abstract final class TripPostcardLayout {

@@ -13,6 +13,7 @@ import 'package:travary/features/premium/paywall_screen.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
+import '../support/ai_consent.dart';
 import '../support/open_tab.dart';
 import '../support/travel_documents.dart';
 import '../support/session.dart';
@@ -42,6 +43,7 @@ void main() {
           ),
           appSessionProvider(),
           travelDocumentsProvider(),
+          aiConsentProvider(),
         ],
         child: MaterialApp(theme: buildTravaryTheme(), home: const HomeShell()),
       ),
@@ -120,6 +122,10 @@ void main() {
 
       await tester.tap(find.text('Smart Import'));
       await tester.pumpAndSettle();
+      // Google's AI reads it: asked first, before a file is chosen.
+      expect(find.text('What shall we read?'), findsNothing);
+      await tester.tap(find.byKey(const ValueKey('ai-consent-allow')));
+      await tester.pumpAndSettle();
       expect(find.text('What shall we read?'), findsOneWidget);
     });
 
@@ -154,6 +160,9 @@ void main() {
       expect(find.text('Get Annual Pass'), findsOneWidget);
       await tapDesk(tester, 'onboarding-pass-buy');
       expect(find.byType(PaywallScreen), findsNothing);
+      // Then the OK for Google's AI, then the file.
+      await tester.tap(find.byKey(const ValueKey('ai-consent-allow')));
+      await tester.pumpAndSettle();
       expect(find.text('What shall we read?'), findsOneWidget);
     });
 

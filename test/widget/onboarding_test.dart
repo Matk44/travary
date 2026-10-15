@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:travary/data/ai_consent_record.dart';
 import 'package:travary/data/memory_travel_repository.dart';
 import 'package:travary/data/onboarding_repository.dart';
 import 'package:travary/data/purchase_service.dart';
@@ -23,8 +24,10 @@ import 'package:travary/features/booking/edit_booking_screen.dart';
 import 'package:travary/features/booking/attachment_viewer.dart';
 import 'package:travary/features/onboarding/onboarding_account_screen.dart';
 import 'package:travary/features/onboarding/onboarding_pass_screen.dart';
+import 'package:travary/logic/ai_consent.dart';
 import 'package:travary/logic/destinations.dart';
 import 'package:travary/logic/flight_status_text.dart';
+import 'package:travary/state/ai_consent_store.dart';
 import 'package:travary/state/onboarding_store.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
@@ -58,6 +61,7 @@ void main() {
   late MemoryTravelRepository repository;
   late OnboardingStore setup;
   String? finishedTrip;
+  late AiConsentStore aiConsent;
 
   Future<void> pump(
     WidgetTester tester, {
@@ -114,6 +118,7 @@ void main() {
           ),
           ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
           ChangeNotifierProvider.value(value: setup),
+          ChangeNotifierProvider(create: (_) => aiConsent = AiConsentStore(MemoryAiConsentRecord())),
         ],
         child: MaterialApp(
           theme: qa
@@ -237,6 +242,22 @@ void main() {
     expect(setup.draft.completed, isTrue);
     expect(repository.bookings, isEmpty);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Smart Import asks before Google’s AI reads anything, without a second Travi', (tester) async {
+    await pump(tester, draft: holiday());
+    // Its button stays busy under the sheet, so nothing settles: pump on.
+    await tester.ensureVisible(find.byKey(const ValueKey('onboarding-import')));
+    await tester.tap(find.byKey(const ValueKey('onboarding-import')));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text(aiConsentWordsFor(AiAsk.smartImport).title), findsOneWidget);
+    expect(find.byKey(const ValueKey('ai-consent-travi')), findsNothing, reason: 'he’s already on the stage');
+    await tester.tap(find.byKey(const ValueKey('ai-consent-not-now')));
+    await tester.pumpAndSettle();
+    expect(aiConsent.consent, AiConsent.declined);
+    expect(find.text('Bring in your booking'), findsNothing, reason: 'no file chosen, nothing sent');
+    expect(find.byKey(const ValueKey('onboarding-import')), findsOneWidget, reason: 'still free to type it in');
   });
 
   testWidgets('flight folio queries the service and saves its actual overnight schedule', (tester) async {

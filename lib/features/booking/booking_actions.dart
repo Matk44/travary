@@ -14,6 +14,8 @@ import '../../logic/card_text.dart';
 import '../../logic/trip_gaps.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../../logic/ai_consent.dart';
+import '../ai/ai_consent_sheet.dart';
 import '../import/smart_import_screen.dart';
 import '../premium/premium_gate.dart';
 import '../travel_documents/document_actions.dart';
@@ -115,6 +117,13 @@ Future<void> _startSmartImport(
   final plan = tripId == null ? travel.focus.plan : travel.plan(tripId);
   final access = await requirePremium(context, PremiumFeature.smartImport, trip: plan, source: source);
   if (access == null || !context.mounted) return;
+  // Nothing goes to Google's AI without the traveller's OK. A shared file
+  // they'd rather not send can still be typed in, keeping it as the ticket.
+  if (!await askAiConsent(context, AiAsk.smartImport)) {
+    if (shared != null && context.mounted) await _addSharedByHand(context, shared);
+    return;
+  }
+  if (!context.mounted) return;
   final file = shared ?? await pickFile(context, title: 'What shall we read?');
   if (file == null || !context.mounted) return;
   final outcome = await Navigator.of(context).push<SmartImportOutcome>(
