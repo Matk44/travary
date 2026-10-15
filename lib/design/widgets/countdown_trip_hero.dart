@@ -14,7 +14,7 @@ import 'travi_clip_player.dart';
 
 /// Measured on the supplied rasters (docs/COUNTDOWN_HANGING_TAG_HANDOFF.md).
 abstract final class CountdownGeometry {
-  /// Every `common/countdown_postcard.png` is 1122 × 1402, the card and its
+  /// Every `common/countdown_postcard.webp` is 1122 × 1402, the card and its
   /// deckled edge inside a transparent margin with its shadow.
   static const postcardAspect = 1122 / 1402;
 
@@ -36,7 +36,7 @@ abstract final class CountdownGeometry {
   /// height (0.05 to 0.06 over the drawn postcards).
   static const postcardCardTop = 0.05;
 
-  /// `common/countdown_luggage_tag.png` is 1024 × 1536. Its card is
+  /// `common/countdown_luggage_tag.webp` is 1024 × 1536. Its card is
   /// `SurfaceSlot.countdownTag.body`.
   static const tagAspect = 1024 / 1536;
 

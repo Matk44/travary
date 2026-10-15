@@ -6,6 +6,7 @@ import 'package:travary/data/image_header.dart';
 
 import '../../tool/src/pack_builder.dart';
 import '../../tool/src/webp_converter.dart';
+import '../support/png_fixture.dart';
 
 void main() {
   final hasCwebp = Process.runSync('which', ['cwebp']).exitCode == 0;
@@ -31,7 +32,7 @@ void main() {
     File(p.join(source.path, 'pack.json')).writeAsStringSync(manifest);
     File(p.join(source.path, 'icons', 'calendar.png'))
       ..parent.createSync(recursive: true)
-      ..writeAsBytesSync(File('assets/art/icons/calendar.png').readAsBytesSync());
+      ..writeAsBytesSync(windowedPng(width: 1024, height: 1024));
   });
 
   tearDown(() => temp.deleteSync(recursive: true));

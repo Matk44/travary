@@ -83,10 +83,10 @@ class TravaryNavBar extends StatelessWidget {
   }
 }
 
-/// A tab's surface. The raster tabs are finished materials (`tab.png`
-/// cream, `tab_selected.png` petrol teal, `tab_add.png` coral), never tinted:
+/// A tab's surface. The raster tabs are finished materials (`tab.webp`
+/// cream, `tab_selected.webp` petrol teal, `tab_add.webp` coral), never tinted:
 /// a destination pack that wants another selected tab supplies its own
-/// `common/tab_selected.png`. Each is placed by the tab's own measured
+/// `common/tab_selected.webp`. Each is placed by the tab's own measured
 /// edges ([SurfaceSlot.body]), never stretched: its top edge sits at the top
 /// of the slot and its foot runs off the bottom of the screen (where the
 /// file ends first, over a home indicator, its last stretch of fabric

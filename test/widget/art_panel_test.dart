@@ -62,9 +62,9 @@ void main() {
   );
 
   testWidgets('bundled and downloaded pictures draw the same way', (tester) async {
-    await pumpPanel(tester, choice(const BundledArtImage('assets/art/icons/dining.png')));
+    await pumpPanel(tester, choice(const BundledArtImage('assets/art/icons/dining.webp')));
     final bundled = tester.widget<Image>(find.byType(Image));
-    expect(bundled.image, isA<AssetImage>().having((i) => i.assetName, 'asset', 'assets/art/icons/dining.png'));
+    expect(bundled.image, isA<AssetImage>().having((i) => i.assetName, 'asset', 'assets/art/icons/dining.webp'));
 
     await pumpPanel(tester, choice(const FileArtImage('/packs/theme/1/dining/g.png')));
     final downloaded = tester.widget<Image>(find.byType(Image));

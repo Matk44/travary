@@ -158,11 +158,11 @@ class SharedArtRef {
 /// All card artwork: the bundled set, discovered by file name, plus any
 /// installed art packs.
 ///
-///     assets/art/<kind>/<theme>_<subject>_<number>_<format>.png
+///     assets/art/<kind>/<theme>_<subject>_<number>_<format>.webp
 ///
-/// e.g. `assets/art/dining/coastal_resort_grill_01_scene.png`. The theme is
+/// e.g. `assets/art/dining/coastal_resort_grill_01_scene.webp`. The theme is
 /// a current name (`urban_heritage`), a legacy one (`tropical`), or `any`.
-/// Everything after the theme is optional: `tropical_01.png` is a generic
+/// Everything after the theme is optional: `tropical_01.webp` is a generic
 /// coastal picture used for both formats. See docs/ART_BRIEF.md.
 ///
 /// Pack pictures keep their pack (ID, priority, selectors). Two packs may

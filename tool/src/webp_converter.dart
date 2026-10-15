@@ -6,6 +6,25 @@ import 'package:travary/data/image_header.dart';
 
 import 'pack_builder.dart';
 
+/// Encodes [png] as [webp], the way every Travary picture is: colour is lossy
+/// at a high quality, transparency is kept exactly (windows, deckled edges
+/// and shadows stay clean), metadata is dropped. The result must have the
+/// PNG's pixel size, else it is removed and [PublishException] says so. The
+/// PNG is left where it is. Needs `cwebp` (`brew install webp`).
+Future<void> encodeWebp({required File png, required File webp, required String label, String cwebp = 'cwebp'}) async {
+  final result = await Process.run(cwebp, [
+    '-quiet', '-q', '88', '-alpha_q', '100', '-m', '6', '-sharp_yuv', '-metadata', 'none', //
+    png.path, '-o', webp.path,
+  ]);
+  if (result.exitCode != 0) throw PublishException('$label: cwebp failed: ${result.stderr}'.trim());
+  final was = readImageInfo(png.readAsBytesSync());
+  final now = readImageInfo(webp.readAsBytesSync());
+  if (now == null || now.type != ImageType.webp || was == null || now.width != was.width || now.height != was.height) {
+    webp.deleteSync();
+    throw PublishException('$label: the WebP came out wrong; the PNG is unchanged.');
+  }
+}
+
 /// What converting one pack source did.
 class WebpReport {
   const WebpReport({required this.converted, required this.bytesBefore, required this.bytesAfter});
@@ -52,23 +71,7 @@ Future<WebpReport> convertSourceToWebp({
     before += png.lengthSync();
     if (dryRun) continue;
 
-    final result = await Process.run(cwebp, [
-      '-quiet', '-q', '88', '-alpha_q', '100', '-m', '6', '-sharp_yuv', '-metadata', 'none', //
-      png.path, '-o', webp.path,
-    ]);
-    if (result.exitCode != 0) {
-      throw PublishException('$packId: cwebp failed on $file: ${result.stderr}'.trim());
-    }
-    final was = readImageInfo(png.readAsBytesSync());
-    final now = readImageInfo(webp.readAsBytesSync());
-    if (now == null ||
-        now.type != ImageType.webp ||
-        was == null ||
-        now.width != was.width ||
-        now.height != was.height) {
-      webp.deleteSync();
-      throw PublishException('$packId: $webpName came out wrong; $file is unchanged.');
-    }
+    await encodeWebp(png: png, webp: webp, label: '$packId: $file', cwebp: cwebp);
     after += webp.lengthSync();
 
     final original = File(p.join(originals.path, packId, file));

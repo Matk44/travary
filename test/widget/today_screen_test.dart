@@ -148,16 +148,16 @@ void main() {
 
       expect(
         imageIn(tester, find.byType(FeaturedTicketCard)),
-        const AssetImage('assets/art/common/featured_ticket.png'),
+        const AssetImage('assets/art/common/featured_ticket.webp'),
       );
-      expect(imageIn(tester, find.byType(RoomKeyCard)), const AssetImage('assets/art/common/room_card.png'));
+      expect(imageIn(tester, find.byType(RoomKeyCard)), const AssetImage('assets/art/common/room_card.webp'));
       final lunch = find.byType(TaggedReservationCard).first;
-      expect(imageIn(tester, lunch), const AssetImage('assets/art/common/reservation_card_blank.png'));
+      expect(imageIn(tester, lunch), const AssetImage('assets/art/common/reservation_card_blank.webp'));
       final vignette = tester.widget<TrimmedArt>(
         find.descendant(of: lunch, matching: find.byKey(const ValueKey('card-vignette'))),
       );
       // Lunch is at Castle Square: the theme park's castle dining picture.
-      expect(vignette.image, const BundledArtImage('assets/art/dining/themepark_castle_01_vignette.png'));
+      expect(vignette.image, const BundledArtImage('assets/art/dining/themepark_castle_01_vignette.webp'));
       expect(find.descendant(of: lunch, matching: find.byKey(const ValueKey('icon-raster-dining'))), findsOneWidget);
       // Nav icons: every tab's raster is supplied.
       for (final key in ['nav_today', 'nav_trips', 'nav_wallet', 'nav_profile']) {
@@ -177,7 +177,7 @@ void main() {
       // The dining icon and the room card are missing; everything else is there.
       final partial = ArtCatalog.fromAssetPaths([
         for (final path in bundledArtPaths())
-          if (!path.endsWith('icons/dining.png') && !path.endsWith('common/room_card.png')) path,
+          if (!path.endsWith('icons/dining.webp') && !path.endsWith('common/room_card.webp')) path,
       ]);
       await pump(tester, catalog: partial);
 
@@ -185,7 +185,7 @@ void main() {
       expect(find.descendant(of: lunch, matching: find.byKey(const ValueKey('icon-fallback-dining'))), findsOneWidget);
       expect(
         imageIn(tester, find.byType(FeaturedTicketCard)),
-        const AssetImage('assets/art/common/featured_ticket.png'),
+        const AssetImage('assets/art/common/featured_ticket.webp'),
       );
       expect(find.byKey(const ValueKey('icon-raster-nav_today')), findsOneWidget);
       // The theme-park key card is gone: just that stay moves to the key tag.
@@ -220,7 +220,7 @@ void main() {
         findsOneWidget,
       );
       expect(find.text('Magic Kingdom'), findsOneWidget);
-      expect(imageIn(tester, find.byType(RoomKeyCard)), const AssetImage('assets/art/common/room_card.png'));
+      expect(imageIn(tester, find.byType(RoomKeyCard)), const AssetImage('assets/art/common/room_card.webp'));
       expect(tester.takeException(), isNull);
     });
 
@@ -383,9 +383,9 @@ void main() {
       expect(
         images,
         containsAll([
-          'assets/art/common/tab.png',
-          'assets/art/common/tab_selected.png',
-          'assets/art/common/tab_add.png',
+          'assets/art/common/tab.webp',
+          'assets/art/common/tab_selected.webp',
+          'assets/art/common/tab_add.webp',
         ]),
       );
       expect(find.descendant(of: nav, matching: find.byKey(const ValueKey('tab-fallback'))), findsNothing);

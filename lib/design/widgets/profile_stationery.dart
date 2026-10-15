@@ -17,7 +17,7 @@ class ProfileHeading extends StatelessWidget {
     builder: (context, box) {
       final postmark =
           TravaryChrome.of(context).slots.surface(SurfaceSlot.profilePostmark) ??
-          const BundledArtImage('assets/art/common/profile_postmark.png');
+          const BundledArtImage('assets/art/common/profile_postmark.webp');
       return Stack(
         clipBehavior: Clip.none,
         children: [
@@ -59,7 +59,7 @@ class ProfileStationery extends StatelessWidget {
     final image = TravaryChrome.of(context).slots.surface(slot);
     // These are bundled global stationery, also available outside a trip's
     // chrome (the account card and standalone previews).
-    final art = image ?? BundledArtImage('assets/art/common/${slot.key}.png');
+    final art = image ?? BundledArtImage('assets/art/common/${slot.key}.webp');
     Widget plate() => Image(
       image: artImageProvider(art),
       fit: BoxFit.fill,
@@ -173,7 +173,7 @@ class _ProfilePaperTexture extends StatelessWidget {
                 width: 1612 * sx,
                 height: 976 * sy,
                 child: Image.asset(
-                  'assets/art/common/profile_account_folio.png',
+                  'assets/art/common/profile_account_folio.webp',
                   fit: BoxFit.fill,
                   excludeFromSemantics: true,
                 ),
@@ -196,7 +196,7 @@ class PassportIllustration extends StatelessWidget {
   Widget build(BuildContext context) {
     final image =
         TravaryChrome.of(context).slots.surface(SurfaceSlot.addPassport) ??
-        const BundledArtImage('assets/art/common/add_passport.png');
+        const BundledArtImage('assets/art/common/add_passport.webp');
     return ExcludeSemantics(
       child: SizedBox.square(
         dimension: size,
@@ -218,7 +218,7 @@ class ProfilePassAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final image =
         TravaryChrome.of(context).slots.surface(SurfaceSlot.profilePassButton) ??
-        const BundledArtImage('assets/art/common/profile_pass_button.png');
+        const BundledArtImage('assets/art/common/profile_pass_button.webp');
     return Stack(
       children: [
         Positioned.fill(

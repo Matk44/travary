@@ -28,7 +28,7 @@ class StampGeometry {
   static const _tuck = 3;
 }
 
-/// The three stamp frames of the Documents list (`common/<key>.png`). A
+/// The three stamp frames of the Documents list (`common/<key>.webp`). A
 /// booking always gets the same one: [forVariant].
 enum StampDesign {
   /// Warm ivory with one navy keyline.

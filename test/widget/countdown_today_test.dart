@@ -109,7 +109,7 @@ void main() {
       expect(postcard.fit, BoxFit.contain, reason: 'never crop the deckled edge');
       expect(
         tester.widget<Image>(find.byKey(const ValueKey('countdown-tag-raster'))).image,
-        const AssetImage('assets/art/common/countdown_luggage_tag.png'),
+        const AssetImage('assets/art/common/countdown_luggage_tag.webp'),
       );
       // No itinerary preview, day chooser or swipe while counting down.
       expect(find.text('Lakeside Cottage'), findsNothing);

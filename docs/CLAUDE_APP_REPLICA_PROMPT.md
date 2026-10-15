@@ -38,8 +38,8 @@ Read these files completely and treat them as the project specification:
 5. `docs/ART_PACKS.md`
 6. `assets/art/README.md`
 7. `assets/art/booking_art_prompts.md`
-8. `assets/art/common/theme_anchor_prompts.md`
-9. `assets/art/common/coastal_resort_prompts.md`
+8. `docs/art_prompts/theme_anchor_prompts.md`
+9. `docs/art_prompts/coastal_resort_prompts.md`
 
 Then inspect the implementation before editing, especially:
 

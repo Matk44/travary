@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../tokens.dart';
 
-const _deskArt = 'assets/onboarding/pass-desk-art-v2.png';
+const _deskArt = 'assets/onboarding/pass-desk-art-v2.webp';
 const _referenceWidth = 851.0;
 
 /// Runtime atlas slicing preserves the approved illustration without baking

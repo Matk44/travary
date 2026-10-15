@@ -35,7 +35,7 @@ const onboardingWorkshopStage = OnboardingStage('assets/onboarding/stages/worksh
 const onboardingAnywhereStage = 'assets/onboarding/stages/anywhere.webp';
 
 const _anywhere = OnboardingStage(onboardingAnywhereStage);
-const _bali = OnboardingStage('assets/onboarding/bali-stage-prop-free-v1.png');
+const _bali = OnboardingStage('assets/onboarding/bali-stage-prop-free-v1.webp');
 const _kyoto = OnboardingStage('assets/onboarding/stages/city_jp_kyoto.webp');
 
 /// Approved city stages by `COUNTRY/city_slug`. A city's own stage wins over

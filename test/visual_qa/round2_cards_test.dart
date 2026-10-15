@@ -191,14 +191,14 @@ void main() {
         tester.widget<Image>(find.descendant(of: card, matching: find.byType(Image)).at(1)).image;
     final featured = find.byType(FeaturedTicketCard);
     expect(featured, findsNWidgets(3));
-    expect(shellOf(featured.at(0)), const AssetImage('assets/art/common/boarding_pass.png'));
-    expect(shellOf(featured.at(1)), const AssetImage('assets/art/common/featured_reservation.png'));
-    expect(shellOf(featured.at(2)), const AssetImage('assets/art/common/travel_ticket.png'));
+    expect(shellOf(featured.at(0)), const AssetImage('assets/art/common/boarding_pass.webp'));
+    expect(shellOf(featured.at(1)), const AssetImage('assets/art/common/featured_reservation.webp'));
+    expect(shellOf(featured.at(2)), const AssetImage('assets/art/common/travel_ticket.webp'));
 
     // The scene is painted first (beneath), then the shell with its window.
     final images = find.descendant(of: featured.at(0), matching: find.byType(Image)).evaluate().toList();
-    expect((images[0].widget as Image).image, const AssetImage('assets/art/flight/any_plane_01_scene.png'));
-    expect((images[1].widget as Image).image, const AssetImage('assets/art/common/boarding_pass.png'));
+    expect((images[0].widget as Image).image, const AssetImage('assets/art/flight/any_plane_01_scene.webp'));
+    expect((images[1].widget as Image).image, const AssetImage('assets/art/common/boarding_pass.webp'));
     final window = tester.getRect(
       find.descendant(of: featured.at(0), matching: find.byKey(const ValueKey('scene-window'))),
     );

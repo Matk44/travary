@@ -1,5 +1,7 @@
 # Travi onboarding assets
 
+> Historical (the files below were later replaced or converted to WebP; bundled art is WebP now, with the PNG masters in `art_masters/bundled/`).
+
 Bundled 6 October 2026 for the first native Flutter integration. These are unchanged copies of the approved local review assets; no image or video was generated for this integration.
 
 | Bundled file | Original |

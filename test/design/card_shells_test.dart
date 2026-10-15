@@ -85,8 +85,8 @@ void main() {
 
     test('an unthemed complete reservation card is never used for every look', () {
       final catalog = ArtCatalog.fromAssetPaths([
-        'assets/art/common/reservation_card.png',
-        'assets/art/common/reservation_card_blank.png',
+        'assets/art/common/reservation_card.webp',
+        'assets/art/common/reservation_card_blank.webp',
       ]);
       expect(
         file(ShellResolver(catalog).resolve(look(ExperienceTheme.themepark)).reservation),
@@ -173,7 +173,7 @@ void main() {
       expect(slots.icon(IconSlot.navToday).image, const FileArtImage('/packs/tp/icons/nav_today.png'));
       expect(
         ArtSlots(catalog, orlando({})).icon(IconSlot.navToday).image,
-        const BundledArtImage('assets/art/icons/nav_today.png'),
+        const BundledArtImage('assets/art/icons/nav_today.webp'),
       );
     });
   });
@@ -184,11 +184,11 @@ void main() {
       // Every booking kind has its raster icon, drawn as one set.
       for (final kind in BookingKind.values) {
         final icon = slots.icon(IconSlot.forKind(kind));
-        expect(icon.image, BundledArtImage('assets/art/icons/${icon.slot.key}.png'), reason: kind.name);
+        expect(icon.image, BundledArtImage('assets/art/icons/${icon.slot.key}.webp'), reason: kind.name);
       }
       // Icons, like surfaces, are used exactly when their files exist.
       for (final slot in IconSlot.values) {
-        expect(slots.icon(slot).isFallback, !File('assets/art/icons/${slot.key}.png').existsSync(), reason: slot.key);
+        expect(slots.icon(slot).isFallback, !File('assets/art/icons/${slot.key}.webp').existsSync(), reason: slot.key);
       }
       for (final supplied in [IconSlot.navDocuments, IconSlot.navProfile, IconSlot.navAdd, IconSlot.attach]) {
         expect(slots.icon(supplied).isFallback, isFalse, reason: supplied.key);
@@ -197,7 +197,7 @@ void main() {
       for (final surface in SurfaceSlot.values) {
         expect(
           slots.surface(surface) != null,
-          File('assets/art/common/${surface.key}.png').existsSync(),
+          File('assets/art/common/${surface.key}.webp').existsSync(),
           reason: surface.key,
         );
       }
@@ -207,7 +207,7 @@ void main() {
       final booking = bookingFor(BookingKind.dining, 'Be Our Guest Restaurant');
       final choice = ArtResolver(bundled).resolve(booking, look(ExperienceTheme.themepark));
       expect(choice.shells.featured?.art.fileKey, 'featured_ticket');
-      expect(choice.icon?.image, const BundledArtImage('assets/art/icons/dining.png'));
+      expect(choice.icon?.image, const BundledArtImage('assets/art/icons/dining.webp'));
       expect(choice.vignette?.group, 'themepark_castle_01', reason: 'the theme park\'s castle dining picture');
       // Its scene, for featured cards and Documents.
       expect(choice.scene?.group, 'themepark_castle_01');
@@ -218,8 +218,8 @@ void main() {
     final commonFiles = Directory('assets/art/common')
         .listSync()
         .whereType<File>()
-        .where((f) => f.path.endsWith('.png'))
-        .map((f) => f.uri.pathSegments.last.replaceAll('.png', ''))
+        .where((f) => f.path.endsWith('.webp'))
+        .map((f) => f.uri.pathSegments.last.replaceAll('.webp', ''))
         .where((name) => ShellRole.values.any((role) => name == role.key || name.endsWith('_${role.key}')))
         .toList();
 
@@ -233,10 +233,10 @@ void main() {
     test('each shell is its role\'s exact size, and its anchors sit inside its card', () {
       for (final name in commonFiles) {
         final role = ShellRole.values.lastWhere((role) => name == role.key || name.endsWith('_${role.key}'));
-        final info = header.readImageInfo(File('assets/art/common/$name.png').readAsBytesSync())!;
+        final info = header.readImageInfo(File('assets/art/common/$name.webp').readAsBytesSync())!;
         expect((info.width, info.height), (role.width, role.height), reason: name);
 
-        final art = SharedArtRef(image: BundledArtImage('assets/art/common/$name.png'), name: role.key);
+        final art = SharedArtRef(image: BundledArtImage('assets/art/common/$name.webp'), name: role.key);
         final geometry = ShellGeometry.of(role, art);
         final body = geometry.body;
         bool inside(FractionRect r, FractionRect outer) =>

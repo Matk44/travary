@@ -4,12 +4,28 @@ Drop images into these folders and rebuild: they're matched to bookings
 automatically. The full brief, with ready-to-paste GPT prompts, is in
 `docs/ART_BRIEF.md`.
 
-```
-assets/art/<type>/<theme>_<subject>_<number>_<format>.png
+**Everything here is WebP.** Bundled PNG made the store download too big
+(Google Play allows 200 MB), so every bundled picture is a `.webp` of the
+same pixel size (lossy colour at q88, transparency exact, encoded exactly
+like the art packs' pictures). The PNG masters are kept in
+`art_masters/bundled/` (the same path without `assets/`), which nothing
+bundles: edit a master, never a WebP. For new art, drop its PNG into the
+folder where it belongs and run
 
-dining/any_pizza_01_scene.png        a pizza scene for any trip (featured ticket)
-dining/any_pizza_01_vignette.png     its corner decoration (normal cards)
-attraction/themepark_castle_01.png   one image used for both formats
+```
+dart run tool/art_packs.dart bundled-webp
+```
+
+It turns every bundled PNG into a `.webp` beside it and moves the PNG to the
+masters. (Needs `cwebp`: `brew install webp`.) Pictures are looked up by
+name without the extension, so nothing else changes. Don't bundle a PNG.
+
+```
+assets/art/<type>/<theme>_<subject>_<number>_<format>.webp
+
+dining/any_pizza_01_scene.webp        a pizza scene for any trip (featured ticket)
+dining/any_pizza_01_vignette.webp     its corner decoration (normal cards)
+attraction/themepark_castle_01.webp   one image used for both formats
 ```
 
 - **type**: `flight`, `stay`, `attraction`, `dining`, `transport`, `activity`, `event`, `note`

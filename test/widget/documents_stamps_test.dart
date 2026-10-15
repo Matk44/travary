@@ -226,7 +226,7 @@ void main() {
 
   group('missing art', () {
     testWidgets('without a scene the window shows a calm placeholder, never black', (tester) async {
-      final noScenes = ArtCatalog.fromAssetPaths(bundledArtPaths().where((path) => !path.endsWith('_scene.png')));
+      final noScenes = ArtCatalog.fromAssetPaths(bundledArtPaths().where((path) => !path.endsWith('_scene.webp')));
       await pumpDocuments(tester, catalog: noScenes);
       for (final (title, _) in documentScenes) {
         expect(inRow(title, find.byKey(const ValueKey('document-window-placeholder'))), findsOneWidget, reason: title);
@@ -244,7 +244,7 @@ void main() {
     testWidgets('a scene that can\'t be loaded falls back to the placeholder', (tester) async {
       final broken = ArtCatalog.fromAssetPaths([
         ...bundledArtPaths().where((path) => !path.startsWith('assets/art/attraction/')),
-        'assets/art/attraction/themepark_castle_09_scene.png',
+        'assets/art/attraction/themepark_castle_09_scene.webp',
       ]);
       await pumpDocuments(tester, catalog: broken);
       expect(inRow('Sunshine Park', find.byKey(const ValueKey('document-scene'))), findsOneWidget);
@@ -311,7 +311,7 @@ void main() {
         final icon = tester.widget<ImageIcon>(
           find.descendant(of: badgeOf(kind), matching: find.byKey(ValueKey('icon-raster-${slot.key}'))),
         );
-        expect(icon.image, AssetImage('assets/art/icons/${slot.key}.png'), reason: kind.name);
+        expect(icon.image, AssetImage('assets/art/icons/${slot.key}.webp'), reason: kind.name);
       }
       expect(tester.takeException(), isNull);
     });

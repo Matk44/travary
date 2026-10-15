@@ -70,6 +70,42 @@ work, accounts, money); everything else can be done in this repo.
   iPhone mode, and real iPad support can come later.
 - [x] Android App Links: travary.app's `assetlinks.json` lists the upload
   and Play App Signing SHA-256s (deployed 15 Oct).
+- [x] **Android download over Google Play's 200 MB limit (fixed 15 Oct).**
+  The release bundle was 245 MB and a phone's download about 203 MB (bundletool
+  `get-size total`, 202.5 MB for an arm64 phone), over Play's 200 MB base
+  cap, almost all of it bundled PNG art. All 99 bundled PNGs (138.3 MB:
+  `assets/art/` and three onboarding pictures) are now WebP like the art
+  packs (cwebp q88, alpha exact, same pixel sizes: 20.3 MB). Now: bundle
+  129 MB, a phone's download **86.4 MB** (arm64, API 34; 86.0 to 86.5 MB
+  across every phone configuration); iOS `Runner.app` 271 MB to 153 MB
+  (zipped, as an .ipa roughly is: 215 MB to 99 MB), so it's well under the
+  200 MB that makes iOS ask before downloading over mobile data. The
+  PNG masters are in `art_masters/bundled/`; new bundled art goes through
+  `dart run tool/art_packs.dart bundled-webp` (`assets/art/README.md`), and
+  a test fails if a PNG is ever bundled again. Looks checked: `tool/visual_qa.sh`
+  before and after (110 renders, 32 identical, the rest within a few
+  levels of colour, no halos on `documents_halo_{light,dark}`), the two
+  Documents goldens regenerated for the same tiny differences, and the
+  iOS Simulator (Today, Trips, a trip, Documents, Profile, onboarding).
+- [x] Android permissions (15 Oct): the release build no longer asks for
+  photos, videos, audio or shared storage (open_filex declared them;
+  Travary only opens files in its own folders, which needs none) or the
+  advertising ID (Firebase Analytics' AdServices ones). Play only allows
+  photo and video access for apps built around a photo library. What's
+  left: internet, notifications, restart (reminders), biometrics (travel
+  documents), billing and push.
+- [ ] **Apple 5.1.2(i): ask before sending anything to AI.** Apple now
+  requires apps to say clearly when personal data goes to a third-party
+  AI and to get explicit permission first. Smart Import sends the chosen
+  file to Google's Gemini with no word of it in the app (only the privacy
+  policy says so), and automatic trip looks (`classifyTripVisuals`) send
+  booking names and places to Gemini in the background. Likeliest App
+  Review rejection on the list. Recommended: one sheet, asked once, before
+  the first Smart Import or automatic look ("Travary uses Google's Gemini
+  AI to read files you import and to pick each trip's look from its
+  bookings' names and places. Your files aren't kept on our servers.";
+  Allow / Not now). Without it, Smart Import isn't offered and looks come
+  from the place detection on the phone (`logic/destinations.dart`).
 
 ## 5. Store listings
 
@@ -79,21 +115,37 @@ work, accounts, money); everything else can be done in this repo.
   in a row) and apply for production access. Travary is a draft with an
   internal test track only. This is the longest wait on the list, so
   start it first.
-- [ ] **You:** Play: Data safety, content rating, target audience (not
-  children), ads (none), app access (no login needed), feature graphic
-  1024×500, phone screenshots.
+- [ ] **You:** Play: Policy → App content shows 11 declarations needing
+  attention (15 Oct), starting with privacy policy, ads (none), app access
+  (no login needed) and content rating; also target audience (not
+  children) and Data safety. If it asks about the advertising ID: Travary
+  doesn't use it (removed from the manifest). Plus a feature graphic
+  1024×500 and phone screenshots.
 - [ ] **You:** App Store: App Privacy answers (analytics and push tokens,
-  `docs/ANALYTICS.md`), age rating, category Travel, support URL
-  `https://matk44.github.io/travary_support/`, privacy policy URL,
-  6.9-inch iPhone screenshots, and review notes (no login needed; passes
-  can be bought in the sandbox).
+  `docs/ANALYTICS.md`), age rating, category Travel, 6.9-inch iPhone
+  screenshots, and review notes (no login needed; passes can be bought in
+  the sandbox). URLs are in the next items.
 - [ ] `privacy.html`: write in the Analytics retention period.
-- [ ] The GitHub copies (`matk44.github.io/travary_support`): `terms.html`,
-  `index.html` and `delete-account.html` still say "Travary Plus" and "Trip
-  Pass", and `index.html` says 3 free Smart Imports (it's 2). The
-  travary.app privacy and terms are current: point the app's links
-  (`TravaryLinks`) and the store listings at them, or bring the GitHub
-  copies in step. travary.app itself said 3 free imports until 15 Oct.
+- [x] Support, privacy, terms and delete-your-data pages are on travary.app
+  (`/support`, `/privacy`, `/terms`, `/delete-account`), and the app links
+  there (15 Oct). The old GitHub Pages copies return 404: don't use them
+  anywhere.
+- [ ] **You, App Store Connect:** Privacy Policy URL
+  `https://travary.app/privacy`; Support URL `https://travary.app/support`;
+  and, because the Annual Pass auto-renews, add a line to the end of the
+  App Description: "Terms of Use: https://travary.app/terms" (or paste the
+  terms into the custom EULA field). In the review notes, say where the
+  links are: the pass desk (any premium action, or Profile → Annual Pass)
+  shows Terms of Use and Privacy Policy under the button; Profile → Help
+  and legal has both too.
+- [ ] **You, Play Console:** Privacy policy URL `https://travary.app/privacy`;
+  Data safety → account deletion URL `https://travary.app/delete-account`.
+- [x] Pass desk: each pass shows its title, price, period and whether it
+  renews; Restore, Terms of Use and Privacy Policy (full names) sit on one
+  line under the button on every phone size tested with the real fonts.
+  Profile → Annual Pass has "Manage or cancel" for subscribers (Google asks
+  for a way to cancel inside the app). Account deletion is in Profile
+  (Apple 5.1.1(v)).
 - [ ] **Decide:** the home-screen name. "Itinerary App - Travary" is cut
   off under the icon ("Itinerary A…"). Store search ranks the store
   listing's title, not the name under the icon. The listing can stay
@@ -121,9 +173,12 @@ no tester flags.
 
 - [ ] Commit, merge `design/c2-art` into `main`, and bump the version
   (`pubspec.yaml` and `lib/app/build_info.dart`, which the script checks).
-- [ ] Publish art catalog v130 (73 packs) if the new city packs should be
-  in 1.0. The bucket still serves v96.
+- [x] Art catalog v234 (83 packs) is published (15 Oct).
 - [ ] `tool/build_release.sh`, then TestFlight and Play internal or
-  closed testing.
-- [ ] This Mac had 213 MB free on 14 Oct (12 GB after clearing Travary's
-  Xcode cache). An archive needs several GB.
+  closed testing. On 15 Oct both release builds compiled cleanly (Android
+  bundle 129 MB and 86 MB per phone, iOS app 153 MB, after the WebP art:
+  see the 200 MB limit above), all 1,218 app tests and 120 server tests
+  pass, and analyze and format are clean.
+- [ ] Keep disk space free: the Mac filled up twice (14 and 15 Oct)
+  building Android and iOS releases one after the other. An archive needs
+  several GB; `build/` alone holds about 4 GB after both.

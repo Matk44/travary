@@ -106,7 +106,7 @@ void main() {
       expectFacts('orlando', ['8 days', '1 booking']);
       // The shared blank countdown tag, not a copy.
       final tag = tester.widget<Image>(inPostcard('lakes', find.byKey(const ValueKey('trip-tag-raster')))).image;
-      expect((tag as ResizeImage).imageProvider, const AssetImage('assets/art/common/countdown_luggage_tag.png'));
+      expect((tag as ResizeImage).imageProvider, const AssetImage('assets/art/common/countdown_luggage_tag.webp'));
       expect(tester.takeException(), isNull);
     });
 

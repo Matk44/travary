@@ -7,7 +7,7 @@ import 'card_shells.dart' show FractionRect;
 import 'document_stamps.dart';
 
 /// Every raster icon the interface places, with its catalog name
-/// (`icons/<name>.png`, overridable by an installed pack) and the Material
+/// (`icons/<name>.webp`, overridable by an installed pack) and the Material
 /// glyph shown only while that file doesn't exist yet. Missing files are
 /// listed in docs/ART_ASSET_GAPS.md.
 enum IconSlot {
@@ -68,7 +68,7 @@ enum IconSlot {
   };
 }
 
-/// Raster surfaces of the interface chrome (`common/<name>.png`). Until a
+/// Raster surfaces of the interface chrome (`common/<name>.webp`). Until a
 /// file exists the interface draws the plainest usable stand-in (a flat
 /// colour, or nothing where the element is optional), never an imitation
 /// of the material.
@@ -145,7 +145,7 @@ enum SurfaceSlot {
 }
 
 /// The destination postcard behind the countdown to the next trip
-/// (`common/countdown_postcard.png`, 1122 × 1402). Nothing is bundled:
+/// (`common/countdown_postcard.webp`, 1122 × 1402). Nothing is bundled:
 /// only a pack that suits the trip supplies one (see
 /// `TravelStore.countdownPostcardFor`), so a trip never shows another
 /// place's postcard.
@@ -159,14 +159,14 @@ const countdownPostcardArt = 'countdown_postcard';
 const countdownPostcardAnywhereArt = 'countdown_postcard_anywhere';
 
 /// The destination stamp beside the Documents heading
-/// (`common/documents_destination_stamp.png`, 1024 × 1280; see
+/// (`common/documents_destination_stamp.webp`, 1024 × 1280; see
 /// `DestinationStampGeometry`). Only the trip's own city, region or country
 /// pack supplies one (`TravelStore.destinationStampFor`), never a look pack
 /// or bundled art, so a trip never shows another place's stamp.
 const documentsDestinationStampArt = 'documents_destination_stamp';
 
 /// A coming trip's landscape postcard on the Trips tab
-/// (`common/trip_postcard.png`, 1536 × 1024), with the countdown tag hung
+/// (`common/trip_postcard.webp`, 1536 × 1024), with the countdown tag hung
 /// on it. Like [countdownPostcardArt], only a pack that suits the trip
 /// supplies one (`TravelStore.tripPostcardFor`); without it the trip keeps
 /// its plain row.

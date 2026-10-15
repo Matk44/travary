@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Normalize and validate the generated Documents stamp asset family."""
+"""Normalize and validate the generated Documents stamp asset family.
+
+Writes PNGs into assets/art/. Bundled art ships as WebP: afterwards run
+`dart run tool/art_packs.dart bundled-webp --replace`, which makes the
+`.webp` files the app bundles and moves these PNGs to art_masters/bundled/.
+"""
 
 from __future__ import annotations
 
@@ -255,7 +260,7 @@ def make_preview(paths: list[Path], preview_path: Path) -> None:
     card.alpha_composite(postmark, (45, 42))
     card.alpha_composite(lines, (210, 104))
     frame = Image.open(ROOT / "assets/art/common/documents_stamp_01.png").convert("RGBA")
-    scenic_stamp = composite_stamp_scene(frame, ROOT / "assets/art/transport/any_car_01_scene.png")
+    scenic_stamp = composite_stamp_scene(frame, ROOT / "art_masters/bundled/art/transport/any_car_01_scene.png")
     scenic_stamp = fit_thumbnail(scenic_stamp, (300, 264))
     stamp_x, stamp_y = 380, 28
     card.alpha_composite(scenic_stamp, (stamp_x, stamp_y))

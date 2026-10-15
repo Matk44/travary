@@ -32,13 +32,13 @@ final lakesNow = DateTime(2026, 11, 26, 8, 0);
 /// The mockup's seven "Coming up" documents, in order, with the scene each
 /// one shows.
 const documentScenes = <(String, String)>[
-  ('Car hire', 'assets/art/transport/any_car_01_scene.png'),
-  ('Lagoon Resort', 'assets/art/stay/tropical_resort_01_scene.png'),
-  ('Sunshine Park', 'assets/art/attraction/themepark_castle_01_scene.png'),
-  ('Sunshine Terrace', 'assets/art/dining/themepark_castle_01_scene.png'),
-  ('Lagoon Grill', 'assets/art/dining/themepark_grill_01_scene.png'),
-  ('Fireworks from the beach', 'assets/art/note/themepark_generic_01_scene.png'),
-  ('Everglades airboat tour', 'assets/art/activity/themepark_boat_01_scene.png'),
+  ('Car hire', 'assets/art/transport/any_car_01_scene.webp'),
+  ('Lagoon Resort', 'assets/art/stay/tropical_resort_01_scene.webp'),
+  ('Sunshine Park', 'assets/art/attraction/themepark_castle_01_scene.webp'),
+  ('Sunshine Terrace', 'assets/art/dining/themepark_castle_01_scene.webp'),
+  ('Lagoon Grill', 'assets/art/dining/themepark_grill_01_scene.webp'),
+  ('Fireworks from the beach', 'assets/art/note/themepark_generic_01_scene.webp'),
+  ('Everglades airboat tour', 'assets/art/activity/themepark_boat_01_scene.webp'),
 ];
 
 /// The destination packs that carry a Documents stamp.

@@ -9,6 +9,12 @@ what must be made before the screen can be signed off against
 All stand-ins sit behind one typed resolver each, so adding the file is the
 whole fix: no code changes.
 
+**File names below** (`common/linen.png`) name the picture as it was
+delivered. The app bundles **WebP**: the shipped file is the same name ending
+`.webp`, made by `dart run tool/art_packs.dart bundled-webp` from the PNG
+master, which is kept in `art_masters/bundled/` (never bundled). To add one,
+drop the PNG into its folder under `assets/art/` and run that command.
+
 - Shells: `ShellResolver` in `lib/design/art/card_shells.dart`.
 - Icons and interface surfaces: `IconSlot` / `SurfaceSlot` / `ArtSlots` in
   `lib/design/art/art_slots.dart`.

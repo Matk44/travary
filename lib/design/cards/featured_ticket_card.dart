@@ -180,7 +180,7 @@ class _TicketButton extends StatelessWidget {
         Stack(
           fit: StackFit.expand,
           children: [
-            // `common/stamp.png` is made at the frame's 3.3:1; never stretched.
+            // `common/stamp.webp` is made at the frame's 3.3:1; never stretched.
             Image(image: artImageProvider(stamp), fit: BoxFit.contain),
             Center(child: words),
           ],

@@ -2,6 +2,8 @@
 // or edits packs; this tool (run by an operator) does.
 //
 //   dart run tool/art_packs.dart webp <source-dir>... [--originals art_packs/originals] [--dry-run]
+//   dart run tool/art_packs.dart bundled-webp [--project .] [--masters art_masters/bundled]
+//       [--replace] [--dry-run]
 //   dart run tool/art_packs.dart build <source-dir> [--catalog art_packs/catalog.json]
 //       [--out build/art_packs] [--dry-run]
 //   dart run tool/art_packs.dart publish [--catalog art_packs/catalog.json]
@@ -15,6 +17,7 @@
 import 'dart:io';
 
 import 'src/bucket.dart';
+import 'src/bundled_art_converter.dart';
 import 'src/pack_builder.dart';
 import 'src/publisher.dart';
 import 'src/webp_converter.dart';
@@ -41,6 +44,20 @@ Future<void> main(List<String> args) async {
           );
         }
         if (dryRun) stdout.writeln('Dry run: nothing written.');
+      case 'bundled-webp':
+        options.done(maxPositional: 0);
+        final report = await convertBundledArtToWebp(
+          project: Directory(options.value('--project') ?? '.'),
+          masters: Directory(options.value('--masters') ?? 'art_masters/bundled'),
+          dryRun: dryRun,
+          replace: options.flag('--replace'),
+        );
+        String mb(int bytes) => (bytes / 1e6).toStringAsFixed(1);
+        stdout.writeln(
+          '${report.files.length} bundled pictures, ${mb(report.bytesBefore)} MB'
+          '${dryRun ? '' : ' → ${mb(report.bytesAfter)} MB; the PNG masters are in the masters folder'}',
+        );
+        if (dryRun) stdout.writeln('Dry run: nothing written.\n${report.files.join('\n')}');
       case 'build':
         final source = options.positional.singleOrNull;
         if (source == null) throw const PublishException('Which pack? build <source-dir>');
@@ -71,7 +88,7 @@ Future<void> main(List<String> args) async {
         await publishArtPacks(catalogFile: catalog, outDir: out, bucket: bucket, dryRun: dryRun);
       default:
         throw const PublishException(
-          'Usage: dart run tool/art_packs.dart webp|build|publish ... (see the top of this file)',
+          'Usage: dart run tool/art_packs.dart webp|bundled-webp|build|publish ... (see the top of this file)',
         );
     }
   } on PublishException catch (e) {
@@ -110,8 +127,8 @@ class _Options {
     }
   }
 
-  static const _flags = {'--dry-run', '--production'};
-  static const _valued = {'--catalog', '--out', '--emulator', '--bucket'};
+  static const _flags = {'--dry-run', '--production', '--replace'};
+  static const _valued = {'--catalog', '--out', '--emulator', '--bucket', '--project', '--masters'};
   final _given = <String>{};
   final _values = <String, String>{};
   final positional = <String>[];

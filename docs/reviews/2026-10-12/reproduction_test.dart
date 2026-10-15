@@ -24,8 +24,14 @@ void main() {
   setUpAll(() => TravaryText.useGoogleFonts = false);
 
   test('arrival-day hotel is hidden at the exact check-in time', () {
-    final stay = booking('Hotel', BookingKind.stay, d(10, 12),
-      at: const ClockTime(15, 0), endDate: d(10, 15), until: const ClockTime(11, 0));
+    final stay = booking(
+      'Hotel',
+      BookingKind.stay,
+      d(10, 12),
+      at: const ClockTime(15, 0),
+      endDate: d(10, 15),
+      until: const ClockTime(11, 0),
+    );
     final day = buildDayPlan(d(10, 12), [stay], DateTime(2026, 10, 12, 15));
     expect(day.entries.single.status, EntryStatus.done);
     expect(day.ongoing, isEmpty);
@@ -34,8 +40,14 @@ void main() {
   });
 
   test('same-day westbound arrival is changed to tomorrow even with explicit date', () {
-    final flight = booking('Sydney to Los Angeles', BookingKind.flight, d(10, 12),
-      at: const ClockTime(11, 0), endDate: d(10, 12), until: const ClockTime(6, 0));
+    final flight = booking(
+      'Sydney to Los Angeles',
+      BookingKind.flight,
+      d(10, 12),
+      at: const ClockTime(11, 0),
+      endDate: d(10, 12),
+      until: const ClockTime(6, 0),
+    );
     expect(withOvernightEnd(flight).endDate, d(10, 13));
   });
 
@@ -47,14 +59,21 @@ void main() {
   });
 
   test('moving a booking preserves the old trip Storage path', () async {
-    final repo = MemoryTravelRepository(userId: 'me')
-      ..replaceAll([trip('old'), trip('new')], []);
+    final repo = MemoryTravelRepository(userId: 'me')..replaceAll([trip('old'), trip('new')], []);
     final store = TravelStore(repository: repo, artCatalog: const ArtCatalog.empty());
     addTearDown(store.dispose);
     await pumpEventQueue();
     final original = booking('flight', BookingKind.flight, d(10, 12), tripId: 'old').copyWith(
-      attachments: [const Attachment(id: 'a', name: 'ticket.pdf', fileName: 'a.pdf',
-        sizeBytes: 10, remotePath: 'trips/old/attachments/a.pdf')]);
+      attachments: [
+        const Attachment(
+          id: 'a',
+          name: 'ticket.pdf',
+          fileName: 'a.pdf',
+          sizeBytes: 10,
+          remotePath: 'trips/old/attachments/a.pdf',
+        ),
+      ],
+    );
     await store.saveBooking(original);
     await pumpEventQueue();
     final result = await store.saveBooking(original.copyWith(tripId: 'new'), previous: original);
@@ -66,15 +85,29 @@ void main() {
     tester.view.physicalSize = const Size(430, 932);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    final repo = MemoryTravelRepository(userId: 'me')..replaceAll(
-      [trip('trip', title: 'Test holiday', plannedStart: d(10, 12), plannedEnd: d(10, 16))],
-      [booking('Monday booking', BookingKind.dining, d(10, 12)),
-       booking('Tuesday booking', BookingKind.dining, d(10, 13)),
-       booking('Wednesday booking', BookingKind.dining, d(10, 14))]);
-    final store = TravelStore(repository: repo, artCatalog: const ArtCatalog.empty(),
-      clock: () => DateTime(2026, 10, 12, 8));
-    await tester.pumpWidget(ChangeNotifierProvider(create: (_) => store,
-      child: MaterialApp(theme: buildTravaryTheme(), home: const Scaffold(body: TodayScreen()))));
+    final repo = MemoryTravelRepository(userId: 'me')
+      ..replaceAll(
+        [trip('trip', title: 'Test holiday', plannedStart: d(10, 12), plannedEnd: d(10, 16))],
+        [
+          booking('Monday booking', BookingKind.dining, d(10, 12)),
+          booking('Tuesday booking', BookingKind.dining, d(10, 13)),
+          booking('Wednesday booking', BookingKind.dining, d(10, 14)),
+        ],
+      );
+    final store = TravelStore(
+      repository: repo,
+      artCatalog: const ArtCatalog.empty(),
+      clock: () => DateTime(2026, 10, 12, 8),
+    );
+    await tester.pumpWidget(
+      ChangeNotifierProvider(
+        create: (_) => store,
+        child: MaterialApp(
+          theme: buildTravaryTheme(),
+          home: const Scaffold(body: TodayScreen()),
+        ),
+      ),
+    );
     await tester.pumpAndSettle();
     await tester.fling(find.byType(CustomScrollView), const Offset(-350, 0), 1000);
     await tester.pumpAndSettle();
@@ -91,17 +124,31 @@ void main() {
     addTearDown(tester.view.reset);
     final directory = Directory.systemTemp.createTempSync('travary-audit-');
     addTearDown(() => directory.deleteSync(recursive: true));
-    final store = TravelStore(repository: MemoryTravelRepository(userId: 'me'),
-      artCatalog: const ArtCatalog.empty(), attachments: AttachmentStore.at(directory));
-    await tester.pumpWidget(MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => store),
-      ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
-    ], child: MaterialApp(theme: buildTravaryTheme(), home: SmartImportScreen(
-      filePath: '${directory.path}/no-longer-available.pdf', fileName: 'booking.pdf',
-      access: const AccessDecision.freeUse(3), initialResult: SmartImportResult([
-        BookingDraft(booking('First booking', BookingKind.dining, d(11, 3), tripId: '')),
-        BookingDraft(booking('Second booking', BookingKind.dining, d(11, 4), tripId: '')),
-      ])))));
+    final store = TravelStore(
+      repository: MemoryTravelRepository(userId: 'me'),
+      artCatalog: const ArtCatalog.empty(),
+      attachments: AttachmentStore.at(directory),
+    );
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => store),
+          ChangeNotifierProvider(create: (_) => PremiumStore(purchases: TestPurchaseService())),
+        ],
+        child: MaterialApp(
+          theme: buildTravaryTheme(),
+          home: SmartImportScreen(
+            filePath: '${directory.path}/no-longer-available.pdf',
+            fileName: 'booking.pdf',
+            access: const AccessDecision.freeUse(3),
+            initialResult: SmartImportResult([
+              BookingDraft(booking('First booking', BookingKind.dining, d(11, 3), tripId: '')),
+              BookingDraft(booking('Second booking', BookingKind.dining, d(11, 4), tripId: '')),
+            ]),
+          ),
+        ),
+      ),
+    );
     await tester.pumpAndSettle();
     final dynamic save = tester.widget<FilledButton>(find.byType(FilledButton).last).onPressed;
     await tester.runAsync(() async {

@@ -49,7 +49,7 @@ class OnboardingFolio extends StatelessWidget {
                               heightFactor: .65,
                               widthFactor: 1,
                               child: Image.asset(
-                                'assets/onboarding/travi-receiving-v1.png',
+                                'assets/onboarding/travi-receiving-v1.webp',
                                 width: 88,
                                 errorBuilder: (_, _, _) => const SizedBox(width: 88),
                               ),

@@ -60,8 +60,8 @@ selected tab), so keep them one flat colour.
 
 **Delivered and implemented:** `ongoing_tag`, `boarding_pass`,
 `featured_reservation`, `travel_ticket` and `note_paper` (prompt record:
-`assets/art/common/round2_p1_prompts.md`); `linen`, `tab`, `tab_selected`
-and `tab_add` (`assets/art/common/surface_and_tabs_prompts.md`). The rest
+`docs/art_prompts/round2_p1_prompts.md`); `linen`, `tab`, `tab_selected`
+and `tab_add` (`docs/art_prompts/surface_and_tabs_prompts.md`). The rest
 of P1 is still to make.
 
 ### Things in progress (why the hire car looks wrong)
@@ -376,7 +376,7 @@ The shells and scenes that widen coverage, from round 1:
    (`docs/ART_ASSET_GAPS.md`). Make `featured_ticket`, `room_card` and
    `reservation_card` for `classic_travel`, `urban_modern`,
    `outdoor_adventure`, `cruise`, `roadtrip` and `wellness_retreat`, using
-   the round 1 prompts in `assets/art/common/theme_anchor_prompts.md`.
+   the round 1 prompts in `docs/art_prompts/theme_anchor_prompts.md`.
    Classic comes first: every unclassified trip uses it.
 2. **Taller variants** closer to the reference's proportions (optional):
    `featured_ticket` at about 1774×1000 and `room_card` at 1774×960.

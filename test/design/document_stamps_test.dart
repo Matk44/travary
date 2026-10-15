@@ -48,7 +48,7 @@ void main() {
   group('stamp frames', () {
     test('each design\'s window is clear and its frame solid, where the geometry says', () async {
       for (final design in StampDesign.values) {
-        final path = 'assets/art/common/${design.key}.png';
+        final path = 'assets/art/common/${design.key}.webp';
         final pixels = await _Pixels.of(path);
         expect((pixels.width, pixels.height), (StampDesign.width, StampDesign.height), reason: path);
         final g = design.geometry;
@@ -94,8 +94,8 @@ void main() {
       for (final look in ExperienceTheme.values) {
         final art = ArtSlots(bundled, TripArtContext(theme: look)).documentArt();
         expect(art.stamps.keys, StampDesign.values, reason: look.wireName);
-        expect(art.postmark, const BundledArtImage('assets/art/common/documents_postmark.png'));
-        expect(art.cancelLines, const BundledArtImage('assets/art/common/documents_cancel_lines.png'));
+        expect(art.postmark, const BundledArtImage('assets/art/common/documents_postmark.webp'));
+        expect(art.cancelLines, const BundledArtImage('assets/art/common/documents_cancel_lines.webp'));
         for (var variant = 0; variant < 6; variant++) {
           expect(art.stampFor(variant)!.design, StampDesign.forVariant(variant));
         }
@@ -117,7 +117,7 @@ void main() {
 
     test('the postmark and its lines are one flat ink, and their measured bodies hold it', () async {
       for (final slot in [SurfaceSlot.documentsPostmark, SurfaceSlot.documentsCancelLines]) {
-        final pixels = await _Pixels.of('assets/art/common/${slot.key}.png');
+        final pixels = await _Pixels.of('assets/art/common/${slot.key}.webp');
         final body = slot.body!;
         expect(pixels.alpha(body.left / 2, 0.5), 0, reason: slot.key);
         expect(pixels.alpha(0.5, body.top / 2), 0, reason: slot.key);

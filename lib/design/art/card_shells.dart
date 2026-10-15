@@ -26,8 +26,8 @@ class FractionRect {
 }
 
 /// The complete raster objects a booking card is drawn on. Each role has a
-/// shared-art name (`common/<key>.png` in a pack, or bundled with a look
-/// prefix: `coastal_resort_featured_ticket.png`) and a fixed pixel size
+/// shared-art name (`common/<key>.webp` in a pack, or bundled with a look
+/// prefix: `coastal_resort_featured_ticket.webp`) and a fixed pixel size
 /// every shell of that role is made at.
 enum ShellRole {
   /// The featured "next up" admission ticket with its tear-off stub.
@@ -483,7 +483,7 @@ const shellStandIns = <ExperienceTheme, ExperienceTheme>{
 /// Order, per role: the trip's city, region and country packs; its look
 /// (pack, then bundled `<look>_<role>`); a secondary look; then the core: a
 /// classic pack, the stand-in look's bundled shell, and the unthemed
-/// bundled anchor (`featured_ticket.png`, `room_card.png`). A tagged card
+/// bundled anchor (`featured_ticket.webp`, `room_card.webp`). A tagged card
 /// uses a complete `reservation_card` from the trip's own look or place
 /// only; otherwise the neutral `reservation_card_blank` plus the booking's
 /// vignette. A pack shell whose pixel size doesn't match its role's

@@ -156,14 +156,14 @@ void main() {
       expect((info.width, info.height), (1122, 1402), reason: path);
     }
     const expected = {
-      'assets/art/common/countdown_luggage_tag.png': (1024, 1536),
-      'assets/art/common/countdown_fact_duration.png': (1024, 512),
-      'assets/art/common/countdown_fact_bookings.png': (1024, 512),
-      'assets/art/common/countdown_fact_opens.png': (1024, 512),
-      'assets/art/common/countdown_button.png': (1536, 460),
-      'assets/art/icons/calendar.png': (1024, 1024),
-      'assets/art/icons/countdown_bookings.png': (1024, 1024),
-      'assets/art/icons/attraction.png': (1024, 1024),
+      'assets/art/common/countdown_luggage_tag.webp': (1024, 1536),
+      'assets/art/common/countdown_fact_duration.webp': (1024, 512),
+      'assets/art/common/countdown_fact_bookings.webp': (1024, 512),
+      'assets/art/common/countdown_fact_opens.webp': (1024, 512),
+      'assets/art/common/countdown_button.webp': (1536, 460),
+      'assets/art/icons/calendar.webp': (1024, 1024),
+      'assets/art/icons/countdown_bookings.webp': (1024, 1024),
+      'assets/art/icons/attraction.webp': (1024, 1024),
     };
     for (final MapEntry(key: path, value: size) in expected.entries) {
       final info = header.readImageInfo(File(path).readAsBytesSync())!;

@@ -105,7 +105,7 @@ class HeaderPill extends StatelessWidget {
 
   final HeaderPillInfo info;
 
-  /// `common/pill.png` is made at 3:1 (1536 × 512) and drawn 35 points tall.
+  /// `common/pill.webp` is made at 3:1 (1536 × 512) and drawn 35 points tall.
   static const pillAspect = 3.0;
   static const pillHeight = 35.0;
 

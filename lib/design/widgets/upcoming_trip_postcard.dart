@@ -42,7 +42,7 @@ class UpcomingTripPostcard extends StatelessWidget {
   final int variant;
   final VoidCallback onOpen;
 
-  /// Every `common/trip_postcard.png` is 1536 × 1024: the card and its
+  /// Every `common/trip_postcard.webp` is 1536 × 1024: the card and its
   /// deckled edge inside a transparent margin with its shadow.
   static const postcardAspect = 1536 / 1024;
 

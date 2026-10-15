@@ -165,8 +165,10 @@ lib/
 │               account (Profile's sign-in card, sign-in sheet, email-link form),
 │               onboarding (Travi scenes, sign-in before the pass desk, home gate)
 └── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
-tool/           art_packs.dart: builds, validates and publishes art packs (operator only)
+tool/           art_packs.dart: builds, validates and publishes art packs, and converts
+                bundled art to WebP (`bundled-webp`) (operator only)
 art_packs/      pack sources (+ catalog.json once published)
+art_masters/    bundled/: the PNG masters of the bundled WebP art (never bundled)
 rules-tests/    Firestore/Storage rules tests; test_emulator/: art-pack end to end
 ```
 
@@ -181,8 +183,16 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
 2. Cards receive **`CardText`** (already worded: eyebrow, title, when, detail,
    place, stub, reference) and **`ArtChoice`**. Cards never format dates or
    decide wording; add fields to `CardText` instead.
-3. Artwork: `assets/art/<kind>/<theme>_<subject>_<nn>_<scene|vignette>.png`
-   (brief and prompts: `docs/ART_BRIEF.md`); themes are `ExperienceTheme`
+3. Artwork: `assets/art/<kind>/<theme>_<subject>_<nn>_<scene|vignette>.webp`
+   (brief and prompts: `docs/ART_BRIEF.md`). **Bundled art is WebP** (the
+   store download limit: PNG made it 245 MB): lossy colour at q88, alpha
+   exact, pixel-for-pixel the same size, encoded like the art packs. The PNG
+   masters live in `art_masters/bundled/` (the same path without `assets/`,
+   never bundled); edit a master, never a WebP. New bundled art: drop its
+   PNG in the bundled folder, run `dart run tool/art_packs.dart bundled-webp`
+   (every PNG the pubspec bundles becomes a `.webp` and its PNG moves to the
+   masters), and look for it by name without extension. Never bundle a PNG
+   (`assets/branding/` isn't bundled). Themes are `ExperienceTheme`
    wire names (`urban_heritage`), legacy `tropical`/`city`/`snow`/`classic`
    still load. A booking's **subject** ("pizza", "castle") comes from Smart
    Import (Gemini picks it: `artSubject`) or from keywords
@@ -234,7 +244,7 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    ever from its own verified city, region or country pack
    (`TravelStore.destinationStampFor`), the place name live. `ShellResolver`
    (`design/art/card_shells.dart`) picks them by the same ranks as card art
-   (packs, then bundled `<look>_<role>.png`, then a stand-in look); text,
+   (packs, then bundled `<look>_<role>.webp`, then a stand-in look); text,
    buttons and tag icons sit at measured fractional anchors (`ShellGeometry`),
    and shells are never stretched. Icons and interface surfaces (tabs, linen,
    pill, stamp) resolve through `ArtSlots` (`design/art/art_slots.dart`).
@@ -474,32 +484,38 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   advertising ID on either platform). RevenueCat gets the analytics ID so its
   Firebase integration can send purchases there too. `docs/ANALYTICS.md`.
 
-**Public pages** (support, privacy, terms, delete your data) live in the
-`Matk44/travary_support` repo on GitHub Pages
-(`https://matk44.github.io/travary_support/`); the app links to them through
-`TravaryLinks` (`domain/links.dart`): Profile's "Help and legal" and the
-paywall's Terms and Privacy links. Support email `dreamprayer.dev@gmail.com`.
-Since 15 Oct 2026 the privacy policy and terms are also on travary.app
-(`/privacy`, `/terms`, from `website/content/legal/`): the Google sign-in
-branding (OAuth consent screen, verified with a logo) links there, and they
-name **Dream Prayer Developer** (the Google Play developer) as who makes
-Travary. The travary.app copies are the current ones (Annual Pass, Holiday
-Pass); keep the two in step, or point everything at travary.app. When the
-app starts collecting something new (analytics, a new provider), update
-both before releasing. Search Console: travary.app is verified by both
-Google accounts (two `google-site-verification` tags in `website/build.py`;
-never remove either), because the OAuth branding needs the Cloud project's
-owner, dreamprayer.dev@gmail.com, to own the domain.
+**Public pages** (support, privacy, terms, delete your data) live on
+travary.app: `/support`, `/privacy`, `/terms`, `/delete-account`, built
+from `website/content/legal/` (moved 15 Oct 2026; the old GitHub Pages
+copies at matk44.github.io/travary_support now return 404). The app links
+to them through `TravaryLinks` (`domain/links.dart`): Profile's "Help and
+legal" and the pass desk's Terms of Use and Privacy Policy links; the store
+listings and the Google sign-in branding (OAuth consent screen, verified
+with a logo) use the same addresses. They name **Dream Prayer Developer**
+(the Google Play developer) as who makes Travary. Support email
+`dreamprayer.dev@gmail.com`. When the app starts collecting something new
+(analytics, a new provider), update the privacy policy before releasing.
+Search Console: travary.app is verified by both Google accounts (two
+`google-site-verification` tags in `website/build.py`; never remove
+either), because the OAuth branding needs the Cloud project's owner,
+dreamprayer.dev@gmail.com, to own the domain.
+
+**What the stores check on the pass desk** (Apple's Schedule 2 §3.8(b)
+and guideline 3.1.2, Google Play's subscriptions policy): each pass shows
+its title, price, period and whether it renews ("Renews yearly. Cancel
+anytime."); Restore, Terms of Use and Privacy Policy stay on one line under
+the button (`paywall_fit_test`); Profile's pass card has "Manage or cancel"
+(the store's subscriptions page) for Annual Pass holders, which Google
+asks for. App Store Connect also needs the Terms of Use link in the App
+Description (`https://travary.app/terms`), as the app uses Apple's
+standard EULA alongside its own terms.
 
 **Before launch:** the store privacy forms updated for analytics and push
 tokens (`docs/ANALYTICS.md`; Google Analytics is linked to `travary-444`);
 the Annual Pass priced in App Store Connect; and a sandbox purchase of each
 pass checked end to end on both stores. (Purchase functions, secrets,
-webhook and Play credentials are done; `privacy.html` was updated 13 Oct
-2026 for analytics, flight alerts and notifications, and still needs the
-Analytics retention period written in. `terms.html`, `index.html` and
-`delete-account.html` in `travary_support` still use "Travary Plus" and
-"Trip Pass".)
+webhook and Play credentials are done; the privacy policy still needs the
+Analytics retention period written in. Full list: `docs/LAUNCH_CHECKLIST.md`.)
 
 ## Accounts (Sign in with Apple / Google / email)
 

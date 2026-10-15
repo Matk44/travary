@@ -11,7 +11,12 @@ they tell the app which booking each picture belongs to (see "Naming").
 2. Paste the **Style block** in front of every prompt.
 3. When one image is right, say *"Use this image as the style reference for
    the rest"* so the set stays consistent.
-4. Ask for **PNG**, and **transparent background** where noted.
+4. Ask for **PNG**, and **transparent background** where noted. (PNG is
+   what you deliver and keep: the app bundles WebP. Put each new PNG in its
+   folder under `assets/` and run `dart run tool/art_packs.dart bundled-webp`:
+   it writes the `.webp` the app ships and moves the PNG to
+   `art_masters/bundled/`. File names below name the picture; the bundled
+   file is the same name ending `.webp`. See `assets/art/README.md`.)
 5. No text in any image. The app adds all words itself.
 
 ### Style block (paste before every illustration prompt)
