@@ -1,0 +1,107 @@
+[
+  {
+    "place": "country_at",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_at",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_at",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_hr",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_hr",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_hr",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_ie",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_ie",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_ie",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_vn",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_vn",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_vn",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_ma",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_ma",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_ma",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_eg",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_eg",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_eg",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_hu",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_hu",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_hu",
+    "role": "reservation_card",
+    "strayPixels": 0
+  }
+]

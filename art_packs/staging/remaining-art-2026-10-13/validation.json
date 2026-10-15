@@ -1,0 +1,278 @@
+{
+  "count": 17,
+  "status": "PASS",
+  "visual_review": "All generated subjects inspected. Final contact sheets checked on light and dark backdrops. No readable text, logos, city-specific US landmarks or real park attractions observed. Card illustrations uniformly fitted to the required blank-text boundaries; shell pixels outside permitted artwork and decorative regions retained. Staged artwork only; no app integration or publishing.",
+  "results": [
+    {
+      "file": "art_packs/staging/lake_district/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "d0a17729ee6118d0cabdbebe3fd056b3999984d27de7ca82ceea0eb067d7863f",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "exterior_and_shadow_match": true
+    },
+    {
+      "file": "art_packs/staging/lake_district/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "d84922006c3c5df0c7db4849d335f526b1f913bc727e9fd09a828bf863e47af4",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "exterior_and_shadow_match": true
+    },
+    {
+      "file": "art_packs/staging/lake_district/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "b8224d229718db8e738a0b5c395af6b55c14fd7c8c88722e71da27af3dc9228c",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "exterior_and_shadow_match": true
+    },
+    {
+      "file": "art_packs/staging/united_states/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "e142c02794be8558bd2ecda9291ad57765ac5821e003a4eafcbb5c658ec19a4b",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "exterior_and_shadow_match": true
+    },
+    {
+      "file": "art_packs/staging/united_states/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "e16f50712cae13ba1f55abe2d246175a7a8049ee97c5826c897dffae07e71799",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "exterior_and_shadow_match": true
+    },
+    {
+      "file": "art_packs/staging/united_states/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "674420605bcfd422b91ee0c8f961575cf913bf2c32cecc2976be5dff671c5cd4",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "exterior_and_shadow_match": true
+    },
+    {
+      "file": "art_packs/staging/interface/common/leather.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "sha256": "7184a0bd6a01a24fd9653b288fe2dd97579c4a1736011f139a81d533720392e4",
+      "horizontal_edge_columns_identical": true,
+      "stitch_centre_y": 123
+    },
+    {
+      "file": "art_packs/staging/interface/common/pill.png",
+      "size": [
+        1536,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "372cb718c2850cd5b6be03804585db0096f4514dcacbe1db0de3764e13103430"
+    },
+    {
+      "file": "art_packs/staging/interface/icons/weather_sunny.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "eba88595ab8b70a6a4c452e215f2e5efa25c0ca68e2f0f57d15d3b1d92287c35",
+      "content_bbox": [
+        256,
+        259,
+        768,
+        764
+      ]
+    },
+    {
+      "file": "art_packs/staging/interface/icons/weather_cloudy.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "220d2c472fb838385518b8fd61fba6dfc0c4a011af4b8cc5ac3aa1342f592a6f",
+      "content_bbox": [
+        256,
+        358,
+        768,
+        666
+      ]
+    },
+    {
+      "file": "art_packs/staging/interface/icons/weather_rain.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "9384a62f791de1e4263437a6cdfdc8e6dbc55bfa7d87536c7d61d770f0cddaaa",
+      "content_bbox": [
+        256,
+        300,
+        768,
+        723
+      ]
+    },
+    {
+      "file": "art_packs/staging/interface/icons/weather_snow.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "2a73bb3f1a376ba6b68b326b331abe13835d45745272942fec7a10403a728f4c",
+      "content_bbox": [
+        256,
+        265,
+        768,
+        759
+      ]
+    },
+    {
+      "file": "art_packs/staging/interface/icons/checklist.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "73021df527bcd62d4d95677e1764f507d7376ff833bff29d8d68a7fbe6b5a3c8",
+      "content_bbox": [
+        315,
+        256,
+        709,
+        768
+      ]
+    },
+    {
+      "file": "art_packs/staging/interface/dining/themepark_castle_01_vignette.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "b8542852f66a4bd4f3899dddc476d3f6b1f30b445e6984e1d3acfc32dbb3237e"
+    },
+    {
+      "file": "art_packs/staging/interface/dining/themepark_castle_01_scene.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "sha256": "329dc322d86d17fef80eba30e8ad2d154a6d0f0145b92efe294d6b4366425b7e"
+    },
+    {
+      "file": "art_packs/staging/interface/dining/themepark_grill_01_vignette.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "56c6809e3d67a677afbb1834b27dcba4273b88513724dbd6c16c8da04c899e88"
+    },
+    {
+      "file": "art_packs/staging/interface/common/countdown_postcard_anywhere.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "cb3daa425c400f42dd4a60d51229cc28b32af7547bede02597e5d9c455caeadb"
+    }
+  ]
+}

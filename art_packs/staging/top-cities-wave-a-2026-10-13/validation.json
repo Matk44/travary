@@ -1,0 +1,1079 @@
+{
+  "date": "2026-10-13",
+  "wave": "A",
+  "count": 60,
+  "status": "PASS",
+  "scope": "Exact PNG dimensions, RGBA8, embedded sRGB, real alpha, corner alpha, original card alpha/structure, barcode stubs, eyelets and empty stamp label bands. Subjects and text-free art reviewed visually.",
+  "cities": [
+    {
+      "city": "London",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/london/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "baab5da9f9fa8673f9edb1a184578ddb2ae26529d4f7096558c3443ec7ee35ce",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/london/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "72af0f26643d797e67d73ece9f1daa5bbc8b337fde1e9b3c01fc6f8dca9050c8",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/london/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "aa971c647709dad7a2925f601d6e2a272b0f7025193d1cae500611184a1149fd",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/london/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4ff6032331c26c1cd28eda86f2a5b591bdaaf4c3c2ad958d985c5f9391f683bc",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/london/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "effb93e2a31eea1ab25d63a8eb76b9152464cc8808ad6b7b8d1d9f85df682776",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/london/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "5b5646ea2f7caa77b62f3f924913e9e3235931fa9eee2175c45d88841fcb00fa",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Tokyo",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/tokyo/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "9db956131a90bd419b3b5c32a5b6da2614d5641b61f781fb1fcc45c4cdb284b9",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/tokyo/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "727cf454dc0eca27031587732798dec2b79442c0d2fbdf3290c74e7df84f518d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/tokyo/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "6b3c1d53493859c429657dd78e100dc4fc17061bf84d9eed68bf09dbf24a960e",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/tokyo/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "7f3f62213fee40cea2235bb1a0d756dd326cc0facc157aa1b53dbd8bcd15e9fd",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/tokyo/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "sha256": "4a94fadf68695ffbd683c578278917afa74c01cb0880ad39a775eb5a36ad037e",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/tokyo/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d85406bf4ea3e4c015eb1c3aad98551ee520eed5bb20ab118427deb49e7999b7",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Bangkok",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/bangkok/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "32eb2e56550ed7fe3fc863c432132f2843ccd8d023732ba4f3fb07d0da9587e4",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/bangkok/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "7909a693510e00e0d02602dc12a04008eb1a0291fc4f2c7288d99d07903af115",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/bangkok/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "56a402be22c26525459d690735383c4806e69f2ae7a8401de2d39c3c762b663d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/bangkok/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "sha256": "a1c0515faf620a5a9ba28d412dbe474c48310234a99353eef5821b25f1258b5e",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/bangkok/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "f8224cdf045313a10901621b89d09ecf9dacf4934ee629ace611d37c897f318f",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/bangkok/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "23a55e4932ad4491705843ca4ddb0de20962668af0ac3c9f5074b5bdd0c3739d",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Rome",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/rome/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "82539e76b11caf673e6a6273a43b9b455a698b1ee38aa550bf6b9eda3a746e67",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/rome/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d40d99dbb4ae0ee6a456fd9c5670cbd7d40e5cbe49714e1ca0dc56e0166770e2",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/rome/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e7934d2a84064597f2f87729edba4c632d115e0fe871e44265f0f0d1f9447f96",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/rome/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "63afa42405519856f9f782be4a76bc9a5c5b76ffd35192f69078c765c263bf13",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/rome/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "c26182c0d70cafdd3c87c80903960415e1740d881f9dc67c75ddf8fa3f44be1c",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/rome/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4d0e68b2a272f22c9229a7dba4865bfb41dbbc2b43349ab3af34da35923ff688",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Barcelona",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/barcelona/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "bcb392e19d790e9ed0883b7edbacdb95b9acdfc042054f6924baa555ed9a9567",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/barcelona/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "811a6ccfad8c6765fcb3a006897b03246bb0705f180d0ef5393600dd4c847b9d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/barcelona/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "1ad1c96bfcbf2f7d4e508718fa4f5b72f7690b52b5b15e59278cfc42b0456c66",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/barcelona/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "sha256": "f6bb167396046eef1f4ab1789613c94d04d426fee64c8ff41bb923e077fba056",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/barcelona/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "e4fc2c7003c35e638b4167ef008faa3029a4734005633f1ecdb6233c53c2ef29",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/barcelona/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e39da8e1e1b85b25aa18184c636f553c3407d75eccff94958bd4d9f3f0cc0115",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Dubai",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/dubai/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "98f72041e26e41d04ad89662f97ff2ea109fc130ba19f5ab707d2222b5af1e6a",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/dubai/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "5043d04e670da6b71436496b8a8d9f5c6c142e06ee42d0b5edf12c5e0d7b66e2",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/dubai/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "376234986c016c94a7e90fafbf5be77783372579715860460c3055c203a4478b",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/dubai/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "3e2e394d923fa1ff1ff6f1c7674dfea25382a8798b72424101a551d6e6325d09",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/dubai/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "8f46ff2b869cc89ac98bd3e1850dcc42b81802ca113a05af4ab408246d63f7e9",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/dubai/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "a0ccfd88a7422847bdef6737a690efb5ede35a50f879233f1852b02c81180185",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Istanbul",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/istanbul/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "df31cf79be60dfbd4a6491c67439521ee3ddae51b95a087560cf7808789d0ff7",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/istanbul/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d883720645b6fdafb4f066c10263e3ce574c3d6b1cd9bde03f8bb3e915b5a176",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/istanbul/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d8e9a03d88f14f169e1460814f23273651cfac7ba1a31181b7955df62afb6915",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/istanbul/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "6ed9907ddc13a5eaafe8c27df683c313b769754303c931df7c5d86e07a4b0f92",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/istanbul/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "1df60e7b77ced4eeff5d4a57f13394d9ed1f01cacabea5379bc04df752d50e53",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/istanbul/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "1fbd4498909755cef118856eec51c04c4e2354868c528be6d839ce5e5ce3132f",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Amsterdam",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/amsterdam/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "848f72578ab65b3fb2d323040578140782a60da1a47811ad9fe1df32d6a3954d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/amsterdam/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "98b181f4ed2c321d50535423693742312e450ce34e70951e15939e80554afb16",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/amsterdam/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "bbe2245f901be176121d20e8a41daf31d08e022790d425e24d05ca923b0da9a1",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/amsterdam/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "0c4f785e5c79844456626e1179cd5998f9313129bdab9995d7824700315bea68",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/amsterdam/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "aef803ab4a573b3b20e38e828b018452eaadaf08ed9245bd034dd71c247a7fd6",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/amsterdam/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "54db2992bc853cc22b89f8ff2f25c14443114f2300a33f2632b0708e898cfede",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Hong Kong",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/hong_kong/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "20d4fd4e92c66a38665630589ac15ddd057fa017b1ad883e762cefa850daa2f8",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/hong_kong/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4c88680799f6626d0be9bb6f18298f473658e3e86ec0f2f3f55642e2f4d4a867",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/hong_kong/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e1f50a9e0305b66ef224e6fac5e2b45cc8fb85f3c899c8306e435f77aa82318c",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/hong_kong/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "82669d9c3bb8dd654085e6db08acc36838bc0a0db4cc0ced6d9015e76e35a840",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/hong_kong/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "f619c36136fd999c24608c9aa10b0dfb82bc1d3b5d6473e2eefd3e97f3222f11",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/hong_kong/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4aa1a9522ec879d9b3c36464ade6c65fb75faef431b67264c1269290840cddf6",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Seoul",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/seoul/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "910aed325d44e212c53d3389c1aff33311e661350c53b2d7dc75d27dcfadc92e",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/seoul/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4b0d5b99872138d4ea0b691df8f13567973f285e922ad134efb44075c5925c72",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/seoul/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "69558d0fdb0ca3eeddde845e3747936ab27280e94c07e305e7c0a2fd286fa590",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/seoul/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "93e7149d5dfbb046c72e0f3d3940c8772f35fae101c6a7b6214c8956cef8eede",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/seoul/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "2cc57968f55768801687d9636261bfa60bdc8fcc737b9113dc3ca049d67d4f8d",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/seoul/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "0a0d80c0cb4f4b2ce56fa31cc3f674308b1c9054b445944e56816fa187425871",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    }
+  ]
+}

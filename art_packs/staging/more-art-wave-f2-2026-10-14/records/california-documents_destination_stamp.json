@@ -1,0 +1,26 @@
+{
+  "id": "california/documents_destination_stamp",
+  "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for California.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: the Golden Gate Bridge, Big Sur's Bixby Bridge on the coast road, a pier with a Ferris wheel, Half Dome above a valley. The geographic scope is only this named US city or region. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5b536dcf-dc22-4f90-8433-300b6c006908.png",
+  "finalPath": "art_packs/staging/california/documents_destination_stamp.png",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-f2-2026-10-14/originals/california-exec-5b536dcf-dc22-4f90-8433-300b6c006908.png",
+  "dimensions": [
+    1024,
+    1280
+  ],
+  "mode": "RGBA8",
+  "embeddedSrgb": true,
+  "realAlpha": true,
+  "transparentCorners": true,
+  "blankLabelMatchesTemplate": true,
+  "protectedStampMatchesTemplate": true,
+  "sha256": "4096d1aa958c37e8300f4cd70db590b50272e716960b654413fbe2ce20fcb6c0",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Checked raw and light/dark export: Golden Gate and Bixby coast, Half Dome and pier wheel, poppies and one sun; no Hollywood sign, theme parks, casino buildings, text or flags. Clean label and template."
+}

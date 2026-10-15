@@ -1,0 +1,170 @@
+[
+  {
+    "id": "country_at",
+    "name": "Austria",
+    "scene": "a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground",
+    "palette": "alpine teal, Baroque gold, rose",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        56,
+        123,
+        125
+      ],
+      [
+        210,
+        172,
+        100
+      ],
+      [
+        189,
+        127,
+        133
+      ]
+    ]
+  },
+  {
+    "id": "country_hr",
+    "name": "Croatia",
+    "scene": "a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond",
+    "palette": "Adriatic turquoise, terracotta, cypress green",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        49,
+        140,
+        152
+      ],
+      [
+        199,
+        118,
+        87
+      ],
+      [
+        72,
+        104,
+        83
+      ]
+    ]
+  },
+  {
+    "id": "country_ie",
+    "name": "Ireland",
+    "scene": "tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns)",
+    "palette": "emerald, stone grey, soft gold",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        76,
+        121,
+        89
+      ],
+      [
+        138,
+        142,
+        134
+      ],
+      [
+        207,
+        179,
+        110
+      ]
+    ]
+  },
+  {
+    "id": "country_vn",
+    "name": "Vietnam",
+    "scene": "an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces)",
+    "palette": "jade green, lantern red, lotus pink",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        54,
+        119,
+        95
+      ],
+      [
+        191,
+        87,
+        72
+      ],
+      [
+        197,
+        136,
+        150
+      ]
+    ]
+  },
+  {
+    "id": "country_ma",
+    "name": "Morocco",
+    "scene": "a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern)",
+    "palette": "rose red, indigo blue, saffron",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        189,
+        102,
+        90
+      ],
+      [
+        62,
+        82,
+        119
+      ],
+      [
+        210,
+        160,
+        79
+      ]
+    ]
+  },
+  {
+    "id": "country_eg",
+    "name": "Egypt",
+    "scene": "three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs)",
+    "palette": "desert gold, Nile turquoise, lapis blue",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        209,
+        167,
+        93
+      ],
+      [
+        57,
+        140,
+        152
+      ],
+      [
+        54,
+        93,
+        131
+      ]
+    ]
+  },
+  {
+    "id": "country_hu",
+    "name": "Hungary",
+    "scene": "a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram",
+    "palette": "Danube blue, paprika red, gold",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        53,
+        106,
+        131
+      ],
+      [
+        185,
+        84,
+        70
+      ],
+      [
+        203,
+        166,
+        90
+      ]
+    ]
+  }
+]

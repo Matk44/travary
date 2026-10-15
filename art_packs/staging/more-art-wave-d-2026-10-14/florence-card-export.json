@@ -1,0 +1,68 @@
+[
+  {
+    "place": "florence",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/florence-featured_ticket.png",
+    "palette": [
+      [
+        189,
+        113,
+        84
+      ],
+      [
+        82,
+        102,
+        74
+      ],
+      [
+        214,
+        179,
+        110
+      ]
+    ]
+  },
+  {
+    "place": "florence",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/florence-room_card.png",
+    "palette": [
+      [
+        189,
+        113,
+        84
+      ],
+      [
+        82,
+        102,
+        74
+      ],
+      [
+        214,
+        179,
+        110
+      ]
+    ]
+  },
+  {
+    "place": "florence",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/florence-reservation_card.png",
+    "palette": [
+      [
+        189,
+        113,
+        84
+      ],
+      [
+        82,
+        102,
+        74
+      ],
+      [
+        214,
+        179,
+        110
+      ]
+    ]
+  }
+]

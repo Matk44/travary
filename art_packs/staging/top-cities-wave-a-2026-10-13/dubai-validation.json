@@ -1,0 +1,101 @@
+{
+  "city": "Dubai",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/dubai/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "98f72041e26e41d04ad89662f97ff2ea109fc130ba19f5ab707d2222b5af1e6a",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/dubai/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "5043d04e670da6b71436496b8a8d9f5c6c142e06ee42d0b5edf12c5e0d7b66e2",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/dubai/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "376234986c016c94a7e90fafbf5be77783372579715860460c3055c203a4478b",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/dubai/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "3e2e394d923fa1ff1ff6f1c7674dfea25382a8798b72424101a551d6e6325d09"
+    },
+    {
+      "file": "art_packs/staging/dubai/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "8f46ff2b869cc89ac98bd3e1850dcc42b81802ca113a05af4ab408246d63f7e9"
+    },
+    {
+      "file": "art_packs/staging/dubai/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "a0ccfd88a7422847bdef6737a690efb5ede35a50f879233f1852b02c81180185",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

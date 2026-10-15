@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_hu",
+  "version": 1,
+  "palette": {
+    "id": "hungary_danube_paprika",
+    "anchors": {"ink": "#1E3555", "paper": "#F5EEE2"},
+    "accents": ["#3B6EA5", "#B83A2B", "#D1A046", "#5B7A4E"],
+    "ui": {
+      "primary": "#25508A",
+      "secondary": "#A63424",
+      "highlight": "#B38529",
+      "onPrimary": "#FFF9EF"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

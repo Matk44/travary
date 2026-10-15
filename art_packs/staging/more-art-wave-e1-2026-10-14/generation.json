@@ -1,0 +1,1022 @@
+{
+  "date": "2026-10-14",
+  "mode": "built-in imagegen; owner-authorized template compositing; uniform mechanical PNG export",
+  "brief": "docs/art_requests/GPT_MORE_ART_2026-10-14.md",
+  "records": [
+    {
+      "id": "country_at/countdown_postcard-corrected",
+      "prompt": "Use case: precise-object-edit\nEdit target: this Austria countdown_postcard illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3fbe46ca-8fc0-4ae5-b80f-e76077ecb523.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-bdbb5466-9c7d-42cf-bee4-42d628bff0bb.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_at/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Austria. Scene: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Light: warm low golden sun. Stripe and tag: alpine teal, Baroque gold, rose (#387b7d, #d2ac64, #bd7f85). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3fbe46ca-8fc0-4ae5-b80f-e76077ecb523.png",
+      "rejection": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty."
+    },
+    {
+      "id": "country_at/documents_destination_stamp-corrected",
+      "prompt": "Use case: precise-object-edit\nEdit target: this Austria destination stamp. Remove the ENTIRE red vintage tram, its pantograph and all rails/track from the lower-right scene. Replace that tram area naturally with the existing lakeside stone promenade, quiet low greenery and blue gentians continuing from the foreground. No new objects. For this small stamp let the Alpine lake, onion-domed village church and yellow-and-white Baroque palace/garden be the clear subjects. Preserve all mountains, lake reflections, architecture, plants, golden light, palette, paper grain, exact stamp canvas, perforated ivory paper, navy keyline, blank bottom label and genuine exterior transparency. Absolutely no transport vehicle anywhere in the finished image, no text/letters/numbers/pseudo-text/logos/flags/people/faces. Output one corrected portrait stamp, same proportions.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1da7c1c0-98aa-46c7-94a3-9198c15b5c77.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-82656368-d549-4dc0-b4a2-0c0138c2f67a.png",
+      "attempts": [
+        {
+          "id": "country_at/documents_destination_stamp-corrected",
+          "prompt": "Use case: precise-object-edit\nEdit target: this Austria documents_destination_stamp illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-55316e2f-3e45-43ed-bc1b-7ba264b708b7.png"
+          ],
+          "transparent_background": true,
+          "status": "generated_pending_review",
+          "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1da7c1c0-98aa-46c7-94a3-9198c15b5c77.png",
+          "selected": false,
+          "rejection": "First text cleanup retained a small oval route plaque; remove tram from the small stamp composition."
+        }
+      ],
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_at-documents_destination_stamp-final-v2.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_at/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country. Input image 2 is supporting country colour/scenery reference ONLY, discard ticket structure.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Austria. Scene: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Light: warm low golden sun. Stripe and tag: alpine teal, Baroque gold, rose (#387b7d, #d2ac64, #bd7f85). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png",
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a832c2d2-0406-475b-b8fb-5a51acf23a5f.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-55316e2f-3e45-43ed-bc1b-7ba264b708b7.png",
+      "rejection": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty."
+    },
+    {
+      "id": "country_at/featured_ticket-corrected",
+      "prompt": "Use case: precise-object-edit\nEdit target: this Austria featured ticket. Remove the ENTIRE red tram in the lower-right picture, its pantograph and the tram track. Continue the existing stone lakeside promenade, green shrubs and blue gentians naturally across that cleared area. No new objects. The picture's clear subjects remain the turquoise Alpine lake, onion-domed village church and yellow-and-white Baroque palace/formal garden under snow-topped peaks. Keep ALL architecture, mountains, lake reflections, vegetation, warm light and palette unchanged. Keep exact ticket canvas, silhouette, navy blank left 42%, original stripe/barcode stub geometry, paper grain, edges, notches, perforation and genuine outside transparency. Absolutely NO tram or other transport vehicle anywhere. No text, letters, numbers, badges, monograms, logos, flags or people. Output one corrected ticket of the same proportions.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-9b77f9bc-bc5f-4cb0-98c5-2430b4e911cc.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-faf5c34f-7f0f-4f7d-bd0b-ad03d435dbb1.png",
+      "attempts": [
+        {
+          "id": "country_at/featured_ticket-corrected",
+          "prompt": "Use case: precise-object-edit\nEdit target: this Austria featured_ticket illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a832c2d2-0406-475b-b8fb-5a51acf23a5f.png"
+          ],
+          "transparent_background": true,
+          "status": "generated_pending_review",
+          "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-9b77f9bc-bc5f-4cb0-98c5-2430b4e911cc.png",
+          "selected": false,
+          "rejection": "First text cleanup retained a tiny route badge; simplified ticket scene by removing tram, which remains in other country assets."
+        }
+      ],
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_at-featured_ticket-final-v2.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_at/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Austria. Scene: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Light: warm low golden sun. Stripe and tag: alpine teal, Baroque gold, rose (#387b7d, #d2ac64, #bd7f85). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a832c2d2-0406-475b-b8fb-5a51acf23a5f.png",
+      "rejection": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty."
+    },
+    {
+      "id": "country_at/onboarding_stage_v1",
+      "destinationId": "country_at",
+      "label": "Austria",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "AT"
+        ]
+      },
+      "geographicScope": "a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground",
+      "prompt": "Use case: precise-object-edit. Edit this Austria miniature cardstock onboarding stage. Preserve its complete canvas, rich embossed paper, folded theatre wings, coherent Austrian Alps/lake/onion church/palace/gentians/tram, warm light, camera and cream floor starting y65%. Correct ONLY HEADLINE CLEARANCE. Upper y0\u201328% MUST be uninterrupted plain petrol-teal sky across ENTIRE WIDTH including left edge; currently the tall church finial and clouds reach too high. Lower the left church tower and all its nearby clouds so their highest point is below y29% (536 pixels on this 1848px canvas). Nothing scenic above y536. Keep mountain peaks below that line too. Blend the vacated area into exact neighbouring teal sky texture. All landmarks and scenery fit y29\u201364%, with no objects on cream floor. Keep the church recognisable but shorter/lower. No text, letters, numbers, inscriptions, logos, flags, faces, UI or props. One opaque851x1848PNG.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a02db3b8-cfe6-4457-8fd8-58452bc12f1d.png"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-30b250ad-0518-48e8-a6a7-268f0d7b7ff8.png",
+      "attempts": [
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a02db3b8-cfe6-4457-8fd8-58452bc12f1d.png",
+          "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Austria (country_at). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% completely quiet petrol-teal paper sky THROUGH CENTRE, all landmark tops below 28%. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_at/countdown_postcard.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ch.webp"
+          ],
+          "status": "rejected",
+          "rejection": "Church/left clouds intruded into quiet headline sky."
+        }
+      ],
+      "visuallyInspected": true,
+      "qaNotes": "Inspected corrected still: church and clouds lowered clear of headline centre; rich folded-cardstock Alps/lake/palace/onion church/tram/gentians, cream floor starts65%, right foreground clear. No text, logos, flags, people or props. Original high church attempt rejected.",
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_at/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_at.png",
+      "sha256": "91ead37ad3a787e7308940c91ab7e6259520790f1ea2ce9abcdec88ba05eec07",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false,
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_at/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ch.webp"
+      ]
+    },
+    {
+      "id": "country_at/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Austria. Scene: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Light: warm low golden sun. Stripe and tag: alpine teal, Baroque gold, rose (#387b7d, #d2ac64, #bd7f85). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-8ce6f597-33d2-4019-8c1f-8721b456982b.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_at/room_card-corrected",
+      "prompt": "Use case: precise-object-edit\nEdit target: this Austria room_card illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5d441084-4cc3-400e-b679-63b07b3fba8c.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d161783e-c56e-4d2e-a680-84c9bd6ea426.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_at/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Austria. Scene: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Light: warm low golden sun. Stripe and tag: alpine teal, Baroque gold, rose (#387b7d, #d2ac64, #bd7f85). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5d441084-4cc3-400e-b679-63b07b3fba8c.png",
+      "rejection": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty."
+    },
+    {
+      "id": "country_at/trip_postcard-corrected",
+      "prompt": "Use case: precise-object-edit\nEdit target: this Austria trip_postcard illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-01b4473a-d521-499c-96a7-9ca316082f95.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3122af34-abf6-47f4-b1e2-cf082d68da72.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_at/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country. Input image 2 is supporting country colour/scenery reference ONLY, discard ticket structure.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Austria. Scene: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Light: warm low golden sun. Stripe and tag: alpine teal, Baroque gold, rose (#387b7d, #d2ac64, #bd7f85). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png",
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a832c2d2-0406-475b-b8fb-5a51acf23a5f.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-01b4473a-d521-499c-96a7-9ca316082f95.png",
+      "rejection": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty."
+    },
+    {
+      "id": "country_eg/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Egypt. Scene: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Light: warm low golden sun. Stripe and tag: desert gold, Nile turquoise, lapis blue (#d1a75d, #398c98, #365d83). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-8e9cab8c-ea52-471e-841e-282367cec8f8.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+    },
+    {
+      "id": "country_eg/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Egypt. Scene: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Light: warm low golden sun. Stripe and tag: desert gold, Nile turquoise, lapis blue (#d1a75d, #398c98, #365d83). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-8edd372f-a62c-487d-aa19-6d5f3fb941aa.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+    },
+    {
+      "id": "country_eg/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Egypt. Scene: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Light: warm low golden sun. Stripe and tag: desert gold, Nile turquoise, lapis blue (#d1a75d, #398c98, #365d83). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-79e03c5a-1947-41a5-873c-9952ad49755d.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+    },
+    {
+      "id": "country_eg/onboarding_stage_v1",
+      "destinationId": "country_eg",
+      "label": "Egypt",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "EG"
+        ]
+      },
+      "geographicScope": "three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs)",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Egypt (country_eg). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still. EXACTLY THREE pyramids, no fourth tiny/background/foreground pyramid. Pyramid count is a strict invariant. Plain uninscribed temple stone, no hieroglyphs.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_eg/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ae.webp"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-eb648681-05f2-4655-bbfa-46df3288cc0b.png",
+      "visuallyInspected": true,
+      "qaNotes": "Inspected still: exactly three pyramids, recognisable camel silhouette, plain papyrus-column temple, felucca with blank white sail, palms and turquoise water in dimensional paper theatre. Quiet central upper27% teal, cream floor65%, right foreground clear. No hieroglyphs, lettering, flags, faces, UI or props; UAE skyline/wind towers replaced.",
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_eg/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_eg.png",
+      "sha256": "4cb18fa9607bbcc4d7023642044ce675660577866b8c2408ae3632258b7cdeb0",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "country_eg/reservation_card-corrected",
+      "prompt": "Use case: precise-object-edit. Preserve this exact Travary Egypt card canvas, paper outline, alpha, shadow, stripe, scenery style, palette and golden light. Change ONLY pyramid count from four to EXACTLY THREE. Remove the tiny FOURTH pyramid directly in front of the large central pyramid near x1660,y370; replace it seamlessly with the surrounding warm golden dunes. Keep the three LARGE pyramids across the horizon: left, central largest, right. Do not create any new pyramid. Preserve untouched cord, brass eyelet, unprinted gold tag, blank centre, Nile felucca, plain papyrus-column temple and camel. No hieroglyphs, pseudo-script, letters, numerals, logos, flags or faces.1983x793PNG truealpha outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-e24300d0-fffb-4658-89a5-98f28cd1239f.png"
+      ],
+      "transparent_background": true,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-74ae5a04-361a-4b21-9fb8-4fbc144eb200.png",
+      "status": "review_ready",
+      "corrects": "country_eg/reservation_card",
+      "rejection": "Extra small foreground pyramid made four rather than three.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_eg-reservation_card-corrected.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+    },
+    {
+      "id": "country_eg/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Egypt. Scene: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Light: warm low golden sun. Stripe and tag: desert gold, Nile turquoise, lapis blue (#d1a75d, #398c98, #365d83). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-e24300d0-fffb-4658-89a5-98f28cd1239f.png",
+      "rejection": "Extra small foreground pyramid made four rather than three."
+    },
+    {
+      "id": "country_eg/room_card-corrected",
+      "prompt": "Use case: precise-object-edit. Preserve this exact Travary Egypt card canvas, paper outline, alpha, shadow, stripe, scenery style, palette and golden light. Change ONLY pyramid count from four to EXACTLY THREE. Remove the far-right background pyramid whose peak is behind the palms to right of the largest pyramid (near x1365,y380). Fill its space with the existing sky and low dunes. Keep the other three peaks: small left, medium left, large centre. Nile felucca, papyrus-bud columns, plain stone temple and camel unchanged. Pure blank ivory left ofx700, no scenery/text/speckles there. No hieroglyphs, pseudo-script, letters, numerals, logos, flags or faces.1774x887PNG truealpha outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-0d65c8d2-bdab-4c7f-82a5-afa58cee52e9.png"
+      ],
+      "transparent_background": true,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-afaa1229-c30e-48ba-a1da-2d3b47c3f30e.png",
+      "status": "review_ready",
+      "corrects": "country_eg/room_card",
+      "rejection": "Four pyramids rather than requested three.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_eg-room_card-corrected.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+    },
+    {
+      "id": "country_eg/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Egypt. Scene: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Light: warm low golden sun. Stripe and tag: desert gold, Nile turquoise, lapis blue (#d1a75d, #398c98, #365d83). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-0d65c8d2-bdab-4c7f-82a5-afa58cee52e9.png",
+      "rejection": "Four pyramids rather than requested three."
+    },
+    {
+      "id": "country_eg/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Egypt. Scene: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Light: warm low golden sun. Stripe and tag: desert gold, Nile turquoise, lapis blue (#d1a75d, #398c98, #365d83). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-09434a1b-e8e9-4c3c-9685-26876ab85a97.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+    },
+    {
+      "id": "country_hr/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Croatia. Scene: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Light: warm low golden sun. Stripe and tag: Adriatic turquoise, terracotta, cypress green (#318c98, #c77657, #486853). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-50dc17b3-c954-40b0-ac5d-51ac0d1524c7.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six generated illustrations and both exported light/dark sheets. Walled Adriatic headland, terracotta roofs, bell tower, stone harbour, islands, plain white sails, cypress and lavender match broad Croatia brief. Consistent turquoise/terracotta/gold light. No visible lettering, flags or faces. Protected card paper, outlines, eyelet and barcode clean; alpha and blank label checks pass."
+    },
+    {
+      "id": "country_hr/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Croatia. Scene: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Light: warm low golden sun. Stripe and tag: Adriatic turquoise, terracotta, cypress green (#318c98, #c77657, #486853). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-90383853-32f7-4754-b104-cafe6b13c5a3.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six generated illustrations and both exported light/dark sheets. Walled Adriatic headland, terracotta roofs, bell tower, stone harbour, islands, plain white sails, cypress and lavender match broad Croatia brief. Consistent turquoise/terracotta/gold light. No visible lettering, flags or faces. Protected card paper, outlines, eyelet and barcode clean; alpha and blank label checks pass."
+    },
+    {
+      "id": "country_hr/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Croatia. Scene: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Light: warm low golden sun. Stripe and tag: Adriatic turquoise, terracotta, cypress green (#318c98, #c77657, #486853). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-4671ac74-bdfd-45d0-a7d3-8ce9c1aaafbe.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six generated illustrations and both exported light/dark sheets. Walled Adriatic headland, terracotta roofs, bell tower, stone harbour, islands, plain white sails, cypress and lavender match broad Croatia brief. Consistent turquoise/terracotta/gold light. No visible lettering, flags or faces. Protected card paper, outlines, eyelet and barcode clean; alpha and blank label checks pass."
+    },
+    {
+      "id": "country_hr/onboarding_stage_v1",
+      "destinationId": "country_hr",
+      "label": "Croatia",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "HR"
+        ]
+      },
+      "geographicScope": "a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Croatia (country_hr). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201328% completely quiet petrol-teal paper sky across ENTIRE WIDTH, including both edges. No clouds, hills, foliage, church finials or other scenery above pixel y536. Every landmark top below 29%. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hr/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_gr.webp"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-61809a28-0478-4733-b540-298357a1f780.png",
+      "visuallyInspected": true,
+      "qaNotes": "Inspected still: rich folded-cardstock walled Adriatic town, harbour, terracotta roofs, turquoise bay, plain sailboats, distant island, cypress and lavender. Headline centre is quiet teal; peripheral foliage follows sibling theatre layout. Cream control floor at65%, right foreground clear. No text, logos, flags, faces, UI or props.",
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_hr/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_hr.png",
+      "sha256": "89d9294c20b27a83a1d043d917ccb7af8340faf0bc9e76ad14f76d8ca3e0a2b9",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "country_hr/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Croatia. Scene: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Light: warm low golden sun. Stripe and tag: Adriatic turquoise, terracotta, cypress green (#318c98, #c77657, #486853). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-b09b2f82-0c7c-4b14-a9f6-bdfdf526d3a7.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six generated illustrations and both exported light/dark sheets. Walled Adriatic headland, terracotta roofs, bell tower, stone harbour, islands, plain white sails, cypress and lavender match broad Croatia brief. Consistent turquoise/terracotta/gold light. No visible lettering, flags or faces. Protected card paper, outlines, eyelet and barcode clean; alpha and blank label checks pass."
+    },
+    {
+      "id": "country_hr/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Croatia. Scene: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Light: warm low golden sun. Stripe and tag: Adriatic turquoise, terracotta, cypress green (#318c98, #c77657, #486853). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1a1a767c-6a1d-4b37-b8a4-357bf1633ec4.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six generated illustrations and both exported light/dark sheets. Walled Adriatic headland, terracotta roofs, bell tower, stone harbour, islands, plain white sails, cypress and lavender match broad Croatia brief. Consistent turquoise/terracotta/gold light. No visible lettering, flags or faces. Protected card paper, outlines, eyelet and barcode clean; alpha and blank label checks pass."
+    },
+    {
+      "id": "country_hr/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Croatia. Scene: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Light: warm low golden sun. Stripe and tag: Adriatic turquoise, terracotta, cypress green (#318c98, #c77657, #486853). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-7a7bc38b-aa0a-405a-a216-9ffc83f8ea13.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six generated illustrations and both exported light/dark sheets. Walled Adriatic headland, terracotta roofs, bell tower, stone harbour, islands, plain white sails, cypress and lavender match broad Croatia brief. Consistent turquoise/terracotta/gold light. No visible lettering, flags or faces. Protected card paper, outlines, eyelet and barcode clean; alpha and blank label checks pass."
+    },
+    {
+      "id": "country_hu/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Hungary. Scene: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Light: warm low golden sun. Stripe and tag: Danube blue, paprika red, gold (#356a83, #b95446, #cba65a). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d8af24d0-6abb-4026-ab17-7c80264ae2b7.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+    },
+    {
+      "id": "country_hu/documents_destination_stamp-corrected",
+      "prompt": "Use case: precise-object-edit. Preserve this entire Hungary illustration and exact full card/stamp canvas, alpha, paper edges, layout, skyline, Parliament-like river building, bridge, castle, paprika and golden light. Change ONLY THE TRAM ROOF: REMOVE the entire dark destination-number display housing above the front windshield, including its rectangular outline and every mark inside. Replace with a smooth continuous plain curved cream tram roof, with NO panel, sign, plaque, badge, screen, monogram or inset box remaining. Leave windshield dark and featureless, front lamp circular, body yellow, wheels and rails unchanged. No other text, numerals, logos, flags or faces. 1024x1280PNG truealpha outside, perforations/navy keyline and completely blank ivory lower label band unchanged.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-79394538-3abd-480e-9164-35e5afd3e6c5.png"
+      ],
+      "transparent_background": true,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1b12a243-9416-4a50-81a9-10617df8f41f.png",
+      "status": "review_ready",
+      "corrects": "country_hu/documents_destination_stamp",
+      "rejection": "Close-up exposed faint route-number-like marks in tram roof display.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_hu-documents_destination_stamp-corrected.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+    },
+    {
+      "id": "country_hu/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Hungary. Scene: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Light: warm low golden sun. Stripe and tag: Danube blue, paprika red, gold (#356a83, #b95446, #cba65a). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-79394538-3abd-480e-9164-35e5afd3e6c5.png",
+      "rejection": "Close-up exposed faint route-number-like marks in tram roof display."
+    },
+    {
+      "id": "country_hu/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Hungary. Scene: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Light: warm low golden sun. Stripe and tag: Danube blue, paprika red, gold (#356a83, #b95446, #cba65a). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-e356b8e2-1157-4c62-b6f3-a905ecc1bce5.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+    },
+    {
+      "id": "country_hu/onboarding_stage_v1",
+      "destinationId": "country_hu",
+      "label": "Hungary",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "HU"
+        ]
+      },
+      "geographicScope": "a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Hungary (country_hu). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still. Tram has no destination-number display housing or front badge at all: continuous plain cream curved roof above dark empty windshield. No panel outline or inset box.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hu/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_cz_prague.webp"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-9fd912ff-ff12-4534-a4d8-11b4e66d3236.png",
+      "visuallyInspected": true,
+      "qaNotes": "Inspected still: rich folded-cardstock country theatre with parliament-like dome/spires, chain suspension bridge, hill castle, steaming domed bath, plain yellow tram, paprika and wide reflective river. Quiet central upper27% teal, cream lower control floor about65%, open right foreground. No lettering, logos, flags, faces, Travi, folio or tickets; Prague scenery replaced.",
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_hu/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_hu.png",
+      "sha256": "12614b67763a909f62b1203ea3357d7b0bbfca21d7c7de512727c5099ac96481",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "country_hu/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Hungary. Scene: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Light: warm low golden sun. Stripe and tag: Danube blue, paprika red, gold (#356a83, #b95446, #cba65a). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-57eb289f-008b-40da-a63e-f85f91294a13.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+    },
+    {
+      "id": "country_hu/room_card-corrected",
+      "prompt": "Use case: precise-object-edit. Preserve this entire Hungary illustration and exact full card/stamp canvas, alpha, paper edges, layout, skyline, Parliament-like river building, bridge, castle, paprika and golden light. Change ONLY THE TRAM ROOF: REMOVE the entire dark destination-number display housing above the front windshield, including its rectangular outline and every mark inside. Replace with a smooth continuous plain curved cream tram roof, with NO panel, sign, plaque, badge, screen, monogram or inset box remaining. Leave windshield dark and featureless, front lamp circular, body yellow, wheels and rails unchanged. No other text, numerals, logos, flags or faces. 1774x887PNG, truealpha outside, pure blank ivory paper left ofx700, feather scenery only afterx700, existing stripe unchanged.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-66508009-0ea1-4631-a71c-1f832cae6973.png"
+      ],
+      "transparent_background": true,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a17e5539-6aa7-4fae-b669-6ed83b752937.png",
+      "status": "review_ready",
+      "corrects": "country_hu/room_card",
+      "rejection": "Close-up exposed faint route-number-like marks in tram roof display.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_hu-room_card-corrected.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+    },
+    {
+      "id": "country_hu/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Hungary. Scene: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Light: warm low golden sun. Stripe and tag: Danube blue, paprika red, gold (#356a83, #b95446, #cba65a). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-66508009-0ea1-4631-a71c-1f832cae6973.png",
+      "rejection": "Close-up exposed faint route-number-like marks in tram roof display."
+    },
+    {
+      "id": "country_hu/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Hungary. Scene: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Light: warm low golden sun. Stripe and tag: Danube blue, paprika red, gold (#356a83, #b95446, #cba65a). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-ec3cb6ef-fdc1-4a3d-b633-ad879c80ff25.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+    },
+    {
+      "id": "country_ie/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Ireland. Scene: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Light: warm low golden sun. Stripe and tag: emerald, stone grey, soft gold (#4c7959, #8a8e86, #cfb36e). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-8764f2f9-4d83-4ca5-aac7-d66325bf736a.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six original illustrations and exported light/dark sheets. Broad Irish Atlantic cliffs, round tower, abbey ruins, thatched cottage, stone walls and small fields with recognisable sheep; coherent emerald/stone/gold light and soft rainbow. No shamrocks, harps, leprechauns, lettering, flags or faces. Card blanks and exported alpha clean; checks pass."
+    },
+    {
+      "id": "country_ie/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Ireland. Scene: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Light: warm low golden sun. Stripe and tag: emerald, stone grey, soft gold (#4c7959, #8a8e86, #cfb36e). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-e52c9cb2-4a19-4b5f-b2d1-b755b8343a18.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six original illustrations and exported light/dark sheets. Broad Irish Atlantic cliffs, round tower, abbey ruins, thatched cottage, stone walls and small fields with recognisable sheep; coherent emerald/stone/gold light and soft rainbow. No shamrocks, harps, leprechauns, lettering, flags or faces. Card blanks and exported alpha clean; checks pass."
+    },
+    {
+      "id": "country_ie/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Ireland. Scene: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Light: warm low golden sun. Stripe and tag: emerald, stone grey, soft gold (#4c7959, #8a8e86, #cfb36e). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d5571676-b54d-48d3-85f4-a95ea9643234.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six original illustrations and exported light/dark sheets. Broad Irish Atlantic cliffs, round tower, abbey ruins, thatched cottage, stone walls and small fields with recognisable sheep; coherent emerald/stone/gold light and soft rainbow. No shamrocks, harps, leprechauns, lettering, flags or faces. Card blanks and exported alpha clean; checks pass."
+    },
+    {
+      "id": "country_ie/onboarding_stage_v1",
+      "destinationId": "country_ie",
+      "label": "Ireland",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "IE"
+        ]
+      },
+      "geographicScope": "tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns)",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Ireland (country_ie). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ie/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_gb.webp"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5f429595-c35a-4ef7-b69f-9ccf5cc2801b.png",
+      "visuallyInspected": true,
+      "qaNotes": "Inspected still: dimensional cardstock Irish cliffs, round stone tower and abbey arch, thatched cottage, small walled fields and recognisable sheep. Soft rainbow below headline sky; central upper27% quiet teal, cream floor65%, right foreground unblocked. No lettering, flags, faces, props or UK telephone box from sibling.",
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_ie/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_ie.png",
+      "sha256": "379e7195355f322446a5207a5af398294bc00441710639a8b8229a441bf1a061",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "country_ie/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Ireland. Scene: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Light: warm low golden sun. Stripe and tag: emerald, stone grey, soft gold (#4c7959, #8a8e86, #cfb36e). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-93469407-20db-40f5-b06d-0885f8883cad.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six original illustrations and exported light/dark sheets. Broad Irish Atlantic cliffs, round tower, abbey ruins, thatched cottage, stone walls and small fields with recognisable sheep; coherent emerald/stone/gold light and soft rainbow. No shamrocks, harps, leprechauns, lettering, flags or faces. Card blanks and exported alpha clean; checks pass."
+    },
+    {
+      "id": "country_ie/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Ireland. Scene: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Light: warm low golden sun. Stripe and tag: emerald, stone grey, soft gold (#4c7959, #8a8e86, #cfb36e). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-dcab1848-dc96-408f-906b-1e2ad6cf73f2.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six original illustrations and exported light/dark sheets. Broad Irish Atlantic cliffs, round tower, abbey ruins, thatched cottage, stone walls and small fields with recognisable sheep; coherent emerald/stone/gold light and soft rainbow. No shamrocks, harps, leprechauns, lettering, flags or faces. Card blanks and exported alpha clean; checks pass."
+    },
+    {
+      "id": "country_ie/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Ireland. Scene: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Light: warm low golden sun. Stripe and tag: emerald, stone grey, soft gold (#4c7959, #8a8e86, #cfb36e). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-dcff6411-d76f-4b82-8281-808a2e544079.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six original illustrations and exported light/dark sheets. Broad Irish Atlantic cliffs, round tower, abbey ruins, thatched cottage, stone walls and small fields with recognisable sheep; coherent emerald/stone/gold light and soft rainbow. No shamrocks, harps, leprechauns, lettering, flags or faces. Card blanks and exported alpha clean; checks pass."
+    },
+    {
+      "id": "country_ma/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Morocco. Scene: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Light: warm low golden sun. Stripe and tag: rose red, indigo blue, saffron (#bd665a, #3e5277, #d2a04f). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-66ad671d-c2f3-4b69-9c1a-a6915185ae05.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six originals and final light/dark sheets. Coherent rose medina, tall square minaret, abstract geometric keyhole doorway, palms, sunset dunes, recognisable camel silhouettes and coloured spice mounds. No Arabic/pseudo-script on tiles, pots, textiles or minaret; no flags, logos or real faces. Protected card blanks and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_ma/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Morocco. Scene: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Light: warm low golden sun. Stripe and tag: rose red, indigo blue, saffron (#bd665a, #3e5277, #d2a04f). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-bbfdcfba-8694-4e43-a0f1-f3f92aefcef2.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six originals and final light/dark sheets. Coherent rose medina, tall square minaret, abstract geometric keyhole doorway, palms, sunset dunes, recognisable camel silhouettes and coloured spice mounds. No Arabic/pseudo-script on tiles, pots, textiles or minaret; no flags, logos or real faces. Protected card blanks and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_ma/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Morocco. Scene: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Light: warm low golden sun. Stripe and tag: rose red, indigo blue, saffron (#bd665a, #3e5277, #d2a04f). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-4e3f40e0-26ce-4d63-9d31-33fb47dd47a3.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six originals and final light/dark sheets. Coherent rose medina, tall square minaret, abstract geometric keyhole doorway, palms, sunset dunes, recognisable camel silhouettes and coloured spice mounds. No Arabic/pseudo-script on tiles, pots, textiles or minaret; no flags, logos or real faces. Protected card blanks and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_ma/onboarding_stage_v1",
+      "destinationId": "country_ma",
+      "label": "Morocco",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "MA"
+        ]
+      },
+      "geographicScope": "a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern)",
+      "prompt": "Use case: precise-object-edit. Keep this entire Morocco folded-cardstock stage unchanged except for one layout correction: SHORTEN the square minaret by about20% so its highest finial is at y560px or lower on the851x1848canvas, safely below30%height. Currently the finial at y450 intrudes in the live headline area. Preserve its base and location; rebuild the top lower, with authentic square tower proportions and geometric arched windows. Fill vacated space with neighbouring plain teal paper sky. Keep palms at peripheral left, medina, keyhole doorway, tile geometry, spices, dunes and camel silhouettes, warm light, theatre wings, camera and completely clear cream floor starting65% exactly the same. No writing, pseudo-script, letters, numbers, flags, faces, UI, folio, characters or newprops. One opaque portrait851x1848PNG.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-de561a4f-d8f0-4d3b-8857-4c68ed5b4e4e.png"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-59d242c5-2f58-448a-ac61-1cfb3ae727dd.png",
+      "attempts": [
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-de561a4f-d8f0-4d3b-8857-4c68ed5b4e4e.png",
+          "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Morocco (country_ma). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ma/countdown_postcard.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_tr.webp"
+          ],
+          "status": "rejected",
+          "rejection": "Square minaret finial intruded in central headline sky."
+        }
+      ],
+      "visuallyInspected": true,
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ma/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_tr.webp"
+      ],
+      "qaNotes": "Inspected corrected still: central minaret shortened below30%height, quiet teal headline centre, peripheral palms match theatre family. Rich cardstock medina, geometric keyhole doorway, spices, sunset dunes and recognisable camel silhouettes. Cream floor65%, right foreground clear. No script, lettering, logos, flags, faces, UI or travel props; Turkish balloon/sea scenery replaced.",
+      "originalDimensions": [
+        851,
+        1847
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_ma/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_ma.png",
+      "sha256": "7da4997ff5f14d0f45be31bdb9129572bf03c08acf06e9592a9eaad5653a2cd6",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "country_ma/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Morocco. Scene: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Light: warm low golden sun. Stripe and tag: rose red, indigo blue, saffron (#bd665a, #3e5277, #d2a04f). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d412e99f-cf48-4dca-908e-53b751c164e3.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six originals and final light/dark sheets. Coherent rose medina, tall square minaret, abstract geometric keyhole doorway, palms, sunset dunes, recognisable camel silhouettes and coloured spice mounds. No Arabic/pseudo-script on tiles, pots, textiles or minaret; no flags, logos or real faces. Protected card blanks and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_ma/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Morocco. Scene: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Light: warm low golden sun. Stripe and tag: rose red, indigo blue, saffron (#bd665a, #3e5277, #d2a04f). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-f7a82752-0dc8-4c7f-9179-94f0486149d0.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six originals and final light/dark sheets. Coherent rose medina, tall square minaret, abstract geometric keyhole doorway, palms, sunset dunes, recognisable camel silhouettes and coloured spice mounds. No Arabic/pseudo-script on tiles, pots, textiles or minaret; no flags, logos or real faces. Protected card blanks and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_ma/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Morocco. Scene: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Light: warm low golden sun. Stripe and tag: rose red, indigo blue, saffron (#bd665a, #3e5277, #d2a04f). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-f6af54dd-3255-4091-91bd-9faa679a0603.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected all six originals and final light/dark sheets. Coherent rose medina, tall square minaret, abstract geometric keyhole doorway, palms, sunset dunes, recognisable camel silhouettes and coloured spice mounds. No Arabic/pseudo-script on tiles, pots, textiles or minaret; no flags, logos or real faces. Protected card blanks and transparent edges clean; all export checks pass."
+    },
+    {
+      "id": "country_vn/countdown_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Vietnam. Scene: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Light: warm low golden sun. Stripe and tag: jade green, lantern red, lotus pink (#36775f, #bf5748, #c58896). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 \u00d7 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-281f66ae-8bf4-4f4c-920d-8e03ff06bf87.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six source illustrations and both final light/dark sheets. Coherent jade/lantern red/lotus pink country montage of limestone bay, red-sailed junk, covered bridge, old-town lanterns, rice terraces and lotus; hats as plain shapes/tiny featureless silhouettes. No readable or decorative script, signs, logos, flags or real faces. Card protected areas clean; alpha, dimensions and blank stamp label pass."
+    },
+    {
+      "id": "country_vn/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Vietnam. Scene: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Light: warm low golden sun. Stripe and tag: jade green, lantern red, lotus pink (#36775f, #bf5748, #c58896). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 \u00d7 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this country scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-24652fa0-9c0a-4a5d-9338-d14678948ed8.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six source illustrations and both final light/dark sheets. Coherent jade/lantern red/lotus pink country montage of limestone bay, red-sailed junk, covered bridge, old-town lanterns, rice terraces and lotus; hats as plain shapes/tiny featureless silhouettes. No readable or decorative script, signs, logos, flags or real faces. Card protected areas clean; alpha, dimensions and blank stamp label pass."
+    },
+    {
+      "id": "country_vn/featured_ticket",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Vietnam. Scene: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Light: warm low golden sun. Stripe and tag: jade green, lantern red, lotus pink (#36775f, #bf5748, #c58896). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d27e12ed-1f7e-442a-ba8e-b038b679b0f7.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six source illustrations and both final light/dark sheets. Coherent jade/lantern red/lotus pink country montage of limestone bay, red-sailed junk, covered bridge, old-town lanterns, rice terraces and lotus; hats as plain shapes/tiny featureless silhouettes. No readable or decorative script, signs, logos, flags or real faces. Card protected areas clean; alpha, dimensions and blank stamp label pass."
+    },
+    {
+      "id": "country_vn/onboarding_stage_v1",
+      "destinationId": "country_vn",
+      "label": "Vietnam",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "VN"
+        ]
+      },
+      "geographicScope": "an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces)",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Vietnam (country_vn). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_vn/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_th.webp"
+      ],
+      "transparent_background": false,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d858c6fa-faed-41b8-add8-05bab164dc4e.png",
+      "visuallyInspected": true,
+      "qaNotes": "Inspected still: dimensional paper country scene from own postcard: limestone bay, red-sailed junk, lantern-hung yellow street, covered bridge, rice terraces, lotus and plain conical hats as scenery shapes. Quiet central upper27% teal, cream floor about65%, right foreground open. No lettering, flags, faces, folio, Travi, UI or Thai temple from sibling.",
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/country_vn/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_vn.png",
+      "sha256": "7f42037cb781f34e1e6694e067c047560cd306526c8b7e0abf98d15622b43bec",
+      "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "country_vn/reservation_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Vietnam. Scene: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Light: warm low golden sun. Stripe and tag: jade green, lantern red, lotus pink (#36775f, #bf5748, #c58896). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 \u00d7 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-7dc322d8-37ca-4dc7-8b19-2520231d66d5.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six source illustrations and both final light/dark sheets. Coherent jade/lantern red/lotus pink country montage of limestone bay, red-sailed junk, covered bridge, old-town lanterns, rice terraces and lotus; hats as plain shapes/tiny featureless silhouettes. No readable or decorative script, signs, logos, flags or real faces. Card protected areas clean; alpha, dimensions and blank stamp label pass."
+    },
+    {
+      "id": "country_vn/room_card",
+      "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed country scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Vietnam. Scene: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Light: warm low golden sun. Stripe and tag: jade green, lantern red, lotus pink (#36775f, #bf5748, #c58896). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 \u00d7 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. Country hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-748d6d66-4376-49b6-882f-1617482aa17c.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six source illustrations and both final light/dark sheets. Coherent jade/lantern red/lotus pink country montage of limestone bay, red-sailed junk, covered bridge, old-town lanterns, rice terraces and lotus; hats as plain shapes/tiny featureless silhouettes. No readable or decorative script, signs, logos, flags or real faces. Card protected areas clean; alpha, dimensions and blank stamp label pass."
+    },
+    {
+      "id": "country_vn/trip_postcard",
+      "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Every tram/train destination board and front oval/badge is a COMPLETELY SOLID BLANK PANEL: no monogram, emblem, oval outline, route label, letter-like scratches or painted symbol. Windows empty dark glass. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Even for San Francisco, remove original desert mesas, cactus, snowy peaks and road-trip scenery; retain only this place's specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Vietnam. Scene: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Light: warm low golden sun. Stripe and tag: jade green, lantern red, lotus pink (#36775f, #bf5748, #c58896). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 \u00d7 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-583811cf-faa3-4c19-a095-9c2cb34b623e.png",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected six source illustrations and both final light/dark sheets. Coherent jade/lantern red/lotus pink country montage of limestone bay, red-sailed junk, covered bridge, old-town lanterns, rice terraces and lotus; hats as plain shapes/tiny featureless silhouettes. No readable or decorative script, signs, logos, flags or real faces. Card protected areas clean; alpha, dimensions and blank stamp label pass."
+    }
+  ]
+}

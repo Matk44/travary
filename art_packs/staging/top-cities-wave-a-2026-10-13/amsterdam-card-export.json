@@ -1,0 +1,68 @@
+[
+  {
+    "place": "amsterdam",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/amsterdam-featured_ticket.png",
+    "palette": [
+      [
+        26,
+        66,
+        75
+      ],
+      [
+        195,
+        98,
+        75
+      ],
+      [
+        211,
+        164,
+        74
+      ]
+    ]
+  },
+  {
+    "place": "amsterdam",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/amsterdam-room_card.png",
+    "palette": [
+      [
+        26,
+        66,
+        75
+      ],
+      [
+        195,
+        98,
+        75
+      ],
+      [
+        211,
+        164,
+        74
+      ]
+    ]
+  },
+  {
+    "place": "amsterdam",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/amsterdam-reservation_card.png",
+    "palette": [
+      [
+        26,
+        66,
+        75
+      ],
+      [
+        195,
+        98,
+        75
+      ],
+      [
+        211,
+        164,
+        74
+      ]
+    ]
+  }
+]

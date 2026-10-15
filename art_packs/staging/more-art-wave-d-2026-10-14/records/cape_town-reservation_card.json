@@ -1,0 +1,14 @@
+{
+  "id": "cape_town/reservation_card",
+  "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed city scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Cape Town. Scene: a flat-topped mountain under a tablecloth of cloud, a cable car, a street of brightly painted hillside houses, penguins on a granite beach, proteas, a Cape Dutch gable. Light: warm low golden sun; coherent golden hour. Stripe and tag: ocean blue, protea pink, sunlit gold (#2b6685, #c67888, #d5ae58). Keep all six pictures coherent in light, palette and landmarks.\nOne finished reservation card 1983 × 793 PNG, genuine transparency outside. Preserve original outline, rounded corners, contact shadow, exact cord and brass eyelet, tag shape and position. Small compact scene confined to far-right framed illustration x1423..1950,y165..713. Large middle ivory paper area COMPLETELY blank. Recolour thin existing separator and tag to the place palette. Tag plain solid first palette colour, no original flag, no stars, stripes, text or printing. Keep grommet/cord intact.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-ad38c580-75d3-4f18-bbef-3fd6819f183e.png",
+  "visuallyInspected": true,
+  "qaNotes": "Table Mountain/tablecloth cloud, cable car, bright hillside houses, Cape Dutch gable, granite beach/penguins and proteas consistent; no type/flags/faces. Light/dark final sheets inspected; all template checks pass; all three card speckle counts 0.",
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/cape_town-reservation_card.png"
+}

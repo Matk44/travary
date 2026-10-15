@@ -1,0 +1,68 @@
+[
+  {
+    "place": "san_francisco",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/san_francisco-featured_ticket.png",
+    "palette": [
+      [
+        196,
+        91,
+        67
+      ],
+      [
+        127,
+        152,
+        167
+      ],
+      [
+        60,
+        126,
+        121
+      ]
+    ]
+  },
+  {
+    "place": "san_francisco",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/san_francisco-room_card.png",
+    "palette": [
+      [
+        196,
+        91,
+        67
+      ],
+      [
+        127,
+        152,
+        167
+      ],
+      [
+        60,
+        126,
+        121
+      ]
+    ]
+  },
+  {
+    "place": "san_francisco",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/san_francisco-reservation_card.png",
+    "palette": [
+      [
+        196,
+        91,
+        67
+      ],
+      [
+        127,
+        152,
+        167
+      ],
+      [
+        60,
+        126,
+        121
+      ]
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["ZA"],
+    "cities": ["cape_town"]
+  },
+  "minAppBuild": 1
+}

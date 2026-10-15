@@ -1,0 +1,18 @@
+{
+  "id": "vancouver/featured_ticket",
+  "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed city scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Vancouver. Scene: glass towers on a harbour backed by snowy mountains, a seaplane, a white sail-roofed waterfront pavilion, the seawall and tall cedars, a ferry, autumn colour. Light: warm low golden sun; coherent golden hour. Stripe and tag: spruce green, ocean teal, maple red (#365e4f, #327982, #bd5f4d). Keep all six pictures coherent in light, palette and landmarks.\nOne finished featured ticket 1774 × 887 PNG, genuine transparency outside. Preserve original canvas, outline, notches, perforation, contact shadow, barcode stub and stripe pattern geometry. LEFT 42% plain navy at ALL heights, no scenic ink, silhouettes, flowers or grain speckles there. Scenery flows toward barcode in right picture panel, feathering from x746; full scene confined to x746..1360, y108..789. Recolour only original thin stripe to the three specified ink colours.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-7a99953c-b2eb-438a-9ce9-e4f0fe03b475.png",
+  "visuallyInspected": true,
+  "qaNotes": "White sail-roofed waterfront pavilion, glass harbour skyline, snowy mountains, seaplane, ferry, cedar seawall and autumn colour coherent. Observation deck on rectangular tower reads as Vancouver Harbour Centre, checked against the official site; not Seattle Space Needle. Original stripe geometry restored by approved compositor. No type/flags/faces; final light/dark sheets inspected; all three card speckle counts 0.",
+  "qaReferenceUrls": [
+    "https://vancouverlookout.com/about/",
+    "https://harbourcentre.com/about/"
+  ],
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/vancouver-featured_ticket.png"
+}

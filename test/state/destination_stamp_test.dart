@@ -134,6 +134,92 @@ void main() {
     expect(await stampFor(lakes, [countryGb, britain]), ('region_gb_lake_district', 'Lake District'));
   });
 
+  test('the packs drawn since give every kind of place its stamp', () async {
+    final packs = [
+      for (final id in [
+        'city_jp_tokyo',
+        'country_jp',
+        'country_at',
+        'city_us_san_francisco',
+        'region_us_california',
+        'country_us',
+        'country_hk',
+        'country_gb',
+      ])
+        sourcePack(id),
+    ];
+    TripVisualProfile at({
+      required String country,
+      required String name,
+      String? region,
+      String? regionName,
+      String? city,
+      String? cityName,
+    }) => place(
+      ExperienceTheme.urbanHeritage,
+      country: country,
+      countryName: name,
+      region: region,
+      regionName: regionName,
+      city: city,
+      cityName: cityName,
+    );
+    // A city with its own pack, then a place in its country that has none.
+    expect(await stampFor(at(country: 'JP', name: 'Japan', region: 'kanto', city: 'tokyo', cityName: 'Tokyo'), packs), (
+      'city_jp_tokyo',
+      'Tokyo',
+    ));
+    expect(await stampFor(at(country: 'JP', name: 'Japan', city: 'nara', cityName: 'Nara'), packs), (
+      'country_jp',
+      'Japan',
+    ));
+    // A whole country, and a place in a country with only a country pack.
+    expect(await stampFor(at(country: 'AT', name: 'Austria'), packs), ('country_at', 'Austria'));
+    expect(await stampFor(at(country: 'AT', name: 'Austria', city: 'vienna', cityName: 'Vienna'), packs), (
+      'country_at',
+      'Austria',
+    ));
+    expect(await stampFor(at(country: 'HK', name: 'Hong Kong'), packs), ('country_hk', 'Hong Kong'));
+    expect(await stampFor(at(country: 'GB', name: 'United Kingdom', city: 'cardiff', cityName: 'Cardiff'), packs), (
+      'country_gb',
+      'United Kingdom',
+    ));
+    // The United States: the city's pack, else the region's, else the country's.
+    expect(
+      await stampFor(
+        at(
+          country: 'US',
+          name: 'United States',
+          region: 'california',
+          city: 'san_francisco',
+          cityName: 'San Francisco',
+        ),
+        packs,
+      ),
+      ('city_us_san_francisco', 'San Francisco'),
+    );
+    expect(
+      await stampFor(
+        at(
+          country: 'US',
+          name: 'United States',
+          region: 'california',
+          regionName: 'California',
+          city: 'san_diego',
+          cityName: 'San Diego',
+        ),
+        packs,
+      ),
+      ('region_us_california', 'California'),
+    );
+    expect(await stampFor(at(country: 'US', name: 'United States', region: 'texas'), packs), (
+      'country_us',
+      'United States',
+    ));
+    // Still never another country's.
+    expect(await stampFor(at(country: 'IT', name: 'Italy', city: 'rome', cityName: 'Rome'), packs), isNull);
+  });
+
   test('never another place\'s stamp', () async {
     // Another city in a country that only has a city pack.
     final miami = place(

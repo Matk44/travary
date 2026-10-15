@@ -1,0 +1,9 @@
+{
+  "id": "dubai/reservation_card",
+  "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, finished Travary card. Preserve exact canvas, card position, silhouette, corners, notches, perforations, shadow, paper, barcode stub, cord, eyelet and tag geometry. Only printed scenery changes; existing stripe/tag may be recoloured keeping pattern geometry.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Dubai. Scene: a balanced needle-like tower skyline, desert dunes at its edge, a wooden dhow on the creek and a sail-shaped hotel silhouette within the skyline. Light: warm golden sunset. Palette: navy, creek teal, sand cream, muted gold and coral.\nReservation card exactly 1983 × 793 PNG. Change only right picture x=1423..1950,y=165..713 to compact city view. Middle ivory completely blank. Tag blank dark teal textured paper, no flag, stars, stripes or printing. Exact original cord, eyelet, tag shape and shadow.\nOne finished card, genuinely transparent outside. Remove all original American landmarks. Absolutely no flags or writing on buildings, vehicles, boats or bridges.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-f9cbd3f5-f8dc-4cf0-a843-c14c350a7a7b.png"
+}

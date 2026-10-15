@@ -1,0 +1,51 @@
+{
+  "id": "antalya/onboarding_stage_v1",
+  "destinationId": "city_tr_antalya",
+  "status": "review_ready",
+  "prompt": "Use case: style-transfer\nAsset type: Travary Antalya onboarding scenery still, city_tr_antalya, Turkey.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Antalya postcard, geographic content/palette reference, discard its border. Input 3: Istanbul sibling stage, same family and richness, NOT its landmarks.\nCreate ONE new opaque portrait 851 × 1848 PNG. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, layered depth, warm apricot late-afternoon physical light. Antalya's old stone harbour and terracotta-roofed walls, one fluted Yivli-style minaret, limestone cliffs over turquoise sea, Taurus mountain ridges, palms and small unmarked sailboats. Symbolic Antalya composition; no Istanbul domes or bridges, no Bali temples, terraces or volcano. Broad harbour to right, buildings stronger on left.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% completely quiet petrol-teal paper sky through centre; ALL landmarks below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi; background water may continue.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, pseudo-script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. One full uncropped opaque still; exact same very tall aspect as reference.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/antalya/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_tr_istanbul.webp"
+  ],
+  "transparent_background": false,
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-faec5880-5696-4fa0-8e83-1d28f6aa4ae6.png",
+  "label": "Antalya",
+  "scope": "city",
+  "selectors": {
+    "countryCodes": [
+      "TR"
+    ],
+    "cities": [
+      "antalya"
+    ]
+  },
+  "geographicScope": "Antalya old harbour, Yivli-style fluted minaret, cliffs, turquoise sea and Taurus mountains",
+  "visuallyInspected": true,
+  "qaNotes": {
+    "paperStyle": "passed",
+    "centralHeadlineSpace": "passed; central upper 27% quiet, peripheral palm/minaret",
+    "creamFloor": "passed; boundary approximately 65%",
+    "traviClearance": "passed visually; open water at right",
+    "noBakedPropsOrType": "passed",
+    "ownerApproval": "pending"
+  },
+  "originalDimensions": [
+    851,
+    1847
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/city_tr_antalya/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/city_tr_antalya.png",
+  "sha256": "6aef9c6e0d4fe838f3cc08a47131f3352ae99d2e814736b38a16d7b036b3cf78",
+  "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false
+}

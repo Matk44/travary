@@ -1,0 +1,68 @@
+[
+  {
+    "place": "cape_town",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/cape_town-featured_ticket.png",
+    "palette": [
+      [
+        43,
+        102,
+        133
+      ],
+      [
+        198,
+        120,
+        136
+      ],
+      [
+        213,
+        174,
+        88
+      ]
+    ]
+  },
+  {
+    "place": "cape_town",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/cape_town-room_card.png",
+    "palette": [
+      [
+        43,
+        102,
+        133
+      ],
+      [
+        198,
+        120,
+        136
+      ],
+      [
+        213,
+        174,
+        88
+      ]
+    ]
+  },
+  {
+    "place": "cape_town",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/cape_town-reservation_card.png",
+    "palette": [
+      [
+        43,
+        102,
+        133
+      ],
+      [
+        198,
+        120,
+        136
+      ],
+      [
+        213,
+        174,
+        88
+      ]
+    ]
+  }
+]

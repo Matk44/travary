@@ -1,0 +1,68 @@
+[
+  {
+    "place": "taipei",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/taipei-featured_ticket.png",
+    "palette": [
+      [
+        25,
+        65,
+        73
+      ],
+      [
+        199,
+        92,
+        66
+      ],
+      [
+        212,
+        164,
+        65
+      ]
+    ]
+  },
+  {
+    "place": "taipei",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/taipei-room_card.png",
+    "palette": [
+      [
+        25,
+        65,
+        73
+      ],
+      [
+        199,
+        92,
+        66
+      ],
+      [
+        212,
+        164,
+        65
+      ]
+    ]
+  },
+  {
+    "place": "taipei",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/taipei-reservation_card.png",
+    "palette": [
+      [
+        25,
+        65,
+        73
+      ],
+      [
+        199,
+        92,
+        66
+      ],
+      [
+        212,
+        164,
+        65
+      ]
+    ]
+  }
+]

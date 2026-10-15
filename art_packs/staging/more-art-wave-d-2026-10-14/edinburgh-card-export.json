@@ -1,0 +1,68 @@
+[
+  {
+    "place": "edinburgh",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/edinburgh-featured_ticket.png",
+    "palette": [
+      [
+        82,
+        103,
+        121
+      ],
+      [
+        133,
+        109,
+        152
+      ],
+      [
+        203,
+        161,
+        93
+      ]
+    ]
+  },
+  {
+    "place": "edinburgh",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/edinburgh-room_card.png",
+    "palette": [
+      [
+        82,
+        103,
+        121
+      ],
+      [
+        133,
+        109,
+        152
+      ],
+      [
+        203,
+        161,
+        93
+      ]
+    ]
+  },
+  {
+    "place": "edinburgh",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/edinburgh-reservation_card.png",
+    "palette": [
+      [
+        82,
+        103,
+        121
+      ],
+      [
+        133,
+        109,
+        152
+      ],
+      [
+        203,
+        161,
+        93
+      ]
+    ]
+  }
+]

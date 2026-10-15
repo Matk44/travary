@@ -1,0 +1,10 @@
+{
+  "id": "dubai/countdown_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1: paper-object/style reference only; replace Paris with the new city. Input image 2: supporting city-scene reference; do not copy ticket layout.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Dubai. Scene: a balanced needle-like tower skyline, desert dunes at its edge, a wooden dhow on the creek and a sail-shaped hotel silhouette within the skyline. Light: warm golden sunset. Palette: navy, creek teal, sand cream, muted gold and coral. Same light, landmarks and palette as supporting city card. Absolutely no flags, flagpoles, lettering or vehicle/boat markings.\nOne upright vintage postcard exactly 1122 × 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight on with true alpha outside. Main city subjects in LEFT and lower two-thirds; upper-right quarter quiet open sky. No tags, postmarks, stamps or UI.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png",
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-076fe16f-abae-449a-b57b-592970a8be80.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-fa790e6a-3b8b-4994-87b8-414a564b9f32.png"
+}

@@ -1,0 +1,104 @@
+{
+  "city": "Croatia",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/country_hr/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "9e978b3fca0a11346f125ae961d10103dff87a776bb92e1f29bb5ed05b26c938",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/country_hr/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "222abc7f3aab8a596a3b4f59a5ef65e378735bbabe842c1bd1e01269803649c0",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0
+    },
+    {
+      "file": "art_packs/staging/country_hr/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "bde9d8c56917ffa3bdafd1d820162395afcee753800970952a57f0a4c2819f78",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/country_hr/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "cbdcdeddc66ae2b1030cb3ea12d338cee457e33ad2cf80ea18b8d61f812e3e83"
+    },
+    {
+      "file": "art_packs/staging/country_hr/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "415c6bd8ab1d6fe2744420add2cc1936b3e45de24935110ceb9b6f506bb81544"
+    },
+    {
+      "file": "art_packs/staging/country_hr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "46025af423fe98d89a098f4c2096b1198d80997e6ac37b4e038fb9ed461d65b2",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

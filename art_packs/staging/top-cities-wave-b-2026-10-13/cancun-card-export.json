@@ -1,0 +1,68 @@
+[
+  {
+    "place": "cancun",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/cancun-featured_ticket.png",
+    "palette": [
+      [
+        26,
+        70,
+        78
+      ],
+      [
+        205,
+        112,
+        79
+      ],
+      [
+        218,
+        177,
+        80
+      ]
+    ]
+  },
+  {
+    "place": "cancun",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/cancun-room_card.png",
+    "palette": [
+      [
+        26,
+        70,
+        78
+      ],
+      [
+        205,
+        112,
+        79
+      ],
+      [
+        218,
+        177,
+        80
+      ]
+    ]
+  },
+  {
+    "place": "cancun",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/cancun-reservation_card.png",
+    "palette": [
+      [
+        26,
+        70,
+        78
+      ],
+      [
+        205,
+        112,
+        79
+      ],
+      [
+        218,
+        177,
+        80
+      ]
+    ]
+  }
+]

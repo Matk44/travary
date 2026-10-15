@@ -161,3 +161,36 @@ Generate complete queues when the owner explicitly requests a batch, as authoriz
 - **6 October 2026:** Owner authorised proceeding. Integrated the existing shared assets and Bali/Kyoto exceptions into Flutter; setup, flight/manual/import review and actual saved-booking handoff are connected. Added the bundled country resolver and native guide. The 25-country image queue is unchanged; no new image or video generated, no onboarding art pack published.
 - **6 October 2026:** Created the next optional pass-desk scene: proud Travi pose, two blank pass shells and an approval composition with built-in imagegen. Retained exact prompts/references/source paths/hashes. Native prototype uses live offers, current saved holiday identity and explicit Back/free/restore outcomes. Artwork remains review ready, owner approval pending. Shared assets reuse country scenery; the 25-country queue is unchanged and no new film or onboarding art pack was published.
 - **6 October 2026:** Owner approved the full pass-desk composition and requested native fidelity instead of the compact adaptation. Generated a text-free atlas and shared foreground with exact prompt/source logs. Passes and localized prices now support RevenueCat offering data/metadata; offline Holiday default is $14.99 USD. Billing remains simulated. This adds no country-stage requirement: queue remains 25, with no new film or published onboarding pack. V1 remains historical; the v2 reference is the selected direction.
+
+<!-- more-art-wave-c-2026-10-14 -->
+
+## Additional destination stages — 14 October 2026 (Wave C)
+
+Four explicitly requested still stages are **review_ready**. Owner approval, native integration and publishing remain separate. The existing country baseline and earlier integrated city stages are unchanged.
+
+[Review gallery](../../art_packs/staging/more-art-wave-c-2026-10-14/index.html) · [Prompts, sources and checks](../../art_packs/staging/more-art-wave-c-2026-10-14/README.md)
+
+| Place | ID / scope | Master | Pixels | Status |
+|---|---|---|---|---|
+| Antalya | `city_tr_antalya` · city | [PNG](../../art_packs/pending/onboarding/city_tr_antalya/onboarding_stage_v1.png) | 851 × 1848 | integrated 14 Oct 2026 (bundled WebP); owner approval pending |
+| Milan | `city_it_milan` · city | [PNG](../../art_packs/pending/onboarding/city_it_milan/onboarding_stage_v1.png) | 851 × 1848 | integrated 14 Oct 2026 (bundled WebP); owner approval pending |
+| Phuket | `region_th_phuket` · region | [PNG](../../art_packs/pending/onboarding/region_th_phuket/onboarding_stage_v1.png) | 851 × 1848 | integrated 14 Oct 2026 (bundled WebP); owner approval pending |
+| Taipei | `city_tw_taipei` · city | [PNG](../../art_packs/pending/onboarding/city_tw_taipei/onboarding_stage_v1.png) | 851 × 1848 | integrated 14 Oct 2026 (bundled WebP); owner approval pending |
+
+<!-- more-art-wave-e1-2026-10-14 -->
+
+## Additional country baseline stages — 14 October 2026 (Wave E1)
+
+Seven broad country stages are **review_ready**, expanding the artwork baseline beyond the original 25 countries. Owner approval, native integration and publishing remain separate. Existing runtime coverage is unchanged by this artwork task.
+
+[Stage overview](../../art_packs/staging/more-art-wave-e1-2026-10-14/stages-overview.png) · [Prompt/source/check manifest](../../art_packs/staging/more-art-wave-e1-2026-10-14/stages-validation.json)
+
+| Country | ID | Master | Pixels | Status |
+|---|---|---|---|---|
+| Austria | `country_at` | [PNG](../../art_packs/pending/onboarding/country_at/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |
+| Croatia | `country_hr` | [PNG](../../art_packs/pending/onboarding/country_hr/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |
+| Ireland | `country_ie` | [PNG](../../art_packs/pending/onboarding/country_ie/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |
+| Vietnam | `country_vn` | [PNG](../../art_packs/pending/onboarding/country_vn/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |
+| Morocco | `country_ma` | [PNG](../../art_packs/pending/onboarding/country_ma/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |
+| Egypt | `country_eg` | [PNG](../../art_packs/pending/onboarding/country_eg/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |
+| Hungary | `country_hu` | [PNG](../../art_packs/pending/onboarding/country_hu/onboarding_stage_v1.png) | 851 × 1848 | integrated 15 Oct 2026 (bundled WebP); owner approval pending |

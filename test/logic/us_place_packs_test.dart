@@ -103,7 +103,7 @@ void main() {
     });
 
     test('the cities of California and Hawaii, San Francisco included', () {
-      for (final city in ['los_angeles', 'san_francisco', 'san_diego', 'anaheim', 'san_jose']) {
+      for (final city in ['los_angeles', 'san_diego', 'anaheim', 'san_jose']) {
         expect(
           packFor(trip(region: 'california', city: city)),
           'region_us_california',
@@ -120,6 +120,15 @@ void main() {
       expect(packFor(trip(region: 'arizona', city: 'phoenix')), 'region_us_arizona');
       expect(packFor(trip(region: 'arizona', city: 'sedona')), 'region_us_arizona');
       expect(packFor(trip(region: 'alaska', city: 'anchorage')), 'region_us_alaska');
+    });
+
+    test('San Francisco\'s own pack beats California\'s, which still serves the rest of the state', () {
+      expect(packFor(trip(region: 'california', city: 'san_francisco')), 'city_us_san_francisco');
+      expect(packsToDownload(trip(region: 'california', city: 'san_francisco'), all).map((pack) => pack.id), [
+        'city_us_san_francisco',
+        'country_us',
+      ]);
+      expect(packFor(trip(region: 'california', city: 'oakland')), 'region_us_california');
     });
 
     test('a city with a pack in a region with one gets the city\'s (Las Vegas is Nevada, not Arizona)', () {
@@ -184,6 +193,7 @@ void main() {
         'New Orleans': 'city_us_new_orleans',
         'Nashville': 'city_us_nashville',
         'Seattle': 'city_us_seattle',
+        'San Francisco': 'city_us_san_francisco',
         'Florida': 'region_us_florida',
         'California': 'region_us_california',
         'Hawaii': 'region_us_hawaii',
@@ -199,7 +209,6 @@ void main() {
       expect(packFor(chosen(place('Miami'))), 'region_us_florida');
       expect(packFor(chosen(place('Florida Keys'))), 'region_us_florida');
       expect(packFor(chosen(place('Los Angeles'))), 'region_us_california');
-      expect(packFor(chosen(place('San Francisco'))), 'region_us_california');
       expect(packFor(chosen(place('San Diego'))), 'region_us_california');
       expect(packFor(chosen(place('Anaheim'))), 'region_us_california');
       expect(packFor(chosen(place('Maui'))), 'region_us_hawaii');
@@ -231,6 +240,7 @@ const _cityPacks = {
   'new_orleans': 'city_us_new_orleans',
   'nashville': 'city_us_nashville',
   'seattle': 'city_us_seattle',
+  'san_francisco': 'city_us_san_francisco',
   'orlando': 'city_us_orlando',
 };
 

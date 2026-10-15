@@ -1,0 +1,16 @@
+{
+  "id": "country_eg/room_card-corrected",
+  "prompt": "Use case: precise-object-edit. Preserve this exact Travary Egypt card canvas, paper outline, alpha, shadow, stripe, scenery style, palette and golden light. Change ONLY pyramid count from four to EXACTLY THREE. Remove the far-right background pyramid whose peak is behind the palms to right of the largest pyramid (near x1365,y380). Fill its space with the existing sky and low dunes. Keep the other three peaks: small left, medium left, large centre. Nile felucca, papyrus-bud columns, plain stone temple and camel unchanged. Pure blank ivory left ofx700, no scenery/text/speckles there. No hieroglyphs, pseudo-script, letters, numerals, logos, flags or faces.1774x887PNG truealpha outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-0d65c8d2-bdab-4c7f-82a5-afa58cee52e9.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-afaa1229-c30e-48ba-a1da-2d3b47c3f30e.png",
+  "status": "review_ready",
+  "corrects": "country_eg/room_card",
+  "rejection": "Four pyramids rather than requested three.",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_eg-room_card-corrected.png",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected six selected illustrations, rejected two extra-pyramid originals, and inspected final light/dark exports. Exactly three pyramids per selected scene, white-sailed felucca, date palms, plain uninscribed papyrus-column temple, camel silhouette and turquoise water. Coherent gold/Nile turquoise/lapis palette; no hieroglyphs, script, flags, logos or real faces. Blanks, alpha, template details and export checks pass."
+}

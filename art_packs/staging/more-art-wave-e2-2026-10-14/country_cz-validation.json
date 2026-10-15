@@ -1,0 +1,104 @@
+{
+  "city": "Czechia",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/country_cz/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "6c1add942ba059e509c343c4f0471cabba8451630b2e17f1e8b11dd42ca902f8",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/country_cz/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "d1d59977f5287d447e51927fb43b16820e5acd8423a81f6a4e99efb3bb6a3fa2",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0
+    },
+    {
+      "file": "art_packs/staging/country_cz/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "14434315d60853a1be818354ff3ff2cc713bf598e17945085bfabe2c204e8fd6",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/country_cz/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "882330bb1fff01222454c4396729c79206ced6b92f9a9635508d83b0ce7295d2"
+    },
+    {
+      "file": "art_packs/staging/country_cz/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "31cb6bdf947aae86f594b44123c5212a859854494c8820762a85561eedd26eb2"
+    },
+    {
+      "file": "art_packs/staging/country_cz/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "416e1c82711148a117f1ce6f02de428804dfc0935c77b6875e7d6b4f92f55f4f",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

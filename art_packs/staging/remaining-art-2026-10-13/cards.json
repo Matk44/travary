@@ -1,0 +1,68 @@
+[
+  {
+    "place": "lake_district",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-46dab24e-1b79-4dc0-8a0a-9cc7ba56f9d3.png",
+    "palette": [
+      [
+        35,
+        61,
+        52
+      ],
+      [
+        115,
+        136,
+        83
+      ],
+      [
+        202,
+        161,
+        68
+      ]
+    ]
+  },
+  {
+    "place": "lake_district",
+    "role": "room_card",
+    "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-365fcbe6-6692-42ba-a576-45d85573382b.png",
+    "palette": [
+      [
+        35,
+        61,
+        52
+      ],
+      [
+        115,
+        136,
+        83
+      ],
+      [
+        202,
+        161,
+        68
+      ]
+    ]
+  },
+  {
+    "place": "lake_district",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-225c7058-f5db-482a-bd8e-593a16a5662a.png",
+    "palette": [
+      [
+        35,
+        61,
+        52
+      ],
+      [
+        115,
+        136,
+        83
+      ],
+      [
+        202,
+        161,
+        68
+      ]
+    ]
+  }
+]

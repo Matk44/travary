@@ -1,0 +1,68 @@
+[
+  {
+    "place": "queenstown",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/queenstown-featured_ticket.png",
+    "palette": [
+      [
+        47,
+        100,
+        132
+      ],
+      [
+        201,
+        162,
+        83
+      ],
+      [
+        67,
+        102,
+        87
+      ]
+    ]
+  },
+  {
+    "place": "queenstown",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/queenstown-room_card.png",
+    "palette": [
+      [
+        47,
+        100,
+        132
+      ],
+      [
+        201,
+        162,
+        83
+      ],
+      [
+        67,
+        102,
+        87
+      ]
+    ]
+  },
+  {
+    "place": "queenstown",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/queenstown-reservation_card.png",
+    "palette": [
+      [
+        47,
+        100,
+        132
+      ],
+      [
+        201,
+        162,
+        83
+      ],
+      [
+        67,
+        102,
+        87
+      ]
+    ]
+  }
+]

@@ -1,0 +1,101 @@
+{
+  "city": "Hong Kong",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/hong_kong/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "20d4fd4e92c66a38665630589ac15ddd057fa017b1ad883e762cefa850daa2f8",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/hong_kong/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "4c88680799f6626d0be9bb6f18298f473658e3e86ec0f2f3f55642e2f4d4a867",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/hong_kong/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "e1f50a9e0305b66ef224e6fac5e2b45cc8fb85f3c899c8306e435f77aa82318c",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/hong_kong/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "82669d9c3bb8dd654085e6db08acc36838bc0a0db4cc0ced6d9015e76e35a840"
+    },
+    {
+      "file": "art_packs/staging/hong_kong/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "f619c36136fd999c24608c9aa10b0dfb82bc1d3b5d6473e2eefd3e97f3222f11"
+    },
+    {
+      "file": "art_packs/staging/hong_kong/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "4aa1a9522ec879d9b3c36464ade6c65fb75faef431b67264c1269290840cddf6",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

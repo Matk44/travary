@@ -1,0 +1,10 @@
+{
+  "id": "seoul/countdown_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1: paper-object/style reference only; replace Paris with the new city. Input image 2: supporting city-scene reference; do not copy ticket layout.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Seoul. Scene: a palace gate with curved tiled roofs, Namsan tower on its wooded hill, hanok rooftops and autumn maples. Light: warm autumn late-afternoon light. Palette: navy, deep teal, maple coral, mustard gold, sage and warm ivory. Same light, landmarks and palette as supporting city card. Absolutely no flags, flagpoles, lettering or vehicle/boat markings.\nOne upright vintage postcard exactly 1122 × 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight on with true alpha outside. Main city subjects in LEFT and lower two-thirds; upper-right quarter quiet open sky. No tags, postmarks, stamps or UI.\nAll palace entrance beams are plain unmarked painted wood: NO inscription boards, signs, plaques, Hangul, Chinese characters or pseudo-lettering, even tiny. Omit signboards entirely.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png",
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-b32028b6-4dc2-4b48-9346-dee86f182b6d.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-d673ab35-fc08-4532-94e9-6766e45e979e.png"
+}

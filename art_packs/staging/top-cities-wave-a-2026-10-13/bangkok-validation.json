@@ -1,0 +1,101 @@
+{
+  "city": "Bangkok",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/bangkok/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "32eb2e56550ed7fe3fc863c432132f2843ccd8d023732ba4f3fb07d0da9587e4",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/bangkok/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "7909a693510e00e0d02602dc12a04008eb1a0291fc4f2c7288d99d07903af115",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/bangkok/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "56a402be22c26525459d690735383c4806e69f2ae7a8401de2d39c3c762b663d",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/bangkok/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "sha256": "a1c0515faf620a5a9ba28d412dbe474c48310234a99353eef5821b25f1258b5e"
+    },
+    {
+      "file": "art_packs/staging/bangkok/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "f8224cdf045313a10901621b89d09ecf9dacf4934ee629ace611d37c897f318f"
+    },
+    {
+      "file": "art_packs/staging/bangkok/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "23a55e4932ad4491705843ca4ddb0de20962668af0ac3c9f5074b5bdd0c3739d",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

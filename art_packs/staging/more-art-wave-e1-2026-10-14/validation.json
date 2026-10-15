@@ -1,0 +1,779 @@
+{
+  "date": "2026-10-14",
+  "wave": "E1",
+  "count": 42,
+  "status": "PASS",
+  "scope": "Exact PNG dimensions, RGBA8, embedded sRGB, real alpha, corner alpha, original card alpha/structure, barcode stubs, eyelets and empty stamp label bands. Subjects and text-free art reviewed visually.",
+  "cities": [
+    {
+      "city": "Austria",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_at/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "65ade68cf65cf36601819ddd5b7a39b55888df78896f88cce190551832867c8a",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_at/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e18d850072138d3d9985c6221867771fdb0abe72ae92737f8ec0db4f203bca87",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_at/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "79eddc0decbee61e3aa28f843cb9b52e23cf67a1990f9d501d8d48edf8f60abe",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_at/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "881922b039a2923c4a40bd88b313f0943a2af9e378e766d5145c2b26a7e72734",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_at/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "97fb44e74a36041bdfbfa1b29e35243a192d9a8b1d6d05746ecc750d1f8f846f",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_at/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "0062c76cf6a795106d59df2643a7d4b04cde369d6873e5c02094562154d5cccd",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Croatia",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_hr/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "9e978b3fca0a11346f125ae961d10103dff87a776bb92e1f29bb5ed05b26c938",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hr/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "222abc7f3aab8a596a3b4f59a5ef65e378735bbabe842c1bd1e01269803649c0",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hr/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "bde9d8c56917ffa3bdafd1d820162395afcee753800970952a57f0a4c2819f78",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hr/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "cbdcdeddc66ae2b1030cb3ea12d338cee457e33ad2cf80ea18b8d61f812e3e83",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hr/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "415c6bd8ab1d6fe2744420add2cc1936b3e45de24935110ceb9b6f506bb81544",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hr/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "46025af423fe98d89a098f4c2096b1198d80997e6ac37b4e038fb9ed461d65b2",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Ireland",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_ie/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "5c74eb937dd90fe75fff482c091893cfe224377ac459dbc29582bc84e929a94d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ie/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4d74aa136bc1797a3b548abb6143c0de26ec5adc3ef57e1c06f054b27c8cf369",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ie/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "c2eb3922bcadbe0a339b909faa20003855bdfefa30d9834af69066112a38368b",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ie/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "3766fa144b4afec620499d2749f5fdb691a7210709efac331d7ea85f1514aa7f",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ie/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "02abcd68690071641713d374124a72a6594482f3bb8a2e4a26cd83163b39351e",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ie/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "790fbf1b5e65cb3c8896cb4ef927c21d89908e79daf2a63fa27ac509bdfc6220",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Vietnam",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_vn/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4832a30d73418c3dbde0d93197697113509a40d0c99698e4bcc304b97306766d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_vn/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d1cf485276f9d7269b6a58c05d734479a279294aad33eb70da9bf4a2fc47c82e",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_vn/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "72e06f6025f31f08e83f9e64f73a64c4ae2ed883f22c82187cfd6da63283596f",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_vn/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "cea49536ac50674a8e3ac7d507f40e4210c2087924a2bad3864293a0d9e9f8e4",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_vn/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "0b8a08eee57fc4258026c5c4cc44623817c61dd1c2a386b0b5fc389b1a46d9ba",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_vn/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d09681363bb8847f6ba7b2ac0ecb5c6506a5ff9eae9560a7a20e690fc0c7eb7a",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Morocco",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_ma/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "6c904c315c562e61814974bc19b46a25c63304cab256b2720f02c5ccbb877ff6",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ma/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "491b49e6e0ebbd18e67d15fc8167140638fb2964f3399d2c288cd8d6d365a067",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ma/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "908b408e6484c7941847e8cd803854932899ef0bae8d7c19f590250f57df7fe3",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ma/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "fe82e3c47446e2f1534373e6823f9bc2880ad3c629939b81de734b993f33a049",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ma/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "e8aa12c5b1d4be0d2e4cc93a70204906b46713414367ca39114d543146c89668",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_ma/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "616ca8c3cd721f3ebb001e28624a6d3c8796002a564500e4bef593f6070577fb",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Egypt",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_eg/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "db80f71f0e5b6a784889d368efbc9274a06a913a1faf0400e4938b6d690f8591",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_eg/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d3f113131a1992215c4867915b6655344015b5df715df30e26cce0da699735cb",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_eg/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "d95f1221fa93457f552424b0b32025aa221d8ed069c096f1c15a6cbda8837c55",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_eg/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e5723393e4f86cf350ce2a8f33552bf85b841b06a6f355bcd78c988962efae56",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_eg/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "e29a04ac4045681169f7eb436b4989cdf3a9a630c254ffbb9a134eaf483a5a40",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_eg/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "183c09528042c852f80a562b8a7b98747594afc77030a142e5e58bde02e4e36b",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Hungary",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/country_hu/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "317e426d4683d77407c277e9ce4a81cbd4dc271df87c16b171006fc9c559550f",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hu/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "b7567502e0c631cc1f9b092883e4522ea1005de2c70e8134bd172e26debf930b",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hu/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "c8e52ac7cba90af02bd62d018b21b52aa4f592a216549950b3eeae3d09251822",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hu/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "2a1a7a00eb9966b7e758fe4943c69ec1025dfc9cc42a620c0f68edc8817d1148",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hu/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "f93d5a1172b88c9af61e74e9c807845609a45a845346a4b644e0c3f8214c0de7",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/country_hu/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "cd4f4c85e3f436c15326809d16de8b15c3fbdaab6aa6a94bb97ab824ce6aefd2",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    }
+  ]
+}

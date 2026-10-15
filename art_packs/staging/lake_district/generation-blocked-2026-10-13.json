@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-13",
+  "mode": "built-in image_gen",
+  "status": "rejected — batch stopped at item 1a",
+  "brief": "docs/art_requests/GPT_REMAINING_ART_2026-10-12.md",
+  "template": "art_packs/prompts/city_card_references/featured_ticket.png",
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-46dab24e-1b79-4dc0-8a0a-9cc7ba56f9d3.png",
+  "draft": "art_packs/staging/lake_district/featured_ticket-draft-rejected-2026-10-13.png",
+  "prompt": "Use case: precise-object-edit\nAsset type: finished Travary featured ticket PNG, exactly 1774 × 887 pixels with true transparent background.\nInput image 1: EDIT TARGET, the finished card template. Preserve its exact canvas, position, silhouette, corner notches, perforation, bevels, shadow, paper grain, ivory barcode stub and barcode. Do not redesign any part of the shell.\nPrimary request: replace only the illustrated American landscape with England's Lake District: layered rounded green fells behind a still lake, a small wooden rowing boat, slate cottages, a dry-stone wall and a few tiny Herdwick sheep. Soft English late-afternoon light. No US scenery survives.\nStyle: template's mid-century travel-poster screen print, flat layered shapes, fine paper grain, navy, deep teal, muted sage, warm cream and restrained gold. Not photographic.\nComposition: entire LEFT 42% of the canvas remains plain blank navy paper for live text at all heights. Landscape flows softly out of this navy into the right-hand illustrated area, ending precisely at the existing perforation beside the barcode stub. No scenery in the blank left text zone. Change only this printed picture. Existing narrow decorative stripe may be recoloured sage and gold while keeping every shape and position identical. Preserve exact exterior alpha and all original shell details.\nNo words, letters, numbers, signage, flags, logos, watermark, recognisable attraction or faces anywhere. The existing non-text barcode is retained.\nReturn one finished card only; no sheet, no presentation background. Exact 1774 × 887 canvas.",
+  "validation": {
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_changed_pixels": 446935,
+    "barcode_stub_changed_pixels": 127847,
+    "visual_failure": "Landscape extends into the left 42% reserved blank text zone.",
+    "disposition": "Not a completed deliverable. No app assets modified or packs published."
+  }
+}

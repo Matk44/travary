@@ -1,0 +1,68 @@
+[
+  {
+    "place": "seoul",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/seoul-featured_ticket.png",
+    "palette": [
+      [
+        25,
+        63,
+        73
+      ],
+      [
+        199,
+        96,
+        67
+      ],
+      [
+        212,
+        162,
+        60
+      ]
+    ]
+  },
+  {
+    "place": "seoul",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/seoul-room_card.png",
+    "palette": [
+      [
+        25,
+        63,
+        73
+      ],
+      [
+        199,
+        96,
+        67
+      ],
+      [
+        212,
+        162,
+        60
+      ]
+    ]
+  },
+  {
+    "place": "seoul",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/seoul-reservation_card.png",
+    "palette": [
+      [
+        25,
+        63,
+        73
+      ],
+      [
+        199,
+        96,
+        67
+      ],
+      [
+        212,
+        162,
+        60
+      ]
+    ]
+  }
+]

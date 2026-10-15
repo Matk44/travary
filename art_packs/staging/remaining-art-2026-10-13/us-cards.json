@@ -1,0 +1,68 @@
+[
+  {
+    "place": "united_states",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-3ee6c1f6-70f0-4d63-a079-37a990c54c87.png",
+    "palette": [
+      [
+        10,
+        54,
+        76
+      ],
+      [
+        205,
+        72,
+        46
+      ],
+      [
+        219,
+        151,
+        39
+      ]
+    ]
+  },
+  {
+    "place": "united_states",
+    "role": "room_card",
+    "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-b67e6004-1374-4187-a553-08d702a17dc4.png",
+    "palette": [
+      [
+        10,
+        54,
+        76
+      ],
+      [
+        205,
+        72,
+        46
+      ],
+      [
+        219,
+        151,
+        39
+      ]
+    ]
+  },
+  {
+    "place": "united_states",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-67ad0ad1-38a9-474f-9caa-44e98d5928fa.png",
+    "palette": [
+      [
+        10,
+        54,
+        76
+      ],
+      [
+        205,
+        72,
+        46
+      ],
+      [
+        219,
+        151,
+        39
+      ]
+    ]
+  }
+]

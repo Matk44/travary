@@ -1,0 +1,104 @@
+{
+  "city": "Vietnam",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/country_vn/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "4832a30d73418c3dbde0d93197697113509a40d0c99698e4bcc304b97306766d",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/country_vn/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "d1cf485276f9d7269b6a58c05d734479a279294aad33eb70da9bf4a2fc47c82e",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0
+    },
+    {
+      "file": "art_packs/staging/country_vn/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "72e06f6025f31f08e83f9e64f73a64c4ae2ed883f22c82187cfd6da63283596f",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/country_vn/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "cea49536ac50674a8e3ac7d507f40e4210c2087924a2bad3864293a0d9e9f8e4"
+    },
+    {
+      "file": "art_packs/staging/country_vn/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "0b8a08eee57fc4258026c5c4cc44623817c61dd1c2a386b0b5fc389b1a46d9ba"
+    },
+    {
+      "file": "art_packs/staging/country_vn/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "d09681363bb8847f6ba7b2ac0ecb5c6506a5ff9eae9560a7a20e690fc0c7eb7a",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

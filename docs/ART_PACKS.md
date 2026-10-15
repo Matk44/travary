@@ -81,7 +81,7 @@ from folder names):
   `documents_cancel_lines` (1536 × 384, both one-colour ink), the
   Documents heading's `documents_destination_stamp` (1024 × 1280,
   destination packs; see below), the interface surfaces
-  `linen`, `leather`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`,
+  `linen`, `tab`, `tab_selected`, `tab_add`, `pill` and `stamp`,
   and the countdown to the next trip (Today between trips):
   `countdown_postcard` (1122 × 1402, destination packs; see below),
   `trip_postcard` (1536 × 1024, its landscape companion on the Trips tab),
@@ -114,7 +114,7 @@ tagged cards with the destination printed on, booking scenes and
 vignettes, trip-cover stickers and look emblems, the countdown and Trips
 postcards, and the palette.
 Everything universal stays bundled and is never duplicated per country:
-navigation, kind, weather and timeline icons; linen, leather, tabs, pill
+navigation, kind, weather and timeline icons; linen, tabs, pill
 and stamp; the windowed boarding pass, restaurant and travel tickets
 (their windows already show the destination's scenes); note paper and the
 key tag. A pack may still override any of these by name, in the same
@@ -141,12 +141,13 @@ palette) beside its three new shells, so a New York trip never loses the US
 postcard or colours even before `country_us` (now downloaded beside it, to
 fall back on) arrives. Orlando's
 city pack outranks Florida's; every other Florida city (Miami, Tampa, the
-Keys) gets Florida's, every California city (San Francisco included) gets
-California's, and a US place with neither (Texas, Austin, Denver) stays on
-the country's cards. A verified or traveller-chosen place is needed, as
+Keys) gets Florida's, every California city but San Francisco (which has
+its own pack, `city_us_san_francisco`: see below) gets California's, and a
+US place with neither (Texas, Austin, Denver) stays on the country's
+cards. A verified or traveller-chosen place is needed, as
 everywhere (`test/logic/us_place_packs_test.dart` pins every case, for the
-classifier's places and for "Where to?"). Only Orlando has a Documents
-stamp.
+classifier's places and for "Where to?"). Every one of them has a
+Documents stamp too (the 13 drawn on 14 October 2026 are their packs' v2).
 
 Adding a place: put its three PNGs in a new `art_packs/sources/<pack-id>/common/`
 with `country_us`'s postcards, a `pack.json` (version 1, the country's
@@ -159,6 +160,107 @@ name**: keep an old master in git (or copy it away) first.
 shells with the real fonts (`tool/visual_qa.sh`,
 `build/visual_qa/us_cards_<place>.png`) and checks each card is drawn on the
 pack's shells with its live text inside their text zones.
+
+### The world's most-visited cities
+
+Thirty more places have the same six pictures each: a featured ticket,
+key card and tagged reservation card, both postcards and a Documents
+destination stamp (`art_packs/prompts/city_cards.md` and `postcards.md`; the
+briefs were `docs/art_requests/GPT_TOP_CITIES_2026-10-13.md` and, for the
+last nine, `GPT_MORE_ART_2026-10-14.md`; the PNGs came from
+`art_packs/staging/top-cities-wave-{a,b}-2026-10-13/` and
+`more-art-wave-d-2026-10-14/`). Each is a small
+place pack like `city_fr_paris`: the six pictures and its country's palette,
+nothing else, since a trip also downloads its country's pack to fall back
+on.
+
+| Pack | Scope | Selectors | Palette from |
+|---|---|---|---|
+| `city_gb_london` | city | `london` | `country_gb` |
+| `city_jp_tokyo`, `city_jp_osaka` | city | `tokyo`, `osaka` | `country_jp` |
+| `city_th_bangkok` | city | `bangkok` | `country_th` |
+| `region_th_phuket` | **region** | `phuket` | `country_th` |
+| `city_it_rome`, `_venice`, `_milan` | city | `rome`, `venice`, `milan` | `country_it` |
+| `city_es_barcelona`, `_madrid` | city | `barcelona`, `madrid` | `country_es` |
+| `city_ae_dubai` | city | `dubai` | `country_ae` |
+| `city_tr_istanbul`, `_antalya` | city | `istanbul`, `antalya` | `country_tr` |
+| `city_nl_amsterdam` | city | `amsterdam` | `country_nl` |
+| `city_kr_seoul` | city | `seoul` | `country_kr` |
+| `city_pt_lisbon` | city | `lisbon` | `country_pt` |
+| `city_mx_cancun` | city | `cancun` | `country_mx` |
+| `city_gb_edinburgh` | city | `edinburgh` | `country_gb` |
+| `city_au_sydney`, `_melbourne` | city | `sydney`, `melbourne` | `country_au` |
+| `city_it_florence` | city | `florence` | `country_it` |
+| `city_gr_athens` | city | `athens` | `country_gr` |
+| `city_ca_vancouver` | city | `vancouver` | `country_ca` |
+| `city_za_cape_town` | city | `cape_town` | `country_za` |
+| `city_nz_queenstown` | city | `queenstown` | `country_nz` |
+| `city_us_san_francisco` | city | `san_francisco` | `country_us` |
+| `country_hk` | **country** | (none; `HK`) | its own: `hong_kong_harbour_junk` |
+| `city_cz_prague` | city | `prague` | its own: `czechia_garnet_roofs` |
+| `city_my_kuala_lumpur` | city | `kuala_lumpur` | its own: `malaysia_rainforest_songket` |
+| `city_tw_taipei` | city | `taipei` | its own: `taiwan_jade_lantern` |
+
+The scope follows how `lib/logic/destinations.dart` models the place, so a
+traveller's "Where to?" picks the pack: Phuket is a region there (Thailand's
+pack covers Krabi and Koh Samui) and Hong Kong is a country, so its pack
+selects `HK` alone. Hong Kong, Czechia, Malaysia and Taiwan have no country
+pack, so their palettes are their own (from the harbour at dusk and a junk's
+sails, Prague's roof tiles and garnet, rainforest and songket gold, tea
+mountains and lantern amber); the other places in those countries keep the
+trip's look. `test/logic/world_city_packs_test.dart` pins every case against
+the real selectors and the destination list; `test/visual_qa/world_city_cards_test.dart`
+renders Today on each pack's shells (`build/visual_qa/world_cards_<place>.png`)
+and checks the live text sits inside their zones.
+
+**Key cards are full height.** The key card's picture is the view from a hotel
+window, as big as the template's: top to bottom of the card, beginning about
+43% of the way across (the Paris, Kyoto and country cards are 78-80% of the
+card's height). The first export of the 30 city cards squeezed each picture
+into a small bottom-right patch (about 40% of the height, starting at 64%) to
+keep the left 62% empty; that looked too small, so on 15 October 2026 all 56
+key cards drawn that way (the 30 city and 10 country cards, and the 16 US and
+Lake District ones) were made again with the generated picture laid on at its
+own size (`export_cards_full.cjs`, `art_packs/staging/key-card-backdrop-fix-2026-10-14/`),
+from the original generated images. Their masters in `originals/` are the new
+ones; the PNGs in `staging/` are as GPT delivered. The text zone runs to 60%
+of the width, so a very long hotel name can reach the picture's soft edge (it
+can on Paris too). A new key card is checked for stray speckle in the left
+36% (the check in `docs/art_requests/GPT_MORE_ART_2026-10-14.md`) and for its
+picture height (70% or more).
+
+### Countries drawn as a whole
+
+Ten countries are packs of their own, drawn for the country (two or three
+landmarks or landscapes, a plant or an animal, the light; the briefs are in
+`docs/art_requests/GPT_MORE_ART_2026-10-14.md`), each with the same six
+pictures. They serve a trip to the whole country and every place in it
+without a pack of its own (Vienna, Dubrovnik, Hanoi, Penang and so on); a
+city pack, where there is one, still comes first and the country's is
+downloaded beside it.
+
+| Pack | Colours | Places it serves |
+|---|---|---|
+| `country_at` | `austria_alpine_baroque` | Vienna, Salzburg, the Tyrol |
+| `country_hr` | `croatia_adriatic_terracotta` | Dubrovnik, Split, Hvar |
+| `country_ie` | `ireland_emerald_atlantic` | Dublin, Galway |
+| `country_vn` | `vietnam_jade_lantern` | Hanoi, Ho Chi Minh City, Ha Long Bay, Hoi An |
+| `country_ma` | `morocco_medina_indigo` | Marrakech |
+| `country_eg` | `egypt_nile_lapis` | Cairo, Luxor, Sharm El Sheikh, Hurghada |
+| `country_hu` | `hungary_danube_paprika` | Budapest |
+| `country_cz` | `czechia_garnet_roofs` (Prague's) | everywhere in Czechia but Prague |
+| `country_my` | `malaysia_rainforest_songket` (Kuala Lumpur's) | Penang, Langkawi, the rest of Malaysia |
+| `country_tw` | `taiwan_jade_lantern` (Taipei's) | everywhere in Taiwan but Taipei |
+
+Their palettes are written from the landscape and crafts, never a flag. The
+seven with no city pack also have an onboarding background (see
+`lib/logic/onboarding_art.dart`). Czechia, Malaysia and Taiwan reuse their
+city pack's palette and keep its onboarding background as the stand-in.
+
+**Every country pack, and every US city and region pack, now has a Documents
+stamp** (the 25 older country packs went v3 → v4, `country_us` v4 → v5, the
+13 US places v1 → v2), so a trip to a whole country, or to a place in it
+without its own pack, has a stamp for the Documents heading.
 
 ### The countdown postcard
 
@@ -205,7 +307,8 @@ blank ivory label band under it, where the app prints the place's name), is
 stricter still: it comes only from the trip's own city, region or country
 pack (`TravelStore.destinationStampFor`), never a look pack or bundled
 art, so a trip without one shows none rather than another place's. The
-five complete place packs carry one.
+every pack carries one (the five complete place packs, the 30 city packs,
+every country pack and every US city and region pack).
 
 ```json
 { "file": "common/documents_destination_stamp.png", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280 }
@@ -386,7 +489,13 @@ Published so far (3 October 2026, catalog v30): 25 country packs, the
 Paris, Kyoto and Orlando city packs, and the Lake District and Bali region
 packs, all in WebP. Catalog **v96 published 13 October 2026** (43 packs):
 Orlando v2, the 13 US city and region packs above, `country_us` v4 and
-`region_gb_lake_district` v2. `publish` needs every archive in the bucket or
+`region_gb_lake_district` v2. **Built, not yet published (14 October 2026):**
+the 30 packs above and the 10 country packs below, all v1, plus a v+1 of
+each of the 25 older country packs and 13 US city and region packs (now with
+a Documents stamp, and new key cards: Orlando and the Lake District are
+v3 because they were already published), so the local `art_packs/catalog.json` is v234 with 83
+packs (their archives are in `build/art_packs/`; the bucket's
+catalog is still v96, which `publish` accepts). `publish` needs every archive in the bucket or
 in `build/art_packs/`, and `build` regenerates a missing archive from its
 source without changing the catalog (the zips are reproducible).
 `seed_themepark` is for tests and local development only and is never

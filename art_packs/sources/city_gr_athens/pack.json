@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "city_gr_athens",
+  "version": 1,
+  "palette": {
+    "id": "greece_aegean_cobalt",
+    "anchors": {"ink": "#173653", "paper": "#F8F5EA"},
+    "accents": ["#145DA0", "#278DB5", "#D7A548", "#718368"],
+    "ui": {
+      "primary": "#0E5595",
+      "secondary": "#237F9F",
+      "highlight": "#C58D2D",
+      "onPrimary": "#FFFBF2"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

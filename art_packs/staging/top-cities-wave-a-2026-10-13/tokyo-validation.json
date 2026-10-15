@@ -1,0 +1,101 @@
+{
+  "city": "Tokyo",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/tokyo/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "9db956131a90bd419b3b5c32a5b6da2614d5641b61f781fb1fcc45c4cdb284b9",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/tokyo/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "727cf454dc0eca27031587732798dec2b79442c0d2fbdf3290c74e7df84f518d",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/tokyo/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "6b3c1d53493859c429657dd78e100dc4fc17061bf84d9eed68bf09dbf24a960e",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/tokyo/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "7f3f62213fee40cea2235bb1a0d756dd326cc0facc157aa1b53dbd8bcd15e9fd"
+    },
+    {
+      "file": "art_packs/staging/tokyo/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "sha256": "4a94fadf68695ffbd683c578278917afa74c01cb0880ad39a775eb5a36ad037e"
+    },
+    {
+      "file": "art_packs/staging/tokyo/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "d85406bf4ea3e4c015eb1c3aad98551ee520eed5bb20ab118427deb49e7999b7",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

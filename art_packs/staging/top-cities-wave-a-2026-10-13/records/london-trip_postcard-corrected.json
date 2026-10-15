@@ -1,0 +1,9 @@
+{
+  "id": "london/trip_postcard-corrected",
+  "prompt": "Use case: background-extraction\nEdit target: this finished landscape London postcard. Remove ONLY the solid tan presentation backdrop outside the cream deckled paper object. Return genuine transparent alpha outside the postcard, including a narrow clear margin on every side; retain a faint soft contact shadow. Keep every illustrated pixel inside the paper, card shape, proportions and composition unchanged. Exactly 1536 × 1024 PNG RGBA. No added objects, text or marks. No flags.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-b7abc3f1-3c36-42e8-9bfb-c67dbfb25798.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-161382b8-b8a3-4442-9370-55bd38d3923a.png"
+}

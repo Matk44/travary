@@ -1,0 +1,1234 @@
+[
+ {
+  "place": "athens",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/athens-room_card.png",
+  "palette": [
+   [
+    40,
+    101,
+    128
+   ],
+   [
+    109,
+    121,
+    81
+   ],
+   [
+    211,
+    173,
+    100
+   ]
+  ]
+ },
+ {
+  "place": "cape_town",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/cape_town-room_card.png",
+  "palette": [
+   [
+    43,
+    102,
+    133
+   ],
+   [
+    198,
+    120,
+    136
+   ],
+   [
+    213,
+    174,
+    88
+   ]
+  ]
+ },
+ {
+  "place": "edinburgh",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/edinburgh-room_card.png",
+  "palette": [
+   [
+    82,
+    103,
+    121
+   ],
+   [
+    133,
+    109,
+    152
+   ],
+   [
+    203,
+    161,
+    93
+   ]
+  ]
+ },
+ {
+  "place": "florence",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/florence-room_card.png",
+  "palette": [
+   [
+    189,
+    113,
+    84
+   ],
+   [
+    82,
+    102,
+    74
+   ],
+   [
+    214,
+    179,
+    110
+   ]
+  ]
+ },
+ {
+  "place": "melbourne",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/melbourne-room_card.png",
+  "palette": [
+   [
+    65,
+    101,
+    82
+   ],
+   [
+    213,
+    125,
+    73
+   ],
+   [
+    117,
+    83,
+    111
+   ]
+  ]
+ },
+ {
+  "place": "queenstown",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/queenstown-room_card.png",
+  "palette": [
+   [
+    47,
+    100,
+    132
+   ],
+   [
+    201,
+    162,
+    83
+   ],
+   [
+    67,
+    102,
+    87
+   ]
+  ]
+ },
+ {
+  "place": "san_francisco",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/san_francisco-room_card.png",
+  "palette": [
+   [
+    196,
+    91,
+    67
+   ],
+   [
+    127,
+    152,
+    167
+   ],
+   [
+    60,
+    126,
+    121
+   ]
+  ]
+ },
+ {
+  "place": "sydney",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/sydney-room_card.png",
+  "palette": [
+   [
+    36,
+    99,
+    128
+   ],
+   [
+    130,
+    112,
+    166
+   ],
+   [
+    198,
+    157,
+    96
+   ]
+  ]
+ },
+ {
+  "place": "vancouver",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-d-2026-10-14/normalised/vancouver-room_card.png",
+  "palette": [
+   [
+    54,
+    94,
+    79
+   ],
+   [
+    50,
+    121,
+    130
+   ],
+   [
+    189,
+    95,
+    77
+   ]
+  ]
+ },
+ {
+  "place": "country_at",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_at-room_card.png",
+  "palette": [
+   [
+    56,
+    123,
+    125
+   ],
+   [
+    210,
+    172,
+    100
+   ],
+   [
+    189,
+    127,
+    133
+   ]
+  ]
+ },
+ {
+  "place": "country_eg",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_eg-room_card.png",
+  "palette": [
+   [
+    209,
+    167,
+    93
+   ],
+   [
+    57,
+    140,
+    152
+   ],
+   [
+    54,
+    93,
+    131
+   ]
+  ]
+ },
+ {
+  "place": "country_hr",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_hr-room_card.png",
+  "palette": [
+   [
+    49,
+    140,
+    152
+   ],
+   [
+    199,
+    118,
+    87
+   ],
+   [
+    72,
+    104,
+    83
+   ]
+  ]
+ },
+ {
+  "place": "country_hu",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_hu-room_card.png",
+  "palette": [
+   [
+    53,
+    106,
+    131
+   ],
+   [
+    185,
+    84,
+    70
+   ],
+   [
+    203,
+    166,
+    90
+   ]
+  ]
+ },
+ {
+  "place": "country_ie",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_ie-room_card.png",
+  "palette": [
+   [
+    76,
+    121,
+    89
+   ],
+   [
+    138,
+    142,
+    134
+   ],
+   [
+    207,
+    179,
+    110
+   ]
+  ]
+ },
+ {
+  "place": "country_ma",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_ma-room_card.png",
+  "palette": [
+   [
+    189,
+    102,
+    90
+   ],
+   [
+    62,
+    82,
+    119
+   ],
+   [
+    210,
+    160,
+    79
+   ]
+  ]
+ },
+ {
+  "place": "country_vn",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e1-2026-10-14/normalised/country_vn-room_card.png",
+  "palette": [
+   [
+    54,
+    119,
+    95
+   ],
+   [
+    191,
+    87,
+    72
+   ],
+   [
+    197,
+    136,
+    150
+   ]
+  ]
+ },
+ {
+  "place": "country_cz",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e2-2026-10-14/normalised/country_cz-room_card.png",
+  "palette": [
+   [
+    141,
+    66,
+    80
+   ],
+   [
+    93,
+    115,
+    76
+   ],
+   [
+    195,
+    161,
+    90
+   ]
+  ]
+ },
+ {
+  "place": "country_my",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e2-2026-10-14/normalised/country_my-room_card.png",
+  "palette": [
+   [
+    63,
+    112,
+    78
+   ],
+   [
+    201,
+    161,
+    83
+   ],
+   [
+    189,
+    85,
+    78
+   ]
+  ]
+ },
+ {
+  "place": "country_tw",
+  "role": "room_card",
+  "source": "art_packs/staging/more-art-wave-e2-2026-10-14/normalised/country_tw-room_card.png",
+  "palette": [
+   [
+    89,
+    117,
+    78
+   ],
+   [
+    209,
+    160,
+    88
+   ],
+   [
+    184,
+    91,
+    78
+   ]
+  ]
+ },
+ {
+  "place": "amsterdam",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/amsterdam-room_card.png",
+  "palette": [
+   [
+    26,
+    66,
+    75
+   ],
+   [
+    195,
+    98,
+    75
+   ],
+   [
+    211,
+    164,
+    74
+   ]
+  ]
+ },
+ {
+  "place": "bangkok",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/bangkok-room_card.png",
+  "palette": [
+   [
+    20,
+    68,
+    70
+   ],
+   [
+    203,
+    100,
+    60
+   ],
+   [
+    213,
+    164,
+    66
+   ]
+  ]
+ },
+ {
+  "place": "barcelona",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/barcelona-room_card.png",
+  "palette": [
+   [
+    24,
+    76,
+    79
+   ],
+   [
+    213,
+    112,
+    80
+   ],
+   [
+    212,
+    166,
+    67
+   ]
+  ]
+ },
+ {
+  "place": "dubai",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/dubai-room_card.png",
+  "palette": [
+   [
+    23,
+    70,
+    80
+   ],
+   [
+    200,
+    115,
+    82
+   ],
+   [
+    213,
+    167,
+    75
+   ]
+  ]
+ },
+ {
+  "place": "hong_kong",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/hong_kong-room_card.png",
+  "palette": [
+   [
+    22,
+    64,
+    79
+   ],
+   [
+    193,
+    77,
+    62
+   ],
+   [
+    210,
+    164,
+    73
+   ]
+  ]
+ },
+ {
+  "place": "istanbul",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/istanbul-room_card.png",
+  "palette": [
+   [
+    24,
+    67,
+    77
+   ],
+   [
+    201,
+    101,
+    77
+   ],
+   [
+    213,
+    163,
+    65
+   ]
+  ]
+ },
+ {
+  "place": "london",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/london-room_card.png",
+  "palette": [
+   [
+    26,
+    57,
+    70
+   ],
+   [
+    180,
+    64,
+    50
+   ],
+   [
+    199,
+    163,
+    88
+   ]
+  ]
+ },
+ {
+  "place": "rome",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/rome-room_card.png",
+  "palette": [
+   [
+    32,
+    63,
+    64
+   ],
+   [
+    190,
+    98,
+    65
+   ],
+   [
+    210,
+    164,
+    83
+   ]
+  ]
+ },
+ {
+  "place": "seoul",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/seoul-room_card.png",
+  "palette": [
+   [
+    25,
+    63,
+    73
+   ],
+   [
+    199,
+    96,
+    67
+   ],
+   [
+    212,
+    162,
+    60
+   ]
+  ]
+ },
+ {
+  "place": "tokyo",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-a-2026-10-13/normalised/tokyo-room_card.png",
+  "palette": [
+   [
+    25,
+    54,
+    77
+   ],
+   [
+    218,
+    93,
+    96
+   ],
+   [
+    209,
+    161,
+    83
+   ]
+  ]
+ },
+ {
+  "place": "antalya",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/antalya-room_card.png",
+  "palette": [
+   [
+    27,
+    68,
+    78
+   ],
+   [
+    203,
+    109,
+    76
+   ],
+   [
+    215,
+    168,
+    75
+   ]
+  ]
+ },
+ {
+  "place": "cancun",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/cancun-room_card.png",
+  "palette": [
+   [
+    26,
+    70,
+    78
+   ],
+   [
+    205,
+    112,
+    79
+   ],
+   [
+    218,
+    177,
+    80
+   ]
+  ]
+ },
+ {
+  "place": "kuala_lumpur",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/kuala_lumpur-room_card.png",
+  "palette": [
+   [
+    27,
+    67,
+    72
+   ],
+   [
+    196,
+    95,
+    67
+   ],
+   [
+    213,
+    166,
+    67
+   ]
+  ]
+ },
+ {
+  "place": "lisbon",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/lisbon-room_card.png",
+  "palette": [
+   [
+    25,
+    65,
+    80
+   ],
+   [
+    201,
+    100,
+    71
+   ],
+   [
+    218,
+    171,
+    61
+   ]
+  ]
+ },
+ {
+  "place": "madrid",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/madrid-room_card.png",
+  "palette": [
+   [
+    28,
+    64,
+    74
+   ],
+   [
+    196,
+    106,
+    77
+   ],
+   [
+    207,
+    160,
+    66
+   ]
+  ]
+ },
+ {
+  "place": "milan",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/milan-room_card.png",
+  "palette": [
+   [
+    29,
+    64,
+    75
+   ],
+   [
+    193,
+    101,
+    75
+   ],
+   [
+    213,
+    167,
+    67
+   ]
+  ]
+ },
+ {
+  "place": "osaka",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/osaka-room_card.png",
+  "palette": [
+   [
+    27,
+    65,
+    75
+   ],
+   [
+    196,
+    91,
+    65
+   ],
+   [
+    211,
+    163,
+    64
+   ]
+  ]
+ },
+ {
+  "place": "phuket",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/phuket-room_card.png",
+  "palette": [
+   [
+    25,
+    67,
+    76
+   ],
+   [
+    198,
+    100,
+    68
+   ],
+   [
+    214,
+    169,
+    72
+   ]
+  ]
+ },
+ {
+  "place": "prague",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/prague-room_card.png",
+  "palette": [
+   [
+    28,
+    63,
+    76
+   ],
+   [
+    193,
+    94,
+    67
+   ],
+   [
+    207,
+    163,
+    73
+   ]
+  ]
+ },
+ {
+  "place": "taipei",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/taipei-room_card.png",
+  "palette": [
+   [
+    25,
+    65,
+    73
+   ],
+   [
+    199,
+    92,
+    66
+   ],
+   [
+    212,
+    164,
+    65
+   ]
+  ]
+ },
+ {
+  "place": "venice",
+  "role": "room_card",
+  "source": "art_packs/staging/top-cities-wave-b-2026-10-13/normalised/venice-room_card.png",
+  "palette": [
+   [
+    26,
+    66,
+    79
+   ],
+   [
+    198,
+    100,
+    77
+   ],
+   [
+    210,
+    165,
+    69
+   ]
+  ]
+ },
+ {
+  "place": "orlando",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/orlando-room_card.png",
+  "palette": [
+   [
+    10,
+    91,
+    103
+   ],
+   [
+    224,
+    98,
+    69
+   ],
+   [
+    223,
+    157,
+    45
+   ]
+  ]
+ },
+ {
+  "place": "florida",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/florida-room_card.png",
+  "palette": [
+   [
+    11,
+    109,
+    121
+   ],
+   [
+    226,
+    120,
+    136
+   ],
+   [
+    214,
+    165,
+    88
+   ]
+  ]
+ },
+ {
+  "place": "new_york",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/new_york-room_card.png",
+  "palette": [
+   [
+    36,
+    68,
+    91
+   ],
+   [
+    172,
+    65,
+    49
+   ],
+   [
+    223,
+    171,
+    42
+   ]
+  ]
+ },
+ {
+  "place": "las_vegas",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/las_vegas-room_card.png",
+  "palette": [
+   [
+    35,
+    95,
+    103
+   ],
+   [
+    205,
+    74,
+    140
+   ],
+   [
+    213,
+    154,
+    50
+   ]
+  ]
+ },
+ {
+  "place": "california",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/california-room_card.png",
+  "palette": [
+   [
+    21,
+    81,
+    111
+   ],
+   [
+    217,
+    99,
+    40
+   ],
+   [
+    216,
+    170,
+    100
+   ]
+  ]
+ },
+ {
+  "place": "hawaii",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/hawaii-room_card.png",
+  "palette": [
+   [
+    19,
+    102,
+    125
+   ],
+   [
+    204,
+    65,
+    49
+   ],
+   [
+    218,
+    164,
+    48
+   ]
+  ]
+ },
+ {
+  "place": "washington_dc",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/washington_dc-room_card.png",
+  "palette": [
+   [
+    33,
+    70,
+    91
+   ],
+   [
+    195,
+    103,
+    115
+   ],
+   [
+    216,
+    164,
+    77
+   ]
+  ]
+ },
+ {
+  "place": "chicago",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/chicago-room_card.png",
+  "palette": [
+   [
+    28,
+    70,
+    100
+   ],
+   [
+    185,
+    80,
+    47
+   ],
+   [
+    220,
+    165,
+    50
+   ]
+  ]
+ },
+ {
+  "place": "boston",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/boston-room_card.png",
+  "palette": [
+   [
+    30,
+    74,
+    100
+   ],
+   [
+    176,
+    71,
+    48
+   ],
+   [
+    214,
+    157,
+    48
+   ]
+  ]
+ },
+ {
+  "place": "new_orleans",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/new_orleans-room_card.png",
+  "palette": [
+   [
+    21,
+    82,
+    74
+   ],
+   [
+    190,
+    82,
+    51
+   ],
+   [
+    218,
+    163,
+    57
+   ]
+  ]
+ },
+ {
+  "place": "nashville",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/nashville-room_card.png",
+  "palette": [
+   [
+    27,
+    68,
+    97
+   ],
+   [
+    183,
+    83,
+    104
+   ],
+   [
+    220,
+    157,
+    51
+   ]
+  ]
+ },
+ {
+  "place": "seattle",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/seattle-room_card.png",
+  "palette": [
+   [
+    24,
+    79,
+    83
+   ],
+   [
+    181,
+    87,
+    51
+   ],
+   [
+    217,
+    164,
+    57
+   ]
+  ]
+ },
+ {
+  "place": "arizona",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/arizona-room_card.png",
+  "palette": [
+   [
+    29,
+    78,
+    83
+   ],
+   [
+    198,
+    86,
+    48
+   ],
+   [
+    220,
+    159,
+    55
+   ]
+  ]
+ },
+ {
+  "place": "alaska",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/alaska-room_card.png",
+  "palette": [
+   [
+    30,
+    87,
+    109
+   ],
+   [
+    181,
+    95,
+    69
+   ],
+   [
+    218,
+    166,
+    73
+   ]
+  ]
+ },
+ {
+  "place": "united_states",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/united_states-room_card.png",
+  "palette": [
+   [
+    10,
+    54,
+    76
+   ],
+   [
+    205,
+    72,
+    46
+   ],
+   [
+    219,
+    151,
+    39
+   ]
+  ]
+ },
+ {
+  "place": "lake_district",
+  "role": "room_card",
+  "source": "art_packs/staging/key-card-backdrop-fix-2026-10-14/donors/lake_district-room_card.png",
+  "palette": [
+   [
+    35,
+    61,
+    52
+   ],
+   [
+    115,
+    136,
+    83
+   ],
+   [
+    202,
+    161,
+    68
+   ]
+  ]
+ }
+]

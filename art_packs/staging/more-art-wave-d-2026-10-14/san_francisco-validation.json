@@ -1,0 +1,104 @@
+{
+  "city": "San Francisco",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/san_francisco/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "9a935cf29732299181788ce56a2d9ded3a38f8b3b246ab9d3783b8cde15faf6a",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/san_francisco/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "46a0fe7e05fa7b4a8201e7a729a1726a0960e3fbd146f18bdb3ff123db8e658e",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0
+    },
+    {
+      "file": "art_packs/staging/san_francisco/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "153546d94db515d23c8bd1c111f4b9877c44a5ab6dda14c6f72738bcc2e58c32",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/san_francisco/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "6fc58fdabb739b6754125656337b8efbaa2387b66b18c0b156e97f96c7e36762"
+    },
+    {
+      "file": "art_packs/staging/san_francisco/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "02808a62f26f2c12a50cdb037ca0ce5b70e308c8dc025c56a197b9dc5841b301"
+    },
+    {
+      "file": "art_packs/staging/san_francisco/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "a6ffacaf0303465428dae6a27cb148c1190b43729f047022baf84caa89972d7d",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "city": "Athens",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/athens/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "2dc2682df655e0e12f7239ca0ebe6ae46bd2df201c5c246d31b1952699ca2405",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/athens/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "40bb05127e189ce1f24b6b828e3921761ab885e46d4721ee381d17f95aa6df53",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0
+    },
+    {
+      "file": "art_packs/staging/athens/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "ce465b106922c452b8880e2d72f0ddf2492493fa66602e441e7a0ae30f980f47",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "stray_pixels": 0,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/athens/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "ab92e9f61508b3d3c9eb947a479a68fe61467a9d0dbc3189928f5a8b1462a998"
+    },
+    {
+      "file": "art_packs/staging/athens/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "84619be5dce294e9e9b0935525e6dff504e94d82f33865a4a01f10ee963ab970"
+    },
+    {
+      "file": "art_packs/staging/athens/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "fc248ec143400bf94f1ba7bca8442555bd8051426485efd3689b6d8ee27e4e1e",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

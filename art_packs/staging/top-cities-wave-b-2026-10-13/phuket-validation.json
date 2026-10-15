@@ -1,0 +1,101 @@
+{
+  "city": "Phuket",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/phuket/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "4a2dd94822fcc2746ba0446413174655fcec5a2a7e2e974d929940c2d2dafaf8",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/phuket/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "40cca3f1fcad47472da6692aac738b92253a498169ceb8f94d982e377f67cc7b",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/phuket/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "2c9da4edeab647a36e06865f7eed88eca03401e6e1d73faa739a3cc7d9b4617f",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/phuket/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "e3edf6968a34b2d91360ecfe507c8ae83c01326f1dd37219c567eedd4633b0a5"
+    },
+    {
+      "file": "art_packs/staging/phuket/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "89bbb1bd922847d900468273b825c7d614cc22ee682335b38493b8214c3da8f6"
+    },
+    {
+      "file": "art_packs/staging/phuket/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "b08508e1fafbd304b4c49b53608aaeb61cff15003f3ff40dd55c54c44d98d40f",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

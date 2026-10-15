@@ -1,0 +1,16 @@
+{
+  "id": "country_hu/documents_destination_stamp-corrected",
+  "prompt": "Use case: precise-object-edit. Preserve this entire Hungary illustration and exact full card/stamp canvas, alpha, paper edges, layout, skyline, Parliament-like river building, bridge, castle, paprika and golden light. Change ONLY THE TRAM ROOF: REMOVE the entire dark destination-number display housing above the front windshield, including its rectangular outline and every mark inside. Replace with a smooth continuous plain curved cream tram roof, with NO panel, sign, plaque, badge, screen, monogram or inset box remaining. Leave windshield dark and featureless, front lamp circular, body yellow, wheels and rails unchanged. No other text, numerals, logos, flags or faces. 1024x1280PNG truealpha outside, perforations/navy keyline and completely blank ivory lower label band unchanged.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-79394538-3abd-480e-9164-35e5afd3e6c5.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1b12a243-9416-4a50-81a9-10617df8f41f.png",
+  "status": "review_ready",
+  "corrects": "country_hu/documents_destination_stamp",
+  "rejection": "Close-up exposed faint route-number-like marks in tram roof display.",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_hu-documents_destination_stamp-corrected.png",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected six selected illustrations and both final light/dark sheets. Coherent Danube blue/paprika/gold river, Gothic Revival parliament-like building, chain bridge, hilltop castle, steaming domed bath, paprika and yellow trams. Removed complete route display housing from key card and stamp after close-up found faint numeral-like marks; selected trams unmarked. No text, flags, logos or real faces; tiny bathers only silhouettes. Blanks, alpha and export checks pass."
+}

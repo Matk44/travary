@@ -1,0 +1,51 @@
+{
+  "id": "country_mx/documents_destination_stamp",
+  "prompt": "Use case: precise-object-edit. Keep this complete Mexico stamp unchanged except the small rectangular temple sitting at the TOP of the stepped pyramid. Rebuild that TOP TEMPLE as a simplified PLAIN SANDSTONE BOX with its two dark rectangular door openings retained. REMOVE both projecting decorative cornice/frieze bands entirely and remove every carving from every face, especially the shaded left-facing face where oval glyph-like marks remain. Its flat roof is a single unmarked straight slab; all walls smooth warm sandstone with only sparse natural grain. No decorative bands, scoring, tiny blocks, glyphs, symbols, circles, inscriptions or carved repeating forms anywhere on that top box. Preserve all lower pyramid stairs/stone courses and geometry exactly, along with jungle, cenote, agave, flowers, sky, one sun, frame/perforations/navy keyline/blank ivory label and real exterior alpha. No hanging banners or flags. No words, letters, numerals, logos, faces or pseudo-script. One1024x1280PNG.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d60061f6-eff0-47a4-b686-222124069364.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a10f31b1-6a85-417a-bf75-d424f91fea3c.png",
+  "originalInputReferencePaths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+  ],
+  "attempts": [
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3d4bd31f-c089-466f-8c16-c7a6f4e2f01e.png",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Mexico.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a stepped stone pyramid in jungle, a cenote pool, papel-picado colours as abstract shapes and agave. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "status": "rejected",
+      "rejection": "Hanging paper banners and inscription-like marks on temple lintel.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_mx-attempt-1-exec-3d4bd31f-c089-466f-8c16-c7a6f4e2f01e.png"
+    },
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d60061f6-eff0-47a4-b686-222124069364.png",
+      "prompt": "Use case: precise-object-edit. Preserve this entire Mexico stamp canvas, real alpha, paper/perforations/navy keyline/blank label, pyramid shape and stairways, cenote pool, agave, jungle and warm light. Cleanup only: REMOVE ALL FIVE hanging coloured paper banners plus their entire string at the top; fill seamlessly with existing natural green foliage and teal sky. Keep their vivid pink/orange/teal colours only in existing flowers/foliage, no hanging flags, bunting or paper rectangles. Also remove every inscription-like mark across both horizontal bands on the small temple at the TOP of the pyramid; those lintels must be completely plain natural stone courses with no carved glyphs, signs or symbols. Other pyramid stones unchanged. No text, lettering, numerals, hieroglyphs, pseudo-script, flags, logos or faces anywhere. One1024x1280PNG true transparency outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3d4bd31f-c089-466f-8c16-c7a6f4e2f01e.png"
+      ],
+      "status": "rejected",
+      "rejection": "First correction removed banners but left carving-like marks on shaded lintel band.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_mx-attempt-2-exec-d60061f6-eff0-47a4-b686-222124069364.png"
+    }
+  ],
+  "finalPath": "art_packs/staging/country_mx/documents_destination_stamp.png",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_mx.png",
+  "dimensions": [
+    1024,
+    1280
+  ],
+  "mode": "RGBA8",
+  "embeddedSrgb": true,
+  "realAlpha": true,
+  "transparentCorners": true,
+  "blankLabelMatchesTemplate": true,
+  "protectedStampMatchesTemplate": true,
+  "sha256": "0d5e728434d913659c64a7a1e5171968a9a8c38649762fb06ed56b000762ce40",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected corrected source and final light/dark sheet: bold stepped jungle pyramid, cenote and agave, bright abstract flower colours. Removed hanging banners and rebuilt top temple as plain uninscribed sandstone after two corrections. No glyphs, script, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass; attempts retained."
+}

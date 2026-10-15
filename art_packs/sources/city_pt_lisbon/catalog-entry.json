@@ -1,0 +1,8 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["PT"],
+    "cities": ["lisbon"]
+  },
+  "minAppBuild": 1
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-14",
   "purpose": "Planning ledger for onboarding art; not a runtime resolver or published art-pack catalog",
   "guidePath": "docs/ONBOARDING_DESTINATION_ART.md",
   "referenceTemplatePath": "docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
@@ -4378,6 +4378,478 @@
         },
         "nativePath": "assets/onboarding/stages/city_mx_cancun.webp"
       }
+    },
+    {
+      "destinationId": "city_tr_antalya",
+      "label": "Antalya",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "TR"
+        ],
+        "cities": [
+          "antalya"
+        ]
+      },
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/antalya/countdown_postcard.png"
+      },
+      "coverageTier": "explicitly_requested_city_override",
+      "generationPriority": "owner_requested_more_art_wave_c",
+      "geographicScope": "Antalya old harbour, Yivli-style fluted minaret, cliffs, turquoise sea and Taurus mountains",
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/city_tr_antalya/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/city_tr_antalya-prompt.txt",
+        "generationMode": "built_in_imagegen",
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-faec5880-5696-4fa0-8e83-1d28f6aa4ae6.png",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/antalya/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_tr_istanbul.webp"
+        ],
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: Travary Antalya onboarding scenery still, city_tr_antalya, Turkey.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Antalya postcard, geographic content/palette reference, discard its border. Input 3: Istanbul sibling stage, same family and richness, NOT its landmarks.\nCreate ONE new opaque portrait 851 × 1848 PNG. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, layered depth, warm apricot late-afternoon physical light. Antalya's old stone harbour and terracotta-roofed walls, one fluted Yivli-style minaret, limestone cliffs over turquoise sea, Taurus mountain ridges, palms and small unmarked sailboats. Symbolic Antalya composition; no Istanbul domes or bridges, no Bali temples, terraces or volcano. Broad harbour to right, buildings stronger on left.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% completely quiet petrol-teal paper sky through centre; ALL landmarks below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi; background water may continue.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, pseudo-script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. One full uncropped opaque still; exact same very tall aspect as reference.",
+        "sha256": "6aef9c6e0d4fe838f3cc08a47131f3352ae99d2e814736b38a16d7b036b3cf78",
+        "qaNotes": {
+          "paperStyle": "passed",
+          "centralHeadlineSpace": "passed; central upper 27% quiet, peripheral palm/minaret",
+          "creamFloor": "passed; boundary approximately 65%",
+          "traviClearance": "passed visually; open water at right",
+          "noBakedPropsOrType": "passed",
+          "ownerApproval": "pending"
+        },
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-14",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 14 Oct 2026 at the owner's request; resolved by city before country (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/city_tr_antalya.webp"
+      }
+    },
+    {
+      "destinationId": "city_it_milan",
+      "label": "Milan",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "IT"
+        ],
+        "cities": [
+          "milan"
+        ]
+      },
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/milan/countdown_postcard.png"
+      },
+      "coverageTier": "explicitly_requested_city_override",
+      "generationPriority": "owner_requested_more_art_wave_c",
+      "geographicScope": "Milan: original Gothic cathedral spires evoking the city, glass arcade, yellow tram and warm shopfront colour",
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/city_it_milan/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/city_it_milan-prompt.txt",
+        "generationMode": "built_in_imagegen",
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c75533c2-a1b0-4509-81ce-b1d6bbf5c8e0.png",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png"
+        ],
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nEdit target: generated Milan onboarding scenery still. Correct ONLY these defects while preserving all other pixels/composition as closely as possible:\n1. Remove every inscription, decorative script, pseudo-text, letter and number from the glass arcade's stone facade, entrance arch and its horizontal attic/plaque bands. Replace with completely blank smooth warm stone, including small dark scratch-like clusters that look like writing. No patterns resembling lettering.\n2. Remove every passenger/human silhouette/face from every window of the yellow tram. All tram windows must be uniformly dark empty glazing. Remove any tiny pedestrians from the street too. No people anywhere.\n3. Lower/shorten the highest cathedral spire so its top begins BELOW 28% down the image (below y518 on 1848 height). Keep the central upper 27% quiet teal sky. Maintain plausible original Gothic spires, not an exact cathedral copy.\nKeep the rich sculpted layered paper material, glass-roofed arcade, ochre shopfronts, yellow tram position, cathedral identity, greenery, warm low sunlight, teal curved theatre wings, camera and warm cream floor boundary at 65% exactly as they are. Preserve the entire calm lower 35% cream floor. Do not add signs or any objects. Single opaque portrait 851 × 1848, same tall aspect. No character, character shadow, folio, tickets, text, numerals, flags, logos, UI, border or watermark.",
+        "sha256": "563d332bcfd4b1e7dd793932411c24c1d5b196a7fe2ea615c8e4c1c74415daa8",
+        "qaNotes": {
+          "paperStyle": "passed",
+          "centralHeadlineSpace": "passed after highest spire shortened",
+          "creamFloor": "passed; boundary approximately 65%",
+          "traviClearance": "passed visually; open street at right",
+          "noBakedPropsOrType": "passed after inscription and tram-passenger correction",
+          "ownerApproval": "pending"
+        },
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-14",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 14 Oct 2026 at the owner's request; resolved by city before country (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/city_it_milan.webp"
+      }
+    },
+    {
+      "destinationId": "region_th_phuket",
+      "label": "Phuket",
+      "scope": "region",
+      "selectors": {
+        "countryCodes": [
+          "TH"
+        ],
+        "regions": [
+          "phuket"
+        ]
+      },
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/phuket/countdown_postcard.png"
+      },
+      "coverageTier": "explicitly_requested_region_override",
+      "generationPriority": "owner_requested_more_art_wave_c",
+      "geographicScope": "Phuket region and Andaman limestone islands, longtail boats, white beach and palms",
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/region_th_phuket/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/region_th_phuket-prompt.txt",
+        "generationMode": "built_in_imagegen",
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a5a91a38-fc4a-42bc-aa2c-d6123efaec69.png",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/phuket/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_th.webp"
+        ],
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: Travary Phuket onboarding scenery still, region_th_phuket, Thailand.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Phuket postcard, geographic content/palette reference, discard its border. Input 3: Thailand sibling stage, same family and richness; remove its temple.\nCreate ONE new opaque portrait 851 × 1848 PNG, full uncropped very tall aspect of input 1. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, convincing layered depth, warm low golden sun. Phuket region's limestone islands rising from green-blue Andaman sea, three small unmarked Thai longtail boats, white beach and palms, jade tropical foliage. Scenery rather than temple: NO temples, Bali gates, rice terraces or volcano. Strong limestone and beach on left with open sea on right. Match the postcard's turquoise, navy, sage, coral and golden light.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% quiet petrol-teal paper sky through centre; landmark tops below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi; background water may continue.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, decorative script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. No glossy plastic. One complete opaque scenery still.",
+        "sha256": "ca4d8a6b8921437194f74f1e0c5c661adf11841d82918a38eabcf098c2d7d03e",
+        "qaNotes": {
+          "paperStyle": "passed",
+          "centralHeadlineSpace": "passed; quiet central upper 27%",
+          "creamFloor": "passed; boundary approximately 65%",
+          "traviClearance": "passed visually; low boats in background, open sea at right",
+          "noBakedPropsOrType": "passed",
+          "ownerApproval": "pending"
+        },
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-14",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 14 Oct 2026 at the owner's request; resolved by region before country (onboardingRegionStages in lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/region_th_phuket.webp"
+      }
+    },
+    {
+      "destinationId": "city_tw_taipei",
+      "label": "Taipei",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "TW"
+        ],
+        "cities": [
+          "taipei"
+        ]
+      },
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/taipei/countdown_postcard.png"
+      },
+      "coverageTier": "explicitly_requested_city_override",
+      "generationPriority": "owner_requested_more_art_wave_c",
+      "geographicScope": "Taipei: bamboo-shaped tiered tower, green mountains, Taiwanese temple roofs and lantern market",
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/city_tw_taipei/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/city_tw_taipei-prompt.txt",
+        "generationMode": "built_in_imagegen",
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-963752a7-3721-4429-b881-00e9efaca89b.png",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-018492f2-8f83-477d-a866-f32be27ee509.png"
+        ],
+        "exactSubmittedPrompt": "Use case: precise-object-edit\nEdit target: Taipei onboarding paper scenery. Change ONLY the vertical height of the bamboo-shaped skyscraper. Shorten it in place, retaining its recognisable stacked tapering bamboo segments, so its COMPLETE antenna/top begins below y520 (28% down) on the 851 × 1848 portrait. Fill the vacated tower area with the matching uninterrupted petrol-teal paper sky; leave central upper 0–27% completely quiet for live headings. Keep city/mountains, warm rose-gold dusk, temple roof, blank coral lanterns, empty market, paper material, camera, teal wings and cream floor boundary at 65% exactly as they are. All the lower 35% remains blank cream. Keep lanterns/temple/shopfronts free of every letter, numeral, script or pseudo-text. No people, character, character shadow, folio, tickets, UI, logos, flags, border or watermark. Single opaque portrait 851 × 1848, unchanged aspect. Do not raise or add any other scenery.",
+        "sha256": "ec0c98baf4637dad65fef66445e11d683b1f5b2a8c82e5f98a0931fcfc186737",
+        "qaNotes": {
+          "paperStyle": "passed",
+          "centralHeadlineSpace": "passed after tower lowered",
+          "creamFloor": "passed; boundary approximately 65%",
+          "traviClearance": "passed visually; market scenery remains in background",
+          "noBakedPropsOrType": "passed; no script on lanterns, temple or market panels",
+          "ownerApproval": "pending"
+        },
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-14",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 14 Oct 2026 at the owner's request; resolved by city before country (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/city_tw_taipei.webp"
+      }
+    },
+    {
+      "destinationId": "country_at",
+      "label": "Austria",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "AT"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_at/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_at/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: precise-object-edit. Edit this Austria miniature cardstock onboarding stage. Preserve its complete canvas, rich embossed paper, folded theatre wings, coherent Austrian Alps/lake/onion church/palace/gentians/tram, warm light, camera and cream floor starting y65%. Correct ONLY HEADLINE CLEARANCE. Upper y0–28% MUST be uninterrupted plain petrol-teal sky across ENTIRE WIDTH including left edge; currently the tall church finial and clouds reach too high. Lower the left church tower and all its nearby clouds so their highest point is below y29% (536 pixels on this 1848px canvas). Nothing scenic above y536. Keep mountain peaks below that line too. Blend the vacated area into exact neighbouring teal sky texture. All landmarks and scenery fit y29–64%, with no objects on cream floor. Keep the church recognisable but shorter/lower. No text, letters, numbers, inscriptions, logos, flags, faces, UI or props. One opaque851x1848PNG.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a02db3b8-cfe6-4457-8fd8-58452bc12f1d.png"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-30b250ad-0518-48e8-a6a7-268f0d7b7ff8.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_at-prompt.txt",
+        "sha256": "91ead37ad3a787e7308940c91ab7e6259520790f1ea2ce9abcdec88ba05eec07",
+        "qaNotes": "Inspected corrected still: church and clouds lowered clear of headline centre; rich folded-cardstock Alps/lake/palace/onion church/tram/gentians, cream floor starts65%, right foreground clear. No text, logos, flags, people or props. Original high church attempt rejected.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_at.webp"
+      }
+    },
+    {
+      "destinationId": "country_hr",
+      "label": "Croatia",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "HR"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hr/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_hr/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Croatia (country_hr). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–28% completely quiet petrol-teal paper sky across ENTIRE WIDTH, including both edges. No clouds, hills, foliage, church finials or other scenery above pixel y536. Every landmark top below 29%. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hr/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_gr.webp"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-61809a28-0478-4733-b540-298357a1f780.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_hr-prompt.txt",
+        "sha256": "89d9294c20b27a83a1d043d917ccb7af8340faf0bc9e76ad14f76d8ca3e0a2b9",
+        "qaNotes": "Inspected still: rich folded-cardstock walled Adriatic town, harbour, terracotta roofs, turquoise bay, plain sailboats, distant island, cypress and lavender. Headline centre is quiet teal; peripheral foliage follows sibling theatre layout. Cream control floor at65%, right foreground clear. No text, logos, flags, faces, UI or props.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_hr.webp"
+      }
+    },
+    {
+      "destinationId": "country_ie",
+      "label": "Ireland",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "IE"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns)",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ie/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_ie/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Ireland (country_ie). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: tall green sea cliffs above a deep blue Atlantic, a round stone tower and a ruined abbey arch, dry-stone walls round small green fields, a whitewashed thatched cottage, sheep, a rainbow after a soft shower (no shamrocks, harps or leprechauns). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–27% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ie/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_gb.webp"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5f429595-c35a-4ef7-b69f-9ccf5cc2801b.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_ie-prompt.txt",
+        "sha256": "379e7195355f322446a5207a5af398294bc00441710639a8b8229a441bf1a061",
+        "qaNotes": "Inspected still: dimensional cardstock Irish cliffs, round stone tower and abbey arch, thatched cottage, small walled fields and recognisable sheep. Soft rainbow below headline sky; central upper27% quiet teal, cream floor65%, right foreground unblocked. No lettering, flags, faces, props or UK telephone box from sibling.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_ie.webp"
+      }
+    },
+    {
+      "destinationId": "country_vn",
+      "label": "Vietnam",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "VN"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces)",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_vn/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_vn/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Vietnam (country_vn). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: an emerald bay of limestone towers with a red-sailed wooden junk, a lantern-hung old-town street with a covered bridge, terraced rice hills, a lotus pond, conical hats as shapes (no faces). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–27% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_vn/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_th.webp"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d858c6fa-faed-41b8-add8-05bab164dc4e.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_vn-prompt.txt",
+        "sha256": "7f42037cb781f34e1e6694e067c047560cd306526c8b7e0abf98d15622b43bec",
+        "qaNotes": "Inspected still: dimensional paper country scene from own postcard: limestone bay, red-sailed junk, lantern-hung yellow street, covered bridge, rice terraces, lotus and plain conical hats as scenery shapes. Quiet central upper27% teal, cream floor about65%, right foreground open. No lettering, flags, faces, folio, Travi, UI or Thai temple from sibling.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_vn.webp"
+      }
+    },
+    {
+      "destinationId": "country_ma",
+      "label": "Morocco",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "MA"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern)",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ma/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_ma/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: precise-object-edit. Keep this entire Morocco folded-cardstock stage unchanged except for one layout correction: SHORTEN the square minaret by about20% so its highest finial is at y560px or lower on the851x1848canvas, safely below30%height. Currently the finial at y450 intrudes in the live headline area. Preserve its base and location; rebuild the top lower, with authentic square tower proportions and geometric arched windows. Fill vacated space with neighbouring plain teal paper sky. Keep palms at peripheral left, medina, keyhole doorway, tile geometry, spices, dunes and camel silhouettes, warm light, theatre wings, camera and completely clear cream floor starting65% exactly the same. No writing, pseudo-script, letters, numbers, flags, faces, UI, folio, characters or newprops. One opaque portrait851x1848PNG.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-de561a4f-d8f0-4d3b-8857-4c68ed5b4e4e.png"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-59d242c5-2f58-448a-ac61-1cfb3ae727dd.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_ma-prompt.txt",
+        "sha256": "7da4997ff5f14d0f45be31bdb9129572bf03c08acf06e9592a9eaad5653a2cd6",
+        "qaNotes": "Inspected corrected still: central minaret shortened below30%height, quiet teal headline centre, peripheral palms match theatre family. Rich cardstock medina, geometric keyhole doorway, spices, sunset dunes and recognisable camel silhouettes. Cream floor65%, right foreground clear. No script, lettering, logos, flags, faces, UI or travel props; Turkish balloon/sea scenery replaced.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_ma.webp"
+      }
+    },
+    {
+      "destinationId": "country_eg",
+      "label": "Egypt",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "EG"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs)",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_eg/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_eg/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Egypt (country_eg). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–27% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still. EXACTLY THREE pyramids, no fourth tiny/background/foreground pyramid. Pyramid count is a strict invariant. Plain uninscribed temple stone, no hieroglyphs.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_eg/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ae.webp"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-eb648681-05f2-4655-bbfa-46df3288cc0b.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_eg-prompt.txt",
+        "sha256": "4cb18fa9607bbcc4d7023642044ce675660577866b8c2408ae3632258b7cdeb0",
+        "qaNotes": "Inspected still: exactly three pyramids, recognisable camel silhouette, plain papyrus-column temple, felucca with blank white sail, palms and turquoise water in dimensional paper theatre. Quiet central upper27% teal, cream floor65%, right foreground clear. No hieroglyphs, lettering, flags, faces, UI or props; UAE skyline/wind towers replaced.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_eg.webp"
+      }
+    },
+    {
+      "destinationId": "country_hu",
+      "label": "Hungary",
+      "scope": "country",
+      "selectors": {
+        "countryCodes": [
+          "HU"
+        ]
+      },
+      "coverageTier": "baseline_country",
+      "generationPriority": "owner_requested_more_art_wave_e1",
+      "geographicScope": "a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram",
+      "references": {
+        "countdownPostcard": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hu/countdown_postcard.png"
+      },
+      "onboardingStage": {
+        "status": "integrated",
+        "masterPath": "art_packs/pending/onboarding/country_hu/onboarding_stage_v1.png",
+        "dimensions": [
+          851,
+          1848
+        ],
+        "generationMode": "built_in_imagegen",
+        "exactSubmittedPrompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Hungary (country_hu). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a grand riverside Gothic Revival parliament-like building with a dome and many spires (not an exact copy) reflected in a wide river, a chain suspension bridge, a hilltop castle, a steaming domed thermal bath, strings of red paprika, a yellow tram. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–27% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still. Tram has no destination-number display housing or front badge at all: continuous plain cream curved roof above dark empty windshield. No panel outline or inset box.",
+        "inputReferencePaths": [
+          "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hu/countdown_postcard.png",
+          "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_cz_prague.webp"
+        ],
+        "originalGenerationOutputPath": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-9fd912ff-ff12-4534-a4d8-11b4e66d3236.png",
+        "promptLogPath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/country_hu-prompt.txt",
+        "sha256": "12614b67763a909f62b1203ea3357d7b0bbfca21d7c7de512727c5099ac96481",
+        "qaNotes": "Inspected still: rich folded-cardstock country theatre with parliament-like dome/spires, chain suspension bridge, hill castle, steaming domed bath, plain yellow tram, paprika and wide reflective river. Quiet central upper27% teal, cream lower control floor about65%, open right foreground. No lettering, logos, flags, faces, Travi, folio or tickets; Prague scenery replaced.",
+        "flutterIntegrated": true,
+        "publicationEvidence": null,
+        "lastReviewed": "2026-10-15",
+        "nextAction": "Bundled as 851-wide WebP (q84) on 15 Oct 2026 at the owner's request; resolved by country in onboardingCountryStages (lib/logic/onboarding_art.dart). Owner artwork approval still pending. Not published in an art pack.",
+        "bundledAsset": "assets/onboarding/stages/country_hu.webp"
+      }
     }
   ],
   "changeLog": [
@@ -4460,6 +4932,22 @@
     {
       "date": "2026-10-09",
       "change": "Integrated 24 country stages, Anywhere and prop-free Kyoto (WebP in assets/onboarding/stages/); resolver is city -> Bali/Kyoto -> country -> stand-in city (CZ, MY) -> Anywhere. Normalised the five green plates onto flat #00B140 as green-*-clean-v1.png; films await owner approval."
+    },
+    {
+      "date": "2026-10-14",
+      "change": "Wave C: Antalya, Phuket, Milan and Taipei still stages generated and validated at 851 × 1848; review_ready, owner approval pending; no native integration or publication."
+    },
+    {
+      "date": "2026-10-14",
+      "change": "Integrated Wave C: Antalya, Milan and Taipei city stages and Phuket's region stage bundled as WebP in assets/onboarding/stages/. The resolver is now city -> region (Phuket) -> Bali/Kyoto -> country -> stand-in city (CZ, MY) -> Anywhere; 31 city stages, 1 region stage, 26 country stages."
+    },
+    {
+      "date": "2026-10-14",
+      "change": "Wave E1: seven new country baseline stages generated, measured and reviewed; owner approval pending. New stages are not integrated or published."
+    },
+    {
+      "date": "2026-10-15",
+      "change": "Integrated Wave E1: seven country stages (Austria, Croatia, Ireland, Vietnam, Morocco, Egypt, Hungary) bundled as WebP in assets/onboarding/stages/ and added to onboardingCountryStages (26 -> 33 country stages). Czechia and Malaysia keep their city stage as the stand-in (no country stage drawn)."
     }
   ],
   "coveragePolicy": {

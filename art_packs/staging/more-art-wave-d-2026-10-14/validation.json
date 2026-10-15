@@ -1,0 +1,999 @@
+{
+  "date": "2026-10-14",
+  "wave": "D",
+  "count": 54,
+  "status": "PASS",
+  "scope": "Exact PNG dimensions, RGBA8, embedded sRGB, real alpha, corner alpha, original card alpha/structure, barcode stubs, eyelets and empty stamp label bands. Subjects and text-free art reviewed visually.",
+  "cities": [
+    {
+      "city": "Edinburgh",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/edinburgh/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "2b6c88de59298b33113328bfa6290e059f05f4f042af6d3a95f321db6f1745ba",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/edinburgh/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "505ffd30348337c05584117ee012fc00d8c2269d635be61728fa1fe15b5288ff",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/edinburgh/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "954d969d3e1dcfb51c2f9441bdfd01d47e826ace7b744dba0f19ace15ffca9ed",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/edinburgh/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "95545bca15e7b0932ef00e2c276b59c7c062cdddd4b18023216922784ed84717",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/edinburgh/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "sha256": "cfe38414d0a6beceaf51ac258045072d1670c3115afc668fac876806bb205dd6",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/edinburgh/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e591932bdabe934ca2e6a0bdaa0f656fa0a77451c0617e01b2b768f2f564d67b",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Sydney",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/sydney/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "905247b061767b9d37a09cd115b648d6c5b94a661da27249cc18571b3565a6b5",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/sydney/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "8ab5e61472b577471754f9d7b91cf6ba63b2130ae837a52bf5289fcbdc473fe0",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/sydney/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "5f0f3cd15184c9bca4dd306bd5d190b16b536908aa681a0d67349396c844906e",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/sydney/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "35eb668a1e52ccf54bc8d635e48ec1c1ce81ee325ebdbbebbb08bbe5cb7393f5",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/sydney/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "f4beb8459361a107b408648838b3100cbb1fac69263afc4bb17b1f017a99668b",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/sydney/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "c248cee6b6900e58d29ba1d768da30e0d7dc0bbf3447fed828bcfbdc0922a0c5",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Melbourne",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/melbourne/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "0c7312cdbc4f1b93e0ea26e6c208e9132be7159bb2b880858269bcc800a410cb",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/melbourne/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4d9aa15580f7d45bb6c153c3625d50a5125964c88fcc6e0d61babb48f313a262",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/melbourne/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "231b0bf285fbfaf0e38be8c99c6c1603f6540cee747b2d711feab34f67533d8f",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/melbourne/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "6078289259e1a3a62f9d8963fc14d85eefb7fe67e4fd768d84ba4240a4214c18",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/melbourne/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "74d5c0481982ed50d784a9d35eeac515c759f90288c90ac5d54ebabfdcbdaa6c",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/melbourne/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "b9628228e65fad44264881c197fab57c9a3683c189fd38b646fdd67cde2d55dd",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Florence",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/florence/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "be81023f8148a66bddb3d4cbb046f16d8987a684dd250819aa9291d57e833092",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/florence/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "731e2d60d13a6302c1944bf0c31f00d4e5a56291abd01d0ee3bdf48d07dfb37f",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/florence/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "79416e4c5c269a48706e5b837457c99bfaf877ffb0090a00bafa206dfb398f69",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/florence/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "55d96a9d03f2b7c42064bf739b953a4e99be184ee2836d5b5d1b7c3021152597",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/florence/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "c641d684e2d9ab0e4fc7ffd01edf75e6bacffe95f14999748628d791a4813f41",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/florence/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "fb2f9d4633937151f68a1f8b9e5e11b2a4e1b03d6c872d9ea5ea3e624a5acbe8",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Athens",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/athens/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "2dc2682df655e0e12f7239ca0ebe6ae46bd2df201c5c246d31b1952699ca2405",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/athens/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "40bb05127e189ce1f24b6b828e3921761ab885e46d4721ee381d17f95aa6df53",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/athens/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "ce465b106922c452b8880e2d72f0ddf2492493fa66602e441e7a0ae30f980f47",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/athens/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "ab92e9f61508b3d3c9eb947a479a68fe61467a9d0dbc3189928f5a8b1462a998",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/athens/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "84619be5dce294e9e9b0935525e6dff504e94d82f33865a4a01f10ee963ab970",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/athens/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "fc248ec143400bf94f1ba7bca8442555bd8051426485efd3689b6d8ee27e4e1e",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Vancouver",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/vancouver/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "4c88b7ad7aae0fa86a313c13f17d5360160963c5727f62477750ad72f0c2f5e1",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/vancouver/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "a3525784fe8b0d9c3eb0a165700ea3258f8151a314003771a346110524200859",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/vancouver/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "a09669a28f3f5b344c9d90f5a67b7cb356d0bbd79af1f54fa37f2b81a2a18210",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/vancouver/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "1091f68b2966b576a466bc95a57a313ddc3d93dcf9a0381fb546f4a2d0238888",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/vancouver/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "8ad6579d9792b6540c1fe49e088e7f3fc26203ca2c418780cd42946863b1d4c9",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/vancouver/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "31abebf1aca7f37aaf87e27a97b7a482336f76a321b1c28da3b337f7ddaab027",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Cape Town",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/cape_town/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "a9b4a90aaddcdf3dce44cfd5062a3fe527598372236fe980d4bac38f722af879",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/cape_town/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "c0356d27f7b5f36284f9df739551c16fae26c24d99727a736e25879d982d15d4",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/cape_town/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e9e393c46a1360fbe1596409b1281f3093b8080dd32196424c25d2df9491334d",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/cape_town/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "e0b9a0b7769ed831edae5860de999ab6c3e079429ee3bc181d2847ecfe18239e",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/cape_town/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "c8a14c38a8d6c0632d17b4cf6fc4e53b0336d8bc0c8213b3316d9e8ccc8d3c25",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/cape_town/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "c2c3b3580ace6d9879dcd7cfe18432e6efbd54c347f4108a051fed1910670c25",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "Queenstown",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/queenstown/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "be29ac19b4c93b5f2f86d76df0c5b4626dc96d5d9eaabbd637d3fd9bfb5d2161",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/queenstown/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "45c6c790960905ad4da4996e1a2e4a96ffeb6f10a0ae9dec67dafb5a7f76f3ae",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/queenstown/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "deeeddd27fcdb36635b253747b52d188b368a86fdfca7d7d18a1baa78b893918",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/queenstown/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "8d35d322ee20244c45dbbc7ba13119e9545b83552f94f5de72a13a4a118cc91c",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/queenstown/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "5f040f6e2e0d491f64fb80be720d246eb2f78b6908b6e61194e1f78ea19c1911",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/queenstown/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "7699623646c41fd3f2f8e645d3abcb30cafa387d455464bc2ad05cc8a4da5f01",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    },
+    {
+      "city": "San Francisco",
+      "count": 6,
+      "status": "PASS",
+      "results": [
+        {
+          "file": "art_packs/staging/san_francisco/featured_ticket.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "9a935cf29732299181788ce56a2d9ded3a38f8b3b246ab9d3783b8cde15faf6a",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "barcode_stub_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/san_francisco/room_card.png",
+          "size": [
+            1774,
+            887
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "46a0fe7e05fa7b4a8201e7a729a1726a0960e3fbd146f18bdb3ff123db8e658e",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/san_francisco/reservation_card.png",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "153546d94db515d23c8bd1c111f4b9877c44a5ab6dda14c6f72738bcc2e58c32",
+          "alpha_matches_template": true,
+          "protected_shell_pixels_match": true,
+          "stray_pixels": 0,
+          "brass_eyelet_matches_template": true,
+          "blank_centre_matches_template": true,
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/san_francisco/countdown_postcard.png",
+          "size": [
+            1122,
+            1402
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "6fc58fdabb739b6754125656337b8efbaa2387b66b18c0b156e97f96c7e36762",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/san_francisco/trip_postcard.png",
+          "size": [
+            1536,
+            1024
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "sha256": "02808a62f26f2c12a50cdb037ca0ce5b70e308c8dc025c56a197b9dc5841b301",
+          "embedded_srgb_profile": true
+        },
+        {
+          "file": "art_packs/staging/san_francisco/documents_destination_stamp.png",
+          "size": [
+            1024,
+            1280
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "sha256": "a6ffacaf0303465428dae6a27cb148c1190b43729f047022baf84caa89972d7d",
+          "blank_label_matches_reference": true,
+          "printed_illustration_box": [
+            123,
+            115,
+            901,
+            947
+          ],
+          "embedded_srgb_profile": true
+        }
+      ]
+    }
+  ]
+}

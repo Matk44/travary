@@ -1,0 +1,750 @@
+{
+  "date": "2026-10-14",
+  "mode": "built-in imagegen",
+  "brief": "docs/art_requests/GPT_MORE_ART_2026-10-14.md",
+  "partial": false,
+  "remaining": [],
+  "records": [
+    {
+      "id": "country_ae/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for United Arab Emirates.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: dunes at golden hour, a dhow on a calm creek, wind-tower houses and a slender modern skyline far behind. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-f69605f4-570f-4d8f-87af-62d78315fe66.png",
+      "finalPath": "art_packs/staging/country_ae/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_ae.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "309ff8a972202d27b2f658e27faff84e5872ce7e86b8038e94e525fa965e0e59",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: unmarked dhow, wind-tower houses, golden dunes and distant slender skyline; no script, flags, faces or logos. Paris paper/keyline/perforations and blank label preserved; alpha/size/profile checks pass."
+    },
+    {
+      "id": "country_au/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Australia.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: red-earth outback rock at sunset beside a calm harbour of white sail-like roofs, eucalyptus and a kookaburra. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-397ff254-ab5c-4120-8221-86f0b13d936a.png",
+      "finalPath": "art_packs/staging/country_au/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_au.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "4e3cbe3b39e55b13761043163afae2318cfdc2bab830e0ef7d1fcf624783e952",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: recognisable kookaburra/eucalyptus, red outback rock, sail-roof harbour montage, plain white sail. No flags, lettering, logos or real faces. Slight donor ink alpha is composited over opaque Paris paper; exterior alpha, frame and blank label preserved; all checks pass."
+    },
+    {
+      "id": "country_br/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Brazil.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a granite sugarloaf peak over a curved bay, rainforest hills, colourful hillside houses and a toucan. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-f951a1bd-f0d1-4beb-b824-4aa319275584.png",
+      "finalPath": "art_packs/staging/country_br/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_br.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "0d8c3d0e27b33e1a60d6d80c4a98f72394c03ab8bd4aa9b31daecba89b97ad4e",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: bold toucan, sugarloaf peak, rainforest and curved bay with colourful hillside houses. Unmarked boats and cable car; no lettering, flags, logos or faces. Paris frame/blank label/exterior alpha preserved; checks pass."
+    },
+    {
+      "id": "country_ca/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Canada.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a turquoise glacial lake below snowy peaks, pines, a red canoe and a moose silhouette at the shore. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-f8acac26-b77e-4d3b-8185-098d0d5266eb.png",
+      "finalPath": "art_packs/staging/country_ca/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_ca.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "9f92b5e479f53a76e47a05f8d6212e84537694085b0bc3920381f5a0abb8b27e",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: turquoise glacial lake, snowy peaks, pines, plain red canoe and recognisable moose silhouette. No lettering, flags, logos or faces. Protected Paris frame/blank label/exterior alpha and exact export checks pass."
+    },
+    {
+      "id": "country_ch/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Switzerland.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: an alpine meadow, a snow-capped pyramid peak, a red mountain train on a viaduct and a chalet. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3e69ae4e-cd0b-40b5-b20e-7e6f4b6815d6.png",
+      "finalPath": "art_packs/staging/country_ch/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_ch.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "08fc07c464d8045fd749d134952737f8b83bba5227d8c5ca98b815be607a5418",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: bold snowy pyramid peak, Alpine meadow/chalet and plain red mountain train on viaduct. No train badges/route text, flags, logos or faces. Paris frame/blank label/exterior alpha and exact export checks pass."
+    },
+    {
+      "id": "country_cn/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for China.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: karst limestone peaks over a misty river, a bamboo raft, a pagoda and a winding wall on the ridge. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-dc679c5f-c234-47b4-9a68-2e4e81f99c66.png",
+      "finalPath": "art_packs/staging/country_cn/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_cn.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "da867c5750d34ae2ad90d99fa82bf97646a7e522f6f51cabb4e556bfb6977680",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: limestone karst river, pagoda, winding ridge wall and bamboo raft with featureless tiny silhouette. No Chinese/decorative script, lettering, flags or logos. Protected Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_de/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Germany.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a fairy-tale castle on a forested crag above a river valley, half-timbered village and vineyards. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1718edaf-1f74-404b-9b92-c97efe880c0d.png",
+      "finalPath": "art_packs/staging/country_de/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_de.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "5f76fc7b615bbd0248279ede3414ae9b121176bdddc4703ff9a49e1ad589d4ac",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: forested-crag castle, river valley, half-timbered village and vineyard. No lettering, flags, logos or faces. Paris paper/frame/blank label/exterior alpha preserved; exact size/profile checks pass."
+    },
+    {
+      "id": "country_es/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Spain.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: whitewashed hill town above olive groves, a flamenco-red sunset, terracotta roofs and a distant sea. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-72e9465f-1aeb-4ecc-a497-280e8b807123.png",
+      "finalPath": "art_packs/staging/country_es/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_es.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "ecf03e3b85212749fa19672bbfbd1f342d3f10c467ac4130d32bccc2ec41875b",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: white hill town with terracotta roofs, olive groves, distant sea and flamenco-red sunset. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_fr/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for France.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: lavender fields, a stone village with a church spire, a cypress line and soft hills (no Eiffel Tower: Paris has its own pack). The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-7819876c-5588-4c33-bd69-f13acccac680.png",
+      "finalPath": "art_packs/staging/country_fr/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_fr.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "dd553e92bb719c00a849cc0590138faf90e647b47cc0f888d6359559e5bccbed",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: lavender fields, stone village/church spire, cypress and soft hills, no Eiffel Tower. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_gb/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for United Kingdom.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: rolling green patchwork hills, a dry-stone wall, a red telephone-box-style kiosk without signage and a stone cottage. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-33bd9ef6-9a1e-4fca-b710-c7096858adb2.png",
+      "finalPath": "art_packs/staging/country_gb/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_gb.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "f1a5cf3080cd2c56cd8014c70fe970d2a67de86f35f842d10cacf8ae23dfd4d2",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: patchwork green hills, stone cottage/dry wall and red kiosk with completely unprinted sign panels. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_gr/documents_destination_stamp",
+      "prompt": "Use case: precise-object-edit. Preserve this complete Greece travel stamp and its canvas, alpha, perforations, paper, navy keyline, completely blank ivory label, blue-domed chapel, white cube houses, windmill, bougainvillea, coast, sailboat, sky and sunset palette EXACTLY. Correct ONE detail: there are two nested sun discs above the sea horizon at right. Remove the SMALL INNER pale-yellow semicircle at roughlyx833,y590, filling it seamlessly with exactly the same flat golden colour/grain as the surrounding LARGE sun. Keep the large sun's current outer circular silhouette unchanged, so there is ONE single solid warm gold sun with no inner circle, ring, crescent, second disc or bright spot. No other edits. No words, letters, numbers, flags, logos or faces. One1024x1280PNG true transparency outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c4aa49ce-2867-4989-8e18-5d435ce633fa.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d31ecc4e-3830-4f9f-bf02-dc5e05b53e3f.png",
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "attempts": [
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c4aa49ce-2867-4989-8e18-5d435ce633fa.png",
+          "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Greece.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: white cube houses and a blue-domed chapel on a cliff above an Aegean bay, a windmill and bougainvillea. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+          ],
+          "status": "rejected",
+          "rejection": "Nested extra sun disc.",
+          "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_gr-attempt-1-exec-c4aa49ce-2867-4989-8e18-5d435ce633fa.png"
+        }
+      ],
+      "finalPath": "art_packs/staging/country_gr/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_gr.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "4ad6158511acbf84fb0bda04af2c749ed1b52c4589bab4d3001529cf1a76149e",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected corrected source and final light/dark sheet: one sun disc after nested-disc correction, blue-domed chapel/white cliff houses, windmill, bougainvillea and Aegean bay. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass; rejected original retained."
+    },
+    {
+      "id": "country_id/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Indonesia.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: stepped green rice terraces, a split temple gate, a volcano on the horizon and palms. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-6cbab6fb-734f-45b5-b808-409e725c56c9.png",
+      "finalPath": "art_packs/staging/country_id/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_id.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "ca344d92fb4a334f9bf4e1a9e6ba35fdab21425ab608e986e0a8f78eabfc494d",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: bold split temple gate, stepped green rice terraces, volcano and palms. No decorative script, lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_in/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for India.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a white marble domed mausoleum-like palace reflected in a long pool, marigolds and a soft pink dusk. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-db0e4acb-3073-451a-8293-3679d743333f.png",
+      "finalPath": "art_packs/staging/country_in/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_in.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "31d791dd665cacfdc35a3318e63fede5b27f52be1836ac089188f574659e79c2",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: white domed mausoleum-like palace, long reflecting pool, marigolds and pink dusk. Facade ornament reads as geometric/floral relief, no inscriptions or decorative script. No flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_it/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Italy.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a cypress-lined road through golden Tuscan-like hills to a hill town, a pastel coastal village below. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-b2868504-d96d-41b5-86e8-fc84c4234e5f.png",
+      "finalPath": "art_packs/staging/country_it/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_it.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "270f77d1f2ddd380763f2224ae479e9d58ec99278e3840e8f95bc893973d8cd3",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: cypress-lined road, golden hills/hill town and pastel coastal village, broad Italy montage. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_jp/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Japan.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a snow-capped conical mountain over a lake, red maples, a pagoda roofline and a red sun disc. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-e6dfcd32-b18f-4cf0-b1b5-839e1609a5cc.png",
+      "finalPath": "art_packs/staging/country_jp/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_jp.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "ca78a6e275b22191c59a7a85556fdc582ee4983071aa8b1b9b338bc12f33671c",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: bold snow-capped conical mountain/lake, red maples, pagoda roofline and single red sun disc. No Japanese/decorative script, lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_kr/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for South Korea.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a palace gate with curved tiled roofs, cherry blossom, layered blue mountains and a lantern. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d4557e9e-f3ff-473c-86d1-1968fbbeb2ae.png",
+      "finalPath": "art_packs/staging/country_kr/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_kr.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "8051dc1b395f29d08d49fe83e40407919ba4b4d3f91aef96627bc099ed3afd08",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: curved-roof Korean palace gate, cherry blossom, layered blue mountains and lantern. Gate panels unprinted; no Korean/Chinese/decorative script, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_mx/documents_destination_stamp",
+      "prompt": "Use case: precise-object-edit. Keep this complete Mexico stamp unchanged except the small rectangular temple sitting at the TOP of the stepped pyramid. Rebuild that TOP TEMPLE as a simplified PLAIN SANDSTONE BOX with its two dark rectangular door openings retained. REMOVE both projecting decorative cornice/frieze bands entirely and remove every carving from every face, especially the shaded left-facing face where oval glyph-like marks remain. Its flat roof is a single unmarked straight slab; all walls smooth warm sandstone with only sparse natural grain. No decorative bands, scoring, tiny blocks, glyphs, symbols, circles, inscriptions or carved repeating forms anywhere on that top box. Preserve all lower pyramid stairs/stone courses and geometry exactly, along with jungle, cenote, agave, flowers, sky, one sun, frame/perforations/navy keyline/blank ivory label and real exterior alpha. No hanging banners or flags. No words, letters, numerals, logos, faces or pseudo-script. One1024x1280PNG.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d60061f6-eff0-47a4-b686-222124069364.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a10f31b1-6a85-417a-bf75-d424f91fea3c.png",
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "attempts": [
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3d4bd31f-c089-466f-8c16-c7a6f4e2f01e.png",
+          "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Mexico.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a stepped stone pyramid in jungle, a cenote pool, papel-picado colours as abstract shapes and agave. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+          ],
+          "status": "rejected",
+          "rejection": "Hanging paper banners and inscription-like marks on temple lintel.",
+          "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_mx-attempt-1-exec-3d4bd31f-c089-466f-8c16-c7a6f4e2f01e.png"
+        },
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-d60061f6-eff0-47a4-b686-222124069364.png",
+          "prompt": "Use case: precise-object-edit. Preserve this entire Mexico stamp canvas, real alpha, paper/perforations/navy keyline/blank label, pyramid shape and stairways, cenote pool, agave, jungle and warm light. Cleanup only: REMOVE ALL FIVE hanging coloured paper banners plus their entire string at the top; fill seamlessly with existing natural green foliage and teal sky. Keep their vivid pink/orange/teal colours only in existing flowers/foliage, no hanging flags, bunting or paper rectangles. Also remove every inscription-like mark across both horizontal bands on the small temple at the TOP of the pyramid; those lintels must be completely plain natural stone courses with no carved glyphs, signs or symbols. Other pyramid stones unchanged. No text, lettering, numerals, hieroglyphs, pseudo-script, flags, logos or faces anywhere. One1024x1280PNG true transparency outside.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3d4bd31f-c089-466f-8c16-c7a6f4e2f01e.png"
+          ],
+          "status": "rejected",
+          "rejection": "First correction removed banners but left carving-like marks on shaded lintel band.",
+          "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_mx-attempt-2-exec-d60061f6-eff0-47a4-b686-222124069364.png"
+        }
+      ],
+      "finalPath": "art_packs/staging/country_mx/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_mx.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "0d5e728434d913659c64a7a1e5171968a9a8c38649762fb06ed56b000762ce40",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected corrected source and final light/dark sheet: bold stepped jungle pyramid, cenote and agave, bright abstract flower colours. Removed hanging banners and rebuilt top temple as plain uninscribed sandstone after two corrections. No glyphs, script, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass; attempts retained."
+    },
+    {
+      "id": "country_nl/documents_destination_stamp",
+      "prompt": "Use case: precise-object-edit. Preserve this entire Netherlands stamp unchanged, including ONE sun only, sky, windmill tower, canal, tulips, bicycle, houses, paper/perforations/keyline/blanklabel and realalpha. Correct ONLY windmill rotor: currently three lattice sails visible. Add the missing FOURTH WOODEN LATTICE SAIL from the central hub diagonally DOWN-LEFT, exactly opposite the existing UP-RIGHT sail. Four straight evenly spaced sails form one coherent X, equal-length arms at90degreeintervals, matching existing cream/blue wooden lattice construction, perspective and warm light. The new down-left sail passes in front of the dark mill tower, clearly visible from hub to tip, and ends above the small red-roofed building. Do not change the other3sails, move the hub, add more blades, add flags, create letters or numbers. Everything else unchanged. One1024x1280PNG genuinealpha outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1d715171-7d4f-4dd7-8fd7-db2d4d4c104e.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c44a4996-09dd-4488-96de-0255c08b1265.png",
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "attempts": [
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-cedfd130-74bb-4cf8-a54b-dbc9fe5807fd.png",
+          "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Netherlands.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: tulip fields in stripes, a windmill by a canal, a bicycle and gabled canal houses far off. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+          ],
+          "status": "rejected",
+          "rejection": "Two distinct sun discs in the sky.",
+          "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nl-attempt-1-exec-cedfd130-74bb-4cf8-a54b-dbc9fe5807fd.png"
+        },
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1d715171-7d4f-4dd7-8fd7-db2d4d4c104e.png",
+          "prompt": "Use case: precise-object-edit. Keep this complete Netherlands travel stamp unchanged: windmill, canal, tulip stripes, bicycle, gabled houses, printed style, warm light, canvas, alpha, perforations/navy keyline and blank ivory label. Fix ONLY extra sun: REMOVE THE LARGE ORANGE-RED semicircle in the upper-middle sky centred near x714,y530. Fill that orange area seamlessly with adjacent petrol-blue sky and continuous peach/cream cloud bands. RETAIN ONLY the SMALL GOLD SUN at the distant horizon near x700,y600, its reflection unchanged. There must be exactly ONE sun in the entire image; no orange disc, ring, second semicircle or moon above it. No other edits, no words, numerals, flags, logos or faces. One1024x1280PNG genuine alpha outside.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-cedfd130-74bb-4cf8-a54b-dbc9fe5807fd.png"
+          ],
+          "status": "rejected",
+          "rejection": "Windmill rotor had only three sails; add matching fourth for coherent structure.",
+          "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nl-attempt-2-exec-1d715171-7d4f-4dd7-8fd7-db2d4d4c104e.png"
+        }
+      ],
+      "finalPath": "art_packs/staging/country_nl/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nl-exec-c44a4996-09dd-4488-96de-0255c08b1265.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "de2a5cc4ebb10b0d56d404cd8a7420ac6672e37b672dd7596bcecad792f96145",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected corrected source and final light/dark sheet: tulip stripes, windmill with four coherent lattice sails, canal, bicycle and gabled houses. Extra sun removed; one gold horizon sun remains. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass; rejected export/attempts preserved."
+    },
+    {
+      "id": "country_nz/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for New Zealand.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a deep fjord with waterfalls, sheep on green hills, a snowy range and a fern frond. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-18927661-ade9-4bbc-9a46-e724c4a71e63.png",
+      "finalPath": "art_packs/staging/country_nz/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nz-exec-18927661-ade9-4bbc-9a46-e724c4a71e63.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "bbcccbcda0f2f674539e77e6242e0c3c8424955b23355772994fdb6e554d6445",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: deep fjord/waterfalls, snowy range, green hills with recognisable sheep and fern frond. Single sun; no lettering, flags, logos or people. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_pt/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Portugal.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a yellow tram on a steep cobbled hill, azulejo-patterned walls as abstract tiles, an ocean cliff. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1576f04e-a443-4336-a62e-1025fc8438a8.png",
+      "finalPath": "art_packs/staging/country_pt/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_pt-exec-1576f04e-a443-4336-a62e-1025fc8438a8.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "8ad1e90978f45187aec3159332b292a4c86d6bd77c1dfbe942e5e7ba8e69d8ce",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: unmarked yellow tram, steep cobbles, abstract azulejo floral/geometric tiles and ocean cliff. Tram has plain roof without route-display housing or badge, single sun. No lettering, script, flags, logos or real faces. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_sg/documents_destination_stamp",
+      "prompt": "Use case: precise-object-edit. Preserve this entire Singapore travel stamp, one sun, dusk light, Supertree-like garden sculptures, glass conservatory domes, orchids, waterfront, palette, printed papergrain, alpha, frame/perforations/navy keyline and blank ivory label. Remove ONLY the entire THREE-TOWER HOTEL COMPLEX with the boat-shaped roof spanning its tops at the right background (roughlyx680..975,y585..810). Delete every part of its three towers AND connecting rooftop platform. Replace that region with a balanced distant cluster of GENERIC SMALLER GLASS OFFICE TOWERS, varied heights, independent flat roofs, tiny rectangular windows, no connecting rooftop structure or recognisable hotel. The glass conservatory domes in front remain unchanged. No casino buildings or advertising. Supertrees remain the dominant subject. No text, letters, numbers, logos, flags, faces or second sun. One1024x1280PNG genuinealpha outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5ebc4fab-06af-4d4e-87c9-fd16184f4ebc.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-b4f6b527-7d35-4dc2-a3c7-754446e3102e.png",
+      "finalPath": "art_packs/staging/country_sg/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_sg-exec-b4f6b527-7d35-4dc2-a3c7-754446e3102e.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "50a9b0949d87822e2da4adda7825c83f6823cc788ac9757cddce54d86612f8df",
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "attempts": [
+        {
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5ebc4fab-06af-4d4e-87c9-fd16184f4ebc.png",
+          "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Singapore.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a garden of tall tree-like sculptures at dusk, a waterfront skyline, orchids. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+          ],
+          "status": "rejected",
+          "rejection": "Three-tower skypark hotel complex conflicts with brief exclusion of casino buildings.",
+          "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_sg-attempt-1-exec-5ebc4fab-06af-4d4e-87c9-fd16184f4ebc.png"
+        }
+      ],
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected corrected source and final light/dark sheet: dominant garden tree sculptures, orchids, conservatories and generic waterfront office skyline at dusk. Removed three-tower skypark hotel complex to meet casino-building exclusion. One sun, no text, logos, flags or faces. Paris frame/blank label/exterior alpha and exact checks pass; rejected export/attempt retained."
+    },
+    {
+      "id": "country_th/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Thailand.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a golden temple roof with tiered eaves, a longtail boat on turquoise water, limestone islands. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-b86dbbb7-9091-4cb4-b4ef-1a3b1d4032a8.png",
+      "finalPath": "art_packs/staging/country_th/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_th-exec-b86dbbb7-9091-4cb4-b4ef-1a3b1d4032a8.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "f22507bd94af6f137f1c77419b5e6a54afca5914cd6f3a0a1387b8f79de6ac5b",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Inspected source and final light/dark sheet: tiered golden Thai temple roof, plain longtail boat, turquoise water and limestone islands. Temple ornament geometric/floral, no decorative script or lettering; boat ribbons are plain tied strips, no flags. No logos or faces, single sun. Paris frame/blank label/exterior alpha and exact checks pass."
+    },
+    {
+      "id": "country_tr/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Turkey.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: hot-air balloons over fairy-chimney rock valleys at sunrise, a domed mosque silhouette far behind. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "lastGenerationError": {
+        "tool": "built-in imagegen",
+        "httpStatus": 429,
+        "code": "usage_limit_reached",
+        "message": "The usage limit has been reached",
+        "resetsAt": 1791968364,
+        "resetsAtSydney": "2026-10-14T19:59:24+11:00",
+        "attemptedAsset": "country_tr/documents_destination_stamp",
+        "outputCreated": false,
+        "nextStep": "Resume the existing country_tr prepared prompt after reset, or obtain explicit user authorization before CLI/API fallback."
+      },
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-0fa1df1b-e1d4-4d35-8f29-272bc52f1e75.png",
+      "finalPath": "art_packs/staging/country_tr/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_tr-exec-0fa1df1b-e1d4-4d35-8f29-272bc52f1e75.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "4020059438d2496ca707a54cadfb369b8b843e716a158852fbddeeff45c77666",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Checked light/dark: coherent balloon valley, one sunrise, distant mosque, blank label; template edges and transparency clean."
+    },
+    {
+      "id": "country_us/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for United States.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a desert mesa and canyon at sunset, a highway curving away, saguaro cactus (no Orlando castle: that's its own pack). The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-83767ee9-f55c-410d-a96f-059fc3e39768.png",
+      "finalPath": "art_packs/staging/country_us/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_us-exec-83767ee9-f55c-410d-a96f-059fc3e39768.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "8ad2303ff4fabea959b2975be10f88e01230fbdcdfe2e6849457b8c07007c0b8",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Checked light/dark: southwest desert road, single sun, no excluded landmarks or text; blank label and clean template edges."
+    },
+    {
+      "id": "country_za/documents_destination_stamp",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for South Africa.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a flat-topped mountain over a bay, protea flowers, an elephant silhouette on the savannah. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "transparent_background": true,
+      "status": "review_ready",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-cfdef6ad-8757-46be-8606-d78c8a56795b.png",
+      "finalPath": "art_packs/staging/country_za/documents_destination_stamp.png",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_za-exec-cfdef6ad-8757-46be-8606-d78c8a56795b.png",
+      "dimensions": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "blankLabelMatchesTemplate": true,
+      "protectedStampMatchesTemplate": true,
+      "sha256": "a9795a0337111ac69da320e2ec01f0d1cb04c3f4ba3dadb54287b47d34c84440",
+      "visuallyInspected": true,
+      "ownerApproval": "pending",
+      "qaNotes": "Checked light/dark: Table Mountain, proteas and elephant support a broad South African scene; single sun, no text, clean label and template edges."
+    }
+  ]
+}

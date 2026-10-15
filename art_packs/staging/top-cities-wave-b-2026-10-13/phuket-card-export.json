@@ -1,0 +1,68 @@
+[
+  {
+    "place": "phuket",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/phuket-featured_ticket.png",
+    "palette": [
+      [
+        25,
+        67,
+        76
+      ],
+      [
+        198,
+        100,
+        68
+      ],
+      [
+        214,
+        169,
+        72
+      ]
+    ]
+  },
+  {
+    "place": "phuket",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/phuket-room_card.png",
+    "palette": [
+      [
+        25,
+        67,
+        76
+      ],
+      [
+        198,
+        100,
+        68
+      ],
+      [
+        214,
+        169,
+        72
+      ]
+    ]
+  },
+  {
+    "place": "phuket",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/phuket-reservation_card.png",
+    "palette": [
+      [
+        25,
+        67,
+        76
+      ],
+      [
+        198,
+        100,
+        68
+      ],
+      [
+        214,
+        169,
+        72
+      ]
+    ]
+  }
+]

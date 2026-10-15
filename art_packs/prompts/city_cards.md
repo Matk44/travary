@@ -28,12 +28,15 @@ card whose shape has changed (it then shows the country's card instead).
 - The outline, corners, shadow, paper texture, notches, perforations,
   barcode stub, cord, brass grommet and tag stay exactly where they are.
 - Every blank area stays blank: the ticket's left 42% (plain navy), the key
-  card's left 62% (ivory paper), the middle of the reservation card.
+  card's left 38% (ivory paper, nothing in it at all), the middle of the
+  reservation card.
 - Only the illustrated scene changes, inside the area it fills now, plus the
   thin decorative stripe and the tag, recoloured to the place.
 - **Ticket:** the scene flows out of the navy panel towards the barcode stub.
-- **Key card:** the view from a hotel window, fading softly into the paper
-  on its left edge.
+- **Key card:** the view from a hotel window, **full height** (top edge to
+  bottom edge of the card), beginning about 43% of the way across and fading
+  softly into the paper on its left edge, as on the Paris card. Not a small
+  picture in a corner: it must be as big as the template's.
 - **Reservation card:** only the small framed picture at the far right.
 - Style: mid-century travel poster, screen-printed. Flat layered shapes,
   fine paper grain, warm low sun, the same palette family as the template.
@@ -73,7 +76,8 @@ Wave 2, when wave 1 is in:
 | Arizona (`arizona`) | region | the Grand Canyon at sunset, Horseshoe Bend, saguaro cacti, an empty desert road |
 | Alaska (`alaska`) | region | Denali, a glacier meeting the fjord, a cruise ship, a bald eagle |
 
-San Francisco needs nothing: the United States cards already show it.
+San Francisco uses California's cards until its own are drawn: it is Wave D of
+`docs/art_requests/GPT_MORE_ART_2026-10-14.md`.
 
 Outside the US, the Lake District's cards are still London's (Big Ben).
 Its templates are the United Kingdom cards in

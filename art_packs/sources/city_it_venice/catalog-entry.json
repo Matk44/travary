@@ -1,0 +1,8 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["IT"],
+    "cities": ["venice"]
+  },
+  "minAppBuild": 1
+}

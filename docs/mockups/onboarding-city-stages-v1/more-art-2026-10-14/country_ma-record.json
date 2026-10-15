@@ -1,0 +1,57 @@
+{
+  "id": "country_ma/onboarding_stage_v1",
+  "destinationId": "country_ma",
+  "label": "Morocco",
+  "scope": "country",
+  "selectors": {
+    "countryCodes": [
+      "MA"
+    ]
+  },
+  "geographicScope": "a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern)",
+  "prompt": "Use case: precise-object-edit. Keep this entire Morocco folded-cardstock stage unchanged except for one layout correction: SHORTEN the square minaret by about20% so its highest finial is at y560px or lower on the851x1848canvas, safely below30%height. Currently the finial at y450 intrudes in the live headline area. Preserve its base and location; rebuild the top lower, with authentic square tower proportions and geometric arched windows. Fill vacated space with neighbouring plain teal paper sky. Keep palms at peripheral left, medina, keyhole doorway, tile geometry, spices, dunes and camel silhouettes, warm light, theatre wings, camera and completely clear cream floor starting65% exactly the same. No writing, pseudo-script, letters, numbers, flags, faces, UI, folio, characters or newprops. One opaque portrait851x1848PNG.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-de561a4f-d8f0-4d3b-8857-4c68ed5b4e4e.png"
+  ],
+  "transparent_background": false,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-59d242c5-2f58-448a-ac61-1cfb3ae727dd.png",
+  "attempts": [
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-de561a4f-d8f0-4d3b-8857-4c68ed5b4e4e.png",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Morocco (country_ma). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a rose-red walled medina with a tall square minaret at sunset, a keyhole-arched doorway tiled in abstract geometric patterns, a camel train on golden dunes, palms, mounds of coloured spice (no script, even as pattern). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–27% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ma/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_tr.webp"
+      ],
+      "status": "rejected",
+      "rejection": "Square minaret finial intruded in central headline sky."
+    }
+  ],
+  "visuallyInspected": true,
+  "originalInputReferencePaths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_ma/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_tr.webp"
+  ],
+  "qaNotes": "Inspected corrected still: central minaret shortened below30%height, quiet teal headline centre, peripheral palms match theatre family. Rich cardstock medina, geometric keyhole doorway, spices, sunset dunes and recognisable camel silhouettes. Cream floor65%, right foreground clear. No script, lettering, logos, flags, faces, UI or travel props; Turkish balloon/sea scenery replaced.",
+  "originalDimensions": [
+    851,
+    1847
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/country_ma/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_ma.png",
+  "sha256": "7da4997ff5f14d0f45be31bdb9129572bf03c08acf06e9592a9eaad5653a2cd6",
+  "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false
+}

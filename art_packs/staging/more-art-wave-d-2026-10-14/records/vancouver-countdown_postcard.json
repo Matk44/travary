@@ -1,0 +1,18 @@
+{
+  "id": "vancouver/countdown_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this city.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Vancouver. Scene: glass towers on a harbour backed by snowy mountains, a seaplane, a white sail-roofed waterfront pavilion, the seawall and tall cedars, a ferry, autumn colour. Light: warm low golden sun; coherent golden hour. Stripe and tag: spruce green, ocean teal, maple red (#365e4f, #327982, #bd5f4d). Keep all six pictures coherent in light, palette and landmarks.\nOne upright portrait vintage postcard 1122 × 1402 PNG. Thin deckled warm-cream paper edge about 2% width, faint soft contact shadow, centred and straight-on with generous genuine transparent margin outside. Illustration fills paper inside edge. Upper-right quarter quiet open sky, main subjects in left and lower two-thirds. No tag, postmark, stamp, UI or surrounding backdrop.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5d090cc5-bbd1-467f-92d0-9e9c995e1db1.png",
+  "visuallyInspected": true,
+  "qaNotes": "White sail-roofed waterfront pavilion, glass harbour skyline, snowy mountains, seaplane, ferry, cedar seawall and autumn colour coherent. Observation deck on rectangular tower reads as Vancouver Harbour Centre, checked against the official site; not Seattle Space Needle. Original stripe geometry restored by approved compositor. No type/flags/faces; final light/dark sheets inspected; all three card speckle counts 0.",
+  "qaReferenceUrls": [
+    "https://vancouverlookout.com/about/",
+    "https://harbourcentre.com/about/"
+  ],
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/vancouver-countdown_postcard.png"
+}

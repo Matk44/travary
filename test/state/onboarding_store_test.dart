@@ -87,6 +87,26 @@ void main() {
     expect(onboardingStageFor(countryPlace('ID').destination), contains('country_id'));
     // Czechia has Prague's stage but no country stage yet.
     expect(onboardingStageFor(countryPlace('CZ').destination), contains('city_cz_prague'));
+    // Phuket is a region, with a stage of its own; the rest of Thailand keeps the country's.
+    expect(onboardingStageFor(detectPlace('Phuket')!.destination), contains('region_th_phuket'));
+    expect(onboardingStage(detectPlace('Phuket')!.destination).props, isFalse);
+    expect(onboardingStageFor(detectPlace('Krabi')!.destination), contains('country_th'));
+    expect(onboardingStageFor(countryPlace('TH').destination), contains('country_th'));
+    // Taiwan has Taipei's stage but no country stage, so the country itself is Anywhere.
+    expect(onboardingStageFor(detectPlace('Taipei')!.destination), contains('city_tw_taipei'));
+    expect(onboardingStageFor(countryPlace('TW').destination), onboardingAnywhereStage);
+    // The seven countries drawn on 14 Oct 2026 cover their cities too.
+    for (final (name, stage) in [
+      ('Vienna', 'country_at'),
+      ('Dubrovnik', 'country_hr'),
+      ('Dublin', 'country_ie'),
+      ('Hanoi', 'country_vn'),
+      ('Marrakech', 'country_ma'),
+      ('Cairo', 'country_eg'),
+      ('Budapest', 'country_hu'),
+    ]) {
+      expect(onboardingStageFor(detectPlace(name)!.destination), contains(stage), reason: name);
+    }
     // Nowhere to borrow from, or no holiday yet: Anywhere.
     expect(onboardingStageFor(countryPlace('IS').destination), onboardingAnywhereStage);
     expect(onboardingStageFor(null), onboardingAnywhereStage);
@@ -98,19 +118,36 @@ void main() {
       expect(onboardingCityStages['$code/$city'], isNotNull, reason: code);
       expect(onboardingCountryStages[code], isNull, reason: '$code has its own stage now');
     }
-    for (final asset in [...onboardingCityStages.values, ...onboardingCountryStages.values, onboardingAnywhereStage]) {
+    for (final asset in [
+      ...onboardingCityStages.values,
+      ...onboardingRegionStages.values,
+      ...onboardingCountryStages.values,
+      onboardingAnywhereStage,
+    ]) {
       expect(File(asset).existsSync(), isTrue, reason: asset);
     }
-    expect(onboardingCountryStages, hasLength(26));
+    expect(onboardingCountryStages, hasLength(33));
   });
 
   test('every approved city stage is reachable from the place a traveller picks', () {
-    for (final name in ['Paris', 'New York', 'Cancún', 'Kuala Lumpur', 'Cape Town', 'Queenstown', 'San Francisco']) {
+    for (final name in [
+      'Paris',
+      'New York',
+      'Cancún',
+      'Kuala Lumpur',
+      'Cape Town',
+      'Queenstown',
+      'San Francisco',
+      'Antalya',
+      'Milan',
+      'Taipei',
+    ]) {
       final stage = onboardingStage(detectPlace(name)!.destination);
       expect(stage.asset, contains('assets/onboarding/stages/city_'), reason: name);
       expect(stage.props, isFalse);
     }
-    expect(onboardingCityStages, hasLength(28));
+    expect(onboardingCityStages, hasLength(31));
+    expect(onboardingRegionStages, hasLength(1));
     // City-states: the city's art is the country's.
     expect(onboardingStageFor(countryPlace('SG').destination), contains('city_sg_singapore'));
     expect(onboardingStageFor(countryPlace('HK').destination), contains('city_hk_hong_kong'));

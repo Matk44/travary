@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "city_ca_vancouver",
+  "version": 1,
+  "palette": {
+    "id": "canada_maple_alpine",
+    "anchors": {"ink": "#173C57", "paper": "#F4EFE4"},
+    "accents": ["#C44742", "#28727B", "#345B4A", "#C6963F"],
+    "ui": {
+      "primary": "#214B69",
+      "secondary": "#AA3C39",
+      "highlight": "#B5812D",
+      "onPrimary": "#FFF9EF"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

@@ -53,6 +53,7 @@ const onboardingCityStages = <String, String>{
   'GB/london': 'assets/onboarding/stages/city_gb_london.webp',
   'GR/athens': 'assets/onboarding/stages/city_gr_athens.webp',
   'IT/florence': 'assets/onboarding/stages/city_it_florence.webp',
+  'IT/milan': 'assets/onboarding/stages/city_it_milan.webp',
   'IT/rome': 'assets/onboarding/stages/city_it_rome.webp',
   'IT/venice': 'assets/onboarding/stages/city_it_venice.webp',
   'JP/osaka': 'assets/onboarding/stages/city_jp_osaka.webp',
@@ -64,33 +65,46 @@ const onboardingCityStages = <String, String>{
   'NZ/queenstown': 'assets/onboarding/stages/city_nz_queenstown.webp',
   'PT/lisbon': 'assets/onboarding/stages/city_pt_lisbon.webp',
   'TH/bangkok': 'assets/onboarding/stages/city_th_bangkok.webp',
+  'TR/antalya': 'assets/onboarding/stages/city_tr_antalya.webp',
   'TR/istanbul': 'assets/onboarding/stages/city_tr_istanbul.webp',
+  'TW/taipei': 'assets/onboarding/stages/city_tw_taipei.webp',
   'US/new_york': 'assets/onboarding/stages/city_us_new_york.webp',
   'US/orlando': 'assets/onboarding/stages/city_us_orlando.webp',
   'US/san_francisco': 'assets/onboarding/stages/city_us_san_francisco.webp',
   'ZA/cape_town': 'assets/onboarding/stages/city_za_cape_town.webp',
 };
 
+/// Stages for a region with no city of its own, by `COUNTRY/region_slug`
+/// (Phuket is a region, not a city). A city's stage still wins over its
+/// region's; the region's wins over its country's.
+const onboardingRegionStages = <String, String>{'TH/phuket': 'assets/onboarding/stages/region_th_phuket.webp'};
+
 /// Country stages by ISO code; cities and regions inherit them. Hong Kong
 /// and Singapore are city-states, so their city art is the country.
 const onboardingCountryStages = <String, String>{
   'AE': 'assets/onboarding/stages/country_ae.webp',
+  'AT': 'assets/onboarding/stages/country_at.webp',
   'AU': 'assets/onboarding/stages/country_au.webp',
   'BR': 'assets/onboarding/stages/country_br.webp',
   'CA': 'assets/onboarding/stages/country_ca.webp',
   'CH': 'assets/onboarding/stages/country_ch.webp',
   'CN': 'assets/onboarding/stages/country_cn.webp',
   'DE': 'assets/onboarding/stages/country_de.webp',
+  'EG': 'assets/onboarding/stages/country_eg.webp',
   'ES': 'assets/onboarding/stages/country_es.webp',
   'FR': 'assets/onboarding/stages/country_fr.webp',
   'GB': 'assets/onboarding/stages/country_gb.webp',
   'GR': 'assets/onboarding/stages/country_gr.webp',
   'HK': 'assets/onboarding/stages/city_hk_hong_kong.webp',
+  'HR': 'assets/onboarding/stages/country_hr.webp',
+  'HU': 'assets/onboarding/stages/country_hu.webp',
   'ID': 'assets/onboarding/stages/country_id.webp',
+  'IE': 'assets/onboarding/stages/country_ie.webp',
   'IN': 'assets/onboarding/stages/country_in.webp',
   'IT': 'assets/onboarding/stages/country_it.webp',
   'JP': 'assets/onboarding/stages/country_jp.webp',
   'KR': 'assets/onboarding/stages/country_kr.webp',
+  'MA': 'assets/onboarding/stages/country_ma.webp',
   'MX': 'assets/onboarding/stages/country_mx.webp',
   'NL': 'assets/onboarding/stages/country_nl.webp',
   'NZ': 'assets/onboarding/stages/country_nz.webp',
@@ -99,6 +113,7 @@ const onboardingCountryStages = <String, String>{
   'TH': 'assets/onboarding/stages/country_th.webp',
   'TR': 'assets/onboarding/stages/country_tr.webp',
   'US': 'assets/onboarding/stages/country_us.webp',
+  'VN': 'assets/onboarding/stages/country_vn.webp',
   'ZA': 'assets/onboarding/stages/country_za.webp',
 };
 
@@ -106,13 +121,15 @@ const onboardingCountryStages = <String, String>{
 /// in, so choosing "Czechia" still shows it. A country stage takes over.
 const onboardingCountryCities = <String, String>{'CZ': 'prague', 'MY': 'kuala_lumpur'};
 
-/// The stage for [destination]: the city's own, then the selected Bali and
+/// The stage for [destination]: the city's own, then its region's
+/// ([onboardingRegionStages]), then the selected Bali and
 /// Kyoto scenes, then the country's, then a stand-in city
 /// ([onboardingCountryCities]), then Anywhere. Never Bali for the rest of
 /// Indonesia or Kyoto for the rest of Japan: they have country stages.
 OnboardingStage onboardingStage(
   TripDestination? destination, {
   Map<String, String> cities = onboardingCityStages,
+  Map<String, String> regions = onboardingRegionStages,
   Map<String, String> countries = onboardingCountryStages,
   Map<String, String> standIns = onboardingCountryCities,
 }) {
@@ -120,6 +137,8 @@ OnboardingStage onboardingStage(
   final code = destination.countryCode;
   final city = destination.citySlug == null ? null : cities['$code/${destination.citySlug}'];
   if (city != null) return OnboardingStage(city);
+  final region = destination.regionSlug == null ? null : regions['$code/${destination.regionSlug}'];
+  if (region != null) return OnboardingStage(region);
   if (code == 'ID' && destination.regionSlug == 'bali') return _bali;
   if (code == 'JP' && destination.citySlug == 'kyoto') return _kyoto;
   final country = countries[code];
@@ -132,5 +151,6 @@ OnboardingStage onboardingStage(
 String onboardingStageFor(
   TripDestination? destination, {
   Map<String, String> cities = onboardingCityStages,
+  Map<String, String> regions = onboardingRegionStages,
   Map<String, String> countries = onboardingCountryStages,
-}) => onboardingStage(destination, cities: cities, countries: countries).asset;
+}) => onboardingStage(destination, cities: cities, regions: regions, countries: countries).asset;

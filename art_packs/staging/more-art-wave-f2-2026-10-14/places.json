@@ -1,0 +1,67 @@
+[
+  {
+    "id": "new_york",
+    "name": "New York",
+    "scene": "the Manhattan skyline, the Brooklyn Bridge, the Statue of Liberty in the harbour, the Flatiron Building, autumn in Central Park"
+  },
+  {
+    "id": "las_vegas",
+    "name": "Las Vegas",
+    "scene": "the Strip glowing at dusk (neon without words), the diamond-shaped welcome sign without lettering, dancing fountains, Red Rock Canyon"
+  },
+  {
+    "id": "washington_dc",
+    "name": "Washington DC",
+    "scene": "the Capitol, the Washington Monument, the Lincoln Memorial, cherry blossom round the Tidal Basin"
+  },
+  {
+    "id": "chicago",
+    "name": "Chicago",
+    "scene": "the skyline with Willis Tower, river bridges, the elevated train, Buckingham Fountain, the Navy Pier wheel (not Cloud Gate)"
+  },
+  {
+    "id": "boston",
+    "name": "Boston",
+    "scene": "the Old North Church steeple, the Zakim Bridge, brownstones, a tall ship in the harbour, autumn leaves"
+  },
+  {
+    "id": "new_orleans",
+    "name": "New Orleans",
+    "scene": "St. Louis Cathedral, French Quarter iron balconies, a green streetcar, a paddle steamer on the Mississippi"
+  },
+  {
+    "id": "nashville",
+    "name": "Nashville",
+    "scene": "Broadway's neon at dusk without words, a guitar, the pedestrian bridge over the Cumberland, the skyline"
+  },
+  {
+    "id": "seattle",
+    "name": "Seattle",
+    "scene": "Mount Rainier over the sound, green-and-white ferries, the waterfront market, the skyline (no Space Needle)"
+  },
+  {
+    "id": "florida",
+    "name": "Florida",
+    "scene": "Miami Beach's art deco hotels, the Seven Mile Bridge over turquoise water, a lighthouse, pelicans"
+  },
+  {
+    "id": "california",
+    "name": "California",
+    "scene": "the Golden Gate Bridge, Big Sur's Bixby Bridge on the coast road, a pier with a Ferris wheel, Half Dome above a valley"
+  },
+  {
+    "id": "hawaii",
+    "name": "Hawaii",
+    "scene": "Diamond Head above Waikiki, an outrigger canoe, surfers, the Na Pali cliffs"
+  },
+  {
+    "id": "arizona",
+    "name": "Arizona",
+    "scene": "the Grand Canyon at sunset, Horseshoe Bend, saguaro cacti, an empty desert road"
+  },
+  {
+    "id": "alaska",
+    "name": "Alaska",
+    "scene": "Denali, a glacier meeting the fjord, a cruise ship, a bald eagle"
+  }
+]

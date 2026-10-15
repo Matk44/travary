@@ -1,0 +1,41 @@
+{
+  "id": "country_hr/onboarding_stage_v1",
+  "destinationId": "country_hr",
+  "label": "Croatia",
+  "scope": "country",
+  "selectors": {
+    "countryCodes": [
+      "HR"
+    ]
+  },
+  "geographicScope": "a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond",
+  "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Croatia (country_hr). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a walled, terracotta-roofed Adriatic old town on a headland with a bell tower and stone harbour, a turquoise bay with white sailboats, cypress and pine, lavender, a limestone island beyond. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–28% completely quiet petrol-teal paper sky across ENTIRE WIDTH, including both edges. No clouds, hills, foliage, church finials or other scenery above pixel y536. Every landmark top below 29%. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_hr/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_gr.webp"
+  ],
+  "transparent_background": false,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-61809a28-0478-4733-b540-298357a1f780.png",
+  "visuallyInspected": true,
+  "qaNotes": "Inspected still: rich folded-cardstock walled Adriatic town, harbour, terracotta roofs, turquoise bay, plain sailboats, distant island, cypress and lavender. Headline centre is quiet teal; peripheral foliage follows sibling theatre layout. Cream control floor at65%, right foreground clear. No text, logos, flags, faces, UI or props.",
+  "originalDimensions": [
+    851,
+    1848
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/country_hr/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_hr.png",
+  "sha256": "89d9294c20b27a83a1d043d917ccb7af8340faf0bc9e76ad14f76d8ca3e0a2b9",
+  "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false
+}

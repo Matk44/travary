@@ -1,0 +1,37 @@
+{
+  "id": "country_tr/documents_destination_stamp",
+  "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Turkey.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: hot-air balloons over fairy-chimney rock valleys at sunrise, a domed mosque silhouette far behind. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "lastGenerationError": {
+    "tool": "built-in imagegen",
+    "httpStatus": 429,
+    "code": "usage_limit_reached",
+    "message": "The usage limit has been reached",
+    "resetsAt": 1791968364,
+    "resetsAtSydney": "2026-10-14T19:59:24+11:00",
+    "attemptedAsset": "country_tr/documents_destination_stamp",
+    "outputCreated": false,
+    "nextStep": "Resume the existing country_tr prepared prompt after reset, or obtain explicit user authorization before CLI/API fallback."
+  },
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-0fa1df1b-e1d4-4d35-8f29-272bc52f1e75.png",
+  "finalPath": "art_packs/staging/country_tr/documents_destination_stamp.png",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_tr-exec-0fa1df1b-e1d4-4d35-8f29-272bc52f1e75.png",
+  "dimensions": [
+    1024,
+    1280
+  ],
+  "mode": "RGBA8",
+  "embeddedSrgb": true,
+  "realAlpha": true,
+  "transparentCorners": true,
+  "blankLabelMatchesTemplate": true,
+  "protectedStampMatchesTemplate": true,
+  "sha256": "4020059438d2496ca707a54cadfb369b8b843e716a158852fbddeeff45c77666",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Checked light/dark: coherent balloon valley, one sunrise, distant mosque, blank label; template edges and transparency clean."
+}

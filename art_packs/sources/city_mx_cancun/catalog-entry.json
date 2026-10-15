@@ -1,0 +1,8 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["MX"],
+    "cities": ["cancun"]
+  },
+  "minAppBuild": 1
+}

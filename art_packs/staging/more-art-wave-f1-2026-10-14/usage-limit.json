@@ -1,0 +1,11 @@
+{
+  "tool": "built-in imagegen",
+  "httpStatus": 429,
+  "code": "usage_limit_reached",
+  "message": "The usage limit has been reached",
+  "resetsAt": 1791968364,
+  "resetsAtSydney": "2026-10-14T19:59:24+11:00",
+  "attemptedAsset": "country_tr/documents_destination_stamp",
+  "outputCreated": false,
+  "nextStep": "Resume the existing country_tr prepared prompt after reset, or obtain explicit user authorization before CLI/API fallback."
+}

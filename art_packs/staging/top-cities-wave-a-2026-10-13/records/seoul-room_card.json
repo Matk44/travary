@@ -1,0 +1,9 @@
+{
+  "id": "seoul/room_card",
+  "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, finished Travary card. Preserve exact canvas, card position, silhouette, corners, notches, perforations, shadow, paper, barcode stub, cord, eyelet and tag geometry. Only printed scenery changes; existing stripe/tag may be recoloured keeping pattern geometry.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Seoul. Scene: a palace gate with curved tiled roofs, Namsan tower on its wooded hill, hanok rooftops and autumn maples. Light: warm autumn late-afternoon light. Palette: navy, deep teal, maple coral, mustard gold, sage and warm ivory.\nHotel key card exactly 1774 × 887 PNG. Printed city view from a hotel without adding a window frame. LEFT 62% empty ivory paper at all heights. Picture x=1100..1483, soft fade left. Keep stripe and right ivory end cap.\nOne finished card, genuinely transparent outside. Remove all original American landmarks. Absolutely no flags or writing on buildings, vehicles, boats or bridges.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-2a9fbaed-b591-4ae9-b229-02330c0b9e78.png"
+}

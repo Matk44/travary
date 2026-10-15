@@ -1,0 +1,68 @@
+[
+  {
+    "place": "antalya",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/antalya-featured_ticket.png",
+    "palette": [
+      [
+        27,
+        68,
+        78
+      ],
+      [
+        203,
+        109,
+        76
+      ],
+      [
+        215,
+        168,
+        75
+      ]
+    ]
+  },
+  {
+    "place": "antalya",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/antalya-room_card.png",
+    "palette": [
+      [
+        27,
+        68,
+        78
+      ],
+      [
+        203,
+        109,
+        76
+      ],
+      [
+        215,
+        168,
+        75
+      ]
+    ]
+  },
+  {
+    "place": "antalya",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/antalya-reservation_card.png",
+    "palette": [
+      [
+        27,
+        68,
+        78
+      ],
+      [
+        203,
+        109,
+        76
+      ],
+      [
+        215,
+        168,
+        75
+      ]
+    ]
+  }
+]

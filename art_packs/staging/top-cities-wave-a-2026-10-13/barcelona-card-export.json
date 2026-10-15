@@ -1,0 +1,68 @@
+[
+  {
+    "place": "barcelona",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/barcelona-featured_ticket.png",
+    "palette": [
+      [
+        24,
+        76,
+        79
+      ],
+      [
+        213,
+        112,
+        80
+      ],
+      [
+        212,
+        166,
+        67
+      ]
+    ]
+  },
+  {
+    "place": "barcelona",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/barcelona-room_card.png",
+    "palette": [
+      [
+        24,
+        76,
+        79
+      ],
+      [
+        213,
+        112,
+        80
+      ],
+      [
+        212,
+        166,
+        67
+      ]
+    ]
+  },
+  {
+    "place": "barcelona",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/barcelona-reservation_card.png",
+    "palette": [
+      [
+        24,
+        76,
+        79
+      ],
+      [
+        213,
+        112,
+        80
+      ],
+      [
+        212,
+        166,
+        67
+      ]
+    ]
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "place": "edinburgh",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "edinburgh",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "edinburgh",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "sydney",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "sydney",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "sydney",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "melbourne",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "melbourne",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "melbourne",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "florence",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "florence",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "florence",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "athens",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "athens",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "athens",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "vancouver",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "vancouver",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "vancouver",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "cape_town",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "cape_town",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "cape_town",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "queenstown",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "queenstown",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "queenstown",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "san_francisco",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "san_francisco",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "san_francisco",
+    "role": "reservation_card",
+    "strayPixels": 0
+  }
+]

@@ -71,8 +71,9 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   coming, and a notched "Add a booking". The countdown says how the
   packing list stands under its postcard (`CountdownNote`), opening it.
   The trip itself (name, dates, family, card style, delete) is under "Trip
-  details". Forms are a paper ticket in the trip's colours; a new flight
-  starts on the departures board (`FlightFinder`) when flight data is on.
+  details". Forms are a paper ticket in the trip's colours; a new flight's
+  ticket is headed by the departures board (`FlightFinder`) when flight
+  data is on, its number filling in the rest (else the number heads it).
 - **Never lock someone's tickets.** Tickets and bookings are always reachable,
   offline, whatever their plan.
 - **Travel documents stay on the phone.** Passports, visas, insurance and
@@ -190,7 +191,11 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    experience art (`docs/ART_PACKS.md`; sources are WebP, converted with
    `dart run tool/art_packs.dart webp`, PNG masters in `art_packs/originals/`;
    catalog v96 is published: 43 packs, including Orlando v2, the 13 US city
-   and region packs, `country_us` v4 and the Lake District v2). `ArtResolver` takes a
+   and region packs, `country_us` v4 and the Lake District v2; built, not
+   yet published: 30 city packs for the world's most-visited cities, 10
+   whole-country packs, and a Documents stamp on every country and US pack:
+   local catalog v234, 83 packs; their key cards are full height, see
+   `docs/ART_PACKS.md`). `ArtResolver` takes a
    `TripArtContext` and tries the subject from the city → region → country
    pack → the trip's look → secondary look → core, then generics, stable per
    booking and never repeating side by side. Each booking's context is at
@@ -234,7 +239,7 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    (packs, then bundled `<look>_<role>.png`, then a stand-in look); text,
    buttons and tag icons sit at measured fractional anchors (`ShellGeometry`),
    and shells are never stretched. Icons and interface surfaces (tabs, linen,
-   leather, pill, stamp) resolve through `ArtSlots` (`design/art/art_slots.dart`).
+   pill, stamp) resolve through `ArtSlots` (`design/art/art_slots.dart`).
    A missing file gets its documented stand-in; list every gap in
    `docs/ART_ASSET_GAPS.md`. The countdown postcard
    (`common/countdown_postcard`, `TravelStore.countdownPostcardFor`) and
@@ -322,7 +327,8 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 | Cloud (default) | `flutter run` | Firestore, real trips: a guest account until the traveller signs in |
 | Demo | `flutter run --dart-define=TRAVARY_BACKEND=demo` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
 | Emulators | add `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` | Local Firebase emulators (`docs/ART_PACKS.md`) |
-| Real purchases | add `--dart-define-from-file=config/revenuecat.local.json` | RevenueCat's public SDK keys (git-ignored); without them, purchases are simulated |
+| Real purchases | add `--dart-define-from-file=config/revenuecat.local.json` | RevenueCat's public SDK keys (git-ignored); without them, purchases are simulated (a release build refuses to start) |
+| Store builds | `tool/build_release.sh [android\|ios\|both]` | The App Bundle and .ipa with RevenueCat's keys and flight lookup (`FLIGHT_LOOKUP=false` leaves it out); checks the upload key and build number |
 | Email sign-in | add `--dart-define=TRAVARY_EMAIL_LINKS=true` | Passwordless links on `travary-444.firebaseapp.com` (or `TRAVARY_EMAIL_LINK_DOMAIN`); off until the app opens them (`docs/EMAIL_LINK_SIGN_IN.md`) |
 | Analytics in debug | add `--dart-define=TRAVARY_ANALYTICS=true` | Debug runs send nothing otherwise; release builds always send (`docs/ANALYTICS.md`) |
 | Flight alerts off | add `--dart-define=TRAVARY_FLIGHT_ALERTS=false` | They're on in every build by default; this hides them (a build-time kill switch); see Flight alerts |
@@ -355,7 +361,10 @@ coming trips (`test/support/trip_postcards.dart`, target
 `documents_actual.png` (Orlando), `documents_lakes_actual.png` (the Lake
 District) and `documents_halo_{light,dark}.png` (rows on light and dark
 backdrops, to catch alpha halos); and Today on each US city and region pack's
-shells (`test/visual_qa/us_city_cards_test.dart`) as `us_cards_<place>.png`. The same two lists are goldens in
+shells (`test/visual_qa/us_city_cards_test.dart`) as `us_cards_<place>.png`, and on each of the world's 30 city packs and 10 country packs
+(`test/visual_qa/world_city_cards_test.dart`) as `world_cards_<place>.png`; and the paywall on six
+phones and an iPhone SE (`test/visual_qa/paywall_fit_test.dart`, which also checks nothing scrolls) as
+`paywall_<w>x<h>.png`. The two card lists are goldens in
 `test/widget/goldens/` (test font; update with `--update-goldens`).
 Never edit the reference to make a comparison pass.
 
@@ -399,8 +408,11 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   always stay; adding more goes through `requireTicketRoom`, counted
   against the trip saving will put the booking in (the form's
   `placeBooking(booking:)`, Smart Import's `TravelStore.importPlaces`, the
-  same `placeImport` the batch save uses), and a Smart Import past the
-  limit saves the booking without its file and says so.
+  same `placeImport` the batch save uses). Every way past the limit opens
+  the paywall (owner, 14 Oct 2026: it pops up for every free-limited
+  action): adding a file, and a Smart Import whose file has no room (over
+  the form for one booking, before saving for several); without a pass the
+  booking saves without its file and says so, the form still offering it.
   The 2 free files are the owner's call (13 Oct 2026) to lift conversion,
   kept on purpose: raising the limit later is easy, taking files back isn't.
   Travel documents are never counted: they have no limit.
@@ -469,8 +481,17 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
 (`https://matk44.github.io/travary_support/`); the app links to them through
 `TravaryLinks` (`domain/links.dart`): Profile's "Help and legal" and the
 paywall's Terms and Privacy links. Support email `dreamprayer.dev@gmail.com`.
-When the app starts collecting something new (analytics, a new provider),
-update `privacy.html` there before releasing.
+Since 15 Oct 2026 the privacy policy and terms are also on travary.app
+(`/privacy`, `/terms`, from `website/content/legal/`): the Google sign-in
+branding (OAuth consent screen, verified with a logo) links there, and they
+name **Dream Prayer Developer** (the Google Play developer) as who makes
+Travary. The travary.app copies are the current ones (Annual Pass, Holiday
+Pass); keep the two in step, or point everything at travary.app. When the
+app starts collecting something new (analytics, a new provider), update
+both before releasing. Search Console: travary.app is verified by both
+Google accounts (two `google-site-verification` tags in `website/build.py`;
+never remove either), because the OAuth branding needs the Cloud project's
+owner, dreamprayer.dev@gmail.com, to own the domain.
 
 **Before launch:** the store privacy forms updated for analytics and push
 tokens (`docs/ANALYTICS.md`; Google Analytics is linked to `travary-444`);
@@ -613,23 +634,28 @@ the app. Project `travary-444` is on the Blaze plan.
   everyone on the flight). The cache lasts 10 min near departure and up to
   6 h once landed (`cacheLifetimeMs`). There's a per-traveller daily cap.
   Logs never name the flight.
-- **Adding a flight:** a new flight opens on the departures board,
-  `FlightFinder` (`features/booking/flight_finder.dart`). The flight
+- **Adding a flight:** a new flight's ticket is headed by the departures
+  board, `FlightFinder` (`features/booking/flight_finder.dart`), the ticket
+  right under it and editable all along (owner, 14 Oct 2026: the number at
+  the top fills in the rest, typing by hand still works). The flight
   number and departure date find the flight in the airline's schedule (up
-  to a year ahead, by departure date) and flip it onto split-flap tiles.
-  "Use this flight" fills in the ticket: the title ("London to Tokyo"),
-  departure and landing times, and the departure airport with its code
-  (`logic/flight_fill.dart`). "Enter flight manually" skips to the ticket.
-  It searches once typing pauses on a whole flight number. Editing or a
-  Smart Import draft goes straight to the ticket. A trip's "Flight out" or
-  "Flight home" gap opens the board on that day.
+  to a year ahead, by departure date) and flip it onto split-flap tiles;
+  the found flight fills in the ticket at once: the title ("London to
+  Tokyo"), departure and landing times, and both airports with their codes
+  (`logic/flight_fill.dart`). `refillFlight` keeps whatever the traveller
+  typed, and takes the last flight's details out again when the number or
+  board date changes. It searches once typing pauses on a whole flight
+  number. Without the service, editing, or a Smart Import draft, the
+  flight number heads the ticket instead. A trip's "Flight out" or "Flight
+  home" gap opens the form on that day.
 - **On the day:** the flight's page shows `FlightStatusPanel` from 3 days
   before take-off to the day after landing (`logic/flight_status_text.dart`:
   `flightLookupFor`, all wording). Design tools have a "Flight status test"
   for any real flight.
 - **Debug enabled by default** (`Dependencies.flightStatus`). Explicit
-  `TRAVARY_FLIGHT_LOOKUP` enables/disables the cloud service. Release opt-in
-  needs the deployment's provider plan ready first.
+  `TRAVARY_FLIGHT_LOOKUP` enables/disables the cloud service.
+  `tool/build_release.sh` turns it on for store builds, so the AeroDataBox
+  plan must be bought first (or build with `FLIGHT_LOOKUP=false`).
 
 ## Flight alerts (paid trips)
 
@@ -766,7 +792,14 @@ and belts are a bonus shown and announced only when the data has them
   puts `OnboardingPassPanel` on the trip's onboarding stage with Travi
   presenting, a headline for the feature reached for (`paywallWordsFor`),
   the benefits family first (`passBenefits`) and "Not now". Profile opens it
-  for the trip on now or coming next.
+  for the trip on now or coming next. Nothing to scroll and Travi never
+  moves (owner, 14 Oct 2026): the desk's floor starts just under his shadow
+  (`snugFloor`) and a `FitColumn` (`design/widgets/fit_column.dart`) fits
+  the room the stage gives it (`OnboardingFloorSpace`): the passes, the
+  button and one row of "Not now" · Restore · Terms · Privacy always show,
+  the benefits only while they fit, family first, never a lesser one in a
+  greater one's place. Only an iPhone SE scrolls
+  (`test/visual_qa/paywall_fit_test.dart`).
 - **Two names only** (owner, changed 13 Oct 2026: "Annual Pass" says plainly
   that it's a yearly subscription, so it replaces the "Travary Plus" chosen
   on 12 Oct): **Annual Pass** (the yearly plan, `travary_annual_pass`) and
@@ -825,9 +858,9 @@ and belts are a bonus shown and announced only when the data has them
   ledger row. Forms open out of the folio he lifts to the camera. Smart
   Import reads on the stage (the reading pose) before the check opens.
 - **The world follows the destination.** `logic/onboarding_art.dart` picks
-  the stage (city → Bali/Kyoto → country → a stand-in city for Czechia and
-  Malaysia → Anywhere; 30 cities, 24 countries and Anywhere bundled as WebP
-  in `assets/onboarding/stages/`). Travi rolls into the paper workshop
+  the stage (city → region (Phuket) → Bali/Kyoto → country → a stand-in
+  city for Czechia and Malaysia → Anywhere; 31 cities, Phuket, 33 countries
+  and Anywhere bundled as WebP in `assets/onboarding/stages/`). Travi rolls into the paper workshop
   (`onboardingWorkshopStage`); the chosen place folds up over it like a
   pop-up page (`OnboardingScene`). Text and controls are always live UI.
 - First-booking handoff still board approved 8 Oct 2026: flat folio → Travi
@@ -845,7 +878,8 @@ and belts are a bonus shown and announced only when the data has them
 - Setup persists per uid, reserving the trip ID before creation. Dates stay
   null when unknown. Unsaved form/import edits keep route lifetime only.
 - New places: add the stage (WebP, 851 wide, floor at 1.41 widths) to
-  `onboardingCountryStages` or `onboardingCityStages` in
+  `onboardingCountryStages`, `onboardingCityStages` or (a region with no
+  city, like Phuket) `onboardingRegionStages` in
   `logic/onboarding_art.dart`; cities inherit their country's. Unillustrated
   places use Anywhere. See
   `docs/ONBOARDING_NATIVE.md` and the destination art register.

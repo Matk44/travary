@@ -1,0 +1,68 @@
+[
+  {
+    "place": "madrid",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/madrid-featured_ticket.png",
+    "palette": [
+      [
+        28,
+        64,
+        74
+      ],
+      [
+        196,
+        106,
+        77
+      ],
+      [
+        207,
+        160,
+        66
+      ]
+    ]
+  },
+  {
+    "place": "madrid",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/madrid-room_card.png",
+    "palette": [
+      [
+        28,
+        64,
+        74
+      ],
+      [
+        196,
+        106,
+        77
+      ],
+      [
+        207,
+        160,
+        66
+      ]
+    ]
+  },
+  {
+    "place": "madrid",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/madrid-reservation_card.png",
+    "palette": [
+      [
+        28,
+        64,
+        74
+      ],
+      [
+        196,
+        106,
+        77
+      ],
+      [
+        207,
+        160,
+        66
+      ]
+    ]
+  }
+]

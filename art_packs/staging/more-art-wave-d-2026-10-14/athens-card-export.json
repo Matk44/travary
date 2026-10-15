@@ -1,0 +1,68 @@
+[
+  {
+    "place": "athens",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/athens-featured_ticket.png",
+    "palette": [
+      [
+        40,
+        101,
+        128
+      ],
+      [
+        109,
+        121,
+        81
+      ],
+      [
+        211,
+        173,
+        100
+      ]
+    ]
+  },
+  {
+    "place": "athens",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/athens-room_card.png",
+    "palette": [
+      [
+        40,
+        101,
+        128
+      ],
+      [
+        109,
+        121,
+        81
+      ],
+      [
+        211,
+        173,
+        100
+      ]
+    ]
+  },
+  {
+    "place": "athens",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/athens-reservation_card.png",
+    "palette": [
+      [
+        40,
+        101,
+        128
+      ],
+      [
+        109,
+        121,
+        81
+      ],
+      [
+        211,
+        173,
+        100
+      ]
+    ]
+  }
+]

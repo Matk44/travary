@@ -1,0 +1,101 @@
+{
+  "city": "Kuala Lumpur",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/kuala_lumpur/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "acd6dcd18165f6ef4cda8c528fec5ca8cda2938962cb46295f4c2dff8c2a3701",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/kuala_lumpur/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "5738f798888188f9b9e87df93cfffd5fa8b716349694449e49566a0f4d8e45f4",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/kuala_lumpur/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "0289590786e77f3ec49f5d63baa9f5e7daa059a186fef0cda326e40ed71a297a",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/kuala_lumpur/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "sha256": "4baab88c8643a056f46948807c9a253fde09f16ac5a0dfd37c5e393ef16efcbc"
+    },
+    {
+      "file": "art_packs/staging/kuala_lumpur/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "d76790a18b851ef16c141e9e78f34300e4439dc914e3b6545cf0ff2793dc6aa5"
+    },
+    {
+      "file": "art_packs/staging/kuala_lumpur/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "689f70271365c559acd865681f3c5859bf41dd121dba262dbb4daaa6546ab8a6",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

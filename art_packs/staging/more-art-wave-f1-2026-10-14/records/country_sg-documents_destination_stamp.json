@@ -1,0 +1,41 @@
+{
+  "id": "country_sg/documents_destination_stamp",
+  "prompt": "Use case: precise-object-edit. Preserve this entire Singapore travel stamp, one sun, dusk light, Supertree-like garden sculptures, glass conservatory domes, orchids, waterfront, palette, printed papergrain, alpha, frame/perforations/navy keyline and blank ivory label. Remove ONLY the entire THREE-TOWER HOTEL COMPLEX with the boat-shaped roof spanning its tops at the right background (roughlyx680..975,y585..810). Delete every part of its three towers AND connecting rooftop platform. Replace that region with a balanced distant cluster of GENERIC SMALLER GLASS OFFICE TOWERS, varied heights, independent flat roofs, tiny rectangular windows, no connecting rooftop structure or recognisable hotel. The glass conservatory domes in front remain unchanged. No casino buildings or advertising. Supertrees remain the dominant subject. No text, letters, numbers, logos, flags, faces or second sun. One1024x1280PNG genuinealpha outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5ebc4fab-06af-4d4e-87c9-fd16184f4ebc.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-b4f6b527-7d35-4dc2-a3c7-754446e3102e.png",
+  "finalPath": "art_packs/staging/country_sg/documents_destination_stamp.png",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_sg-exec-b4f6b527-7d35-4dc2-a3c7-754446e3102e.png",
+  "dimensions": [
+    1024,
+    1280
+  ],
+  "mode": "RGBA8",
+  "embeddedSrgb": true,
+  "realAlpha": true,
+  "transparentCorners": true,
+  "blankLabelMatchesTemplate": true,
+  "protectedStampMatchesTemplate": true,
+  "sha256": "50a9b0949d87822e2da4adda7825c83f6823cc788ac9757cddce54d86612f8df",
+  "originalInputReferencePaths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+  ],
+  "attempts": [
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-5ebc4fab-06af-4d4e-87c9-fd16184f4ebc.png",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Singapore.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: a garden of tall tree-like sculptures at dusk, a waterfront skyline, orchids. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "status": "rejected",
+      "rejection": "Three-tower skypark hotel complex conflicts with brief exclusion of casino buildings.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_sg-attempt-1-exec-5ebc4fab-06af-4d4e-87c9-fd16184f4ebc.png"
+    }
+  ],
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected corrected source and final light/dark sheet: dominant garden tree sculptures, orchids, conservatories and generic waterfront office skyline at dusk. Removed three-tower skypark hotel complex to meet casino-building exclusion. One sun, no text, logos, flags or faces. Paris frame/blank label/exterior alpha and exact checks pass; rejected export/attempt retained."
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "place": "bangkok",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/bangkok-featured_ticket.png",
+    "palette": [
+      [
+        20,
+        68,
+        70
+      ],
+      [
+        203,
+        100,
+        60
+      ],
+      [
+        213,
+        164,
+        66
+      ]
+    ]
+  },
+  {
+    "place": "bangkok",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/bangkok-room_card.png",
+    "palette": [
+      [
+        20,
+        68,
+        70
+      ],
+      [
+        203,
+        100,
+        60
+      ],
+      [
+        213,
+        164,
+        66
+      ]
+    ]
+  },
+  {
+    "place": "bangkok",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/bangkok-reservation_card.png",
+    "palette": [
+      [
+        20,
+        68,
+        70
+      ],
+      [
+        203,
+        100,
+        60
+      ],
+      [
+        213,
+        164,
+        66
+      ]
+    ]
+  }
+]

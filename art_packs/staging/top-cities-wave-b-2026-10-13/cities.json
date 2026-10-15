@@ -1,0 +1,266 @@
+[
+  {
+    "id": "osaka",
+    "name": "Osaka",
+    "scene": "a castle keep with green tiered roofs on stone walls, canal-side abstract neon and food stalls, a lantern street",
+    "light": "warm rose-gold dusk",
+    "palette": "deep navy, jade teal, warm cream, coral lantern glow and muted mustard",
+    "colors": [
+      [
+        27,
+        65,
+        75
+      ],
+      [
+        196,
+        91,
+        65
+      ],
+      [
+        211,
+        163,
+        64
+      ]
+    ]
+  },
+  {
+    "id": "venice",
+    "name": "Venice",
+    "scene": "the Grand Canal, gondolas, striped mooring poles, a domed basilica and pastel palazzi",
+    "light": "warm late-afternoon gold",
+    "palette": "deep navy, lagoon teal, warm cream, terracotta coral, sage and muted mustard",
+    "colors": [
+      [
+        26,
+        66,
+        79
+      ],
+      [
+        198,
+        100,
+        77
+      ],
+      [
+        210,
+        165,
+        69
+      ]
+    ]
+  },
+  {
+    "id": "lisbon",
+    "name": "Lisbon",
+    "scene": "a yellow tram climbing a hill, tiled façades, terracotta roofs down to the river, a suspension bridge in the distance",
+    "light": "warm evening gold",
+    "palette": "navy, river teal, warm cream, tile blue, terracotta coral and tram mustard",
+    "colors": [
+      [
+        25,
+        65,
+        80
+      ],
+      [
+        201,
+        100,
+        71
+      ],
+      [
+        218,
+        171,
+        61
+      ]
+    ]
+  },
+  {
+    "id": "madrid",
+    "name": "Madrid",
+    "scene": "a grand plaza with arcades, a royal palace façade, a park lake with rowing boats, warm stone",
+    "light": "soft honey-gold late afternoon",
+    "palette": "deep navy, muted teal, warm cream, honey stone, coral and sage",
+    "colors": [
+      [
+        28,
+        64,
+        74
+      ],
+      [
+        196,
+        106,
+        77
+      ],
+      [
+        207,
+        160,
+        66
+      ]
+    ]
+  },
+  {
+    "id": "prague",
+    "name": "Prague",
+    "scene": "a stone bridge with featureless stone statue silhouettes, a castle on the hill, red roofs and Gothic spires",
+    "light": "misty golden late afternoon",
+    "palette": "deep navy, river teal, warm cream, terracotta coral, sage hills and soft mustard",
+    "colors": [
+      [
+        28,
+        63,
+        76
+      ],
+      [
+        193,
+        94,
+        67
+      ],
+      [
+        207,
+        163,
+        73
+      ]
+    ]
+  },
+  {
+    "id": "cancun",
+    "name": "Cancún",
+    "scene": "turquoise sea, white sand, palms, and a Maya stepped pyramid in the jungle",
+    "light": "warm tropical late afternoon",
+    "palette": "deep navy, turquoise teal, warm cream, lush sage, coral and pale mustard",
+    "colors": [
+      [
+        26,
+        70,
+        78
+      ],
+      [
+        205,
+        112,
+        79
+      ],
+      [
+        218,
+        177,
+        80
+      ]
+    ]
+  },
+  {
+    "id": "kuala_lumpur",
+    "name": "Kuala Lumpur",
+    "scene": "twin tapered towers, a rainforest edge, a market street and a colourful temple stair",
+    "light": "warm golden dusk",
+    "palette": "deep navy, rainforest teal and sage, warm cream, coral and temple-stair mustard",
+    "colors": [
+      [
+        27,
+        67,
+        72
+      ],
+      [
+        196,
+        95,
+        67
+      ],
+      [
+        213,
+        166,
+        67
+      ]
+    ]
+  },
+  {
+    "id": "antalya",
+    "name": "Antalya",
+    "scene": "an old harbour with stone walls, cliffs over a turquoise sea, the Taurus mountains and palms",
+    "light": "warm apricot evening sun",
+    "palette": "deep navy, turquoise teal, warm cream, terracotta coral, sage and honey stone",
+    "colors": [
+      [
+        27,
+        68,
+        78
+      ],
+      [
+        203,
+        109,
+        76
+      ],
+      [
+        215,
+        168,
+        75
+      ]
+    ]
+  },
+  {
+    "id": "phuket",
+    "name": "Phuket",
+    "scene": "limestone islands rising from the sea, unmarked long-tail boats, a white beach and palms",
+    "light": "warm tropical late afternoon",
+    "palette": "deep navy, turquoise teal, warm cream, limestone sage, coral and muted mustard",
+    "colors": [
+      [
+        25,
+        67,
+        76
+      ],
+      [
+        198,
+        100,
+        68
+      ],
+      [
+        214,
+        169,
+        72
+      ]
+    ]
+  },
+  {
+    "id": "milan",
+    "name": "Milan",
+    "scene": "an original Gothic cathedral's spires, not an exact copy of a real cathedral, a glass-roofed arcade, an unmarked tram, abstract fashion-window colour",
+    "light": "warm pale-gold late afternoon",
+    "palette": "deep navy, soft teal, warm cream, coral, sage and tram mustard",
+    "colors": [
+      [
+        29,
+        64,
+        75
+      ],
+      [
+        193,
+        101,
+        75
+      ],
+      [
+        213,
+        167,
+        67
+      ]
+    ]
+  },
+  {
+    "id": "taipei",
+    "name": "Taipei",
+    "scene": "a bamboo-shaped tiered tower, night market lanterns, green mountains and a curved temple roof",
+    "light": "warm rose-gold dusk",
+    "palette": "deep navy, mountain teal and sage, warm cream, coral lantern glow and muted mustard",
+    "colors": [
+      [
+        25,
+        65,
+        73
+      ],
+      [
+        199,
+        92,
+        66
+      ],
+      [
+        212,
+        164,
+        65
+      ]
+    ]
+  }
+]

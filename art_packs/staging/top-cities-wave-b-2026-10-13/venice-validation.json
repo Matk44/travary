@@ -1,0 +1,101 @@
+{
+  "city": "Venice",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/venice/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "3ac0fd4ec20ee7be4bf989cfc6e4d340f7750db61788b478ed3ecd2cf61d0a81",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/venice/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "50d3fac1640caca1f1a1f380f40d60bca742057fb09a4cf1c2dd9aabece56aa7",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/venice/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "3842f9ec91d4dc5ddff0d458cbb7d2a37fefffe6f220b471578a9bc1a8b22c0a",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/venice/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "192fe9498d834e3048b62441e17bbabd00f211f93ef994d3841f6aa4df95e213"
+    },
+    {
+      "file": "art_packs/staging/venice/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "a36edd1bc5d03b0515ddc090ae4937aa249e88b72d8778e2ef6e874aa17055d6"
+    },
+    {
+      "file": "art_packs/staging/venice/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "57fb8ea44f3eec691ca42d5e823a4a7a6ae035735a5dca2fdcba1094cc4e2565",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

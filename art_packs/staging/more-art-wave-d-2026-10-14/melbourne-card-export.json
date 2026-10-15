@@ -1,0 +1,68 @@
+[
+  {
+    "place": "melbourne",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/melbourne-featured_ticket.png",
+    "palette": [
+      [
+        65,
+        101,
+        82
+      ],
+      [
+        213,
+        125,
+        73
+      ],
+      [
+        117,
+        83,
+        111
+      ]
+    ]
+  },
+  {
+    "place": "melbourne",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/melbourne-room_card.png",
+    "palette": [
+      [
+        65,
+        101,
+        82
+      ],
+      [
+        213,
+        125,
+        73
+      ],
+      [
+        117,
+        83,
+        111
+      ]
+    ]
+  },
+  {
+    "place": "melbourne",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/melbourne-reservation_card.png",
+    "palette": [
+      [
+        65,
+        101,
+        82
+      ],
+      [
+        213,
+        125,
+        73
+      ],
+      [
+        117,
+        83,
+        111
+      ]
+    ]
+  }
+]

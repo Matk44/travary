@@ -1,0 +1,8 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["TR"],
+    "cities": ["istanbul"]
+  },
+  "minAppBuild": 1
+}

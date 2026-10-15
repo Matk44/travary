@@ -1,0 +1,8 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["TW"],
+    "cities": ["taipei"]
+  },
+  "minAppBuild": 1
+}

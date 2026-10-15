@@ -1,0 +1,68 @@
+[
+  {
+    "place": "london",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/london-featured_ticket.png",
+    "palette": [
+      [
+        26,
+        57,
+        70
+      ],
+      [
+        180,
+        64,
+        50
+      ],
+      [
+        199,
+        163,
+        88
+      ]
+    ]
+  },
+  {
+    "place": "london",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/london-room_card.png",
+    "palette": [
+      [
+        26,
+        57,
+        70
+      ],
+      [
+        180,
+        64,
+        50
+      ],
+      [
+        199,
+        163,
+        88
+      ]
+    ]
+  },
+  {
+    "place": "london",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/london-reservation_card.png",
+    "palette": [
+      [
+        26,
+        57,
+        70
+      ],
+      [
+        180,
+        64,
+        50
+      ],
+      [
+        199,
+        163,
+        88
+      ]
+    ]
+  }
+]

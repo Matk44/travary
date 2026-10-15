@@ -1,0 +1,57 @@
+{
+  "id": "country_at/onboarding_stage_v1",
+  "destinationId": "country_at",
+  "label": "Austria",
+  "scope": "country",
+  "selectors": {
+    "countryCodes": [
+      "AT"
+    ]
+  },
+  "geographicScope": "a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground",
+  "prompt": "Use case: precise-object-edit. Edit this Austria miniature cardstock onboarding stage. Preserve its complete canvas, rich embossed paper, folded theatre wings, coherent Austrian Alps/lake/onion church/palace/gentians/tram, warm light, camera and cream floor starting y65%. Correct ONLY HEADLINE CLEARANCE. Upper y0\u201328% MUST be uninterrupted plain petrol-teal sky across ENTIRE WIDTH including left edge; currently the tall church finial and clouds reach too high. Lower the left church tower and all its nearby clouds so their highest point is below y29% (536 pixels on this 1848px canvas). Nothing scenic above y536. Keep mountain peaks below that line too. Blend the vacated area into exact neighbouring teal sky texture. All landmarks and scenery fit y29\u201364%, with no objects on cream floor. Keep the church recognisable but shorter/lower. No text, letters, numbers, inscriptions, logos, flags, faces, UI or props. One opaque851x1848PNG.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a02db3b8-cfe6-4457-8fd8-58452bc12f1d.png"
+  ],
+  "transparent_background": false,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-30b250ad-0518-48e8-a6a7-268f0d7b7ff8.png",
+  "attempts": [
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a02db3b8-cfe6-4457-8fd8-58452bc12f1d.png",
+      "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Austria (country_at). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: a turquoise Alpine lake below snow-topped peaks, a village with an onion-domed church tower, a yellow-and-white Baroque palace with a formal garden, a vintage tram, gentians in the foreground. Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 \u00d7 1848 PNG, reference aspect 0.4605. Upper 0\u201327% completely quiet petrol-teal paper sky THROUGH CENTRE, all landmark tops below 28%. Middle 27\u201365% expansive country scenery filling theatre width. Lower 65\u2013100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62\u201392%,y42\u201371% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_at/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ch.webp"
+      ],
+      "status": "rejected",
+      "rejection": "Church/left clouds intruded into quiet headline sky."
+    }
+  ],
+  "visuallyInspected": true,
+  "qaNotes": "Inspected corrected still: church and clouds lowered clear of headline centre; rich folded-cardstock Alps/lake/palace/onion church/tram/gentians, cream floor starts65%, right foreground clear. No text, logos, flags, people or props. Original high church attempt rejected.",
+  "originalDimensions": [
+    851,
+    1848
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/country_at/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_at.png",
+  "sha256": "91ead37ad3a787e7308940c91ab7e6259520790f1ea2ce9abcdec88ba05eec07",
+  "export": "Uniform LANCZOS cover to 851 \u00d7 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false,
+  "originalInputReferencePaths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_at/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ch.webp"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "sydney/room_card",
+  "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET finished Travary card. Preserve structural geometry; change only printed city scenery and allowed stripe/tag colours.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Sydney. Scene: a white sail-roofed opera house on the harbour, a steel arch bridge, a ferry, jacaranda in bloom, a gold harbour sunset. Light: warm low golden sun; coherent golden hour. Stripe and tag: harbour blue, jacaranda violet, sandstone gold (#246380, #8270a6, #c69d60). Keep all six pictures coherent in light, palette and landmarks.\nOne finished hotel key card 1774 × 887 PNG, genuine transparency outside. Preserve original canvas, rounded outline, edge, paper, contact shadow, stripe geometry and ivory right end cap. City hotel view WITHOUT window frame. Critical: pure blank ivory paper LEFT OF X700 at every height, no speckle, haze, texture, scenery echo or dither in that protected area. x430..630 MUST be completely clean paper because this region is sampled for export. Scenic ink feathers in only after x700; final key card left 62% remains completely blank for live text; key subject in right x1100..1483. Recolour existing stripe only to specified colours.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/room_card.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-230f0447-6fae-4c76-9719-ced360e2bf2c.png",
+  "visuallyInspected": true,
+  "qaNotes": "Opera-house sails, arch bridge, ferry and jacaranda coherent; bridge flags removed in four targeted edits, no flags on selected final art. Light/dark final sheets inspected; all template checks pass; all card speckle counts 0.",
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/sydney-room_card.png"
+}

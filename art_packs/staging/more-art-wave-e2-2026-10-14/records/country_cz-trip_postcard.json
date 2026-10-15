@@ -1,0 +1,13 @@
+{
+  "id": "country_cz/trip_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this country.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. Exactly ONE sun disc in the entire composition; no second sun, nested sun, orange semicircle behind a yellow sun, or moon. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL unrelated American template scenery. Remove original desert mesas, cactus and road-trip scenery; retain only this country’s specified scene. Famous buildings belong within a balanced country composition, not giant isolated objects.\nCountry: Czechia. Scene: a fairy-tale castle on a rocky bluff above a looping river and a red-roofed old town (the south Bohemian kind, not Prague), hop fields and birch woods, a Baroque church spire, a spa colonnade. Light: warm low golden sun. Stripe and tag: garnet, hop green, old gold (#8d4250, #5d734c, #c3a15a). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 × 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same country scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-f0b94b60-08fb-4aa2-80be-7e5b25690833.png",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "All six raw images and light/dark exports checked: south Bohemian castle and river landscape, no Prague landmarks, one sun each, no text or flags; blank protected areas, clean paper edges and small-scale scenery."
+}

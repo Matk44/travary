@@ -1,0 +1,15 @@
+{
+  "id": "sydney/documents_destination_stamp",
+  "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this city. Input image 2 is supporting city colour/scenery reference ONLY, discard ticket structure.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Sydney. Scene: a white sail-roofed opera house on the harbour, a steel arch bridge, a ferry, jacaranda in bloom, a gold harbour sunset. Light: warm low golden sun; coherent golden hour. Stripe and tag: harbour blue, jacaranda violet, sandstone gold (#246380, #8270a6, #c69d60). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 × 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this city scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png",
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c0718fe9-296e-4a5c-8e2e-164ec09bbfaa.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-dcd210e8-0a07-45a1-8c35-faa21177b298.png",
+  "visuallyInspected": true,
+  "qaNotes": "Opera-house sails, arch bridge, ferry and jacaranda coherent; bridge flags removed in four targeted edits, no flags on selected final art. Light/dark final sheets inspected; all template checks pass; all card speckle counts 0.",
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/sydney-documents_destination_stamp.png"
+}

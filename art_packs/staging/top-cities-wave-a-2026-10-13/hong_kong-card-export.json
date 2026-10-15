@@ -1,0 +1,68 @@
+[
+  {
+    "place": "hong_kong",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/hong_kong-featured_ticket.png",
+    "palette": [
+      [
+        22,
+        64,
+        79
+      ],
+      [
+        193,
+        77,
+        62
+      ],
+      [
+        210,
+        164,
+        73
+      ]
+    ]
+  },
+  {
+    "place": "hong_kong",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/hong_kong-room_card.png",
+    "palette": [
+      [
+        22,
+        64,
+        79
+      ],
+      [
+        193,
+        77,
+        62
+      ],
+      [
+        210,
+        164,
+        73
+      ]
+    ]
+  },
+  {
+    "place": "hong_kong",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/hong_kong-reservation_card.png",
+    "palette": [
+      [
+        22,
+        64,
+        79
+      ],
+      [
+        193,
+        77,
+        62
+      ],
+      [
+        210,
+        164,
+        73
+      ]
+    ]
+  }
+]

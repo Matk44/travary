@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "country_eg",
+  "version": 1,
+  "palette": {
+    "id": "egypt_nile_lapis",
+    "anchors": {"ink": "#20365A", "paper": "#F5EBD8"},
+    "accents": ["#D3A24A", "#2A8C8F", "#B5573A", "#5C6F58"],
+    "ui": {
+      "primary": "#1F4E7A",
+      "secondary": "#A9552F",
+      "highlight": "#B8862C",
+      "onPrimary": "#FFF9EC"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

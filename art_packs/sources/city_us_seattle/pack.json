@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "city_us_seattle",
-  "version": 1,
+  "version": 2,
   "palette": {
     "id": "usa_navy_roadtrip",
     "anchors": {"ink": "#18375B", "paper": "#F4EFE4"},
@@ -18,6 +18,7 @@
     {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
     {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
     {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
-    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024}
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
   ]
 }

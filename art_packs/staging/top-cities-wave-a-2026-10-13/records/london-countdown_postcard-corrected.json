@@ -1,0 +1,9 @@
+{
+  "id": "london/countdown_postcard-corrected",
+  "prompt": "Use case: precise-object-edit\nEdit target: this finished London postcard. Remove ONLY the tiny flags and flagpoles from the bridge. Every rooftop and bridge top must be bare of flags. Keep all artwork, composition, palette, paper edge and shadow identical. No new marks or writing. Return PNG exactly 1122 × 1402 with genuine alpha outside the postcard.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-da8ede14-2b5a-4f5b-bb3e-c786415b5f1d.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-6478df87-792e-4562-9118-487dd26b0482.png"
+}

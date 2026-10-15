@@ -1,0 +1,255 @@
+{
+  "date": "2026-10-14",
+  "wave": "C",
+  "status": "PASS",
+  "count": 4,
+  "records": [
+    {
+      "id": "antalya/onboarding_stage_v1",
+      "destinationId": "city_tr_antalya",
+      "status": "review_ready",
+      "prompt": "Use case: style-transfer\nAsset type: Travary Antalya onboarding scenery still, city_tr_antalya, Turkey.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Antalya postcard, geographic content/palette reference, discard its border. Input 3: Istanbul sibling stage, same family and richness, NOT its landmarks.\nCreate ONE new opaque portrait 851 × 1848 PNG. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, layered depth, warm apricot late-afternoon physical light. Antalya's old stone harbour and terracotta-roofed walls, one fluted Yivli-style minaret, limestone cliffs over turquoise sea, Taurus mountain ridges, palms and small unmarked sailboats. Symbolic Antalya composition; no Istanbul domes or bridges, no Bali temples, terraces or volcano. Broad harbour to right, buildings stronger on left.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% completely quiet petrol-teal paper sky through centre; ALL landmarks below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi; background water may continue.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, pseudo-script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. One full uncropped opaque still; exact same very tall aspect as reference.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/antalya/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_tr_istanbul.webp"
+      ],
+      "transparent_background": false,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-faec5880-5696-4fa0-8e83-1d28f6aa4ae6.png",
+      "label": "Antalya",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "TR"
+        ],
+        "cities": [
+          "antalya"
+        ]
+      },
+      "geographicScope": "Antalya old harbour, Yivli-style fluted minaret, cliffs, turquoise sea and Taurus mountains",
+      "visuallyInspected": true,
+      "qaNotes": {
+        "paperStyle": "passed",
+        "centralHeadlineSpace": "passed; central upper 27% quiet, peripheral palm/minaret",
+        "creamFloor": "passed; boundary approximately 65%",
+        "traviClearance": "passed visually; open water at right",
+        "noBakedPropsOrType": "passed",
+        "ownerApproval": "pending"
+      },
+      "originalDimensions": [
+        851,
+        1847
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/city_tr_antalya/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/city_tr_antalya.png",
+      "sha256": "6aef9c6e0d4fe838f3cc08a47131f3352ae99d2e814736b38a16d7b036b3cf78",
+      "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "milan/onboarding_stage_v1",
+      "destinationId": "city_it_milan",
+      "status": "review_ready",
+      "prompt": "Use case: precise-object-edit\nEdit target: generated Milan onboarding scenery still. Correct ONLY these defects while preserving all other pixels/composition as closely as possible:\n1. Remove every inscription, decorative script, pseudo-text, letter and number from the glass arcade's stone facade, entrance arch and its horizontal attic/plaque bands. Replace with completely blank smooth warm stone, including small dark scratch-like clusters that look like writing. No patterns resembling lettering.\n2. Remove every passenger/human silhouette/face from every window of the yellow tram. All tram windows must be uniformly dark empty glazing. Remove any tiny pedestrians from the street too. No people anywhere.\n3. Lower/shorten the highest cathedral spire so its top begins BELOW 28% down the image (below y518 on 1848 height). Keep the central upper 27% quiet teal sky. Maintain plausible original Gothic spires, not an exact cathedral copy.\nKeep the rich sculpted layered paper material, glass-roofed arcade, ochre shopfronts, yellow tram position, cathedral identity, greenery, warm low sunlight, teal curved theatre wings, camera and warm cream floor boundary at 65% exactly as they are. Preserve the entire calm lower 35% cream floor. Do not add signs or any objects. Single opaque portrait 851 × 1848, same tall aspect. No character, character shadow, folio, tickets, text, numerals, flags, logos, UI, border or watermark.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png"
+      ],
+      "transparent_background": false,
+      "attempts": [
+        {
+          "id": "milan/onboarding_stage_v1",
+          "destinationId": "city_it_milan",
+          "status": "generating",
+          "prompt": "Use case: style-transfer\nAsset type: Travary Milan onboarding scenery still, city_it_milan, Italy.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Milan postcard, geographic content/palette reference, discard its border. Input 3: Rome sibling stage, same family and paper richness, NOT its landmarks.\nCreate ONE new opaque full portrait 851 × 1848 PNG. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, convincing layered depth and warm honey late-afternoon physical light. Milan: an original white Gothic cathedral with many delicate spires evoking Milan but NOT an exact copy; a glass-roofed nineteenth-century shopping arcade; one small yellow vintage tram without words, numbers or plates; warm ochre/coral shopfront panels, trees, subtle flowers. Blank shop windows, no fashion logos or human figures. Cathedral mainly left and centre, arcade to left, tram low left. No Colosseum, Roman ruins, Bali temples, rice terraces or volcano.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% quiet petrol-teal paper sky through centre, ALL spire tops below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi, with quiet distant city background.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, decorative script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. No glossy plastic. Single complete opaque stage, same tall aspect as input 1.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/milan/countdown_postcard.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_it_rome.webp"
+          ],
+          "transparent_background": false,
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png",
+          "selected": false,
+          "rejection": "Inscription-like marks on arcade and passenger shapes in tram; highest spire encroached heading zone."
+        }
+      ],
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c75533c2-a1b0-4509-81ce-b1d6bbf5c8e0.png",
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/milan/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_it_rome.webp"
+      ],
+      "correctionInputReferencePaths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png"
+      ],
+      "label": "Milan",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "IT"
+        ],
+        "cities": [
+          "milan"
+        ]
+      },
+      "geographicScope": "Milan: original Gothic cathedral spires evoking the city, glass arcade, yellow tram and warm shopfront colour",
+      "visuallyInspected": true,
+      "qaNotes": {
+        "paperStyle": "passed",
+        "centralHeadlineSpace": "passed after highest spire shortened",
+        "creamFloor": "passed; boundary approximately 65%",
+        "traviClearance": "passed visually; open street at right",
+        "noBakedPropsOrType": "passed after inscription and tram-passenger correction",
+        "ownerApproval": "pending"
+      },
+      "originalDimensions": [
+        851,
+        1847
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/city_it_milan/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/city_it_milan.png",
+      "sha256": "563d332bcfd4b1e7dd793932411c24c1d5b196a7fe2ea615c8e4c1c74415daa8",
+      "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "phuket/onboarding_stage_v1",
+      "destinationId": "region_th_phuket",
+      "status": "review_ready",
+      "prompt": "Use case: style-transfer\nAsset type: Travary Phuket onboarding scenery still, region_th_phuket, Thailand.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Phuket postcard, geographic content/palette reference, discard its border. Input 3: Thailand sibling stage, same family and richness; remove its temple.\nCreate ONE new opaque portrait 851 × 1848 PNG, full uncropped very tall aspect of input 1. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, convincing layered depth, warm low golden sun. Phuket region's limestone islands rising from green-blue Andaman sea, three small unmarked Thai longtail boats, white beach and palms, jade tropical foliage. Scenery rather than temple: NO temples, Bali gates, rice terraces or volcano. Strong limestone and beach on left with open sea on right. Match the postcard's turquoise, navy, sage, coral and golden light.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% quiet petrol-teal paper sky through centre; landmark tops below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi; background water may continue.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, decorative script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. No glossy plastic. One complete opaque scenery still.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/phuket/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_th.webp"
+      ],
+      "transparent_background": false,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a5a91a38-fc4a-42bc-aa2c-d6123efaec69.png",
+      "label": "Phuket",
+      "scope": "region",
+      "selectors": {
+        "countryCodes": [
+          "TH"
+        ],
+        "regions": [
+          "phuket"
+        ]
+      },
+      "geographicScope": "Phuket region and Andaman limestone islands, longtail boats, white beach and palms",
+      "visuallyInspected": true,
+      "qaNotes": {
+        "paperStyle": "passed",
+        "centralHeadlineSpace": "passed; quiet central upper 27%",
+        "creamFloor": "passed; boundary approximately 65%",
+        "traviClearance": "passed visually; low boats in background, open sea at right",
+        "noBakedPropsOrType": "passed",
+        "ownerApproval": "pending"
+      },
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/region_th_phuket/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/region_th_phuket.png",
+      "sha256": "ca4d8a6b8921437194f74f1e0c5c661adf11841d82918a38eabcf098c2d7d03e",
+      "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    },
+    {
+      "id": "taipei/onboarding_stage_v1",
+      "destinationId": "city_tw_taipei",
+      "status": "review_ready",
+      "prompt": "Use case: precise-object-edit\nEdit target: Taipei onboarding paper scenery. Change ONLY the vertical height of the bamboo-shaped skyscraper. Shorten it in place, retaining its recognisable stacked tapering bamboo segments, so its COMPLETE antenna/top begins below y520 (28% down) on the 851 × 1848 portrait. Fill the vacated tower area with the matching uninterrupted petrol-teal paper sky; leave central upper 0–27% completely quiet for live headings. Keep city/mountains, warm rose-gold dusk, temple roof, blank coral lanterns, empty market, paper material, camera, teal wings and cream floor boundary at 65% exactly as they are. All the lower 35% remains blank cream. Keep lanterns/temple/shopfronts free of every letter, numeral, script or pseudo-text. No people, character, character shadow, folio, tickets, UI, logos, flags, border or watermark. Single opaque portrait 851 × 1848, unchanged aspect. Do not raise or add any other scenery.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-018492f2-8f83-477d-a866-f32be27ee509.png"
+      ],
+      "transparent_background": false,
+      "attempts": [
+        {
+          "id": "taipei/onboarding_stage_v1",
+          "destinationId": "city_tw_taipei",
+          "status": "generating",
+          "prompt": "Use case: style-transfer\nAsset type: Travary Taipei onboarding scenery still, city_tw_taipei, Taiwan.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Taipei postcard, geographic content/palette reference, discard its border. Input 3: Seoul sibling stage, same family and richness, NOT its Korean geography.\nCreate ONE new opaque full portrait 851 × 1848 PNG. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, convincing layered depth. Taipei: one bamboo-shaped tiered skyscraper with its complete top below 27% down the image, layered green mountains, an ornate Taiwanese temple roof at left and low lantern-hung night-market street. Blank coral/amber lanterns and unlettered colourful market canopy panels. Warm rose-gold dusk, lantern glow, mountain teal, jade green, navy and cream. Strong temple/street on left, tiered tower middle-left, distant city and soft hills across right. NO Korean Namsan tower, autumn maples, Bali gates, rice terraces or volcano.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% quiet petrol-teal paper sky through centre; ALL landmark tops below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi, with quieter distant city scenery.\nEvery lantern, banner, temple beam and market panel has NO Chinese characters or pseudo-script, even as decoration. No signboards or plaques. No people, faces, character, character shadow, folio, luggage, loose tickets, text, lettering, numbers, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. No glossy plastic. One complete opaque scene, same tall aspect as input 1.",
+          "referenced_image_paths": [
+            "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/taipei/countdown_postcard.png",
+            "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_kr_seoul.webp"
+          ],
+          "transparent_background": false,
+          "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-018492f2-8f83-477d-a866-f32be27ee509.png",
+          "selected": false,
+          "rejection": "Tower antenna encroached upper 27% heading zone."
+        }
+      ],
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-963752a7-3721-4429-b881-00e9efaca89b.png",
+      "originalInputReferencePaths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/taipei/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_kr_seoul.webp"
+      ],
+      "label": "Taipei",
+      "scope": "city",
+      "selectors": {
+        "countryCodes": [
+          "TW"
+        ],
+        "cities": [
+          "taipei"
+        ]
+      },
+      "geographicScope": "Taipei: bamboo-shaped tiered tower, green mountains, Taiwanese temple roofs and lantern market",
+      "visuallyInspected": true,
+      "qaNotes": {
+        "paperStyle": "passed",
+        "centralHeadlineSpace": "passed after tower lowered",
+        "creamFloor": "passed; boundary approximately 65%",
+        "traviClearance": "passed visually; market scenery remains in background",
+        "noBakedPropsOrType": "passed; no script on lanterns, temple or market panels",
+        "ownerApproval": "pending"
+      },
+      "originalDimensions": [
+        851,
+        1848
+      ],
+      "selectedWorkspacePath": "art_packs/pending/onboarding/city_tw_taipei/onboarding_stage_v1.png",
+      "dimensions": [
+        851,
+        1848
+      ],
+      "mode": "RGBA",
+      "embeddedSrgb": true,
+      "opaque": true,
+      "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/city_tw_taipei.png",
+      "sha256": "ec0c98baf4637dad65fef66445e11d683b1f5b2a8c82e5f98a0931fcfc186737",
+      "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+      "ownerApproval": "pending",
+      "flutterIntegrated": false,
+      "published": false
+    }
+  ]
+}

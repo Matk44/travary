@@ -1,0 +1,358 @@
+{
+  "date": "2026-10-14",
+  "wave": "F1",
+  "status": "PASS",
+  "count": 25,
+  "results": [
+    {
+      "file": "art_packs/staging/country_ae/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "309ff8a972202d27b2f658e27faff84e5872ce7e86b8038e94e525fa965e0e59"
+    },
+    {
+      "file": "art_packs/staging/country_au/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "4e3cbe3b39e55b13761043163afae2318cfdc2bab830e0ef7d1fcf624783e952"
+    },
+    {
+      "file": "art_packs/staging/country_br/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "0d8c3d0e27b33e1a60d6d80c4a98f72394c03ab8bd4aa9b31daecba89b97ad4e"
+    },
+    {
+      "file": "art_packs/staging/country_ca/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "9f92b5e479f53a76e47a05f8d6212e84537694085b0bc3920381f5a0abb8b27e"
+    },
+    {
+      "file": "art_packs/staging/country_ch/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "08fc07c464d8045fd749d134952737f8b83bba5227d8c5ca98b815be607a5418"
+    },
+    {
+      "file": "art_packs/staging/country_cn/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "da867c5750d34ae2ad90d99fa82bf97646a7e522f6f51cabb4e556bfb6977680"
+    },
+    {
+      "file": "art_packs/staging/country_de/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "5f76fc7b615bbd0248279ede3414ae9b121176bdddc4703ff9a49e1ad589d4ac"
+    },
+    {
+      "file": "art_packs/staging/country_es/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "ecf03e3b85212749fa19672bbfbd1f342d3f10c467ac4130d32bccc2ec41875b"
+    },
+    {
+      "file": "art_packs/staging/country_fr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "dd553e92bb719c00a849cc0590138faf90e647b47cc0f888d6359559e5bccbed"
+    },
+    {
+      "file": "art_packs/staging/country_gb/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "f1a5cf3080cd2c56cd8014c70fe970d2a67de86f35f842d10cacf8ae23dfd4d2"
+    },
+    {
+      "file": "art_packs/staging/country_gr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "4ad6158511acbf84fb0bda04af2c749ed1b52c4589bab4d3001529cf1a76149e"
+    },
+    {
+      "file": "art_packs/staging/country_id/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "ca344d92fb4a334f9bf4e1a9e6ba35fdab21425ab608e986e0a8f78eabfc494d"
+    },
+    {
+      "file": "art_packs/staging/country_in/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "31d791dd665cacfdc35a3318e63fede5b27f52be1836ac089188f574659e79c2"
+    },
+    {
+      "file": "art_packs/staging/country_it/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "270f77d1f2ddd380763f2224ae479e9d58ec99278e3840e8f95bc893973d8cd3"
+    },
+    {
+      "file": "art_packs/staging/country_jp/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "ca78a6e275b22191c59a7a85556fdc582ee4983071aa8b1b9b338bc12f33671c"
+    },
+    {
+      "file": "art_packs/staging/country_kr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "8051dc1b395f29d08d49fe83e40407919ba4b4d3f91aef96627bc099ed3afd08"
+    },
+    {
+      "file": "art_packs/staging/country_mx/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "0d5e728434d913659c64a7a1e5171968a9a8c38649762fb06ed56b000762ce40"
+    },
+    {
+      "file": "art_packs/staging/country_nl/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "de2a5cc4ebb10b0d56d404cd8a7420ac6672e37b672dd7596bcecad792f96145"
+    },
+    {
+      "file": "art_packs/staging/country_nz/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "bbcccbcda0f2f674539e77e6242e0c3c8424955b23355772994fdb6e554d6445"
+    },
+    {
+      "file": "art_packs/staging/country_pt/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "8ad1e90978f45187aec3159332b292a4c86d6bd77c1dfbe942e5e7ba8e69d8ce"
+    },
+    {
+      "file": "art_packs/staging/country_sg/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "50a9b0949d87822e2da4adda7825c83f6823cc788ac9757cddce54d86612f8df"
+    },
+    {
+      "file": "art_packs/staging/country_th/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "f22507bd94af6f137f1c77419b5e6a54afca5914cd6f3a0a1387b8f79de6ac5b"
+    },
+    {
+      "file": "art_packs/staging/country_tr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "4020059438d2496ca707a54cadfb369b8b843e716a158852fbddeeff45c77666"
+    },
+    {
+      "file": "art_packs/staging/country_us/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "8ad2303ff4fabea959b2975be10f88e01230fbdcdfe2e6849457b8c07007c0b8"
+    },
+    {
+      "file": "art_packs/staging/country_za/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "a9795a0337111ac69da320e2ec01f0d1cb04c3f4ba3dadb54287b47d34c84440"
+    }
+  ]
+}

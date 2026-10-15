@@ -1,0 +1,15 @@
+{
+  "id": "melbourne/trip_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this city. Input image 2 is supporting city colour/scenery reference ONLY, discard ticket structure.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. NO FLAGS OR FLAGPOLES, including tiny bridge-top pennants, roof flags, boat flags or decorative banners. Bridge arches have clean uninterrupted bare tops. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Melbourne. Scene: a yellow-domed Victorian railway station with a clock, a green-and-cream tram, a laneway café with abstract colourful murals (nothing readable), rowing sheds on the river, the skyline; every clock face has hands and plain tick marks ONLY, no Arabic/Roman numerals; tram has empty dark windows and blank body panels, no destination boards; murals are purely abstract coloured geometric shapes, no script. Light: warm low golden sun; coherent golden hour. Stripe and tag: tram green, laneway orange, plum (#416552, #d57d49, #75536f). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 × 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same city scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png",
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-dc4b6f24-04be-414e-9d53-986678eb26d9.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c87159e7-41ac-4c83-8a1e-6e5354dce4b0.png",
+  "visuallyInspected": true,
+  "qaNotes": "Green-and-cream tram, domed Victorian station, river/rowing sheds and abstract murals coherent. Clock faces use hands/ticks without lettering; tram panels unmarked. Featureless rower silhouettes only. Light/dark final sheets inspected; all template checks pass and all three card speckle counts 0.",
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/melbourne-trip_postcard.png"
+}

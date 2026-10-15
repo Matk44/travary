@@ -1,0 +1,9 @@
+{
+  "id": "seoul/featured_ticket-corrected",
+  "prompt": "Use case: precise-object-edit\nEdit target: this finished Seoul ticket. Remove ONLY the small yellow inscription/signboard panel centred beneath the palace gate's upper roof; replace it with plain unmarked dark-green painted wooden beam matching adjoining wood. No signboard or characters, not even tiny decorative pseudo-text. Keep every other scene detail, city skyline, Namsan tower, foliage, colour, composition, shell, barcode and blank navy area unchanged. Exactly 1774 × 887 PNG with true alpha outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-b32028b6-4dc2-4b48-9346-dee86f182b6d.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-4ca5eea2-0fee-45d1-abba-39aaa08906d2.png"
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "place": "osaka",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/osaka-featured_ticket.png",
+    "palette": [
+      [
+        27,
+        65,
+        75
+      ],
+      [
+        196,
+        91,
+        65
+      ],
+      [
+        211,
+        163,
+        64
+      ]
+    ]
+  },
+  {
+    "place": "osaka",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/osaka-room_card.png",
+    "palette": [
+      [
+        27,
+        65,
+        75
+      ],
+      [
+        196,
+        91,
+        65
+      ],
+      [
+        211,
+        163,
+        64
+      ]
+    ]
+  },
+  {
+    "place": "osaka",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/osaka-reservation_card.png",
+    "palette": [
+      [
+        27,
+        65,
+        75
+      ],
+      [
+        196,
+        91,
+        65
+      ],
+      [
+        211,
+        163,
+        64
+      ]
+    ]
+  }
+]

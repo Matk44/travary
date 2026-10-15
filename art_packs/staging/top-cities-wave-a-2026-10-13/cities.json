@@ -1,0 +1,242 @@
+[
+  {
+    "id": "london",
+    "name": "London",
+    "scene": "Tower Bridge over the Thames, a red double-decker bus with no writing or route number, a black cab and Georgian terraces",
+    "light": "soft grey-gold late-afternoon light",
+    "palette": "navy, river teal, muted stone, red and warm cream",
+    "colors": [
+      [
+        26,
+        57,
+        70
+      ],
+      [
+        180,
+        64,
+        50
+      ],
+      [
+        199,
+        163,
+        88
+      ]
+    ]
+  },
+  {
+    "id": "tokyo",
+    "name": "Tokyo",
+    "scene": "Shibuya-style crossing and abstract unlettered neon lights, red-and-white Tokyo Tower within a balanced skyline, cherry blossom and a bullet train with no markings",
+    "light": "neon after dusk",
+    "palette": "navy, petrol teal, coral red, pale blossom pink and warm cream",
+    "colors": [
+      [
+        25,
+        54,
+        77
+      ],
+      [
+        218,
+        93,
+        96
+      ],
+      [
+        209,
+        161,
+        83
+      ]
+    ]
+  },
+  {
+    "id": "bangkok",
+    "name": "Bangkok",
+    "scene": "Wat Arun-like temple spires along the river, long-tail boats, an unmarked tuk-tuk and a floating market",
+    "light": "warm evening sun",
+    "palette": "deep teal, navy, gold, terracotta coral and sage green",
+    "colors": [
+      [
+        20,
+        68,
+        70
+      ],
+      [
+        203,
+        100,
+        60
+      ],
+      [
+        213,
+        164,
+        66
+      ]
+    ]
+  },
+  {
+    "id": "rome",
+    "name": "Rome",
+    "scene": "the Colosseum within a layered low cityscape, umbrella pines, terracotta roofs, an unbranded vintage Italian scooter and a stone fountain",
+    "light": "golden late-afternoon light",
+    "palette": "navy, warm cream stone, terracotta coral, sage and muted gold",
+    "colors": [
+      [
+        32,
+        63,
+        64
+      ],
+      [
+        190,
+        98,
+        65
+      ],
+      [
+        210,
+        164,
+        83
+      ]
+    ]
+  },
+  {
+    "id": "barcelona",
+    "name": "Barcelona",
+    "scene": "original Gaudí-inspired mosaic curves and imaginative stone spires, no exact copy of Sagrada Família; a beach, palms and warm stone buildings",
+    "light": "warm golden afternoon",
+    "palette": "deep teal, navy, mosaic coral and gold, sage and warm stone cream",
+    "colors": [
+      [
+        24,
+        76,
+        79
+      ],
+      [
+        213,
+        112,
+        80
+      ],
+      [
+        212,
+        166,
+        67
+      ]
+    ]
+  },
+  {
+    "id": "dubai",
+    "name": "Dubai",
+    "scene": "a balanced needle-like tower skyline, desert dunes at its edge, a wooden dhow on the creek and a sail-shaped hotel silhouette within the skyline",
+    "light": "warm golden sunset",
+    "palette": "navy, creek teal, sand cream, muted gold and coral",
+    "colors": [
+      [
+        23,
+        70,
+        80
+      ],
+      [
+        200,
+        115,
+        82
+      ],
+      [
+        213,
+        167,
+        75
+      ]
+    ]
+  },
+  {
+    "id": "istanbul",
+    "name": "Istanbul",
+    "scene": "domes and slender minarets above the Bosphorus, a ferry, gulls, a bridge at sunset and the saffron/coral colours of a spice market",
+    "light": "warm coral-gold sunset",
+    "palette": "navy, teal, warm stone cream, saffron gold, coral and sage",
+    "colors": [
+      [
+        24,
+        67,
+        77
+      ],
+      [
+        201,
+        101,
+        77
+      ],
+      [
+        213,
+        163,
+        65
+      ]
+    ]
+  },
+  {
+    "id": "amsterdam",
+    "name": "Amsterdam",
+    "scene": "gabled canal houses, bicycles on a little arched bridge, a canal boat and tulips",
+    "light": "soft late-afternoon gold",
+    "palette": "navy, canal teal, brick coral, sage, mustard gold and warm cream",
+    "colors": [
+      [
+        26,
+        66,
+        75
+      ],
+      [
+        195,
+        98,
+        75
+      ],
+      [
+        211,
+        164,
+        74
+      ]
+    ]
+  },
+  {
+    "id": "hong_kong",
+    "name": "Hong Kong",
+    "scene": "Victoria Harbour's balanced skyline, a red-sailed junk, a green-and-white harbour ferry and the Peak's green slopes",
+    "light": "warm sunset giving way to early evening",
+    "palette": "navy, harbour teal, red coral sails, sage hills and warm gold",
+    "colors": [
+      [
+        22,
+        64,
+        79
+      ],
+      [
+        193,
+        77,
+        62
+      ],
+      [
+        210,
+        164,
+        73
+      ]
+    ]
+  },
+  {
+    "id": "seoul",
+    "name": "Seoul",
+    "scene": "a palace gate with curved tiled roofs, Namsan tower on its wooded hill, hanok rooftops and autumn maples",
+    "light": "warm autumn late-afternoon light",
+    "palette": "navy, deep teal, maple coral, mustard gold, sage and warm ivory",
+    "colors": [
+      [
+        25,
+        63,
+        73
+      ],
+      [
+        199,
+        96,
+        67
+      ],
+      [
+        212,
+        162,
+        60
+      ]
+    ]
+  }
+]

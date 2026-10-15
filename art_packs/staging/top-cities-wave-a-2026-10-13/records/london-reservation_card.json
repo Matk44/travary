@@ -1,0 +1,9 @@
+{
+  "id": "london/reservation_card",
+  "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, finished card template. Preserve exact canvas, card position, silhouette, corners, notches, perforations, shadow, paper, barcode stub, cord, eyelet and tag geometry. Change only printed scenery plus recolour existing stripe/tag to city palette; identical stripe pattern and blank text zones.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: London. Scene: Tower Bridge over the Thames, a red double-decker bus with no writing or route number, a black cab and Georgian terraces. Light: soft grey-gold late-afternoon light. Palette: navy, river teal, muted stone, red and warm cream.\nFinished reservation card, exactly 1983 × 793 PNG. Change only small picture at far right x=1423..1950,y=165..713 to a compact city view. Keep blank ivory centre, exact cord and brass grommet. Tag face is blank dark teal textured paper, no stars/stripes/flag or other printing. Retain tag shape, position and shadow.\nReturn one finished card on genuine transparent background. Remove all original American landmarks. No added objects beyond the scene or shell.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/reservation_card.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-731b1b69-4eab-4066-be2f-a03a96058775.png"
+}

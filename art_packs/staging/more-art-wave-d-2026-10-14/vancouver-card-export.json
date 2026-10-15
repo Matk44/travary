@@ -1,0 +1,68 @@
+[
+  {
+    "place": "vancouver",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/vancouver-featured_ticket.png",
+    "palette": [
+      [
+        54,
+        94,
+        79
+      ],
+      [
+        50,
+        121,
+        130
+      ],
+      [
+        189,
+        95,
+        77
+      ]
+    ]
+  },
+  {
+    "place": "vancouver",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/vancouver-room_card.png",
+    "palette": [
+      [
+        54,
+        94,
+        79
+      ],
+      [
+        50,
+        121,
+        130
+      ],
+      [
+        189,
+        95,
+        77
+      ]
+    ]
+  },
+  {
+    "place": "vancouver",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/vancouver-reservation_card.png",
+    "palette": [
+      [
+        54,
+        94,
+        79
+      ],
+      [
+        50,
+        121,
+        130
+      ],
+      [
+        189,
+        95,
+        77
+      ]
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "place": "milan",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/milan-featured_ticket.png",
+    "palette": [
+      [
+        29,
+        64,
+        75
+      ],
+      [
+        193,
+        101,
+        75
+      ],
+      [
+        213,
+        167,
+        67
+      ]
+    ]
+  },
+  {
+    "place": "milan",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/milan-room_card.png",
+    "palette": [
+      [
+        29,
+        64,
+        75
+      ],
+      [
+        193,
+        101,
+        75
+      ],
+      [
+        213,
+        167,
+        67
+      ]
+    ]
+  },
+  {
+    "place": "milan",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/milan-reservation_card.png",
+    "palette": [
+      [
+        29,
+        64,
+        75
+      ],
+      [
+        193,
+        101,
+        75
+      ],
+      [
+        213,
+        167,
+        67
+      ]
+    ]
+  }
+]

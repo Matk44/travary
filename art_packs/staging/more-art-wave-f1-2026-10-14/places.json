@@ -1,0 +1,127 @@
+[
+  {
+    "id": "country_ae",
+    "scene": "dunes at golden hour, a dhow on a calm creek, wind-tower houses and a slender modern skyline far behind",
+    "name": "United Arab Emirates"
+  },
+  {
+    "id": "country_au",
+    "scene": "red-earth outback rock at sunset beside a calm harbour of white sail-like roofs, eucalyptus and a kookaburra",
+    "name": "Australia"
+  },
+  {
+    "id": "country_br",
+    "scene": "a granite sugarloaf peak over a curved bay, rainforest hills, colourful hillside houses and a toucan",
+    "name": "Brazil"
+  },
+  {
+    "id": "country_ca",
+    "scene": "a turquoise glacial lake below snowy peaks, pines, a red canoe and a moose silhouette at the shore",
+    "name": "Canada"
+  },
+  {
+    "id": "country_ch",
+    "scene": "an alpine meadow, a snow-capped pyramid peak, a red mountain train on a viaduct and a chalet",
+    "name": "Switzerland"
+  },
+  {
+    "id": "country_cn",
+    "scene": "karst limestone peaks over a misty river, a bamboo raft, a pagoda and a winding wall on the ridge",
+    "name": "China"
+  },
+  {
+    "id": "country_de",
+    "scene": "a fairy-tale castle on a forested crag above a river valley, half-timbered village and vineyards",
+    "name": "Germany"
+  },
+  {
+    "id": "country_es",
+    "scene": "whitewashed hill town above olive groves, a flamenco-red sunset, terracotta roofs and a distant sea",
+    "name": "Spain"
+  },
+  {
+    "id": "country_fr",
+    "scene": "lavender fields, a stone village with a church spire, a cypress line and soft hills (no Eiffel Tower: Paris has its own pack)",
+    "name": "France"
+  },
+  {
+    "id": "country_gb",
+    "scene": "rolling green patchwork hills, a dry-stone wall, a red telephone-box-style kiosk without signage and a stone cottage",
+    "name": "United Kingdom"
+  },
+  {
+    "id": "country_gr",
+    "scene": "white cube houses and a blue-domed chapel on a cliff above an Aegean bay, a windmill and bougainvillea",
+    "name": "Greece"
+  },
+  {
+    "id": "country_id",
+    "scene": "stepped green rice terraces, a split temple gate, a volcano on the horizon and palms",
+    "name": "Indonesia"
+  },
+  {
+    "id": "country_in",
+    "scene": "a white marble domed mausoleum-like palace reflected in a long pool, marigolds and a soft pink dusk",
+    "name": "India"
+  },
+  {
+    "id": "country_it",
+    "scene": "a cypress-lined road through golden Tuscan-like hills to a hill town, a pastel coastal village below",
+    "name": "Italy"
+  },
+  {
+    "id": "country_jp",
+    "scene": "a snow-capped conical mountain over a lake, red maples, a pagoda roofline and a red sun disc",
+    "name": "Japan"
+  },
+  {
+    "id": "country_kr",
+    "scene": "a palace gate with curved tiled roofs, cherry blossom, layered blue mountains and a lantern",
+    "name": "South Korea"
+  },
+  {
+    "id": "country_mx",
+    "scene": "a stepped stone pyramid in jungle, a cenote pool, papel-picado colours as abstract shapes and agave",
+    "name": "Mexico"
+  },
+  {
+    "id": "country_nl",
+    "scene": "tulip fields in stripes, a windmill by a canal, a bicycle and gabled canal houses far off",
+    "name": "Netherlands"
+  },
+  {
+    "id": "country_nz",
+    "scene": "a deep fjord with waterfalls, sheep on green hills, a snowy range and a fern frond",
+    "name": "New Zealand"
+  },
+  {
+    "id": "country_pt",
+    "scene": "a yellow tram on a steep cobbled hill, azulejo-patterned walls as abstract tiles, an ocean cliff",
+    "name": "Portugal"
+  },
+  {
+    "id": "country_sg",
+    "scene": "a garden of tall tree-like sculptures at dusk, a waterfront skyline, orchids",
+    "name": "Singapore"
+  },
+  {
+    "id": "country_th",
+    "scene": "a golden temple roof with tiered eaves, a longtail boat on turquoise water, limestone islands",
+    "name": "Thailand"
+  },
+  {
+    "id": "country_tr",
+    "scene": "hot-air balloons over fairy-chimney rock valleys at sunrise, a domed mosque silhouette far behind",
+    "name": "Turkey"
+  },
+  {
+    "id": "country_us",
+    "scene": "a desert mesa and canyon at sunset, a highway curving away, saguaro cactus (no Orlando castle: that's its own pack)",
+    "name": "United States"
+  },
+  {
+    "id": "country_za",
+    "scene": "a flat-topped mountain over a bay, protea flowers, an elephant silhouette on the savannah",
+    "name": "South Africa"
+  }
+]

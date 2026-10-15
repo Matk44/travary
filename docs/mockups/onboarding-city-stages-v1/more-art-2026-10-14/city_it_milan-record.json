@@ -1,0 +1,74 @@
+{
+  "id": "milan/onboarding_stage_v1",
+  "destinationId": "city_it_milan",
+  "status": "review_ready",
+  "prompt": "Use case: precise-object-edit\nEdit target: generated Milan onboarding scenery still. Correct ONLY these defects while preserving all other pixels/composition as closely as possible:\n1. Remove every inscription, decorative script, pseudo-text, letter and number from the glass arcade's stone facade, entrance arch and its horizontal attic/plaque bands. Replace with completely blank smooth warm stone, including small dark scratch-like clusters that look like writing. No patterns resembling lettering.\n2. Remove every passenger/human silhouette/face from every window of the yellow tram. All tram windows must be uniformly dark empty glazing. Remove any tiny pedestrians from the street too. No people anywhere.\n3. Lower/shorten the highest cathedral spire so its top begins BELOW 28% down the image (below y518 on 1848 height). Keep the central upper 27% quiet teal sky. Maintain plausible original Gothic spires, not an exact cathedral copy.\nKeep the rich sculpted layered paper material, glass-roofed arcade, ochre shopfronts, yellow tram position, cathedral identity, greenery, warm low sunlight, teal curved theatre wings, camera and warm cream floor boundary at 65% exactly as they are. Preserve the entire calm lower 35% cream floor. Do not add signs or any objects. Single opaque portrait 851 × 1848, same tall aspect. No character, character shadow, folio, tickets, text, numerals, flags, logos, UI, border or watermark.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png"
+  ],
+  "transparent_background": false,
+  "attempts": [
+    {
+      "id": "milan/onboarding_stage_v1",
+      "destinationId": "city_it_milan",
+      "status": "generating",
+      "prompt": "Use case: style-transfer\nAsset type: Travary Milan onboarding scenery still, city_it_milan, Italy.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Milan postcard, geographic content/palette reference, discard its border. Input 3: Rome sibling stage, same family and paper richness, NOT its landmarks.\nCreate ONE new opaque full portrait 851 × 1848 PNG. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, convincing layered depth and warm honey late-afternoon physical light. Milan: an original white Gothic cathedral with many delicate spires evoking Milan but NOT an exact copy; a glass-roofed nineteenth-century shopping arcade; one small yellow vintage tram without words, numbers or plates; warm ochre/coral shopfront panels, trees, subtle flowers. Blank shop windows, no fashion logos or human figures. Cathedral mainly left and centre, arcade to left, tram low left. No Colosseum, Roman ruins, Bali temples, rice terraces or volcano.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% quiet petrol-teal paper sky through centre, ALL spire tops below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi, with quiet distant city background.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, decorative script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. No glossy plastic. Single complete opaque stage, same tall aspect as input 1.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/milan/countdown_postcard.png",
+        "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_it_rome.webp"
+      ],
+      "transparent_background": false,
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png",
+      "selected": false,
+      "rejection": "Inscription-like marks on arcade and passenger shapes in tram; highest spire encroached heading zone."
+    }
+  ],
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c75533c2-a1b0-4509-81ce-b1d6bbf5c8e0.png",
+  "originalInputReferencePaths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/milan/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/city_it_rome.webp"
+  ],
+  "correctionInputReferencePaths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-10b25470-8c3f-4ee8-b5a6-258dad134428.png"
+  ],
+  "label": "Milan",
+  "scope": "city",
+  "selectors": {
+    "countryCodes": [
+      "IT"
+    ],
+    "cities": [
+      "milan"
+    ]
+  },
+  "geographicScope": "Milan: original Gothic cathedral spires evoking the city, glass arcade, yellow tram and warm shopfront colour",
+  "visuallyInspected": true,
+  "qaNotes": {
+    "paperStyle": "passed",
+    "centralHeadlineSpace": "passed after highest spire shortened",
+    "creamFloor": "passed; boundary approximately 65%",
+    "traviClearance": "passed visually; open street at right",
+    "noBakedPropsOrType": "passed after inscription and tram-passenger correction",
+    "ownerApproval": "pending"
+  },
+  "originalDimensions": [
+    851,
+    1847
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/city_it_milan/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/city_it_milan.png",
+  "sha256": "563d332bcfd4b1e7dd793932411c24c1d5b196a7fe2ea615c8e4c1c74415daa8",
+  "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false
+}

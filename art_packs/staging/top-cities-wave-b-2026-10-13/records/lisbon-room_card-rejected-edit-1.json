@@ -1,0 +1,11 @@
+{
+  "id": "lisbon/room_card-rejected-edit-1",
+  "prompt": "Use case: precise-object-edit\nInput image 1 is the EDIT TARGET. Remove the pale lettering-like scratches on the yellow side panel of the tram immediately left of its front. Make this tram panel plain mustard yellow textured paint, with no glyphs, marks, logos, words or numbers anywhere on the tram. Preserve absolutely everything else: same scene, exact card canvas and position, blank ivory area, stripe, shadow, buildings, bridge, colour, light and real transparency outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-620b5e42-65ed-4753-9896-5ad6a5dc4a5c.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-2d5956ac-5f71-4776-b9ac-a4eb0854db53.png",
+  "selected": false,
+  "note": "Rejected: pseudo-lettering remained; superseded by the final front-on tram generation."
+}

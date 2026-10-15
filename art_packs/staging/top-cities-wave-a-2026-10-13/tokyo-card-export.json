@@ -1,0 +1,68 @@
+[
+  {
+    "place": "tokyo",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/tokyo-featured_ticket.png",
+    "palette": [
+      [
+        25,
+        54,
+        77
+      ],
+      [
+        218,
+        93,
+        96
+      ],
+      [
+        209,
+        161,
+        83
+      ]
+    ]
+  },
+  {
+    "place": "tokyo",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/tokyo-room_card.png",
+    "palette": [
+      [
+        25,
+        54,
+        77
+      ],
+      [
+        218,
+        93,
+        96
+      ],
+      [
+        209,
+        161,
+        83
+      ]
+    ]
+  },
+  {
+    "place": "tokyo",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/tokyo-reservation_card.png",
+    "palette": [
+      [
+        25,
+        54,
+        77
+      ],
+      [
+        218,
+        93,
+        96
+      ],
+      [
+        209,
+        161,
+        83
+      ]
+    ]
+  }
+]

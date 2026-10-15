@@ -1,0 +1,218 @@
+[
+  {
+    "id": "edinburgh",
+    "name": "Edinburgh",
+    "scene": "a castle on its black volcanic rock above a garden valley, the Royal Mile's tall stone tenements, a Gothic monument spire, a green crag-topped hill, a piper's silhouette, thistles, gold-grey northern light",
+    "palette": "slate blue, thistle purple, heather gold",
+    "light": "warm low golden sun; gold-grey northern light",
+    "colors": [
+      [
+        82,
+        103,
+        121
+      ],
+      [
+        133,
+        109,
+        152
+      ],
+      [
+        203,
+        161,
+        93
+      ]
+    ]
+  },
+  {
+    "id": "sydney",
+    "name": "Sydney",
+    "scene": "a white sail-roofed opera house on the harbour, a steel arch bridge, a ferry, jacaranda in bloom, a gold harbour sunset",
+    "palette": "harbour blue, jacaranda violet, sandstone gold",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        36,
+        99,
+        128
+      ],
+      [
+        130,
+        112,
+        166
+      ],
+      [
+        198,
+        157,
+        96
+      ]
+    ]
+  },
+  {
+    "id": "melbourne",
+    "name": "Melbourne",
+    "scene": "a yellow-domed Victorian railway station with a clock, a green-and-cream tram, a laneway café with abstract colourful murals (nothing readable), rowing sheds on the river, the skyline; every clock face has hands and plain tick marks ONLY, no Arabic/Roman numerals; tram has empty dark windows and blank body panels, no destination boards; murals are purely abstract coloured geometric shapes, no script",
+    "palette": "tram green, laneway orange, plum",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        65,
+        101,
+        82
+      ],
+      [
+        213,
+        125,
+        73
+      ],
+      [
+        117,
+        83,
+        111
+      ]
+    ]
+  },
+  {
+    "id": "florence",
+    "name": "Florence",
+    "scene": "a red-tiled cathedral dome with a striped bell tower, the river with a covered bridge of little shops, cypress hills, terracotta roofs, golden hour",
+    "palette": "terracotta, cypress green, cream gold",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        189,
+        113,
+        84
+      ],
+      [
+        82,
+        102,
+        74
+      ],
+      [
+        214,
+        179,
+        110
+      ]
+    ]
+  },
+  {
+    "id": "athens",
+    "name": "Athens",
+    "scene": "the Parthenon on its rock, whitewashed old-quarter houses stepping down with bougainvillea, olive and pine, a pine-clad hill with a small chapel, deep Aegean light",
+    "palette": "Aegean blue, olive green, gold",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        40,
+        101,
+        128
+      ],
+      [
+        109,
+        121,
+        81
+      ],
+      [
+        211,
+        173,
+        100
+      ]
+    ]
+  },
+  {
+    "id": "vancouver",
+    "name": "Vancouver",
+    "scene": "glass towers on a harbour backed by snowy mountains, a seaplane, a white sail-roofed waterfront pavilion, the seawall and tall cedars, a ferry, autumn colour",
+    "palette": "spruce green, ocean teal, maple red",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        54,
+        94,
+        79
+      ],
+      [
+        50,
+        121,
+        130
+      ],
+      [
+        189,
+        95,
+        77
+      ]
+    ]
+  },
+  {
+    "id": "cape_town",
+    "name": "Cape Town",
+    "scene": "a flat-topped mountain under a tablecloth of cloud, a cable car, a street of brightly painted hillside houses, penguins on a granite beach, proteas, a Cape Dutch gable",
+    "palette": "ocean blue, protea pink, sunlit gold",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        43,
+        102,
+        133
+      ],
+      [
+        198,
+        120,
+        136
+      ],
+      [
+        213,
+        174,
+        88
+      ]
+    ]
+  },
+  {
+    "id": "queenstown",
+    "name": "Queenstown",
+    "scene": "a long mountain lake with a vintage steamship, the jagged Remarkables-like range with snow, a gondola on the slope, autumn poplars in gold, a jet boat's wake",
+    "palette": "alpine blue, autumn gold, pine green",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        47,
+        100,
+        132
+      ],
+      [
+        201,
+        162,
+        83
+      ],
+      [
+        67,
+        102,
+        87
+      ]
+    ]
+  },
+  {
+    "id": "san_francisco",
+    "name": "San Francisco",
+    "scene": "the Golden Gate Bridge in orange-red with fog rolling through, a cable car climbing a steep street, a row of painted Victorian houses, a pier with sea lions, a pyramid-topped skyline, an island prison silhouette in the bay",
+    "palette": "bridge orange-red, fog grey-blue, Victorian teal",
+    "light": "warm low golden sun; coherent golden hour",
+    "colors": [
+      [
+        196,
+        91,
+        67
+      ],
+      [
+        127,
+        152,
+        167
+      ],
+      [
+        60,
+        126,
+        121
+      ]
+    ]
+  }
+]

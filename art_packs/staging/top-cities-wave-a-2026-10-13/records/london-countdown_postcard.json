@@ -1,0 +1,10 @@
+{
+  "id": "london/countdown_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1: postcard paper/composition reference. Input image 2: supporting city scene/palette reference.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: London. Scene: Tower Bridge over the Thames, a red double-decker bus with no writing or route number, a black cab and Georgian terraces. Light: soft grey-gold late-afternoon light. Palette: navy, river teal, muted stone, red and warm cream.\nAll six assets form one matching set. The input city card is a supporting scene/style reference; do not copy its ticket layout.\nOne single upright vintage postcard, exactly 1122 × 1402 PNG, straight on, centred on true transparent background, thin deckled warm-cream edge about 2% of width and faint contact shadow. City scene fills inside edge. Main bridge, bus, cab and terraces in left and lower two-thirds. Keep upper-right quarter quiet open grey-teal sky; a separate luggage tag overlays it in the app. No tag, stamp, postmark, UI or writing in image.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/countdown_postcard.png",
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-480d04d3-2faf-4cda-bfc3-270093aaa967.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-da8ede14-2b5a-4f5b-bb3e-c786415b5f1d.png"
+}

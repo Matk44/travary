@@ -1,0 +1,15 @@
+{
+  "id": "edinburgh/documents_destination_stamp",
+  "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace Paris geography completely with this city. Input image 2 is supporting city colour/scenery reference ONLY, discard ticket structure.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Edinburgh. Scene: a castle on its black volcanic rock above a garden valley, the Royal Mile's tall stone tenements, a Gothic monument spire, a green crag-topped hill, a piper's silhouette, thistles, gold-grey northern light. Light: warm low golden sun; gold-grey northern light. Stripe and tag: slate blue, thistle purple, heather gold (#526779, #856d98, #cba15d). Keep all six pictures coherent in light, palette and landmarks.\nOne portrait postage stamp 1024 × 1280 PNG, matching Paris stamp paper/perforations/navy keyline and genuine alpha outside. Illustration in measured upper box x123..901,y115..947, with one clear bold subject from this city scene, simple shapes suitable at small size. Plain warm-ivory label band x123..901,y986..1152 MUST remain completely blank. Same palette and light as the city's other pictures. No denomination, text, numerals or postal marks.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png",
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-b26fe1c6-b089-40c9-9df9-966467626415.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-19b79226-6e99-4bc3-852c-a31433918b82.png",
+  "visuallyInspected": true,
+  "qaNotes": "Coherent Castle Rock, Gothic spire, green crag, thistles and featureless piper silhouette; no type/flags/faces. Final light/dark contact sheets inspected; template/blank-area checks passed; all three card speckle counts 0.",
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/edinburgh-documents_destination_stamp.png"
+}

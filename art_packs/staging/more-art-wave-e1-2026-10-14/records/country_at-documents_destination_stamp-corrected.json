@@ -1,0 +1,30 @@
+{
+  "id": "country_at/documents_destination_stamp-corrected",
+  "prompt": "Use case: precise-object-edit\nEdit target: this Austria destination stamp. Remove the ENTIRE red vintage tram, its pantograph and all rails/track from the lower-right scene. Replace that tram area naturally with the existing lakeside stone promenade, quiet low greenery and blue gentians continuing from the foreground. No new objects. For this small stamp let the Alpine lake, onion-domed village church and yellow-and-white Baroque palace/garden be the clear subjects. Preserve all mountains, lake reflections, architecture, plants, golden light, palette, paper grain, exact stamp canvas, perforated ivory paper, navy keyline, blank bottom label and genuine exterior transparency. Absolutely no transport vehicle anywhere in the finished image, no text/letters/numbers/pseudo-text/logos/flags/people/faces. Output one corrected portrait stamp, same proportions.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1da7c1c0-98aa-46c7-94a3-9198c15b5c77.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-82656368-d549-4dc0-b4a2-0c0138c2f67a.png",
+  "attempts": [
+    {
+      "id": "country_at/documents_destination_stamp-corrected",
+      "prompt": "Use case: precise-object-edit\nEdit target: this Austria documents_destination_stamp illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-55316e2f-3e45-43ed-bc1b-7ba264b708b7.png"
+      ],
+      "transparent_background": true,
+      "status": "generated_pending_review",
+      "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1da7c1c0-98aa-46c7-94a3-9198c15b5c77.png",
+      "selected": false,
+      "rejection": "First text cleanup retained a small oval route plaque; remove tram from the small stamp composition."
+    }
+  ],
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-e1-2026-10-14/originals/country_at-documents_destination_stamp-final-v2.png",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+}

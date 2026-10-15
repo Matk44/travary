@@ -10,6 +10,12 @@ look (beach, city, alpine, theme park and so on), then the generic
 pictures. Postcards fall back to the neutral "anywhere" postcard. Nothing
 else is needed for the rest of the world.
 
+**Status, 14 October 2026:** all 21 cities are drawn (126 PNGs, Waves A
+and B) and built into packs (`docs/ART_PACKS.md`, "The world's most-visited
+cities"); publishing waits for the owner's go-ahead. Still to draw:
+onboarding backgrounds for Antalya, Phuket, Milan and Taipei (see the end).
+The next batch is `docs/art_requests/GPT_MORE_ART_2026-10-14.md`.
+
 ## The message to send
 
 > Make city art for my travel app, Travary. The list, sizes and rules are

@@ -1,0 +1,130 @@
+[
+  {
+    "id": "interface/common/leather",
+    "path": "art_packs/staging/interface/common/leather.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "notes": [
+      "End-gap crop 14..1524; stitch centre moved from y=114 to y=123; 16px feather joins original texture, matching left/right edge columns exactly."
+    ]
+  },
+  {
+    "id": "interface/common/pill",
+    "path": "art_packs/staging/interface/common/pill.png",
+    "size": [
+      1536,
+      512
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Uniform downsample to exact 3:1 delivery dimensions; generated alpha retained."
+    ]
+  },
+  {
+    "id": "interface/icons/weather_sunny",
+    "path": "art_packs/staging/interface/icons/weather_sunny.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Uniformly scaled to 512px maximum content extent; centred with transparent padding."
+    ]
+  },
+  {
+    "id": "interface/icons/weather_cloudy",
+    "path": "art_packs/staging/interface/icons/weather_cloudy.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Uniformly scaled to 512px maximum content extent; centred with transparent padding."
+    ]
+  },
+  {
+    "id": "interface/icons/weather_rain",
+    "path": "art_packs/staging/interface/icons/weather_rain.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Uniformly scaled to 512px maximum content extent; centred with transparent padding."
+    ]
+  },
+  {
+    "id": "interface/icons/weather_snow",
+    "path": "art_packs/staging/interface/icons/weather_snow.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Uniformly scaled to 512px maximum content extent; centred with transparent padding."
+    ]
+  },
+  {
+    "id": "interface/icons/checklist",
+    "path": "art_packs/staging/interface/icons/checklist.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Uniformly scaled to 512px maximum content extent; centred with transparent padding."
+    ]
+  },
+  {
+    "id": "interface/dining/themepark_castle_01_vignette",
+    "path": "art_packs/staging/interface/dining/themepark_castle_01_vignette.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Resampled generated artwork to required delivery canvas."
+    ]
+  },
+  {
+    "id": "interface/dining/themepark_castle_01_scene",
+    "path": "art_packs/staging/interface/dining/themepark_castle_01_scene.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": []
+  },
+  {
+    "id": "interface/dining/themepark_grill_01_vignette",
+    "path": "art_packs/staging/interface/dining/themepark_grill_01_vignette.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "notes": [
+      "Resampled generated artwork to required delivery canvas."
+    ]
+  },
+  {
+    "id": "interface/common/countdown_postcard_anywhere",
+    "path": "art_packs/staging/interface/common/countdown_postcard_anywhere.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "mode": "RGBA",
+    "notes": []
+  }
+]

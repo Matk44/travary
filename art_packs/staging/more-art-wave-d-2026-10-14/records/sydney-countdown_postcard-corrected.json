@@ -1,0 +1,15 @@
+{
+  "id": "sydney/countdown_postcard-corrected",
+  "prompt": "Use case: precise-object-edit\nEdit target: this Sydney countdown_postcard artwork. Remove EVERY tiny flag, pennant and flagpole from the very top of the steel arch bridge, including the pair of dark triangles at the apex. The entire curved bridge arch must have a clean uninterrupted bare top with nothing projecting above it. Fill removed marks with the precisely matching surrounding sunset sky. Also remove any flags on boat masts or rooftops if present. Keep the steel truss structure, towers, bridge position, opera-house sails, jacaranda, harbour, ferry, skyline, golden light, palette and paper texture unchanged. Preserve exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, deckled/perforated edges and label where present. Preserve genuine transparency outside the object. Do not add or alter anything else. No flags, flagpoles, text, letters, numbers, logos, faces, UI or watermark. Output one corrected PNG, same proportions.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-90036753-f103-40d4-a781-f4c9a4e7c404.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "correctionReason": "Tiny flags/flagpoles on top of Harbour Bridge; no-flags requirement.",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-2542adac-0b5d-4db9-8772-07047c4edef5.png",
+  "visuallyInspected": true,
+  "qaNotes": "Opera-house sails, arch bridge, ferry and jacaranda coherent; bridge flags removed in four targeted edits, no flags on selected final art. Light/dark final sheets inspected; all template checks pass; all card speckle counts 0.",
+  "ownerApproval": "pending",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/sydney-countdown_postcard-corrected.png"
+}

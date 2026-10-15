@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-14",
+  "wave": "F2",
+  "status": "PASS",
+  "count": 13,
+  "results": [
+    {
+      "file": "art_packs/staging/new_york/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "84c5cc37ce2e8d72c5fc14846d3690887d5fbf3750244779badf7e6873415dfc"
+    },
+    {
+      "file": "art_packs/staging/las_vegas/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "0984c9133d71b722b0f3071f4ea89aa0576e7e25c9730669060807f898d194ce"
+    },
+    {
+      "file": "art_packs/staging/washington_dc/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "635d4708ac1ba856aca658e0eb1b8565b0824f7e3609cfa1a6fc4d5bbe7ce3df"
+    },
+    {
+      "file": "art_packs/staging/chicago/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "f34e357643536ba01faa1f7624d9e9e772ea9f39208b18a122434f01846bb371"
+    },
+    {
+      "file": "art_packs/staging/boston/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "1ef27a4d3c5facb85a2853eb7bf9d1b47a0d61dd564864a02f1f69a4b7c0754d"
+    },
+    {
+      "file": "art_packs/staging/new_orleans/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "2a3420465e7713498966e8000a9bd75c825da8602d0c7b306a408645412b3ac8"
+    },
+    {
+      "file": "art_packs/staging/nashville/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "25538c5dc788a31b8df07d71f0833b93d40ea883462b181f380d98301971a0a2"
+    },
+    {
+      "file": "art_packs/staging/seattle/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "abba0020b4a17cef0827d7b5d66513ff8a50988c1ea7cbec5105582296e29a89"
+    },
+    {
+      "file": "art_packs/staging/florida/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "29d1acc49bf3271e64d5c21dc2b01d542e3beab1ce63d3fb785be3cbc7eb1159"
+    },
+    {
+      "file": "art_packs/staging/california/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "4096d1aa958c37e8300f4cd70db590b50272e716960b654413fbe2ce20fcb6c0"
+    },
+    {
+      "file": "art_packs/staging/hawaii/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "2794900f7bf1fb619c886c722aa8f2a10d29f2a87dfbd710c3253bbb0c068822"
+    },
+    {
+      "file": "art_packs/staging/arizona/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "eff54f6823bc0b4078f3c747ecc2a2da9e737fb017447311db7fbcc7b2eaa8f4"
+    },
+    {
+      "file": "art_packs/staging/alaska/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "realAlpha": true,
+      "transparentCorners": true,
+      "exteriorAlphaMatchesParisTemplate": true,
+      "blankLabelMatchesParisTemplate": true,
+      "sha256": "69b24ba110cf38051f478e91cf13f6ea0bdd9cbb6e472aa78ca62e253b59e816"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+[
+ {
+  "place": "prague",
+  "role": "room_card",
+  "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/prague-room_card.png",
+  "palette": [
+   [
+    28,
+    63,
+    76
+   ],
+   [
+    193,
+    94,
+    67
+   ],
+   [
+    207,
+    163,
+    73
+   ]
+  ]
+ },
+ {
+  "place": "phuket",
+  "role": "room_card",
+  "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/phuket-room_card.png",
+  "palette": [
+   [
+    25,
+    67,
+    76
+   ],
+   [
+    198,
+    100,
+    68
+   ],
+   [
+    214,
+    169,
+    72
+   ]
+  ]
+ },
+ {
+  "place": "barcelona",
+  "role": "room_card",
+  "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/barcelona-room_card.png",
+  "palette": [
+   [
+    24,
+    76,
+    79
+   ],
+   [
+    213,
+    112,
+    80
+   ],
+   [
+    212,
+    166,
+    67
+   ]
+  ]
+ },
+ {
+  "place": "london",
+  "role": "room_card",
+  "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/london-room_card.png",
+  "palette": [
+   [
+    26,
+    57,
+    70
+   ],
+   [
+    180,
+    64,
+    50
+   ],
+   [
+    199,
+    163,
+    88
+   ]
+  ]
+ }
+]

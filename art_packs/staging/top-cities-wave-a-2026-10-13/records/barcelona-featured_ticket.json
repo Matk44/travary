@@ -1,0 +1,9 @@
+{
+  "id": "barcelona/featured_ticket",
+  "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, finished Travary card. Preserve exact canvas, card position, silhouette, corners, notches, perforations, shadow, paper, barcode stub, cord, eyelet and tag geometry. Only printed scenery changes; existing stripe/tag may be recoloured keeping pattern geometry.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Barcelona. Scene: original Gaudí-inspired mosaic curves and imaginative stone spires, no exact copy of Sagrada Família; a beach, palms and warm stone buildings. Light: warm golden afternoon. Palette: deep teal, navy, mosaic coral and gold, sage and warm stone cream.\nFeatured ticket exactly 1774 × 887 PNG. Entire LEFT 42% plain blank navy at all heights. City illustration flows from navy towards original ivory barcode stub, x=746..1360. Stub and barcode unchanged.\nOne finished card, genuinely transparent outside. Remove all original American landmarks. Absolutely no flags or writing on buildings, vehicles, boats or bridges.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/prompts/city_card_references/featured_ticket.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-06fbb83d-9176-4d85-a313-48954b829651.png"
+}

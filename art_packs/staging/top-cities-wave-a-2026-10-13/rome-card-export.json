@@ -1,0 +1,68 @@
+[
+  {
+    "place": "rome",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/rome-featured_ticket.png",
+    "palette": [
+      [
+        32,
+        63,
+        64
+      ],
+      [
+        190,
+        98,
+        65
+      ],
+      [
+        210,
+        164,
+        83
+      ]
+    ]
+  },
+  {
+    "place": "rome",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/rome-room_card.png",
+    "palette": [
+      [
+        32,
+        63,
+        64
+      ],
+      [
+        190,
+        98,
+        65
+      ],
+      [
+        210,
+        164,
+        83
+      ]
+    ]
+  },
+  {
+    "place": "rome",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/rome-reservation_card.png",
+    "palette": [
+      [
+        32,
+        63,
+        64
+      ],
+      [
+        190,
+        98,
+        65
+      ],
+      [
+        210,
+        164,
+        83
+      ]
+    ]
+  }
+]

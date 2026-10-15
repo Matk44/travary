@@ -1,0 +1,68 @@
+[
+  {
+    "place": "sydney",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/sydney-featured_ticket.png",
+    "palette": [
+      [
+        36,
+        99,
+        128
+      ],
+      [
+        130,
+        112,
+        166
+      ],
+      [
+        198,
+        157,
+        96
+      ]
+    ]
+  },
+  {
+    "place": "sydney",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/sydney-room_card.png",
+    "palette": [
+      [
+        36,
+        99,
+        128
+      ],
+      [
+        130,
+        112,
+        166
+      ],
+      [
+        198,
+        157,
+        96
+      ]
+    ]
+  },
+  {
+    "place": "sydney",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-d-2026-10-14/normalised/sydney-reservation_card.png",
+    "palette": [
+      [
+        36,
+        99,
+        128
+      ],
+      [
+        130,
+        112,
+        166
+      ],
+      [
+        198,
+        157,
+        96
+      ]
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "place": "dubai",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/dubai-featured_ticket.png",
+    "palette": [
+      [
+        23,
+        70,
+        80
+      ],
+      [
+        200,
+        115,
+        82
+      ],
+      [
+        213,
+        167,
+        75
+      ]
+    ]
+  },
+  {
+    "place": "dubai",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/dubai-room_card.png",
+    "palette": [
+      [
+        23,
+        70,
+        80
+      ],
+      [
+        200,
+        115,
+        82
+      ],
+      [
+        213,
+        167,
+        75
+      ]
+    ]
+  },
+  {
+    "place": "dubai",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-a-2026-10-13/normalised/dubai-reservation_card.png",
+    "palette": [
+      [
+        23,
+        70,
+        80
+      ],
+      [
+        200,
+        115,
+        82
+      ],
+      [
+        213,
+        167,
+        75
+      ]
+    ]
+  }
+]

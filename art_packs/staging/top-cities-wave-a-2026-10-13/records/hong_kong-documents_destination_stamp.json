@@ -1,0 +1,10 @@
+{
+  "id": "hong_kong/documents_destination_stamp",
+  "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, preserve stamp paper, perforations and label while replacing the illustration. Input image 2: supporting city-scene reference; do not copy ticket layout.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Hong Kong. Scene: Victoria Harbour's balanced skyline, a red-sailed junk, a green-and-white harbour ferry and the Peak's green slopes. Light: warm sunset giving way to early evening. Palette: navy, harbour teal, red coral sails, sage hills and warm gold. Same light, landmarks and palette as supporting city card. Absolutely no flags, flagpoles, lettering or vehicle/boat markings.\nOne upright portrait destination postage stamp exactly 1024 × 1280 PNG RGBA sRGB. Keep reference perforations, paper and thin navy keyline. Body fractions .04,.035,.96,.965; printed city illustration .12,.09,.88,.74; BLANK warm ivory label .12,.77,.88,.90. Miniature city composition with centred subjects and restrained low sun. No scene in label, no writing/denomination/symbols. Fine cotton paper, faint down-right contact shadow. True transparency outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png",
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-e181db8a-15bb-4d38-8dbe-8591dd6e0ed3.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-534dd978-6ea9-4c4c-a4b0-cf465a6a28f8.png"
+}

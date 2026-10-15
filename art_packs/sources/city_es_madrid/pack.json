@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "city_es_madrid",
+  "version": 1,
+  "palette": {
+    "id": "spain_garnet_sun",
+    "anchors": {"ink": "#26384A", "paper": "#F6EFE1"},
+    "accents": ["#8F2636", "#F1BF00", "#27677D", "#65704A"],
+    "ui": {
+      "primary": "#7A2030",
+      "secondary": "#235B70",
+      "highlight": "#C99500",
+      "onPrimary": "#FFFAF0"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

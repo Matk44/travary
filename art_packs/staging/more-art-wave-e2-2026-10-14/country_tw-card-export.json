@@ -1,0 +1,68 @@
+[
+  {
+    "place": "country_tw",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-e2-2026-10-14/normalised/country_tw-featured_ticket.png",
+    "palette": [
+      [
+        89,
+        117,
+        78
+      ],
+      [
+        209,
+        160,
+        88
+      ],
+      [
+        184,
+        91,
+        78
+      ]
+    ]
+  },
+  {
+    "place": "country_tw",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-e2-2026-10-14/normalised/country_tw-room_card.png",
+    "palette": [
+      [
+        89,
+        117,
+        78
+      ],
+      [
+        209,
+        160,
+        88
+      ],
+      [
+        184,
+        91,
+        78
+      ]
+    ]
+  },
+  {
+    "place": "country_tw",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/more-art-wave-e2-2026-10-14/normalised/country_tw-reservation_card.png",
+    "palette": [
+      [
+        89,
+        117,
+        78
+      ],
+      [
+        209,
+        160,
+        88
+      ],
+      [
+        184,
+        91,
+        78
+      ]
+    ]
+  }
+]

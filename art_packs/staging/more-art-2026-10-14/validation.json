@@ -1,0 +1,2740 @@
+{
+  "date": "2026-10-14",
+  "status": "PASS",
+  "count": 163,
+  "scope": "Rechecked final hashes, exact dimensions, PNG RGBA8, embedded sRGB, and alpha. Per-wave manifests contain template, blank-area, speckle and visual checks.",
+  "cardSpeckleChecks": [
+    {
+      "place": "edinburgh",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "edinburgh",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "edinburgh",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "sydney",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "sydney",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "sydney",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "melbourne",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "melbourne",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "melbourne",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "florence",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "florence",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "florence",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "athens",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "athens",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "athens",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "vancouver",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "vancouver",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "vancouver",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "cape_town",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "cape_town",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "cape_town",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "queenstown",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "queenstown",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "queenstown",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "san_francisco",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "san_francisco",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "san_francisco",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_at",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_at",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_at",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_hr",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_hr",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_hr",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_ie",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_ie",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_ie",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_vn",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_vn",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_vn",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_ma",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_ma",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_ma",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_eg",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_eg",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_eg",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_hu",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_hu",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_hu",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_cz",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_cz",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_cz",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_my",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_my",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_my",
+      "role": "reservation_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_tw",
+      "role": "featured_ticket",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_tw",
+      "role": "room_card",
+      "strayPixels": 0
+    },
+    {
+      "place": "country_tw",
+      "role": "reservation_card",
+      "strayPixels": 0
+    }
+  ],
+  "results": [
+    {
+      "wave": "C",
+      "file": "art_packs/pending/onboarding/city_tr_antalya/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "6aef9c6e0d4fe838f3cc08a47131f3352ae99d2e814736b38a16d7b036b3cf78"
+    },
+    {
+      "wave": "C",
+      "file": "art_packs/pending/onboarding/city_it_milan/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "563d332bcfd4b1e7dd793932411c24c1d5b196a7fe2ea615c8e4c1c74415daa8"
+    },
+    {
+      "wave": "C",
+      "file": "art_packs/pending/onboarding/region_th_phuket/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "ca4d8a6b8921437194f74f1e0c5c661adf11841d82918a38eabcf098c2d7d03e"
+    },
+    {
+      "wave": "C",
+      "file": "art_packs/pending/onboarding/city_tw_taipei/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "ec0c98baf4637dad65fef66445e11d683b1f5b2a8c82e5f98a0931fcfc186737"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/edinburgh/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2b6c88de59298b33113328bfa6290e059f05f4f042af6d3a95f321db6f1745ba"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/edinburgh/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "505ffd30348337c05584117ee012fc00d8c2269d635be61728fa1fe15b5288ff"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/edinburgh/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "954d969d3e1dcfb51c2f9441bdfd01d47e826ace7b744dba0f19ace15ffca9ed"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/edinburgh/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "95545bca15e7b0932ef00e2c276b59c7c062cdddd4b18023216922784ed84717"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/edinburgh/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "sha256": "cfe38414d0a6beceaf51ac258045072d1670c3115afc668fac876806bb205dd6"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/edinburgh/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e591932bdabe934ca2e6a0bdaa0f656fa0a77451c0617e01b2b768f2f564d67b"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/sydney/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "905247b061767b9d37a09cd115b648d6c5b94a661da27249cc18571b3565a6b5"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/sydney/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "8ab5e61472b577471754f9d7b91cf6ba63b2130ae837a52bf5289fcbdc473fe0"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/sydney/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "5f0f3cd15184c9bca4dd306bd5d190b16b536908aa681a0d67349396c844906e"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/sydney/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "35eb668a1e52ccf54bc8d635e48ec1c1ce81ee325ebdbbebbb08bbe5cb7393f5"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/sydney/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "f4beb8459361a107b408648838b3100cbb1fac69263afc4bb17b1f017a99668b"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/sydney/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "c248cee6b6900e58d29ba1d768da30e0d7dc0bbf3447fed828bcfbdc0922a0c5"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/melbourne/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0c7312cdbc4f1b93e0ea26e6c208e9132be7159bb2b880858269bcc800a410cb"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/melbourne/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4d9aa15580f7d45bb6c153c3625d50a5125964c88fcc6e0d61babb48f313a262"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/melbourne/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "231b0bf285fbfaf0e38be8c99c6c1603f6540cee747b2d711feab34f67533d8f"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/melbourne/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "6078289259e1a3a62f9d8963fc14d85eefb7fe67e4fd768d84ba4240a4214c18"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/melbourne/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "74d5c0481982ed50d784a9d35eeac515c759f90288c90ac5d54ebabfdcbdaa6c"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/melbourne/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "b9628228e65fad44264881c197fab57c9a3683c189fd38b646fdd67cde2d55dd"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/florence/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "be81023f8148a66bddb3d4cbb046f16d8987a684dd250819aa9291d57e833092"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/florence/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "731e2d60d13a6302c1944bf0c31f00d4e5a56291abd01d0ee3bdf48d07dfb37f"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/florence/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "79416e4c5c269a48706e5b837457c99bfaf877ffb0090a00bafa206dfb398f69"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/florence/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "55d96a9d03f2b7c42064bf739b953a4e99be184ee2836d5b5d1b7c3021152597"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/florence/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "c641d684e2d9ab0e4fc7ffd01edf75e6bacffe95f14999748628d791a4813f41"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/florence/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "fb2f9d4633937151f68a1f8b9e5e11b2a4e1b03d6c872d9ea5ea3e624a5acbe8"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/athens/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2dc2682df655e0e12f7239ca0ebe6ae46bd2df201c5c246d31b1952699ca2405"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/athens/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "40bb05127e189ce1f24b6b828e3921761ab885e46d4721ee381d17f95aa6df53"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/athens/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "ce465b106922c452b8880e2d72f0ddf2492493fa66602e441e7a0ae30f980f47"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/athens/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "ab92e9f61508b3d3c9eb947a479a68fe61467a9d0dbc3189928f5a8b1462a998"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/athens/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "84619be5dce294e9e9b0935525e6dff504e94d82f33865a4a01f10ee963ab970"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/athens/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "fc248ec143400bf94f1ba7bca8442555bd8051426485efd3689b6d8ee27e4e1e"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/vancouver/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4c88b7ad7aae0fa86a313c13f17d5360160963c5727f62477750ad72f0c2f5e1"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/vancouver/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a3525784fe8b0d9c3eb0a165700ea3258f8151a314003771a346110524200859"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/vancouver/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a09669a28f3f5b344c9d90f5a67b7cb356d0bbd79af1f54fa37f2b81a2a18210"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/vancouver/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "1091f68b2966b576a466bc95a57a313ddc3d93dcf9a0381fb546f4a2d0238888"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/vancouver/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "8ad6579d9792b6540c1fe49e088e7f3fc26203ca2c418780cd42946863b1d4c9"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/vancouver/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "31abebf1aca7f37aaf87e27a97b7a482336f76a321b1c28da3b337f7ddaab027"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/cape_town/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a9b4a90aaddcdf3dce44cfd5062a3fe527598372236fe980d4bac38f722af879"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/cape_town/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "c0356d27f7b5f36284f9df739551c16fae26c24d99727a736e25879d982d15d4"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/cape_town/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e9e393c46a1360fbe1596409b1281f3093b8080dd32196424c25d2df9491334d"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/cape_town/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e0b9a0b7769ed831edae5860de999ab6c3e079429ee3bc181d2847ecfe18239e"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/cape_town/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "c8a14c38a8d6c0632d17b4cf6fc4e53b0336d8bc0c8213b3316d9e8ccc8d3c25"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/cape_town/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "c2c3b3580ace6d9879dcd7cfe18432e6efbd54c347f4108a051fed1910670c25"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/queenstown/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "be29ac19b4c93b5f2f86d76df0c5b4626dc96d5d9eaabbd637d3fd9bfb5d2161"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/queenstown/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "45c6c790960905ad4da4996e1a2e4a96ffeb6f10a0ae9dec67dafb5a7f76f3ae"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/queenstown/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "deeeddd27fcdb36635b253747b52d188b368a86fdfca7d7d18a1baa78b893918"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/queenstown/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "8d35d322ee20244c45dbbc7ba13119e9545b83552f94f5de72a13a4a118cc91c"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/queenstown/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "5f040f6e2e0d491f64fb80be720d246eb2f78b6908b6e61194e1f78ea19c1911"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/queenstown/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "7699623646c41fd3f2f8e645d3abcb30cafa387d455464bc2ad05cc8a4da5f01"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/san_francisco/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "9a935cf29732299181788ce56a2d9ded3a38f8b3b246ab9d3783b8cde15faf6a"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/san_francisco/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "46a0fe7e05fa7b4a8201e7a729a1726a0960e3fbd146f18bdb3ff123db8e658e"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/san_francisco/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "153546d94db515d23c8bd1c111f4b9877c44a5ab6dda14c6f72738bcc2e58c32"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/san_francisco/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "6fc58fdabb739b6754125656337b8efbaa2387b66b18c0b156e97f96c7e36762"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/san_francisco/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "02808a62f26f2c12a50cdb037ca0ce5b70e308c8dc025c56a197b9dc5841b301"
+    },
+    {
+      "wave": "D",
+      "file": "art_packs/staging/san_francisco/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a6ffacaf0303465428dae6a27cb148c1190b43729f047022baf84caa89972d7d"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_at/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "65ade68cf65cf36601819ddd5b7a39b55888df78896f88cce190551832867c8a"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_at/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e18d850072138d3d9985c6221867771fdb0abe72ae92737f8ec0db4f203bca87"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_at/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "79eddc0decbee61e3aa28f843cb9b52e23cf67a1990f9d501d8d48edf8f60abe"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_at/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "881922b039a2923c4a40bd88b313f0943a2af9e378e766d5145c2b26a7e72734"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_at/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "97fb44e74a36041bdfbfa1b29e35243a192d9a8b1d6d05746ecc750d1f8f846f"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_at/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0062c76cf6a795106d59df2643a7d4b04cde369d6873e5c02094562154d5cccd"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hr/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "9e978b3fca0a11346f125ae961d10103dff87a776bb92e1f29bb5ed05b26c938"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hr/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "222abc7f3aab8a596a3b4f59a5ef65e378735bbabe842c1bd1e01269803649c0"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hr/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "bde9d8c56917ffa3bdafd1d820162395afcee753800970952a57f0a4c2819f78"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hr/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "cbdcdeddc66ae2b1030cb3ea12d338cee457e33ad2cf80ea18b8d61f812e3e83"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hr/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "415c6bd8ab1d6fe2744420add2cc1936b3e45de24935110ceb9b6f506bb81544"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "46025af423fe98d89a098f4c2096b1198d80997e6ac37b4e038fb9ed461d65b2"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ie/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "5c74eb937dd90fe75fff482c091893cfe224377ac459dbc29582bc84e929a94d"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ie/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4d74aa136bc1797a3b548abb6143c0de26ec5adc3ef57e1c06f054b27c8cf369"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ie/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "c2eb3922bcadbe0a339b909faa20003855bdfefa30d9834af69066112a38368b"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ie/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "3766fa144b4afec620499d2749f5fdb691a7210709efac331d7ea85f1514aa7f"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ie/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "02abcd68690071641713d374124a72a6594482f3bb8a2e4a26cd83163b39351e"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ie/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "790fbf1b5e65cb3c8896cb4ef927c21d89908e79daf2a63fa27ac509bdfc6220"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_vn/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4832a30d73418c3dbde0d93197697113509a40d0c99698e4bcc304b97306766d"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_vn/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "d1cf485276f9d7269b6a58c05d734479a279294aad33eb70da9bf4a2fc47c82e"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_vn/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "72e06f6025f31f08e83f9e64f73a64c4ae2ed883f22c82187cfd6da63283596f"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_vn/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "cea49536ac50674a8e3ac7d507f40e4210c2087924a2bad3864293a0d9e9f8e4"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_vn/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "0b8a08eee57fc4258026c5c4cc44623817c61dd1c2a386b0b5fc389b1a46d9ba"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_vn/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "d09681363bb8847f6ba7b2ac0ecb5c6506a5ff9eae9560a7a20e690fc0c7eb7a"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ma/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "6c904c315c562e61814974bc19b46a25c63304cab256b2720f02c5ccbb877ff6"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ma/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "491b49e6e0ebbd18e67d15fc8167140638fb2964f3399d2c288cd8d6d365a067"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ma/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "908b408e6484c7941847e8cd803854932899ef0bae8d7c19f590250f57df7fe3"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ma/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "fe82e3c47446e2f1534373e6823f9bc2880ad3c629939b81de734b993f33a049"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ma/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "e8aa12c5b1d4be0d2e4cc93a70204906b46713414367ca39114d543146c89668"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_ma/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "616ca8c3cd721f3ebb001e28624a6d3c8796002a564500e4bef593f6070577fb"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_eg/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "db80f71f0e5b6a784889d368efbc9274a06a913a1faf0400e4938b6d690f8591"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_eg/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "d3f113131a1992215c4867915b6655344015b5df715df30e26cce0da699735cb"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_eg/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "d95f1221fa93457f552424b0b32025aa221d8ed069c096f1c15a6cbda8837c55"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_eg/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e5723393e4f86cf350ce2a8f33552bf85b841b06a6f355bcd78c988962efae56"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_eg/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "e29a04ac4045681169f7eb436b4989cdf3a9a630c254ffbb9a134eaf483a5a40"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_eg/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "183c09528042c852f80a562b8a7b98747594afc77030a142e5e58bde02e4e36b"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hu/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "317e426d4683d77407c277e9ce4a81cbd4dc271df87c16b171006fc9c559550f"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hu/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "b7567502e0c631cc1f9b092883e4522ea1005de2c70e8134bd172e26debf930b"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hu/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "c8e52ac7cba90af02bd62d018b21b52aa4f592a216549950b3eeae3d09251822"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hu/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2a1a7a00eb9966b7e758fe4943c69ec1025dfc9cc42a620c0f68edc8817d1148"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hu/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "f93d5a1172b88c9af61e74e9c807845609a45a845346a4b644e0c3f8214c0de7"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/staging/country_hu/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "cd4f4c85e3f436c15326809d16de8b15c3fbdaab6aa6a94bb97ab824ce6aefd2"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_at/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "91ead37ad3a787e7308940c91ab7e6259520790f1ea2ce9abcdec88ba05eec07"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_hr/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "89d9294c20b27a83a1d043d917ccb7af8340faf0bc9e76ad14f76d8ca3e0a2b9"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_ie/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "379e7195355f322446a5207a5af398294bc00441710639a8b8229a441bf1a061"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_vn/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "7f42037cb781f34e1e6694e067c047560cd306526c8b7e0abf98d15622b43bec"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_ma/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "7da4997ff5f14d0f45be31bdb9129572bf03c08acf06e9592a9eaad5653a2cd6"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_eg/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "4cb18fa9607bbcc4d7023642044ce675660577866b8c2408ae3632258b7cdeb0"
+    },
+    {
+      "wave": "E1",
+      "file": "art_packs/pending/onboarding/country_hu/onboarding_stage_v1.png",
+      "size": [
+        851,
+        1848
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sha256": "12614b67763a909f62b1203ea3357d7b0bbfca21d7c7de512727c5099ac96481"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_ae/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "309ff8a972202d27b2f658e27faff84e5872ce7e86b8038e94e525fa965e0e59"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_au/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4e3cbe3b39e55b13761043163afae2318cfdc2bab830e0ef7d1fcf624783e952"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_br/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0d8c3d0e27b33e1a60d6d80c4a98f72394c03ab8bd4aa9b31daecba89b97ad4e"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_ca/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "9f92b5e479f53a76e47a05f8d6212e84537694085b0bc3920381f5a0abb8b27e"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_ch/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "08fc07c464d8045fd749d134952737f8b83bba5227d8c5ca98b815be607a5418"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_cn/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "da867c5750d34ae2ad90d99fa82bf97646a7e522f6f51cabb4e556bfb6977680"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_de/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "5f76fc7b615bbd0248279ede3414ae9b121176bdddc4703ff9a49e1ad589d4ac"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_es/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "ecf03e3b85212749fa19672bbfbd1f342d3f10c467ac4130d32bccc2ec41875b"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_fr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "dd553e92bb719c00a849cc0590138faf90e647b47cc0f888d6359559e5bccbed"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_gb/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "f1a5cf3080cd2c56cd8014c70fe970d2a67de86f35f842d10cacf8ae23dfd4d2"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_gr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4ad6158511acbf84fb0bda04af2c749ed1b52c4589bab4d3001529cf1a76149e"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_id/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "ca344d92fb4a334f9bf4e1a9e6ba35fdab21425ab608e986e0a8f78eabfc494d"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_in/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "31d791dd665cacfdc35a3318e63fede5b27f52be1836ac089188f574659e79c2"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_it/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "270f77d1f2ddd380763f2224ae479e9d58ec99278e3840e8f95bc893973d8cd3"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_jp/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "ca78a6e275b22191c59a7a85556fdc582ee4983071aa8b1b9b338bc12f33671c"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_kr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "8051dc1b395f29d08d49fe83e40407919ba4b4d3f91aef96627bc099ed3afd08"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_mx/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0d5e728434d913659c64a7a1e5171968a9a8c38649762fb06ed56b000762ce40"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_nl/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "de2a5cc4ebb10b0d56d404cd8a7420ac6672e37b672dd7596bcecad792f96145"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_nz/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "bbcccbcda0f2f674539e77e6242e0c3c8424955b23355772994fdb6e554d6445"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_pt/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "8ad1e90978f45187aec3159332b292a4c86d6bd77c1dfbe942e5e7ba8e69d8ce"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_sg/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "50a9b0949d87822e2da4adda7825c83f6823cc788ac9757cddce54d86612f8df"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_th/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "f22507bd94af6f137f1c77419b5e6a54afca5914cd6f3a0a1387b8f79de6ac5b"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_tr/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4020059438d2496ca707a54cadfb369b8b843e716a158852fbddeeff45c77666"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_us/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "8ad2303ff4fabea959b2975be10f88e01230fbdcdfe2e6849457b8c07007c0b8"
+    },
+    {
+      "wave": "F1",
+      "file": "art_packs/staging/country_za/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a9795a0337111ac69da320e2ec01f0d1cb04c3f4ba3dadb54287b47d34c84440"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_cz/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "6c1add942ba059e509c343c4f0471cabba8451630b2e17f1e8b11dd42ca902f8"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_cz/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "d1d59977f5287d447e51927fb43b16820e5acd8423a81f6a4e99efb3bb6a3fa2"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_cz/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "14434315d60853a1be818354ff3ff2cc713bf598e17945085bfabe2c204e8fd6"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_cz/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "882330bb1fff01222454c4396729c79206ced6b92f9a9635508d83b0ce7295d2"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_cz/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "31cb6bdf947aae86f594b44123c5212a859854494c8820762a85561eedd26eb2"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_cz/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "416e1c82711148a117f1ce6f02de428804dfc0935c77b6875e7d6b4f92f55f4f"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_my/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "06ad0b525d6cf2edc501b0ca4d779d171e7399503d132d64cc54fe484330b327"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_my/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "af2d6a00daaea9f664cfd6a1d3243eda496e45b92a3bce73d3c34e03cdfc89f6"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_my/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0c616a8d7b7204bee5fe913648210becd5e3563fcb7e8847c0fffbd7e3f19ae6"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_my/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "sha256": "9fc65cdf30edebd3098a0bce28102fadedd6b38ff28b1d4ba44e07233d750e35"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_my/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "b4face3359d724dd4d2f0e89781cfdd1030b62bf65f03fca859eb6812d3adba5"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_my/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "09916c864761b4a7812f476304472e173be057b3dce7abd77e35784ba19c28e6"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_tw/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "da3d9c96b2deed7b1b7a5c572ff1e35e1bc22f9a1856fd6d4deaa5a25d77068c"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_tw/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "359fd09c76945347451a1e3d0831442046efb3965a26c9834897d8079c486965"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_tw/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "7d4a2ad0de8a1af2d4b05e301e7ef50c905f92caa1a5583151039746603e718c"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_tw/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "26b7a883ddbc004d4a3c18d793f987221c964477b4aa1b12fd6489b95abac598"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_tw/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "e5216980de5887007a77eff6a005efd753b8695aa4af79345844b33336d850ce"
+    },
+    {
+      "wave": "E2",
+      "file": "art_packs/staging/country_tw/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "42c3d3dc44d2da4fe277e59474b4c7c0bc894e2d91d3216d97d0be71a54070b4"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/new_york/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "84c5cc37ce2e8d72c5fc14846d3690887d5fbf3750244779badf7e6873415dfc"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/las_vegas/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0984c9133d71b722b0f3071f4ea89aa0576e7e25c9730669060807f898d194ce"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/washington_dc/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "635d4708ac1ba856aca658e0eb1b8565b0824f7e3609cfa1a6fc4d5bbe7ce3df"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/chicago/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "f34e357643536ba01faa1f7624d9e9e772ea9f39208b18a122434f01846bb371"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/boston/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "1ef27a4d3c5facb85a2853eb7bf9d1b47a0d61dd564864a02f1f69a4b7c0754d"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/new_orleans/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2a3420465e7713498966e8000a9bd75c825da8602d0c7b306a408645412b3ac8"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/nashville/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "25538c5dc788a31b8df07d71f0833b93d40ea883462b181f380d98301971a0a2"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/seattle/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "abba0020b4a17cef0827d7b5d66513ff8a50988c1ea7cbec5105582296e29a89"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/florida/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "29d1acc49bf3271e64d5c21dc2b01d542e3beab1ce63d3fb785be3cbc7eb1159"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/california/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "4096d1aa958c37e8300f4cd70db590b50272e716960b654413fbe2ce20fcb6c0"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/hawaii/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2794900f7bf1fb619c886c722aa8f2a10d29f2a87dfbd710c3253bbb0c068822"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/arizona/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "eff54f6823bc0b4078f3c747ecc2a2da9e737fb017447311db7fbcc7b2eaa8f4"
+    },
+    {
+      "wave": "F2",
+      "file": "art_packs/staging/alaska/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA8",
+      "embeddedSrgb": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "69b24ba110cf38051f478e91cf13f6ea0bdd9cbb6e472aa78ca62e253b59e816"
+    }
+  ]
+}

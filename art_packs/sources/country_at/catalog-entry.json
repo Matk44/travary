@@ -1,0 +1,7 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["AT"]
+  },
+  "minAppBuild": 1
+}

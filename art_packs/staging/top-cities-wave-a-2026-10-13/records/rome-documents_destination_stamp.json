@@ -1,0 +1,10 @@
+{
+  "id": "rome/documents_destination_stamp",
+  "prompt": "Use case: precise-object-edit\nInput image 1: EDIT TARGET, preserve stamp paper, perforations and label while replacing the illustration. Input image 2: supporting city-scene reference; do not copy ticket layout.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Rome. Scene: the Colosseum within a layered low cityscape, umbrella pines, terracotta roofs, an unbranded vintage Italian scooter and a stone fountain. Light: golden late-afternoon light. Palette: navy, warm cream stone, terracotta coral, sage and muted gold. Same light, landmarks and palette as supporting city card. Absolutely no flags, flagpoles, lettering or vehicle/boat markings.\nOne upright portrait destination postage stamp exactly 1024 × 1280 PNG RGBA sRGB. Keep reference perforations, paper and thin navy keyline. Body fractions .04,.035,.96,.965; printed city illustration .12,.09,.88,.74; BLANK warm ivory label .12,.77,.88,.90. Miniature city composition with centred subjects and restrained low sun. No scene in label, no writing/denomination/symbols. Fine cotton paper, faint down-right contact shadow. True transparency outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png",
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-6d163077-be49-4f10-92bb-b86efb6d3038.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-5d294449-8c24-49f5-8beb-c9ee6098e3f0.png"
+}

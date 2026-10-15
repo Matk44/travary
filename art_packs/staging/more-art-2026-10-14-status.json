@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-14",
+  "brief": "docs/art_requests/GPT_MORE_ART_2026-10-14.md",
+  "requestedImages": 163,
+  "mode": "built-in imagegen",
+  "waveOrder": [
+    "C",
+    "D",
+    "E1",
+    "F1",
+    "E2",
+    "F2"
+  ],
+  "waves": {
+    "C": {
+      "requested": 4,
+      "status": "complete_review_ready",
+      "reviewFolder": "art_packs/staging/more-art-wave-c-2026-10-14",
+      "completed": 4
+    },
+    "D": {
+      "requested": 54,
+      "status": "complete_review_ready",
+      "reviewFolder": "art_packs/staging/more-art-wave-d-2026-10-14",
+      "completed": 54,
+      "completedPlaces": [
+        "edinburgh",
+        "sydney",
+        "melbourne",
+        "florence",
+        "athens",
+        "vancouver",
+        "cape_town",
+        "queenstown",
+        "san_francisco"
+      ]
+    },
+    "E1": {
+      "requested": 49,
+      "status": "complete_review_ready",
+      "reviewFolder": "art_packs/staging/more-art-wave-e1-2026-10-14",
+      "completed": 49,
+      "completedPlaces": [
+        "country_at",
+        "country_hr",
+        "country_ie",
+        "country_vn",
+        "country_ma",
+        "country_eg",
+        "country_hu"
+      ]
+    },
+    "F1": {
+      "requested": 25,
+      "status": "complete_review_ready",
+      "completed": 25,
+      "completedPlaces": [
+        "country_ae",
+        "country_au",
+        "country_br",
+        "country_ca",
+        "country_ch",
+        "country_cn",
+        "country_de",
+        "country_es",
+        "country_fr",
+        "country_gb",
+        "country_gr",
+        "country_id",
+        "country_in",
+        "country_it",
+        "country_jp",
+        "country_kr",
+        "country_mx",
+        "country_nl",
+        "country_nz",
+        "country_pt",
+        "country_sg",
+        "country_th",
+        "country_tr",
+        "country_us",
+        "country_za"
+      ],
+      "reviewFolder": "art_packs/staging/more-art-wave-f1-2026-10-14"
+    },
+    "E2": {
+      "requested": 18,
+      "status": "complete_review_ready",
+      "completed": 18,
+      "completedPlaces": [
+        "country_cz",
+        "country_my",
+        "country_tw"
+      ],
+      "reviewFolder": "art_packs/staging/more-art-wave-e2-2026-10-14"
+    },
+    "F2": {
+      "requested": 13,
+      "status": "complete_review_ready",
+      "completed": 13,
+      "completedPlaces": [
+        "new_york",
+        "las_vegas",
+        "washington_dc",
+        "chicago",
+        "boston",
+        "new_orleans",
+        "nashville",
+        "seattle",
+        "florida",
+        "california",
+        "hawaii",
+        "arizona",
+        "alaska"
+      ],
+      "reviewFolder": "art_packs/staging/more-art-wave-f2-2026-10-14"
+    }
+  },
+  "resumeInstructions": "All requested still artwork is saved and checked. Review final staged PNGs and per-wave handoffs. Owner approval, app integration and publication remain separate.",
+  "completedImages": 163,
+  "remainingImages": 0,
+  "overallStatus": "complete_review_ready",
+  "usageLimit": {
+    "tool": "built-in imagegen",
+    "error": "HTTP429 usage_limit_reached",
+    "resetsAt": 1791968364,
+    "resetsAtSydney": "2026-10-14T19:59:24+11:00",
+    "fallbackAuthorization": "not used",
+    "status": "historical; reset and all remaining images completed with built-in imagegen"
+  },
+  "nextAsset": null
+}

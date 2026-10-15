@@ -1,0 +1,51 @@
+{
+  "id": "country_nl/documents_destination_stamp",
+  "prompt": "Use case: precise-object-edit. Preserve this entire Netherlands stamp unchanged, including ONE sun only, sky, windmill tower, canal, tulips, bicycle, houses, paper/perforations/keyline/blanklabel and realalpha. Correct ONLY windmill rotor: currently three lattice sails visible. Add the missing FOURTH WOODEN LATTICE SAIL from the central hub diagonally DOWN-LEFT, exactly opposite the existing UP-RIGHT sail. Four straight evenly spaced sails form one coherent X, equal-length arms at90degreeintervals, matching existing cream/blue wooden lattice construction, perspective and warm light. The new down-left sail passes in front of the dark mill tower, clearly visible from hub to tip, and ends above the small red-roofed building. Do not change the other3sails, move the hub, add more blades, add flags, create letters or numbers. Everything else unchanged. One1024x1280PNG genuinealpha outside.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1d715171-7d4f-4dd7-8fd7-db2d4d4c104e.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c44a4996-09dd-4488-96de-0255c08b1265.png",
+  "originalInputReferencePaths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+  ],
+  "attempts": [
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-cedfd130-74bb-4cf8-a54b-dbc9fe5807fd.png",
+      "prompt": "Use case: illustration-story\nAsset type: Travary Documents destination stamp for Netherlands.\nInput image 1 is the Paris stamp PAPER/GEOMETRY reference only. Replace all Paris scenery; retain ivory cotton paper, fine fibres, perforations, thin navy keyline and completely blank bottom label.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, warm low sun, limited navy/teal/coral/sage/mustard/cream family. Never photographic. Compose for a small portrait stamp with one clear bold geographic subject and only one or two supporting cues, no fine clutter.\nRequired destination scene: tulip fields in stripes, a windmill by a canal, a bicycle and gabled canal houses far off. The geographic scope is whole country. No incorrect Paris landmarks.\nOne straight-on portrait postage stamp 1024 × 1280 PNG RGBA, genuine transparency outside the paper/shadow. Keep Paris paper/perforation/keyline geometry. Picture confined to upper measured box x123..901,y115..947. Leave bottom label x123..901,y986..1152 plain completely blank ivory for live place name. No opaque backdrop, no rotation, no perspective.\nNo words, letters, numbers, pseudo-text, decorative script, hieroglyphs, Arabic or Chinese characters even as pattern. No signs, inscriptions, logos, flags, denominations, postmarks, watermarks, UI, faces or copyrighted characters. Featureless tiny silhouettes only if necessary. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Vehicles/boats unmarked. Trams and trains have NO route-board housing, plaque, badge or sign: roof is continuous plain curve, windows featureless dark glass. No flagpoles or pennants even on bridge tops, rooftops or boat masts; bridge arches have clean bare tops. Clock faces use hands and ticks only, no Arabic/Roman numerals.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/documents_destination_stamp.png"
+      ],
+      "status": "rejected",
+      "rejection": "Two distinct sun discs in the sky.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nl-attempt-1-exec-cedfd130-74bb-4cf8-a54b-dbc9fe5807fd.png"
+    },
+    {
+      "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-1d715171-7d4f-4dd7-8fd7-db2d4d4c104e.png",
+      "prompt": "Use case: precise-object-edit. Keep this complete Netherlands travel stamp unchanged: windmill, canal, tulip stripes, bicycle, gabled houses, printed style, warm light, canvas, alpha, perforations/navy keyline and blank ivory label. Fix ONLY extra sun: REMOVE THE LARGE ORANGE-RED semicircle in the upper-middle sky centred near x714,y530. Fill that orange area seamlessly with adjacent petrol-blue sky and continuous peach/cream cloud bands. RETAIN ONLY the SMALL GOLD SUN at the distant horizon near x700,y600, its reflection unchanged. There must be exactly ONE sun in the entire image; no orange disc, ring, second semicircle or moon above it. No other edits, no words, numerals, flags, logos or faces. One1024x1280PNG genuine alpha outside.",
+      "referenced_image_paths": [
+        "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-cedfd130-74bb-4cf8-a54b-dbc9fe5807fd.png"
+      ],
+      "status": "rejected",
+      "rejection": "Windmill rotor had only three sails; add matching fourth for coherent structure.",
+      "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nl-attempt-2-exec-1d715171-7d4f-4dd7-8fd7-db2d4d4c104e.png"
+    }
+  ],
+  "finalPath": "art_packs/staging/country_nl/documents_destination_stamp.png",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-f1-2026-10-14/originals/country_nl-exec-c44a4996-09dd-4488-96de-0255c08b1265.png",
+  "dimensions": [
+    1024,
+    1280
+  ],
+  "mode": "RGBA8",
+  "embeddedSrgb": true,
+  "realAlpha": true,
+  "transparentCorners": true,
+  "blankLabelMatchesTemplate": true,
+  "protectedStampMatchesTemplate": true,
+  "sha256": "de2a5cc4ebb10b0d56d404cd8a7420ac6672e37b672dd7596bcecad792f96145",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected corrected source and final light/dark sheet: tulip stripes, windmill with four coherent lattice sails, canal, bicycle and gabled houses. Extra sun removed; one gold horizon sun remains. No lettering, flags, logos or faces. Paris frame/blank label/exterior alpha and exact checks pass; rejected export/attempts preserved."
+}

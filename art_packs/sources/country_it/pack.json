@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "country_it",
-  "version": 3,
+  "version": 4,
   "palette": {
     "id": "italy_heritage_tricolore",
     "anchors": {
@@ -51,6 +51,7 @@
       "name": "trip_postcard",
       "width": 1536,
       "height": 1024
-    }
+    },
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
   ]
 }

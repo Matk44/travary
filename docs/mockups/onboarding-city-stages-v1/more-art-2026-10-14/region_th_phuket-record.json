@@ -1,0 +1,51 @@
+{
+  "id": "phuket/onboarding_stage_v1",
+  "destinationId": "region_th_phuket",
+  "status": "review_ready",
+  "prompt": "Use case: style-transfer\nAsset type: Travary Phuket onboarding scenery still, region_th_phuket, Thailand.\nInput 1: clean Bali stage, authoritative camera, tactile layered cardstock, teal wings, quiet sky and cream floor reference only. Input 2: Phuket postcard, geographic content/palette reference, discard its border. Input 3: Thailand sibling stage, same family and richness; remove its temple.\nCreate ONE new opaque portrait 851 × 1848 PNG, full uncropped very tall aspect of input 1. Rich sculpted folded paper miniature, visible fine embossed grain and cut edges, convincing layered depth, warm low golden sun. Phuket region's limestone islands rising from green-blue Andaman sea, three small unmarked Thai longtail boats, white beach and palms, jade tropical foliage. Scenery rather than temple: NO temples, Bali gates, rice terraces or volcano. Strong limestone and beach on left with open sea on right. Match the postcard's turquoise, navy, sage, coral and golden light.\nPreserve reference theatre camera and teal curved side wings with fine cream edging. Upper 0–27% quiet petrol-teal paper sky through centre; landmark tops below 27%. Middle 27–65% expansive scenery across theatre width. Lower 65–100% uninterrupted warm cream stage/control floor, scenery ends at 65%. Right foreground x62–92%, y42–71% clear of bulky close objects for separately composited Travi; background water may continue.\nNo character, people, character shadow, folio, luggage, loose tickets, text, lettering, numbers, decorative script, signs, logos, flags, UI, labels, dates, prices, button, watermark, postcard border or device. No glossy plastic. One complete opaque scenery still.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/phuket/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_th.webp"
+  ],
+  "transparent_background": false,
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a5a91a38-fc4a-42bc-aa2c-d6123efaec69.png",
+  "label": "Phuket",
+  "scope": "region",
+  "selectors": {
+    "countryCodes": [
+      "TH"
+    ],
+    "regions": [
+      "phuket"
+    ]
+  },
+  "geographicScope": "Phuket region and Andaman limestone islands, longtail boats, white beach and palms",
+  "visuallyInspected": true,
+  "qaNotes": {
+    "paperStyle": "passed",
+    "centralHeadlineSpace": "passed; quiet central upper 27%",
+    "creamFloor": "passed; boundary approximately 65%",
+    "traviClearance": "passed visually; low boats in background, open sea at right",
+    "noBakedPropsOrType": "passed",
+    "ownerApproval": "pending"
+  },
+  "originalDimensions": [
+    851,
+    1848
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/region_th_phuket/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/region_th_phuket.png",
+  "sha256": "ca4d8a6b8921437194f74f1e0c5c661adf11841d82918a38eabcf098c2d7d03e",
+  "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false
+}

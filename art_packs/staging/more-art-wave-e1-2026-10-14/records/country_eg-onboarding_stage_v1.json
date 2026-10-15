@@ -1,0 +1,41 @@
+{
+  "id": "country_eg/onboarding_stage_v1",
+  "destinationId": "country_eg",
+  "label": "Egypt",
+  "scope": "country",
+  "selectors": {
+    "countryCodes": [
+      "EG"
+    ]
+  },
+  "geographicScope": "three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs)",
+  "prompt": "Use case: style-transfer\nAsset type: clean Travary onboarding country stage for Egypt (country_eg). COUNTRY scope, broad coverage, not one city.\nInput 1: approved clean Bali stage, authoritative portrait camera, tactile paper material, teal theatre wings, quiet headline sky and cream floor reference only. Input 2: this country's OWN newly generated countdown postcard, geographic content, palette and light reference; remove its border. Input 3: sibling stage for consistency of camera/paper richness ONLY; do not copy its geographic landmarks.\nReplace the entire landscape with a lavish handmade miniature country world: three stepped-triangle pyramids at golden hour on the desert's edge, a felucca with a white sail on the Nile, date palms, a temple with papyrus-bud columns, a camel silhouette, a strip of turquoise Red Sea (no hieroglyphs). Symbolic staged country composition, not a claim that distant landmarks share one literal viewpoint. Preserve correct local architecture, landscapes, plants and animal shapes. warm low golden sun.\nRich sculpted folded cardstock, fine embossed grain, visible cut edges, convincing miniature depth, shadows BETWEEN scenery layers, warm physical light. Match Bali richness and sibling family; not flat poster, photograph or glossy plastic. Use this country's postcard colours, not a universal Bali tint.\nOne full uncropped opaque portrait 851 × 1848 PNG, reference aspect 0.4605. Upper 0–27% quiet petrol-teal paper sky through centre for live wordmark and headline. Side foliage may frame the sky like Bali and sibling; detailed landmark tops must remain below28%, and no rainbow/sun/cloud cuts through central headline sky. Middle 27–65% expansive country scenery filling theatre width. Lower 65–100% uninterrupted warm cream control floor with matching camera and gentle light, scenery ends at 65%. Teal curved side wings with fine cream edging. Right foreground x62–92%,y42–71% clear of bulky close landmarks for shared Travi; scenery continues quietly behind.\nRemove Bali temples, gates, terraces, volcano and tropical vegetation unless genuinely present in this country's required scene. No people, faces, Travi, character, character shadow, folio, luggage, loose tickets, UI, labels, prices, dates, text, letters, numerals, decorative script, inscriptions, hieroglyphs, Arabic/Chinese characters even as pattern, signs, logos, flags, flagpoles, watermark, postcard border or device. Clocks use hands/ticks only; transport panels and windows plain/unmarked. One complete clean opaque scenery still. EXACTLY THREE pyramids, no fourth tiny/background/foreground pyramid. Pyramid count is a strict invariant. Plain uninscribed temple stone, no hieroglyphs.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/docs/mockups/onboarding-folio-motion-v1/bali-stage-prop-free-v1.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/country_eg/countdown_postcard.png",
+    "/Users/khairofamily/AndroidStudioProjects/Travary/assets/onboarding/stages/country_ae.webp"
+  ],
+  "transparent_background": false,
+  "status": "review_ready",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-eb648681-05f2-4655-bbfa-46df3288cc0b.png",
+  "visuallyInspected": true,
+  "qaNotes": "Inspected still: exactly three pyramids, recognisable camel silhouette, plain papyrus-column temple, felucca with blank white sail, palms and turquoise water in dimensional paper theatre. Quiet central upper27% teal, cream floor65%, right foreground clear. No hieroglyphs, lettering, flags, faces, UI or props; UAE skyline/wind towers replaced.",
+  "originalDimensions": [
+    851,
+    1848
+  ],
+  "selectedWorkspacePath": "art_packs/pending/onboarding/country_eg/onboarding_stage_v1.png",
+  "dimensions": [
+    851,
+    1848
+  ],
+  "mode": "RGBA",
+  "embeddedSrgb": true,
+  "opaque": true,
+  "originalWorkspacePath": "docs/mockups/onboarding-city-stages-v1/more-art-2026-10-14/originals/country_eg.png",
+  "sha256": "4cb18fa9607bbcc4d7023642044ce675660577866b8c2408ae3632258b7cdeb0",
+  "export": "Uniform LANCZOS cover to 851 × 1848, centre crop only; original preserved",
+  "ownerApproval": "pending",
+  "flutterIntegrated": false,
+  "published": false
+}

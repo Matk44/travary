@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packId": "region_gb_lake_district",
-  "version": 2,
+  "version": 3,
   "palette": {
     "id": "britain_heritage_rain",
     "anchors": {"ink": "#173653", "paper": "#F6F0E5"},

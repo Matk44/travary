@@ -1,0 +1,47 @@
+[
+  {
+    "place": "country_cz",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_cz",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_cz",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_my",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_my",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_my",
+    "role": "reservation_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_tw",
+    "role": "featured_ticket",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_tw",
+    "role": "room_card",
+    "strayPixels": 0
+  },
+  {
+    "place": "country_tw",
+    "role": "reservation_card",
+    "strayPixels": 0
+  }
+]

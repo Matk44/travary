@@ -1,0 +1,68 @@
+[
+  {
+    "place": "venice",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/venice-featured_ticket.png",
+    "palette": [
+      [
+        26,
+        66,
+        79
+      ],
+      [
+        198,
+        100,
+        77
+      ],
+      [
+        210,
+        165,
+        69
+      ]
+    ]
+  },
+  {
+    "place": "venice",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/venice-room_card.png",
+    "palette": [
+      [
+        26,
+        66,
+        79
+      ],
+      [
+        198,
+        100,
+        77
+      ],
+      [
+        210,
+        165,
+        69
+      ]
+    ]
+  },
+  {
+    "place": "venice",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/venice-reservation_card.png",
+    "palette": [
+      [
+        26,
+        66,
+        79
+      ],
+      [
+        198,
+        100,
+        77
+      ],
+      [
+        210,
+        165,
+        69
+      ]
+    ]
+  }
+]

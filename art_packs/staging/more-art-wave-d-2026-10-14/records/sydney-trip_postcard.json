@@ -1,0 +1,13 @@
+{
+  "id": "sydney/trip_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1 is the paper-object/style reference ONLY; replace reference geography completely with this city. Input image 2 is supporting city colour/scenery reference ONLY, discard ticket structure.\nTactile mid-century travel-poster screen print: flat layered shapes, fine risograph grain, soft paper fibres, calm elegant Travary navy/teal/coral/sage/mustard/cream family, never photographic. No words, letters, numbers, pseudo-text, decorative script, inscriptions, signs, logos, watermarks, flags, faces or copyrighted characters. All vehicle panels/plates, boat hulls, tram windows and shopfronts blank and unmarked. Small people may only be featureless silhouettes; prefer empty streets. Exclude theme parks, Hollywood sign, Space Needle, Cloud Gate and casino buildings. Replace ALL American scenery in the template unless this is San Francisco. Famous buildings belong within a balanced city view, not giant isolated objects.\nCity: Sydney. Scene: a white sail-roofed opera house on the harbour, a steel arch bridge, a ferry, jacaranda in bloom, a gold harbour sunset. Light: warm low golden sun; coherent golden hour. Stripe and tag: harbour blue, jacaranda violet, sandstone gold (#246380, #8270a6, #c69d60). Keep all six pictures coherent in light, palette and landmarks.\nOne landscape 3:2 vintage postcard 1536 × 1024 PNG. Thin deckled warm-cream edge, faint soft shadow, centred and straight-on. Genuine transparency outside, NO opaque presentation backdrop. Same city scene recomposed with key subject in LEFT 60%; RIGHT 35% quieter, particularly upper right. No tags, postmarks, stamps or UI.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/london/trip_postcard.png",
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-c0718fe9-296e-4a5c-8e2e-164ec09bbfaa.png"
+  ],
+  "transparent_background": true,
+  "status": "rejected",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-a798f12d-305a-4084-895a-cd23bb75717e.png",
+  "rejection": "Tiny flags/flagpoles on top of Harbour Bridge; no-flags requirement.",
+  "originalWorkspacePath": "art_packs/staging/more-art-wave-d-2026-10-14/originals/sydney-trip_postcard.png"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "hong_kong/trip_postcard",
+  "prompt": "Use case: illustration-story\nInput image 1: paper-object/style reference only; replace Paris with the new city. Input image 2: supporting city-scene reference; do not copy ticket layout.\nTactile mid-century travel-poster screen print; flat layered shapes, fine risograph grain and soft paper fibres. Calm, elegant, original artwork in Travary's navy/teal/coral/sage/mustard/warm-cream family. Never photographic. No words, letters, numbers, pseudo-text, readable signs, logos, watermarks, flags, faces or copyrighted characters. Famous architecture sits within a balanced city view, not an oversized isolated object. Exclude real theme-park attractions, Hollywood sign, Space Needle, Cloud Gate and casino buildings.\nCity: Hong Kong. Scene: Victoria Harbour's balanced skyline, a red-sailed junk, a green-and-white harbour ferry and the Peak's green slopes. Light: warm sunset giving way to early evening. Palette: navy, harbour teal, red coral sails, sage hills and warm gold. Same light, landmarks and palette as supporting city card. Absolutely no flags, flagpoles, lettering or vehicle/boat markings.\nOne landscape 3:2 vintage postcard exactly 1536 × 1024 PNG. Thin deckled warm-cream paper edge, faint contact shadow, centred and straight on with genuine alpha outside. Main city subjects in LEFT 60%; RIGHT 35% quiet, especially upper right. No presentation backdrop, tags, postmarks, stamps or UI.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/originals/city_fr_paris/common/trip_postcard.png",
+    "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-e181db8a-15bb-4d38-8dbe-8591dd6e0ed3.png"
+  ],
+  "transparent_background": true,
+  "source": "/Users/khairofamily/.codex/generated_images/01a131bb-a52e-7c01-88e0-11d0b57b0c85/exec-fa70d3bb-e191-43d6-a208-ebe48d998e10.png"
+}

@@ -1,0 +1,101 @@
+{
+  "city": "Barcelona",
+  "count": 6,
+  "status": "PASS",
+  "results": [
+    {
+      "file": "art_packs/staging/barcelona/featured_ticket.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "bcb392e19d790e9ed0883b7edbacdb95b9acdfc042054f6924baa555ed9a9567",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "barcode_stub_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/barcelona/room_card.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "811a6ccfad8c6765fcb3a006897b03246bb0705f180d0ef5393600dd4c847b9d",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true
+    },
+    {
+      "file": "art_packs/staging/barcelona/reservation_card.png",
+      "size": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "1ad1c96bfcbf2f7d4e508718fa4f5b72f7690b52b5b15e59278cfc42b0456c66",
+      "alpha_matches_template": true,
+      "protected_shell_pixels_match": true,
+      "brass_eyelet_matches_template": true,
+      "blank_centre_matches_template": true
+    },
+    {
+      "file": "art_packs/staging/barcelona/countdown_postcard.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "sha256": "f6bb167396046eef1f4ab1789613c94d04d426fee64c8ff41bb923e077fba056"
+    },
+    {
+      "file": "art_packs/staging/barcelona/trip_postcard.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "e4fc2c7003c35e638b4167ef008faa3029a4734005633f1ecdb6233c53c2ef29"
+    },
+    {
+      "file": "art_packs/staging/barcelona/documents_destination_stamp.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "e39da8e1e1b85b25aa18184c636f553c3407d75eccff94958bd4d9f3f0cc0115",
+      "blank_label_matches_reference": true,
+      "printed_illustration_box": [
+        123,
+        115,
+        901,
+        947
+      ]
+    }
+  ]
+}

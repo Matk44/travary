@@ -1,0 +1,14 @@
+{
+  "id": "country_at/countdown_postcard-corrected",
+  "prompt": "Use case: precise-object-edit\nEdit target: this Austria countdown_postcard illustration. Remove EVERY word, letter, numeral, route label, pseudo-text, oval badge, emblem, logo or monogram from the vintage tram, especially the tiny destination panel above the front windows and any oval mark on its roof/front/body. Replace every such panel/badge with completely plain solid paint matching the surrounding tram body, no oval outline or scratches. All tram windows must be plain dark empty glass without passengers or faces. Preserve original tram colour and location, all Alpine peaks, lake, onion-domed village church, yellow-and-white Baroque palace and formal gardens, blue gentians, light and palette. Keep exact canvas and paper/card geometry, blank text areas, stripe/tag, barcode, cord, eyelet, paper edges and blank stamp label where applicable. Preserve true transparency outside. Do not change any other scene element. No text, letters, numbers, logos, flags or faces anywhere. Output one corrected PNG with the same proportions.",
+  "referenced_image_paths": [
+    "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-3fbe46ca-8fc0-4ae5-b80f-e76077ecb523.png"
+  ],
+  "transparent_background": true,
+  "status": "review_ready",
+  "correctionReason": "Small route-board/badge-like marks on tram; remove all potential text/logos and keep windows empty.",
+  "source": "/Users/khairofamily/.codex/generated_images/01a136fe-b7a7-7861-9b64-f5fb09a3e2ee/exec-bdbb5466-9c7d-42cf-bee4-42d628bff0bb.png",
+  "visuallyInspected": true,
+  "ownerApproval": "pending",
+  "qaNotes": "Inspected all original/corrected illustrations and final light/dark sheets. Coherent Austrian Alps, lake, onion church, Baroque palace and gentians. Unmarked trams remain in four pictures; removed entire tram from featured/stamp after two badge corrections. No visible text, flags or faces. Card paper and transparent edges clean; all export checks pass."
+}

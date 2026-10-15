@@ -1,0 +1,68 @@
+[
+  {
+    "place": "kuala_lumpur",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/kuala_lumpur-featured_ticket.png",
+    "palette": [
+      [
+        27,
+        67,
+        72
+      ],
+      [
+        196,
+        95,
+        67
+      ],
+      [
+        213,
+        166,
+        67
+      ]
+    ]
+  },
+  {
+    "place": "kuala_lumpur",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/kuala_lumpur-room_card.png",
+    "palette": [
+      [
+        27,
+        67,
+        72
+      ],
+      [
+        196,
+        95,
+        67
+      ],
+      [
+        213,
+        166,
+        67
+      ]
+    ]
+  },
+  {
+    "place": "kuala_lumpur",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/kuala_lumpur-reservation_card.png",
+    "palette": [
+      [
+        27,
+        67,
+        72
+      ],
+      [
+        196,
+        95,
+        67
+      ],
+      [
+        213,
+        166,
+        67
+      ]
+    ]
+  }
+]

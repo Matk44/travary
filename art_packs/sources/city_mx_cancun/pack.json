@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "packId": "city_mx_cancun",
+  "version": 1,
+  "palette": {
+    "id": "mexico_jade_marigold",
+    "anchors": {"ink": "#173D42", "paper": "#F6EBD8"},
+    "accents": ["#176B58", "#B8323E", "#E2A62B", "#2768A0"],
+    "ui": {
+      "primary": "#145A4A",
+      "secondary": "#9D2936",
+      "highlight": "#C68A17",
+      "onPrimary": "#FFF8EA"
+    }
+  },
+  "assets": [
+    {"file": "common/featured_ticket.webp", "kind": "common", "name": "featured_ticket", "width": 1774, "height": 887},
+    {"file": "common/room_card.webp", "kind": "common", "name": "room_card", "width": 1774, "height": 887},
+    {"file": "common/reservation_card.webp", "kind": "common", "name": "reservation_card", "width": 1983, "height": 793},
+    {"file": "common/countdown_postcard.webp", "kind": "common", "name": "countdown_postcard", "width": 1122, "height": 1402},
+    {"file": "common/trip_postcard.webp", "kind": "common", "name": "trip_postcard", "width": 1536, "height": 1024},
+    {"file": "common/documents_destination_stamp.webp", "kind": "common", "name": "documents_destination_stamp", "width": 1024, "height": 1280}
+  ]
+}

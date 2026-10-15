@@ -1,0 +1,7 @@
+{
+  "priority": 500,
+  "selectors": {
+    "countryCodes": ["HR"]
+  },
+  "minAppBuild": 1
+}

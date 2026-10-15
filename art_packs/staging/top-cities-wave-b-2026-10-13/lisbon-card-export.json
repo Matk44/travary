@@ -1,0 +1,68 @@
+[
+  {
+    "place": "lisbon",
+    "role": "featured_ticket",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/lisbon-featured_ticket.png",
+    "palette": [
+      [
+        25,
+        65,
+        80
+      ],
+      [
+        201,
+        100,
+        71
+      ],
+      [
+        218,
+        171,
+        61
+      ]
+    ]
+  },
+  {
+    "place": "lisbon",
+    "role": "room_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/lisbon-room_card.png",
+    "palette": [
+      [
+        25,
+        65,
+        80
+      ],
+      [
+        201,
+        100,
+        71
+      ],
+      [
+        218,
+        171,
+        61
+      ]
+    ]
+  },
+  {
+    "place": "lisbon",
+    "role": "reservation_card",
+    "source": "/Users/khairofamily/AndroidStudioProjects/Travary/art_packs/staging/top-cities-wave-b-2026-10-13/normalised/lisbon-reservation_card.png",
+    "palette": [
+      [
+        25,
+        65,
+        80
+      ],
+      [
+        201,
+        100,
+        71
+      ],
+      [
+        218,
+        171,
+        61
+      ]
+    ]
+  }
+]

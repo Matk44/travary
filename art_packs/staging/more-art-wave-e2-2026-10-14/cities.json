@@ -1,0 +1,74 @@
+[
+  {
+    "id": "country_cz",
+    "name": "Czechia",
+    "scene": "a fairy-tale castle on a rocky bluff above a looping river and a red-roofed old town (the south Bohemian kind, not Prague), hop fields and birch woods, a Baroque church spire, a spa colonnade",
+    "palette": "garnet, hop green, old gold",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        141,
+        66,
+        80
+      ],
+      [
+        93,
+        115,
+        76
+      ],
+      [
+        195,
+        161,
+        90
+      ]
+    ]
+  },
+  {
+    "id": "country_my",
+    "name": "Malaysia",
+    "scene": "limestone islets and a white beach with palms, a rainforest canopy with a hornbill, a colourful old-port shophouse street with a trishaw, a gold-domed mosque, tea-plantation hills (no twin towers: Kuala Lumpur has its own pack)",
+    "palette": "rainforest green, songket gold, hibiscus red",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        63,
+        112,
+        78
+      ],
+      [
+        201,
+        161,
+        83
+      ],
+      [
+        189,
+        85,
+        78
+      ]
+    ]
+  },
+  {
+    "id": "country_tw",
+    "name": "Taiwan",
+    "scene": "terraced tea hills in mist, a narrow-gauge mountain train through bamboo, a marble gorge with a suspension bridge, a lantern-lit mountain village street, sky lanterns rising (no bamboo-shaped tower: Taipei has its own pack)",
+    "palette": "tea green, lantern amber, temple red",
+    "light": "warm low golden sun",
+    "colors": [
+      [
+        89,
+        117,
+        78
+      ],
+      [
+        209,
+        160,
+        88
+      ],
+      [
+        184,
+        91,
+        78
+      ]
+    ]
+  }
+]
