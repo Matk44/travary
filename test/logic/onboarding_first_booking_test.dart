@@ -40,7 +40,10 @@ void main() {
 
   group('the form under the heading', () {
     test('only a read booking asks to be checked', () {
-      expect(onboardingFormSubtitle(finding: true, checking: false), 'Flight number and the day it leaves.');
+      expect(
+        onboardingFormSubtitle(finding: true, checking: false),
+        'Type the flight number and we’ll fill in the rest.',
+      );
       expect(onboardingFormSubtitle(finding: false, checking: true), 'Check the details before adding it.');
       expect(onboardingFormSubtitle(finding: false, checking: false), isNot(contains('Check')));
     });

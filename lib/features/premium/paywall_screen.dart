@@ -59,6 +59,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
         backEnabled: !premium.busy,
         backTooltip: 'Close',
         backKey: 'paywall-close',
+        snugFloor: true,
         floor: OnboardingPassPanel(
           // A trip that's gone (or none) offers the Annual Pass only.
           tripId: plan?.id,

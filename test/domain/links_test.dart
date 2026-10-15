@@ -2,11 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travary/domain/domain.dart';
 
 void main() {
-  test('the public pages live on the support site', () {
-    expect('${TravaryLinks.support}', 'https://matk44.github.io/travary_support/');
-    expect('${TravaryLinks.privacy}', 'https://matk44.github.io/travary_support/privacy.html');
-    expect('${TravaryLinks.terms}', 'https://matk44.github.io/travary_support/terms.html');
-    expect('${TravaryLinks.deleteData}', 'https://matk44.github.io/travary_support/delete-account.html');
+  test('the public pages live on travary.app', () {
+    expect('${TravaryLinks.support}', 'https://travary.app/support');
+    expect('${TravaryLinks.privacy}', 'https://travary.app/privacy');
+    expect('${TravaryLinks.terms}', 'https://travary.app/terms');
+    expect('${TravaryLinks.deleteData}', 'https://travary.app/delete-account');
+  });
+
+  test('the Annual Pass is managed in the store it was bought from', () {
+    expect('${TravaryLinks.appStoreSubscriptions}', 'https://apps.apple.com/account/subscriptions');
+    expect(TravaryLinks.playSubscriptions.queryParameters, {
+      'sku': 'travary_annual_pass',
+      'package': 'com.travary.app',
+    });
   });
 
   test('support email opens a new message with a subject', () {

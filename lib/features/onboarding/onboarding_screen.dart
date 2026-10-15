@@ -288,7 +288,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     });
     final SmartImportResult found;
     try {
-      found = await context.read<SmartImportService>().read(file.path, today: _travel.today, tripId: access.tripId);
+      final service = context.read<SmartImportService>();
+      found = await readWithPass(
+        context,
+        (tripId) => service.read(file.path, today: _travel.today, tripId: tripId),
+        access: access,
+        trip: trip == null ? null : _travel.plan(trip.id),
+        source: 'onboarding',
+      );
     } on SmartImportException catch (e) {
       track('smart_import_failed', {'reason': e.message});
       if (mounted) {
@@ -497,6 +504,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         words: words,
         wordsKey: '$beat-${session?.emailLinkSentTo}-$_misread',
         floorKey: beat == OnboardingBeat.email ? OnboardingBeat.account : beat,
+        snugFloor: beat == OnboardingBeat.desk,
         onBack: _offer == _Offer.account || _offer == _Offer.desk ? _back : null,
         backEnabled: !premium.busy && session?.isBusy != true,
         backTooltip: _offer == _Offer.desk ? 'Back to your saved booking' : 'Back to your holiday',

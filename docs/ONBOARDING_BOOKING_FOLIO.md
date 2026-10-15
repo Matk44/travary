@@ -40,7 +40,7 @@ Use Paper words for the short scene heading, cream with one coral accent, then l
 
 **Working-page direction, revised 6 October:** keep the angled folio as the invitation prop. When import/manual entry begins, turn it square to the viewer and expand it into a flat full-screen cream page with navy binding and brass stitching. Reveal horizontal text/fields after flattening; never paste a working form onto an angled illustrated page. Travi peeks over the header and yields the paper. The flight board uses this same surface. Successful save returns to the colourful holiday world. These shared native surfaces require no additional destination images. Picker access and real response timing remain immediate, independent of decorative motion.
 
-**Review copy:** use “Check your booking” for general booking review and “Check your flight” for flights, replacing “Make it yours”. Flight lookup starts with “Find your flight” and “Flight number and the day it leaves.” The selected result becomes an editable draft; the final action remains “Add to my holiday”.
+**Review copy:** use “Check your booking” for general booking review and “Check your flight” for flights, replacing “Make it yours”. A new flight is “Add your flight” and “Type the flight number and we’ll fill in the rest.”, with the departures board heading its ticket; a found flight fills in what hasn’t been typed and the heading becomes “Check your flight”. Every field stays editable; the final action remains “Add to my holiday”.
 
 ## Flight lookup integration
 

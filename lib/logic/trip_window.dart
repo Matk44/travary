@@ -92,7 +92,9 @@ class TripPlacement {
 /// keeps it but asks ([TripPlacement.stretches]). A trip of its own that
 /// it's alone in follows it into a trip its new dates fall in.
 ///
-/// [chosen]: the traveller picked [tripId] on the form, so it stays put.
+/// [chosen]: the traveller picked [tripId] on the form, so it stays put;
+/// a trip that formed from its bookings still asks before new dates
+/// stretch it well past them (a typed month is just as easy to get wrong).
 /// [editing]: the booking being edited, left out of every trip's dates;
 /// with [datesChanged] false it stays where it is. [looseMarginDays]: how
 /// far from a formed trip's bookings still fits it (wider for Smart
@@ -117,9 +119,12 @@ TripPlacement placeBooking({
       findTripFor(start, end, trips) ?? (booking == null ? null : findReturnFlightTrip(booking, trips)),
     );
   }
-  if (chosen || !datesChanged || fitsTrip(start, end, asked, looseMarginDays: looseMarginDays)) {
+  final formed = asked.trip.plannedStart == null;
+  final fits = !datesChanged || fitsTrip(start, end, asked, looseMarginDays: looseMarginDays);
+  // A chosen trip with planned dates has had them moved inside its days.
+  if (fits || (chosen && !formed)) {
     // Alone in a trip of its own: new dates inside another trip join it.
-    if (!chosen && datesChanged && asked.bookings.isEmpty && asked.trip.plannedStart == null) {
+    if (!chosen && datesChanged && asked.bookings.isEmpty && formed) {
       final others = [
         for (final plan in trips)
           if (plan.id != asked.id) plan,
@@ -133,7 +138,7 @@ TripPlacement placeBooking({
       if (plan.id != asked.id) plan,
   ];
   final elsewhere = findTripFor(start, end, others);
-  if (asked.trip.plannedStart == null) return TripPlacement(asked, stretches: true, alternative: elsewhere);
+  if (formed) return TripPlacement(asked, stretches: true, alternative: elsewhere);
   return TripPlacement(elsewhere);
 }
 

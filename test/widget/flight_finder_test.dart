@@ -89,13 +89,17 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
   }
 
-  testWidgets('the departures board finds the flight; one tap fills in the ticket', (tester) async {
+  testWidgets('the board heads the ticket; a found flight fills in the rest', (tester) async {
     final service = FakeFlightStatusService()..legs = [ba283()];
     await pump(tester, opener(), service: service);
     await openForm(tester);
-    expect(find.text('Find your flight'), findsOneWidget);
+    expect(find.text('Add a flight'), findsWidgets);
     expect(board, findsOneWidget);
+    expect(find.byKey(const ValueKey('form-ticket')), findsOneWidget, reason: 'the ticket is under the board');
+    expect(find.byKey(const ValueKey('field-flightNumber')), findsNothing, reason: 'the number is typed on the board');
     expect(find.text('8 Nov 2026'), findsOneWidget, reason: 'the day it leaves, in its box');
+    final top = tester.getTopLeft(number).dy;
+    expect(top, lessThan(tester.getTopLeft(find.byKey(const ValueKey('field-title'))).dy));
 
     // Typing doesn't ask until a whole number has been typed and the typing pauses.
     await tester.enterText(number, 'ba');
@@ -114,30 +118,51 @@ void main() {
     expect(find.text('Los Angeles'), findsOneWidget);
     expect(flaps('10:05'), findsOneWidget);
     expect(find.text('Lands 1:25pm'), findsOneWidget);
-    expect(find.text('Details stay editable'), findsOneWidget);
 
-    await tester.tap(find.byKey(const ValueKey('use-flight')));
-    await tester.pumpAndSettle();
-    expect(find.text('Add a flight'), findsWidgets);
+    // No extra tap: the ticket below is filled in, and stays editable.
     expect(find.text('Filled in from the airline\'s schedule. Check it matches your ticket.'), findsOneWidget);
-    expect(find.widgetWithText(TextField, 'London to Los Angeles'), findsOneWidget);
-    expect(find.widgetWithText(TextField, 'London Heathrow (LHR)'), findsOneWidget);
-    expect(fieldText(tester, 'flightNumber'), 'BA 283');
+    expect(fieldText(tester, 'title'), 'London to Los Angeles');
+    expect(fieldText(tester, 'location'), 'London Heathrow (LHR)');
     expect(find.text('8 NOV 2026'), findsOneWidget);
     expect(find.text('10:05am'), findsOneWidget);
     expect(find.text('1:25pm'), findsOneWidget);
     expect(service.calls, hasLength(1), reason: 'filling in isn\'t a new search');
 
+    await tester.enterText(
+      find.descendant(of: find.byKey(const ValueKey('field-title')), matching: find.byType(TextField)),
+      'Off to LA',
+    );
     await tester.tap(find.widgetWithText(TextButton, 'Save'));
     await tester.pumpAndSettle();
     final saved = repo.bookings.single;
-    expect(saved.title, 'London to Los Angeles');
+    expect(saved.title, 'Off to LA');
     expect(saved.startDate, d(11, 8));
     expect(saved.startTime, const ClockTime(10, 5));
     expect(saved.endTime, const ClockTime(13, 25));
     expect(saved.location, 'London Heathrow (LHR)');
-    expect(saved.detail(DetailKeys.flightNumber), 'BA 283');
+    expect(saved.detail(DetailKeys.flightNumber), 'BA 283', reason: 'as the airline writes it');
     expect(saved.tripId, 'la');
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('what\'s typed by hand stays; another number swaps only the board\'s details', (tester) async {
+    final service = FakeFlightStatusService()..legs = [ba283()];
+    await pump(tester, opener(), service: service);
+    await openForm(tester);
+    final title = find.descendant(of: find.byKey(const ValueKey('field-title')), matching: find.byType(TextField));
+    await tester.enterText(title, 'Holiday flight');
+    await tester.enterText(number, 'BA 283');
+    await settle(tester);
+    expect(fieldText(tester, 'title'), 'Holiday flight');
+    expect(fieldText(tester, 'location'), 'London Heathrow (LHR)');
+
+    service.legs = [];
+    await tester.enterText(number, 'BA 999');
+    await settle(tester);
+    expect(find.text('NOT FOUND'), findsOneWidget);
+    expect(fieldText(tester, 'title'), 'Holiday flight');
+    expect(fieldText(tester, 'location'), isEmpty, reason: 'BA 283\'s airport went with it');
+    expect(find.text('Filled in from the airline\'s schedule. Check it matches your ticket.'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 
@@ -149,25 +174,34 @@ void main() {
     await settle(tester);
     expect(find.text('NOT FOUND'), findsOneWidget);
     expect(flaps('NO FLIGHT'), findsOneWidget);
-    expect(find.text('No BA999 found on Sun 8 Nov. Check the number and date, or enter it yourself.'), findsOneWidget);
+    expect(
+      find.text('No BA999 found on Sun 8 Nov. Check the number and date, or fill in the ticket yourself.'),
+      findsOneWidget,
+    );
 
     service.failure = const FlightStatusException('Flights can be looked up up to a year ahead.');
     await tester.enterText(number, 'BA 998');
     await settle(tester);
     expect(find.text('Flights can be looked up up to a year ahead.'), findsOneWidget);
 
-    await tester.tap(find.byKey(const ValueKey('enter-flight-manually')));
+    final title = find.descendant(of: find.byKey(const ValueKey('field-title')), matching: find.byType(TextField));
+    await tester.enterText(title, 'Home');
+    await tester.tap(find.widgetWithText(TextButton, 'Save'));
     await tester.pumpAndSettle();
-    expect(board, findsNothing);
-    expect(find.byKey(const ValueKey('form-ticket')), findsOneWidget);
-    expect(fieldText(tester, 'flightNumber'), 'BA 998', reason: 'what was typed carries over');
+    expect(repo.bookings.single.title, 'Home');
+    expect(repo.bookings.single.detail(DetailKeys.flightNumber), 'BA 998', reason: 'what was typed is kept');
   });
 
-  testWidgets('without the service, and when editing, the flight form is the ticket', (tester) async {
+  testWidgets('without the service the flight number heads the ticket', (tester) async {
     await pump(tester, opener());
     await openForm(tester);
     expect(board, findsNothing);
-    expect(find.byKey(const ValueKey('field-flightNumber')), findsOneWidget);
+    final flightNumber = find.byKey(const ValueKey('field-flightNumber'));
+    expect(flightNumber, findsOneWidget);
+    expect(
+      tester.getTopLeft(flightNumber).dy,
+      lessThan(tester.getTopLeft(find.byKey(const ValueKey('field-title'))).dy),
+    );
   });
 
   testWidgets('editing a flight opens its ticket, not the board', (tester) async {
@@ -213,8 +247,11 @@ void main() {
       await tester.enterText(number, 'BA 283');
       await settle(tester);
       expect(tester.takeException(), isNull);
-      await tester.ensureVisible(find.byKey(const ValueKey('use-flight')));
-      await tester.tap(find.byKey(const ValueKey('use-flight')));
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('save-booking')),
+        300,
+        scrollable: find.descendant(of: find.byType(EditBookingScreen), matching: find.byType(Scrollable)).first,
+      );
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });

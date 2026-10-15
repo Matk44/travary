@@ -10,6 +10,7 @@ import 'package:travary/domain/domain.dart';
 import 'package:travary/features/travel_documents/edit_travel_document_screen.dart';
 import 'package:travary/features/travel_documents/travel_document_screen.dart';
 import 'package:travary/features/travel_documents/travel_documents_screen.dart';
+import 'package:travary/features/profile/profile_screen.dart';
 import 'package:travary/state/travel_documents_store.dart';
 
 import '../support/countdown_today.dart';
@@ -185,7 +186,15 @@ void main() {
     await tester.pumpAndSettle();
 
     await openTab(tester, 'Profile');
-    await tester.tap(find.text('Travel documents'));
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey('profile-travel-documents')),
+      100,
+      scrollable: find.descendant(of: find.byType(ProfileScreen), matching: find.byType(Scrollable)),
+    );
+    final pocket = find.byKey(const ValueKey('profile-travel-documents'));
+    await Scrollable.ensureVisible(tester.element(pocket), alignment: 0.5);
+    await tester.pumpAndSettle();
+    await tester.tap(pocket);
     await tester.pumpAndSettle();
     expect(find.byType(TravelDocumentsScreen), findsOneWidget);
     expect(storeOf(tester).count, 0);

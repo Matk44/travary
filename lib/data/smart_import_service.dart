@@ -18,9 +18,13 @@ class SmartImportResult {
 
 /// A problem worth showing the traveller as-is.
 class SmartImportException implements Exception {
-  const SmartImportException(this.message);
+  const SmartImportException(this.message, {this.needsPass = false});
 
   final String message;
+
+  /// The server counted the free imports as used (the app's count was
+  /// behind): a pass brings in more.
+  final bool needsPass;
 
   @override
   String toString() => message;
@@ -91,6 +95,7 @@ class CloudSmartImportService implements SmartImportService {
         e.message?.isNotEmpty == true && e.code != 'internal'
             ? e.message!
             : 'Smart Import had a problem. Try again shortly.',
+        needsPass: e.code == 'permission-denied',
       );
     } on SocketException {
       throw const SmartImportException('Smart Import needs an internet connection.');

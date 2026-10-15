@@ -47,10 +47,16 @@ IOS_URL = f"https://apps.apple.com/app/id{IOS_APP_ID}" if IOS_APP_ID else ""
 PLAY_URL = ("https://play.google.com/store/apps/details?id=com.travary.app"
             "&referrer=utm_source%3Dtravary_website%26utm_medium%3Dweb")
 
-SUPPORT_SITE = "https://matk44.github.io/travary_support/"
-PRIVACY_URL = SUPPORT_SITE + "privacy.html"
-TERMS_URL = SUPPORT_SITE + "terms.html"
-DELETE_URL = SUPPORT_SITE + "delete-account.html"
+# Support, the privacy policy, the terms and deleting your data live here
+# (content/legal/): the app (TravaryLinks), the store listings and Google's
+# OAuth branding link to them. They were on GitHub Pages until 15 Oct 2026.
+SUPPORT_SITE = "/support"
+PRIVACY_URL = "/privacy"
+TERMS_URL = "/terms"
+DELETE_URL = "/delete-account"
+# Who makes Travary: the developer named on Google Play, and the OAuth
+# consent screen's owner (dreamprayer.dev@gmail.com).
+PUBLISHER = "Dream Prayer Developer"
 SUPPORT_EMAIL = "dreamprayer.dev@gmail.com"
 
 # Family invite links (travary.app/join/ABC234) open the app: iOS checks
@@ -63,15 +69,23 @@ ANDROID_PACKAGE = "com.travary.app"
 ANDROID_CERT_SHA256 = [
     # debug (~/.android/debug.keystore on the build Mac)
     "0A:36:06:E4:42:3F:37:85:1C:5F:D9:34:EF:86:F3:F9:B8:B8:A3:55:25:52:71:C7:F5:ED:6E:D0:42:4A:16:E3",
+    # upload key (~/travary-upload-keystore.jks)
+    "60:93:96:C1:D2:6E:CF:E6:B2:65:54:01:56:D9:6B:78:76:8D:8D:A3:60:CC:33:72:D5:9A:AE:E9:88:81:D2:67",
+    # Play App Signing (the key Google signs store installs with; also in Firebase)
+    "12:1C:4E:43:D4:0B:F7:0C:63:F1:EB:C3:18:1F:4E:C3:BD:50:06:5A:CB:01:24:8B:3B:98:A5:A5:94:CC:3D:ED",
 ]
 
 # Launch prices (USD), as lib/domain/pricing.dart. Stores show local prices.
 PRICE_HOLIDAY_PASS = "$14.99"
 PRICE_ANNUAL = "$34.99"
-FREE_IMPORTS = 3
+FREE_IMPORTS = 2  # Pricing.freeSmartImports
 
 # Google Search Console HTML-tag verification (keep once set).
 GOOGLE_SITE_VERIFICATION = "BNFiwdJQsQhtfB-wy4vX7FkKSjhbBQf8b-ICFFr4dos"
+# dreamprayer.dev@gmail.com's own Search Console verification: it owns the
+# Firebase/Google Cloud project, and Google's OAuth branding check needs a
+# project owner to own the domain. Never remove either tag.
+GOOGLE_SITE_VERIFICATION_PROJECT = "gd5CFX6leMbMOK_J_Jh99LmivB9aux2Y7YQsW3Zjj60"
 BING_SITE_VERIFICATION = ""
 
 TODAY = date.today().isoformat()
@@ -620,13 +634,13 @@ def footer() -> str:
       <h2>Travary</h2><ul>
       <li><a href="/guides/how-travary-works">How Travary works</a></li>
       {"".join(f'<li><a href="{p.path}">{esc(p.crumb)}</a></li>' for p in APP_PAGES if not p.card)}
-      <li><a href="{SUPPORT_SITE}" rel="noopener">Help and support</a></li>
-      <li><a href="{PRIVACY_URL}" rel="noopener">Privacy policy</a></li>
-      <li><a href="{TERMS_URL}" rel="noopener">Terms of use</a></li>
-      <li><a href="{DELETE_URL}" rel="noopener">Delete your data</a></li>
+      <li><a href="{SUPPORT_SITE}">Help and support</a></li>
+      <li><a href="{PRIVACY_URL}">Privacy policy</a></li>
+      <li><a href="{TERMS_URL}">Terms of use</a></li>
+      <li><a href="{DELETE_URL}">Delete your data</a></li>
       <li><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></li></ul></div>
   </div>
-  <div class="wrap footnote"><p>© 2026 Travary. Travel guidance on this site is general information: always check entry rules with the official source for your passport. Apple and the Apple logo are trademarks of Apple Inc. Google Play is a trademark of Google LLC. Other names belong to their owners and are used only to describe them.</p></div>
+  <div class="wrap footnote"><p>© 2026 Travary, made by {PUBLISHER}. Travel guidance on this site is general information: always check entry rules with the official source for your passport. Apple and the Apple logo are trademarks of Apple Inc. Google Play is a trademark of Google LLC. Other names belong to their owners and are used only to describe them.</p></div>
 </footer>'''
 
 
@@ -638,8 +652,9 @@ def layout(page: Page, main: str) -> str:
     robots = '<meta name="robots" content="noindex, follow">' if page.noindex else \
         '<meta name="robots" content="index, follow, max-image-preview:large">'
     verify = ""
-    if GOOGLE_SITE_VERIFICATION:
-        verify += f'<meta name="google-site-verification" content="{GOOGLE_SITE_VERIFICATION}">\n'
+    for token in (GOOGLE_SITE_VERIFICATION, GOOGLE_SITE_VERIFICATION_PROJECT):
+        if token:
+            verify += f'<meta name="google-site-verification" content="{token}">\n'
     if BING_SITE_VERIFICATION:
         verify += f'<meta name="msvalidate.01" content="{BING_SITE_VERIFICATION}">\n'
     banner = f'<meta name="apple-itunes-app" content="app-id={IOS_APP_ID}">\n' if STORE_LIVE and IOS_APP_ID else ""
@@ -693,7 +708,8 @@ def layout(page: Page, main: str) -> str:
 
 # ---------------------------------------------------------------- schema
 ORG = {"@type": "Organization", "@id": f"{DOMAIN}/#org", "name": "Travary", "url": DOMAIN + "/",
-       "logo": f"{DOMAIN}/img/brand/icon-512.png", "email": SUPPORT_EMAIL}
+       "logo": f"{DOMAIN}/img/brand/icon-512.png", "email": SUPPORT_EMAIL,
+       "parentOrganization": {"@type": "Organization", "name": PUBLISHER}}
 
 
 def crumbs_schema(items: list[tuple[str, str]]) -> dict:
@@ -796,6 +812,47 @@ def render_article(p: Page, by_slug: dict[str, Page]) -> str:
 {rel_block}
 </article>
 {cta_band()}'''
+
+
+# Support and the policies: (slug, title, h1, meta, date, what the date is).
+# Bodies in content/legal/<slug>.html; change the date when the text changes.
+LEGAL = [
+    ("support", "Travary Support: Help With the Holiday Organiser", "How can we help?",
+     "Help with Travary: adding bookings, Smart Import, sharing a trip, travel documents, the Annual Pass and the Holiday Pass, and your account.",
+     "2026-10-15", "Updated"),
+    ("privacy", "Privacy Policy | Travary", "Privacy Policy",
+     "How Travary handles your trips, bookings and account: what's stored, who processes it, and how to delete it. Passports never leave your phone.",
+     "2026-10-15", "Effective"),
+    ("terms", "Terms of Use | Travary", "Terms of Use",
+     "The terms for using Travary, the holiday organiser app, including the Annual Pass and the Holiday Pass.",
+     "2026-10-15", "Effective"),
+    ("delete-account", "Delete Your Travary Account and Data", "Delete your Travary data",
+     "How to delete your Travary account and data: in the app, as a guest, or by email, and what is deleted and kept.",
+     "2026-10-15", "Updated"),
+]
+
+
+def legal_page(p: Page, body: str, dated: str = "Effective") -> str:
+    """A policy page: its heading, the date it took effect, and the text with a contents rail."""
+    body, toc_html = toc(body)
+    p.schema = [crumbs_schema([("Travary", "/"), (p.h1, "")])]
+    return f'''<article class="article legal">
+<header class="article-hero">
+  <div class="wrap">
+    <div class="article-hero-copy">
+      <p class="crumbs"><a href="/">Travary</a><span>›</span>{esc(p.h1)}</p>
+      <h1>{esc(p.h1)}</h1>
+      <p class="byline">{dated} <time datetime="{p.updated}">{human_date(p.updated)}</time> <span>·</span> Travary is made by {PUBLISHER}</p>
+    </div>
+  </div>
+</header>
+<div class="wrap article-grid">
+  <aside class="article-side">{toc_html}</aside>
+  <div class="prose">
+    {body}
+  </div>
+</div>
+</article>'''
 
 
 def cta_band() -> str:
@@ -1035,7 +1092,7 @@ def build_pages() -> list[Page]:
           <li><strong>The page you joined from,</strong> so we know which guides help.</li>
           <li><strong>A scrambled form of your IP address, for a day,</strong> to stop bulk sign-ups. It can't be turned back into the address.</li>
         </ul>
-        <p>It's kept privately, never shared or sold, and deleted once we've emailed you that Travary is out, or sooner whenever you ask: email <a href="mailto:{SUPPORT_EMAIL}?subject=Remove%20me%20from%20the%20Travary%20waiting%20list">{SUPPORT_EMAIL}</a>. Travary's full <a href="{PRIVACY_URL}" rel="noopener">privacy policy</a> covers the app.</p>
+        <p>It's kept privately, never shared or sold, and deleted once we've emailed you that Travary is out, or sooner whenever you ask: email <a href="mailto:{SUPPORT_EMAIL}?subject=Remove%20me%20from%20the%20Travary%20waiting%20list">{SUPPORT_EMAIL}</a>. Travary's full <a href="{PRIVACY_URL}">privacy policy</a> covers the app.</p>
       </div>
     </div>
     <div class="early-art">
@@ -1101,6 +1158,13 @@ def build_pages() -> list[Page]:
   el.classList.add("is-code");
 }})();
 </script>''')
+
+    # --------------------------------------------------------------- legal
+    for slug, title, h1, meta, date, dated in LEGAL:
+        page = Page(path=f"/{slug}", title=title, h1=h1, meta=meta, kind="legal",
+                    art="postcard:anywhere", updated=date)
+        write(page, legal_page(page, (SITE / "content" / "legal" / f"{slug}.html").read_text(encoding="utf-8"), dated))
+        pages.append(page)
 
     # ---------------------------------------------------------------- 404
     lost = Page(path="/404", title="Page not found | Travary", meta="This page has wandered off. Try the guides, the itineraries or the holiday countdown.",

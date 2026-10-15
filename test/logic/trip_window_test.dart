@@ -123,10 +123,23 @@ void main() {
       expect(placement.stretches, isFalse);
     });
 
-    test('a trip the traveller chose on the form, whatever the dates', () {
-      final placement = placeBooking(start: d(12, 1), end: d(12, 1), plans: [tokyo()], tripId: 'tokyo', chosen: true);
+    test('a trip the traveller chose on the form stays chosen', () {
+      // Planned: choosing it moved the dates inside its days.
+      final planned = placeBooking(start: d(10, 14), end: d(10, 14), plans: [japan()], tripId: 'japan', chosen: true);
+      expect(planned.plan?.id, 'japan');
+      expect(planned.stretches, isFalse);
+      // Formed: near its bookings it just goes in.
+      final near = placeBooking(start: d(10, 12), end: d(10, 12), plans: [tokyo()], tripId: 'tokyo', chosen: true);
+      expect(near.plan?.id, 'tokyo');
+      expect(near.stretches, isFalse);
+    });
+
+    test('a formed trip chosen on the form still asks before months away stretch it', () {
+      // A train typed for August, in a trip that runs in October.
+      final placement = placeBooking(start: d(8, 1), end: d(8, 1), plans: [tokyo()], tripId: 'tokyo', chosen: true);
       expect(placement.plan?.id, 'tokyo');
-      expect(placement.stretches, isFalse);
+      expect(placement.stretches, isTrue);
+      expect(placement.alternative, isNull);
     });
 
     test('an edit that leaves the dates alone stays put', () {

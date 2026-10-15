@@ -26,7 +26,7 @@ below account for most of the remaining difference.
 
 | File (key) | Size | Where | Stand-in now (visible?) | Needed for sign-off |
 |---|---|---|---|---|
-| `common/leather.png` (`leather`) | 1536 × 1024, tiles left to right, stitching 12% from the top | The strip under the home tabs, filling the bottom safe area (34 pt on the reference phone), `BoxFit.cover`, top-aligned | Nothing is drawn. Per the spec the strip appears only when the raster exists (**visible**: tabs run to the screen edge) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
+| ~~`common/leather.png`~~ | | The strip under the home tabs | Nothing is drawn: the tabs run to the screen edge | **Retired, 14 Oct 2026**: the owner had the stitched navy strip taken out (it read as a passport edge across the tabs). The slot and the bundled file are gone; don't bring it back |
 | `common/pill.png` (`pill`) | 1536 × 512 (3:1), raised cream pill, empty | Header weather or countdown pill, drawn 35 pt tall at its own aspect | Flat cream pill with a soft shadow (**visible**) | **Supplied, 13 Oct 2026** (`art_packs/staging/remaining-art-2026-10-13/`) |
 | `icons/nav_wallet.png` (`nav_wallet`) | 1024 × 1024, one-colour navy ink, transparent, content ≈ 50% of the canvas like `nav_today` | Documents tab (the ticket wallet) | Supplied letterpress document icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |
 | `icons/nav_profile.png` (`nav_profile`) | as above | Profile tab | Supplied letterpress person icon; Material glyph remains the fallback | **Supplied, 5 Oct 2026** |

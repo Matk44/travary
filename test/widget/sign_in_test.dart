@@ -89,7 +89,7 @@ void main() {
     final auth = FakeAuthService(email: 'sam@example.com');
     await pumpApp(tester, auth);
     await openTab(tester, 'Profile');
-    expect(find.text('Keep your trips safe'), findsOneWidget);
+    expect(find.text('Keep your trips with you'), findsOneWidget);
     expect(find.byKey(const ValueKey('sign-in-apple')), findsOneWidget);
     expect(find.byKey(const ValueKey('sign-in-google')), findsOneWidget);
 
@@ -179,6 +179,8 @@ void main() {
         null,
       ),
     );
+    await Scrollable.ensureVisible(tester.element(find.byKey(const ValueKey('help-terms'))), alignment: 0.5);
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('help-terms')));
     await tester.pumpAndSettle();
     expect(find.textContaining('travary_support/terms.html'), findsOneWidget);

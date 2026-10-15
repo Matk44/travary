@@ -6,6 +6,7 @@ import '../../data/auth_service.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/sign_in_buttons.dart';
+import '../../design/widgets/profile_stationery.dart';
 import '../../domain/domain.dart';
 import '../../state/app_session.dart';
 import 'sign_in_sheet.dart';
@@ -22,19 +23,22 @@ class AccountCard extends StatelessWidget {
     final account = session.account;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: TravaryColors.paper,
-          borderRadius: BorderRadius.circular(TravaryRadius.card),
-          boxShadow: const [BoxShadow(color: Color(0x1F000000), blurRadius: 8, offset: Offset(0, 2))],
-        ),
+      child: ProfileStationery.folio(
         child: Padding(
-          padding: const EdgeInsets.all(TravarySpace.lg),
-          child: !session.canSignIn
-              ? const _DemoNotice()
-              : account == null || account.isGuest
-              ? _SignIn(session: session)
-              : _SignedIn(session: session, account: account),
+          padding: const EdgeInsets.fromLTRB(52, 24, 20, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('YOUR ACCOUNT', style: TravaryText.eyebrow),
+              const SizedBox(height: TravarySpace.sm),
+              if (!session.canSignIn)
+                const _DemoNotice()
+              else if (account == null || account.isGuest)
+                _SignIn(session: session)
+              else
+                _SignedIn(session: session, account: account),
+            ],
+          ),
         ),
       ),
     );
@@ -113,15 +117,16 @@ class _SignInState extends State<_SignIn> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Keep your trips safe', style: TravaryText.title),
+        Text('Keep your trips with you', style: TravaryText.profileAccountTitle),
         const SizedBox(height: TravarySpace.xs),
         Text(
-          'Sign in and your plans are linked to your account, ready on another phone. '
-          'Everything you\'ve added stays as it is on this phone.',
+          'Sign in to find your plans on another phone. Everything here stays just as it is.',
           style: TravaryText.bodySoft,
         ),
         const SizedBox(height: TravarySpace.lg),
         for (final (i, button) in buttons.indexed) ...[if (i > 0) const SizedBox(height: TravarySpace.sm), button],
+        const SizedBox(height: TravarySpace.sm),
+        Text('Signing in is free.', style: TravaryText.small),
       ],
     );
   }

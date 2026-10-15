@@ -34,8 +34,9 @@ import 'flight_finder.dart';
 /// details", the ticket files below, and one notched button. Only the
 /// title and date are required, so adding something takes seconds.
 ///
-/// A new flight starts on the departures board ([FlightFinder]) when live
-/// flight data is available: its number and date fill in the rest.
+/// A new flight's ticket starts with the departures board ([FlightFinder])
+/// when live flight data is available: its number and date fill in what
+/// hasn't been typed below it. Otherwise the flight number heads the ticket.
 ///
 /// The booking goes where [placeBooking] says, shown under the title. In a
 /// trip with planned dates the date pickers only offer its days (and a
@@ -95,7 +96,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   late String _tripId;
 
   /// The traveller picked the trip on this form ("Choose automatically"
-  /// included), so it goes there whatever the dates.
+  /// included), so its dates don't move it to another; a trip that formed
+  /// from its bookings still asks before they stretch it well past them.
   bool _tripChosen = false;
   late List<Attachment> _attachments;
   late final TravelStore _store;
@@ -106,11 +108,16 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   bool _saving = false;
   String? _titleError;
 
-  /// On the departures board, before the ticket (a new flight).
-  late bool _finding;
+  /// The departures board heads the ticket (a new flight).
+  late final bool _board;
 
-  /// The ticket was filled in from the airline's schedule.
-  bool _fromSchedule = false;
+  /// The day the board looks for: the ticket's first day, until a found
+  /// flight sets that (a later leg can leave the next day).
+  late LocalDate _searchDate;
+
+  /// The flight on the board, filled in from the airline's schedule.
+  FlightFill? _filled;
+  bool get _fromSchedule => _filled != null;
 
   /// "More details" unfolded.
   late bool _more;
@@ -150,7 +157,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     _endTime = existing?.endTime;
     _tripId = widget.existing?.tripId ?? widget.tripId ?? '';
     _attachments = [...?widget.existing?.attachments];
-    _finding = _findsFlights && !_isEditing && widget.draft == null;
+    _board = _findsFlights && !_isEditing && widget.draft == null;
+    _searchDate = _startDate;
     _more =
         [_reference, _notes, for (final field in _moreFields) _details[field.key]!].any((c) => c.text.isNotEmpty) ||
         _highlight.any((field) => field == 'reference' || field == 'notes' || field.startsWith('details.'));
@@ -159,12 +167,16 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
 
   /// The file Smart Import read becomes the ticket, while the holiday has
   /// room for it (free holidays keep [Pricing.freeTicketFiles]); otherwise
-  /// the form offers to attach it ([_sourceWaiting]).
+  /// the pass desk opens over the form, and without a pass the form offers
+  /// to attach it later ([_sourceWaiting]).
   Future<void> _attachSource() async {
     final policy = context.read<PremiumStore?>()?.policy;
     if (policy != null && !policy.canAttachTickets(_targetPlan, kept: _ticketsKept)) {
-      // Called from initState: the first build shows it.
+      // Called from initState: the first build shows the row, then the desk.
       _sourceWaiting = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _attachWaitingSource();
+      });
       return;
     }
     final attachment = await _importSource();
@@ -369,6 +381,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
 
   void _changeStartDate(LocalDate picked) {
     final window = _window(_placement(_store));
+    // Until the board finds a flight, the ticket's day is the one it looks for.
+    if (_board && _filled == null) _searchDate = picked;
     setState(() {
       final shift = _startDate.daysUntil(picked);
       _startDate = picked;
@@ -380,19 +394,45 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     });
   }
 
-  void _useFlight(FlightFill fill) => setState(() {
-    _title.text = fill.title;
-    _titleError = null;
-    _startDate = fill.startDate;
-    _startTime = fill.startTime;
-    _endDate = fill.endDate;
-    _endTime = fill.endTime;
-    if (fill.location != null) _location.text = fill.location!;
-    if (fill.arrival != null) _details[DetailKeys.arrivesAt]!.text = fill.arrival!;
-    _details[DetailKeys.flightNumber]!.text = fill.flightNumber;
-    _finding = false;
-    _fromSchedule = true;
-  });
+  /// The board's flight in the ticket ([refillFlight]): what the traveller
+  /// typed stays, the rest follows the flight (or empties once it's gone).
+  void _fillFlight(FlightFill? fill) {
+    if (!mounted) return;
+    final arrival = _details[DetailKeys.arrivesAt]!;
+    final form = refillFlight(
+      FlightFields(
+        startDate: _startDate,
+        title: _title.text,
+        location: _location.text,
+        arrival: arrival.text,
+        startTime: _startTime,
+        endDate: _endDate,
+        endTime: _endTime,
+      ),
+      previous: _filled,
+      fill: fill,
+      searchDate: _searchDate,
+    );
+    setState(() {
+      if (_title.text != form.title) _title.text = form.title;
+      if (_location.text != form.location) _location.text = form.location;
+      if (arrival.text != form.arrival) arrival.text = form.arrival;
+      _startDate = form.startDate;
+      _startTime = form.startTime;
+      _endDate = form.endDate;
+      _endTime = form.endTime;
+      if (form.title.isNotEmpty) _titleError = null;
+      _filled = fill;
+    });
+  }
+
+  /// A new day on the board: the last flight leaves the ticket, which
+  /// moves to that day.
+  void _changeSearchDate(LocalDate picked) {
+    _fillFlight(null);
+    _searchDate = picked;
+    _changeStartDate(picked);
+  }
 
   // ---------------------------------------------------------------- save
 
@@ -499,6 +539,10 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       details: {
         for (final entry in _details.entries)
           if (entry.value.text.trim().isNotEmpty) entry.key: entry.value.text.trim(),
+        // "ba283" as the airline writes it, once the board found it: "BA 283".
+        if (_filled case final filled?
+            when cleanFlightNumber(_details[DetailKeys.flightNumber]!.text) == cleanFlightNumber(filled.flightNumber))
+          DetailKeys.flightNumber: filled.flightNumber,
       },
       attachments: _attachments,
       artKey: widget.existing?.artKey,
@@ -542,7 +586,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
             title: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_finding ? 'Find your flight' : text.title, style: TravaryText.formTitle),
+                Text(text.title, style: TravaryText.formTitle),
                 InkWell(
                   key: const ValueKey('form-trip'),
                   onTap: _chooseTrip,
@@ -563,38 +607,15 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
               ],
             ),
             actions: [
-              if (!_finding)
-                TextButton(
-                  onPressed: _saving ? null : _save,
-                  style: TextButton.styleFrom(foregroundColor: colors.ink),
-                  child: Text('Save', style: TravaryText.label.copyWith(color: colors.ink)),
-                ),
+              TextButton(
+                onPressed: _saving ? null : _save,
+                style: TextButton.styleFrom(foregroundColor: colors.ink),
+                child: Text('Save', style: TravaryText.label.copyWith(color: colors.ink)),
+              ),
             ],
           ),
         ),
-        body: _finding
-            ? ListView(
-                padding: const EdgeInsets.fromLTRB(
-                  TravarySpace.gutter,
-                  TravarySpace.md,
-                  TravarySpace.gutter,
-                  TravarySpace.xxl,
-                ),
-                children: [
-                  FlightFinder(
-                    service: store.flightStatus!,
-                    number: _details[DetailKeys.flightNumber]!,
-                    date: _startDate,
-                    onPickDate: () async {
-                      final picked = await _pickDate(_startDate);
-                      if (picked != null) _changeStartDate(picked);
-                    },
-                    onUse: _useFlight,
-                    onManual: () => setState(() => _finding = false),
-                  ),
-                ],
-              )
-            : _ticket(context, store, text, plan),
+        body: _ticket(context, store, text, plan),
       ),
     );
   }
@@ -603,36 +624,26 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     final checking = widget.draft != null || _fromSchedule;
     final heading = OnboardingFolioHeading(
       holiday: widget.onboardingHoliday!,
-      title: _finding
-          ? 'Find your'
-          : checking
-          ? 'Check your'
-          : 'Add your',
+      title: checking ? 'Check your' : 'Add your',
       accent: _isFlight ? 'flight.' : 'booking.',
-      subtitle: onboardingFormSubtitle(finding: _finding, checking: checking),
+      subtitle: onboardingFormSubtitle(finding: _board && !checking, checking: checking),
     );
     return OnboardingFolio(
-      body: _finding
-          ? ListView(
-              padding: const EdgeInsets.all(TravarySpace.gutter),
-              children: [
-                heading,
-                FlightFinder(
-                  service: store.flightStatus!,
-                  number: _details[DetailKeys.flightNumber]!,
-                  date: _startDate,
-                  onPickDate: () async {
-                    final picked = await _pickDate(_startDate);
-                    if (picked != null) _changeStartDate(picked);
-                  },
-                  onUse: _useFlight,
-                  onManual: () => setState(() => _finding = false),
-                ),
-              ],
-            )
-          : _ticket(context, store, bookingFormText(widget.kind, editing: _isEditing), plan, heading: heading),
+      body: _ticket(context, store, bookingFormText(widget.kind, editing: _isEditing), plan, heading: heading),
     );
   }
+
+  /// The flight number, typed where it's looked up (the board) or, without
+  /// one, at the head of the ticket.
+  Widget _flightNumberField() => PaperTextField(
+    key: const ValueKey('field-flightNumber'),
+    label: 'Flight number',
+    controller: _details[DetailKeys.flightNumber]!,
+    hint: 'BA 283',
+    autofocus: !_isEditing && widget.draft == null,
+    textCapitalization: TextCapitalization.characters,
+    check: _highlight.contains('details.${DetailKeys.flightNumber}'),
+  );
 
   Widget _ticket(BuildContext context, TravelStore store, BookingFormText text, TripPlan? plan, {Widget? heading}) {
     final colors = TravaryChrome.of(context).colors;
@@ -642,34 +653,42 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.xxl),
       children: [
         if (heading != null) heading,
+        if (_board) ...[
+          FlightFinder(
+            service: store.flightStatus!,
+            number: _details[DetailKeys.flightNumber]!,
+            date: _searchDate,
+            onPickDate: () async {
+              final picked = await _pickDate(_searchDate);
+              if (picked != null) _changeSearchDate(picked);
+            },
+            onFound: _fillFlight,
+          ),
+          const SizedBox(height: TravarySpace.lg),
+        ],
         if (widget.draft != null)
           const _Banner(
             text:
                 'Filled in by Smart Import. Please check the outlined details, especially dates and times, then save.',
           ),
         if (_fromSchedule)
-          _Banner(
+          const _Banner(
             icon: Icons.check_circle_rounded,
             iconColor: TravaryColors.moss,
             text: 'Filled in from the airline\'s schedule. Check it matches your ticket.',
-            action: _findsFlights
-                ? TextButton(
-                    onPressed: () => setState(() => _finding = true),
-                    style: TextButton.styleFrom(foregroundColor: colors.ink),
-                    child: const Text('Find another'),
-                  )
-                : null,
           ),
         FormTicket(
           heading: text.heading,
           art: _title.text.trim().isEmpty ? null : store.artFor(preview),
           children: [
+            // Without the board, the flight number heads the ticket.
+            if (_isFlight && !_board) ...[_flightNumberField(), const SizedBox(height: TravarySpace.lg)],
             PaperTextField(
               key: const ValueKey('field-title'),
               label: _spec.titleLabel,
               controller: _title,
               hint: _spec.titleHint,
-              autofocus: !_isEditing && widget.draft == null && !_fromSchedule,
+              autofocus: !_isEditing && widget.draft == null && !_isFlight,
               textCapitalization: TextCapitalization.words,
               check: _highlight.contains('title'),
               errorText: _titleError,
@@ -683,17 +702,6 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
               textCapitalization: TextCapitalization.words,
               check: _highlight.contains('location'),
             ),
-            if (_isFlight) ...[
-              const SizedBox(height: TravarySpace.lg),
-              PaperTextField(
-                key: const ValueKey('field-flightNumber'),
-                label: 'Flight number',
-                controller: _details[DetailKeys.flightNumber]!,
-                hint: 'BA 283',
-                textCapitalization: TextCapitalization.characters,
-                check: _highlight.contains('details.${DetailKeys.flightNumber}'),
-              ),
-            ],
             const SizedBox(height: TravarySpace.xl),
             _dates(),
             if (span != null) ...[const SizedBox(height: TravarySpace.md), SpanLabel(span)],
@@ -866,17 +874,11 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
 /// A note above the ticket: Smart Import's "please check", or "filled in
 /// from the airline's schedule".
 class _Banner extends StatelessWidget {
-  const _Banner({
-    required this.text,
-    this.icon = Icons.auto_awesome_rounded,
-    this.iconColor = TravaryColors.coral,
-    this.action,
-  });
+  const _Banner({required this.text, this.icon = Icons.auto_awesome_rounded, this.iconColor = TravaryColors.coral});
 
   final String text;
   final IconData icon;
   final Color iconColor;
-  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -892,15 +894,8 @@ class _Banner extends StatelessWidget {
               child: Icon(icon, color: iconColor, size: 20),
             ),
             const SizedBox(width: TravarySpace.sm),
-            // The action goes under the words, so large text never squeezes them.
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(text, style: TravaryText.bodySoft.copyWith(color: TravaryColors.ink)),
-                  ?action,
-                ],
-              ),
+              child: Text(text, style: TravaryText.bodySoft.copyWith(color: TravaryColors.ink)),
             ),
           ],
         ),

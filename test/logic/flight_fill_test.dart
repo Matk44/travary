@@ -68,4 +68,65 @@ void main() {
     expect(board.lands, 'Lands 6:10am Mon 9 Nov');
     expect(boardTextFor(ba283(), typedNumber: 'ba283').lands, 'Lands 1:25pm');
   });
+
+  group('the board fills the ticket around what the traveller typed', () {
+    final ba = flightFill(ba283(), typedNumber: 'BA283')!;
+    final overnight = flightFill(
+      ba283(departs: '2026-11-08T21:40', lands: '2026-11-09T06:10'),
+      typedNumber: 'BA283',
+    )!;
+
+    test('an empty ticket takes the whole flight', () {
+      final form = refillFlight(
+        FlightFields(startDate: d(11, 8)),
+        fill: ba,
+        searchDate: d(11, 8),
+      );
+      expect(form.title, 'London to Los Angeles');
+      expect(form.location, 'London Heathrow (LHR)');
+      expect(form.arrival, ba.arrival);
+      expect(form.startTime, const ClockTime(10, 5));
+      expect(form.endTime, const ClockTime(13, 25));
+      expect(form.endDate, isNull);
+    });
+
+    test('what was typed by hand is kept', () {
+      final typed = FlightFields(startDate: d(11, 8), title: 'Off to LA', startTime: const ClockTime(10, 0));
+      final form = refillFlight(typed, fill: ba, searchDate: d(11, 8));
+      expect(form.title, 'Off to LA');
+      expect(form.startTime, const ClockTime(10, 0));
+      expect(form.location, 'London Heathrow (LHR)', reason: 'empty fields still fill');
+    });
+
+    test('another flight replaces the last one\'s details, never the traveller\'s', () {
+      var form = refillFlight(
+        FlightFields(startDate: d(11, 8), arrival: 'LAX, gate side'),
+        fill: ba,
+        searchDate: d(11, 8),
+      );
+      form = refillFlight(form, previous: ba, fill: overnight, searchDate: d(11, 8));
+      expect(form.startTime, const ClockTime(21, 40));
+      expect(form.endDate, d(11, 9));
+      expect(form.endTime, const ClockTime(6, 10));
+      expect(form.arrival, 'LAX, gate side');
+    });
+
+    test('when the flight leaves the board its details go, and the day goes back to the one searched', () {
+      final later = FlightFill(title: 'Singapore to London', startDate: d(11, 9), flightNumber: 'QF 1');
+      var form = refillFlight(
+        FlightFields(startDate: d(11, 8)),
+        fill: later,
+        searchDate: d(11, 8),
+      );
+      expect(form.startDate, d(11, 9), reason: 'a later leg leaves the next day');
+      form = refillFlight(
+        FlightFields(startDate: form.startDate, title: form.title, location: 'Changi T1'),
+        previous: later,
+        searchDate: d(11, 8),
+      );
+      expect(form.startDate, d(11, 8));
+      expect(form.title, isEmpty);
+      expect(form.location, 'Changi T1');
+    });
+  });
 }

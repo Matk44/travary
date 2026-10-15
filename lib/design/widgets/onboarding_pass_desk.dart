@@ -91,9 +91,15 @@ class OnboardingPaperPass extends StatelessWidget {
                           style: serif.copyWith(fontSize: 46 * s),
                         ),
                         SizedBox(height: 3 * s),
-                        Text(
-                          annual ? 'Renews yearly. Cancel anytime.' : 'One payment. No renewal.',
-                          style: copy.copyWith(fontSize: 23 * s),
+                        // One line, so the ticket keeps its artwork's height.
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            annual ? 'Renews yearly. Cancel anytime.' : 'One payment. No renewal.',
+                            maxLines: 1,
+                            style: copy.copyWith(fontSize: 23 * s),
+                          ),
                         ),
                       ],
                     ),

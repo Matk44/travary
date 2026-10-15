@@ -61,8 +61,9 @@ Backend get configuredBackend => _backendName == 'demo' ? Backend.demo : Backend
 /// Android emulator). Ports are the ones in firebase.json.
 const _emulatorHost = String.fromEnvironment('TRAVARY_EMULATOR_HOST');
 
-/// Opt in for release after the deployment's AeroData plan is ready. The
-/// callable remains authenticated, capped and server-keyed in every mode.
+/// On in debug; release builds opt in (tool/build_release.sh does, unless
+/// `FLIGHT_LOOKUP=false`) once the AeroDataBox plan is bought. The callable
+/// remains authenticated, capped and server-keyed in every mode.
 const flightLookupEnabled = bool.fromEnvironment('TRAVARY_FLIGHT_LOOKUP', defaultValue: kDebugMode);
 
 const _revenueCatIosKey = String.fromEnvironment('TRAVARY_REVENUECAT_IOS_KEY');
@@ -198,6 +199,11 @@ Future<Dependencies> bootstrap() async {
   final attachments = await AttachmentStore.open();
   final travelDocuments = await LocalTravelDocumentRepository.open();
   final cloud = configuredBackend == Backend.cloud;
+  // A store build without RevenueCat's keys would simulate purchases:
+  // unlocking premium without charging. Build with tool/build_release.sh.
+  if (kReleaseMode && cloud && !kIsWeb && _revenueCatKey.isEmpty) {
+    throw StateError('Release builds need RevenueCat keys: --dart-define-from-file=config/revenuecat.local.json');
+  }
   final demo = cloud ? null : _demoRepository();
   final initialUserId = demo?.userId ?? await _cloudSignIn();
   // Signs in first (in the background in demo mode); never awaited.

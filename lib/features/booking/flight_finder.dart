@@ -6,17 +6,17 @@ import '../../data/flight_status_service.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/departure_board.dart';
-import '../../design/widgets/ledger.dart';
 import '../../domain/domain.dart';
 import '../../logic/flight_fill.dart';
 import '../../logic/formatters.dart';
 import '../../state/analytics.dart';
 
-/// Adding a flight starts here: the flight number and the day it leaves,
-/// typed into a departures board. Once typing pauses on a whole flight
-/// number the board looks it up and flips the flight into place (number,
-/// route, departure time); "Use this flight" fills in the ticket from the
-/// airline's schedule. "Enter flight manually" goes straight to the ticket.
+/// The top of a new flight's ticket: the flight number and the day it
+/// leaves, typed into a departures board. Once typing pauses on a whole
+/// flight number the board looks it up, flips the flight into place
+/// (number, route, departure time) and hands it to the ticket below
+/// ([onFound]), which fills in what the traveller hasn't typed. Nothing
+/// waits on it: the ticket can be filled in by hand all along.
 class FlightFinder extends StatefulWidget {
   const FlightFinder({
     super.key,
@@ -24,8 +24,7 @@ class FlightFinder extends StatefulWidget {
     required this.number,
     required this.date,
     required this.onPickDate,
-    required this.onUse,
-    required this.onManual,
+    required this.onFound,
   });
 
   final FlightStatusService service;
@@ -33,11 +32,14 @@ class FlightFinder extends StatefulWidget {
   /// The form's flight number field.
   final TextEditingController number;
 
-  /// The day it leaves (the form's start date).
+  /// The day it leaves, as searched.
   final LocalDate date;
   final VoidCallback onPickDate;
-  final ValueChanged<FlightFill> onUse;
-  final VoidCallback onManual;
+
+  /// The flight on the board for the ticket: the chosen leg once found,
+  /// null once it's gone (another number, nothing found). Never called
+  /// while building, and not for a new date: whoever changed it knows.
+  final ValueChanged<FlightFill?> onFound;
 
   @override
   State<FlightFinder> createState() => _FlightFinderState();
@@ -58,13 +60,16 @@ class _FlightFinderState extends State<FlightFinder> {
   /// Which leg is chosen when one number flies several that day.
   int _chosen = 0;
 
+  /// A flight was handed to the ticket and is still on the board.
+  bool _handed = false;
+
   String? get _number => cleanFlightNumber(widget.number.text);
   String? _keyFor(String? number) => number == null ? null : '$number|${widget.date.toIso()}';
 
   @override
   void initState() {
     super.initState();
-    widget.number.addListener(_changed);
+    widget.number.addListener(_typed);
     _changed();
   }
 
@@ -72,8 +77,8 @@ class _FlightFinderState extends State<FlightFinder> {
   void didUpdateWidget(FlightFinder oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.number != widget.number) {
-      oldWidget.number.removeListener(_changed);
-      widget.number.addListener(_changed);
+      oldWidget.number.removeListener(_typed);
+      widget.number.addListener(_typed);
     }
     if (oldWidget.date != widget.date) _changed();
   }
@@ -81,15 +86,28 @@ class _FlightFinderState extends State<FlightFinder> {
   @override
   void dispose() {
     _timer?.cancel();
-    widget.number.removeListener(_changed);
+    widget.number.removeListener(_typed);
     super.dispose();
   }
 
-  void _changed() {
+  /// A new number takes the last flight off the ticket.
+  void _typed() {
+    final handed = _handed;
+    if (_changed() && handed) _hand(null);
+  }
+
+  void _hand(FlightFill? fill) {
+    _handed = fill != null;
+    widget.onFound(fill);
+  }
+
+  /// Starts a new search when the number or date changed; true if so.
+  bool _changed() {
     final number = _number;
     final key = _keyFor(number);
-    if (key == _key) return;
+    if (key == _key) return false;
     _timer?.cancel();
+    _handed = false;
     setState(() {
       _key = key;
       _legs = null;
@@ -98,17 +116,22 @@ class _FlightFinderState extends State<FlightFinder> {
       _searching = number != null;
     });
     if (number != null) _timer = Timer(_typingPause, () => _search(number, widget.date, key!));
+    return true;
   }
 
   Future<void> _search(String number, LocalDate date, String key) async {
     try {
       final legs = await widget.service.find(flightNumber: number, date: date);
       if (!mounted || key != _key) return;
-      setState(() => _legs = legs);
+      setState(() {
+        _legs = legs;
+        _searching = false;
+      });
+      _handFound();
     } on FlightStatusException catch (e) {
       if (mounted && key == _key) setState(() => _error = e.message);
     } finally {
-      if (mounted && key == _key) setState(() => _searching = false);
+      if (mounted && key == _key && _searching) setState(() => _searching = false);
     }
   }
 
@@ -118,13 +141,19 @@ class _FlightFinderState extends State<FlightFinder> {
     return legs[_chosen.clamp(0, legs.length - 1)];
   }
 
-  void _use() {
+  /// The chosen leg to the ticket, worded as the airline's schedule has it.
+  void _handFound() {
     final leg = _found;
-    if (leg == null) return;
-    final fill = flightFill(leg, typedNumber: widget.number.text.trim());
-    if (fill == null) return;
-    track('flight_filled');
-    widget.onUse(fill);
+    final fill = leg == null ? null : flightFill(leg, typedNumber: widget.number.text.trim());
+    if (fill == null && !_handed) return;
+    if (fill != null) track('flight_filled');
+    _hand(fill);
+  }
+
+  void _choose(int index) {
+    if (index == _chosen) return;
+    setState(() => _chosen = index);
+    _handFound();
   }
 
   @override
@@ -198,26 +227,6 @@ class _FlightFinderState extends State<FlightFinder> {
             ],
           ),
         ),
-        const SizedBox(height: TravarySpace.md),
-        if (found != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: TravarySpace.sm),
-            child: Text('Details stay editable', textAlign: TextAlign.center, style: TravaryText.small),
-          ),
-        TicketButton(
-          key: const ValueKey('use-flight'),
-          label: 'Use this flight',
-          onPressed: found == null ? null : _use,
-        ),
-        const SizedBox(height: TravarySpace.xs),
-        Center(
-          child: TextButton(
-            key: const ValueKey('enter-flight-manually'),
-            onPressed: widget.onManual,
-            style: TextButton.styleFrom(foregroundColor: colors.ink, textStyle: TravaryText.body),
-            child: const Text('Enter flight manually'),
-          ),
-        ),
       ],
     );
   }
@@ -234,7 +243,7 @@ class _FlightFinderState extends State<FlightFinder> {
         const SizedBox(height: 10),
         FlapText('------', color: Colors.white.withValues(alpha: 0.35)),
         const SizedBox(height: 10),
-        Text('Type the flight number from your booking and the day it leaves.', style: caption),
+        Text('Type the flight number from your booking and we\'ll fill in the ticket below.', style: caption),
       ]);
     }
     if (_searching) {
@@ -256,7 +265,7 @@ class _FlightFinderState extends State<FlightFinder> {
         const SizedBox(height: 10),
         const FlapText('NO FLIGHT', color: TravaryColors.coral),
         const SizedBox(height: 10),
-        Text('No $typed found on $day. Check the number and date, or enter it yourself.', style: caption),
+        Text('No $typed found on $day. Check the number and date, or fill in the ticket yourself.', style: caption),
       ]);
     }
     final board = boardTextFor(found, typedNumber: typed);
@@ -287,7 +296,7 @@ class _FlightFinderState extends State<FlightFinder> {
             child: BoardStrip(
               key: ValueKey('flight-leg-$index'),
               selected: index == _chosen,
-              onTap: () => setState(() => _chosen = index),
+              onTap: () => _choose(index),
               child: route(boardTextFor(leg, typedNumber: typed), size: 18),
             ),
           )

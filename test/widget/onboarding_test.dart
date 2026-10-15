@@ -258,14 +258,14 @@ void main() {
     await pump(tester, draft: holiday(), flights: flights);
     await tap(tester, 'onboarding-manual');
     await tap(tester, 'onboarding-kind-flight');
-    expect(find.text('Find your\nflight.'), findsOneWidget);
+    expect(find.text('Add your\nflight.'), findsOneWidget);
+    expect(find.text('Type the flight number and we’ll fill in the rest.'), findsOneWidget);
     await tester.enterText(find.byKey(const ValueKey('flight-number-field')), 'qf 43');
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
     expect(flights.calls, [const FlightLookup(flightNumber: 'QF43', date: LocalDate(2026, 11, 8))]);
     expect(find.text('Sydney'), findsOneWidget);
     expect(find.text('Denpasar'), findsOneWidget);
-    await tap(tester, 'use-flight');
     expect(find.text('Check your\nflight.'), findsOneWidget);
     await tap(tester, 'save-booking');
     final saved = repository.bookings.single;
@@ -407,8 +407,8 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
     expect(find.text('Board unavailable. Try again.'), findsOneWidget);
-    await tap(tester, 'enter-flight-manually');
     expect(find.byType(EditBookingScreen), findsOneWidget);
+    expect(find.byKey(const ValueKey('form-ticket')), findsOneWidget, reason: 'the ticket waits under the board');
     final title = find.descendant(of: find.byKey(const ValueKey('field-title')), matching: find.byType(TextField));
     expect(tester.widget<TextField>(title).controller!.text, isEmpty);
     await tester.pageBack();

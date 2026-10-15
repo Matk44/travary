@@ -192,6 +192,50 @@ void main() {
       expect(sushi().tripId, 'tokyo');
       expect(store.plan('tokyo')!.end, d(10, 20));
     });
+
+    testWidgets('asks too when it was chosen on the form, months before it', (tester) async {
+      // From the + button: no trip yet, so the traveller picks Tokyo on the
+      // form, then types a month too early.
+      await pump(
+        tester,
+        Builder(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: TextButton(
+                onPressed: () => Navigator.of(
+                  context,
+                ).push(MaterialPageRoute<void>(builder: (_) => const EditBookingScreen(kind: BookingKind.transport))),
+                child: const Text('Add'),
+              ),
+            ),
+          ),
+        ),
+        trips: [tokyo],
+        bookings: [outbound],
+      );
+      await tester.tap(find.text('Add'));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.descendant(of: find.byKey(const ValueKey('field-title')), matching: find.byType(TextField)),
+        'Shinkansen',
+      );
+      await tester.tap(find.byKey(const ValueKey('form-trip')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ListTile, 'Tokyo'));
+      await tester.pumpAndSettle();
+      expect(tripLine(tester), 'Tokyo · 11 Oct');
+
+      await openStartPicker(tester, '5 OCT 2026');
+      await typeDate(tester, '11/07/2026');
+      await tester.tap(find.byKey(const ValueKey('save-booking')));
+      await tester.pumpAndSettle();
+      expect(find.text('Add to Tokyo?'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('stretch-other')));
+      await tester.pumpAndSettle();
+      final train = store.bookings.singleWhere((b) => b.title == 'Shinkansen');
+      expect(train.tripId, isNot('tokyo'));
+      expect(store.plan('tokyo')!.start, d(10, 11));
+    });
   });
 
   testWidgets('fixing a typed month moves a booking out of the stray trip it made', (tester) async {

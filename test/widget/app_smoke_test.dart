@@ -200,10 +200,7 @@ void main() {
       );
       await tapDesk(tester, 'onboarding-pass-terms');
       await tapDesk(tester, 'onboarding-pass-privacy');
-      expect(opened, [
-        'https://matk44.github.io/travary_support/terms.html',
-        'https://matk44.github.io/travary_support/privacy.html',
-      ]);
+      expect(opened, ['https://travary.app/terms', 'https://travary.app/privacy']);
     });
 
     testWidgets('closing the paywall changes nothing', (tester) async {

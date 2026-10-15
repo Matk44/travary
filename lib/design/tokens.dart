@@ -18,6 +18,8 @@ abstract final class TravaryColors {
   static const mustard = Color(0xFFD7A443);
   static const plum = Color(0xFF5B3F63);
   static const line = Color(0xFFDCD2C1);
+  static const profileCastShadow = Color(0x24382B1D);
+  static const profileContactShadow = Color(0x16382B1D);
 
   // Trip looks (tiles and theme chips).
   static const alpine = Color(0xFF6F8FAF);
@@ -220,6 +222,15 @@ abstract final class TravaryText {
 
   /// The notched primary button: "Add stay".
   static TextStyle get ticketButton => _serif(20, FontWeight.w700, TravaryColors.paper, height: 1.1);
+
+  // ---- Profile: the account folio and Annual Pass ----------------------
+  static TextStyle get profileSubtitle => _sans(15, FontWeight.w400, TravaryColors.inkSoft);
+  static TextStyle get profileAccountTitle => _serif(22, FontWeight.w700, TravaryColors.ink, height: 1.1);
+  static TextStyle get profilePassTitle => _serif(27, FontWeight.w700, TravaryColors.ink, height: 1.1);
+  static TextStyle get profilePassLead => _sans(14.5, FontWeight.w600, TravaryColors.ink);
+  static TextStyle get profileBenefit => _sans(13.5, FontWeight.w400, TravaryColors.ink, height: 1.3);
+  static TextStyle get profileSettingTitle => _serif(17, FontWeight.w600, TravaryColors.ink, height: 1.15);
+  static TextStyle get profileSettingCopy => _sans(12.5, FontWeight.w400, TravaryColors.inkSoft, height: 1.35);
 
   /// The departures board: its labels, a split-flap character, and the
   /// route between them.

@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/tokens.dart';
+import '../../design/widgets/profile_stationery.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
+import '../help/help_links.dart';
 import 'premium_gate.dart';
 
-/// Profile card: your plan, your Trip Passes, and a way to Plus.
+/// Profile card: your plan, your Holiday Passes, a way to the Annual Pass,
+/// and, with one, a way to manage or cancel it in the store.
 class PlusCard extends StatelessWidget {
   const PlusCard({super.key});
 
@@ -20,84 +23,148 @@ class PlusCard extends StatelessWidget {
     final policy = premium.policy;
     final plus = premium.entitlements.plus;
 
-    final String title;
-    final String body;
-    if (policy.hasPlus && plus != null) {
-      final date = formatDate(LocalDate.fromDateTime(plus.expiresAt));
-      title = 'Annual Pass';
-      body = plus.willRenew ? 'Renews on $date.' : 'Ends on $date.';
-    } else {
-      final left = policy.freeSmartImportsLeft;
-      title = 'Annual Pass';
-      body =
-          'Everyone on your trips gets the plan and their own tickets, backed up and in sync. '
-          '$left free Smart Import${left == 1 ? '' : 's'} left.';
-    }
     final passes = [
       for (final id in premium.entitlements.tripPasses.keys) travel.plan(id)?.trip.title ?? 'A past trip',
     ];
+    final left = policy.freeSmartImportsLeft;
+    final renewal = policy.hasPlus && plus != null
+        ? '${plus.willRenew ? 'Renews' : 'Ends'} on ${formatDate(LocalDate.fromDateTime(plus.expiresAt))}.'
+        : null;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
-      child: Container(
-        padding: const EdgeInsets.all(TravarySpace.lg),
-        decoration: BoxDecoration(
-          color: policy.hasPlus ? TravaryColors.ink : TravaryColors.paper,
-          borderRadius: BorderRadius.circular(TravaryRadius.card),
-        ),
-        child: DefaultTextStyle.merge(
-          style: TextStyle(color: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+      child: ProfileStationery.pass(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Icon(
-                    Icons.workspace_premium_rounded,
-                    color: policy.hasPlus ? TravaryColors.mustard : TravaryColors.coral,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.workspace_premium_rounded,
+                        color: policy.hasPlus ? TravaryColors.mustard : TravaryColors.coral,
+                        size: 28,
+                      ),
+                      const SizedBox(width: TravarySpace.sm),
+                      Expanded(child: Text('Annual Pass', style: TravaryText.profilePassTitle)),
+                    ],
                   ),
-                  const SizedBox(width: TravarySpace.sm),
-                  Text(
-                    title,
-                    style: TravaryText.title.copyWith(color: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink),
+                  const SizedBox(height: TravarySpace.sm),
+                  Text(renewal ?? 'A little help for every holiday.', style: TravaryText.profilePassLead),
+                  const SizedBox(height: TravarySpace.sm),
+                  LayoutBuilder(
+                    builder: (context, box) {
+                      final benefits = Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _Benefit(Icons.cloud_upload_rounded, 'Smart Imports'),
+                          const _Benefit(Icons.people_rounded, 'Shared plans & tickets'),
+                          const _Benefit(Icons.description_rounded, 'Booking-file backup'),
+                          if (!policy.hasPlus) ...[
+                            const SizedBox(height: TravarySpace.sm),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: TravaryColors.kraft),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Text(
+                                '$left free Smart Import${left == 1 ? '' : 's'} left',
+                                style: TravaryText.small,
+                              ),
+                            ),
+                          ],
+                        ],
+                      );
+                      // The owner supplies the animation later. This is a real
+                      // empty layout slot, with no placeholder or still loaded.
+                      const travi = SizedBox(key: ValueKey('profile-travi-slot'), width: 112, height: 124);
+                      if (box.maxWidth < 285 || MediaQuery.textScalerOf(context).scale(14) > 19) {
+                        return benefits;
+                      }
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(flex: 5, child: benefits),
+                          const SizedBox(width: TravarySpace.sm),
+                          const Expanded(flex: 3, child: travi),
+                        ],
+                      );
+                    },
                   ),
+                  for (final trip in passes)
+                    Padding(
+                      padding: const EdgeInsets.only(top: TravarySpace.sm),
+                      child: Text('Holiday Pass: $trip', style: TravaryText.label),
+                    ),
+                  if (!policy.hasPlus) ...[
+                    const SizedBox(height: TravarySpace.sm),
+                    ProfilePassAction(
+                      key: const ValueKey('profile-annual-pass'),
+                      busy: premium.busy,
+                      onPressed: () =>
+                          showPaywall(context, tripId: context.read<TravelStore>().focus.plan?.id, source: 'profile'),
+                    ),
+                  ],
                 ],
               ),
-              const SizedBox(height: TravarySpace.sm),
-              Text(
-                body,
-                style: TravaryText.bodySoft.copyWith(
-                  color: policy.hasPlus ? TravaryColors.paper.withValues(alpha: 0.85) : null,
+            ),
+            const SizedBox(height: TravarySpace.sm),
+            if (plus != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: TextButton(
+                  key: const ValueKey('profile-manage-subscription'),
+                  onPressed: () => openSubscriptions(context),
+                  style: TextButton.styleFrom(
+                    foregroundColor: TravaryColors.ink,
+                    minimumSize: const Size.fromHeight(48),
+                    textStyle: TravaryText.body.copyWith(decoration: TextDecoration.underline),
+                  ),
+                  child: const Text('Manage or cancel'),
                 ),
               ),
-              for (final trip in passes)
-                Padding(
-                  padding: const EdgeInsets.only(top: TravarySpace.xs),
-                  child: Text('Holiday Pass: $trip', style: TravaryText.label),
-                ),
-              if (!policy.hasPlus) ...[
-                const SizedBox(height: TravarySpace.md),
-                FilledButton(
-                  // The trip on now or coming next: its Holiday Pass is on offer too.
-                  onPressed: () =>
-                      showPaywall(context, tripId: context.read<TravelStore>().focus.plan?.id, source: 'profile'),
-                  child: const Text('See the Annual Pass'),
-                ),
-              ],
-              TextButton(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+              child: TextButton(
+                key: const ValueKey('profile-restore-purchases'),
                 onPressed: premium.busy ? null : premium.restore,
                 style: TextButton.styleFrom(
-                  foregroundColor: policy.hasPlus ? TravaryColors.paper : TravaryColors.ink,
-                  padding: EdgeInsets.zero,
+                  foregroundColor: TravaryColors.ink,
+                  minimumSize: const Size.fromHeight(48),
+                  textStyle: TravaryText.body.copyWith(decoration: TextDecoration.underline),
                 ),
                 child: const Text('Restore purchases'),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
+}
+
+class _Benefit extends StatelessWidget {
+  const _Benefit(this.icon, this.label);
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 6),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: TravaryColors.ink, size: 20),
+        const SizedBox(width: 10),
+        Expanded(child: Text(label, style: TravaryText.profileBenefit)),
+      ],
+    ),
+  );
 }
 
 /// Debug only: flip between plans to see every state of the app.

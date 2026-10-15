@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/purchase_service.dart';
 import '../../design/tokens.dart';
+import '../../design/widgets/fit_column.dart';
 import '../../design/widgets/onboarding_pass_desk.dart';
 import '../../design/widgets/onboarding_scene.dart';
 import '../../domain/domain.dart';
@@ -69,6 +70,14 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) context.read<PremiumStore>().refreshOffers();
     });
+  }
+
+  @override
+  void didUpdateWidget(OnboardingPassPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // The holiday arrived (or changed): choose again for it, so a Holiday
+    // Pass it can have is the one chosen.
+    if (oldWidget.tripId != widget.tripId) _selected = null;
   }
 
   void _continue(OnboardingPassOutcome outcome) {
@@ -167,99 +176,147 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
         : selected.kind == OfferKind.plusAnnual
         ? '${selected.displayTitle} renews at ${priceOf(selected)} each year until cancelled in your App Store or Google Play settings.'
         : '${selected.displayTitle} is one payment of ${priceOf(selected)}. It does not renew.';
-    final link = TextButton.styleFrom(
-      minimumSize: const Size(44, 44),
+    Widget fine(String text) => Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TravaryText.small.copyWith(color: OnboardingColors.navy),
+    );
+    final small = TextButton.styleFrom(
+      minimumSize: const Size(44, 40),
+      padding: const EdgeInsets.symmetric(horizontal: 6),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       foregroundColor: OnboardingColors.navy,
+      textStyle: TravaryText.small.copyWith(decoration: TextDecoration.underline),
     );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (!ready) ...[
-          if (canPass)
-            _SlideIn(
-              order: 0,
-              child: OnboardingPaperPass(
-                key: const ValueKey('onboarding-pass-holiday'),
-                annual: false,
-                selected: _selected == OfferKind.tripPass,
-                title: pass.displayTitle,
-                scope: pass.displayScope,
-                price: priceOf(pass),
-                onTap: busy
-                    ? null
-                    : () => setState(() {
-                        _selected = OfferKind.tripPass;
-                        _message = null;
-                      }),
-              ),
+    // Under the passes: the passes, then what paying adds while there's
+    // room for it. At the bottom, always on screen: the button, free, and
+    // the small print's links. Nothing to scroll on a phone of today.
+    final top = <Widget>[
+      if (!ready) ...[
+        if (canPass)
+          _SlideIn(
+            order: 0,
+            child: OnboardingPaperPass(
+              key: const ValueKey('onboarding-pass-holiday'),
+              annual: false,
+              selected: _selected == OfferKind.tripPass,
+              title: pass.displayTitle,
+              scope: pass.displayScope,
+              price: priceOf(pass),
+              onTap: busy
+                  ? null
+                  : () => setState(() {
+                      _selected = OfferKind.tripPass;
+                      _message = null;
+                    }),
             ),
-          if (annual != null)
-            _SlideIn(
-              order: canPass ? 1 : 0,
-              child: OnboardingPaperPass(
-                key: const ValueKey('onboarding-pass-annual'),
-                annual: true,
-                selected: _selected == OfferKind.plusAnnual,
-                title: annual.displayTitle,
-                scope: annual.displayScope,
-                price: priceOf(annual),
-                onTap: busy
-                    ? null
-                    : () => setState(() {
-                        _selected = OfferKind.plusAnnual;
-                        _message = null;
-                      }),
-              ),
+          ),
+        if (annual != null)
+          _SlideIn(
+            order: canPass ? 1 : 0,
+            child: OnboardingPaperPass(
+              key: const ValueKey('onboarding-pass-annual'),
+              annual: true,
+              selected: _selected == OfferKind.plusAnnual,
+              title: annual.displayTitle,
+              scope: annual.displayScope,
+              price: priceOf(annual),
+              onTap: busy
+                  ? null
+                  : () => setState(() {
+                      _selected = OfferKind.plusAnnual;
+                      _message = null;
+                    }),
             ),
-          if (selected == null)
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                premium.offersLoading
-                    ? 'Loading passes…'
-                    : premium.offersError ?? 'Choose an available pass, or continue with free.',
-                textAlign: TextAlign.center,
-                style: TravaryText.body.copyWith(color: OnboardingColors.navy),
-              ),
-            ),
-          if (premium.offersError != null)
-            TextButton(
-              key: const ValueKey('onboarding-pass-retry'),
-              onPressed: busy ? null : premium.refreshOffers,
-              child: const Text('Try again'),
-            ),
-          const SizedBox(height: 6),
-          // What paying adds, family first.
-          for (final line in passBenefits(first: widget.feature, flightAlerts: PremiumFeature.flightAlerts.released))
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 2, right: 8),
-                    child: Icon(Icons.check_rounded, size: 16, color: OnboardingColors.navy),
-                  ),
-                  Expanded(
-                    child: Text(line, style: TravaryText.small.copyWith(color: OnboardingColors.navy)),
-                  ),
-                ],
-              ),
-            ),
-          const SizedBox(height: 8),
-        ] else
+          ),
+        if (selected == null)
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(16),
             child: Text(
-              covered
-                  ? 'Your holiday is already covered. Let’s open your plan.'
-                  : 'Your saved plans are still here. Let’s open your holiday.',
+              premium.offersLoading
+                  ? 'Loading passes…'
+                  : premium.offersError ?? 'Choose an available pass, or continue with free.',
               textAlign: TextAlign.center,
               style: TravaryText.body.copyWith(color: OnboardingColors.navy),
             ),
           ),
-        PassDeskButton(
+        if (premium.offersError != null)
+          TextButton(
+            key: const ValueKey('onboarding-pass-retry'),
+            onPressed: busy ? null : premium.refreshOffers,
+            child: const Text('Try again'),
+          ),
+        // Why there's no Holiday Pass for this holiday (none at all: nothing to say).
+        if (!canPass && !premium.offersLoading && pass != null && plan != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: fine(
+              premium.policy.isTooLongForTripPass(plan)
+                  ? '${pass.displayTitle} covers trips of up to ${Pricing.tripPassMaxDays} days. Your longer holiday can use the ${annual?.displayTitle ?? 'Annual Pass'}.'
+                  : '${pass.displayTitle} needs dates for a holiday that hasn’t ended. You can choose an available pass or continue with free.',
+            ),
+          ),
+        // What paying adds, family first, as much as there's room for.
+        for (final (i, line) in passBenefits(
+          first: widget.feature,
+          flightAlerts: PremiumFeature.flightAlerts.released,
+        ).indexed)
+          FitItem(
+            keep: 50 - i * 10,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(4, 0, 4, 4),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: Icon(Icons.check_rounded, size: 16, color: OnboardingColors.navy),
+                  ),
+                  Expanded(child: _Benefit(line)),
+                ],
+              ),
+            ),
+          ),
+        if (plan != null && selected?.kind == OfferKind.tripPass)
+          FitItem(
+            keep: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: fine(
+                '${plan.trip.title} · ${formatDayMonthRange(plan.start!, plan.end!)}. '
+                'It covers this holiday until ${formatDate(newTripPassFor(plan).lastDay)}. '
+                'Covers a holiday of up to ${Pricing.tripPassMaxDays} days.',
+              ),
+            ),
+          ),
+      ] else
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: Text(
+            covered
+                ? 'Your holiday is already covered. Let’s open your plan.'
+                : 'Your saved plans are still here. Let’s open your holiday.',
+            textAlign: TextAlign.center,
+            style: TravaryText.body.copyWith(color: OnboardingColors.navy),
+          ),
+        ),
+    ];
+    final bottom = <Widget>[
+      if (_message != null)
+        Padding(
+          padding: const EdgeInsets.only(top: 4, bottom: 4),
+          child: Semantics(
+            liveRegion: true,
+            child: Text(
+              _message!,
+              textAlign: TextAlign.center,
+              style: TravaryText.body.copyWith(color: OnboardingColors.navy),
+            ),
+          ),
+        ),
+      Padding(
+        padding: const EdgeInsets.only(top: 6),
+        child: PassDeskButton(
           key: const ValueKey('onboarding-pass-buy'),
           label: ready
               ? 'Open my holiday'
@@ -273,87 +330,97 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
               ? null
               : _buy,
         ),
-        if (!ready)
-          TextButton(
-            key: const ValueKey('onboarding-pass-free'),
-            onPressed: busy ? null : () => _continue(OnboardingPassOutcome.free),
-            style: link.copyWith(
-              textStyle: WidgetStatePropertyAll(
-                TravaryText.title.copyWith(fontSize: 17, decoration: TextDecoration.underline),
+      ),
+      // The passes above always say the title, price, period and whether it
+      // renews (Apple's Schedule 2 §3.8(b), Google Play's subscriptions
+      // policy); this spells it out again when there's room.
+      if (terms != null)
+        FitItem(
+          keep: 25,
+          child: Padding(padding: const EdgeInsets.only(top: 4), child: fine(terms)),
+        ),
+      if (premium.isTestStore)
+        FitItem(
+          keep: 1,
+          child: Padding(padding: const EdgeInsets.only(top: 4), child: fine('Test store: nothing is charged.')),
+        ),
+      // Free first, then the small print's links: one line when they fit,
+      // else free on its own above them.
+      OverflowBar(
+        alignment: MainAxisAlignment.center,
+        overflowAlignment: OverflowBarAlignment.center,
+        children: [
+          if (!ready)
+            TextButton(
+              key: const ValueKey('onboarding-pass-free'),
+              onPressed: busy ? null : () => _continue(OnboardingPassOutcome.free),
+              style: small.copyWith(
+                textStyle: WidgetStatePropertyAll(
+                  TravaryText.title.copyWith(fontSize: 17, decoration: TextDecoration.underline),
+                ),
               ),
+              child: Text(widget.freeLabel),
             ),
-            child: Text(widget.freeLabel),
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              TextButton(
+                key: const ValueKey('onboarding-pass-restore'),
+                onPressed: busy ? null : _restore,
+                style: small,
+                child: const Text('Restore', semanticsLabel: 'Restore purchases'),
+              ),
+              TextButton(
+                key: const ValueKey('onboarding-pass-terms'),
+                onPressed: busy ? null : () => openTravaryPage(context, TravaryLinks.terms),
+                style: small,
+                child: const Text('Terms of Use'),
+              ),
+              TextButton(
+                key: const ValueKey('onboarding-pass-privacy'),
+                onPressed: busy ? null : () => openTravaryPage(context, TravaryLinks.privacy),
+                style: small,
+                child: const Text('Privacy Policy'),
+              ),
+            ],
           ),
-        TextButton(
-          key: const ValueKey('onboarding-pass-restore'),
-          onPressed: busy ? null : _restore,
-          style: link.copyWith(
-            textStyle: WidgetStatePropertyAll(TravaryText.small.copyWith(decoration: TextDecoration.underline)),
-          ),
-          child: const Text('Restore purchases'),
-        ),
-        if (_message != null)
-          Semantics(
-            liveRegion: true,
-            child: Text(
-              _message!,
-              textAlign: TextAlign.center,
-              style: TravaryText.body.copyWith(color: OnboardingColors.navy),
-            ),
-          ),
-        if (!ready && plan != null && selected?.kind == OfferKind.tripPass)
-          Text(
-            '${plan.trip.title} · ${formatDayMonthRange(plan.start!, plan.end!)}. '
-            'It covers this holiday until ${formatDate(newTripPassFor(plan).lastDay)}. '
-            'Covers a holiday of up to ${Pricing.tripPassMaxDays} days.',
-            style: TravaryText.small.copyWith(color: OnboardingColors.navy),
-            textAlign: TextAlign.center,
-          ),
-        // Why there's no Holiday Pass for this holiday (none at all: nothing to say).
-        if (!ready && !canPass && !premium.offersLoading && pass != null && plan != null)
-          Text(
-            premium.policy.isTooLongForTripPass(plan)
-                ? '${pass.displayTitle} covers trips of up to ${Pricing.tripPassMaxDays} days. Your longer holiday can use the ${annual?.displayTitle ?? 'Annual Pass'}.'
-                : '${pass.displayTitle} needs dates for a holiday that hasn’t ended. You can choose an available pass or continue with free.',
-            style: TravaryText.small.copyWith(color: OnboardingColors.navy),
-            textAlign: TextAlign.center,
-          ),
-        if (terms != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(
-              terms,
-              textAlign: TextAlign.center,
-              style: TravaryText.small.copyWith(color: OnboardingColors.navy),
-            ),
-          ),
-        if (premium.isTestStore)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Text(
-              'Test store: nothing is charged.',
-              textAlign: TextAlign.center,
-              style: TravaryText.small.copyWith(color: OnboardingColors.navy),
-            ),
-          ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          children: [
-            TextButton(
-              key: const ValueKey('onboarding-pass-terms'),
-              onPressed: busy ? null : () => openTravaryPage(context, TravaryLinks.terms),
-              style: TextButton.styleFrom(textStyle: TravaryText.small, foregroundColor: OnboardingColors.navy),
-              child: const Text('Terms of Use'),
-            ),
-            TextButton(
-              key: const ValueKey('onboarding-pass-privacy'),
-              onPressed: busy ? null : () => openTravaryPage(context, TravaryLinks.privacy),
-              style: TextButton.styleFrom(textStyle: TravaryText.small, foregroundColor: OnboardingColors.navy),
-              child: const Text('Privacy Policy'),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
+    ];
+    return FitColumn(
+      height: OnboardingFloorSpace.maybeOf(context) ?? double.infinity,
+      bottomFrom: top.length,
+      children: [...top, ...bottom],
+    );
+  }
+}
+
+/// A benefit on one line, a touch smaller if that's all it takes (down to
+/// 90%), else wrapped: one line leaves room on the floor for the next.
+class _Benefit extends StatelessWidget {
+  const _Benefit(this.line);
+  final String line;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = TravaryText.small.copyWith(color: OnboardingColors.navy);
+    return LayoutBuilder(
+      builder: (context, box) {
+        final painter = TextPainter(
+          text: TextSpan(text: line, style: style),
+          textDirection: Directionality.of(context),
+          textScaler: MediaQuery.textScalerOf(context),
+          maxLines: 1,
+        )..layout();
+        final oneLine = painter.width * .9 <= box.maxWidth;
+        painter.dispose();
+        if (!oneLine) return Text(line, style: style);
+        return FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(line, maxLines: 1, style: style),
+        );
+      },
     );
   }
 }
@@ -374,7 +441,7 @@ class _SlideIn extends StatelessWidget {
         opacity: t.clamp(0, 1),
         child: Transform.translate(offset: Offset(0, (1 - t) * 40), child: child),
       ),
-      child: Padding(padding: const EdgeInsets.only(bottom: 8), child: child),
+      child: Padding(padding: const EdgeInsets.only(bottom: 4), child: child),
     );
   }
 }
@@ -401,6 +468,7 @@ class OnboardingPassScreen extends StatelessWidget {
       backEnabled: !premium.busy,
       backTooltip: 'Back to your saved booking',
       backKey: 'onboarding-pass-back',
+      snugFloor: true,
       floor: OnboardingPassPanel(
         tripId: tripId,
         bookingId: bookingId,

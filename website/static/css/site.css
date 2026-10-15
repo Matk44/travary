@@ -499,7 +499,7 @@ p { margin: 0 0 1em; }
   background: url(/img/ephemera/tag.webp) center / contain no-repeat; transform: rotate(-8deg);
 }
 .note p:last-child { margin: 0; }
-.note strong:first-child { display: block; font: 600 .74rem/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--coral-ink); margin-bottom: 6px; }
+.note > strong:first-child { display: block; font: 600 .74rem/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--coral-ink); margin-bottom: 6px; }
 
 .table-wrap { overflow-x: auto; margin: 1.6em 0; border-radius: 12px; box-shadow: var(--shadow-2); background: var(--paper); -webkit-overflow-scrolling: touch; }
 .prose table { border-collapse: collapse; width: 100%; min-width: 520px; font: 400 .95rem/1.45 var(--sans); }

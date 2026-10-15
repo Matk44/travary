@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,6 +11,19 @@ Future<void> openTravaryPage(BuildContext context, Uri page) async {
   final opened = await _launch(page, LaunchMode.inAppBrowserView);
   if (!opened) {
     messenger.showSnackBar(SnackBar(content: Text('Couldn\'t open the page. It\'s at $page')));
+  }
+}
+
+/// The store's subscriptions page, where the Annual Pass is managed or
+/// cancelled (Google Play asks for a way there from inside the app).
+Future<void> openSubscriptions(BuildContext context) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final page = defaultTargetPlatform == TargetPlatform.iOS
+      ? TravaryLinks.appStoreSubscriptions
+      : TravaryLinks.playSubscriptions;
+  final opened = await _launch(page, LaunchMode.externalApplication);
+  if (!opened) {
+    messenger.showSnackBar(SnackBar(content: Text('Couldn\'t open your subscriptions. They\'re at $page')));
   }
 }
 

@@ -38,9 +38,10 @@ BookingFormText bookingFormText(BookingKind kind, {bool editing = false}) {
 
 /// The line under the first-booking form's heading in onboarding. Only a
 /// booking read from a file or the airline's schedule asks to be checked;
-/// one typed in is the traveller's own.
+/// one typed in is the traveller's own. A flight with the board on top
+/// ([finding]) starts from its number.
 String onboardingFormSubtitle({required bool finding, required bool checking}) {
-  if (finding) return 'Flight number and the day it leaves.';
+  if (finding) return 'Type the flight number and we’ll fill in the rest.';
   return checking ? 'Check the details before adding it.' : 'A name and a day are all it needs.';
 }
 

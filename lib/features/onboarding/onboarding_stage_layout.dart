@@ -11,7 +11,8 @@ import '../../logic/onboarding_journey.dart';
 /// wordmark and headline in the sky, the controls on the floor just under
 /// Travi's wheels. Words re-enter when [wordsKey] changes; controls swap
 /// when [floorKey] does. The stage never moves; the controls scroll above
-/// the keyboard and large type.
+/// the keyboard and large type. The floor's controls can read how much room
+/// they have ([OnboardingFloorSpace]) to fit it rather than scroll.
 class OnboardingStageLayout extends StatelessWidget {
   const OnboardingStageLayout({
     super.key,
@@ -21,6 +22,7 @@ class OnboardingStageLayout extends StatelessWidget {
     this.wordsKey,
     this.floorKey,
     this.floorTop,
+    this.snugFloor = false,
     this.onBack,
     this.backEnabled = true,
     this.backTooltip,
@@ -37,6 +39,10 @@ class OnboardingStageLayout extends StatelessWidget {
   /// Where the controls start, as a share of the screen's height, when
   /// that's lower than the stage's floor (the workshop's bigger Travi).
   final double? floorTop;
+
+  /// Controls that need all the floor there is (the pass desk) start right
+  /// under Travi's shadow, with less margin round them.
+  final bool snugFloor;
   final VoidCallback? onBack;
 
   /// False while something can't be left (a purchase under way).
@@ -52,8 +58,11 @@ class OnboardingStageLayout extends StatelessWidget {
     final reduced = MediaQuery.disableAnimationsOf(context);
     // Large type grows over Travi, so it gets the sky behind it.
     final largeType = MediaQuery.textScalerOf(context).scale(16) > 17.6;
-    // Just under Travi's wheels (1.25 frame widths), or lower if asked.
-    final controlsTop = math.max(size.width * 1.3, (floorTop ?? 0) * size.height);
+    // Just under Travi's wheels (1.25 frame widths; his shadow ends at
+    // 1.26), or lower if asked.
+    final controlsTop = math.max(size.width * (snugFloor ? 1.275 : 1.3), (floorTop ?? 0) * size.height);
+    final bottom = math.max(padding.bottom, MediaQuery.viewInsetsOf(context).bottom) + (snugFloor ? 6 : 16);
+    final floorPadding = snugFloor ? 4.0 : 8.0;
     final subtitle = words.subtitle;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
@@ -89,12 +98,7 @@ class OnboardingStageLayout extends StatelessWidget {
             ),
             SingleChildScrollView(
               key: const ValueKey('onboarding-scroll'),
-              padding: EdgeInsets.fromLTRB(
-                TravarySpace.gutter,
-                padding.top + 12,
-                TravarySpace.gutter,
-                math.max(padding.bottom, MediaQuery.viewInsetsOf(context).bottom) + 16,
-              ),
+              padding: EdgeInsets.fromLTRB(TravarySpace.gutter, padding.top + 12, TravarySpace.gutter, bottom),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -147,7 +151,10 @@ class OnboardingStageLayout extends StatelessWidget {
                     ),
                     child: KeyedSubtree(
                       key: ValueKey(floorKey),
-                      child: OnboardingFloor(child: floor),
+                      child: OnboardingFloorSpace(
+                        height: math.max(0, size.height - controlsTop - bottom - 2 * floorPadding),
+                        child: OnboardingFloor(padding: floorPadding, child: floor),
+                      ),
                     ),
                   ),
                 ],
@@ -192,7 +199,8 @@ class OnboardingSky extends StatelessWidget {
 /// Keeps the controls readable when they scroll up over the scenery (the
 /// keyboard, large type); on the floor it matches the floor.
 class OnboardingFloor extends StatelessWidget {
-  const OnboardingFloor({super.key, required this.child});
+  const OnboardingFloor({super.key, this.padding = 8, required this.child});
+  final double padding;
   final Widget child;
   @override
   Widget build(BuildContext context) => DecoratedBox(
@@ -200,6 +208,24 @@ class OnboardingFloor extends StatelessWidget {
       color: OnboardingColors.floor.withValues(alpha: .92),
       borderRadius: BorderRadius.circular(12),
     ),
-    child: Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: child),
+    child: Padding(
+      padding: EdgeInsets.symmetric(vertical: padding),
+      child: child,
+    ),
   );
+}
+
+/// The height the floor's controls have between Travi's wheels and the
+/// bottom of the screen, for controls that fit it instead of scrolling
+/// (`FitColumn`). More than they need on a tall phone; less with the
+/// keyboard up or large type, when the screen scrolls.
+class OnboardingFloorSpace extends InheritedWidget {
+  const OnboardingFloorSpace({super.key, required this.height, required super.child});
+  final double height;
+
+  static double? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<OnboardingFloorSpace>()?.height;
+
+  @override
+  bool updateShouldNotify(OnboardingFloorSpace oldWidget) => oldWidget.height != height;
 }

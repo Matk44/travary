@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../design/cards/travel_document_card.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/profile_stationery.dart';
 import '../../logic/travel_documents.dart';
 import '../../state/travel_documents_store.dart';
 import '../../state/travel_store.dart';
@@ -13,10 +14,13 @@ import 'document_actions.dart';
 /// Locked behind the phone's lock; while locked it shows only how many
 /// there are. With none yet, it invites the first one.
 class TravelDocumentsSection extends StatelessWidget {
-  const TravelDocumentsSection({super.key, this.limit});
+  const TravelDocumentsSection({super.key, this.limit, this.illustratedInvitation = false});
 
   /// Show at most this many, then "See all" (the Documents tab).
   final int? limit;
+
+  /// The standalone screen carries the same passport art as Profile.
+  final bool illustratedInvitation;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,7 @@ class TravelDocumentsSection extends StatelessWidget {
           _Notice(
             key: const ValueKey('documents-invite'),
             icon: Icons.menu_book_rounded,
+            art: illustratedInvitation ? const PassportIllustration(size: 84) : null,
             title: 'Passports, visas and insurance',
             message: 'Kept on this phone only, behind Face ID or your passcode.',
             onTap: () => startAddTravelDocument(context),
@@ -117,9 +122,17 @@ class TravelDocumentsSection extends StatelessWidget {
 
 /// A quiet card standing in for the list: the invitation, or the lock.
 class _Notice extends StatelessWidget {
-  const _Notice({super.key, required this.icon, required this.title, required this.message, required this.onTap});
+  const _Notice({
+    super.key,
+    required this.icon,
+    this.art,
+    required this.title,
+    required this.message,
+    required this.onTap,
+  });
 
   final IconData icon;
+  final Widget? art;
   final String title;
   final String message;
   final VoidCallback onTap;
@@ -137,22 +150,39 @@ class _Notice extends StatelessWidget {
         borderRadius: shape,
         child: Padding(
           padding: const EdgeInsets.all(TravarySpace.md),
-          child: Row(
-            children: [
-              Icon(icon, color: TravaryColors.kraft, size: 28),
-              const SizedBox(width: TravarySpace.md),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: LayoutBuilder(
+            builder: (context, box) {
+              final copy = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: art == null ? TravaryText.label : TravaryText.title),
+                  const SizedBox(height: 2),
+                  Text(message, style: TravaryText.small),
+                ],
+              );
+              if (art != null && (box.maxWidth < 300 || MediaQuery.textScalerOf(context).scale(14) > 20)) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(title, style: TravaryText.label),
-                    const SizedBox(height: 2),
-                    Text(message, style: TravaryText.small),
+                    Center(child: art),
+                    const SizedBox(height: TravarySpace.md),
+                    copy,
+                    const Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.chevron_right_rounded, color: TravaryColors.inkFaint),
+                    ),
                   ],
-                ),
-              ),
-              const Icon(Icons.chevron_right_rounded, color: TravaryColors.inkFaint),
-            ],
+                );
+              }
+              return Row(
+                children: [
+                  art ?? Icon(icon, color: TravaryColors.kraft, size: 28),
+                  const SizedBox(width: TravarySpace.md),
+                  Expanded(child: copy),
+                  const Icon(Icons.chevron_right_rounded, color: TravaryColors.inkFaint),
+                ],
+              );
+            },
           ),
         ),
       ),

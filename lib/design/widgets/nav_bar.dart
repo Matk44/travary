@@ -16,8 +16,9 @@ class NavItem {
   final IconSlot icon;
 }
 
-/// The home tabs: two fabric tabs, the coral add tab, two more, standing on
-/// the leather strip at the bottom of the screen (in the safe area).
+/// The home tabs: two fabric tabs, the coral add tab, two more, running off
+/// the bottom of the screen (through the safe area). Nothing is drawn under
+/// them: the owner had the navy leather strip taken out (14 Oct 2026).
 ///
 /// The chosen tab pops up [NavLayout.rise] points with an ease-out-back
 /// spring, its shadow deepening, as its cream fabric crossfades into the
@@ -43,9 +44,7 @@ class TravaryNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final slots = TravaryChrome.of(context).slots;
     final bottom = MediaQuery.viewPaddingOf(context).bottom;
-    final leather = slots.surface(SurfaceSlot.leather);
 
     Widget tab(int index) => Expanded(
       flex: NavLayout.tabFlex,
@@ -60,46 +59,25 @@ class TravaryNavBar extends StatelessWidget {
     const gap = SizedBox(width: NavLayout.gap);
     return SizedBox(
       height: NavLayout.height + NavLayout.rise + bottom,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned.fill(
-            left: NavLayout.inset,
-            right: NavLayout.inset,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                tab(0),
-                gap,
-                tab(1),
-                gap,
-                Expanded(
-                  flex: NavLayout.addFlex,
-                  child: _AddTab(onTap: onAdd, bottomInset: bottom),
-                ),
-                gap,
-                tab(2),
-                gap,
-                tab(3),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: NavLayout.inset),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            tab(0),
+            gap,
+            tab(1),
+            gap,
+            Expanded(
+              flex: NavLayout.addFlex,
+              child: _AddTab(onTap: onAdd, bottomInset: bottom),
             ),
-          ),
-          if (leather != null)
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: bottom + 2,
-              child: IgnorePointer(
-                child: Image(
-                  key: const ValueKey('nav-leather'),
-                  image: artImageProvider(leather),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                ),
-              ),
-            ),
-        ],
+            gap,
+            tab(2),
+            gap,
+            tab(3),
+          ],
+        ),
       ),
     );
   }
@@ -110,10 +88,11 @@ class TravaryNavBar extends StatelessWidget {
 /// a destination pack that wants another selected tab supplies its own
 /// `common/tab_selected.png`. Each is placed by the tab's own measured
 /// edges ([SurfaceSlot.body]), never stretched: its top edge sits at the top
-/// of the slot and its foot runs on under the bottom rail, while the file's
-/// transparent margin spills harmlessly round it. Resting crossfades into
-/// selected by [selection], and a soft shadow behind the tab deepens as it
-/// rises ([elevation]).
+/// of the slot and its foot runs off the bottom of the screen (where the
+/// file ends first, over a home indicator, its last stretch of fabric
+/// carries on), while the file's transparent margin spills harmlessly round
+/// it. Resting crossfades into selected by [selection], and a soft shadow
+/// behind the tab deepens as it rises ([elevation]).
 ///
 /// While a file is missing, a plain flat tab in [color] stands in (the only
 /// place the palette colours a tab).
@@ -160,24 +139,50 @@ class _TabSurface extends StatelessWidget {
     }
     return LayoutBuilder(
       builder: (context, box) {
-        Widget place(ArtImageRef image, SurfaceSlot slot, {Key? key}) {
+        List<Widget> place(ArtImageRef image, SurfaceSlot slot, {Key? key}) {
           final body = slot.body ?? const FractionRect(0, 0, 1, 1);
           final width = box.maxWidth / body.width;
           // Tab files are made at 720 × 1024: this box is exactly their shape.
           final height = width * 1024 / 720;
-          return Positioned(
-            left: -body.left * width,
-            top: -body.top * height,
-            width: width,
-            height: height,
-            child: Image(key: key, image: artImageProvider(image), fit: BoxFit.fill, gaplessPlayback: true),
-          );
+          final left = -body.left * width;
+          final top = -body.top * height;
+          Widget picture({Key? key}) =>
+              Image(key: key, image: artImageProvider(image), fit: BoxFit.fill, gaplessPlayback: true);
+          // Room left under the file's foot: its last stretch of fabric,
+          // straight sides and all, runs on into it (from just above the
+          // foot, whose very edge darkens a little).
+          final rest = box.maxHeight - top - height;
+          final edge = height * .03;
+          return [
+            Positioned(
+              left: left,
+              top: top,
+              width: width,
+              height: height,
+              child: picture(key: key),
+            ),
+            if (rest > 0)
+              Positioned(
+                left: left,
+                top: top + height - edge,
+                width: width,
+                height: rest + edge,
+                child: ClipRect(
+                  child: OverflowBox(
+                    alignment: Alignment.bottomCenter,
+                    minHeight: height,
+                    maxHeight: height,
+                    child: Transform.translate(offset: Offset(0, edge), child: picture()),
+                  ),
+                ),
+              ),
+          ];
         }
 
-        Widget layer(double opacity, Widget child) => Positioned.fill(
+        Widget layer(double opacity, List<Widget> children) => Positioned.fill(
           child: Opacity(
             opacity: opacity,
-            child: Stack(clipBehavior: Clip.none, children: [child]),
+            child: Stack(clipBehavior: Clip.none, children: children),
           ),
         );
 

@@ -13,7 +13,9 @@ import 'package:travary/design/tokens.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/booking/edit_booking_screen.dart';
 import 'package:travary/features/import/smart_import_screen.dart';
+import 'package:travary/features/premium/paywall_screen.dart';
 import 'package:travary/logic/access.dart';
+import 'package:travary/logic/price_text.dart';
 import 'package:travary/logic/travi_cameos.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
@@ -36,6 +38,22 @@ class _FakeImport implements SmartImportService {
     final r = result;
     if (r is SmartImportException) throw r;
     return r as SmartImportResult;
+  }
+}
+
+/// Refused by the server once (the free imports were used after all), then reads.
+class _RefusedOnce implements SmartImportService {
+  _RefusedOnce(this.result);
+
+  final SmartImportResult result;
+  int calls = 0;
+
+  @override
+  Future<SmartImportResult> read(String path, {required LocalDate today, String? tripId}) async {
+    if (calls++ == 0) {
+      throw const SmartImportException('You\'ve used your free Smart Imports.', needsPass: true);
+    }
+    return result;
   }
 }
 
@@ -277,6 +295,66 @@ void main() {
       expect(travel.plans, hasLength(2));
     });
 
+    /// A free holiday keeping its two files already.
+    MemoryTravelRepository fullHoliday() {
+      Attachment file(String id) => Attachment(id: id, name: '$id.pdf', fileName: '$id.pdf', sizeBytes: 10);
+      return MemoryTravelRepository(userId: 'me')..replaceAll(
+        [trip('japan', title: 'Japan holiday', plannedStart: d(10, 11), plannedEnd: d(10, 23))],
+        [
+          booking(
+            'park',
+            BookingKind.attraction,
+            d(10, 13),
+            tripId: 'japan',
+          ).copyWith(attachments: [file('a'), file('b')]),
+        ],
+      );
+    }
+
+    Future<void> notNow(WidgetTester tester) async {
+      await tester.ensureVisible(find.byKey(const ValueKey('onboarding-pass-free')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('onboarding-pass-free')));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('one booking for a free holiday with its two files opens the pass desk for the file', (tester) async {
+      await pump(
+        tester,
+        _FakeImport(SmartImportResult([draft('Sushi Saito', BookingKind.dining, d(10, 15))])),
+        repository: fullHoliday(),
+        tripId: 'japan',
+      );
+
+      expect(find.byType(PaywallScreen), findsOneWidget, reason: 'a third file is a pass’s, so the desk opens');
+      await notNow(tester);
+      expect(find.byType(EditBookingScreen), findsOneWidget);
+      expect(find.byKey(const ValueKey('attach-scanned')), findsOneWidget, reason: 'the file is still on offer');
+    });
+
+    testWidgets('several bookings for a full free holiday open the pass desk before they’re added', (tester) async {
+      final (travel, _) = await pump(
+        tester,
+        _FakeImport(
+          SmartImportResult([
+            draft('Sushi Saito', BookingKind.dining, d(10, 15)),
+            draft('Tea ceremony', BookingKind.activity, d(10, 16)),
+          ]),
+        ),
+        repository: fullHoliday(),
+        tripId: 'japan',
+      );
+      await tester.tap(find.text('Add 2 bookings'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PaywallScreen), findsOneWidget, reason: 'not a quiet snackbar afterwards');
+      await notNow(tester);
+      final added = travel.bookings.where((b) => b.id != 'park');
+      expect(added, hasLength(2), reason: 'the bookings are still added');
+      expect(added.every((b) => b.attachments.isEmpty), isTrue);
+      expect(find.text(ticketsNotKeptText(2)), findsOneWidget);
+    });
+
     testWidgets('while it reads, Travi studies it instead of a spinner', (tester) async {
       final service = _SlowImport();
       await pump(tester, service);
@@ -296,6 +374,35 @@ void main() {
       expect(find.text('That file is too big.'), findsOneWidget);
       expect(find.text('Add it myself'), findsOneWidget);
       expect(traviCameo(TraviMoment.oops), findsOneWidget);
+    });
+
+    testWidgets('when the server says the free ones are used, the pass desk opens; buying reads it', (tester) async {
+      final service = _RefusedOnce(SmartImportResult([draft('Lagoon Grill', BookingKind.dining, d(11, 3))]));
+      await pump(tester, service);
+
+      expect(find.byType(PaywallScreen), findsOneWidget, reason: 'the pass desk, not a dead end');
+      await tester.ensureVisible(find.byKey(const ValueKey('onboarding-pass-annual')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('onboarding-pass-annual')));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.byKey(const ValueKey('onboarding-pass-buy')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('onboarding-pass-buy')));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PaywallScreen), findsNothing);
+      expect(service.calls, 2);
+      expect(find.textContaining('Filled in by Smart Import'), findsOneWidget);
+    });
+
+    testWidgets('"Not now" on that desk leaves the refusal on screen', (tester) async {
+      await pump(tester, _RefusedOnce(const SmartImportResult([])));
+      await tester.ensureVisible(find.byKey(const ValueKey('onboarding-pass-free')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('onboarding-pass-free')));
+      await tester.pumpAndSettle();
+      expect(find.byType(PaywallScreen), findsNothing);
+      expect(find.text('You\'ve used your free Smart Imports.'), findsOneWidget);
     });
 
     testWidgets('finding nothing does not use a free import', (tester) async {

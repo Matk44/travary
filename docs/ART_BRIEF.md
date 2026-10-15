@@ -34,7 +34,7 @@ Textures are tiled or stretched behind everything, so they must be quiet.
 | `common/paper.png` | 1024×1024 | Seamless tileable texture of thick cream cotton paper with faint fibres, very low contrast, colour #F8F4EC. Tiles seamlessly. No shadows. |
 | `common/kraft.png` | 1024×1024 | Seamless tileable kraft paper texture, warm tan #C9A77D, fine fibres and slight mottling. Tiles seamlessly. |
 | `common/foil.png` | 1024×1536 | Iridescent holographic foil texture in soft pastel pink, peach and lilac, fine rainbow sheen and diagonal shimmer, like the security strip on a theme-park ticket. Fills the frame edge to edge. |
-| `common/leather.png` | 1536×1024 | Top-down close-up of navy leather #1C2A47, subtle grain, even light, with one row of cream saddle stitching running horizontally 12% below the top edge. Tiles seamlessly left to right. |
+| ~~`common/leather.png`~~ (retired 14 Oct 2026: no strip under the tabs) | 1536×1024 | Top-down close-up of navy leather #1C2A47, subtle grain, even light, with one row of cream saddle stitching running horizontally 12% below the top edge. Tiles seamlessly left to right. |
 
 ## Batch 2: objects (transparent background)
 
@@ -42,7 +42,7 @@ Textures are tiled or stretched behind everything, so they must be quiet.
 |---|---|---|
 | `common/tag.png` | 1024×1536 | Transparent background PNG. A blank kraft-paper luggage tag with a brass grommet near the top and a loop of natural twine, straight-on view, rotated 4°, soft realistic drop shadow. Plain surface, no printing (an icon is placed on it). |
 | `common/stamp.png` | 1536×464 | Transparent background PNG. An empty rectangular rubber-stamp border in navy ink, double line, rounded corners, uneven ink with speckles and small gaps like a real stamp impression, rotated −3°. Empty inside. Fills the frame edge to edge (the "Show tickets" button on tickets that don't print a frame). |
-| `common/tab.png` | 720×1024 | Transparent background PNG. A soft cream canvas fabric tab shaped like a file-folder tab: rounded top corners, straight sides running off the bottom edge, stitched edge, gentle shadow. Empty. Only the top 60% shows; the rest runs under the leather strip. |
+| `common/tab.png` | 720×1024 | Transparent background PNG. A soft cream canvas fabric tab shaped like a file-folder tab: rounded top corners, straight sides running off the bottom edge, stitched edge, gentle shadow. Empty. Only the top 60% shows; the rest runs off the bottom of the screen. |
 | `common/tab_selected.png` | 720×1024 | Same as the tab above in deep petrol-teal #1E5B70 canvas, slightly raised. A finished material: the app draws it as it is, never tinted (a destination pack may supply its own). |
 | `common/tab_add.png` | 720×1024 | Same tab in coral #E5785B cotton. |
 | `common/pill.png` | 1536×512 | Transparent background PNG. An empty raised cream pill, soft shadow, like a paper badge. Drawn 35 pt tall behind the weather or countdown. |

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/tokens.dart';
+import '../../design/trip_chrome.dart';
+import '../../design/widgets/ledger.dart';
 import '../../state/travel_documents_store.dart';
+import '../../state/travel_store.dart';
 import 'document_actions.dart';
 import 'travel_documents_section.dart';
 
@@ -29,28 +32,35 @@ class _TravelDocumentsScreenState extends State<TravelDocumentsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Travel documents')),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
-        children: [
-          const TravelDocumentsSection(),
-          const SizedBox(height: TravarySpace.xl),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    final travel = context.watch<TravelStore>();
+    return TravaryChrome(
+      colors: TripColors.of(travel.paletteFor(travel.focus.plan)),
+      slots: travel.chromeArtFor(travel.focus.plan),
+      child: Scaffold(
+        appBar: AppBar(title: const BarText(child: Text('Travel documents'))),
+        body: LinenBackground(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
             children: [
-              const Icon(Icons.shield_outlined, size: 20, color: TravaryColors.inkSoft),
-              const SizedBox(width: TravarySpace.sm),
-              Expanded(
-                child: Text(
-                  'These stay on this phone. Travary never uploads them, never reads them with AI and never '
-                  'shares them with a trip\'s family. Your phone\'s own backup keeps a copy.',
-                  style: TravaryText.small,
-                ),
+              const TravelDocumentsSection(illustratedInvitation: true),
+              const SizedBox(height: TravarySpace.xl),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.shield_outlined, size: 20, color: TravaryColors.inkSoft),
+                  const SizedBox(width: TravarySpace.sm),
+                  Expanded(
+                    child: Text(
+                      'These stay on this phone. Travary never uploads them, never reads them with AI and never '
+                      'shares them with a trip\'s family. Your phone\'s own backup keeps a copy.',
+                      style: TravaryText.small,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

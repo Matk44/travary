@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/smart_import_service.dart';
 import '../../domain/domain.dart';
 import '../../logic/access.dart';
 import '../../logic/trip_plan.dart';
@@ -29,6 +30,27 @@ Future<AccessDecision?> requirePremium(
   if (!bought) return null;
   final after = premium.decide(feature, trip: trip);
   return after.allowed ? after : null;
+}
+
+/// Runs [read] (Smart Import, already allowed here) and, when the server
+/// says the free imports are used up after all, opens the paywall and
+/// reads again once something's bought. Otherwise the refusal stands.
+Future<T> readWithPass<T>(
+  BuildContext context,
+  Future<T> Function(String? tripId) read, {
+  required AccessDecision access,
+  TripPlan? trip,
+  required String source,
+}) async {
+  try {
+    return await read(access.tripId);
+  } on SmartImportException catch (e) {
+    if (!e.needsPass || !context.mounted) rethrow;
+    final bought = await showPaywall(context, feature: PremiumFeature.smartImport, tripId: trip?.id, source: source);
+    if (!bought || !context.mounted) rethrow;
+    final after = context.read<PremiumStore>().decide(PremiumFeature.smartImport, trip: trip);
+    return read(after.tripId ?? access.tripId);
+  }
 }
 
 /// Room on [plan] for [adding] more ticket files, which keeps [kept]

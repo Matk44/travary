@@ -62,6 +62,49 @@ FlightFill? flightFill(FlightStatus leg, {required String typedNumber}) {
   );
 }
 
+/// The add-flight form's fields a found flight fills in.
+class FlightFields {
+  const FlightFields({
+    required this.startDate,
+    this.title = '',
+    this.location = '',
+    this.arrival = '',
+    this.startTime,
+    this.endDate,
+    this.endTime,
+  });
+
+  final LocalDate startDate;
+  final String title;
+  final String location;
+  final String arrival;
+  final ClockTime? startTime;
+  final LocalDate? endDate;
+  final ClockTime? endTime;
+}
+
+/// The form once the board's answer changes from [previous] to [fill] (null:
+/// no flight on the board now). A field that's empty, or still holds what
+/// [previous] put there, takes [fill]'s value, or is emptied when there's
+/// none; whatever the traveller typed is kept. The day is the found
+/// flight's, or [searchDate] again once the flight that set it has gone.
+FlightFields refillFlight(FlightFields form, {FlightFill? previous, FlightFill? fill, required LocalDate searchDate}) {
+  String text(String current, String? before, String? next) =>
+      current.trim().isEmpty || (previous != null && current == before) ? next ?? '' : current;
+  T? value<T>(T? current, T? before, T? next) =>
+      current == null || (previous != null && current == before) ? next : current;
+  return FlightFields(
+    startDate:
+        fill?.startDate ?? (previous != null && form.startDate == previous.startDate ? searchDate : form.startDate),
+    title: text(form.title, previous?.title, fill?.title),
+    location: text(form.location, previous?.location, fill?.location),
+    arrival: text(form.arrival, previous?.arrival, fill?.arrival),
+    startTime: value(form.startTime, previous?.startTime, fill?.startTime),
+    endDate: value(form.endDate, previous?.endDate, fill?.endDate),
+    endTime: value(form.endTime, previous?.endTime, fill?.endTime),
+  );
+}
+
 /// A found flight, worded for "Is this your flight?".
 class FoundFlightText {
   const FoundFlightText({required this.heading, required this.route, required this.times});

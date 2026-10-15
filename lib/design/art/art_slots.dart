@@ -76,9 +76,6 @@ enum SurfaceSlot {
   /// Oatmeal linen behind every screen, tiled.
   linen('linen'),
 
-  /// Navy leather strip under the home tabs, in the bottom safe area.
-  leather('leather'),
-
   /// Cream canvas home tab. The tab itself spans [body] of the image (the
   /// rest is margin and shadow); its foot runs off the bottom edge.
   tab('tab', body: FractionRect(0.080, 0.290, 0.920, 1.0)),
@@ -120,6 +117,12 @@ enum SurfaceSlot {
   /// The add sheet's "Passport & documents" picture (768 × 768,
   /// transparent): a closed passport. A glyph on paper stands in.
   addPassport('add_passport'),
+
+  /// The profile's text-free stationery, with native content on top.
+  profileAccountFolio('profile_account_folio'),
+  profileAnnualPass('profile_annual_pass_paper'),
+  profilePassButton('profile_pass_button'),
+  profilePostmark('profile_postmark'),
 
   /// The round date postmark at the start of a Documents row (1024 ×
   /// 1024): two rings, one-colour ink, tinted; the live date sits in its

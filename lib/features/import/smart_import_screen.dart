@@ -21,6 +21,7 @@ import '../../logic/trip_plan.dart';
 import '../../logic/trip_window.dart';
 import '../../state/analytics.dart';
 import '../../state/premium_store.dart';
+import '../premium/premium_gate.dart';
 import '../../state/travel_store.dart';
 import '../booking/edit_booking_screen.dart';
 
@@ -107,8 +108,15 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     final service = context.read<SmartImportService>();
     final today = context.read<TravelStore>().today;
     final premium = context.read<PremiumStore>();
+    final travel = context.read<TravelStore>();
     try {
-      final result = await service.read(widget.filePath, today: today, tripId: widget.access.tripId);
+      final result = await readWithPass(
+        context,
+        (tripId) => service.read(widget.filePath, today: today, tripId: tripId),
+        access: widget.access,
+        trip: travel.plan(widget.tripId ?? widget.access.tripId ?? '') ?? travel.focus.plan,
+        source: 'smart_import_refused',
+      );
       if (mounted) await _found(result, premium);
     } on SmartImportException catch (e) {
       track('smart_import_failed', {'reason': e.message});
@@ -186,7 +194,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     setState(() => _saving = true);
     final store = context.read<TravelStore>();
     final trip = widget.tripId == null ? null : store.plan(widget.tripId!);
-    final policy = context.read<PremiumStore?>()?.policy;
+    var policy = context.read<PremiumStore?>()?.policy;
     final messenger = ScaffoldMessenger.of(context);
     final bookings = <Booking>[];
     // The file becomes each booking's ticket while its holiday has room
@@ -207,6 +215,16 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     // Where saving will put each one (a new trip for some, perhaps), so
     // the file is counted against the holiday it actually lands in.
     final places = store.importPlaces(picked);
+    // A free holiday with no room left for the file opens the pass desk
+    // first (once): with a pass, the file is kept there too.
+    for (final key in places.toSet()) {
+      final target = store.plan(key);
+      if (policy == null || policy.canAttachTickets(target, kept: ticketFilesIn(target))) continue;
+      await requireTicketRoom(context, target, kept: ticketFilesIn(target), source: 'attach_ticket');
+      if (!mounted) return;
+      policy = context.read<PremiumStore?>()?.policy;
+      break;
+    }
     for (final (i, booking) in picked.indexed) {
       final key = places[i];
       final target = store.plan(key);

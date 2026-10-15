@@ -10,6 +10,8 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Travary uses Face ID to keep your passports and travel documents private.</string>
 	<key>CFBundleURLTypes</key>
