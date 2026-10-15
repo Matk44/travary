@@ -190,12 +190,10 @@ Dependencies flow downward only: `features → state → logic/data → domain`.
    a test keeps them equal). Downloaded **art packs** add destination and
    experience art (`docs/ART_PACKS.md`; sources are WebP, converted with
    `dart run tool/art_packs.dart webp`, PNG masters in `art_packs/originals/`;
-   catalog v96 is published: 43 packs, including Orlando v2, the 13 US city
-   and region packs, `country_us` v4 and the Lake District v2; built, not
-   yet published: 30 city packs for the world's most-visited cities, 10
-   whole-country packs, and a Documents stamp on every country and US pack:
-   local catalog v234, 83 packs; their key cards are full height, see
-   `docs/ART_PACKS.md`). `ArtResolver` takes a
+   catalog v234 is published (15 October 2026): 83 packs, including 30
+   city packs for the world's most-visited cities, 10 whole-country packs,
+   and a Documents stamp on every country and US pack; their key cards are
+   full height, see `docs/ART_PACKS.md`). `ArtResolver` takes a
    `TripArtContext` and tries the subject from the city → region → country
    pack → the trip's look → secondary look → core, then generics, stable per
    booking and never repeating side by side. Each booking's context is at

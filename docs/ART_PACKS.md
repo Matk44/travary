@@ -489,14 +489,15 @@ Published so far (3 October 2026, catalog v30): 25 country packs, the
 Paris, Kyoto and Orlando city packs, and the Lake District and Bali region
 packs, all in WebP. Catalog **v96 published 13 October 2026** (43 packs):
 Orlando v2, the 13 US city and region packs above, `country_us` v4 and
-`region_gb_lake_district` v2. **Built, not yet published (14 October 2026):**
-the 30 packs above and the 10 country packs below, all v1, plus a v+1 of
-each of the 25 older country packs and 13 US city and region packs (now with
-a Documents stamp, and new key cards: Orlando and the Lake District are
-v3 because they were already published), so the local `art_packs/catalog.json` is v234 with 83
-packs (their archives are in `build/art_packs/`; the bucket's
-catalog is still v96, which `publish` accepts). `publish` needs every archive in the bucket or
-in `build/art_packs/`, and `build` regenerates a missing archive from its
+`region_gb_lake_district` v2. **Catalog v234 published 15 October 2026**
+(83 packs, 80 new archives; checked against the bucket afterwards: the
+bucket's catalog is identical to `art_packs/catalog.json` and every archive
+is there at the right size): the 30 city packs above and the 10 country
+packs below, all v1, plus a new version of each of the 25 older country
+packs and 13 US city and region packs (now with a Documents stamp and new
+key cards; Orlando and the Lake District are v3 because their v2 was
+already published). `publish` needs every archive in the bucket or in
+`build/art_packs/`, and `build` regenerates a missing archive from its
 source without changing the catalog (the zips are reproducible).
 `seed_themepark` is for tests and local development only and is never
 published.

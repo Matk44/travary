@@ -20,8 +20,7 @@ Wave order: **C, D, E1, F1, E2, F2.**
 C: four backgrounds bundled. D: nine city packs. E1 and E2: ten country
 packs, and E1's seven backgrounds bundled. F1 and F2: a Documents stamp
 added to the 25 older country packs and the 13 US city and region packs (new
-versions). Local catalog v234, 83 packs, built and checked offline, **not
-yet published**.
+versions). Catalog v234, 83 packs, **published on 15 October 2026**.
 
 ## The message to send
 
