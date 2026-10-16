@@ -79,9 +79,10 @@ between his peek stills:
 
 - iOS: the widget is the `CountdownWidget` target (bundle ID
   `com.travary.app.CountdownWidget`, iOS 17), embedded beside the share
-  extension. Device and store builds need that App ID in the Apple
-  Developer account with the App Group `group.com.travary.app` (automatic
-  signing creates it when the account allows). The simulator needs nothing.
+  extension. Its App ID is registered in the Apple Developer account (16
+  Oct, "Travary Countdown Widget") with the App Group
+  `group.com.travary.app`, which device and store builds need. The
+  simulator needs nothing.
 - Android: nothing to set up. The picker's preview is
   `res/drawable-nodpi/countdown_widget_preview.webp`, a capture of the real
   widget.

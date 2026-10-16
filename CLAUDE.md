@@ -813,8 +813,8 @@ trip (`travary://trip/<id>` → `AppSession.pendingWidgetTarget` → `HomeShell`
 Widgets can't play films: iOS animates between timeline entries, Android
 flips Travi's drawn layer. The file's version, channel and folder are
 mirrored in Swift and Kotlin (`test/tool/countdown_widget_config_test.dart`).
-Device builds need the `com.travary.app.CountdownWidget` App ID with the
-App Group.
+Its App ID, `com.travary.app.CountdownWidget`, is registered with the App
+Group (16 Oct 2026); not yet tried on a real iPhone.
 
 ## Travi onboarding
 

@@ -59,12 +59,14 @@ work, accounts, money); everything else can be done in this repo.
   Store Connect rejects uploads without it (ITMS-91053).
 - [x] iOS: `ITSAppUsesNonExemptEncryption` is false (HTTPS only), so
   uploads don't ask the export compliance question.
-- [ ] **You:** iOS: the countdown widget's App ID,
-  `com.travary.app.CountdownWidget`, with the App Group
+- [x] iOS: the countdown widget's App ID, `com.travary.app.CountdownWidget`
+  ("Travary Countdown Widget"), registered 16 Oct with the App Group
   `group.com.travary.app` (like the share extension's), so device and
-  TestFlight builds sign. Then add the widget on a real iPhone and tap its
-  tag (`docs/COUNTDOWN_WIDGET.md`). It has its own privacy manifest
+  TestFlight builds can sign. It has its own privacy manifest
   (`ios/CountdownWidget/PrivacyInfo.xcprivacy`, no reasons needed).
+- [ ] Add the countdown widget on a real iPhone and tap its tag
+  (`docs/COUNTDOWN_WIDGET.md`); so far it's been tried on the simulator
+  and an Android emulator.
 - [x] Android targets API 36 (Flutter's default), which Play requires of
   new apps.
 - [ ] **Decide now: iPhone only, or iPad too?** The iOS target says both
