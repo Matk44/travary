@@ -31,6 +31,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 SITE = Path(__file__).resolve().parent
 REPO = SITE.parent
+# The app bundles its art as WebP; the PNG masters it was made from live
+# here (the same path without assets/), the best source for the site.
+ART_MASTERS = REPO / "art_masters" / "bundled" / "art"
 OUT = SITE / "public"
 CACHE = SITE / ".cache"
 
@@ -197,13 +200,14 @@ def build_assets() -> None:
             if f.exists():
                 IMAGES[f"{name}:{pack}"] = _encode(f, f"{name.replace('_', '-')}/{pack}.webp", w, 80)
     common = REPO / "assets" / "art" / "common"
-    IMAGES["postcard:anywhere"] = _encode(common / "trip_postcard_anywhere.png", "postcard/anywhere.webp", 960, 80)
-    IMAGES["postcard-sm:anywhere"] = _encode(common / "trip_postcard_anywhere.png", "postcard/anywhere-480.webp", 480, 78)
+    masters = ART_MASTERS / "common"
+    IMAGES["postcard:anywhere"] = _encode(masters / "trip_postcard_anywhere.png", "postcard/anywhere.webp", 960, 80)
+    IMAGES["postcard-sm:anywhere"] = _encode(masters / "trip_postcard_anywhere.png", "postcard/anywhere-480.webp", 480, 78)
     IMAGES["countdown:anywhere"] = _encode(common / "countdown_postcard_anywhere.webp", "countdown/anywhere.webp", 560, 72)
     for name, w in EPHEMERA.items():
-        IMAGES[f"ephemera:{name}"] = _encode(common / f"{name}.png", f"ephemera/{name}.webp", w, 82)
-    IMAGES["linen"] = _encode(common / "linen.png", "ephemera/linen.webp", 512, 70)
-    for f in sorted((REPO / "assets" / "art" / "icons").glob("*.png")):
+        IMAGES[f"ephemera:{name}"] = _encode(masters / f"{name}.png", f"ephemera/{name}.webp", w, 82)
+    IMAGES["linen"] = _encode(masters / "linen.png", "ephemera/linen.webp", 512, 70)
+    for f in sorted((ART_MASTERS / "icons").glob("*.png")):
         IMAGES[f"icon:{f.stem}"] = _encode(f, f"icon/{f.stem}.webp", 112, 85)
     for f in sorted((REPO / "assets" / "onboarding" / "stages").glob("*.webp")):
         # The stage down to a little below the floor line, where Travi stands.
@@ -261,7 +265,7 @@ def og_image(slug: str, title: str, art_key: str, kicker: str) -> str:
     cached = CACHE / "og" / f"{slug}-{key}.jpg"
     if not cached.exists():
         cached.parent.mkdir(parents=True, exist_ok=True)
-        linen = Image.open(REPO / "assets" / "art" / "common" / "linen.png").convert("RGB").resize((630, 630))
+        linen = Image.open(ART_MASTERS / "common" / "linen.png").convert("RGB").resize((630, 630))
         canvas = Image.new("RGB", (1200, 630))
         for x in range(0, 1200, 630):
             canvas.paste(linen, (x, 0))
@@ -310,14 +314,15 @@ def _art_source(art_key: str) -> Path:
     kind, _, ident = art_key.partition(":")
     packs = REPO / "art_packs" / "sources"
     if kind in ("postcard", "countdown") and ident == "anywhere":
-        return REPO / "assets" / "art" / "common" / ("trip_postcard_anywhere.png" if kind == "postcard"
-                                                     else "countdown_postcard_anywhere.webp")
+        if kind == "postcard":
+            return ART_MASTERS / "common" / "trip_postcard_anywhere.png"
+        return REPO / "assets" / "art" / "common" / "countdown_postcard_anywhere.webp"
     if kind == "postcard":
         return packs / ident / "common" / "trip_postcard.webp"
     if kind == "countdown":
         return packs / ident / "common" / "countdown_postcard.webp"
     if kind == "ephemera":
-        return REPO / "assets" / "art" / "common" / f"{ident}.png"
+        return ART_MASTERS / "common" / f"{ident}.png"
     if kind == "screen":
         return REPO / "build" / "marketing_screens" / f"{ident}.png"
     return REPO / "art_packs" / "sources" / "country_jp" / "common" / "trip_postcard.webp"
@@ -822,7 +827,7 @@ LEGAL = [
      "2026-10-15", "Updated"),
     ("privacy", "Privacy Policy | Travary", "Privacy Policy",
      "How Travary handles your trips, bookings and account: what's stored, who processes it, and how to delete it. Passports never leave your phone.",
-     "2026-10-15", "Effective"),
+     "2026-10-16", "Effective"),
     ("terms", "Terms of Use | Travary", "Terms of Use",
      "The terms for using Travary, the holiday organiser app, including the Annual Pass and the Holiday Pass.",
      "2026-10-15", "Effective"),

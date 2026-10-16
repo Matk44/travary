@@ -1,4 +1,4 @@
-# Launch checklist (14 October 2026)
+# Launch checklist (14 October 2026, checked again 16 October)
 
 What's left before Travary goes to Google Play and the App Store. Ticked
 items were checked or done on 14 Oct 2026. "You" means the owner (console
@@ -45,14 +45,12 @@ work, accounts, money); everything else can be done in this repo.
 
 ## 3. Flight data
 
-- [ ] **You:** buy the AeroDataBox base plan on API.Market ($7.50, 5,000
-  units). Until then every lookup fails. On 14 Oct the board answered
-  "That flight couldn't be found on that day" for JL 5.
-- [ ] Then set `FLIGHT_BILLING_DAY` in `functions/.env` to the day the
-  plan renews and redeploy the functions.
-- [ ] Store builds turn flight lookup on. To build before the plan is
-  bought, run `FLIGHT_LOOKUP=false tool/build_release.sh`.
-- [ ] Test a flight alert on a real iPhone.
+- [x] The AeroDataBox Pro plan ($7.50, 5,000 units, schedules 180 days
+  ahead) was bought on API.Market (15 Oct) and the key works.
+- [x] `FLIGHT_BILLING_DAY=15` in `functions/.env` (07:28, 16 Oct) and the
+  functions redeployed an hour later (08:28), so it's live.
+- [ ] Test a flight alert on a real iPhone (a test push reached the
+  simulator on 15 Oct).
 
 ## 4. Platform requirements
 
@@ -101,9 +99,8 @@ work, accounts, money); everything else can be done in this repo.
   places for automatic looks) until the traveller taps Allow on the
   consent sheet: at Smart Import before the file is chosen, from a trip
   page's "Dress up this trip?" offer, at Trip details' "Automatic", or
-  from Profile's switch. The privacy policy's source says so too
-  (`website/content/legal/privacy.html`); **redeploy travary.app** for it
-  to show. In the App Review notes, mention the sheet.
+  from Profile's switch. The privacy policy says so too (live on
+  travary.app since 16 Oct). In the App Review notes, mention the sheet.
 - [ ] **Closed test first (confirmed 14 Oct).** "Dream Prayer Developer"
   is a personal account, and Travary's dashboard says it must finish
   setting up, **complete a closed test** (at least 12 testers for 14 days
@@ -174,6 +171,20 @@ no tester flags.
   bundle 129 MB and 86 MB per phone, iOS app 153 MB, after the WebP art:
   see the 200 MB limit above), all 1,218 app tests and 120 server tests
   pass, and analyze and format are clean.
+- [x] **Crash reporting** (16 Oct): Firebase Crashlytics in release
+  builds (Flutter, Dart and native crashes), never linked to an account.
+  Checked in an Android release build on the emulator (Crashlytics starts
+  and collects). The privacy policy says so and is live on travary.app.
+  **You:** add crash data to the store forms (`docs/ANALYTICS.md`, "Store
+  privacy forms"): Apple *Diagnostics → Crash Data*, Play *App info and
+  performance → Crash logs*, both not linked to identity.
+- [ ] **Run it on a real iPhone and a real Android phone** before inviting
+  testers: a TestFlight build and the Play internal track. Nothing so far
+  has been checked off a simulator or emulator: Apple and Google sign-in,
+  a sandbox purchase, Face ID on travel documents, the share extension,
+  reminders and a flight alert.
+- [ ] Push to GitHub: 9 commits on `design/c2-art` (15 and 16 Oct, the
+  WebP art and the AI consent included) exist only on this Mac.
 - [ ] Keep disk space free: the Mac filled up twice (14 and 15 Oct)
   building Android and iOS releases one after the other. An archive needs
   several GB; `build/` alone holds about 4 GB after both.

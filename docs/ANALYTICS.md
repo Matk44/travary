@@ -71,6 +71,15 @@ manifest) and ad personalisation signals. No user ID is set.
 - **Google Play → Data safety:** *App activity → App interactions* and
   *App info and performance*, collected, not shared, for analytics. No
   advertising ID.
+- **Crash reports** (Firebase Crashlytics, release builds since 16 Oct
+  2026, `useCrashReporting` in `app/bootstrap.dart`): Apple *Diagnostics →
+  Crash Data* (and *Performance Data* is not collected), used for App
+  Functionality, *not linked to identity*, *not used for tracking*. Play
+  *App info and performance → Crash logs* and *Diagnostics*, collected,
+  not shared, for app functionality and analytics; *Device or other IDs*
+  covers the random Crashlytics installation ID. No user ID is ever set on
+  Crashlytics, which keeps reports unlinked; keep it that way, or both
+  forms change to "linked".
 - **Flight alerts (push):** Play's form likely needs *Device or other IDs*
   (the notification token), collected for app functionality, not shared.
   Apple doesn't ask about push tokens on their own; check both forms when

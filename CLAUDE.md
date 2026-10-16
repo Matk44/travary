@@ -487,6 +487,13 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   collection is off in Info.plist/AndroidManifest until then, and there's no
   advertising ID on either platform). RevenueCat gets the analytics ID so its
   Firebase integration can send purchases there too. `docs/ANALYTICS.md`.
+- Crash reports: **Firebase Crashlytics** from release builds
+  (`useCrashReporting`: Flutter, Dart and native crashes), off in the
+  platform config until then like analytics, never linked to an account
+  (no user ID is set; the store forms say "not linked"). Android needs the
+  Crashlytics Gradle plugin or the SDK won't start; iOS release builds
+  upload their dSYMs in the "[Crashlytics] Upload symbols" phase.
+  `test/tool/platform_config_test.dart` keeps all of that in place.
 
 **Public pages** (support, privacy, terms, delete your data) live on
 travary.app: `/support`, `/privacy`, `/terms`, `/delete-account`, built

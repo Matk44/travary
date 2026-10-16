@@ -6,6 +6,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -209,7 +210,10 @@ Future<Dependencies> bootstrap() async {
   // Signs in first (in the background in demo mode); never awaited.
   unawaited(artPacks.refreshCatalog());
   final auth = cloud ? FirebaseAuthService(ensureSignedIn: ensureSignedIn) : null;
-  if (cloud) await useFirebaseAnalytics();
+  if (cloud) {
+    await useFirebaseAnalytics();
+    await useCrashReporting();
+  }
   return Dependencies(
     repositoryFor: (userId) => demo ?? FirestoreTravelRepository(firestore: FirebaseFirestore.instance, userId: userId),
     initialUserId: initialUserId,
@@ -265,6 +269,27 @@ Future<void> useFirebaseAnalytics() async {
     RevenueCatIdentity.analyticsInstanceId = () => analytics.appInstanceId;
   } catch (_) {
     // Analytics never stops the app starting.
+  }
+}
+
+/// Crashes go to Firebase Crashlytics from release builds: what broke (the
+/// error and its stack trace), the app version, and the phone's model and
+/// system. Never linked to an account (no user ID is set) and never a
+/// booking's contents. Collection is off in the platform config until this
+/// turns it on, so debug runs report nothing. Native crashes are caught by
+/// Crashlytics itself; these hooks add the ones in Flutter and Dart.
+Future<void> useCrashReporting() async {
+  if (kDebugMode) return;
+  try {
+    final crashlytics = FirebaseCrashlytics.instance;
+    await crashlytics.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = crashlytics.recordFlutterFatalError;
+    PlatformDispatcher.instance.onError = (error, stack) {
+      unawaited(crashlytics.recordError(error, stack, fatal: true));
+      return true;
+    };
+  } catch (_) {
+    // Crash reporting never stops the app starting.
   }
 }
 

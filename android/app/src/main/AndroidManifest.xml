@@ -25,6 +25,8 @@
         <meta-data android:name="firebase_analytics_collection_enabled" android:value="false" />
         <meta-data android:name="google_analytics_adid_collection_enabled" android:value="false" />
         <meta-data android:name="google_analytics_default_allow_ad_personalization_signals" android:value="false" />
+        <!-- So do crash reports (release builds). -->
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />
         <!-- Flight alerts: their own channel (made in MainActivity), a plane in the status bar. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

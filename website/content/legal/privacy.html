@@ -6,6 +6,7 @@
         <li><strong>Passports, visas and other travel documents</strong> are stored only on your phone, behind its lock. We never receive them.</li>
         <li><strong>Smart Import</strong> sends the file you choose to Google's Gemini AI to read the booking. We don't keep the file on our servers.</li>
         <li><strong>Usage statistics</strong> (Google Firebase Analytics) count which actions happen in the app, never what you've booked or typed.</li>
+        <li><strong>Crash reports</strong> (Google Firebase Crashlytics) tell us when the app breaks and where in its code, so we can fix it. They aren't linked to your account.</li>
         <li><strong>Flight alerts</strong> (optional, on trips with a pass) use the flight number and date of your flights, and your phone's notification token.</li>
         <li><strong>No advertising, no selling data, no tracking</strong> you across other apps or websites.</li>
         <li><strong>You can delete your data</strong> at any time: see <a href="/delete-account">Delete your data</a>.</li>
@@ -36,6 +37,9 @@
 
     <h3>Usage statistics</h3>
     <p>Travary uses <strong>Google Firebase Analytics</strong> to understand how the app is used, for example how many people finish setting up a holiday or open the pass options. It records which actions happen (such as "booking added" or "pass options shown"), counts, and basic device information (device model, operating system, app version and approximate country from your IP address). For a travel document it records only that one was added and its type (such as "passport"). It never records your destinations, bookings, document details, email address or anything you type. Each installation gets a random analytics ID; we don't attach your account to it. Travary switches off the advertising identifier on both iPhone and Android, and doesn't share these statistics with advertisers. Google processes them on our behalf, and RevenueCat is given the same random analytics ID so purchases can be counted alongside.</p>
+
+    <h3>Crash reports</h3>
+    <p>If the app crashes or hits an error it can't recover from, it sends a crash report to <strong>Google Firebase Crashlytics</strong> so we can find and fix the problem. A report contains what went wrong and where in the app's code (the error and its stack trace), the app version, basic device information (device model, operating system and its version, free memory and storage, whether the app was in the foreground) and a random ID for this installation, so we can tell how many phones a problem affects. We don't attach your account, name or email to crash reports, and the app doesn't add your bookings, travel documents or anything you've typed to them. Google processes them on our behalf.</p>
 
     <h3>Flight alerts and notifications</h3>
     <p>Flight alerts are optional and work on trips covered by an Annual Pass or Holiday Pass, for everyone on the trip. When you add a flight to such a trip, our server keeps a watch entry with the flight number, the date and the trip it belongs to (not your name). If you allow notifications, we also keep this phone's <strong>notification token</strong> (issued by Apple or Google) with your account identifier and phone type, so we know where to send an alert. Travary asks for permission once, when you first open a flight on a covered trip, never when the app starts. You can turn notifications off at any time in your phone's settings.</p>
@@ -90,6 +94,7 @@
         <tbody>
           <tr><td>Google (Firebase: Authentication, Cloud Firestore, Cloud Storage, Cloud Functions)</td><td>Your account, trips, bookings, checklists, ticket backups and our server code</td></tr>
           <tr><td>Google (Firebase Analytics)</td><td>Usage statistics, as described above</td></tr>
+          <tr><td>Google (Firebase Crashlytics)</td><td>Crash reports, as described above</td></tr>
           <tr><td>Apple Push Notification service and Google (Firebase Cloud Messaging)</td><td>Delivering flight alerts to your phone</td></tr>
           <tr><td>Google (Gemini API, Places API)</td><td>Smart Import and automatic trip looks</td></tr>
           <tr><td>Apple and Google sign-in</td><td>Signing in, if you choose to</td></tr>
@@ -107,7 +112,7 @@
     <ul>
       <li>We don't sell or rent your personal information, or share it for advertising.</li>
       <li>We don't show ads or use advertising identifiers, and we don't track you across other companies' apps or websites.</li>
-      <li>We don't use the usage statistics to profile you or to build an advertising profile. They count actions only, and we keep them free of your booking contents and travel documents.</li>
+      <li>We don't use the usage statistics or crash reports to profile you or to build an advertising profile. They count actions and errors only, and we keep them free of your booking contents and travel documents.</li>
     </ul>
 
     <h2 id="retention">7. How long we keep it</h2>
@@ -120,6 +125,7 @@
       <li><strong>Flight alert watch entries:</strong> until about three days after the flight, or sooner if the booking or trip is deleted or the trip is no longer covered by a pass.</li>
       <li><strong>Notification tokens:</strong> until you delete your account, or sooner if Apple or Google tells us the token no longer works.</li>
       <li><strong>Usage statistics:</strong> kept by Google Analytics for a limited period set in our Analytics settings, and not linked to your account.</li>
+      <li><strong>Crash reports:</strong> 90 days, then deleted by Firebase Crashlytics.</li>
       <li><strong>Server logs:</strong> kept for a limited time by Google Cloud (normally 30 days) to run and secure the service.</li>
       <li><strong>Records we must keep by law</strong> (such as purchase records the stores hold) are kept by Apple, Google or RevenueCat as their terms and the law require.</li>
     </ul>

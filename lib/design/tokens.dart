@@ -664,7 +664,11 @@ ThemeData buildTravaryTheme() {
     scaffoldBackgroundColor: TravaryColors.linen,
   );
   return base.copyWith(
-    textTheme: TravaryText.useGoogleFonts ? GoogleFonts.interTextTheme(base.textTheme) : base.textTheme,
+    // Renders with the real fonts loaded locally (visual QA, the website's
+    // screens) give unstyled text, such as a search hint, Inter too.
+    textTheme: TravaryText.useGoogleFonts
+        ? GoogleFonts.interTextTheme(base.textTheme)
+        : base.textTheme.apply(fontFamily: TravaryText.sansFamily),
     appBarTheme: const AppBarTheme(
       backgroundColor: TravaryColors.linen,
       foregroundColor: TravaryColors.ink,
