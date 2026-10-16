@@ -35,7 +35,7 @@ postmarks, perforated stamps, ticket stubs. Soft, warm daylight from the upper l
 Gentle paper grain. Gouache and papercraft illustration, never glossy 3D render, never
 neon, no mesh gradients, no stock-photo people, no clutter. Think premium, calm and
 characterful. The attached style board has the palette, type and materials; the contact
-sheet shows all ten layouts together, so the set must feel like one family.
+sheet shows all the layouts together, so the set must feel like one family.
 
 PALETTE: linen #EFE8DC, paper #F8F4EC, ink #1C2A47, navy wall #024A6D, folio navy
 #102B46, coral #FA815A, coral on linen #CF5F3C, cream #FFF1D9, kraft #C9A77D,
@@ -318,6 +318,30 @@ Words, exactly:
 
 Travi: the attached wave pose, holding his navy folio and waving goodbye, standing on the
 floor in front of the phone's lower-left corner as in my layout. Soft contact shadow.
+```
+
+### Frame 11: The home-screen widget
+
+Attach: `references/green/11-widget-green.jpg`, `references/layout/11-widget.jpg`,
+approved frame 01
+
+```text
+Frame 11, the home-screen widget. Edit the first attached image (11-widget-green) into
+the finished screenshot, keeping its composition exactly (phone, size, position, green
+screen). The second image shows what goes on the screen, the iPhone home screen with
+Travary's countdown widget, for your reference only; don't draw it.
+
+Background: Travi's workshop, the deep navy wall (#024A6D) with arches at both sides
+opening onto a Florida lagoon at sunset: palm trees, tropical flowers, a Ferris wheel far
+off, calm water reflecting a low orange sun. No castle. Cream floor. Warm evening light
+from the arches.
+
+Words, exactly:
+  Line 1 (cream #FFF1D9): Your countdown,
+  Line 2 (coral #FA815A): on your home screen.
+  Under it (warm cream #E6D6BD): Days to go at a glance, with Travi each morning.
+
+No Travi outside the phone (he pops up inside the widget on the real screen).
 ```
 
 ---

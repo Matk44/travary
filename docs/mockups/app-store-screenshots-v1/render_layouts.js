@@ -13,6 +13,9 @@ const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
 const here = __dirname;
 const data = JSON.parse(fs.readFileSync(path.join(here, 'frames.json'), 'utf8'));
 const final = process.argv.includes('--final');
+// --only=11,12 renders just those frames (and the contact sheet)
+const only = (process.argv.find(a => a.startsWith('--only=')) || '').slice(7).split(',').filter(Boolean);
+const wanted = f => only.length === 0 || only.includes(f.id);
 
 async function shoot(page, hash, size, file, type) {
   await page.setViewportSize(size);
@@ -36,22 +39,22 @@ async function shoot(page, hash, size, file, type) {
   const ref = p => path.join(here, 'references', p);
 
   if (final) {
-    for (const f of data.frames) {
+    for (const f of data.frames.filter(wanted)) {
       const capture = path.join(here, 'captures', `${f.id}-${f.slug}.png`);
       if (!fs.existsSync(capture)) { console.log(`  skip ${f.id}: no captures/${f.id}-${f.slug}.png`); continue; }
       await shoot(page, `${f.id}-final`, canvas, path.join(here, 'final', `${f.id}-${f.slug}.png`), 'png');
     }
   } else {
-    for (const id of ['06', '08', '09']) {
+    for (const id of ['06', '08', '09'].filter(id => only.length === 0 || only.includes(id))) {
       const f = data.frames.find(x => x.id === id);
       await shoot(page, `screen-${id}`, { width: data.phone.screen.width, height: data.phone.screen.height }, path.join(here, f.screen), 'jpeg');
     }
-    for (const f of data.frames) {
+    for (const f of data.frames.filter(wanted)) {
       await shoot(page, f.id, canvas, ref(`layout/${f.id}-${f.slug}.jpg`), 'jpeg');
       await shoot(page, `${f.id}-green`, canvas, ref(`green/${f.id}-${f.slug}-green.jpg`), 'jpeg');
     }
-    await shoot(page, 'style', { width: 2400, height: 1500 }, ref('style/style-board.jpg'), 'jpeg');
-    await shoot(page, 'sheet', { width: 36 * 2 + 396 * 10 + 28 * 9, height: 860 + 72 }, ref('contact-sheet.jpg'), 'jpeg');
+    if (only.length === 0) await shoot(page, 'style', { width: 2400, height: 1500 }, ref('style/style-board.jpg'), 'jpeg');
+    await shoot(page, 'sheet', { width: 36 * 2 + 396 * data.frames.length + 28 * (data.frames.length - 1), height: 860 + 72 }, ref('contact-sheet.jpg'), 'jpeg');
   }
   await browser.close();
 })();

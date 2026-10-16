@@ -45,8 +45,8 @@ organize, colours → colors.
 
 ## Screenshots
 
-Ten frames, linen and navy in turn, one phone centred at the same size in
-every frame, Travi in front of its lower corner where he appears. The first
+Eleven frames (ten uploaded), linen and navy in turn, one phone centred at
+the same size in every frame, Travi in front of its lower corner where he appears. The first
 three show in search on iOS 26 and earlier, so they stand alone.
 
 | # | Caption | Screen | Travi |
@@ -61,6 +61,18 @@ three show in search on iOS 26 and earlier, so they stand alone.
 | 08 | Your passport stays / on your phone. | Travel documents, unlocked (demo) | none |
 | 09 | Packed / together. | The Kyoto packing list (cloud) | proud, overlapping |
 | 10 | Every trip gets / its own postcard. | The Trips tab, three coming trips (cloud) | wave, overlapping |
+| 11 | Your countdown, / on your home screen. | The home screen with the medium countdown widget | in the widget |
+
+**Upload order: 01–09, then 11.** App Store Connect takes at most 10
+screenshots per size. The widget (free, shipped on main 16 Oct 2026) closes
+the story; 10 (Trips) moves to the countdown custom product page. Capture 11
+on a home-screen page with only the widget, Travary's icon and Apple's
+apps, with Travi up in the widget (before noon, or within four seconds of
+tapping the tag). The home-screen name "Itinerary App - Travary" is cut off
+under the icon ("ItineraryApp-Tr…") and labels the widget in full: set the
+display name to "Travary" (`CFBundleDisplayName`, Android's label) before
+capturing, which the launch checklist already asks to decide. The listing's
+name stays "Itinerary App - Travary".
 
 Capture in the iPhone 17 Pro Max simulator (1320 × 2868) and upload a
 1206 × 2622 copy too: Apple's page names the 6.3-inch size as the required
@@ -84,8 +96,10 @@ simulator (`xcrun simctl io booted recordVideo`) and take the frame.
   and countdown screens, Travi presenting them. It replaces the three
   screenshot thumbnails for iOS 27 users.
 - **Custom product pages linked to keywords** (up to 70): packing (packing,
-  list, checklist), countdown, family (family, kids), documents (passport),
-  flights (flight). Seasonal headers wait, pre-approved, in the Asset Library.
+  list, checklist), countdown (the widget first, then 02 and 10), family
+  (family, kids), documents (passport), flights (flight). "Widget" is worth
+  a place in the keyword field now ("countdown widget"), in place of
+  "offline". Seasonal headers wait, pre-approved, in the Asset Library.
 - No prices, discounts, URLs or awards in header and search assets.
 
 ## Never in the listing

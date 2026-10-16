@@ -23,6 +23,7 @@ html, body { margin: 0; background: #fff; }
 .bg-linen { background: var(--linen) url(../../../assets/art/common/linen.webp) 0 0 / 1024px; }
 .bg-stage { background: #024A6D; }
 .stage { position: absolute; left: 0; width: 1320px; height: auto; }
+.stage.faded { -webkit-mask-image: linear-gradient(transparent 0, #000 260px); mask-image: linear-gradient(transparent 0, #000 260px); }
 .shade { position: absolute; inset: 0; pointer-events: none; }
 .bg-linen .shade { background: radial-gradient(120% 70% at 50% 35%, rgba(255,255,255,.18), rgba(120,96,64,.10) 70%, rgba(80,60,40,.16)); }
 .bg-stage .shade { background: linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,0) 22%); }
@@ -188,8 +189,11 @@ html, body { margin: 0; background: #fff; }
 
   function frame(f, mode) {
     const bg = f.bg === 'linen' ? 'bg-linen' : 'bg-stage';
-    const stage = f.bg === 'stage' ? `<img class="stage" src="../../../${esc(f.stage)}" style="top:${f.stageTop || 0}px" alt="">` : '';
-    return `<div class="frame ${bg}">${stage}<div class="shade"></div>${ephemera(f)}
+    // A scene moved down (stageTop) fades into the same wall drawn unmoved behind it, so no seam shows
+    const shifted = f.bg === 'stage' && f.stageTop > 0;
+    const stage = f.bg === 'stage' ? `<img class="stage${shifted ? ' faded' : ''}" src="../../../${esc(f.stage)}" style="top:${f.stageTop || 0}px" alt="">` : '';
+    const wall = shifted ? ` style="background:#024A6D url(../../../${esc(f.stage)}) 0 0 / 1320px auto no-repeat"` : '';
+    return `<div class="frame ${bg}"${wall}>${stage}<div class="shade"></div>${ephemera(f)}
       <div class="cap"><h1><span>${esc(f.headline[0])}</span><span>${esc(f.headline[1])}</span></h1><p>${esc(f.sub)}</p></div>
       ${phoneHTML(f, mode)}${tag(f)}${trav(f)}</div>`;
   }

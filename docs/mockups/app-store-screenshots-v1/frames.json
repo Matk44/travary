@@ -84,6 +84,13 @@
       "screen": "references/screens/10-trips.jpg",
       "travi": { "pose": "wave", "side": "left", "height": 600, "offset": -70, "mirror": false },
       "capture": "The Trips tab with three coming trips on postcards"
+    },
+    {
+      "id": "11", "slug": "widget", "bg": "stage", "stage": "assets/onboarding/stages/city_us_orlando.webp", "stageTop": 140,
+      "headline": ["Your countdown,", "on your home screen."],
+      "sub": "Days to go at a glance, with Travi each morning.",
+      "screen": "references/screens/11-widget.jpg",
+      "capture": "The home screen with the medium countdown widget, Travi up in it, before noon"
     }
   ]
 }
