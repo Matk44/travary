@@ -36,6 +36,15 @@
 				<string>ShareMedia-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- The countdown widget opens its trip: travary://trip/<id>. -->
+				<string>travary</string>
+			</array>
+		</dict>
 	</array>
 	<!-- Where the share extension leaves shared files. -->
 	<key>AppGroupId</key>

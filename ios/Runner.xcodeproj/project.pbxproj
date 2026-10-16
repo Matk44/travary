@@ -8,15 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		00F0B687DD778C583D32DC38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E76DB8933E7FC6B11C62C0C6 /* Foundation.framework */; };
+		03344C8E71E693B80AD50EB9 /* CountdownData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366FB853EFC4F8EA625A933 /* CountdownData.swift */; };
+		12F074B9B0A4BC9E414C31B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E76DB8933E7FC6B11C62C0C6 /* Foundation.framework */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		18EF306F71891BCA6A758CD5 /* CountdownViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC05EC2741AAABACC07A1A8 /* CountdownViews.swift */; };
 		23F7CC01D8FA4D073F22D322 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D52E355B270C9120ED999F /* Pods_Runner.framework */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		605AF28CF0023CBDEF553B5E /* CountdownWidgetChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F65D136D7F0B661F48D2C9D /* CountdownWidgetChannel.swift */; };
+		66E53E8E916697AAC058A869 /* CountdownWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4DB07E0CAD183C77412C8D8F /* CountdownWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		76F41688AD35F434D9DABCEC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = CAA488570BA35F976B91220E /* PrivacyInfo.xcprivacy */; };
+		7F22CABF01829A565EAFEB26 /* CountdownFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D5DEAF35736A35229E9A1 /* CountdownFace.swift */; };
 		827E15774534D923DC9CC18C /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719CB224587C0532CBC5362 /* ShareViewController.swift */; };
+		93456DBDD6773675901D3BE6 /* CountdownStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E206405C42A2EB7638E7F8 /* CountdownStage.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		AC3A6A141C6F4EFE97DB17C9 /* CountdownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D51FDD529B32A7A35562AB /* CountdownWidget.swift */; };
 		CB68376D8B47DC2A6013D3DD /* ShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3D9AEA68002DC99BD2A5CAE1 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E3F733AC278BFFD1164266E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97474459AA2FAE7AB123B29F /* GoogleService-Info.plist */; };
 		EA289F6927207D101BBC9F95 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 67141E8A8BBA050F9539C722 /* PrivacyInfo.xcprivacy */; };
@@ -30,6 +39,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
+		};
+		3EC556D8B4440F9F9D10B4DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0FCA32C2E5FFE213E409AAB1;
+			remoteInfo = CountdownWidget;
 		};
 		B9ED52FF410E312B191E3230 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -48,6 +64,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				CB68376D8B47DC2A6013D3DD /* ShareExtension.appex in Embed Foundation Extensions */,
+				66E53E8E916697AAC058A869 /* CountdownWidget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +82,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02E206405C42A2EB7638E7F8 /* CountdownStage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountdownStage.swift; sourceTree = "<group>"; };
+		0360504ABE4766ED11A3929E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		19981DB5D4AAF520CB2E6406 /* ShareExtension.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
@@ -72,16 +91,22 @@
 		2379A4E54CE49B02F648F4E1 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		34D51FDD529B32A7A35562AB /* CountdownWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountdownWidget.swift; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3D9AEA68002DC99BD2A5CAE1 /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E64C6E7F089A1864964B892 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
+		4DB07E0CAD183C77412C8D8F /* CountdownWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CountdownWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		57F3CD88197B033DE6F7E91F /* CountdownWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = CountdownWidget.entitlements; sourceTree = "<group>"; };
 		60D52E355B270C9120ED999F /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62CB10EFB08F8CD6EA2D757C /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		67141E8A8BBA050F9539C722 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		6AC05EC2741AAABACC07A1A8 /* CountdownViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountdownViews.swift; sourceTree = "<group>"; };
+		6E9D5DEAF35736A35229E9A1 /* CountdownFace.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountdownFace.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7E3C42ABFF4D1DCD9A2CC3F4 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		8F65D136D7F0B661F48D2C9D /* CountdownWidgetChannel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountdownWidgetChannel.swift; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97474459AA2FAE7AB123B29F /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -92,6 +117,8 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4E77AEAC2E47FA91871E093 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		B719CB224587C0532CBC5362 /* ShareViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		CAA488570BA35F976B91220E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		D366FB853EFC4F8EA625A933 /* CountdownData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountdownData.swift; sourceTree = "<group>"; };
 		D9397E9B3E91197B32DE3A16 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E76DB8933E7FC6B11C62C0C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F10F44B8735F7421972D3BAD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +146,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F0B687DD778C583D32DC38 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6981012959ABD89674990B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12F074B9B0A4BC9E414C31B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +198,22 @@
 			path = ShareExtension;
 			sourceTree = "<group>";
 		};
+		8B37917E58119E12D82A8742 /* CountdownWidget */ = {
+			isa = PBXGroup;
+			children = (
+				34D51FDD529B32A7A35562AB /* CountdownWidget.swift */,
+				D366FB853EFC4F8EA625A933 /* CountdownData.swift */,
+				6E9D5DEAF35736A35229E9A1 /* CountdownFace.swift */,
+				02E206405C42A2EB7638E7F8 /* CountdownStage.swift */,
+				6AC05EC2741AAABACC07A1A8 /* CountdownViews.swift */,
+				CAA488570BA35F976B91220E /* PrivacyInfo.xcprivacy */,
+				0360504ABE4766ED11A3929E /* Info.plist */,
+				57F3CD88197B033DE6F7E91F /* CountdownWidget.entitlements */,
+			);
+			name = CountdownWidget;
+			path = CountdownWidget;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +236,7 @@
 				41F76A651273B66EC96A0758 /* Frameworks */,
 				97474459AA2FAE7AB123B29F /* GoogleService-Info.plist */,
 				847B08D2FBDE7FE47EA9A8D6 /* ShareExtension */,
+				8B37917E58119E12D82A8742 /* CountdownWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +246,7 @@
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
 				3D9AEA68002DC99BD2A5CAE1 /* ShareExtension.appex */,
+				4DB07E0CAD183C77412C8D8F /* CountdownWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,6 +262,7 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				8F65D136D7F0B661F48D2C9D /* CountdownWidgetChannel.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -245,6 +299,23 @@
 			name = ShareExtension;
 			productName = ShareExtension;
 			productReference = 3D9AEA68002DC99BD2A5CAE1 /* ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		0FCA32C2E5FFE213E409AAB1 /* CountdownWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61DD1CFC942D0867194023DE /* Build configuration list for PBXNativeTarget "CountdownWidget" */;
+			buildPhases = (
+				F43CB1AAD9991C5DA2E6ED32 /* Sources */,
+				D6981012959ABD89674990B0 /* Frameworks */,
+				35D288000DBFDB521F92D00D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CountdownWidget;
+			productName = CountdownWidget;
+			productReference = 4DB07E0CAD183C77412C8D8F /* CountdownWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		331C8080294A63A400263BE5 /* RunnerTests */ = {
@@ -286,6 +357,7 @@
 			);
 			dependencies = (
 				F40185613AA473FEF152BC97 /* PBXTargetDependency */,
+				E5253A85A13F3C007E0C7249 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -328,6 +400,7 @@
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
 				0B8A3634367C673FC9E368F9 /* ShareExtension */,
+				0FCA32C2E5FFE213E409AAB1 /* CountdownWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -337,6 +410,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35D288000DBFDB521F92D00D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76F41688AD35F434D9DABCEC /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +601,19 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				605AF28CF0023CBDEF553B5E /* CountdownWidgetChannel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F43CB1AAD9991C5DA2E6ED32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC3A6A141C6F4EFE97DB17C9 /* CountdownWidget.swift in Sources */,
+				03344C8E71E693B80AD50EB9 /* CountdownData.swift in Sources */,
+				7F22CABF01829A565EAFEB26 /* CountdownFace.swift in Sources */,
+				93456DBDD6773675901D3BE6 /* CountdownStage.swift in Sources */,
+				18EF306F71891BCA6A758CD5 /* CountdownViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +624,12 @@
 			isa = PBXTargetDependency;
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
+		};
+		E5253A85A13F3C007E0C7249 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CountdownWidget;
+			target = 0FCA32C2E5FFE213E409AAB1 /* CountdownWidget */;
+			targetProxy = 3EC556D8B4440F9F9D10B4DD /* PBXContainerItemProxy */;
 		};
 		F40185613AA473FEF152BC97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -713,6 +813,35 @@
 			};
 			name = Profile;
 		};
+		4F23A08EDF6846EF15EA3819 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB31CF90195004384FC /* Generated.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = CountdownWidget/CountdownWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3D53JGDGD;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CountdownWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.travary.app.CountdownWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile;
+		};
 		69491A1CC4D8F1E552434F87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB31CF90195004384FC /* Generated.xcconfig */;
@@ -739,6 +868,35 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		8484DB8ADA97FA63E4FEA93F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB31CF90195004384FC /* Generated.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = CountdownWidget/CountdownWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3D53JGDGD;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CountdownWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.travary.app.CountdownWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
 		};
 		97C147031CF9000F007C117D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -928,6 +1086,34 @@
 			};
 			name = Profile;
 		};
+		F05B359E482714B3DAFD453C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB31CF90195004384FC /* Generated.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = CountdownWidget/CountdownWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3D53JGDGD;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CountdownWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.travary.app.CountdownWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -947,6 +1133,16 @@
 				331C8088294A63A400263BE5 /* Debug */,
 				331C8089294A63A400263BE5 /* Release */,
 				331C808A294A63A400263BE5 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61DD1CFC942D0867194023DE /* Build configuration list for PBXNativeTarget "CountdownWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8484DB8ADA97FA63E4FEA93F /* Release */,
+				F05B359E482714B3DAFD453C /* Debug */,
+				4F23A08EDF6846EF15EA3819 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

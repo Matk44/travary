@@ -17,7 +17,7 @@ carry their type only. Parameter text is cut at 100 characters.
 | Onboarding | `onboarding_destination_chosen`, `onboarding_holiday_started` (dates set?), `onboarding_booking_started` / `_added` (kind, manual or import), `onboarding_offer_requested`, `onboarding_account_shown` / `_started` / `_linked` / `_cancelled` / `_failed` / `_skipped` (method), `onboarding_pass_desk_shown` / `_continued` (free or upgraded), `onboarding_completed` |
 | Accounts | `sign_in` (method, switched, trips moved), `sign_out`, `account_deleted`, `email_link_sent`, `email_link_failed` |
 | Paywall and purchases | `paywall_shown` / `_dismissed` (where, feature), `purchase_started` / `_purchased` / `_cancelled` / `_failed` (product ID, where) |
-| Using the app | `trip_created`, `trip_joined`, `invite_created` / `_shared`, `smart_import_read` / `_failed`, `flight_filled`, `checklist_item_added` / `_done`, `packing_item_added` / `_done`, `packing_list_copied` (count), `travel_document_saved` (type), `notifications_asked` (allowed, denied), `flight_alert_opened`, and a few others |
+| Using the app | `trip_created`, `trip_joined`, `invite_created` / `_shared`, `smart_import_read` / `_failed`, `flight_filled`, `checklist_item_added` / `_done`, `packing_item_added` / `_done`, `packing_list_copied` (count), `travel_document_saved` (type), `notifications_asked` (allowed, denied), `flight_alert_opened`, `countdown_widget_opened` (a tap on the home-screen widget), and a few others |
 
 Firebase also records its automatic events (first open, sessions, app
 updates) and device basics (model, OS, country from IP). Travary turns off

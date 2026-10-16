@@ -24,6 +24,7 @@ import '../data/onboarding_record.dart';
 import '../data/pending_pass_claims.dart';
 import '../data/purchase_server.dart';
 import '../data/push_service.dart';
+import '../data/countdown_widget_bridge.dart';
 import '../data/reminder_scheduler.dart';
 import '../data/shared_files.dart';
 import '../data/purchase_service.dart';
@@ -97,6 +98,7 @@ class Dependencies {
     this.flightStatus,
     this.push,
     this.reminders,
+    this.countdownWidget,
     this.sharedFiles,
     required this.artCatalog,
     required this.artPacks,
@@ -120,8 +122,8 @@ class Dependencies {
   /// mode only.
   final OnboardingRecord? onboardingRecord;
 
-  /// Links that open the app (email sign-in links). Only when email links
-  /// are set up (`TRAVARY_EMAIL_LINKS`).
+  /// Links that open the app: family invites and email sign-in links
+  /// (cloud mode), and a tap on the countdown widget (every mode).
   final Stream<Uri>? signInLinks;
   final SmartImportService smartImport;
 
@@ -144,6 +146,10 @@ class Dependencies {
   /// Reminders on this phone (local notifications), in every mode. Null in
   /// tests and on the web.
   final ReminderScheduler? reminders;
+
+  /// The countdown widget on the home screen: its folder, and redrawing
+  /// it. Null in tests and on the web.
+  final CountdownWidgetBridge? countdownWidget;
 
   /// Screenshots and PDFs shared into Travary from other apps. Null in tests
   /// and on the web.
@@ -219,9 +225,9 @@ Future<Dependencies> bootstrap() async {
     initialUserId: initialUserId,
     auth: auth,
     onboardingRecord: cloud ? FirestoreOnboardingRecord(ensureSignedIn: () async => ensureSignedIn()) : null,
-    // Links that open the app: family invites, and email sign-in links
-    // when those are on.
-    signInLinks: auth != null ? AppLinks().uriLinkStream : null,
+    // Links that open the app: family invites, email sign-in links when
+    // those are on, and the countdown widget's taps.
+    signInLinks: kIsWeb ? null : AppLinks().uriLinkStream,
     purchases: TestPurchaseService(),
     purchasesFor: !cloud || _revenueCatKey.isEmpty
         ? null
@@ -244,6 +250,7 @@ Future<Dependencies> bootstrap() async {
         : null,
     push: cloud ? FirebasePushService(ensureSignedIn: () async => ensureSignedIn()) : null,
     reminders: kIsWeb ? null : LocalReminderScheduler(),
+    countdownWidget: kIsWeb ? null : PlatformCountdownWidgetBridge(),
     sharedFiles: kIsWeb ? null : PluginSharedFiles(),
     artCatalog: artCatalog,
     artPacks: artPacks,

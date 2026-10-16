@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_widget_name">Trip countdown</string>
+    <string name="countdown_widget_description">Your next trip\'s postcard, counting down the days.</string>
+    <string name="countdown_widget_travi">Say hello to Travi</string>
+    <dimen name="countdown_widget_radius">16dp</dimen>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The linen's colour under its drawing, rounded like the launcher's widgets. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#EFE8DC" />
+    <corners android:radius="@dimen/countdown_widget_radius" />
+</shape>

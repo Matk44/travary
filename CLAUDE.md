@@ -123,6 +123,7 @@ lib/
 │               checklist ("Before you go": order, wording, ideas),
 │               ai_consent (asking before anything goes to Google's Gemini: wording, offers),
 │               packing (the packing list: wording, ideas, which list to reuse),
+│               countdown_widget (the home-screen widget's every day ahead, worded),
 │               trip_gaps (what a trip still needs: nights without a stay, the
 │               flight home), trip_hero_text (a trip's tag), booking_form_text,
 │               card_text (all card wording), countdown_text (the countdown's
@@ -139,6 +140,7 @@ lib/
 │               push_service (flight alerts: permission, this phone's token, taps);
 │               reminder_scheduler + reminder_settings (local reminders, this phone);
 │               shared_files (files shared in from other apps);
+│               countdown_widget_bridge (the home-screen widget's folder + redraw);
 │               ai_consent_record (the answer about Google's AI, this phone);
 │               auth_service (guest, Apple/Google/email-link sign-in, delete account);
 │               onboarding_record (users/{uid}.onboardingCompleted, every phone)
@@ -148,7 +150,8 @@ lib/
 │               TravelDocumentsStore (documents + lock), AppSession (account + uid),
 │               NotificationsStore (flight alerts on this phone),
 │               RemindersStore (free reminders), ShareInbox (a shared file waiting),
-│               AiConsentStore (may Smart Import and trip looks use Google's AI)
+│               AiConsentStore (may Smart Import and trip looks use Google's AI),
+│               CountdownWidgetSync (keeps the home-screen widget in step)
 ├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
 │               TaggedReservationCard on ShellFrame, DocumentStampCard, LedgerRowCard),
@@ -793,6 +796,26 @@ and belts are a bonus shown and announced only when the data has them
   `singleTask`; `MainActivity.dropUnreadableShare` drops a share Travary
   can't read, which would otherwise crash the plugin.
 
+## Home-screen countdown widget (free for everyone)
+
+Today's postcard and luggage tag on the home screen (`docs/COUNTDOWN_WIDGET.md`):
+iOS WidgetKit (`ios/CountdownWidget/`, iOS 17+, small/medium/large) and an
+Android app widget (`android/.../widget/`, resizable). The widget runs
+without the app, so `logic/countdown_widget.dart` works out every day ahead
+(Today's `focusFor`, the Trips tab's wording, Travi's `countdownReactionFor`)
+and `CountdownWidgetSync` writes it, with the trip's postcards, tag, linen,
+ink and Travi's stills, to the widget's folder (iOS: the App Group;
+Android: the app's files) only when it changes. The tag is written in the
+app's own fonts (`assets/widget/fonts/`, the files google_fonts downloads).
+Travi pops up each morning until noon and when the tag is tapped (four
+seconds; iOS 17 App Intent, Android a broadcast); a tap elsewhere opens the
+trip (`travary://trip/<id>` → `AppSession.pendingWidgetTarget` → `HomeShell`).
+Widgets can't play films: iOS animates between timeline entries, Android
+flips Travi's drawn layer. The file's version, channel and folder are
+mirrored in Swift and Kotlin (`test/tool/countdown_widget_config_test.dart`).
+Device builds need the `com.travary.app.CountdownWidget` App ID with the
+App Group.
+
 ## Travi onboarding
 
 - `OnboardingGate` shows first-run setup only to an account that hasn't been
@@ -954,7 +977,8 @@ and belts are a bonus shown and announced only when the data has them
 - Never hardcode secret keys in the app; AI runs server-side (see AI).
 - Mirrors kept equal by tests: art subjects, the visual vocabulary and ISO
   country list (Dart ↔ TypeScript), Trip Pass coverage (shared cases in
-  `functions/src/tripPassCases.json`), `appBuildNumber` ↔ pubspec's `+N`.
+  `functions/src/tripPassCases.json`), `appBuildNumber` ↔ pubspec's `+N`,
+  the countdown widget's file version and channel (Dart ↔ Swift ↔ Kotlin).
 - The Firebase CLI shadows `node` inside `emulators:exec`; scripts use
   `$npm_node_execpath`.
 

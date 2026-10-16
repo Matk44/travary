@@ -11,6 +11,9 @@ import UIKit
     // (firebase_messaging) both reach Flutter through this delegate.
     UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     GeneratedPluginRegistrant.register(with: self)
+    if let registrar = registrar(forPlugin: "CountdownWidgetChannel") {
+      CountdownWidgetChannel.register(with: registrar)
+    }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 

@@ -67,3 +67,10 @@ flutter:
     - assets/art/activity/
     - assets/art/event/
     - assets/art/note/
+    # The home-screen countdown widget's fonts (Source Serif 4 and Inter, SIL
+    # Open Font License): byte for byte the files google_fonts downloads for
+    # the app, copied to the widget so its tag reads the same. Named so
+    # google_fonts never takes them for its own.
+    - assets/widget/fonts/widget_serif_bold.ttf
+    - assets/widget/fonts/widget_sans_semibold.ttf
+    - assets/widget/fonts/widget_sans_medium.ttf

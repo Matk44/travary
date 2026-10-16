@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import '../data/auth_service.dart';
 import '../data/onboarding_record.dart';
 import '../domain/domain.dart';
+import '../logic/countdown_widget.dart';
 import '../logic/invite_link.dart';
 import 'analytics.dart';
 
@@ -19,8 +20,8 @@ class AppSession extends ChangeNotifier {
   AppSession({required this.auth, required String uid, this.onboardingRecord, Stream<Uri>? links}) : _uid = uid {
     _account = auth?.current;
     _subscription = auth?.changes.listen(_changed);
+    _links = links?.listen((link) => unawaited(_openLink(link)));
     if (auth != null) {
-      _links = links?.listen((link) => unawaited(_openLink(link)));
       unawaited(auth!.pendingEmail().then((email) => _emailLinkSentTo ??= email).then((_) => _notify()));
     }
   }
@@ -136,7 +137,26 @@ class AppSession extends ChangeNotifier {
     return code;
   }
 
+  /// What a tap on the home-screen countdown widget opens, until the home
+  /// screen takes it: the trip it showed, or `''` for Today.
+  String? get pendingWidgetTarget => _pendingWidgetTarget;
+  String? _pendingWidgetTarget;
+
+  String? takeWidgetTarget() {
+    final target = _pendingWidgetTarget;
+    _pendingWidgetTarget = null;
+    return target;
+  }
+
   Future<void> _openLink(Uri link) async {
+    if (countdownWidgetTarget(link) case final target?) {
+      track('countdown_widget_opened');
+      _pendingWidgetTarget = target;
+      _notify();
+      return;
+    }
+    // Invites and sign-in need an account (cloud mode).
+    if (auth == null) return;
     if (inviteCodeFrom(link) case final code?) {
       track('invite_link_opened');
       _pendingInviteCode = code;

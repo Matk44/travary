@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The countdown widget (CountdownWidgetProvider): three drawn layers, so
+     Travi can rise from behind the postcard (or the widget's edge) and duck
+     again, and an invisible patch over the tag that says hello to him. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/countdown_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/countdown_widget_background"
+    android:clipToOutline="true">
+
+    <ImageView
+        android:id="@+id/countdown_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no"
+        android:scaleType="fitXY" />
+
+    <ViewFlipper
+        android:id="@+id/countdown_travi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@anim/countdown_travi_rise"
+        android:outAnimation="@anim/countdown_travi_duck">
+
+        <ImageView
+            android:id="@+id/countdown_travi_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no" />
+
+        <ImageView
+            android:id="@+id/countdown_travi_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY" />
+    </ViewFlipper>
+
+    <ImageView
+        android:id="@+id/countdown_front"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no"
+        android:scaleType="fitXY" />
+
+    <FrameLayout
+        android:id="@+id/countdown_tag_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/countdown_tag_hit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/countdown_widget_travi" />
+    </FrameLayout>
+</FrameLayout>

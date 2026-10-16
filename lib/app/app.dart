@@ -12,6 +12,7 @@ import '../design/tokens.dart';
 import '../logic/formatters.dart';
 import '../state/ai_consent_store.dart';
 import '../state/app_session.dart';
+import '../state/countdown_widget_sync.dart';
 import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
 import '../state/reminders_store.dart';
@@ -105,6 +106,14 @@ class TravaryApp extends StatelessWidget {
                   settings: LocalReminderSettings(),
                   travel: context.read<TravelStore>(),
                 )..start(),
+              ),
+              // The countdown widget on the home screen, kept in step with
+              // this account's trips.
+              Provider<CountdownWidgetSync>(
+                lazy: false,
+                create: (context) =>
+                    CountdownWidgetSync(bridge: dependencies.countdownWidget, travel: context.read<TravelStore>()),
+                dispose: (_, sync) => sync.dispose(),
               ),
               ChangeNotifierProvider(
                 create: (context) => OnboardingStore(

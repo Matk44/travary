@@ -6,7 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import com.travary.app.widget.CountdownWidgetChannel
 import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.embedding.engine.FlutterEngine
 
 // A FragmentActivity, so local_auth can show the fingerprint/face prompt.
 class MainActivity : FlutterFragmentActivity() {
@@ -14,6 +16,12 @@ class MainActivity : FlutterFragmentActivity() {
         dropUnreadableShare(intent)
         super.onCreate(savedInstanceState)
         createFlightChangesChannel()
+    }
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        // The countdown widget: its folder, and drawing it again.
+        CountdownWidgetChannel.register(this, flutterEngine.dartExecutor.binaryMessenger)
     }
 
     override fun onNewIntent(intent: Intent) {

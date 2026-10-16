@@ -14,10 +14,12 @@ import '../domain/domain.dart';
 import '../features/booking/booking_actions.dart';
 import '../features/profile/profile_screen.dart';
 import '../features/today/today_screen.dart';
+import '../features/trips/trip_screen.dart';
 import '../features/trips/trips_screen.dart';
 import '../features/wallet/wallet_screen.dart';
 import '../logic/travi_cameos.dart';
 import '../state/app_session.dart';
+import '../state/countdown_widget_sync.dart';
 import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
 import '../state/reminders_store.dart';
@@ -71,6 +73,11 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
   late final RemindersStore? _reminders;
   late final ShareInbox? _shares;
   bool _readingShare = false;
+  late final AppSession? _session;
+  late final CountdownWidgetSync? _widget;
+
+  /// A trip the countdown widget was tapped on, opened once it has loaded.
+  String? _pendingTrip;
 
   /// A tapped flight alert's booking, opened as soon as it has loaded.
   String? _pendingBooking;
@@ -87,12 +94,17 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
     _reminders = context.read<RemindersStore?>()?..addListener(_reminderTapped);
     _shares = context.read<ShareInbox?>()?..addListener(_readShare);
     _store.addListener(_readShare);
+    _session = context.read<AppSession?>()?..addListener(_widgetTapped);
+    _store.addListener(_openPendingTrip);
+    _widget = context.read<CountdownWidgetSync?>();
     // A flight alert or a reminder may have opened the app.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _notificationsChanged();
       _reminderTapped();
       // A file shared in may be waiting (shared before, or during onboarding).
       _readShare();
+      // Or the countdown widget opened the app.
+      _widgetTapped();
     });
     // After switching account the app is rebuilt: say what happened.
     final notice = context.read<AppSession>().takeNotice();
@@ -124,6 +136,8 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
       // The phone may have landed in another time zone: reminders are set
       // again on its clock.
       if (_reminders case final reminders?) unawaited(reminders.refresh());
+      // The countdown widget too.
+      if (_widget case final widget?) unawaited(widget.refresh());
       // Back from the background, not just from Control Centre.
       if (_wasAway) _showedToday();
       _wasAway = false;
@@ -161,6 +175,8 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
     _reminders?.removeListener(_reminderTapped);
     _shares?.removeListener(_readShare);
     _store.removeListener(_readShare);
+    _session?.removeListener(_widgetTapped);
+    _store.removeListener(_openPendingTrip);
     _pages.dispose();
     super.dispose();
   }
@@ -224,6 +240,28 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
     if (opens.startsWith('booking:')) return _openBooking(opens.substring('booking:'.length));
     Navigator.of(context).popUntil((route) => route.isFirst);
     _select(0);
+  }
+
+  /// The countdown widget tapped: the trip it showed, else Today.
+  void _widgetTapped() {
+    final target = _session?.takeWidgetTarget();
+    if (target == null || !mounted) return;
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    _select(0);
+    if (target.isNotEmpty) {
+      _pendingTrip = target;
+      _openPendingTrip();
+    }
+  }
+
+  /// Waits for the trips to load after a cold start; a trip that's gone
+  /// leaves Today showing.
+  void _openPendingTrip() {
+    final id = _pendingTrip;
+    if (id == null || !mounted || _store.isLoading) return;
+    _pendingTrip = null;
+    if (_store.plan(id) == null) return;
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: id)));
   }
 
   void _openBooking(String bookingId) {
