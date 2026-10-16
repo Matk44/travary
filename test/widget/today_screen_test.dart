@@ -647,7 +647,13 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('Car hire'), findsOneWidget, reason: 'a hire car in progress');
-    final list = find.descendant(of: find.byType(TodayScreen), matching: find.byType(Scrollable)).first;
+    // The day's own list, not the sheet the days slide on.
+    final list = find
+        .descendant(
+          of: find.byType(TodayScreen),
+          matching: find.byWidgetPredicate((widget) => widget is Scrollable && widget.axis == Axis.vertical),
+        )
+        .first;
     // Built isn't enough: scroll until the button is on screen to tap.
     await tester.scrollUntilVisible(find.text('Show').hitTestable(), 200, scrollable: list);
     await tester.tap(find.text('Show'));

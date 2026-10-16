@@ -21,6 +21,7 @@ import '../../logic/day_layout.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/flight_status_text.dart';
 import '../../logic/formatters.dart';
+import '../../logic/today_sheet.dart';
 import '../../logic/travi_cameos.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/travel_store.dart';
@@ -30,18 +31,26 @@ import '../trips/packing_list_screen.dart';
 import '../trips/trip_details_sheet.dart';
 import '../trips/trip_screen.dart';
 
-/// Opens on what matters right now: today's plan during a trip, or the first
-/// day of the next trip before it starts.
+/// Opens on what matters right now: today's plan during a trip, or the next
+/// trip's countdown before it starts.
 ///
-/// Under the greeting and day, the day's cards run down the time rail: the
-/// timed ones in time order, each with its time beside it, the featured
-/// "next up" ticket in its place and the hotel you're staying at after it
-/// ([layOutDay]). Other days of the trip are a swipe away, or a tap on the
-/// date pill or the day line ("Day 3 of 7 · Orlando") opens the trip's
-/// calendar.
+/// Today is one sheet of pages laid side by side ([todaySheetFor]) that
+/// follows the finger: drag left for the next day, right for the one
+/// before, and let go to settle on the nearest with a little bobble
+/// ([TodayLayout.daySettle]). It runs from the first day of the trip you're
+/// on through every trip to come, each one's countdown between the last day
+/// of the trip before it and its own first day, and ends on where to next.
+/// A day picked in the trip's calendar (tap the date pill or the day line,
+/// "Day 3 of 7 · Orlando") slides in like a tab ([NavLayout.switchCurve]).
 ///
-/// Between trips, when a postcard suits the next trip, Today counts down to
-/// it instead ([CountdownTripHero]); without one it keeps the first-day view.
+/// Under the greeting and day, each day's cards run down the time rail:
+/// the timed ones in time order, each with its time beside it, the
+/// featured "next up" ticket in its place and the hotel you're staying at
+/// after it ([layOutDay]).
+///
+/// Between trips, a trip still to come counts down on the postcard that
+/// suits it ([CountdownTripHero]); without one, the sheet goes straight to
+/// its first day.
 class TodayScreen extends StatefulWidget {
   const TodayScreen({super.key, this.weather, this.shown});
 
@@ -58,20 +67,29 @@ class TodayScreen extends StatefulWidget {
 }
 
 class _TodayScreenState extends State<TodayScreen> {
-  /// A day picked in the chooser or by swiping; null follows the focus day.
-  LocalDate? _picked;
+  /// The page the traveller moved the sheet to (a swipe, or a day picked in
+  /// the calendar); null keeps to the one Today opens on.
+  TodayPage? _moved;
 
-  /// The date when [_picked] was chosen. Once the real day moves on (the
+  /// The date when [_moved] was chosen. Once the real day moves on (the
   /// app left open overnight), Today opens on the new day again.
-  LocalDate? _pickedOn;
+  LocalDate? _movedOn;
 
-  void _pick(LocalDate day, LocalDate today) => setState(() {
-    _picked = day;
-    _pickedOn = today;
-  });
+  /// The sheet's position: made when the sheet appears, on the page it
+  /// opens on.
+  PageController? _pages;
+
+  /// The sheet as last built.
+  TodaySheet _sheet = TodaySheet.empty;
 
   /// Finished items stay folded away so "next up" is always near the top.
   bool _showEarlier = false;
+
+  @override
+  void dispose() {
+    _pages?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,118 +99,232 @@ class _TodayScreenState extends State<TodayScreen> {
     }
 
     final focus = store.focus;
-    final plan = focus.plan;
-    final picked = _picked != null && _pickedOn == store.today && plan != null && plan.contains(_picked!)
-        ? _picked
-        : null;
-    final countdown = picked == null ? _countdownFor(store, focus) : null;
-    final day = picked ?? focus.day;
-    final dayPlan = store.dayPlan(day);
-    final canChoose = countdown == null && plan != null && plan.dayCount > 1;
+    // A trip to come counts down only while nothing is on today.
+    final quiet = store.dayPlan(store.today).isEmpty;
+    final sheet = _sheet = todaySheetFor(
+      store.plans,
+      focus,
+      store.today,
+      countsDown: (plan) => quiet && _countdownFor(store, plan) != null,
+    );
+    if (sheet.isEmpty) {
+      _dropSheet();
+      return SafeArea(bottom: false, child: _nothingOn(context, store, focus));
+    }
 
+    final moved = _movedOn == store.today ? _moved : null;
+    final index = (moved == null ? null : sheet.indexOf(moved)) ?? sheet.opening;
+    final pages = _pages ??= PageController(initialPage: index, keepPage: false);
+    _keepOn(pages, index);
     return SafeArea(
       bottom: false,
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onHorizontalDragEnd: canChoose ? (details) => _swipe(details, plan, day, store.today) : null,
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: TodayHeader(
-                greeting: greetingFor(store.now),
-                subtitle: countdown != null ? 'Nothing planned today' : _subtitle(store, focus, day),
-                pill: _pill(store, focus, day, countdown: countdown != null),
-                onChooseDay: canChoose ? () => _chooseDay(context, store, plan, day) : null,
-              ),
-            ),
-            if (!store.hasAnything)
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: Center(
-                  child: EmptyState(
-                    art: const TraviCameo(moment: TraviMoment.waiting),
-                    title: 'Where are you off to?',
-                    message:
-                        'Start a trip, then add your flights, hotels, tickets and tables. '
-                        'Travary sorts them into days and shows you each one as it comes.',
-                    actionLabel: 'New trip',
-                    onAction: () => startNewTrip(context),
-                    secondaryLabel: 'Or add a booking',
-                    onSecondary: () => startAddBooking(context),
-                  ),
-                ),
-              )
-            else if (countdown != null)
-              SliverToBoxAdapter(
-                child: CountdownTripHero(
-                  text: countdown.text,
-                  postcard: countdown.postcard,
-                  onOpen: () => _openTrip(context, countdown.plan),
-                  replay: widget.shown,
-                  reaction: countdownReactionFor(focus.daysUntilStart!),
-                  greet: () => _greet(context, store),
-                  note: _packingNote(context, countdown.plan, focus.daysUntilStart!),
-                ),
-              )
-            else if (dayPlan.isEmpty)
-              SliverToBoxAdapter(child: _emptyDay(context, store, focus, day))
-            else
-              ..._daySlivers(context, store, dayPlan),
-            const SliverToBoxAdapter(child: SizedBox(height: TodayLayout.bottomGap)),
-          ],
-        ),
+      // The pages are clear: the linen behind stays put, so the days slide
+      // over it as one sheet, with no edge between them.
+      child: PageView.builder(
+        controller: pages,
+        // With reduced motion a page let go settles without the bobble.
+        physics: MediaQuery.disableAnimationsOf(context) ? null : const _DaySheetPhysics(),
+        onPageChanged: (i) {
+          _moved = _sheet.pages[i];
+          _movedOn = store.today;
+        },
+        itemCount: sheet.pages.length,
+        itemBuilder: (context, i) {
+          final page = sheet.pages[i];
+          return KeyedSubtree(key: ValueKey(page), child: _page(context, store, page));
+        },
       ),
     );
   }
 
-  /// A day with nothing on it: a free day of the trip, the holiday still
-  /// waiting for its dates, or nothing coming up at all.
-  Widget _emptyDay(BuildContext context, TravelStore store, TodayFocus focus, LocalDate day) {
-    if (focus.plan case final plan?) {
-      return EmptyState(
-        art: TraviLounge(greet: () => _greet(context, store)),
-        title: 'A free day',
-        message: 'Nothing booked on ${formatDayLong(day)}.',
-        actionLabel: 'Add a booking',
-        onAction: () => startAddBooking(context, date: day, tripId: plan.id),
-      );
-    }
-    if (focus.undated case final undated?) return _UndatedHoliday(plan: undated);
-    return EmptyState(
-      art: const TraviCameo(moment: TraviMoment.waiting),
-      title: 'Nothing coming up',
-      message: 'Start your next trip, or add a booking and it will appear here.',
-      actionLabel: 'New trip',
-      onAction: () => startNewTrip(context),
-      secondaryLabel: 'Or add a booking',
-      onSecondary: () => startAddBooking(context, date: day),
+  /// When the page on screen moves along the sheet without a swipe (a
+  /// trip's dates change, or a new day begins), the sheet goes to it once
+  /// the frame is drawn, never under the traveller's finger.
+  void _keepOn(PageController pages, int index) {
+    bool away() => pages.hasClients && pages.page?.round() != index && !pages.position.isScrollingNotifier.value;
+    if (!away()) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _pages == pages && away()) pages.jumpToPage(index);
+    });
+  }
+
+  /// Nothing on or coming: the sheet goes, and the next one starts afresh
+  /// on its own opening page.
+  void _dropSheet() {
+    final pages = _pages;
+    if (pages == null) return;
+    _pages = null;
+    _moved = null;
+    WidgetsBinding.instance.addPostFrameCallback((_) => pages.dispose());
+  }
+
+  /// A day picked in the calendar slides in from the day beside it with
+  /// the tabs' bobble, however far away it is (never a blur of days), or
+  /// is there at once with reduced motion.
+  void _goTo(TodayPage page) {
+    final pages = _pages;
+    final index = _sheet.indexOf(page);
+    if (pages == null || !pages.hasClients || index == null) return;
+    final from = pages.page?.round() ?? index;
+    if (index == from) return;
+    if (MediaQuery.disableAnimationsOf(context)) return pages.jumpToPage(index);
+    if ((index - from).abs() > 1) pages.jumpToPage(index > from ? index - 1 : index + 1);
+    pages.animateToPage(index, duration: NavLayout.switchDuration, curve: NavLayout.switchCurve);
+  }
+
+  /// One page of the sheet: its own header over its own cards, so each day
+  /// scrolls on its own and slides as a whole.
+  Widget _page(BuildContext context, TravelStore store, TodayPage page) {
+    final greeting = greetingFor(store.now);
+    final (header, content) = switch (page) {
+      TripDayPage(:final plan, :final day) => (
+        TodayHeader(
+          greeting: greeting,
+          subtitle: _subtitle(store, plan, day),
+          pill: _dayPill(store, plan, day),
+          onChooseDay: plan.dayCount > 1 ? () => _chooseDay(context, store, plan, day) : null,
+        ),
+        _day(context, store, plan, day),
+      ),
+      CountdownPage(:final plan, :final after) => (
+        TodayHeader(
+          greeting: greeting,
+          subtitle: after == null ? 'Nothing planned today' : 'After ${after.trip.title}',
+          // Between trips the page is today: its forecast or date (the tag
+          // has the count). Further on, the tag says it all.
+          pill: after == null ? _todayPill(store) : null,
+        ),
+        [SliverToBoxAdapter(child: _countdown(context, store, plan))],
+      ),
+      EndPage(:final after) => (
+        TodayHeader(greeting: greeting, subtitle: 'After ${after.trip.title}'),
+        [SliverToBoxAdapter(child: _whereNext(context))],
+      ),
+    };
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: header),
+        ...content,
+        const SliverToBoxAdapter(child: SizedBox(height: TodayLayout.bottomGap)),
+      ],
     );
   }
 
-  String _subtitle(TravelStore store, TodayFocus focus, LocalDate day) {
-    final plan = focus.plan;
-    if (plan == null) {
-      if (focus.undated case final undated?) return '${undated.trip.title} · dates to come';
-      return store.hasAnything ? 'No trips coming up' : 'Let\'s plan something';
-    }
-    if (focus.isCountdown && day == plan.start) return '${plan.trip.title} ${relativeDays(focus.daysUntilStart!)}';
+  /// Nothing on or coming: no trips at all yet, a holiday still waiting for
+  /// its dates, or nothing coming up.
+  Widget _nothingOn(BuildContext context, TravelStore store, TodayFocus focus) {
+    final undated = focus.undated;
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: TodayHeader(
+            greeting: greetingFor(store.now),
+            subtitle: undated != null
+                ? '${undated.trip.title} · dates to come'
+                : (store.hasAnything ? 'No trips coming up' : 'Let\'s plan something'),
+            pill: _todayPill(store),
+          ),
+        ),
+        if (!store.hasAnything)
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: EmptyState(
+                art: const TraviCameo(moment: TraviMoment.waiting),
+                title: 'Where are you off to?',
+                message:
+                    'Start a trip, then add your flights, hotels, tickets and tables. '
+                    'Travary sorts them into days and shows you each one as it comes.',
+                actionLabel: 'New trip',
+                onAction: () => startNewTrip(context),
+                secondaryLabel: 'Or add a booking',
+                onSecondary: () => startAddBooking(context),
+              ),
+            ),
+          )
+        else if (undated != null)
+          SliverToBoxAdapter(child: _UndatedHoliday(plan: undated))
+        else
+          SliverToBoxAdapter(
+            child: EmptyState(
+              art: const TraviCameo(moment: TraviMoment.waiting),
+              title: 'Nothing coming up',
+              message: 'Start your next trip, or add a booking and it will appear here.',
+              actionLabel: 'New trip',
+              onAction: () => startNewTrip(context),
+              secondaryLabel: 'Or add a booking',
+              onSecondary: () => startAddBooking(context, date: store.today),
+            ),
+          ),
+        const SliverToBoxAdapter(child: SizedBox(height: TodayLayout.bottomGap)),
+      ],
+    );
+  }
+
+  /// A day of a trip: its cards, or a free day.
+  List<Widget> _day(BuildContext context, TravelStore store, TripPlan plan, LocalDate day) {
+    final dayPlan = store.dayPlan(day);
+    if (!dayPlan.isEmpty) return _daySlivers(context, store, dayPlan);
+    return [
+      SliverToBoxAdapter(
+        child: EmptyState(
+          art: TraviLounge(greet: () => _greet(context, store)),
+          title: 'A free day',
+          message: 'Nothing booked on ${formatDayLong(day)}.',
+          actionLabel: 'Add a booking',
+          onAction: () => startAddBooking(context, date: day, tripId: plan.id),
+        ),
+      ),
+    ];
+  }
+
+  /// After the last trip planned, at the end of the sheet: Travi with his
+  /// folio open, ready for the next one.
+  Widget _whereNext(BuildContext context) => EmptyState(
+    art: const TraviCameo(moment: TraviMoment.waiting),
+    title: 'Where to next?',
+    message: 'That\'s everything planned for now. Start your next trip, or add a booking and it will appear here.',
+    actionLabel: 'New trip',
+    onAction: () => startNewTrip(context),
+    secondaryLabel: 'Or add a booking',
+    onSecondary: () => startAddBooking(context),
+  );
+
+  /// "Day 3 of 7 · Orlando", with the date in front on any day but today,
+  /// and "Lake District in 58 days" on the first day of a trip to come.
+  String _subtitle(TravelStore store, TripPlan plan, LocalDate day) {
+    final today = store.today;
+    if (day == plan.start && day.isAfter(today)) return '${plan.trip.title} ${relativeDays(today.daysUntil(day))}';
     final dayNumber = plan.dayNumber(day);
-    final prefix = day == store.today ? '' : '${formatDayShort(day)} · ';
+    final prefix = day == today ? '' : '${formatDayShort(day)} · ';
     return dayNumber == null
         ? '$prefix${plan.trip.title}'
         : '${prefix}Day $dayNumber of ${plan.dayCount} · ${plan.trip.title}';
   }
 
-  /// Between trips, the next trip's countdown, when nothing is on today:
-  /// on the postcard that suits that trip (its own place, or its look),
-  /// else on the neutral one. Null otherwise, and Today stays as it was.
-  _Countdown? _countdownFor(TravelStore store, TodayFocus focus) {
-    final plan = focus.plan;
-    if (!focus.isCountdown || plan == null || !store.dayPlan(store.today).isEmpty) return null;
+  /// A trip still to come, counting down: its wording, on the postcard that
+  /// suits it (its own place, or its look), else on the neutral one. Null
+  /// without either, and the sheet goes straight to its first day.
+  _Countdown? _countdownFor(TravelStore store, TripPlan plan) {
     final text = countdownTextFor(plan, store.today);
     final postcard = store.countdownPostcardFor(plan) ?? store.neutralCountdownPostcard;
     if (text == null || postcard == null) return null;
     return (plan: plan, text: text, postcard: postcard.image);
+  }
+
+  Widget _countdown(BuildContext context, TravelStore store, TripPlan plan) {
+    final countdown = _countdownFor(store, plan);
+    if (countdown == null) return const SizedBox.shrink();
+    final days = store.today.daysUntil(plan.start!);
+    return CountdownTripHero(
+      text: countdown.text,
+      postcard: countdown.postcard,
+      onOpen: () => _openTrip(context, plan),
+      replay: widget.shown,
+      reaction: countdownReactionFor(days),
+      greet: () => _greet(context, store),
+      note: _packingNote(context, plan, days),
+    );
   }
 
   /// Under the countdown: the trip's packing list, how it stands.
@@ -213,19 +345,26 @@ class _TodayScreenState extends State<TodayScreen> {
   void _openTrip(BuildContext context, TripPlan plan) =>
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => TripScreen(tripId: plan.id)));
 
-  /// Today's forecast when there is one, else the countdown on the first
-  /// day of a trip still to come, else the date of the day on screen. The
-  /// countdown hero carries its own count, so the pill shows today's date
-  /// beside it.
-  HeaderPillInfo _pill(TravelStore store, TodayFocus focus, LocalDate day, {required bool countdown}) {
+  /// A day's pill: today's forecast when there is one, the countdown on the
+  /// first day of a trip still to come, else the date of the day.
+  HeaderPillInfo _dayPill(TravelStore store, TripPlan plan, LocalDate day) {
+    if (day == store.today) {
+      if (_forecast() case final forecast?) return forecast;
+    }
+    if (day == plan.start && day.isAfter(store.today)) {
+      return HeaderPillInfo(icon: IconSlot.flight, label: _countdownLabel(store.today.daysUntil(day)));
+    }
+    return HeaderPillInfo(icon: IconSlot.calendar, label: formatDayShort(day));
+  }
+
+  /// Today's forecast, else today's date.
+  HeaderPillInfo _todayPill(TravelStore store) =>
+      _forecast() ?? HeaderPillInfo(icon: IconSlot.calendar, label: formatDayShort(store.today));
+
+  HeaderPillInfo? _forecast() {
     final weather = widget.weather;
-    if (weather != null && (countdown || day == store.today)) {
-      return HeaderPillInfo(icon: _weatherIcon(weather.condition), label: formatWeather(weather), iconTinted: false);
-    }
-    if (focus.isCountdown && !countdown && day == focus.day) {
-      return HeaderPillInfo(icon: IconSlot.flight, label: _countdownLabel(focus.daysUntilStart!));
-    }
-    return HeaderPillInfo(icon: IconSlot.calendar, label: formatDayShort(countdown ? store.today : day));
+    if (weather == null) return null;
+    return HeaderPillInfo(icon: _weatherIcon(weather.condition), label: formatWeather(weather), iconTinted: false);
   }
 
   static IconSlot _weatherIcon(WeatherCondition condition) => switch (condition) {
@@ -240,13 +379,6 @@ class _TodayScreenState extends State<TodayScreen> {
     1 => 'Tomorrow',
     _ => '$days days',
   };
-
-  void _swipe(DragEndDetails details, TripPlan plan, LocalDate day, LocalDate today) {
-    final velocity = details.primaryVelocity ?? 0;
-    if (velocity.abs() < 250) return;
-    final next = day.addDays(velocity < 0 ? 1 : -1);
-    if (plan.contains(next)) _pick(next, today);
-  }
 
   Future<void> _chooseDay(BuildContext context, TravelStore store, TripPlan plan, LocalDate selected) async {
     // The sheet opens above this screen's trip palette: carry it along.
@@ -265,7 +397,7 @@ class _TodayScreenState extends State<TodayScreen> {
         child: _DayChooser(plan: plan, selected: selected, today: store.today, booked: booked),
       ),
     );
-    if (picked != null && mounted) _pick(picked, store.today);
+    if (picked != null && mounted) _goTo(TripDayPage(plan, picked));
   }
 
   List<Widget> _daySlivers(BuildContext context, TravelStore store, DayPlan dayPlan) {
@@ -385,8 +517,21 @@ class _UndatedHoliday extends StatelessWidget {
   );
 }
 
-/// The next trip, its countdown wording and its postcard.
+/// A trip to come, its countdown wording and its postcard.
 typedef _Countdown = ({TripPlan plan, CountdownText text, ArtImageRef postcard});
+
+/// The day sheet keeps the platform's own drag and edges (past the first
+/// or last page it stretches, or on iOS gives and springs back), and
+/// settles a page let go on [TodayLayout.daySettle].
+class _DaySheetPhysics extends ScrollPhysics {
+  const _DaySheetPhysics({super.parent});
+
+  @override
+  _DaySheetPhysics applyTo(ScrollPhysics? ancestor) => _DaySheetPhysics(parent: buildParent(ancestor));
+
+  @override
+  SpringDescription get spring => TodayLayout.daySettle;
+}
 
 class _Item {
   const _Item(this.child, {this.stop, this.rail = RailMark.none, this.featured = false, this.compact = false});

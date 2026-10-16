@@ -53,7 +53,13 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  PageController pages(WidgetTester tester) => tester.widget<PageView>(find.byType(PageView)).controller!;
+  /// The tabs' PageView: Today's day sheet is another, inside the first tab.
+  final tabPages = find.descendant(
+    of: find.byType(HomeShell),
+    matching: find.byWidgetPredicate((widget) => widget is PageView && widget.physics is NeverScrollableScrollPhysics),
+  );
+
+  PageController pages(WidgetTester tester) => tester.widget<PageView>(tabPages).controller!;
 
   Finder tab(String label) => find.descendant(of: find.byType(TravaryNavBar), matching: find.bySemanticsLabel(label));
 
@@ -74,16 +80,16 @@ void main() {
 
   testWidgets('one PageView holds the four tabs, and swiping between them does nothing', (tester) async {
     await pumpApp(tester);
-    expect(find.byType(PageView), findsOneWidget);
+    expect(tabPages, findsOneWidget);
 
     await tester.tap(tab('Trips'));
     await tester.pumpAndSettle();
     expect(pages(tester).page, 1);
 
-    await tester.fling(find.byType(PageView), const Offset(-300, 0), 1500);
+    await tester.fling(tabPages, const Offset(-300, 0), 1500);
     await tester.pumpAndSettle();
     expect(pages(tester).page, 1, reason: 'no swipe forward');
-    await tester.fling(find.byType(PageView), const Offset(300, 0), 1500);
+    await tester.fling(tabPages, const Offset(300, 0), 1500);
     await tester.pumpAndSettle();
     expect(pages(tester).page, 1, reason: 'no swipe back');
   });
