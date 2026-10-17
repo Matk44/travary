@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Travary App Store frame layout</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=block">
+<!--
+  Layout references for the App Store screenshots. render_layouts.js opens
+  this file once per frame (#01, #01-green, #screen-06, #style) with
+  frames.json injected as window.FRAMES, and saves what it draws.
+  Geometry is in frames.json; every frame shares it exactly.
+-->
+<style>
+:root {
+  --linen: #EFE8DC; --paper: #F8F4EC; --ink: #1C2A47; --ink-soft: #56617A; --ink-faint: #8C909B;
+  --navy: #024A6D; --cream: #FFF1D9; --coral: #FA815A; --coral-ink: #CF5F3C; --teal: #1E5B70;
+  --kraft: #C9A77D; --green: #00B140;
+  --serif: "Source Serif 4", Georgia, serif; --sans: "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #fff; }
+.frame { width: 1320px; height: 2868px; position: relative; overflow: hidden; }
+.bg-linen { background: var(--linen) url(../../../assets/art/common/linen.webp) 0 0 / 1024px; }
+.bg-stage { background: #024A6D; }
+.stage { position: absolute; left: 0; width: 1320px; height: auto; }
+.stage.faded { -webkit-mask-image: linear-gradient(transparent 0, #000 260px); mask-image: linear-gradient(transparent 0, #000 260px); }
+.shade { position: absolute; inset: 0; pointer-events: none; }
+.bg-linen .shade { background: radial-gradient(120% 70% at 50% 35%, rgba(255,255,255,.18), rgba(120,96,64,.10) 70%, rgba(80,60,40,.16)); }
+.bg-stage .shade { background: linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,0) 22%); }
+
+.eph { position: absolute; z-index: 1; pointer-events: none; }
+
+.cap { position: absolute; top: 150px; left: 50px; right: 50px; text-align: center; z-index: 5; }
+.cap h1 { margin: 0; font: 700 112px/1.04 var(--serif); letter-spacing: -0.6px; color: var(--ink); }
+.cap h1 span { display: block; width: max-content; margin: 0 auto; white-space: nowrap; }
+.cap h1 span + span { color: var(--coral-ink); }
+.cap p { width: max-content; margin: 30px auto 0; font: 500 44px/1.3 var(--sans); color: var(--ink-soft); white-space: nowrap; }
+.bg-stage .cap h1 { color: var(--cream); }
+.bg-stage .cap h1 span + span { color: var(--coral); }
+.bg-stage .cap p { color: #E6D6BD; }
+
+.phone { position: absolute; z-index: 3; border-radius: 170px; padding: 12px;
+  background: linear-gradient(120deg, #F3F4F6 0%, #BFC3C9 18%, #EEF0F2 38%, #A9AEB5 62%, #E4E6E9 82%, #B5B9BF 100%);
+  box-shadow: 0 70px 110px -40px rgba(14,28,46,.62), 0 24px 40px -14px rgba(14,28,46,.40), inset 0 0 0 2px rgba(255,255,255,.55); }
+.phone .bezel { width: 100%; height: 100%; border-radius: 158px; background: #050607; padding: 24px; box-shadow: inset 0 0 0 2px #23262B; }
+.phone .screen { position: relative; width: 100%; height: 100%; border-radius: 134px; overflow: hidden; background: var(--linen); }
+.phone .screen > img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.phone .screen.green { background: var(--green); }
+.phone .screen.green > img, .phone .screen.green > .mini { display: none; }
+.island { position: absolute; z-index: 4; top: 26px; left: 50%; width: 283px; height: 83px; margin-left: -141.5px; border-radius: 42px; background: #000; }
+.btn { position: absolute; width: 9px; border-radius: 5px; background: linear-gradient(90deg, #8E939A, #E3E5E8 60%, #A3A8AE); }
+
+.travi { position: absolute; z-index: 6; bottom: 30px; }
+.travi img { display: block; height: 100%; width: auto; filter: drop-shadow(0 26px 26px rgba(10,20,35,.30)); }
+.travi.mirror img { transform: scaleX(-1); }
+.travi::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -14px; height: 46px; border-radius: 50%; background: radial-gradient(closest-side, rgba(20,24,30,.38), rgba(20,24,30,0)); z-index: -1; }
+
+.passtag { position: absolute; z-index: 7; width: 270px; }
+.passtag img { width: 100%; display: block; filter: drop-shadow(0 14px 16px rgba(0,0,0,.32)); }
+.passtag b { position: absolute; left: 68%; top: 61%; transform: translate(-50%, -50%) rotate(10deg); width: 150px; text-align: center; font: 700 33px/1.12 var(--sans); color: #3A2915; letter-spacing: .01em; }
+
+/* Placeholder screens (988 x 2147, the phone's screen) */
+.mini { position: absolute; inset: 0; background: var(--linen) url(../../../assets/art/common/linen.webp) 0 0 / 700px; padding: 190px 48px 60px; font-family: var(--sans); color: var(--ink); display: flex; flex-direction: column; gap: 28px; }
+.sb { position: absolute; top: 44px; left: 96px; right: 84px; display: flex; justify-content: space-between; align-items: center; font: 600 40px/1 var(--sans); color: #111; }
+.sb i { display: inline-block; width: 74px; height: 34px; border: 3px solid #111; border-radius: 10px; position: relative; }
+.sb i::after { content: ""; position: absolute; inset: 4px; border-radius: 5px; background: #111; }
+.nav { display: flex; justify-content: space-between; align-items: center; font: 500 34px/1 var(--sans); color: var(--teal); margin: -40px 0 10px; }
+.mini .k { font: 600 26px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
+.mini h2 { margin: 0; font: 700 84px/1.02 var(--serif); }
+.mini .note { font: 400 32px/1.4 var(--sans); color: var(--ink-soft); }
+.mini .row { background: var(--paper); border-radius: 34px; padding: 30px 36px; display: grid; grid-template-columns: auto 1fr auto; gap: 30px; align-items: center; box-shadow: 0 6px 18px rgba(56,43,29,.12); }
+.mini .row b { display: block; font: 600 44px/1.2 var(--serif); }
+.mini .row small { display: block; font: 400 30px/1.35 var(--sans); color: var(--ink-soft); margin-top: 4px; }
+.mini .row small.warn { color: #C4583A; font-weight: 600; }
+.mini .row .mask { font-family: ui-monospace, Menlo, monospace; letter-spacing: .12em; }
+.mini .av { width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center; font: 700 40px/1 var(--sans); color: #fff; }
+.mini .doc { width: 92px; height: 120px; border-radius: 14px; background: #102B46; display: grid; place-items: center; color: #D1AB68; font: 700 40px/1 var(--serif); }
+.mini .box { width: 64px; height: 64px; border-radius: 16px; border: 5px solid var(--teal); display: grid; place-items: center; font: 700 40px/1 var(--sans); color: #fff; }
+.mini .box.on { background: var(--teal); }
+.mini .row.done b { text-decoration: line-through; color: var(--ink-faint); }
+.mini .pill { align-self: flex-start; font: 600 30px/1 var(--sans); color: var(--teal); }
+.mini .btn2 { margin-top: 8px; background: #102B46; color: var(--cream); border-radius: 30px; text-align: center; font: 600 44px/1 var(--serif); padding: 40px; }
+.mini .chips { display: flex; flex-wrap: wrap; gap: 20px; }
+.mini .chips span { background: #E7DCC9; border-radius: 99px; padding: 18px 30px; font: 500 32px/1 var(--sans); }
+.mini .lock { display: flex; gap: 18px; align-items: center; font: 500 32px/1.3 var(--sans); color: var(--ink-soft); padding: 0 8px; }
+
+/* Style board */
+.board { width: 2400px; height: 1500px; background: var(--linen) url(../../../assets/art/common/linen.webp) 0 0 / 1024px; padding: 70px 80px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 70px; font-family: var(--sans); color: var(--ink); }
+.board h3 { margin: 0 0 22px; font: 600 26px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+.board section { margin-bottom: 52px; }
+.sw { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.sw div { height: 150px; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; font: 600 22px/1.3 var(--sans); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+.type-a { font: 700 104px/1.02 var(--serif); }
+.type-a span { color: var(--coral-ink); display: block; }
+.type-b { font: 500 40px/1.3 var(--sans); color: var(--ink-soft); margin-top: 18px; }
+.cast-row { display: flex; align-items: flex-end; gap: 34px; }
+.cast-row img { height: 230px; }
+.rules { margin: 0; padding-left: 30px; font: 400 30px/1.45 var(--sans); }
+.rules li { margin-bottom: 10px; }
+.mat { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.mat figure { margin: 0; text-align: center; font: 500 22px/1.3 var(--sans); color: var(--ink-soft); }
+.mat .m { height: 190px; border-radius: 16px; background-size: cover; background-position: center; margin-bottom: 10px; box-shadow: 0 6px 16px rgba(0,0,0,.14); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(function () {
+  const F = window.FRAMES;
+  const root = document.getElementById('root');
+  const hash = decodeURIComponent(location.hash.slice(1));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  const minis = {
+    '06': `<div class="mini">
+      <div class="sb"><span>8:20</span><i></i></div>
+      <div class="nav"><span>‹ Trips</span><span>Trip details</span></div>
+      <div class="k">Orlando · 4 people</div>
+      <h2>Who's coming</h2>
+      <div class="note">Everyone sees the plan and carries their own tickets.</div>
+      <div class="row"><span class="av" style="background:#1E5B70">S</span><span><b>Sam</b><small>You · organiser</small></span><span></span></div>
+      <div class="row"><span class="av" style="background:#E5785B">A</span><span><b>Alex</b><small>Joined</small></span><span></span></div>
+      <div class="row"><span class="av" style="background:#5B3F63">M</span><span><b>Mia</b><small>Joined</small></span><span></span></div>
+      <div class="row"><span class="av" style="background:#6E8B5E">J</span><span><b>Jo</b><small>Joined</small></span><span></span></div>
+      <div class="btn2">Invite someone</div>
+    </div>`,
+    '08': `<div class="mini">
+      <div class="sb"><span>8:20</span><i></i></div>
+      <div class="nav"><span>‹ Documents</span><span>Add</span></div>
+      <div class="k">Only on this phone</div>
+      <h2>Travel documents</h2>
+      <div class="row"><span class="doc">P</span><span><b>Passport · Sam</b><small class="mask">•••• ••• 4821</small><small class="warn">Expires 3 Mar 2027, under 6 months after Lake District</small></span><span></span></div>
+      <div class="row"><span class="doc">P</span><span><b>Passport · Alex</b><small class="mask">•••• ••• 1937</small><small>Expires 19 Aug 2031</small></span><span></span></div>
+      <div class="row"><span class="doc">+</span><span><b>Travel insurance</b><small>Family policy · Expires 12 Sep 2027</small></span><span></span></div>
+      <div class="lock">Locked again when you leave the app</div>
+    </div>`,
+    '09': `<div class="mini">
+      <div class="sb"><span>8:20</span><i></i></div>
+      <div class="nav"><span>‹ Kyoto in spring</span><span></span></div>
+      <div class="k">Kyoto in spring · 4 of 7 packed</div>
+      <h2>Packing list</h2>
+      <div class="note">Everything to take, shared with everyone on the trip.</div>
+      <div class="row done"><span class="box on">✓</span><span><b>Passports</b></span><span></span></div>
+      <div class="row done"><span class="box on">✓</span><span><b>Travel adapter</b></span><span></span></div>
+      <div class="row"><span class="box"></span><span><b>Yen for the first day</b></span><span></span></div>
+      <div class="row done"><span class="box on">✓</span><span><b>Comfortable shoes</b></span><span></span></div>
+      <div class="row"><span class="box"></span><span><b>Rain jacket</b></span><span></span></div>
+      <div class="row done"><span class="box on">✓</span><span><b>Phone chargers</b></span><span></span></div>
+      <div class="row"><span class="box"></span><span><b>Snacks for the journey</b></span><span></span></div>
+      <div class="chips"><span>+ Sun cream</span><span>+ Headphones</span><span>+ Medicines</span></div>
+    </div>`
+  };
+
+  function phoneHTML(f, mode) {
+    const o = F.phone.outer, green = mode === 'green';
+    const screen = mode === 'final'
+      ? `<img src="captures/${f.id}-${esc(f.slug)}.png" alt="">`
+      : minis[f.id] ? minis[f.id] : `<img src="${esc(f.screen)}" alt="">`;
+    return `
+      <div class="btn" style="left:${o.x - 6}px;top:${o.y + 400}px;height:96px"></div>
+      <div class="btn" style="left:${o.x - 6}px;top:${o.y + 560}px;height:160px"></div>
+      <div class="btn" style="left:${o.x - 6}px;top:${o.y + 750}px;height:160px"></div>
+      <div class="btn" style="left:${o.x + o.width - 3}px;top:${o.y + 620}px;height:250px"></div>
+      <div class="btn" style="left:${o.x + o.width - 3}px;top:${o.y + 1120}px;height:170px;opacity:.7"></div>
+      <div class="phone" style="left:${o.x}px;top:${o.y}px;width:${o.width}px;height:${o.height}px">
+        <div class="bezel"><div class="screen${green ? ' green' : ''}">${screen}<div class="island"></div></div></div>
+      </div>`;
+  }
+
+  function ephemera(f) {
+    if (f.bg !== 'linen') return '';
+    return `
+      <img class="eph" src="../../../assets/art/common/documents_postmark.webp" style="left:-150px;top:690px;width:430px;opacity:.20;transform:rotate(-14deg)">
+      <img class="eph" src="../../../assets/art/common/profile_postmark.webp" style="left:1010px;top:1620px;width:520px;opacity:.55;transform:rotate(11deg)">`;
+  }
+
+  function trav(f) {
+    if (!f.travi) return '';
+    const t = f.travi, side = t.side === 'right' ? `right:${t.offset}px` : `left:${t.offset}px`;
+    return `<div class="travi${t.mirror ? ' mirror' : ''}" style="${side};height:${t.height}px">
+      <img src="references/travi/travi-${esc(t.pose)}.png" alt=""></div>`;
+  }
+
+  function tag(f) {
+    if (!f.tag) return '';
+    return `<div class="passtag" style="left:1000px;top:470px;transform:rotate(-4deg)">
+      <img src="../../../assets/art/common/tag.webp" alt=""><b>${f.tag.map(esc).join('<br>')}</b></div>`;
+  }
+
+  function frame(f, mode) {
+    const bg = f.bg === 'linen' ? 'bg-linen' : 'bg-stage';
+    // A scene moved down (stageTop) fades into the same wall drawn unmoved behind it, so no seam shows
+    const shifted = f.bg === 'stage' && f.stageTop > 0;
+    const stage = f.bg === 'stage' ? `<img class="stage${shifted ? ' faded' : ''}" src="../../../${esc(f.stage)}" style="top:${f.stageTop || 0}px" alt="">` : '';
+    const wall = shifted ? ` style="background:#024A6D url(../../../${esc(f.stage)}) 0 0 / 1320px auto no-repeat"` : '';
+    return `<div class="frame ${bg}"${wall}>${stage}<div class="shade"></div>${ephemera(f)}
+      <div class="cap"><h1><span>${esc(f.headline[0])}</span><span>${esc(f.headline[1])}</span></h1><p>${esc(f.sub)}</p></div>
+      ${phoneHTML(f, mode)}${tag(f)}${trav(f)}</div>`;
+  }
+
+  function board() {
+    const sw = [['#EFE8DC','Linen','#1C2A47'],['#F8F4EC','Paper','#1C2A47'],['#1C2A47','Ink','#FFF1D9'],['#024A6D','Navy wall','#FFF1D9'],['#102B46','Folio navy','#FFF1D9'],
+                ['#FA815A','Coral','#1C2A47'],['#CF5F3C','Coral on linen','#FFF1D9'],['#FFF1D9','Cream','#1C2A47'],['#C9A77D','Kraft','#1C2A47'],['#D1AB68','Brass','#1C2A47']];
+    return `<div class="board">
+      <div>
+        <section><h3>Palette</h3><div class="sw">${sw.map(s => `<div style="background:${s[0]};color:${s[2]}">${s[1]}<br>${s[0]}</div>`).join('')}</div></section>
+        <section><h3>Type</h3>
+          <div class="type-a">Your holiday,<span>sorted into days.</span></div>
+          <div class="type-b">Source Serif 4 Bold, second line coral · Inter Medium for the line under it</div></section>
+        <section><h3>Materials</h3><div class="mat">
+          <figure><div class="m" style="background-image:url(../../../assets/art/common/linen.webp)"></div>Linen paper</figure>
+          <figure><div class="m" style="background-image:url(../../../assets/onboarding/stages/workshop.webp);background-position:center 30%"></div>Navy wall, arches</figure>
+          <figure><div class="m" style="background:#E8DCC6 url(../../../assets/art/common/tag.webp) center/contain no-repeat"></div>Kraft tag, string</figure>
+          <figure><div class="m" style="background:#EFE8DC url(../../../assets/art/common/profile_postmark.webp) center/contain no-repeat"></div>Postmark</figure>
+        </div></section>
+      </div>
+      <div>
+        <section><h3>Travi: match exactly, never redesign</h3><div class="cast-row">
+          ${['hello','present','envelope','proud','wave'].map(p => `<img src="references/travi/travi-${p}.png" alt="">`).join('')}</div></section>
+        <section><h3>Rules for every frame</h3><ol class="rules">
+          <li>Canvas 1320 × 2868, portrait. Same phone, same size, same place in every frame.</li>
+          <li>Phone: iPhone 17 Pro Max in Silver, straight-on, centred, no tilt, no glare on the screen.</li>
+          <li>Screen: flat chroma green #00B140 (the real app screen goes in afterwards).</li>
+          <li>Only the headline and the line under it as text, spelled exactly.</li>
+          <li>Travi stands in front of the phone's lower corner, overlapping it; he never covers the top two-thirds of the screen.</li>
+          <li>Hand-made travel ephemera: paper, linen, kraft, postmarks. No glossy 3D, neon, mesh gradients or stock-photo people.</li>
+          <li>No logos, prices, badges, real brands, Apple or Android marks.</li>
+        </ol></section>
+      </div>
+    </div>`;
+  }
+
+  let m;
+  if (hash === 'style') root.innerHTML = board();
+  else if (hash === 'sheet') {
+    root.innerHTML = `<div style="display:flex;gap:28px;padding:36px;background:#E2DACC;width:max-content">${F.frames.map(f =>
+      `<img src="references/layout/${f.id}-${esc(f.slug)}.jpg" style="width:396px;height:860px;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.18)">`).join('')}</div>`;
+  }
+  else if ((m = /^screen-(\d\d)$/.exec(hash))) {
+    root.innerHTML = `<div style="position:relative;width:${F.phone.screen.width}px;height:${F.phone.screen.height}px;overflow:hidden">${minis[m[1]]}</div>`;
+  } else if ((m = /^(\d\d)(?:-(green|final))?$/.exec(hash))) {
+    const f = F.frames.find(x => x.id === m[1]);
+    root.innerHTML = frame(f, m[2] || 'layout');
+    // Report a caption line wider than the canvas allows
+    const over = [...document.querySelectorAll('.cap h1 span, .cap p')].filter(el => el.getBoundingClientRect().width > 1220);
+    document.body.dataset.overflow = over.map(el => el.textContent).join(' | ');
+  }
+})();
+</script>
+</body>
+</html>
