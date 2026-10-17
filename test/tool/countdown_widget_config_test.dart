@@ -34,6 +34,31 @@ void main() {
     expect(read('ios/Runner/Runner.entitlements'), contains('group.com.travary.app'));
   });
 
+  test('asking the phone about the widget is the same on both platforms', () {
+    const swift = 'ios/Runner/CountdownWidgetChannel.swift';
+    const kotlin = 'android/app/src/main/kotlin/com/travary/app/widget/CountdownWidgetChannel.kt';
+    // The calls the app makes, answered on each side.
+    for (final method in ['status', 'pin']) {
+      expect(read('lib/data/countdown_widget_bridge.dart'), contains("'$method'"), reason: method);
+      expect(read(swift), contains('case "$method"'), reason: method);
+      expect(read(kotlin), contains('"$method" ->'), reason: method);
+    }
+    // What `status` answers with.
+    for (final key in ['supported', 'added', 'canPin']) {
+      expect(read('lib/data/countdown_widget_bridge.dart'), contains("answer['$key']"), reason: key);
+      expect(read(swift), contains('"$key"'), reason: key);
+      expect(read(kotlin), contains('"$key"'), reason: key);
+    }
+    // iOS finds the widget on the home screen by its kind, the one the widget declares.
+    expect(read(swift), contains('static let kind = "CountdownWidget"'));
+    expect(read('ios/CountdownWidget/CountdownWidget.swift'), contains('kind: "CountdownWidget"'));
+    // iOS has no call that adds a widget: it never claims it can.
+    expect(read(swift), contains('result(false)'));
+    expect(read(swift), contains('#available(iOS 17.0, *)'), reason: 'the widget needs iOS 17');
+    // Android asks the launcher to place it.
+    expect(read(kotlin), contains('requestPinAppWidget'));
+  });
+
   test('the iOS widget is built and embedded with the app', () {
     final project = read('ios/Runner.xcodeproj/project.pbxproj');
     expect(project, contains('CountdownWidget.appex in Embed Foundation Extensions'));

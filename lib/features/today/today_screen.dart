@@ -16,6 +16,7 @@ import '../../design/widgets/trip_calendar.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/countdown_text.dart';
+import '../../logic/countdown_widget_setup.dart';
 import '../../logic/packing.dart';
 import '../../logic/day_layout.dart';
 import '../../logic/day_plan.dart';
@@ -23,12 +24,14 @@ import '../../logic/flight_status_text.dart';
 import '../../logic/formatters.dart';
 import '../../logic/travi_cameos.dart';
 import '../../logic/trip_plan.dart';
+import '../../state/countdown_widget_store.dart';
 import '../../state/travel_store.dart';
 import '../../state/travi_greetings.dart';
 import '../booking/booking_actions.dart';
 import '../trips/packing_list_screen.dart';
 import '../trips/trip_details_sheet.dart';
 import '../trips/trip_screen.dart';
+import '../widget/countdown_widget_sheet.dart';
 
 /// Opens on what matters right now: today's plan during a trip, or the first
 /// day of the next trip before it starts.
@@ -131,7 +134,10 @@ class _TodayScreenState extends State<TodayScreen> {
                   replay: widget.shown,
                   reaction: countdownReactionFor(focus.daysUntilStart!),
                   greet: () => _greet(context, store),
-                  note: _packingNote(context, countdown.plan, focus.daysUntilStart!),
+                  notes: [
+                    _packingNote(context, countdown.plan, focus.daysUntilStart!),
+                    if (context.watch<CountdownWidgetStore?>()?.offers ?? false) _widgetNote(context),
+                  ],
                 ),
               )
             else if (dayPlan.isEmpty)
@@ -205,6 +211,17 @@ class _TodayScreenState extends State<TodayScreen> {
       onTap: () => openPackingList(context, plan),
     );
   }
+
+  /// Beside the tag, under the packing list, while the widget isn't on the
+  /// home screen: opens the sheet that shows how to put it there.
+  CountdownNote _widgetNote(BuildContext context) => CountdownNote(
+    id: 'countdown-widget-note',
+    icon: Icons.add_to_home_screen_rounded,
+    title: countdownWidgetNoteTitle,
+    detail: countdownWidgetNoteDetail,
+    semanticLabel: countdownWidgetNoteLabel,
+    onTap: () => showCountdownWidgetSheet(context, from: 'today'),
+  );
 
   /// Whether Travi greets on his own now: at most once a day on this phone.
   Future<bool> _greet(BuildContext context, TravelStore store) =>

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../data/ai_consent_record.dart';
 import '../data/art_pack_service.dart';
+import '../data/countdown_widget_settings.dart';
 import '../data/smart_import_service.dart';
 import '../data/visual_profile_service.dart';
 import '../data/onboarding_repository.dart';
@@ -12,6 +13,7 @@ import '../design/tokens.dart';
 import '../logic/formatters.dart';
 import '../state/ai_consent_store.dart';
 import '../state/app_session.dart';
+import '../state/countdown_widget_store.dart';
 import '../state/countdown_widget_sync.dart';
 import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
@@ -109,6 +111,13 @@ class TravaryApp extends StatelessWidget {
               ),
               // The countdown widget on the home screen, kept in step with
               // this account's trips.
+              // Helping put that widget on the home screen: whether it's there,
+              // and the offer on Today's countdown.
+              ChangeNotifierProvider(
+                create: (_) =>
+                    CountdownWidgetStore(bridge: dependencies.countdownWidget, settings: LocalCountdownWidgetSettings())
+                      ..start(),
+              ),
               Provider<CountdownWidgetSync>(
                 lazy: false,
                 create: (context) =>
