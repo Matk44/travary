@@ -44,8 +44,16 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   ticket in its place in time, the hotel's key card after it, the day's
   tagged cards; finished ones fold under "Earlier" (`logic/day_layout.dart`,
   mockup `docs/mockups/today-time-rail/01-left-time-rail.webp`). Past and
-  future stay one tap away (swipe, or tap the date pill or "Day 3 of 7" for
-  the trip calendar; Trips, Documents).
+  future stay one tap away (Trips, Documents): Today is one sheet of pages
+  side by side that follows the finger (`logic/today_sheet.dart`): drag
+  left for the next day, right for the one before; let go and it settles
+  on the nearest with a little bobble (`TodayLayout.daySettle`). It runs
+  from the first day of the trip you're on through every trip to come, each
+  one's countdown between the last day of the trip before it ("After
+  Orlando") and its own first day, and ends on "Where to next?" (Travi,
+  folio open); before its first page it stops, as past trips live on
+  Trips. A day picked in the trip calendar (tap the date pill or "Day 3 of
+  7") slides in from the day beside it with the tabs' curve.
   Between trips, Today counts down to the next trip instead
   (`CountdownTripHero`: its destination's postcard, else the neutral one,
   as large as the screen allows, with a luggage tag over its lower right
@@ -112,6 +120,7 @@ lib/
 │               travi_cameos (where Travi turns up outside onboarding: poses, peeks,
 │               the countdown's reactions, once-a-day greeting; generated travi_cameo_assets),
 │               day_plan (done/now/next), day_layout (Today's rows and time rail),
+│               today_sheet (Today's pages: the trip's days, countdowns, where to next),
 │               trip_plan (+ focus), trip_calendar (the calendar's weeks), trip_assignment,
 │               destinations (places a trip's name can mean: detection, suggestions, picker),
 │               travel_documents (expiry checks against the next trip, masking, wording),
@@ -1010,7 +1019,10 @@ modal at launch or in onboarding:
   `openTab` (`test/support/open_tab.dart`); the slide is covered by
   `test/widget/tab_transition_test.dart`. Scope scroll finders to the screen
   (`find.descendant(of: find.byType(TripsScreen), ...)`): the first `Scrollable`
-  in the tree is now the `PageView`'s.
+  in the tree is now the `PageView`'s. Today's day sheet is a second
+  `PageView` inside the first tab (find the tabs' by its
+  `NeverScrollableScrollPhysics`, and a day's own list as Today's vertical
+  `Scrollable`).
 - Never hardcode secret keys in the app; AI runs server-side (see AI).
 - Mirrors kept equal by tests: art subjects, the visual vocabulary and ISO
   country list (Dart ↔ TypeScript), Trip Pass coverage (shared cases in
