@@ -38,6 +38,10 @@ void main() {
   /// The day line of the page on screen (the only page built once settled).
   String dayLine(WidgetTester tester) => tester.widget<TodayHeader>(find.byType(TodayHeader)).subtitle;
 
+  /// The big heading of the page on screen: the greeting, a day's name, or
+  /// nothing.
+  String? heading(WidgetTester tester) => tester.widget<TodayHeader>(find.byType(TodayHeader)).title;
+
   Future<void> swipe(WidgetTester tester, {required bool forward}) async {
     await tester.fling(sheet, Offset(forward ? -300 : 300, 0), 1200);
     await tester.pumpAndSettle();
@@ -245,6 +249,62 @@ void main() {
       expect(find.text('Nothing coming up'), findsOneWidget);
       expect(find.text('New trip'), findsOneWidget);
       expect(find.byType(TraviCameo), findsOneWidget);
+    });
+  });
+
+  group('the greeting is only on the page that is today', () {
+    testWidgets('other days of the trip are headed by their name, today by "Good morning"', (tester) async {
+      await pump(tester, canonicalTodayApp());
+      expect(heading(tester), 'Good morning');
+      expect(dayLine(tester), 'Day 3 of 7 · Orlando');
+
+      await swipe(tester, forward: true);
+      expect(heading(tester), 'Tomorrow');
+      expect(find.text('Good morning'), findsNothing);
+      await swipe(tester, forward: true);
+      expect(heading(tester), 'Friday');
+
+      await swipe(tester, forward: false);
+      await swipe(tester, forward: false);
+      expect(heading(tester), 'Good morning', reason: 'back on today');
+      await swipe(tester, forward: false);
+      expect(heading(tester), 'Yesterday');
+      expect(find.text('Good morning'), findsNothing);
+    });
+
+    testWidgets('a trip counting down after another, and where to next, have no greeting', (tester) async {
+      await pump(tester, countdownTodayApp(now: canonicalNow, data: orlandoThenLakes()));
+      await chooseDay(tester, 'Day 7 of 7, Sunday 18 October');
+      await tester.pumpAndSettle();
+      expect(heading(tester), 'Sunday');
+
+      await swipe(tester, forward: true);
+      expect(dayLine(tester), 'After Orlando');
+      expect(heading(tester), isNull);
+      expect(find.text('Good morning'), findsNothing);
+
+      await swipe(tester, forward: true);
+      expect(dayLine(tester), 'Lake District in 42 days');
+      expect(heading(tester), 'Wednesday', reason: 'its first day isn\'t today');
+
+      for (var day = 0; day < 4; day++) {
+        await swipe(tester, forward: true);
+      }
+      expect(dayLine(tester), 'After Lake District');
+      expect(find.text('Where to next?'), findsOneWidget);
+      expect(heading(tester), isNull);
+      expect(find.text('Good morning'), findsNothing);
+    });
+
+    testWidgets('between trips the opening countdown is today, so it keeps the greeting', (tester) async {
+      await pump(tester, countdownTodayApp());
+      expect(dayLine(tester), 'Nothing planned today');
+      expect(heading(tester), 'Good morning');
+
+      await swipe(tester, forward: true);
+      expect(dayLine(tester), 'Lake District in 58 days');
+      expect(heading(tester), 'Wednesday');
+      expect(find.text('Good morning'), findsNothing);
     });
   });
 

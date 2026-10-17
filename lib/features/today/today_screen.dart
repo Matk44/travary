@@ -176,11 +176,16 @@ class _TodayScreenState extends State<TodayScreen> {
   /// One page of the sheet: its own header over its own cards, so each day
   /// scrolls on its own and slides as a whole.
   Widget _page(BuildContext context, TravelStore store, TodayPage page) {
+    // The greeting belongs to today's page only: another day is headed by
+    // its name, and the pages that aren't a day (a trip's countdown after
+    // another trip, where to next) head themselves.
+    final today = store.today;
     final greeting = greetingFor(store.now);
     final (header, content) = switch (page) {
       TripDayPage(:final plan, :final day) => (
         TodayHeader(
-          greeting: greeting,
+          title: day == today ? greeting : dayHeading(day, today),
+          titleLike: day == today ? null : greeting,
           subtitle: _subtitle(store, plan, day),
           pill: _dayPill(store, plan, day),
           onChooseDay: plan.dayCount > 1 ? () => _chooseDay(context, store, plan, day) : null,
@@ -189,7 +194,8 @@ class _TodayScreenState extends State<TodayScreen> {
       ),
       CountdownPage(:final plan, :final after) => (
         TodayHeader(
-          greeting: greeting,
+          // Between trips the page is today. Further on it isn't.
+          title: after == null ? greeting : null,
           subtitle: after == null ? 'Nothing planned today' : 'After ${after.trip.title}',
           // Between trips the page is today: its forecast or date (the tag
           // has the count). Further on, the tag says it all.
@@ -198,7 +204,7 @@ class _TodayScreenState extends State<TodayScreen> {
         [SliverToBoxAdapter(child: _countdown(context, store, plan))],
       ),
       EndPage(:final after) => (
-        TodayHeader(greeting: greeting, subtitle: 'After ${after.trip.title}'),
+        TodayHeader(subtitle: 'After ${after.trip.title}'),
         [SliverToBoxAdapter(child: _whereNext(context))],
       ),
     };
@@ -219,7 +225,7 @@ class _TodayScreenState extends State<TodayScreen> {
       slivers: [
         SliverToBoxAdapter(
           child: TodayHeader(
-            greeting: greetingFor(store.now),
+            title: greetingFor(store.now),
             subtitle: undated != null
                 ? '${undated.trip.title} · dates to come'
                 : (store.hasAnything ? 'No trips coming up' : 'Let\'s plan something'),
