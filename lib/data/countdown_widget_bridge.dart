@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 
+import '../logic/countdown_widget_setup.dart';
+
 /// The home-screen countdown widget's side of the phone
 /// (`logic/countdown_widget.dart`): the folder it reads and asking the
 /// phone to draw it again. Everything in the folder is written from Dart.
@@ -17,6 +19,15 @@ abstract interface class CountdownWidgetBridge {
 
   /// Asks the phone to draw every Travary widget again from the folder.
   Future<void> reload();
+
+  /// Whether the phone can have the widget, has one on its home screen,
+  /// and lets Travary ask for it to be placed.
+  Future<HomeWidgetStatus> status();
+
+  /// Android: asks the launcher to place the widget (it shows its own
+  /// dialog). True if the dialog was asked for; the traveller may still say
+  /// no. False where the phone can't (iOS, an old launcher).
+  Future<bool> requestPin();
 }
 
 /// The native side: `ios/Runner/CountdownWidgetChannel.swift` and
@@ -35,6 +46,16 @@ class PlatformCountdownWidgetBridge implements CountdownWidgetBridge {
 
   @override
   Future<void> reload() => _channel.invokeMethod<void>('reload');
+
+  @override
+  Future<HomeWidgetStatus> status() async {
+    final answer = await _channel.invokeMapMethod<String, Object?>('status');
+    if (answer == null) return homeWidgetUnavailable;
+    return (supported: answer['supported'] == true, added: answer['added'] == true, canPin: answer['canPin'] == true);
+  }
+
+  @override
+  Future<bool> requestPin() async => await _channel.invokeMethod<bool>('pin') ?? false;
 }
 
 /// The widget's folder: `countdown.json` and the pictures and fonts it
