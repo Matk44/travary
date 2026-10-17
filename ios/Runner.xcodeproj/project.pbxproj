@@ -513,7 +513,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "# Release builds bring their own RevenueCat keys and flight lookup when the last flutter command didn't pass them (an Archive from Xcode): see tool/xcode_dart_defines.sh.\nDART_DEFINES=\"$(/bin/sh \"$SRCROOT/../tool/xcode_dart_defines.sh\")\" || exit 1\nexport DART_DEFINES\n/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		AFF6F18B5051CFB7797623D5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
