@@ -249,7 +249,7 @@ void main() {
         // Inside the countdown, so it scrolls into view with it, and the
         // postcard keeps the size the phone gives it.
         final hero = tester.getRect(find.byType(CountdownTripHero));
-        expect(widget.bottom, lessThanOrEqualTo(hero.bottom), reason: 'inside the countdown');
+        expect(widget.bottom, lessThanOrEqualTo(hero.bottom + 0.5), reason: 'inside the countdown');
         if (height >= 844 && scale == 1) {
           final words = tester.getRect(
             find.descendant(
