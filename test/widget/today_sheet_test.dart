@@ -176,6 +176,78 @@ void main() {
     });
   });
 
+  /// Orlando (12–18 Oct, bookings every day) with the Lake District booked
+  /// after it, so today in Orlando has things on and a trip is still to come.
+  ({List<Trip> trips, List<Booking> bookings}) orlandoThenLakes() {
+    final orlando = canonicalTodayData();
+    final lakes = countdownTodayData();
+    return (
+      trips: [
+        ...orlando.trips,
+        for (final trip in lakes.trips)
+          if (trip.id == 'lakes') trip,
+      ],
+      bookings: [
+        ...orlando.bookings,
+        for (final booking in lakes.bookings)
+          if (booking.tripId == 'lakes') booking,
+      ],
+    );
+  }
+
+  group('at the end of a holiday', () {
+    testWidgets('the next one counts down even while today has bookings, then its days, then where to next', (
+      tester,
+    ) async {
+      await pump(tester, countdownTodayApp(now: canonicalNow, data: orlandoThenLakes()));
+      expect(dayLine(tester), 'Day 3 of 7 · Orlando', reason: 'opens on today, in the holiday');
+      expect(find.byType(CountdownTripHero), findsNothing);
+
+      await chooseDay(tester, 'Day 7 of 7, Sunday 18 October');
+      await tester.pumpAndSettle();
+      expect(dayLine(tester), 'Sun 18 Oct · Day 7 of 7 · Orlando');
+
+      await swipe(tester, forward: true);
+      expect(dayLine(tester), 'After Orlando');
+      expect(find.byType(CountdownTripHero), findsOneWidget, reason: 'the next holiday, counting down');
+      for (final text in ['NEXT ADVENTURE', '42', 'DAYS TO GO', 'Lake District']) {
+        expect(find.text(text), findsOneWidget, reason: text);
+      }
+
+      await swipe(tester, forward: true);
+      expect(dayLine(tester), 'Lake District in 42 days', reason: 'then swipe through the new holiday');
+
+      for (var day = 0; day < 3; day++) {
+        await swipe(tester, forward: true);
+      }
+      expect(dayLine(tester), 'Sat 28 Nov · Day 4 of 4 · Lake District');
+      await swipe(tester, forward: true);
+      expect(dayLine(tester), 'After Lake District');
+      expect(find.text('Where to next?'), findsOneWidget, reason: 'no further holiday booked');
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('the morning after, Today opens on the next holiday\'s countdown, not on the one that ended', (
+      tester,
+    ) async {
+      await pump(tester, countdownTodayApp(now: DateTime(2026, 10, 19, 8), data: orlandoThenLakes()));
+      expect(find.byType(CountdownTripHero), findsOneWidget);
+      expect(dayLine(tester), 'Nothing planned today');
+      expect(pages(tester).page, 0, reason: 'the finished holiday lives on Trips');
+      await swipe(tester, forward: false);
+      expect(pages(tester).page, 0);
+      expect(find.byType(CountdownTripHero), findsOneWidget);
+    });
+
+    testWidgets('with nothing booked after it, Today says so instead of counting down', (tester) async {
+      await pump(tester, countdownTodayApp(now: DateTime(2026, 10, 19, 8), data: canonicalTodayData()));
+      expect(find.byType(CountdownTripHero), findsNothing);
+      expect(find.text('Nothing coming up'), findsOneWidget);
+      expect(find.text('New trip'), findsOneWidget);
+      expect(find.byType(TraviCameo), findsOneWidget);
+    });
+  });
+
   group('between trips (Lake District in 58 days, then Paris)', () {
     testWidgets('the countdown opens the sheet, before the trip\'s first day', (tester) async {
       await pump(tester, countdownTodayApp());

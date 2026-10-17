@@ -99,13 +99,14 @@ class _TodayScreenState extends State<TodayScreen> {
     }
 
     final focus = store.focus;
-    // A trip to come counts down only while nothing is on today.
-    final quiet = store.dayPlan(store.today).isEmpty;
+    // Every trip still to come counts down before its first day, whatever is
+    // on today: it opens the sheet when no trip is on today, and follows the
+    // last day of the trip before it otherwise.
     final sheet = _sheet = todaySheetFor(
       store.plans,
       focus,
       store.today,
-      countsDown: (plan) => quiet && _countdownFor(store, plan) != null,
+      countsDown: (plan) => _countdownFor(store, plan) != null,
     );
     if (sheet.isEmpty) {
       _dropSheet();
