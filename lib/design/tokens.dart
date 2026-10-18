@@ -379,6 +379,13 @@ abstract final class TodayLayout {
 
   /// Below the last card, above the home tabs.
   static const bottomGap = 16.0;
+
+  /// Let go of the day sheet and it settles on a spring a little short of
+  /// critical damping (a ratio of 0.7): it overshoots a few points and
+  /// bobbles into place in about 0.4 s, like the tabs' slide
+  /// ([NavLayout.switchCurve]) but smaller, as the finger did most of the
+  /// move.
+  static const daySettle = SpringDescription(mass: 0.5, stiffness: 160, damping: 12.5);
 }
 
 /// The trip calendar in the day chooser.

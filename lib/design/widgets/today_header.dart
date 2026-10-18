@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../art/art_slots.dart';
@@ -21,9 +23,18 @@ class HeaderPillInfo {
 /// "Good morning" over "Day 3 of 7 · Orlando", with the pill at the top
 /// right. Tapping the pill or the day line opens the day chooser.
 class TodayHeader extends StatelessWidget {
-  const TodayHeader({super.key, required this.greeting, required this.subtitle, this.pill, this.onChooseDay});
+  const TodayHeader({super.key, this.title, this.titleLike, required this.subtitle, this.pill, this.onChooseDay});
 
-  final String greeting;
+  /// The big heading: the greeting on today's page, the day's name on
+  /// another day. Left out on pages that head themselves (a trip's
+  /// countdown, where to next).
+  final String? title;
+
+  /// The words whose line the heading stands level with, when it isn't
+  /// them: another day's name keeps the height of today's greeting, so the
+  /// days of the sheet line up as they slide past each other (the greeting
+  /// shrinks to fit beside the pill, a shorter name wouldn't).
+  final String? titleLike;
   final String subtitle;
   final HeaderPillInfo? pill;
   final VoidCallback? onChooseDay;
@@ -32,6 +43,9 @@ class TodayHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = TravaryChrome.of(context).colors;
     final day = Text(subtitle, style: TravaryText.daySubtitle, maxLines: 2, overflow: TextOverflow.ellipsis);
+    final heading = title;
+    // The day line sits a little below the heading, or at the top without one.
+    final gap = heading == null ? 0.0 : 11.0;
 
     return Padding(
       padding: const EdgeInsets.only(top: TodayLayout.headerTop),
@@ -43,16 +57,12 @@ class TodayHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Semantics(
-                  header: true,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerLeft,
-                    child: Text(greeting, style: TravaryText.greeting, maxLines: 1),
-                  ),
-                ),
+                if (heading != null) _heading(heading),
                 if (onChooseDay == null)
-                  Padding(padding: const EdgeInsets.only(top: 11), child: day)
+                  Padding(
+                    padding: EdgeInsets.only(top: gap),
+                    child: day,
+                  )
                 else
                   Semantics(
                     button: true,
@@ -63,7 +73,10 @@ class TodayHeader extends StatelessWidget {
                       focusColor: colors.highlight.withValues(alpha: 0.2),
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(minHeight: 48),
-                        child: Padding(padding: const EdgeInsets.only(top: 11, bottom: 4), child: day),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: gap, bottom: 4),
+                          child: day,
+                        ),
                       ),
                     ),
                   ),
@@ -74,6 +87,34 @@ class TodayHeader extends StatelessWidget {
           const SizedBox(width: TodayLayout.pillInset),
         ],
       ),
+    );
+  }
+
+  /// The heading, shrunk to fit the width. With [titleLike] it is in a line
+  /// as tall as those words would make, at most that big.
+  Widget _heading(String text) {
+    final style = TravaryText.greeting;
+    final like = titleLike;
+    Widget line() => Semantics(
+      header: true,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
+        child: Text(text, style: style, maxLines: 1),
+      ),
+    );
+    if (like == null) return line();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final painter = TextPainter(
+          text: TextSpan(text: like, style: style),
+          textDirection: Directionality.of(context),
+          textScaler: MediaQuery.textScalerOf(context),
+          maxLines: 1,
+        )..layout();
+        final shrink = math.min(1.0, constraints.maxWidth / painter.width);
+        return SizedBox(height: painter.height * shrink, child: line());
+      },
     );
   }
 

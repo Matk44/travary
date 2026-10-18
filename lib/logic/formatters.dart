@@ -103,6 +103,15 @@ String greetingFor(DateTime now) {
   return 'Good evening';
 }
 
+/// What heads a day that isn't [today] ("Good morning" is for today only):
+/// "Tomorrow", "Yesterday", else the weekday, "Thursday".
+String dayHeading(LocalDate day, LocalDate today) {
+  final days = today.daysUntil(day);
+  if (days == 1) return 'Tomorrow';
+  if (days == -1) return 'Yesterday';
+  return DateFormat('EEEE').format(day.toDateTime());
+}
+
 /// "today", "tomorrow", "in 12 days".
 String relativeDays(int days) {
   if (days == 0) return 'today';
