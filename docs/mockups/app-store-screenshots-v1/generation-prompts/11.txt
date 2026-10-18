@@ -1,0 +1,25 @@
+Use case: precise-object-edit / compositing.
+Asset: still artwork for a coherent iOS App Store screenshot series (this is an eleventh frame added to the ten already made). Opaque portrait PNG 1320 x 2868, or closest size in the SAME 9:19.5 aspect ratio.
+Image 1 is the EDIT TARGET, a layout with a green phone. Preserve its exact geometry and composition, all headline positions, phone size and location, straight-on view and silver finish.
+Image 2 is DRAFT FRAME 01, a provisional style anchor, not owner-approved. Match its premium tactile linen, clean silver rim, warm daylight, soft shadow, serif heading and sans-serif support text. Do not copy frame 01's words, background, postmarks or mascot into this frame unless this frame calls for them.
+Image 3 is the supplied style board, REFERENCE ONLY. Do not copy its labels or panels.
+Phone: outer x130–1190 y590–2809, screen x166–1154 y626–2773 on 1320x2868 canvas, straight-on. One silver phone, no tilt, same rounded outline, black pill Dynamic Island, thin black bezel. A warm soft contact shadow.
+SCREEN: perfectly flat, even #00B140 chroma green, no texture, gradient, reflections, glare, UI, widgets, icons or words; the Dynamic Island stays black. Future real app capture will replace the green.
+LOOK: warm handmade travel ephemera, subtle linen/paper grain. Source Serif 4 Bold headline, first line ink #1C2A47, second line coral #CF5F3C. Inter Medium supporting line, #56617A. Text exactly as below.
+Avoid extra devices, logos, prices, ratings, real brands, people, watermarks, unreadable marks, invented text, clutter, glossy/plastic redesign or neon. STILL image only.
+Frame-specific brief:
+Frame 11. Edit the first attached image (11-widget-green) into the finished
+screenshot, keeping its composition exactly (phone, size, position, green screen).
+
+Background: linen paper as in frame 01. Behind the phone's left edge, the corner of a
+vintage picture postcard with a small illustrated landscape and a perforated stamp;
+behind the right edge, a faded coral postmark ring. Edges only, nothing readable on them.
+Subtle.
+
+Words, exactly:
+  Line 1 (ink #1C2A47): Your next trip,
+  Line 2 (coral #CF5F3C): on your home screen.
+  Under it (soft ink #56617A): A countdown widget, with Travi in it.
+
+No Travi in this frame (he appears inside the widget on the screen that goes in later).
+No Travi anywhere outside the phone. No character from the style anchor.

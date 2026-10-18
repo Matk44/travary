@@ -1,0 +1,96 @@
+{
+  "canvas": { "width": 1320, "height": 2868, "medium": { "width": 1206, "height": 2622 } },
+  "phone": {
+    "model": "iPhone 17 Pro Max, Silver, straight-on, no tilt",
+    "outer": { "x": 130, "y": 590, "width": 1060, "height": 2219, "radius": 170 },
+    "screen": { "x": 166, "y": 626, "width": 988, "height": 2147, "radius": 134 },
+    "island": { "width": 283, "height": 83, "top": 26 }
+  },
+  "caption": { "top": 150, "headline": "Source Serif 4 Bold 112px, line 2 coral", "sub": "Inter Medium 44px" },
+  "greenScreen": "#00B140",
+  "frames": [
+    {
+      "id": "01", "slug": "today", "bg": "linen",
+      "headline": ["Your holiday,", "sorted into days."],
+      "sub": "Flights, stays, tickets and tables, in order.",
+      "screen": "references/screens/01-today.jpg",
+      "travi": { "pose": "hello", "side": "right", "height": 600, "offset": 6, "mirror": false },
+      "capture": "Today on day 3 of the Orlando demo trip, previewed at 8:20am"
+    },
+    {
+      "id": "02", "slug": "countdown", "bg": "stage", "stage": "assets/onboarding/stages/country_gb.webp", "stageTop": 0,
+      "headline": ["Counting down", "to the next one."],
+      "sub": "A postcard from where you're going.",
+      "screen": "references/screens/02-countdown.jpg",
+      "capture": "The Lake District countdown, with Travi's own peek over the postcard"
+    },
+    {
+      "id": "03", "slug": "trip", "bg": "linen",
+      "headline": ["It spots", "what's missing."],
+      "sub": "The night without a stay. The flight home.",
+      "screen": "references/screens/03-trip.jpg",
+      "capture": "The \"Kyoto in spring\" trip page with its gap rows and Before you go"
+    },
+    {
+      "id": "04", "slug": "smart-import", "bg": "stage", "stage": "assets/onboarding/stages/workshop.webp", "stageTop": 0,
+      "headline": ["Hand Travi", "the confirmation."],
+      "sub": "Smart Import reads screenshots and PDFs.",
+      "screen": "references/screens/04-smart-import.jpg",
+      "tag": ["2 free,", "then a pass"],
+      "capture": "Smart Import reading a made-up hotel confirmation (Travi's reading pose)"
+    },
+    {
+      "id": "05", "slug": "flight", "bg": "linen",
+      "headline": ["Just the", "flight number."],
+      "sub": "The board flips in the times and airports.",
+      "screen": "references/screens/05-flight.jpg",
+      "capture": "The departures board after typing a real flight number"
+    },
+    {
+      "id": "06", "slug": "family", "bg": "stage", "stage": "assets/onboarding/bali-stage-prop-free-v1.webp", "stageTop": 0,
+      "headline": ["Everyone on", "the same page."],
+      "sub": "Up to 6 people, each with their own tickets.",
+      "screen": "references/screens/06-family.jpg",
+      "tag": ["With", "a pass"],
+      "travi": { "pose": "envelope", "side": "left", "height": 600, "offset": 6, "mirror": true },
+      "capture": "\"Who's coming\" on a trip with four people joined"
+    },
+    {
+      "id": "07", "slug": "tickets", "bg": "linen",
+      "headline": ["Tickets that work", "with no signal."],
+      "sub": "Saved bookings and tickets, on every plan.",
+      "screen": "references/screens/07-tickets.jpg",
+      "capture": "The Documents tab during the Orlando demo trip"
+    },
+    {
+      "id": "08", "slug": "passport", "bg": "stage", "stage": "assets/onboarding/stages/anywhere.webp", "stageTop": 0,
+      "headline": ["Your passport stays", "on your phone."],
+      "sub": "Behind Face ID. Checked against your next trip.",
+      "screen": "references/screens/08-passport.jpg",
+      "capture": "Travel documents, unlocked, with the six-month warning"
+    },
+    {
+      "id": "09", "slug": "packing", "bg": "linen",
+      "headline": ["Packed", "together."],
+      "sub": "One packing list. Share it with a pass.",
+      "screen": "references/screens/09-packing.jpg",
+      "travi": { "pose": "proud", "side": "right", "height": 600, "offset": 6, "mirror": false },
+      "capture": "The Kyoto trip's packing list, four of seven ticked"
+    },
+    {
+      "id": "10", "slug": "trips", "bg": "stage", "stage": "assets/onboarding/stages/city_jp_kyoto.webp", "stageTop": 230,
+      "headline": ["Every trip gets", "its own postcard."],
+      "sub": "Drawn for where you're going.",
+      "screen": "references/screens/10-trips.jpg",
+      "travi": { "pose": "wave", "image": "../../../assets/branding/travi_passport_source.png", "side": "left", "height": 600, "offset": 6, "mirror": false },
+      "capture": "The Trips tab with three coming trips on postcards"
+    },
+    {
+      "id": "11", "slug": "widget", "bg": "linen",
+      "headline": ["Your next trip,", "on your home screen."],
+      "sub": "A countdown widget, with Travi in it.",
+      "screen": "references/green/11-widget-green.jpg",
+      "capture": "A home-screen page with only the medium countdown widget (Travi up), Travary's icon and Apple's own apps"
+    }
+  ]
+}

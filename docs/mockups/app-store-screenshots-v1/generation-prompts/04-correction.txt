@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Image 1 is the EDIT TARGET, the generated frame 04 with an incorrect linen upper background. Image 2 is the original frame-04 layout and the authoritative NAVY background reference.
+Change ONLY the background above and beside the phone from linen cream to a deep navy painted workshop wall #024A6D, including the entire upper headline area. Keep the dark navy rounded arches along both sides and cream floor below; calm warm lighting. The background behind every word must be NAVY, absolutely no cream or linen panel above the phone.
+Change first headline line "Hand Travi" to cream #FFF1D9, second line "the confirmation." to coral #FA815A, and supporting line "Smart Import reads screenshots and PDFs." to warm cream #E6D6BD.
+Keep all words verbatim, size, type, position, phone outline, phone geometry, green screen, black Dynamic Island, and kraft tag completely unchanged. Kraft tag text remains "2 free, / then a / pass", all visible.
+Portrait 1320x2868 or same exact portrait aspect ratio, no cropping. No Travi outside phone. No other edits. Still image only.

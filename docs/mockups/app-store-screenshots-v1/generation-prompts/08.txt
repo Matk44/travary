@@ -1,0 +1,25 @@
+Use case: precise-object-edit / compositing.
+Asset: still artwork for a coherent ten-image iOS App Store screenshot series. Opaque portrait PNG 1320 x 2868, or closest size in the SAME 9:19.5 aspect ratio.
+Image 1 is the EDIT TARGET, a layout with a green phone. Preserve its exact geometry and composition, all headline positions, phone size and location, straight-on view and silver finish.
+Image 2 is DRAFT FRAME 02, a provisional style anchor, not owner-approved. Match its premium tactile painted navy workshop wall, clean silver rim, warm daylight, soft shadow, serif heading and sans-serif support text. Do not copy frame 02's words, background, postmarks or mascot into this frame unless this frame calls for them.
+Image 3 is the supplied style board, REFERENCE ONLY. Do not copy its labels or panels.
+Phone: outer x130–1190 y590–2809, screen x166–1154 y626–2773 on 1320x2868 canvas, straight-on. One silver phone, no tilt, same rounded outline, black pill Dynamic Island, thin black bezel. A warm soft contact shadow.
+SCREEN: perfectly flat, even #00B140 chroma green, no texture, gradient, reflections, glare, UI or words; the Dynamic Island stays black. Future real app capture will replace the green.
+LOOK: warm handmade travel ephemera, subtle linen/paper grain or deep navy painted workshop arches as specified per-frame. Source Serif 4 Bold headline, first line ink #1C2A47 on linen or cream #FFF1D9 on navy, second line coral #CF5F3C on linen or #FA815A on navy. Inter Medium supporting line, #56617A on linen or #E6D6BD on navy. Text exactly as below.
+Avoid extra devices, logos, prices, ratings, real brands, people, watermarks, unreadable marks, invented text, clutter, glossy/plastic redesign or neon. STILL image only.
+Frame-specific brief:
+Frame 08 of 10. Edit the first attached image (08-passport-green) into the finished
+screenshot, keeping its composition exactly (phone, size, position, green screen).
+
+Background: Travi's workshop, the deep navy wall (#024A6D) with arches at both sides
+opening onto a sunny coastline: green headlands, a winding road, turquoise sea, a low
+orange sun. Cream floor. Calm, safe, settled light.
+
+Words, exactly:
+  Line 1 (cream #FFF1D9): Your passport stays
+  Line 2 (coral #FA815A): on your phone.
+  Under it (warm cream #E6D6BD): Behind Face ID. Checked against your next trip.
+
+No Travi in this frame, and no passport drawn anywhere (the real screen goes in later).
+No Travi anywhere in this frame and no passport illustration outside the phone.
+BACKGROUND MUST BE NAVY #024A6D behind the whole headline, no linen there. Follow this frame's destination as described, don't copy the English countryside from image 2.

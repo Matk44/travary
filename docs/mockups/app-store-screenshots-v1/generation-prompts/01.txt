@@ -1,0 +1,15 @@
+Use case: compositing / identity-preserve
+Asset type: first STILL artwork for Travary's iOS App Store screenshot series, frame 01 Today. Opaque PNG, portrait 1320 x 2868 pixels, or closest output preserving the exact 9:19.5 aspect ratio.
+Input image 1 is the EDIT TARGET: 01-today-green.jpg. Keep its composition and geometry exactly. This is a finish/polish edit, never a redesign.
+Input image 2 is the STYLE REFERENCE: style-board.jpg. Use only its palette, type and travel-ephemera finish; do not reproduce its labels or panels.
+Input image 3 is CHARACTER IDENTITY REFERENCE: travi_passport_source.png, the exact Travi from the owner's passport icon prompt. Preserve his cheerful coral-orange vertically ribbed suitcase shell, faceted handmade material, big expressive navy-and-white eyes, navy brows, open delighted smile, yellow/brass handle posts with navy grip, coral arms and five-finger waving hand, navy trim and corner guards, dark spinner wheels with yellow hubs, cream luggage tag with navy palm tree on brass chain. Preserve his identity and proportions. The icon's passport is only a character reference; do not add the passport or any other prop to this frame. Keep the existing hello/open-arm pose and placement from input 1.
+Primary request: finish this layout into premium, warm, tactile App Store marketing artwork. Make the linen weave refined and softly lit, phone silver edge crisp, integration of Travi clean and on-model, with a soft contact shadow.
+Background: warm linen #EFE8DC filling the entire canvas, subtle natural weave and soft daylight from upper left. Keep the faded navy postmark ring behind the phone's left edge and the coral palm-tree postmark behind its right edge subtle and mostly occluded. No extra props.
+Phone invariant: one Silver iPhone in exactly the target's location, straight-on, no tilt or perspective; outer edge x130–1190 y590–2809 on a 1320x2868 canvas; screen x166–1154 y626–2773, smoothly rounded corners, thin even black bezel, same black Dynamic Island. Warm soft shadow. No Apple logo.
+SCREEN MUST STAY PERFECTLY FLAT CHROMA GREEN #00B140. No UI, words, reflection, glare, gradient, texture or image in the screen. The black Dynamic Island stays black. Travi stays in front at the lower-right corner, same size as target, overlapping only the lower portion, never upper two-thirds. No character elsewhere.
+Text, verbatim with exactly these line breaks and positions from target:
+Your holiday,
+sorted into days.
+Flights, stays, tickets and tables, in order.
+Headline in Source Serif 4 Bold, first line ink #1C2A47, second line coral #CF5F3C. Supporting line in Inter Medium, soft ink #56617A. Centered above phone, unchanged size and hierarchy.
+Keep everything in-frame and keep the exact portrait composition. Gentle handmade gouache/papercraft sensibility, calm and premium. No glossy plastic redesign, neon, stock photos, people, badges, pricing, ratings, watermarks, extra words, extra devices or invented objects. Still image only.

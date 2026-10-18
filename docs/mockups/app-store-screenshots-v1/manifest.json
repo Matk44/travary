@@ -1,0 +1,143 @@
+{
+  "prepared": "2026-10-16",
+  "tool": "built-in image_gen",
+  "frames": [
+    {
+      "id": "01",
+      "slug": "today",
+      "file": "chatgpt/01-today.png",
+      "width": 850,
+      "height": 1850,
+      "mode": "RGB",
+      "sha256": "ffb483dafe7f46f3a3e481560c1d3b0c1acf3fcbe0c678e6563a6d70e5124eee",
+      "prompt": "generation-prompts/01.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "02",
+      "slug": "countdown",
+      "file": "chatgpt/02-countdown.png",
+      "width": 851,
+      "height": 1849,
+      "mode": "RGB",
+      "sha256": "b21558d17a61a6922fa108bc5f1172b34fcfc3bdc9dea581e2ea31a889f5706e",
+      "prompt": "generation-prompts/02.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "03",
+      "slug": "trip",
+      "file": "chatgpt/03-trip.png",
+      "width": 850,
+      "height": 1850,
+      "mode": "RGB",
+      "sha256": "974efa1ef9c26fa3f7fc68aa1d13f3305f67611759511cb637a8e4c3416fd362",
+      "prompt": "generation-prompts/03.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "04",
+      "slug": "smart-import",
+      "file": "chatgpt/04-smart-import-tag-fixed.png",
+      "width": 1320,
+      "height": 2868,
+      "mode": "RGB",
+      "sha256": "b8b85ef62c7c86a02a395e191281ba9ad1f934e93dbae3a3cb19b44e19aa68ac",
+      "derived_from": {
+        "file": "chatgpt/04-smart-import.png",
+        "width": 850,
+        "height": 1850,
+        "sha256": "9a815493f5dd28dfaf2d09c184fd7c14981e7e5ab968b697f2c0538089837a61",
+        "edit": "retag_04.py, 17 Oct 2026: scaled to 1320 x 2868 as compose.py does, and the tag's words set again inside it (ImageGen had clipped the comma and the 'a'); nothing else changed"
+      },
+      "prompt": "generation-prompts/04.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "05",
+      "slug": "flight",
+      "file": "chatgpt/05-flight.png",
+      "width": 851,
+      "height": 1849,
+      "mode": "RGB",
+      "sha256": "5aa71c4a816d178dcd8b06558f739e4d7bf3c8bb12a63ec9368fa3d72034fb29",
+      "prompt": "generation-prompts/05.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "06",
+      "slug": "family",
+      "file": "chatgpt/06-family.png",
+      "width": 850,
+      "height": 1850,
+      "mode": "RGB",
+      "sha256": "61c0c84bc6dfa991128afa5d2303b0b50024f5b14fe86937d7e2aeaa439819e9",
+      "prompt": "generation-prompts/06.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "07",
+      "slug": "tickets",
+      "file": "chatgpt/07-tickets.png",
+      "width": 850,
+      "height": 1850,
+      "mode": "RGB",
+      "sha256": "03b37b8239f1ca1e4ead52963c847e2783ab66c40409d9641a55fd94b651b0f2",
+      "prompt": "generation-prompts/07.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "08",
+      "slug": "passport",
+      "file": "chatgpt/08-passport.png",
+      "width": 851,
+      "height": 1849,
+      "mode": "RGB",
+      "sha256": "14bb1c57f962ffbfdc8275a175b557d92dbd8b1f6111c68422f9154ab38d6e1a",
+      "prompt": "generation-prompts/08.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "09",
+      "slug": "packing",
+      "file": "chatgpt/09-packing.png",
+      "width": 850,
+      "height": 1850,
+      "mode": "RGB",
+      "sha256": "e277fd160df40b58d09bac845eb18af0d6dc0df8c981e729fa93434e28500e93",
+      "prompt": "generation-prompts/09.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    },
+    {
+      "id": "10",
+      "slug": "trips",
+      "file": "chatgpt/10-trips.png",
+      "width": 851,
+      "height": 1848,
+      "mode": "RGB",
+      "sha256": "1b7c5f98c2ae03581e23947878fec78e38c4bcc6097f97a81fde3089af1c0a64",
+      "prompt": "generation-prompts/10.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": false
+    }
+  ]
+}
