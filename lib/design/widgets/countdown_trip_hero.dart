@@ -75,7 +75,7 @@ class CountdownTripHero extends StatefulWidget {
     this.replay,
     this.reaction,
     this.greet,
-    this.note,
+    this.notes = const [],
   });
 
   final CountdownText text;
@@ -96,9 +96,9 @@ class CountdownTripHero extends StatefulWidget {
   /// Asked once the entry settles: true if Travi pops up to wave.
   final Future<bool> Function()? greet;
 
-  /// A line under the postcard, beside the tag (the packing list), with a
-  /// tap of its own.
-  final CountdownNote? note;
+  /// Lines under the postcard, beside the tag (the packing list, the home
+  /// screen widget), each with a tap of its own.
+  final List<CountdownNote> notes;
 
   /// As wide as [available] allows, up to [CountdownLayout.postcardMaxWidth],
   /// with the postcard and the tag hanging below it no taller than
@@ -382,8 +382,8 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
       ),
     );
 
-    final note = widget.note;
-    if (note == null) return hero;
+    final notes = widget.notes;
+    if (notes.isEmpty) return hero;
     // Under the card's bottom left, clear of the tag even as it swings.
     final noteLeft = left + width * CountdownGeometry.postcardCardLeft + CountdownLayout.noteInset;
     final tagCardLeft = tagLeft + body.left * tagWidth;
@@ -405,7 +405,11 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
             width: math.max(0, noteRight - noteLeft),
             child: FadeTransition(
               opacity: CurvedAnimation(parent: _entry, curve: CountdownTripHero._postcardIn),
-              child: _CountdownNoteLink(note: note),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [for (final note in notes) _CountdownNoteLink(note: note)],
+              ),
             ),
           ),
         ),
@@ -415,14 +419,26 @@ class _CountdownTripHeroState extends State<CountdownTripHero> with SingleTicker
 }
 
 /// A line written under the countdown postcard (the packing list: "Packing
-/// list · Start yours"), already worded.
+/// list · Start yours"), already worded. [icon] draws a Material icon where
+/// the packing list has the palette's suitcase.
 class CountdownNote {
-  const CountdownNote({required this.title, required this.detail, required this.semanticLabel, required this.onTap});
+  const CountdownNote({
+    required this.title,
+    required this.detail,
+    required this.semanticLabel,
+    required this.onTap,
+    this.id = 'countdown-note',
+    this.icon,
+  });
 
   final String title;
   final String detail;
   final String semanticLabel;
   final VoidCallback onTap;
+
+  /// Its widget's key suffix: notes under one postcard need different ones.
+  final String id;
+  final IconData? icon;
 }
 
 /// The note as a small link: a suitcase, its title in ink, its state
@@ -441,7 +457,7 @@ class _CountdownNoteLink extends StatelessWidget {
       label: note.semanticLabel,
       excludeSemantics: true,
       child: InkWell(
-        key: const ValueKey('countdown-note'),
+        key: ValueKey(note.id),
         onTap: note.onTap,
         borderRadius: BorderRadius.circular(TravaryRadius.small),
         child: ConstrainedBox(
@@ -450,7 +466,10 @@ class _CountdownNoteLink extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: TravarySpace.xs),
             child: Row(
               children: [
-                SlotIcon(icon: chrome.slots.icon(IconSlot.countdownBookings), color: ink, size: 28),
+                if (note.icon case final icon?)
+                  SizedBox.square(dimension: 28, child: Icon(icon, color: ink, size: 26))
+                else
+                  SlotIcon(icon: chrome.slots.icon(IconSlot.countdownBookings), color: ink, size: 28),
                 const SizedBox(width: TravarySpace.sm),
                 Flexible(
                   child: Column(

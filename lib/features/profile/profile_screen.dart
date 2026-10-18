@@ -8,8 +8,10 @@ import '../../design/widgets/ledger.dart';
 import '../../design/widgets/profile_stationery.dart';
 import '../../domain/domain.dart';
 import '../../logic/ai_consent.dart';
+import '../../logic/countdown_widget_setup.dart';
 import '../../logic/formatters.dart';
 import '../../state/ai_consent_store.dart';
+import '../../state/countdown_widget_store.dart';
 import '../../state/onboarding_store.dart';
 import '../../state/reminders_store.dart';
 import '../../state/travel_store.dart';
@@ -19,6 +21,7 @@ import '../help/help_links.dart';
 import '../premium/plus_card.dart';
 import '../reminders/reminder_offer.dart';
 import '../travel_documents/document_actions.dart';
+import '../widget/countdown_widget_sheet.dart';
 import 'card_gallery_screen.dart';
 import 'flight_status_test_screen.dart';
 import 'travi_cameos_screen.dart';
@@ -69,6 +72,23 @@ class ProfileScreen extends StatelessWidget {
                     onChanged: (on) => on ? turnOnReminders(context) : reminders.turnOff(),
                   ),
                 ],
+              ),
+            ),
+          ],
+          if (context.watch<CountdownWidgetStore?>() case final widget? when widget.available) ...[
+            const SectionLabel('Home screen'),
+            ProfilePaperCard(
+              key: const ValueKey('profile-widget-card'),
+              kind: ProfilePaperKind.memo,
+              child: ListTile(
+                key: const ValueKey('profile-widget'),
+                leading: const Icon(Icons.add_to_home_screen_rounded),
+                title: const Text(countdownWidgetSettingTitle),
+                subtitle: Text(countdownWidgetSettingSubtitle(widget.status)),
+                trailing: widget.added
+                    ? const Icon(Icons.check_circle_outline_rounded, color: TravaryColors.sage)
+                    : const Icon(Icons.chevron_right_rounded),
+                onTap: () => showCountdownWidgetSheet(context, from: 'profile'),
               ),
             ),
           ],

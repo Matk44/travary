@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travary/data/countdown_widget_bridge.dart';
 import 'package:travary/data/memory_travel_repository.dart';
 import 'package:travary/domain/domain.dart';
+import 'package:travary/logic/countdown_widget_setup.dart';
 import 'package:travary/state/countdown_widget_sync.dart';
 import 'package:travary/state/travel_store.dart';
 
@@ -24,6 +25,12 @@ class _FakeBridge implements CountdownWidgetBridge {
 
   @override
   Future<void> reload() async => reloads++;
+
+  @override
+  Future<HomeWidgetStatus> status() async => homeWidgetUnavailable;
+
+  @override
+  Future<bool> requestPin() async => false;
 }
 
 void main() {
