@@ -343,7 +343,7 @@ file name (never absolute paths). Cloud backup of files is a future Plus feature
 | Demo | `flutter run --dart-define=TRAVARY_BACKEND=demo` | Sample Orlando/Lake District/Paris trips built around today; resets on restart |
 | Emulators | add `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` | Local Firebase emulators (`docs/ART_PACKS.md`) |
 | Real purchases | add `--dart-define-from-file=config/revenuecat.local.json` | RevenueCat's public SDK keys (git-ignored); without them, purchases are simulated (a release build refuses to start) |
-| Store builds | `tool/build_release.sh [android\|ios\|both]` | The App Bundle and .ipa with RevenueCat's keys and flight lookup (`FLIGHT_LOOKUP=false` leaves it out); checks the upload key and build number |
+| Store builds | `tool/build_release.sh [android\|ios\|both]` | The App Bundle and .ipa with RevenueCat's keys and flight lookup (`FLIGHT_LOOKUP=false` leaves it out); checks the upload key and build number. An Archive from Xcode adds whichever of those the last flutter command didn't pass (`tool/xcode_dart_defines.sh`, the Runner's Flutter build phase), and fails without the keys file |
 | Email sign-in | add `--dart-define=TRAVARY_EMAIL_LINKS=true` | Passwordless links on `travary-444.firebaseapp.com` (or `TRAVARY_EMAIL_LINK_DOMAIN`); off until the app opens them (`docs/EMAIL_LINK_SIGN_IN.md`) |
 | Analytics in debug | add `--dart-define=TRAVARY_ANALYTICS=true` | Debug runs send nothing otherwise; release builds always send (`docs/ANALYTICS.md`) |
 | Flight alerts off | add `--dart-define=TRAVARY_FLIGHT_ALERTS=false` | They're on in every build by default; this hides them (a build-time kill switch); see Flight alerts |

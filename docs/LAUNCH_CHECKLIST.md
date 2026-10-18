@@ -33,7 +33,12 @@ work, accounts, money); everything else can be done in this repo.
 - [x] `tool/build_release.sh` builds the store uploads with RevenueCat's
   keys and refuses to build without them. A release build without keys
   now refuses to start, where before it would have simulated purchases
-  (premium for free).
+  (premium for free). An Archive from Xcode used to make exactly that
+  build (17 Oct: a TestFlight build that wouldn't start), because Xcode
+  builds with whatever the last flutter command left in
+  `ios/Flutter/Generated.xcconfig`. Now the Runner's Flutter build phase
+  adds the keys and flight lookup to any Release build that lacks them
+  (`tool/xcode_dart_defines.sh`) and fails without the keys file.
 - [ ] **You:** App Store Connect: set the price of the Annual Pass
   (`travary_annual_pass`). Name the products "Annual Pass" and "Holiday
   Pass", and give each one a review screenshot (the pass desk). In-app
