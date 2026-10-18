@@ -1,0 +1,1 @@
+Smart Import reads a confirmation into a draft to check. Two free imports, then a pass.

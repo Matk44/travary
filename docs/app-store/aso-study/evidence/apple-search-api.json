@@ -1,0 +1,1145 @@
+[
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "us",
+    "query": "itinerary app",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=itinerary+app&country=us&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 1476732439,
+        "name": "Wanderlog - Travel Planner",
+        "seller": "Vacation and Travel Planner App LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/wanderlog-travel-planner/id1476732439?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 311035142,
+        "name": "TripIt: Travel Planner",
+        "seller": "TripIt Inc",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripit-travel-planner/id311035142?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 6464438601,
+        "name": "Itineraries by TravelJoy",
+        "seller": "TravelJoy, Inc.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/itineraries-by-traveljoy/id6464438601?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 1499198946,
+        "name": "Structured: Daily Planner Todo",
+        "seller": "unorderly GmbH",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/structured-daily-planner-todo/id1499198946?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 1238631375,
+        "name": "Towngas Metering",
+        "seller": "The Hong Kong and China Gas Co. Ltd.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/towngas-metering/id1238631375?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 905768387,
+        "name": "Funliday - Travel Planner",
+        "seller": "Funliday Inc.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/funliday-travel-planner/id905768387?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 1069006856,
+        "name": "Trip Plans",
+        "seller": "Travefy Inc.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/trip-plans/id1069006856?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 6755474468,
+        "name": "Yalla Cheers",
+        "seller": "Steven Slaiwa",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/yalla-cheers/id6755474468?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 350727384,
+        "name": "CheckMyTrip \u2013 Travel Itinerary",
+        "seller": "Amadeus",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/checkmytrip-travel-itinerary/id350727384?uo=4"
+      },
+      {
+        "position_in_api": 12,
+        "id": 6748781672,
+        "name": "Rhyme - Itinerary Planner",
+        "seller": "LOGOS STUDIO INC.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/rhyme-itinerary-planner/id6748781672?uo=4"
+      },
+      {
+        "position_in_api": 13,
+        "id": 6747716729,
+        "name": "Wanderjoy - Itinerary Planner",
+        "seller": "Kaizoku Works LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/wanderjoy-itinerary-planner/id6747716729?uo=4"
+      },
+      {
+        "position_in_api": 14,
+        "id": 6472216007,
+        "name": "Divineko - Magic Cat",
+        "seller": "Ketchapp",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/divineko-magic-cat/id6472216007?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "us",
+    "query": "family trip planner",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=family+trip+planner&country=us&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 944060491,
+        "name": "Roadtrippers - Trip Planner",
+        "seller": "Roadtrippers Inc.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/roadtrippers-trip-planner/id944060491?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 1476732439,
+        "name": "Wanderlog - Travel Planner",
+        "seller": "Vacation and Travel Planner App LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/wanderlog-travel-planner/id1476732439?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 311035142,
+        "name": "TripIt: Travel Planner",
+        "seller": "TripIt Inc",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripit-travel-planner/id311035142?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 6747716729,
+        "name": "Wanderjoy - Itinerary Planner",
+        "seller": "Kaizoku Works LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/wanderjoy-itinerary-planner/id6747716729?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 6737241065,
+        "name": "Travel Planner \u2013 Trip Way",
+        "seller": "Ivan Madera",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/travel-planner-trip-way/id6737241065?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 844256133,
+        "name": "Road Trip Planner Viewer",
+        "seller": "Kyle Modesitt",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/road-trip-planner-viewer/id844256133?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 6748781672,
+        "name": "Rhyme - Itinerary Planner",
+        "seller": "LOGOS STUDIO INC.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/rhyme-itinerary-planner/id6748781672?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 1095856653,
+        "name": "Road Trip Planner\u2122",
+        "seller": "Kyle Modesitt",
+        "price": "$3.99",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/road-trip-planner/id1095856653?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 1470248252,
+        "name": "Pogo: AI Trip Planner",
+        "seller": "Pogo Travel Ltd",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/pogo-ai-trip-planner/id1470248252?uo=4"
+      },
+      {
+        "position_in_api": 12,
+        "id": 6756543673,
+        "name": "journeybot: trip packing list",
+        "seller": "Michal Ferak",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/journeybot-trip-packing-list/id6756543673?uo=4"
+      },
+      {
+        "position_in_api": 13,
+        "id": 6775075550,
+        "name": "Tripmojo: Trip Planner App",
+        "seller": "Candle Studios LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripmojo-trip-planner-app/id6775075550?uo=4"
+      },
+      {
+        "position_in_api": 14,
+        "id": 6788804180,
+        "name": "Vacadock \u2014 Family Trip Planner",
+        "seller": "Polycrest Labs LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/vacadock-family-trip-planner/id6788804180?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "us",
+    "query": "offline itinerary",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=offline+itinerary&country=us&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 327783342,
+        "name": "CityMaps2Go Pro  Offline Maps",
+        "seller": "Kulemba GmbH",
+        "price": "$11.99",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/citymaps2go-pro-offline-maps/id327783342?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 519058033,
+        "name": "Tripomatic Trip Planner & Maps",
+        "seller": "Tripomatic s.r.o.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripomatic-trip-planner-maps/id519058033?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 1498997939,
+        "name": "YouLi Trip",
+        "seller": "YouLi Travel Pty. Ltd.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/youli-trip/id1498997939?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 934850257,
+        "name": "OsmAnd Maps Travel & Navigate",
+        "seller": "OsmAND B.V.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/osmand-maps-travel-navigate/id934850257?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 554726752,
+        "name": "izi.TRAVEL: Audio Tour Guide",
+        "seller": "Informap Technology Center LLC",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/izi-travel-audio-tour-guide/id554726752?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 436381327,
+        "name": "Chimani: National Parks",
+        "seller": "Chimani, Inc.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/chimani-national-parks/id436381327?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 791684332,
+        "name": "Offline GPS Navigation",
+        "seller": "Alexander Deplov",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/offline-gps-navigation/id791684332?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 6768102879,
+        "name": "Avenly - Itinerary Planner",
+        "seller": "Sofia Rincon",
+        "price": "Free",
+        "currency": "USD",
+        "url": "https://apps.apple.com/us/app/avenly-itinerary-planner/id6768102879?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "gb",
+    "query": "itinerary app",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=itinerary+app&country=gb&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 1476732439,
+        "name": "Wanderlog - Travel Planner",
+        "seller": "Vacation and Travel Planner App LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/wanderlog-travel-planner/id1476732439?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 311035142,
+        "name": "TripIt: Travel Planner",
+        "seller": "TripIt Inc",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripit-travel-planner/id311035142?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 1499198946,
+        "name": "Structured: Daily Planner Todo",
+        "seller": "unorderly GmbH",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/structured-daily-planner-todo/id1499198946?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 350727384,
+        "name": "CheckMyTrip \u2013 Travel Itinerary",
+        "seller": "Amadeus",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/checkmytrip-travel-itinerary/id350727384?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 6748781672,
+        "name": "Rhyme - Itinerary Planner",
+        "seller": "LOGOS STUDIO INC.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/rhyme-itinerary-planner/id6748781672?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 1604607832,
+        "name": "Itinerary Travel Planner App",
+        "seller": "Eugene Marchukevich",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/itinerary-travel-planner-app/id1604607832?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 785128002,
+        "name": "Steller: Travel & Trip Planner",
+        "seller": "Expedition Travel Advisor, Inc.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/steller-travel-trip-planner/id785128002?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 434832826,
+        "name": "Viator: Top Travel Experiences",
+        "seller": "VIATOR SYSTEMS PTY LIMITED",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/viator-top-travel-experiences/id434832826?uo=4"
+      },
+      {
+        "position_in_api": 12,
+        "id": 6760367525,
+        "name": "Routely: Itinerary Planner",
+        "seller": "AHMET AKIL",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/routely-itinerary-planner/id6760367525?uo=4"
+      },
+      {
+        "position_in_api": 13,
+        "id": 905768387,
+        "name": "Funliday - Travel Planner",
+        "seller": "Funliday Inc.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/funliday-travel-planner/id905768387?uo=4"
+      },
+      {
+        "position_in_api": 14,
+        "id": 6761648948,
+        "name": "Teno - Itinerary Plan & Share",
+        "seller": "Ambra LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/teno-itinerary-plan-share/id6761648948?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "gb",
+    "query": "family trip planner",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=family+trip+planner&country=gb&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 944060491,
+        "name": "Roadtrippers - Trip Planner",
+        "seller": "Roadtrippers Inc.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/roadtrippers-trip-planner/id944060491?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 6737241065,
+        "name": "Travel Planner \u2013 Trip Way",
+        "seller": "Ivan Madera",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/travel-planner-trip-way/id6737241065?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 6758730467,
+        "name": "Layla \u2013 AI Trip Planner",
+        "seller": "Beautiful Destinations Booking Gmbh",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/layla-ai-trip-planner/id6758730467?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 6747716729,
+        "name": "Trip Planner: Wanderjoy",
+        "seller": "Kaizoku Works LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/trip-planner-wanderjoy/id6747716729?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 311035142,
+        "name": "TripIt: Travel Planner",
+        "seller": "TripIt Inc",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripit-travel-planner/id311035142?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 6779089346,
+        "name": "Travobear: Group Trip Planner",
+        "seller": "Xense Limited",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/travobear-group-trip-planner/id6779089346?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 6470818822,
+        "name": "Group Trip Planner - AvoSquado",
+        "seller": "Snowcat Holdings LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/group-trip-planner-avosquado/id6470818822?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 548194955,
+        "name": "Ready Set Holiday! Countdown",
+        "seller": "Cobalt Sign SRL",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/ready-set-holiday-countdown/id548194955?uo=4"
+      },
+      {
+        "position_in_api": 12,
+        "id": 6790821047,
+        "name": "FlyHugz - Trip Planner",
+        "seller": "Arcadia Innovate LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/flyhugz-trip-planner/id6790821047?uo=4"
+      },
+      {
+        "position_in_api": 13,
+        "id": 6740398738,
+        "name": "MyTripSharing: Travel Planner",
+        "seller": "MYTRIPSHARING LTD",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/mytripsharing-travel-planner/id6740398738?uo=4"
+      },
+      {
+        "position_in_api": 14,
+        "id": 6502180062,
+        "name": "Trabu - Family Travel App",
+        "seller": "Trabu Technologies Ltd",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/trabu-family-travel-app/id6502180062?uo=4"
+      },
+      {
+        "position_in_api": 15,
+        "id": 6775075550,
+        "name": "Tripmojo: Trip Planner App",
+        "seller": "Candle Studios LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripmojo-trip-planner-app/id6775075550?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "gb",
+    "query": "offline itinerary",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=offline+itinerary&country=gb&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 510623322,
+        "name": "MAPS.ME: Offline Maps, GPS Nav",
+        "seller": "Convexity Holdings AG",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/maps-me-offline-maps-gps-nav/id510623322?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 327783342,
+        "name": "CityMaps2Go Pro  Offline Maps",
+        "seller": "Kulemba GmbH",
+        "price": "\u00a311.99",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/citymaps2go-pro-offline-maps/id327783342?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 1498997939,
+        "name": "YouLi Trip",
+        "seller": "YouLi Travel Pty. Ltd.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/youli-trip/id1498997939?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 519058033,
+        "name": "Tripomatic Trip Planner & Maps",
+        "seller": "Tripomatic s.r.o.",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/tripomatic-trip-planner-maps/id519058033?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 554726752,
+        "name": "izi.TRAVEL: Audio Tour Guide",
+        "seller": "Informap Technology Center LLC",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/izi-travel-audio-tour-guide/id554726752?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 6768102879,
+        "name": "Avenly - Itinerary Planner",
+        "seller": "Sofia Rincon",
+        "price": "Free",
+        "currency": "GBP",
+        "url": "https://apps.apple.com/gb/app/avenly-itinerary-planner/id6768102879?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "au",
+    "query": "itinerary app",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=itinerary+app&country=au&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 1476732439,
+        "name": "Wanderlog - Travel Planner",
+        "seller": "Vacation and Travel Planner App LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/wanderlog-travel-planner/id1476732439?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 311035142,
+        "name": "TripIt: Travel Planner",
+        "seller": "TripIt Inc",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripit-travel-planner/id311035142?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 350727384,
+        "name": "CheckMyTrip \u2013 Travel Itinerary",
+        "seller": "Amadeus",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/checkmytrip-travel-itinerary/id350727384?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 905768387,
+        "name": "Funliday - Travel Planner",
+        "seller": "Funliday Inc.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/funliday-travel-planner/id905768387?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 1390338445,
+        "name": "Travee - Itinerary App",
+        "seller": "Tatsuhisa Ueno",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/travee-itinerary-app/id1390338445?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 947925763,
+        "name": "Polarsteps",
+        "seller": "Polarsteps B.V.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/polarsteps/id947925763?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 785128002,
+        "name": "Steller: Travel & Trip Planner",
+        "seller": "Expedition Travel Advisor, Inc.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/steller-travel-trip-planner/id785128002?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 1499198946,
+        "name": "Structured: Daily Planner Todo",
+        "seller": "unorderly GmbH",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/structured-daily-planner-todo/id1499198946?uo=4"
+      },
+      {
+        "position_in_api": 12,
+        "id": 6789284163,
+        "name": "BFT Itinerary App",
+        "seller": "KTC Worldwide Pty Ltd",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/bft-itinerary-app/id6789284163?uo=4"
+      },
+      {
+        "position_in_api": 13,
+        "id": 6502032567,
+        "name": "Travel Easy Itinerary",
+        "seller": "Om Sai Raam Ltd",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/travel-easy-itinerary/id6502032567?uo=4"
+      },
+      {
+        "position_in_api": 14,
+        "id": 434832826,
+        "name": "Viator Tours & Attractions",
+        "seller": "VIATOR SYSTEMS PTY LIMITED",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/viator-tours-attractions/id434832826?uo=4"
+      },
+      {
+        "position_in_api": 15,
+        "id": 1069006856,
+        "name": "Trip Plans",
+        "seller": "Travefy Inc.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/trip-plans/id1069006856?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "au",
+    "query": "family trip planner",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=family+trip+planner&country=au&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 944060491,
+        "name": "Roadtrippers - Trip Planner",
+        "seller": "Roadtrippers Inc.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/roadtrippers-trip-planner/id944060491?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 6745585647,
+        "name": "Bali Family Finds",
+        "seller": "CREATIVE DIGITAL HOLDINGS PTE. LTD",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/bali-family-finds/id6745585647?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 6748898199,
+        "name": "Roameo: AI Trip Planner",
+        "seller": "Silvertree Ventures Limited",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/roameo-ai-trip-planner/id6748898199?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 1457145842,
+        "name": "Trip Planner - NSW & Sydney",
+        "seller": "Jerrycan Co Pty Ltd",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/trip-planner-nsw-sydney/id1457145842?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 311035142,
+        "name": "TripIt: Travel Planner",
+        "seller": "TripIt Inc",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripit-travel-planner/id311035142?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 6747716729,
+        "name": "Journey Planner - Wanderjoy",
+        "seller": "Kaizoku Works LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/journey-planner-wanderjoy/id6747716729?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 844256133,
+        "name": "Road Trip Planner Viewer",
+        "seller": "Kyle Modesitt",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/road-trip-planner-viewer/id844256133?uo=4"
+      },
+      {
+        "position_in_api": 11,
+        "id": 6758730467,
+        "name": "Layla \u2013 AI Trip Planner",
+        "seller": "Beautiful Destinations Booking Gmbh",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/layla-ai-trip-planner/id6758730467?uo=4"
+      },
+      {
+        "position_in_api": 12,
+        "id": 6777424085,
+        "name": "Jiola: AI Trip Planner",
+        "seller": "PEI-YU CHAO",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/jiola-ai-trip-planner/id6777424085?uo=4"
+      },
+      {
+        "position_in_api": 13,
+        "id": 6790821047,
+        "name": "FlyHugz - Trip Planner",
+        "seller": "Arcadia Innovate LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/flyhugz-trip-planner/id6790821047?uo=4"
+      },
+      {
+        "position_in_api": 14,
+        "id": 6740001684,
+        "name": "Kiwi Experience Trip Planner",
+        "seller": "Tourism Holdings Limited",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/kiwi-experience-trip-planner/id6740001684?uo=4"
+      },
+      {
+        "position_in_api": 15,
+        "id": 6741714565,
+        "name": "Pocket Trip Planner",
+        "seller": "Mitchell Smith",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/pocket-trip-planner/id6741714565?uo=4"
+      }
+    ]
+  },
+  {
+    "store": "Apple public iTunes Search API",
+    "country": "au",
+    "query": "offline itinerary",
+    "date": "2026-10-18",
+    "context": "Public unauthenticated software API; not native iPhone organic rank; advertising not identified",
+    "url": "https://itunes.apple.com/search?term=offline+itinerary&country=au&entity=software&limit=15",
+    "results": [
+      {
+        "position_in_api": 1,
+        "id": 510623322,
+        "name": "MAPS.ME \u2013 Offline Map & Nav",
+        "seller": "Convexity Holdings AG",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/maps-me-offline-map-nav/id510623322?uo=4"
+      },
+      {
+        "position_in_api": 2,
+        "id": 6443617088,
+        "name": "Stippl: Trip & Travel Planner",
+        "seller": "Stippl B.V.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/stippl-trip-travel-planner/id6443617088?uo=4"
+      },
+      {
+        "position_in_api": 3,
+        "id": 284876795,
+        "name": "Tripadvisor: Plan & Book Trips",
+        "seller": "Tripadvisor",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripadvisor-plan-book-trips/id284876795?uo=4"
+      },
+      {
+        "position_in_api": 4,
+        "id": 327783342,
+        "name": "CityMaps2Go Pro  Offline Maps",
+        "seller": "Kulemba GmbH",
+        "price": "$19.99",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/citymaps2go-pro-offline-maps/id327783342?uo=4"
+      },
+      {
+        "position_in_api": 5,
+        "id": 1498997939,
+        "name": "YouLi Trip",
+        "seller": "YouLi Travel Pty. Ltd.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/youli-trip/id1498997939?uo=4"
+      },
+      {
+        "position_in_api": 6,
+        "id": 519058033,
+        "name": "Tripomatic Trip Planner & Maps",
+        "seller": "Tripomatic s.r.o.",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripomatic-trip-planner-maps/id519058033?uo=4"
+      },
+      {
+        "position_in_api": 7,
+        "id": 1429967544,
+        "name": "Tripsy: Travel Planner",
+        "seller": "Tripsy LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/tripsy-travel-planner/id1429967544?uo=4"
+      },
+      {
+        "position_in_api": 8,
+        "id": 554726752,
+        "name": "izi.TRAVEL: Audio Tour Guide",
+        "seller": "Informap Technology Center LLC",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/izi-travel-audio-tour-guide/id554726752?uo=4"
+      },
+      {
+        "position_in_api": 9,
+        "id": 1083915336,
+        "name": "Interlaken Travel Guide and Offline City Map",
+        "seller": "eTips LTD",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/interlaken-travel-guide-and-offline-city-map/id1083915336?uo=4"
+      },
+      {
+        "position_in_api": 10,
+        "id": 6768102879,
+        "name": "Avenly - Itinerary Planner",
+        "seller": "Sofia Rincon",
+        "price": "Free",
+        "currency": "AUD",
+        "url": "https://apps.apple.com/au/app/avenly-itinerary-planner/id6768102879?uo=4"
+      }
+    ]
+  }
+]

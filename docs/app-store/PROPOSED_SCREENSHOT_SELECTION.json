@@ -1,0 +1,33 @@
+{
+  "prepared": "2026-10-18",
+  "status": "proposal_awaiting_owner_decision",
+  "max_screenshots_per_device_size": 10,
+  "proposed_frame_ids": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11"
+  ],
+  "proposed_omission": {
+    "id": "05",
+    "slug": "flight",
+    "reason": "Prefer the newly implemented home-screen widget as a distinct holiday-anticipation benefit in the main ten-slot set. Preserve flight entry as an alternate asset."
+  },
+  "frame04": {
+    "proposed_action": "keep_current_accurate_capture",
+    "note": "The lower half of the Smart Import reading screen is plain cream in the real app. This is accurate loading-state UI, not a missing composite; no invented content should fill it."
+  },
+  "simulator": {
+    "udid": "79072CFD-E410-409B-8ECC-CBF625F8C742",
+    "status_bar_override": "8:20",
+    "clear_after_final_capture_command": "xcrun simctl status_bar 79072CFD-E410-409B-8ECC-CBF625F8C742 clear",
+    "cleared_by_this_task": false
+  },
+  "uploaded": false
+}

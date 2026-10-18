@@ -1,0 +1,1 @@
+Saved bookings and tickets remain accessible offline on every plan.

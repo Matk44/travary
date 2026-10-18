@@ -1,0 +1,22 @@
+{
+  "status": "TEMPLATE ONLY; no execution performed",
+  "entries": [
+    {
+      "record_id": null,
+      "store": null,
+      "app_id": null,
+      "locale": null,
+      "page": null,
+      "field_label": null,
+      "before_value": null,
+      "after_value": null,
+      "before_asset_paths": null,
+      "after_asset_paths": null,
+      "console_count": null,
+      "saved_state": null,
+      "screenshot_path": null,
+      "observed_at": null,
+      "verification": null
+    }
+  ]
+}

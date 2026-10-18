@@ -139,3 +139,14 @@ it over the screen 1.38 times larger, turned 3° clockwise and raised 24 px, wit
 shadows, so it reaches past both sides of the phone. The widget's pixels are the app's
 own; nothing in it is redrawn. `compose.py --all` writes frame 11 without the pop-out,
 so run `popout_11.py` after it.
+
+
+## Claude handoff notes and proposed upload selection — 18 October 2026
+
+The owner relayed Claude's final context check: eleven completed frames exceed the ten-screenshot limit per device size; frame 04 has an accurate plain-cream lower half while Smart Import reads; and the iPhone 17 Pro Max simulator's clock is pinned to 8:20. These observations are now explicit in the record.
+
+The [proposed selection](../../app-store/PROPOSED_SCREENSHOT_SELECTION.json) includes 01, 02, 03, 04, 06, 07, 08, 09, 10 and 11. Frame 05 is retained as an alternate; this recommendation has not been confirmed by the owner for upload. The proposal keeps frame 04 without filling its real loading state with invented content.
+
+The status-bar override on simulator `79072CFD-E410-409B-8ECC-CBF625F8C742` was left in place while further app recordings may be needed. After captures are complete: `xcrun simctl status_bar 79072CFD-E410-409B-8ECC-CBF625F8C742 clear`. This task did not run that command or change the simulator.
+
+New header/search still concepts and exact built-in ImageGen prompts are recorded in [app-store-creative-v1](../app-store-creative-v1/README.md). No new motion or store upload was performed.

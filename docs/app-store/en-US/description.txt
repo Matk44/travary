@@ -1,0 +1,43 @@
+Your vacation, sorted into days.
+
+Add your bookings and Travary puts each day in order, with tickets one tap away. Flights, stays, activities and restaurant reservations come together in one calm plan, made for the vacation you've already booked.
+
+START WITH A BOOKING
+No blank itinerary to build first. Add a booking and your trip forms around its dates. Or start with a destination and dates, then fill in the details as you go.
+
+OPEN ON WHAT YOU NEED
+Today shows the day's bookings in time order. The next ticket, your hotel details and what's coming up are close at hand. Finished plans tuck away under Earlier.
+
+LOOK FORWARD TO THE NEXT ONE
+Between vacations, a destination postcard counts down the days. Open it to see your plan, your packing list and what still needs doing.
+
+SPOT THE GAPS
+Find the night without a stay or the flight home you haven't added. Keep visas, the dog sitter and other jobs in Before you go, with an optional due date.
+
+LESS TYPING
+Smart Import reads a booking screenshot, photo or PDF and gives you a draft to check before saving. Your source file can stay with the booking as its ticket. You get 2 free Smart Imports in total; more come with a pass. Flight lookup can fill in times and airports from a flight number and departure date when the schedule is available.
+
+KEEP EVERYONE ON THE PLAN
+With an Annual Pass or Holiday Pass, share a trip with up to 6 people, including you. Everyone sees the same days, can add their bookings and has the trip's tickets on their own phone. Tick off the shared packing list as things go in the case. One pass on the trip covers everyone on it.
+
+CARRY YOUR TICKETS OFFLINE
+Saved bookings and downloaded ticket files open without a connection. Free vacations can attach 2 ticket files; a pass adds unlimited ticket files and cloud backup. Tickets you've already saved stay accessible whatever your plan.
+
+KEEP PERSONAL DOCUMENTS PERSONAL
+Passports, visas and insurance stay only on your phone, behind Face ID or your device passcode. They aren't shared with your trip or sent to Smart Import. Expiry checks against your next trip help you spot documents that may need renewing.
+
+A LITTLE HELP BEFORE YOU GO
+Use a packing list, reuse one from your last trip and choose reminders for the day's plan and upcoming bookings. Destination artwork brings a little of the journey into your cards and postcards.
+
+CHOOSE WHAT YOU NEED
+Free: unlimited trips and bookings, Today, countdowns, packing lists, reminders and personal travel documents, plus 2 Smart Imports in total and 2 ticket files per vacation.
+
+Holiday Pass: a one-off purchase for one vacation of up to 30 days. Adds sharing for up to 6 people, unlimited Smart Import on that vacation, unlimited ticket files, ticket backup and flight-change alerts where flight data is available. Pass features last until 7 days after the vacation ends.
+
+Annual Pass: a yearly subscription with the pass features across the trips you organize. Renews automatically unless cancelled at least 24 hours before the end of the current period. Manage or cancel in your App Store account settings. Prices are shown in your local currency before purchase.
+
+Your bookings, saved tickets and personal travel documents are never locked when a pass ends.
+
+Terms of Use: https://travary.app/terms
+Privacy Policy: https://travary.app/privacy
+Apple Standard EULA: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
