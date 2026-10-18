@@ -53,7 +53,13 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   Orlando") and its own first day, and ends on "Where to next?" (Travi,
   folio open); before its first page it stops, as past trips live on
   Trips. A day picked in the trip calendar (tap the date pill or "Day 3 of
-  7") slides in from the day beside it with the tabs' curve.
+  7") slides in from the day beside it with the tabs' curve. Every trip to
+  come counts down before its first day whatever is on today (never gated
+  on today's bookings), and the greeting is on the page that is today only:
+  another day is headed by its name (`dayHeading`: "Tomorrow", "Yesterday",
+  the weekday), held to the greeting's height so the days line up as they
+  slide; a countdown after another trip and "Where to next?" have no big
+  heading (`TodayHeader.title`, `titleLike`).
   Between trips, Today counts down to the next trip instead
   (`CountdownTripHero`: its destination's postcard, else the neutral one,
   as large as the screen allows, with a luggage tag over its lower right
