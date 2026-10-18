@@ -1,0 +1,17 @@
+Use case: precise-object-edit / compositing.
+Asset: revised still artwork for Travary App Store screenshot frame 11. Opaque portrait PNG. Keep the edit target's entire 9:19.5 portrait composition, ideally 1320 x 2868 or the closest size with the same aspect.
+Image 1 is the EDIT TARGET, the current 11-widget.png: linen App Store artwork with the centered silver phone, green screen, headline and side ephemera.
+Image 2 is the CHARACTER IDENTITY REFERENCE: Travi from the passport icon artwork. Use his exact coral-orange vertically ribbed suitcase body, handmade faceted materials, navy trim and corner guards, yellow/brass telescopic handle posts and navy grip, large expressive navy-and-white eyes, navy eyebrows, coral faceted arms/hands, dark spinner wheels with yellow hubs, and cream luggage tag with navy palm tree on brass chain. Do not copy the passport or the waving pose.
+
+Primary request: add ONE SMALL, cute full-body Travi mascot vignette at the BOTTOM-LEFT corner of image 1, outside and slightly in front of the lower-left phone corner, eagerly checking his wristwatch as he anticipates his holiday countdown. Everything else remains identical.
+Placement: Travi including handle is about 430–470 pixels tall on a 1320 x 2868 canvas, about 16% of canvas height, smaller than the larger mascot in the earlier screenshots. His silhouette sits roughly within x35–380 and y2350–2835. Keep his whole handle, hands and wheels inside the canvas, with a little left and bottom breathing room. Stand him on the linen floor with a soft warm contact shadow. A little overlap with the phone's very lowest left corner is welcome; never cover the upper two-thirds or center of the phone screen.
+Pose: he raises one forearm across his body, turns his wrist to show a small analogue wristwatch, and gently points at the watch face with the other hand. His big eyes glance down towards the watch with raised brows and an open delighted smile: 'is it holiday time yet?' Express playful excitement and eager anticipation, never impatience or worry. A jaunty slight body tilt, same friendly faceted suitcase character. Watch: a small navy strap, warm brass bezel, cream dial with two simple hands, no text or numerals. No passport, folio, tickets or other props. No words or speech bubbles.
+
+INVARIANTS: preserve the exact existing linen background, the picture postcard and perforated stamp peeking out at the left, faded coral postmark at the right, warm daylight and soft phone shadow. Preserve the phone's exact size and position, straight-on view, silver rim, black bezel, rounded screen corners and black Dynamic Island.
+Keep the phone's remaining screen exactly green #00B140, with no UI, widget, icons, reflections, gradients, texture or added words. Only the small Travi silhouette may overlap its very lowest left corner; keep all other green intact.
+Preserve all existing typography, text positions, line breaks, sizes and colors VERBATIM:
+Your next trip,
+on your home screen.
+A countdown widget, with Travi in it.
+Source Serif 4 Bold heading: first line ink #1C2A47, second line coral #CF5F3C. Inter Medium supporting line #56617A.
+Match the target's tactile handmade travel-ephemera finish. Add only this little watch-checking Travi and his contact shadow. No character redesign, extra characters, icon tile or badge around him, extra fingers or missing wheels, new text, prices, logos, watermarks, extra devices or reframing. STILL image only.

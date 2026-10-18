@@ -104,3 +104,38 @@ Frame 10's plate has a slightly shorter phone screen than the layout (972 × 209
 All ten frames are in `final/` at 1320 × 2868 and 1206 × 2622. Left on Firebase: the
 four test guests and their Kyoto, Lisbon and Lake District trips; the organiser still
 has `tester: true`.
+
+
+## Frame 11 — countdown widget still (18 October 2026)
+
+Generated with built-in ImageGen from the owner's exact [frame-11 prompt](generation-prompts/11.txt). Inputs, in order: `references/green/11-widget-green.jpg` as edit target, `chatgpt/01-today.png` as provisional finish reference, and `references/style/style-board.jpg` as style reference. No reference was described as owner-approved.
+
+Saved unchanged as [chatgpt/11-widget.png](chatgpt/11-widget.png), 850 × 1850 RGB PNG, with the generated original retained in Codex's generated_images folder. Added to the manifest as a draft plate awaiting its real widget/home-screen capture. Text, linen finish, silver straight-on phone, postcard/stamp edge and coral postmark were visually checked. The phone interior contains only green and its black Dynamic Island; there is no exterior Travi, widget, icon or UI. The portrait aspect differs from 1320 × 2868 by 0.18%, within the existing compositor's tolerance.
+
+This task added only the frame-11 still and its generation record. Existing captures, final composites, app code and other artwork were preserved. No animation, capture compositing, upload or artwork approval was performed.
+
+
+## Frame 11 revision 2 — Travi checking his watch (18 October 2026)
+
+The owner requested a small Travi at the bottom-left, excitedly anticipating the holiday countdown. This supersedes the earlier instruction to keep Travi off the surrounding artwork. Built-in ImageGen added the coral suitcase checking a brass-rimmed wristwatch, with an open delighted smile and a pointing hand.
+
+The first edit made Travi too large and shortened the phone, so a second targeted ImageGen edit used the original frame-11 plate as its layout target and the first result only as a pose reference. The selected result restores the original full-height phone and reduces Travi to a bottom-left cameo. Headline/supporting copy, the linen, postcard, postmark and green screen were visually checked. The mascot overlaps only the phone's lowest left corner.
+
+The active file is [chatgpt/11-widget.png](chatgpt/11-widget.png); the same revised artwork is preserved in [versions/11-widget-v2-travi-watch.png](versions/11-widget-v2-travi-watch.png). The original no-mascot plate is preserved unchanged in [versions/11-widget-v1-without-travi.png](versions/11-widget-v1-without-travi.png). Keeping only the active frame-11 plate under `chatgpt/` prevents duplicate frame-11 inputs in the compositor's batch scan.
+
+Exact prompts: [watch edit](generation-prompts/11-travi-watch.txt), then [size and phone correction](generation-prompts/11-travi-watch-correction.txt). The first edit used the original frame 11 and `assets/branding/travi_passport_source.png` as character identity reference, without its passport. The corrected image is an opaque 850 × 1850 RGB PNG. It is still a draft plate awaiting the real home-screen/widget capture. No motion or new app UI was generated.
+
+## Frame 11 — capture and pop-out (18 October 2026)
+
+`captures/11-widget.png`: the iPhone 17 Pro Max simulator's home screen with the app's
+real medium "Trip countdown" widget, added from the widget gallery on the same cloud
+guest (174 days to the Kyoto holiday, Travi up as he is each morning until noon),
+Travary's app icon and Apple's own apps; the Maps and Calendar widgets were removed from
+that page. Status bar 8:20 like the rest of the set.
+
+[popout_11.py](popout_11.py) composes the frame as `compose.py` does, then cuts the
+widget out of the same capture (1134 × 530 px at 93,282, corner radius 90 px) and lays
+it over the screen 1.38 times larger, turned 3° clockwise and raised 24 px, with two soft
+shadows, so it reaches past both sides of the phone. The widget's pixels are the app's
+own; nothing in it is redrawn. `compose.py --all` writes frame 11 without the pop-out,
+so run `popout_11.py` after it.

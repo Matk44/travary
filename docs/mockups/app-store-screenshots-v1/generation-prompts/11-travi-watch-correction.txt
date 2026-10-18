@@ -1,0 +1,18 @@
+Use case: precise-object-edit / compositing.
+Image 1 is the EDIT TARGET and authoritative layout: the ORIGINAL frame 11, with the correctly full-height silver phone and no mascot.
+Image 2 is ONLY THE WATCH-CHECKING TRAVI POSE REFERENCE. Its mascot is much too large and its phone was wrongly shortened. Do not copy its phone, layout, scale or background changes.
+Primary request: preserve image 1 exactly and add the Travi from image 2, but at HALF HIS SIZE compared to image 2, as a SMALL bottom-left corner accent.
+
+CRITICAL SIZE: The ENTIRE character silhouette INCLUDING extended handle, hands, watch and wheels must be at most 16% of the canvas height, roughly 440 pixels tall on a 1320 x 2868 canvas, or 285 pixels tall on an 850 x 1850 canvas. Do not render a large mascot. His footprint should be roughly 240 pixels wide on a 1320 canvas (155 pixels on an 850 canvas). All of Travi fits within the BOTTOM SIXTH of the image.
+CRITICAL PLACEMENT: On 1320x2868, whole Travi silhouette fits x35–355, y2405–2845. On 850x1850, whole silhouette fits x23–229, y1552–1834. Soft small contact shadow beneath wheels. Some tiny overlap with the phone's bottom-left rim and lowest green corner is allowed. Keep every part of Travi in frame.
+
+COPY THE ORIGINAL PHONE FROM IMAGE 1, at exactly its original size and full height: outer edge x130–1190 y590–2809, green screen x166–1154 y626–2773 on a 1320x2868 canvas. On the actual 850x1850 image 1, the phone reaches almost to the bottom at y1810. DO NOT move its bottom up, shrink it, shorten it or change its aspect. The entire original silver phone outline remains where image 1 has it, merely occluded a little by the SMALL mascot. Same black Dynamic Island, rounded corners and thin black bezel. All unobscured screen remains flat green #00B140, no UI.
+
+Travi identity and pose: exact cheerful coral ribbed suitcase from image 2, navy trim and corner guards, yellow/brass handle posts and navy grip, dark spinner wheels with yellow hubs, cream palm-tree tag, faceted handmade arms. Checking the little brass/cream wristwatch on a navy strap, other index finger pointing at it, big happy eyes looking toward it, delighted open smile, excited holiday anticipation. No passport or folio, no other props. Preserve this pose but REDUCE it to a small corner cameo.
+
+Everything in image 1 apart from this small addition stays unchanged: warm linen, postcard and stamp peeking behind left edge, faded coral postmark right, light and shadows, exact type, size, placement, colors and text:
+Your next trip,
+on your home screen.
+A countdown widget, with Travi in it.
+
+Opaque portrait PNG, same original entire canvas, no reframing or crop. No extra characters, objects, words, UI, icon tiles, badges, speech bubbles, glow or effects. STILL only.

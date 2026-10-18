@@ -2,7 +2,7 @@
 
 ## Generated draft set — 16 October 2026
 
-All ten still plates are now in `chatgpt/`. [Review the listing](../../app-store/review.html) and see the [generation record](GENERATION_LOG.md) for exact prompts, provenance and remaining work. These are green-screen artwork plates, not upload-ready screenshots. All ten frames have real captures and composites in `final/` (see [Captures](GENERATION_LOG.md#captures--17-october-2026)); frame 11's plate is still to generate. The original stand-in layout images below remain references only.
+All ten still plates are now in `chatgpt/`. [Review the listing](../../app-store/review.html) and see the [generation record](GENERATION_LOG.md) for exact prompts, provenance and remaining work. These are green-screen artwork plates, not upload-ready screenshots. All eleven frames have real captures and composites in `final/` (see [Captures](GENERATION_LOG.md#captures--17-october-2026)). Frame 11's widget pops out of the phone: after `compose.py --all`, run `python3 -I popout_11.py`. The original stand-in layout images below remain references only.
 
 The active frame data clarifies saved-ticket wording in 07, discloses paid sharing in 09, and uses the referenced passport artwork for the waving pose in 10. Existing reference JPGs are preserved unchanged. No artwork has been marked owner-approved and no motion has been generated.
 

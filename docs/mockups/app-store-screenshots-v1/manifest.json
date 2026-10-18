@@ -13,7 +13,8 @@
       "prompt": "generation-prompts/01.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/01-today.png"
     },
     {
       "id": "02",
@@ -26,7 +27,8 @@
       "prompt": "generation-prompts/02.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/02-countdown.png"
     },
     {
       "id": "03",
@@ -39,7 +41,8 @@
       "prompt": "generation-prompts/03.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/03-trip.png"
     },
     {
       "id": "04",
@@ -59,7 +62,8 @@
       "prompt": "generation-prompts/04.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/04-smart-import.png"
     },
     {
       "id": "05",
@@ -72,7 +76,8 @@
       "prompt": "generation-prompts/05.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/05-flight.png"
     },
     {
       "id": "06",
@@ -85,7 +90,8 @@
       "prompt": "generation-prompts/06.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/06-family.png"
     },
     {
       "id": "07",
@@ -98,7 +104,8 @@
       "prompt": "generation-prompts/07.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/07-tickets.png"
     },
     {
       "id": "08",
@@ -111,7 +118,8 @@
       "prompt": "generation-prompts/08.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/08-passport.png"
     },
     {
       "id": "09",
@@ -124,7 +132,8 @@
       "prompt": "generation-prompts/09.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/09-packing.png"
     },
     {
       "id": "10",
@@ -137,7 +146,35 @@
       "prompt": "generation-prompts/10.txt",
       "status": "draft_green_screen_plate",
       "owner_approved": false,
-      "real_capture_added": false
+      "real_capture_added": true,
+      "capture": "captures/10-trips.png"
+    },
+    {
+      "id": "11",
+      "slug": "widget",
+      "file": "chatgpt/11-widget.png",
+      "width": 850,
+      "height": 1850,
+      "mode": "RGB",
+      "sha256": "f1b764ba418ffa1c64b85707153f3be2311a00655afd0798f641ca5a42781c88",
+      "prompt": "generation-prompts/11-travi-watch-correction.txt",
+      "status": "draft_green_screen_plate",
+      "owner_approved": false,
+      "real_capture_added": true,
+      "generated": "2026-10-18",
+      "source_generated_image": "/Users/khairofamily/.codex/generated_images/01a14316-0b36-7792-9e52-5edfafc5ea3a/exec-2e6e500e-562e-4af6-a3ba-d61f90af5895.png",
+      "prompts": [
+        "generation-prompts/11.txt",
+        "generation-prompts/11-travi-watch.txt",
+        "generation-prompts/11-travi-watch-correction.txt"
+      ],
+      "revision": 2,
+      "derived_from": {
+        "file": "versions/11-widget-v1-without-travi.png",
+        "sha256": "9ea0b61c97c8dec756df51ab50109d42a45ee6d632cb46a692a3cc7f2726c4fa"
+      },
+      "version_file": "versions/11-widget-v2-travi-watch.png",
+      "capture": "captures/11-widget.png"
     }
   ]
 }
