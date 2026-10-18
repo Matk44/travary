@@ -1,0 +1,16 @@
+Use case: style-transfer / compositing.
+Asset: FIRST STILL CONCEPT for Travary's animated App Store PRODUCT PAGE HEADER. Opaque PNG, very wide 21:9, aim 3840x1646 or closest same aspect. This is artwork for owner approval before any motion.
+Input 1: workshop stage, EDIT/EXTENSION TARGET for its tactile petrol-navy wall, paper-theatre arches and cream floor; expand it into a beautiful panoramic stage.
+Input 2: Kyoto stage, GEOGRAPHY/ART REFERENCE ONLY for autumn maple leaves, pagoda and torii.
+Input 3: Bali stage, GEOGRAPHY/ART REFERENCE ONLY for tropical coast, palms, temple roof, terraced hills and warm sun.
+Input 4: exact Travi passport source, CHARACTER IDENTITY reference only. Use the coral ribbed faceted suitcase, huge glossy navy/white eyes, navy brows, delighted open smile, navy trim and corner guards, yellow/brass handle posts with navy grip, coral five-finger hands, four black spinner wheels with yellow hubs and cream palm-tree tag. Do not include the passport or copy the waving pose.
+Input 5: style board, PALETTE/TYPE reference only. Never reproduce its labels or panels.
+
+Create an outstanding premium handmade miniature travel theatre, lovingly crafted from embossed paper and folded cardstock, warm gouache destination scenery with dimensional cut edges, refined shadows between paper layers, and warm sunset light. Same Travary visual family, not a new mascot design.
+A deep petrol-navy #024A6D workshop wall runs full width. Three rounded paper-theatre arch openings across the middle/right reveal separate worlds: Kyoto in autumn, a sunny Balinese coastline, and the English Lake District with lake, green fells and a stone cottage. Symbolic separate destination windows, never merge the three into one literal landscape. Warm cream floor in lower quarter. Fine restrained brass edges on arches, not ornate. Left/right outer edges are atmospheric navy architecture and scenery; keep essential focal content in the middle.
+Central composition: Travi stands around 60% of canvas width, about 45% of canvas height tall, on the cream floor. He eagerly presents a large cream luggage tag with one open hand and looks towards it with bright anticipation, other hand in a friendly presenting gesture. A jaunty 3/4 stance, entire handle and wheels visible, friendly expressive face. Keep him away from text. The paper tag stands/hangs slightly left of him on a short brass string, blank cream face with subtle fibre texture and a brass eyelet, no lettering or invented details. It will receive crisp countdown type in final compositing.
+Text, VERBATIM, in two lines just left of center, around x30–50% and y30–60%, well inside the image edges:
+Where are we
+off to?
+Source Serif 4 Bold, first line warm cream #FFF1D9, second line coral #FA815A. Big elegant serif hierarchy, comfortable line spacing. Only these words anywhere.
+The typography, Travi and the blank tag form one compact central hero group, generous outer crop margins. Rich destination scenery supports this focal group and never runs behind the lettering. One quietly magical anticipation moment, strong as a still. No phone, UI, app screenshots, price, badge, rating, logo, watermark, confetti, people or extra characters. No plastic/metal suitcase redesign, no extra fingers, missing wheels or extra props. No animation or video, still only.

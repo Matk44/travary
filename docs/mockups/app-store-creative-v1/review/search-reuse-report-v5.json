@@ -1,0 +1,165 @@
+{
+  "prepared": "2026-10-18",
+  "status": "approved_reuse_locally_rendered",
+  "owner_request": "Rough edges visible around the tag; consider regeneration.",
+  "diagnosis": "V4 retained matte background and blurred a shadow without padding; its bottom boundary alpha was nonzero.",
+  "paper": {
+    "cream_rgb": [
+      242,
+      232,
+      217
+    ],
+    "cream_reference": "docs/mockups/app-store-screenshots-v1/chatgpt/01-today.png",
+    "cream_reference_crop": [
+      180,
+      5,
+      670,
+      75
+    ],
+    "grain_source": "art_masters/bundled/art/common/note_paper.png",
+    "grain_source_crop": [
+      500,
+      125,
+      1500,
+      225
+    ],
+    "texture_detail_gain": 0.35,
+    "native_background_size": [
+      3840,
+      2560
+    ],
+    "method": "Existing fine-paper fibers, low contrast, native pixel scale; screenshot-matched cream tone."
+  },
+  "capture": {
+    "source": "docs/mockups/app-store-screenshots-v1/captures/01-today.png",
+    "source_sha256": "fcac8ad2f706b3e9936b8dcfcdb4f9e01c77c1ad994061cfb3fb58814abe68b4",
+    "capture_crop": false,
+    "capture_resize_count": 1,
+    "capture_resized_size": [
+      404,
+      878
+    ],
+    "phone_size": [
+      480,
+      932
+    ],
+    "phone_position": [
+      2508,
+      810
+    ],
+    "paper_gutters": [
+      11,
+      12
+    ]
+  },
+  "postcard_asset": {
+    "source": "layers/search-postcard-tag-source-v5.png",
+    "source_sha256": "444091b227c1c1ec453dbe82a3cee06c3edd5f63a029d656226bfbf4207776d1",
+    "source_crop_with_transparent_padding": [
+      56,
+      59,
+      1336,
+      1070
+    ],
+    "derived_size": [
+      795,
+      628
+    ],
+    "low_alpha_residue_removed_pixels": 17743,
+    "low_alpha_cutoff": 8,
+    "derived_alpha_boundaries_zero": true,
+    "tag_text_inside_opaque_face": true,
+    "position_on_final_canvas": [
+      875,
+      1125
+    ]
+  },
+  "shadows": [
+    {
+      "name": "soft",
+      "padding": 60,
+      "blur": 10,
+      "opacity": 0.2,
+      "offset": [
+        0,
+        8
+      ],
+      "outer_alpha_max": 0,
+      "size": [
+        915,
+        748
+      ]
+    },
+    {
+      "name": "contact",
+      "padding": 20,
+      "blur": 3,
+      "opacity": 0.14,
+      "offset": [
+        0,
+        3
+      ],
+      "outer_alpha_max": 0,
+      "size": [
+        835,
+        668
+      ]
+    }
+  ],
+  "size": [
+    3840,
+    2560
+  ],
+  "safe_area": [
+    836,
+    765,
+    3004,
+    1795
+  ],
+  "paid_video_jobs_submitted": 0,
+  "imagegen_asset_generated": true,
+  "new_character_generation": false,
+  "motion_composited": true,
+  "stills": [
+    {
+      "file": "review/search-start-v5.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "90c9de473d10724f78f4e2c1deede973a728ee38765382c986d371e18a6f6802",
+      "source_frame": 0,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-blink-v5.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "4258008271c3ad7aa5075681c87016e798bfcb6e2f6a20d85b39d3acc9e64fc5",
+      "source_frame": 30,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-gesture-v5.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "1c79e1a09d1702209a8b0fabc9b89cab4174e9b5630cb61662232c373cb483a3",
+      "source_frame": 66,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-settle-v5.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "90c9de473d10724f78f4e2c1deede973a728ee38765382c986d371e18a6f6802",
+      "source_frame": 96,
+      "source_film": "present-idle"
+    }
+  ],
+  "first_last_still_identical": true,
+  "owner_approval_quote": "much better, lets go ahead and do the rest",
+  "final_playback_approved": false,
+  "delivery_manifest": "exports/delivery-manifest.json"
+}

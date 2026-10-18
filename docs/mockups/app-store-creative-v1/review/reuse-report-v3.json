@@ -1,0 +1,134 @@
+{
+  "prepared": "2026-10-18",
+  "status": "reuse_stills_for_owner_review",
+  "paid_video_jobs_submitted": 0,
+  "new_animation_generated": false,
+  "new_motion_composited": false,
+  "capture": {
+    "source": "docs/mockups/app-store-screenshots-v1/captures/01-today.png",
+    "source_sha256": "fcac8ad2f706b3e9936b8dcfcdb4f9e01c77c1ad994061cfb3fb58814abe68b4",
+    "screen_box_on_1536x1024": [
+      1019,
+      70,
+      1430,
+      914
+    ],
+    "capture_scale": 0.29428172942817293,
+    "capture_resized_size": [
+      388,
+      844
+    ],
+    "horizontal_paper_gutters": [
+      11,
+      12
+    ],
+    "capture_crop": false,
+    "policy": "Complete authentic capture, proportional contain, edge-paper side gutters, no UI redraw",
+    "phone_assembly": {
+      "plate_crop": [
+        993,
+        44,
+        1455,
+        940
+      ],
+      "resized_size": [
+        192,
+        373
+      ],
+      "position_on_1536x1024": [
+        1003,
+        324
+      ]
+    }
+  },
+  "stills": [
+    {
+      "file": "review/header-start-v3.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "1f3a3360c9695c73522b60ceaeb7bdfa615c939a49a5bf54804c2dc5859b19cc",
+      "source_frame": 0,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-blink-v3.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "127e04b95baedc65fd80f5274baea2e7b9f30b045f857690ae2d1bcbdb10318d",
+      "source_frame": 30,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-gesture-v3.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "79d6dc2347cbe1d1061c4cce211e1781d965a4cffcd828d92596619f69e3756e",
+      "source_frame": 66,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-settle-v3.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "1f3a3360c9695c73522b60ceaeb7bdfa615c939a49a5bf54804c2dc5859b19cc",
+      "source_frame": 96,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/search-start-v3.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "9951d5c095f1ca5b5eb707b95cf73a2aca56554ea12d9bfdc860c7f86077ab70",
+      "source_frame": 0,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-blink-v3.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "62f6622236d3534c061ca49fc9c62c1e7daea1dc97a0af4da1aae885ec403831",
+      "source_frame": 30,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-gesture-v3.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "c83e540231963b53eeae687cce4c2fb1ad331c34fbd7c075dcd20e5cc58e2483",
+      "source_frame": 66,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-settle-v3.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "9951d5c095f1ca5b5eb707b95cf73a2aca56554ea12d9bfdc860c7f86077ab70",
+      "source_frame": 96,
+      "source_film": "present-idle"
+    }
+  ],
+  "safe_area_reference": "../references/apple-safe-areas.json",
+  "safe_area_boxes_on_outputs": {
+    "header": [
+      1097,
+      493,
+      2743,
+      1154
+    ],
+    "search": [
+      418,
+      382,
+      1502,
+      898
+    ]
+  },
+  "review_note": "v3 replaces v2 fit studies. Headline, tag and entire character/phone are arranged in the official art safe areas. App Store Connect Preview remains a final placement check."
+}

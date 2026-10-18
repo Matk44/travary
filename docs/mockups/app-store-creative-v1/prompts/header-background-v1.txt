@@ -1,0 +1,7 @@
+Use case: precise-object-edit / background extraction.
+Asset: background-only production plate for compositing existing Travi animation. Opaque PNG, SAME panoramic aspect ratio as the supplied 1915 x 821 edit target, preserve its exact composition.
+Image 1 is the EDIT TARGET, owner-approved Travary App Store header. Perform ONLY object removal/inpainting:
+Remove the complete central coral suitcase character Travi, including every hand, wheel, handle, small personal tag, its brass chain, and the large blank cream hanging tag he is holding, including ring/string. Remove the contact shadow cast by Travi and this tag on the cream floor.
+Fill those areas with a seamless continuation of the same navy paper wall, existing Bali arch scenery where occluded, and cream paper floor. No new objects.
+KEEP EXACTLY: all three destination arch positions/shapes, their detailed handmade landscape illustrations, Kyoto autumn foliage on far left, Balinese coast center-right, Lake District cottage right, all brass edges, foreground foliage, linen/embossed paper textures, warm lighting, cream floor horizon, camera, framing, headline typography, exact headline words "Where are we" and "off to?", headline positions, size, colors, and line spacing. Do not restyle or relayout any retained element.
+Keep full left/right borders. No character, luggage, tag, prop, people, phone, additional words, logo, watermark or invented text. Empty central stage is intentional for later video compositing. Do not add a replacement mascot or shadow.

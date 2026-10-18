@@ -1,0 +1,169 @@
+{
+  "prepared": "2026-10-18",
+  "owner_approval_quote": "much better, lets go ahead and do the rest",
+  "approval_scope": "Header v4, search v5 and local reuse of the presented existing performances; no new transition or paid generation.",
+  "paid_video_jobs_submitted": 0,
+  "new_character_generation": false,
+  "new_scene_transition": false,
+  "upload_performed": false,
+  "source_matte_cleanup": {
+    "performance": "present-idle",
+    "affected_source_frames": 14,
+    "maximum_detached_component_pixels": 60,
+    "method": "Remove tiny detached remnants only; preserve connected character and its antialiasing."
+  },
+  "specification_checked": "2026-10-18",
+  "specification_source": "https://developer.apple.com/help/app-store-connect/reference/app-information/creative-assets-specifications",
+  "placements": {
+    "header": {
+      "size": [
+        3840,
+        1646
+      ],
+      "fps": 30,
+      "duration_seconds": 8.1,
+      "decoded_frames": 243,
+      "codec": "h264",
+      "pixel_format": "yuv420p",
+      "audio_streams": 0,
+      "full_decode_passed": true,
+      "source_start_end_pixel_identical": true,
+      "decoded_join_safe_area_mean_absolute_error_255": 0.336487,
+      "first_frame_vs_approved_still_mean_absolute_error_255": 1.521419,
+      "safe_area": [
+        1097,
+        493,
+        2743,
+        1154
+      ],
+      "delivery_files": [
+        "exports/travary-header-v4.mp4",
+        "exports/travary-header-v4.png"
+      ],
+      "review_crop": "review/header-motion-detail-v4.mp4",
+      "qa_contact_sheet": "review/header-motion-qa-v4.jpg"
+    },
+    "search": {
+      "size": [
+        3840,
+        2560
+      ],
+      "fps": 30,
+      "duration_seconds": 8.1,
+      "decoded_frames": 243,
+      "codec": "h264",
+      "pixel_format": "yuv420p",
+      "audio_streams": 0,
+      "full_decode_passed": true,
+      "source_start_end_pixel_identical": true,
+      "decoded_join_safe_area_mean_absolute_error_255": 0.294286,
+      "first_frame_vs_approved_still_mean_absolute_error_255": 2.175872,
+      "safe_area": [
+        836,
+        765,
+        3004,
+        1795
+      ],
+      "delivery_files": [
+        "exports/travary-search-v5.mp4",
+        "exports/travary-search-v5.png"
+      ],
+      "review_crop": "review/search-motion-detail-v5.mp4",
+      "qa_contact_sheet": "review/search-motion-qa-v5.jpg"
+    }
+  },
+  "files": [
+    {
+      "file": "exports/travary-header-v4.mp4",
+      "kind": "locally_composited_video",
+      "placement": "product_page_header",
+      "width": 3840,
+      "height": 1646,
+      "bytes": 1888040,
+      "sha256": "e2d8ee2e805995f0a94bc6802a08a1e17dd7c7dfda36ac6cc6e2cb0f8a8a86d8",
+      "status": "rendered_and_checked_for_final_playback_review",
+      "owner_approved": false,
+      "scene_and_reuse_approved": true,
+      "final_playback_approved": false,
+      "upload_performed": false,
+      "final_export": true,
+      "video_generated": true,
+      "tool": "Local Pillow compositing and ffmpeg encoding of existing keyed Travi footage",
+      "fps": 30,
+      "duration_seconds": 8.1,
+      "audio_streams": 0
+    },
+    {
+      "file": "exports/travary-header-v4.png",
+      "kind": "opaque_static_fallback",
+      "placement": "product_page_header",
+      "width": 3840,
+      "height": 1646,
+      "bytes": 4380896,
+      "sha256": "7140cffa8ede034d4b1f7838045363076d5ca9f806f14daaa6318871b4759d32",
+      "status": "rendered_and_checked_for_final_playback_review",
+      "owner_approved": false,
+      "scene_and_reuse_approved": true,
+      "final_playback_approved": false,
+      "upload_performed": false,
+      "final_export": true,
+      "video_generated": false,
+      "tool": "Local Pillow compositing and ffmpeg encoding of existing keyed Travi footage",
+      "mode": "RGB"
+    },
+    {
+      "file": "exports/travary-search-v5.mp4",
+      "kind": "locally_composited_video",
+      "placement": "search_results",
+      "width": 3840,
+      "height": 2560,
+      "bytes": 3281785,
+      "sha256": "4de64a2da5251d465de4fbf4108e2f37017ac00bb55525c89dfacb07a560937f",
+      "status": "rendered_and_checked_for_final_playback_review",
+      "owner_approved": false,
+      "scene_and_reuse_approved": true,
+      "final_playback_approved": false,
+      "upload_performed": false,
+      "final_export": true,
+      "video_generated": true,
+      "tool": "Local Pillow compositing and ffmpeg encoding of existing keyed Travi footage",
+      "fps": 30,
+      "duration_seconds": 8.1,
+      "audio_streams": 0
+    },
+    {
+      "file": "exports/travary-search-v5.png",
+      "kind": "opaque_static_fallback",
+      "placement": "search_results",
+      "width": 3840,
+      "height": 2560,
+      "bytes": 4396037,
+      "sha256": "90c9de473d10724f78f4e2c1deede973a728ee38765382c986d371e18a6f6802",
+      "status": "rendered_and_checked_for_final_playback_review",
+      "owner_approved": false,
+      "scene_and_reuse_approved": true,
+      "final_playback_approved": false,
+      "upload_performed": false,
+      "final_export": true,
+      "video_generated": false,
+      "tool": "Local Pillow compositing and ffmpeg encoding of existing keyed Travi footage",
+      "mode": "RGB"
+    }
+  ],
+  "visual_contact_sheets_inspected": true,
+  "browser_playback": {
+    "checked": "2026-10-18",
+    "review_url": "http://127.0.0.1:56894/docs/mockups/app-store-creative-v1/review/index.html?v=6",
+    "detail_and_full_canvas_players_checked": true,
+    "both_full_videos": {
+      "ready_state": 4,
+      "paused": false,
+      "duration_seconds": 8.1,
+      "width": 3840,
+      "header_height": 1646,
+      "search_height": 2560,
+      "media_errors": null
+    },
+    "note": "Both players advanced without media errors. The owner has not yet approved final playback."
+  }
+}

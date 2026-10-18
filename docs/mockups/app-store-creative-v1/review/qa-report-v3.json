@@ -1,0 +1,36 @@
+{
+  "verified": "2026-10-18",
+  "paid_video_jobs_submitted": 0,
+  "motion_created": false,
+  "checks": [
+    "194 isolated source frames stay inside verified template safe areas",
+    "Both start/end composites are pixel-identical",
+    "Eight final-size review stills are opaque RGB and match recorded hashes",
+    "Complete genuine Today capture fits without cropping or stretching",
+    "No generation service called by local compositor; no paid video jobs submitted"
+  ],
+  "character_bounds": {
+    "header": {
+      "frames_checked": 97,
+      "union_on_final_canvas": [
+        2210.6,
+        503.3,
+        2674.5,
+        1143.7
+      ],
+      "inside_official_safe_area": true,
+      "first_last_still_identical": true
+    },
+    "search": {
+      "frames_checked": 97,
+      "union_on_final_canvas": [
+        907.1,
+        586.9,
+        1171.2,
+        870.2
+      ],
+      "inside_official_safe_area": true,
+      "first_last_still_identical": true
+    }
+  }
+}

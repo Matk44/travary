@@ -1,0 +1,108 @@
+{
+  "prepared": "2026-10-18",
+  "status": "cleaner_paper_search_still_for_review",
+  "owner_request": "Cleaner cream material similar to screenshot backgrounds; improve zoomed presentation.",
+  "paper": {
+    "cream_rgb": [
+      242,
+      232,
+      217
+    ],
+    "cream_reference": "docs/mockups/app-store-screenshots-v1/chatgpt/01-today.png",
+    "cream_reference_crop": [
+      180,
+      5,
+      670,
+      75
+    ],
+    "grain_source": "art_masters/bundled/art/common/note_paper.png",
+    "grain_source_crop": [
+      500,
+      125,
+      1500,
+      225
+    ],
+    "texture_detail_gain": 0.35,
+    "native_background_size": [
+      3840,
+      2560
+    ],
+    "method": "Existing fine-paper fibers, low contrast, native pixel scale; screenshot-matched cream tone."
+  },
+  "capture": {
+    "source": "docs/mockups/app-store-screenshots-v1/captures/01-today.png",
+    "source_sha256": "fcac8ad2f706b3e9936b8dcfcdb4f9e01c77c1ad994061cfb3fb58814abe68b4",
+    "capture_crop": false,
+    "capture_resize_count": 1,
+    "capture_resized_size": [
+      404,
+      878
+    ],
+    "phone_size": [
+      480,
+      932
+    ],
+    "phone_position": [
+      2508,
+      810
+    ],
+    "paper_gutters": [
+      11,
+      12
+    ]
+  },
+  "layout_geometry": "Same normalized positions and sizes as search v3.",
+  "size": [
+    3840,
+    2560
+  ],
+  "safe_area": [
+    836,
+    765,
+    3004,
+    1795
+  ],
+  "paid_video_jobs_submitted": 0,
+  "new_image_generation": false,
+  "new_character_generation": false,
+  "motion_composited": false,
+  "stills": [
+    {
+      "file": "review/search-start-v4.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "1785303d4e82318feec03f4f095ac5ab26a54662dca620440046c82fa10a7fde",
+      "source_frame": 0,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-blink-v4.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "f821dc3507e58437539fd7dc7dad312bfecd739dde7dc64b09e44d451db9df3c",
+      "source_frame": 30,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-gesture-v4.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "abd69230d3e0ac797276a5e86019b7ad825019527ff21f11ad4a77acb1677805",
+      "source_frame": 66,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-settle-v4.png",
+      "width": 3840,
+      "height": 2560,
+      "mode": "RGB",
+      "sha256": "1785303d4e82318feec03f4f095ac5ab26a54662dca620440046c82fa10a7fde",
+      "source_frame": 96,
+      "source_film": "present-idle"
+    }
+  ],
+  "first_last_still_identical": true
+}

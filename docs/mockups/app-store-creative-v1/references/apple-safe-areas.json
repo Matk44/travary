@@ -1,0 +1,37 @@
+{
+  "verified": "2026-10-18",
+  "templates": [
+    {
+      "placement": "search_results",
+      "template_size": [
+        3840,
+        2560
+      ],
+      "art_safe_area": [
+        836,
+        765,
+        3004,
+        1795
+      ],
+      "source_url": "https://devimages-cdn.apple.com/design/resources/download/app-store/creative_assets-search_results_template-static.psd",
+      "psd_sha256": "7bb57a3c33cc4402d1c82e85a0211cf0f2f2b1c05cf7f36e4710092226dea056",
+      "method": "Bounding box of the green ART SAFE AREA in the official flattened 16-bit RGB PSD; rectangle includes its 1px outline. Confirm placement in App Store Connect Preview before upload."
+    },
+    {
+      "placement": "product_page_header",
+      "template_size": [
+        3840,
+        1646
+      ],
+      "art_safe_area": [
+        1097,
+        493,
+        2743,
+        1154
+      ],
+      "source_url": "https://devimages-cdn.apple.com/design/resources/download/app-store/creative_assets-product_page_header_template-static.psd",
+      "psd_sha256": "4200f416adcf3affb70d5847c1d0554fc39b7405110ec527bdea92bfb82f93b0",
+      "method": "Bounding box of the green ART SAFE AREA in the official flattened 16-bit RGB PSD; rectangle includes its 1px outline. Confirm placement in App Store Connect Preview before upload."
+    }
+  ]
+}

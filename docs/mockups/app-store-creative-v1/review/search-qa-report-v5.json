@@ -1,0 +1,28 @@
+{
+  "verified": "2026-10-18",
+  "cause": "V4 unpadded shadow reached its canvas edge; its bottom alpha max was 146 before opacity scaling.",
+  "replacement_cutout_genuine_alpha": true,
+  "cutout_boundary_alpha_zero": true,
+  "shadow_boundary_alpha_maxima": [
+    0,
+    0
+  ],
+  "preserved_pixel_regions_vs_v4": {
+    "phone_and_authentic_ui": true,
+    "travi": true,
+    "headline_line_1": true,
+    "headline_line_2": true
+  },
+  "postcard_bounds_inside_safe_area": [
+    885,
+    1135,
+    1660,
+    1743
+  ],
+  "all_four_stills_rgb_3840x2560": true,
+  "first_last_identical": true,
+  "native_closeup_reviewed": true,
+  "v4_previous_fullsize_export_restored_and_hash_verified": true,
+  "paid_video_jobs_submitted": 0,
+  "motion_assembled": false
+}

@@ -1,0 +1,102 @@
+{
+  "prepared": "2026-10-18",
+  "status": "reuse_stills_for_owner_review",
+  "paid_video_jobs_submitted": 0,
+  "new_animation_generated": false,
+  "new_motion_composited": false,
+  "capture": {
+    "source": "docs/mockups/app-store-screenshots-v1/captures/01-today.png",
+    "source_sha256": "fcac8ad2f706b3e9936b8dcfcdb4f9e01c77c1ad994061cfb3fb58814abe68b4",
+    "screen_box_on_1536x1024": [
+      1019,
+      70,
+      1430,
+      914
+    ],
+    "capture_scale": 0.29428172942817293,
+    "capture_resized_size": [
+      388,
+      844
+    ],
+    "horizontal_paper_gutters": [
+      11,
+      12
+    ],
+    "capture_crop": false,
+    "policy": "Complete authentic capture, proportional contain, edge-paper side gutters, no UI redraw"
+  },
+  "stills": [
+    {
+      "file": "review/header-start-v2.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "3b95415a8d88536d040aa5c4d7656db4dee8890867187b70eee6ec1d0842731a",
+      "source_frame": 0,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-blink-v2.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "f5e92535a9d484b6ee1fb33495af482c6bcc3e6fba1f0ffdb127734a4cc5139c",
+      "source_frame": 30,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-gesture-v2.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "4ce21b527c562a23adc8345cfd71acff9d563b4816dfb7d5baeb4448d593dc1c",
+      "source_frame": 66,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-settle-v2.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "3b95415a8d88536d040aa5c4d7656db4dee8890867187b70eee6ec1d0842731a",
+      "source_frame": 96,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/search-start-v2.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "cac0791a89de2250d5a40423715c52fc5d7d3cb4a0234bdfe317d78e215c9ed3",
+      "source_frame": 0,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-blink-v2.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "8a94e8c32c25ecbcbde398937e4760a6d9a5d362c67af1a4bd8af1276f6ac177",
+      "source_frame": 30,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-gesture-v2.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "88310053245bd29309bff51e96f3f896953f4dbc023b2001383bc51ace64d01d",
+      "source_frame": 66,
+      "source_film": "present-idle"
+    },
+    {
+      "file": "review/search-settle-v2.png",
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "sha256": "cac0791a89de2250d5a40423715c52fc5d7d3cb4a0234bdfe317d78e215c9ed3",
+      "source_frame": 96,
+      "source_film": "present-idle"
+    }
+  ]
+}

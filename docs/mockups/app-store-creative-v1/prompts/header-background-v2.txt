@@ -1,0 +1,7 @@
+Use case: precise-object-edit / production layout refinement.
+Image 1 is the EDIT TARGET: Travary's clean navy paper-theatre background.
+Make exactly TWO production changes for the verified Apple header safe area:
+1. Remove ALL headline lettering: cream "Where are we" and coral "off to?" and punctuation. Restore the empty uninterrupted embossed petrol navy wall behind the words.
+2. Raise the cream paper floor horizon from about y612 to y490 on the SAME 1916 x 821 canvas (~60% of image height). Shorten the lower ends of the arches/landscape windows naturally to meet the raised floor. Extend the continuous cream paper stage towards the bottom. This gives the later composited character real floor within the central art safe area.
+Preserve the exact horizontal placement, widths and arched shapes of the three destination windows, their handmade Kyoto, Bali and Lake District identity, all leaf framing at the sides, refined brass outlines, navy embossed texture, warm light and tactile paper quality. The central navy wall should remain clear between x500 and x1050.
+No text, guide rectangle, character, luggage tag, suitcase, phone, new objects or contact shadows. Wide opaque PNG same aspect ratio. Still background only.

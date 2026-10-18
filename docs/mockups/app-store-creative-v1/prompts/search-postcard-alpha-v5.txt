@@ -1,0 +1,10 @@
+Use case: background-extraction / precise-object-edit.
+Asset: production transparent PNG cutout for the existing Travary App Store search composition. STILL only.
+Image 1 is the EDIT TARGET and visual source. Extract ONLY its Lake District illustrated postcard, the large blank cream luggage tag resting over its lower edge, the brass eyelet, and the thick twisted cream twine loop.
+REMOVE everything else: all linen/fabric background, headline words, the entire phone and screen, and every cast/contact shadow outside the solid objects.
+Keep exactly the postcard's warm handmade gouache landscape: stone lakeside cottage left, green fells/mountains, golden sunset reflected in the lake, small boat and trees, the original perspective and proportions, its ivory paper border with restrained natural deckling.
+Keep the tag at the same relative size, angle and position over the postcard. Keep its subtle paper fibers, rounded/clipped corners and brass eyelet, and keep the twine's same loop arrangement. Its face stays completely blank: no words, numbers or marks.
+The output must have GENUINE ALPHA transparency immediately outside the real paper and rope outlines, and through open gaps between the rope strands. Clean, crisp antialiased contours, no dirty halo, no fringe, no leftover linen islands, no polygonal matte, no beige/grey/white background rectangle.
+Do not paint a drop shadow or contact shadow into the cutout; a separate shadow will be rendered locally with generous padding. Object-surface shading and texture may remain, but absolutely no opaque shadow pixels outside the objects.
+No redesign, added objects, changed scenery, phone, character, headline, watermark or invented writing.
+Frame just this complete postcard/tag/twine group on a transparent landscape canvas about 5:4, close to its current group proportions, at the largest practical native resolution. Leave clear transparent padding on ALL four sides. No element should touch or get clipped by the canvas. Preserve fine rope fibers and paper edge detail without blurring or jaggies.

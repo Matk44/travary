@@ -1,0 +1,76 @@
+{
+  "prepared": "2026-10-18",
+  "owner_request": "Complete header image inside the safe area, as for search.",
+  "status": "approved_reuse_locally_rendered",
+  "source_crop": false,
+  "source_scene": "layers/header-background-v1.png",
+  "source_scene_camera": [
+    1916,
+    821
+  ],
+  "scene_size_on_production_camera": [
+    747,
+    320
+  ],
+  "scene_position_on_production_camera": [
+    584,
+    250
+  ],
+  "safe_area_on_final_canvas": [
+    1097,
+    493,
+    2743,
+    1154
+  ],
+  "paid_video_jobs_submitted": 0,
+  "new_character_generation": false,
+  "motion_composited": true,
+  "stills": [
+    {
+      "file": "review/header-start-v4.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "7140cffa8ede034d4b1f7838045363076d5ca9f806f14daaa6318871b4759d32",
+      "source_frame": 0,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-blink-v4.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "3def81916eb1d99641cd4a1627af03030119facde03785f56591387ee3419124",
+      "source_frame": 30,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-gesture-v4.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "44ed5748765ee6321e1e033bc8941188271fd67e8e3d86b55f647f1e8aca4dbe",
+      "source_frame": 66,
+      "source_film": "tag-idle"
+    },
+    {
+      "file": "review/header-settle-v4.png",
+      "width": 3840,
+      "height": 1646,
+      "mode": "RGB",
+      "sha256": "7140cffa8ede034d4b1f7838045363076d5ca9f806f14daaa6318871b4759d32",
+      "source_frame": 96,
+      "source_film": "tag-idle"
+    }
+  ],
+  "complete_scene_bounds_on_final_canvas": [
+    1170.44,
+    501.22,
+    2667.56,
+    1142.78
+  ],
+  "first_last_still_identical": true,
+  "owner_approval_quote": "much better, lets go ahead and do the rest",
+  "final_playback_approved": false,
+  "delivery_manifest": "exports/delivery-manifest.json"
+}
