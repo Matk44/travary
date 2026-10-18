@@ -41,6 +41,38 @@ The file's `version` is mirrored in Swift and Kotlin
 (`test/tool/countdown_widget_config_test.dart` keeps them equal, with the
 channel, folder, App Group, embedding and URL scheme).
 
+## Getting it onto the home screen
+
+An app can't see the home screen, only whether a widget of its own is on it,
+and only Android can be asked to place one. One sheet
+(`features/widget/countdown_widget_sheet.dart`, wording in
+`logic/countdown_widget_setup.dart`) and two ways in:
+
+- **Today's countdown**: a note beside the tag under "Packing list" ("Home
+  screen · Add this countdown ›"). It's a second `CountdownNote` because the
+  countdown fills a 390 × 844 phone down to the tabs, so a row under it is
+  off screen, and its title is short because "Home screen widget" is cut off
+  in the room beside the tag. Offered while the widget can be had, isn't on
+  the home screen, never was, and wasn't turned down; the sheet's "Not now"
+  (from Today only) puts it away for good.
+- **Profile → Home screen → Countdown widget**: always there where the phone
+  can have the widget, with a tick once it's added.
+
+| Phone | The sheet |
+|---|---|
+| Android, launcher can place it | "Add to home screen" asks the launcher (`requestPinAppWidget`); its own dialog does the rest. |
+| iOS 17 and later | Three steps (touch and hold, tap +, pick a size, Add Widget): there is no call to add one. |
+| Android, launcher can't or won't | Android's three steps, and "Your phone didn't open its widget picker." if it refused. |
+| iOS 15 and 16 | No widget exists: no note, no Profile row. |
+
+`CountdownWidgetStore` asks the phone (`status` on the channel: Android
+`getAppWidgetIds`, iOS `WidgetCenter.getCurrentConfigurations` for kind
+`CountdownWidget`) at launch and every time the app returns to the
+foreground, so an open sheet turns into "It's on your home screen" when the
+widget lands. `declined` and `everAdded` are kept on this phone
+(`countdown_widget_settings`); someone who has had it and removed it isn't
+offered it again. Nothing here is ever asked at launch or in onboarding.
+
 ## Sizes
 
 | Size | Layout |
@@ -92,5 +124,8 @@ between his peek stills:
 - Lock Screen and StandBy (`accessoryRectangular`) are easy additions.
 - Interactive taps need iOS 17; on iOS 15 and 16 there's no widget at all
   (the extension's minimum is 17).
-- Analytics only count opens from the widget (`countdown_widget_opened`),
-  not how many people add it.
+- Analytics count opens from the widget (`countdown_widget_opened`) and the
+  first time it's seen on a home screen (`countdown_widget_added`); a
+  widget added while Travary was never reopened isn't seen until it is.
+- The setup sheet's three iOS steps are worded for iOS 17 and 18: check them
+  on a real iPhone (and on iOS 26) before release.

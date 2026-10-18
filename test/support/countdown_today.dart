@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:travary/app/home_shell.dart';
 import 'package:travary/data/memory_travel_document_repository.dart';
 import 'package:travary/data/memory_travel_repository.dart';
@@ -193,6 +194,7 @@ Widget countdownTodayApp({
   List<TravelDocument> documents = const [],
   FixedDocumentLock? documentLock,
   MemoryTravelDocumentRepository? documentRepository,
+  List<SingleChildWidget> extraProviders = const [],
 }) {
   final clock = now ?? countdownNow;
   final repository = MemoryTravelRepository(userId: 'me');
@@ -215,6 +217,7 @@ Widget countdownTodayApp({
       ),
       appSessionProvider(),
       travelDocumentsProvider(documents: documents, lock: documentLock, repository: documentRepository),
+      ...extraProviders,
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,

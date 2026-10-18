@@ -72,6 +72,13 @@ work, accounts, money); everything else can be done in this repo.
 - [ ] Add the countdown widget on a real iPhone and tap its tag
   (`docs/COUNTDOWN_WIDGET.md`); so far it's been tried on the simulator
   and an Android emulator.
+- [ ] Try the widget's setup sheet on real phones (`docs/COUNTDOWN_WIDGET.md`,
+  "Getting it onto the home screen"): on an iPhone, that its three steps
+  match iOS 17, 18 and 26 and that the sheet turns into "It's on your home
+  screen" once the widget is added; on Android, that "Add to home screen"
+  opens the launcher's dialog (Pixel and Samsung) and the sheet follows. The
+  Swift and Kotlin for `status` and `pin` were written without a compiler to
+  hand: build both first.
 - [x] Android targets API 36 (Flutter's default), which Play requires of
   new apps.
 - [ ] **Decide now: iPhone only, or iPad too?** The iOS target says both

@@ -77,7 +77,10 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   shared, ticked as they're packed, one-tap ideas, an empty list can start
   from the last trip's; `logic/packing.dart`, `Trip.packing`), who's
   coming, and a notched "Add a booking". The countdown says how the
-  packing list stands under its postcard (`CountdownNote`), opening it.
+  packing list stands under its postcard (`CountdownNote`), opening it;
+  under that, until the widget is on the home screen, "Home screen · Add
+  this countdown" opens the widget's setup sheet (see Home-screen countdown
+  widget).
   The trip itself (name, dates, family, card style, delete) is under "Trip
   details". Forms are a paper ticket in the trip's colours; a new flight's
   ticket is headed by the departures board (`FlightFinder`) when flight
@@ -133,6 +136,7 @@ lib/
 │               ai_consent (asking before anything goes to Google's Gemini: wording, offers),
 │               packing (the packing list: wording, ideas, which list to reuse),
 │               countdown_widget (the home-screen widget's every day ahead, worded),
+│               countdown_widget_setup (who is offered the widget, the setup sheet's wording),
 │               trip_gaps (what a trip still needs: nights without a stay, the
 │               flight home), trip_hero_text (a trip's tag), booking_form_text,
 │               card_text (all card wording), countdown_text (the countdown's
@@ -149,7 +153,9 @@ lib/
 │               push_service (flight alerts: permission, this phone's token, taps);
 │               reminder_scheduler + reminder_settings (local reminders, this phone);
 │               shared_files (files shared in from other apps);
-│               countdown_widget_bridge (the home-screen widget's folder + redraw);
+│               countdown_widget_bridge (the home-screen widget's folder + redraw, and
+│               asking the phone whether it's added or to place it); countdown_widget_settings
+│               ("Not now" and "has been added", this phone);
 │               ai_consent_record (the answer about Google's AI, this phone);
 │               auth_service (guest, Apple/Google/email-link sign-in, delete account);
 │               onboarding_record (users/{uid}.onboardingCompleted, every phone)
@@ -161,6 +167,7 @@ lib/
 │               RemindersStore (free reminders), ShareInbox (a shared file waiting),
 │               AiConsentStore (may Smart Import and trip looks use Google's AI),
 │               CountdownWidgetSync (keeps the home-screen widget in step)
+│               CountdownWidgetStore (is the widget on the home screen, the offer on Today)
 ├── design/     THE SKIN: tokens, trip_chrome (palette colours + chrome art), kind_style,
 │               cards/ (BookingCard → FeaturedTicketCard / RoomKeyCard /
 │               TaggedReservationCard on ShellFrame, DocumentStampCard, LedgerRowCard),
@@ -179,7 +186,8 @@ lib/
 │               travel_documents (list, form, document, the tab's entry pill),
 │               account (Profile's sign-in card, sign-in sheet, email-link form),
 │               onboarding (Travi scenes, sign-in before the pass desk, home gate),
-│               ai (the consent sheet, the trip page's looks offer)
+│               ai (the consent sheet, the trip page's looks offer),
+│               widget (the home-screen countdown widget's setup sheet)
 └── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
 tool/           art_packs.dart: builds, validates and publishes art packs, and converts
                 bundled art to WebP (`bundled-webp`) (operator only)
@@ -824,6 +832,35 @@ flips Travi's drawn layer. The file's version, channel and folder are
 mirrored in Swift and Kotlin (`test/tool/countdown_widget_config_test.dart`).
 Its App ID, `com.travary.app.CountdownWidget`, is registered with the App
 Group (16 Oct 2026); not yet tried on a real iPhone.
+
+**Getting it onto the home screen** (`logic/countdown_widget_setup.dart`,
+`features/widget/countdown_widget_sheet.dart`): an app can't see the home
+screen, only whether a widget of its own is on it, and only Android can be
+asked to place one. So there is one setup sheet and two ways in, never a
+modal at launch or in onboarding:
+- **Today's countdown** (between trips): a second `CountdownNote` beside the
+  tag, under "Packing list", "Home screen · Add this countdown ›". It sits
+  there, not under the hero, because the countdown fills the phone to the
+  tabs (a row below it is off screen on a 390 × 844 phone), and its title is
+  that short because the room beside the tag cuts "Home screen widget" off.
+  Shown only while the widget can be had, isn't on the home screen, never
+  was (someone who took it off knows it exists), and wasn't turned down
+  (`offersCountdownWidget`). The sheet's "Not now" (only from Today) puts it
+  away for good; Profile keeps the way in.
+- **Profile → "Home screen" → "Countdown widget"**: always there where the
+  phone can have the widget (not iOS 15 or 16), with a tick once it's on.
+- **The sheet** follows `CountdownWidgetStore`: Android asks the launcher to
+  place it (`requestPinAppWidget`, one button, the launcher's own dialog);
+  iOS has no such call, so it shows three steps; an Android launcher that
+  can't be asked, or refuses, gets Android's steps. When the app comes back
+  (`HomeShell`'s resume) the store asks the phone again, and an open sheet
+  turns into "It's on your home screen". Detection: Android
+  `getAppWidgetIds`, iOS `WidgetCenter.getCurrentConfigurations` (kind
+  `CountdownWidget`). `status` and `pin` on the `travary/countdown_widget`
+  channel, mirrored by `test/tool/countdown_widget_config_test.dart`.
+- Per phone: `countdown_widget_settings` (`declined`, `everAdded`).
+  Analytics (kinds only): `countdown_widget_sheet_opened` (from),
+  `_pin_asked` (shown), `_declined`, `_added` (first time it's seen there).
 
 ## Travi onboarding
 

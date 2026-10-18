@@ -19,6 +19,7 @@ import '../features/trips/trips_screen.dart';
 import '../features/wallet/wallet_screen.dart';
 import '../logic/travi_cameos.dart';
 import '../state/app_session.dart';
+import '../state/countdown_widget_store.dart';
 import '../state/countdown_widget_sync.dart';
 import '../state/notifications_store.dart';
 import '../state/premium_store.dart';
@@ -75,6 +76,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
   bool _readingShare = false;
   late final AppSession? _session;
   late final CountdownWidgetSync? _widget;
+  late final CountdownWidgetStore? _widgetSetup;
 
   /// A trip the countdown widget was tapped on, opened once it has loaded.
   String? _pendingTrip;
@@ -97,6 +99,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
     _session = context.read<AppSession?>()?..addListener(_widgetTapped);
     _store.addListener(_openPendingTrip);
     _widget = context.read<CountdownWidgetSync?>();
+    _widgetSetup = context.read<CountdownWidgetStore?>();
     // A flight alert or a reminder may have opened the app.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _notificationsChanged();
@@ -138,6 +141,8 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
       if (_reminders case final reminders?) unawaited(reminders.refresh());
       // The countdown widget too.
       if (_widget case final widget?) unawaited(widget.refresh());
+      // And it may have just been put on the home screen.
+      if (_widgetSetup case final setup?) unawaited(setup.refresh());
       // Back from the background, not just from Control Centre.
       if (_wasAway) _showedToday();
       _wasAway = false;
