@@ -576,6 +576,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  image:
+    dependency: "direct main"
+    description:
+      name: image
+      sha256: b1b353073e127ae2235e04a1526faa4da2638bf3d5f871b592bb26be7e1cd1fd
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.10.0"
   intl:
     dependency: "direct main"
     description:
