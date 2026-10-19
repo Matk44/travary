@@ -162,7 +162,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     _more =
         [_reference, _notes, for (final field in _moreFields) _details[field.key]!].any((c) => c.text.isNotEmpty) ||
         _highlight.any((field) => field == 'reference' || field == 'notes' || field.startsWith('details.'));
-    if (widget.sourceFilePath != null) _attachSource();
+    if (widget.sourceFilePath != null) _keep(_attachSource());
   }
 
   /// The file Smart Import read becomes the ticket, while the holiday has
@@ -197,7 +197,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     final room = await requireTicketRoom(context, _targetPlan, kept: _ticketsKept, source: 'attach_ticket');
     if (!room || !mounted) return;
     setState(() => _sourceWaiting = false);
-    await _attachSourceFile();
+    await _keep(_attachSourceFile());
   }
 
   Future<void> _attachSourceFile() async {
@@ -210,6 +210,19 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   }
 
   bool _sourceWaiting = false;
+
+  /// Files still being kept: a photo takes a moment to shrink as it's
+  /// added (`AttachmentStore.import`), and saving waits for it rather than
+  /// leave the ticket behind.
+  final _keeping = <Future<void>>{};
+
+  /// [work], which keeps a file, for saving to wait for.
+  Future<void> _keep(Future<void> work) {
+    final settled = work.catchError((Object _) {});
+    _keeping.add(settled);
+    settled.whenComplete(() => _keeping.remove(settled));
+    return work;
+  }
 
   /// A copy of the file Smart Import read, or null if it's gone by now: the
   /// booking still saves, just without it.
@@ -321,8 +334,16 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
   Future<void> _addAttachment() async {
     final room = await requireTicketRoom(context, _targetPlan, kept: _ticketsKept, source: 'attach_ticket');
     if (!room || !mounted) return;
+    await _keep(_pickAttachment());
+  }
+
+  Future<void> _pickAttachment() async {
     final attachment = await pickAttachment(context);
-    if (attachment == null || !mounted) return;
+    if (attachment == null) return;
+    if (!mounted) {
+      await _store.attachments?.delete(attachment);
+      return;
+    }
     setState(() {
       _attachments.add(attachment);
       _addedAttachments.add(attachment);
@@ -472,6 +493,8 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     // of its own, not back into the one it left.
     final newTrip = tripId.isEmpty && _tripId.isNotEmpty;
     setState(() => _saving = true);
+    if (_keeping.isNotEmpty) await Future.wait([..._keeping]);
+    if (!mounted) return;
     try {
       final result = await store.saveBooking(
         _booking(id: widget.existing?.id ?? store.repository.newId(), endDate: endDate, tripId: tripId),

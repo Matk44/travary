@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:provider/provider.dart';
 import 'package:travary/data/attachment_store.dart';
 import 'package:travary/data/memory_travel_repository.dart';
@@ -21,6 +22,7 @@ import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
 import '../helpers.dart';
+import '../support/photo_fixture.dart';
 import '../support/travi.dart';
 
 class _FakeImport implements SmartImportService {
@@ -152,6 +154,7 @@ void main() {
       String? tripId,
       AttachmentStore? attachments,
       String? path,
+      String fileName = 'booking.pdf',
     }) async {
       tester.view.physicalSize = const Size(1179, 2556);
       tester.view.devicePixelRatio = 3;
@@ -184,7 +187,7 @@ void main() {
                         MaterialPageRoute(
                           builder: (_) => SmartImportScreen(
                             filePath: path ?? filePath,
-                            fileName: 'booking.pdf',
+                            fileName: fileName,
                             access: access,
                             tripId: tripId,
                           ),
@@ -266,6 +269,80 @@ void main() {
       expect(travel.bookings.every((b) => b.attachments.isEmpty), isTrue);
       expect(find.text('Added without the file: it couldn’t be kept.'), findsOneWidget);
       expect(find.byType(SmartImportScreen), findsNothing, reason: 'nothing left locked');
+    });
+
+    group('a camera photo read', () {
+      late Directory directory;
+      late AttachmentStore files;
+      late String photoPath;
+      late int photoBytes;
+
+      setUp(() {
+        directory = Directory.systemTemp.createTempSync('travary-photos');
+        files = AttachmentStore.at(Directory('${directory.path}/attachments')..createSync());
+        final photo = cameraPhoto();
+        photoBytes = photo.length;
+        photoPath = (File('${directory.path}/IMG_0412.JPG')..writeAsBytesSync(photo)).path;
+      });
+
+      tearDown(() => directory.deleteSync(recursive: true));
+
+      /// The ticket [booking] keeps: a JPEG on the phone, smaller than it came.
+      void expectShrunk(Attachment attachment) {
+        final stored = files.fileFor(attachment).readAsBytesSync();
+        expect(attachment.name, 'IMG_0412.JPG');
+        expect(attachment.sizeBytes, stored.length);
+        expect(stored.length, lessThan(photoBytes ~/ 2));
+        final image = img.decodeJpg(stored)!;
+        expect((image.width, image.height), (1875, 2500));
+      }
+
+      testWidgets('into several bookings is shrunk once, kept on each and counted once', (tester) async {
+        final (travel, _) = await pump(
+          tester,
+          _FakeImport(
+            SmartImportResult([
+              draft('London to Lisbon', BookingKind.flight, d(11, 3)),
+              draft('Lisbon to London', BookingKind.flight, d(11, 8)),
+            ]),
+          ),
+          attachments: files,
+          path: photoPath,
+          fileName: 'IMG_0412.JPG',
+        );
+
+        // Shrinking is real work: decoding, an isolate and the disk.
+        final dynamic add = tester.widget<FilledButton>(find.widgetWithText(FilledButton, 'Add 2 bookings')).onPressed;
+        await tester.runAsync(() async => await add());
+        await tester.pumpAndSettle();
+
+        final tickets = [for (final booking in travel.bookings) ...booking.attachments];
+        expect(tickets, hasLength(2));
+        tickets.forEach(expectShrunk);
+        expect(ticketFilesIn(travel.plans.single), 1, reason: 'one free file, not two');
+      });
+
+      testWidgets('into one booking goes with it, even saved straight away', (tester) async {
+        final (travel, _) = await pump(
+          tester,
+          _FakeImport(SmartImportResult([draft('Lagoon Grill', BookingKind.dining, d(11, 3))])),
+          attachments: files,
+          path: photoPath,
+          fileName: 'IMG_0412.JPG',
+        );
+
+        // Saved while the photo is still shrinking: it's saved once that's done.
+        await tester.tap(find.byKey(const ValueKey('save-booking')));
+        await tester.pump();
+        for (var i = 0; i < 250 && travel.bookings.isEmpty; i++) {
+          await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
+          await tester.pump();
+        }
+        await tester.pumpAndSettle();
+
+        expect(find.byType(EditBookingScreen), findsNothing);
+        expectShrunk(travel.bookings.single.attachments.single);
+      });
     });
 
     testWidgets('opened from a trip, only bookings on its dates go into it', (tester) async {

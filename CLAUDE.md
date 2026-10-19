@@ -141,11 +141,13 @@ lib/
 │               flight home), trip_hero_text (a trip's tag), booking_form_text,
 │               card_text (all card wording), countdown_text (the countdown's
 │               wording, calendar-date count), trip_postcard_text (a coming
-│               trip's tag), formatters, art_pack_selection
+│               trip's tag), formatters, photo_shrink (which ticket photos
+│               are shrunk as they're added, and to what size), art_pack_selection
 │               (trust rules, pack ranks, downloads), visual_profile_request
 │               (classifier payload, meaningful edits)
 ├── data/       TravelRepository interface; Memory (demo/tests) + Firestore;
-│               demo_data; attachment_store (ticket files, offline);
+│               demo_data; attachment_store (ticket files, offline) +
+│               photo_shrinker (camera photos shrunk once, as they come in);
 │               visual_profile_service; art packs: art_pack_catalog (formats +
 │               validation, shared with tool/), art_pack_archive (safe zip),
 │               art_pack_store (disk), art_pack_service (download manager);
@@ -350,7 +352,8 @@ same batch.** Rules are in `firestore.rules`; deploy rules + index with
 Empty automatic trips remove themselves. Writes
 aren't awaited (Firestore's offline cache applies them at once); sync failures
 surface via `TravelRepository.errors`. Attachment files are stored locally by
-file name (never absolute paths). Cloud backup of files is a future Plus feature.
+file name (never absolute paths), camera photos shrunk once as they're added;
+shared and paid trips back them up (see Family sharing and ticket backup).
 
 ## Running
 
@@ -610,6 +613,19 @@ Analytics retention period written in. Full list: `docs/LAUNCH_CHECKLIST.md`.)
   on demand. Files live at `trips/{tripId}/attachments/{fileName}` in Cloud
   Storage (bucket `travary-444.firebasestorage.app`, us-central1), guarded
   by `storage.rules` (members only, images/PDF, < 20 MB).
+- **Photos are shrunk once, on import** (`AttachmentStore.import`; rules in
+  `logic/photo_shrink.dart`, the work in `data/photo_shrinker.dart`): a JPEG
+  over about 1.5 MB or 2,500 px long, and every HEIC/HEIF, is stored as a
+  JPEG at most 2,500 px on its long edge, quality 85, turned upright and
+  with no EXIF (no GPS). The phone decodes it (HEIC by ImageIO on iOS,
+  ImageDecoder on Android 9+), an isolate scales and encodes it. PDFs, PNG,
+  WebP and GIF come in byte for byte, so barcodes stay as sharp as they
+  came; a JPEG that wouldn't get smaller, or a photo that can't be read,
+  stays as it came. That one file is what opens on the phone, backs up and
+  the family downloads: never a second, lesser copy (a blurred barcode at
+  the gate; the free-file count matches copies by name and size, and one
+  import kept on several bookings is the same bytes). HEIC becomes JPEG
+  because Flutter shows HEIC on Android only from Android 9 (minSdk is 24).
 - Storage rules read Firestore, which needs the Storage service agent to have
   `roles/firebaserules.firestoreServiceAgent` (granted on travary-444). A
   new project needs it too, or every upload returns 403.
