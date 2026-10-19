@@ -39,13 +39,19 @@ class AccessDecision {
 ///   before the dates it was bought for loses it ([tripPassLastDay]).
 /// - "Plus travels with the trip": a trip stamped premium by the server
 ///   (its organiser has Plus or a pass) unlocks them for everyone on it.
-/// - Free: a few Smart Imports to try it, nothing else premium.
-/// - Never gated: bookings, tickets, Today, Wallet, sharing a read-only view.
+/// - Free: a few Smart Imports to try it, 2 ticket files and
+///   [FreePlanLimits.bookingsPerHoliday] bookings a holiday until it starts
+///   ([bookingsLeft]), nothing else premium.
+/// - Never gated: what's already in (bookings and tickets open, edit and
+///   delete), Today, Wallet, sharing a read-only view.
 class AccessPolicy {
-  const AccessPolicy(this.entitlements, this.now);
+  const AccessPolicy(this.entitlements, this.now, {this.limits = FreePlanLimits.defaults});
 
   final Entitlements entitlements;
   final DateTime now;
+
+  /// The free plan's numbers, from `config/freePlan`.
+  final FreePlanLimits limits;
 
   bool get hasPlus => entitlements.plus?.activeAt(now) ?? false;
 
@@ -88,6 +94,7 @@ class AccessPolicy {
       PremiumFeature.smartImport =>
         freeSmartImportsLeft > 0 ? AccessDecision.freeUse(freeSmartImportsLeft) : const AccessDecision.locked(),
       PremiumFeature.familySharing ||
+      PremiumFeature.everyBooking ||
       PremiumFeature.ticketBackup ||
       PremiumFeature.flightAlerts => const AccessDecision.locked(),
     };
@@ -116,7 +123,47 @@ class AccessPolicy {
     final left = ticketFilesLeft(plan, kept: kept);
     return left == null || adding <= left;
   }
+
+  /// Bookings still to add to [plan] on the free plan: null when there's
+  /// no limit (a pass, Plus or Plus travelling with the trip; a new
+  /// holiday; one that has started, where adding is never blocked), else
+  /// what's left of [FreePlanLimits.bookingsPerHoliday] after the ones it
+  /// has ([bookingsCountedIn]).
+  int? bookingsLeft(TripPlan? plan) {
+    if (plan == null || hasStarted(plan) || forTrip(plan).allowed) return null;
+    return max(0, limits.bookingsPerHoliday - bookingsCountedIn(plan));
+  }
+
+  /// Whether [adding] more bookings fit [plan]. Notes always do
+  /// ([countsTowardsFreePlan]): leave them out of [adding].
+  bool canAddBookings(TripPlan? plan, {int adding = 1}) {
+    final left = bookingsLeft(plan);
+    return left == null || adding <= left;
+  }
+
+  /// The bookings to count on the trip page ("9 of 12 free bookings
+  /// used"): on a free holiday with [Pricing.bookingCountShownWithin] or
+  /// fewer left, else null.
+  int? bookingCountShown(TripPlan plan) {
+    final left = bookingsLeft(plan);
+    if (left == null || left > Pricing.bookingCountShownWithin) return null;
+    return bookingsCountedIn(plan);
+  }
+
+  /// [plan]'s first day has come, by the phone's clock.
+  bool hasStarted(TripPlan plan) => plan.start != null && !LocalDate.fromDateTime(now).isBefore(plan.start!);
 }
+
+/// The bookings on [plan] that count towards a free holiday's
+/// [FreePlanLimits.bookingsPerHoliday].
+int bookingsCountedIn(TripPlan? plan) =>
+    plan == null ? 0 : plan.bookings.where((booking) => countsTowardsFreePlan(booking.kind)).length;
+
+/// Every kind of booking counts towards a free holiday's
+/// [FreePlanLimits.bookingsPerHoliday] but notes, which are always free to
+/// add (as are the checklist, the packing list and travel documents, which
+/// aren't bookings).
+bool countsTowardsFreePlan(BookingKind kind) => kind != BookingKind.note;
 
 /// The ticket files [plan]'s bookings keep, leaving out booking [except]
 /// (one being edited) and adding [also] (the form's own). One file kept on

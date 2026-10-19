@@ -13,11 +13,13 @@ import 'analytics.dart';
 /// [AccessPolicy].
 class PremiumStore extends ChangeNotifier {
   /// [ownsPurchases]: [purchases] was made for this account alone, so it's
-  /// disposed with the store.
+  /// disposed with the store. [limits]: the free plan's numbers as they
+  /// change (`config/freePlan`); the defaults until one arrives, or without.
   PremiumStore({
     required this.purchases,
     DateTime Function()? clock,
     Future<List<Offer>> Function()? offerLoader,
+    Stream<FreePlanLimits>? limits,
     bool ownsPurchases = false,
   }) : _clock = clock ?? DateTime.now,
        _offerLoader = offerLoader,
@@ -25,6 +27,11 @@ class PremiumStore extends ChangeNotifier {
        _offers = offerLoader == null ? Pricing.defaults : const [] {
     _subscription = purchases.watchEntitlements().listen((entitlements) {
       _entitlements = entitlements;
+      notifyListeners();
+    });
+    _limitsSubscription = limits?.listen((limits) {
+      if (limits == _limits) return;
+      _limits = limits;
       notifyListeners();
     });
     unawaited(_loadOffers());
@@ -35,8 +42,10 @@ class PremiumStore extends ChangeNotifier {
   final Future<List<Offer>> Function()? _offerLoader;
   final bool _ownsPurchases;
   late final StreamSubscription<Entitlements> _subscription;
+  StreamSubscription<FreePlanLimits>? _limitsSubscription;
 
   Entitlements _entitlements = Entitlements.none;
+  FreePlanLimits _limits = FreePlanLimits.defaults;
   List<Offer> _offers;
   bool _busy = false;
   bool _disposed = false;
@@ -45,7 +54,8 @@ class PremiumStore extends ChangeNotifier {
   String? _offersError;
 
   Entitlements get entitlements => _entitlements;
-  AccessPolicy get policy => AccessPolicy(_entitlements, _clock());
+  FreePlanLimits get limits => _limits;
+  AccessPolicy get policy => AccessPolicy(_entitlements, _clock(), limits: _limits);
   bool get hasPlus => policy.hasPlus;
   bool get busy => _busy;
   bool get isTestStore => purchases is TestPurchaseService;
@@ -133,6 +143,7 @@ class PremiumStore extends ChangeNotifier {
   void dispose() {
     _disposed = true;
     _subscription.cancel();
+    _limitsSubscription?.cancel();
     if (_ownsPurchases) unawaited(purchases.dispose());
     super.dispose();
   }

@@ -67,6 +67,17 @@ abstract final class Pricing {
   /// more needs a pass.
   static const freeTicketFiles = 2;
 
+  /// Bookings a holiday takes on the free plan (owner, 20 Oct 2026): adding
+  /// more needs a pass until the holiday starts, and from then on nothing
+  /// is ever blocked. Notes don't count, and nothing already in is locked.
+  /// The live number comes from Firestore's `config/freePlan`
+  /// ([FreePlanLimits]); this is the default.
+  static const freeBookingsPerHoliday = 12;
+
+  /// The trip page counts a free holiday's bookings once this few are left
+  /// ("9 of 12 free bookings used").
+  static const bookingCountShownWithin = 3;
+
   /// A Trip Pass keeps the trip unlocked this long after it ends.
   static const tripPassGraceDays = 7;
 
@@ -77,4 +88,40 @@ abstract final class Pricing {
     Offer(kind: OfferKind.plusAnnual, productId: plusAnnualProductId, amount: plusAnnualUsd, currencyCode: 'USD'),
     Offer(kind: OfferKind.tripPass, productId: tripPassProductId, amount: tripPassUsd, currencyCode: 'USD'),
   ];
+}
+
+/// The free plan's numbers that can change without a release, from
+/// Firestore's `config/freePlan` (`{bookingsPerHoliday: 12}`).
+class FreePlanLimits {
+  const FreePlanLimits({this.bookingsPerHoliday = Pricing.freeBookingsPerHoliday});
+
+  /// What `config/freePlan` says. A missing number, or one outside
+  /// [minBookings] to [maxBookings] (a typo, most likely), keeps the
+  /// default.
+  factory FreePlanLimits.fromJson(Map<String, Object?>? json) {
+    final bookings = json?['bookingsPerHoliday'];
+    final whole = bookings is num && bookings.isFinite && bookings == bookings.roundToDouble()
+        ? bookings.toInt()
+        : null;
+    return FreePlanLimits(
+      bookingsPerHoliday: whole != null && whole >= minBookings && whole <= maxBookings
+          ? whole
+          : Pricing.freeBookingsPerHoliday,
+    );
+  }
+
+  static const defaults = FreePlanLimits();
+
+  /// The numbers `config/freePlan` may set the cap to.
+  static const minBookings = 5;
+  static const maxBookings = 1000;
+
+  /// Bookings a free holiday takes before adding more needs a pass.
+  final int bookingsPerHoliday;
+
+  @override
+  bool operator ==(Object other) => other is FreePlanLimits && other.bookingsPerHoliday == bookingsPerHoliday;
+
+  @override
+  int get hashCode => bookingsPerHoliday.hashCode;
 }

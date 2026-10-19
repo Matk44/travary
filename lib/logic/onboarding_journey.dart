@@ -107,6 +107,11 @@ OnboardingWords paywallWordsFor(PremiumFeature? feature) => switch (feature) {
     accent: 'along?',
     subtitle: 'The plan and their own tickets on every phone.',
   ),
+  PremiumFeature.everyBooking => (
+    text: 'Room for\n',
+    accent: 'every booking?',
+    subtitle: 'A pass makes room for the whole plan.',
+  ),
   PremiumFeature.ticketBackup => (
     text: 'Every ticket,\n',
     accent: 'kept safe?',

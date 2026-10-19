@@ -212,3 +212,15 @@ test('flight alerts are the server\'s: members read their flights\' live state, 
     await assertFails(setDoc(doc(db('bob'), path), { uid: 'bob' }));
   }
 });
+
+test('the free plan\'s numbers: every signed-in phone reads them, nobody writes them', async () => {
+  await env.withSecurityRulesDisabled(async (admin) => {
+    await setDoc(doc(admin.firestore(), 'config/freePlan'), { bookingsPerHoliday: 12 });
+  });
+  const limits = (await getDoc(doc(db('mallory'), 'config/freePlan'))).data();
+  if (limits.bookingsPerHoliday !== 12) throw new Error('signed-in phones read the free plan');
+  await assertFails(getDoc(doc(env.unauthenticatedContext().firestore(), 'config/freePlan')));
+  await assertFails(setDoc(doc(db('bob'), 'config/freePlan'), { bookingsPerHoliday: 1000 }));
+  await assertFails(updateDoc(doc(db('bob'), 'config/freePlan'), { bookingsPerHoliday: 1000 }));
+  await assertFails(getDoc(doc(db('bob'), 'config/flightAlerts')));
+});

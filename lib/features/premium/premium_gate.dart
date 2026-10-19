@@ -70,6 +70,18 @@ Future<bool> requireTicketRoom(
   return bought && premium.policy.canAttachTickets(plan, kept: kept, adding: adding);
 }
 
+/// Room on [plan] for [adding] more bookings (notes left out:
+/// `countsTowardsFreePlan`): a free holiday takes
+/// `FreePlanLimits.bookingsPerHoliday` until it starts, a pass or Plus any
+/// number. Opens the paywall once they're used. True when they can be
+/// added. Nothing already on the holiday is ever touched.
+Future<bool> requireBookingRoom(BuildContext context, TripPlan? plan, {int adding = 1, required String source}) async {
+  final premium = context.read<PremiumStore?>();
+  if (premium == null || premium.policy.canAddBookings(plan, adding: adding)) return true;
+  final bought = await showPaywall(context, feature: PremiumFeature.everyBooking, tripId: plan?.id, source: source);
+  return bought && premium.policy.canAddBookings(plan, adding: adding);
+}
+
 /// Opens the paywall. Returns true if something was bought.
 Future<bool> showPaywall(
   BuildContext context, {

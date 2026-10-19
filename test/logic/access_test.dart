@@ -58,7 +58,12 @@ void main() {
     });
 
     test('other premium features are locked', () {
-      for (final feature in [PremiumFeature.familySharing, PremiumFeature.ticketBackup, PremiumFeature.flightAlerts]) {
+      for (final feature in [
+        PremiumFeature.familySharing,
+        PremiumFeature.everyBooking,
+        PremiumFeature.ticketBackup,
+        PremiumFeature.flightAlerts,
+      ]) {
         expect(policy(Entitlements.none).decide(feature, trip: orlando).allowed, isFalse, reason: feature.name);
       }
     });
@@ -236,6 +241,95 @@ void main() {
       final pass = Entitlements(tripPasses: {'orlando': newTripPassFor(orlando)});
       expect(policy(pass).ticketFilesLeft(orlando, kept: 9), isNull);
       expect(policy(pass).canAttachTickets(paris, kept: 2), isFalse, reason: 'only on the trip it\'s for');
+    });
+  });
+
+  group('bookings on a free holiday', () {
+    // Lisbon: 1–8 Nov, still to come on 14 Oct.
+    TripPlan lisbon(int bookings, {int notes = 0}) => TripPlan(trip('lisbon'), [
+      for (var i = 0; i < bookings; i++) booking('b$i', BookingKind.dining, d(11, 1 + i % 8), tripId: 'lisbon'),
+      for (var i = 0; i < notes; i++) booking('n$i', BookingKind.note, d(11, 2), tripId: 'lisbon'),
+    ]);
+
+    test('a free holiday takes 12 before it starts; adding more needs a pass', () {
+      final free = policy(Entitlements.none);
+      expect(Pricing.freeBookingsPerHoliday, 12);
+      expect(free.bookingsLeft(lisbon(0)), 12);
+      expect(free.bookingsLeft(lisbon(11)), 1);
+      expect(free.canAddBookings(lisbon(11)), isTrue);
+      expect(free.canAddBookings(lisbon(11), adding: 2), isFalse, reason: 'a Smart Import of two');
+      expect(free.canAddBookings(lisbon(12)), isFalse);
+      expect(
+        free.bookingsLeft(lisbon(15)),
+        0,
+        reason: 'already over (a lower cap, or a pass that ended): never below 0',
+      );
+    });
+
+    test('notes never count, so they can always be added', () {
+      expect(policy(Entitlements.none).bookingsLeft(lisbon(11, notes: 6)), 1);
+      expect(bookingsCountedIn(lisbon(3, notes: 2)), 3);
+      expect(bookingsCountedIn(null), 0);
+      expect(countsTowardsFreePlan(BookingKind.note), isFalse);
+      for (final kind in BookingKind.values.where((kind) => kind != BookingKind.note)) {
+        expect(countsTowardsFreePlan(kind), isTrue, reason: kind.name);
+      }
+    });
+
+    test('never blocked once the holiday has started, nor on a new one', () {
+      final onTheDay = policy(Entitlements.none, DateTime(2026, 11, 1, 7));
+      expect(onTheDay.bookingsLeft(lisbon(20)), isNull);
+      expect(onTheDay.canAddBookings(lisbon(20), adding: 5), isTrue);
+      expect(policy(Entitlements.none, DateTime(2026, 10, 31, 23, 59)).canAddBookings(lisbon(12)), isFalse);
+      expect(policy(Entitlements.none).canAddBookings(null, adding: 30), isTrue, reason: 'a new holiday starts empty');
+      final undated = TripPlan(trip('someday'), const []);
+      expect(policy(Entitlements.none).bookingsLeft(undated), 12, reason: 'no dates: it hasn\'t started');
+    });
+
+    test('a pass, Plus, or Plus travelling with the trip: any number', () {
+      final full = lisbon(12);
+      expect(policy(Entitlements(tripPasses: {'lisbon': newTripPassFor(full)})).bookingsLeft(full), isNull);
+      expect(policy(Entitlements(tripPasses: {'paris': newTripPassFor(paris)})).canAddBookings(full), isFalse);
+      final plus = Entitlements(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 30))));
+      expect(policy(plus).canAddBookings(full, adding: 40), isTrue);
+    });
+
+    test('the number comes from config/freePlan', () {
+      final fifteen = AccessPolicy(Entitlements.none, now, limits: const FreePlanLimits(bookingsPerHoliday: 15));
+      expect(fifteen.canAddBookings(lisbon(12)), isTrue);
+      expect(fifteen.bookingsLeft(lisbon(12)), 3);
+      expect(FreePlanLimits.fromJson({'bookingsPerHoliday': 15}).bookingsPerHoliday, 15);
+      expect(FreePlanLimits.fromJson({'bookingsPerHoliday': 15.0}).bookingsPerHoliday, 15, reason: 'a console double');
+      for (final unlikely in [null, 0, 4, 1001, 12.5, double.infinity, double.nan, '12', true]) {
+        expect(
+          FreePlanLimits.fromJson({'bookingsPerHoliday': unlikely}),
+          FreePlanLimits.defaults,
+          reason: '$unlikely keeps the default',
+        );
+      }
+      expect(FreePlanLimits.fromJson(null), FreePlanLimits.defaults, reason: 'no document');
+    });
+
+    test('the trip page counts them from 9 of 12', () {
+      final free = policy(Entitlements.none);
+      expect(free.bookingCountShown(lisbon(8)), isNull);
+      expect(free.bookingCountShown(lisbon(9)), 9);
+      expect(free.bookingCountShown(lisbon(12, notes: 3)), 12);
+      expect(free.bookingCountShown(lisbon(14)), 14);
+      expect(policy(Entitlements.none, DateTime(2026, 11, 2)).bookingCountShown(lisbon(10)), isNull, reason: 'started');
+      final pass = Entitlements(tripPasses: {'lisbon': newTripPassFor(lisbon(10))});
+      expect(policy(pass).bookingCountShown(lisbon(10)), isNull);
+    });
+
+    test('worded', () {
+      expect(bookingCountText(9, 12), '9 of 12 free bookings used');
+      expect(bookingCountText(12, 12), '12 of 12 free bookings used\u00a0· A\u00a0pass\u00a0adds\u00a0more');
+      expect(bookingCountText(14, 12), '12 of 12 free bookings used\u00a0· A\u00a0pass\u00a0adds\u00a0more');
+      expect(bookingsOverText(0, 12), 'This holiday has its 12 free bookings. A pass makes room for these.');
+      expect(
+        bookingsOverText(2, 12),
+        'Only 2 more fit on this free holiday (12 bookings). Untick some, or get a pass for every one.',
+      );
     });
   });
 

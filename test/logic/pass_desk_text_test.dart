@@ -22,14 +22,19 @@ void main() {
     expect((plus.displayTitle, pass.displayTitle), ('Annual Pass', 'Holiday Pass'));
   });
 
-  test('benefits lead with the family, or with what they reached for', () {
+  test('benefits lead with unlimited bookings and the family, or with what they reached for', () {
     expect(passBenefits(), [
-      'Everyone coming gets the plan and their own tickets',
+      'Unlimited bookings, and the plan on every phone',
       'Every ticket and confirmation kept and backed up (free keeps 2)',
       "I'll read the rest of your confirmations for you",
     ]);
+    // All most phones have room for: one line on an iPhone 13 mini.
+    expect(passBenefits().first.length, lessThanOrEqualTo(51));
     expect(passBenefits(first: PremiumFeature.smartImport).first, "I'll read the rest of your confirmations for you");
     expect(passBenefits(first: PremiumFeature.smartImport), hasLength(3));
+    for (final feature in [PremiumFeature.everyBooking, PremiumFeature.familySharing]) {
+      expect(passBenefits(first: feature), passBenefits(), reason: '${feature.name} shares the first line');
+    }
     // Flight alerts only once they're on sale.
     expect(passBenefits(flightAlerts: true).last, "Delays and new times on everyone's phone");
     expect(passBenefits(first: PremiumFeature.flightAlerts), hasLength(3), reason: 'not on sale: not listed');
@@ -42,6 +47,8 @@ void main() {
     }
 
     expect(headline(PremiumFeature.familySharing), 'Bring everyone along?');
+    expect(headline(PremiumFeature.everyBooking), 'Room for every booking?');
+    expect(paywallWordsFor(PremiumFeature.everyBooking).subtitle, 'A pass makes room for the whole plan.');
     expect(headline(PremiumFeature.ticketBackup), 'Every ticket, kept safe?');
     expect(headline(PremiumFeature.smartImport), 'Shall I read the rest?');
     expect(headline(PremiumFeature.flightAlerts), 'Shall I watch your flights?');

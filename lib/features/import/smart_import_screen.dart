@@ -215,6 +215,27 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
     // Where saving will put each one (a new trip for some, perhaps), so
     // the file is counted against the holiday it actually lands in.
     final places = store.importPlaces(picked);
+    // A free holiday takes so many bookings before it starts: when these
+    // don't fit, the pass desk first; without a pass nothing is saved, and
+    // the list stays as it was to untick some.
+    final adding = <String, int>{};
+    for (final (i, booking) in picked.indexed) {
+      if (countsTowardsFreePlan(booking.kind)) adding.update(places[i], (n) => n + 1, ifAbsent: () => 1);
+    }
+    for (final MapEntry(key: place, value: count) in adding.entries) {
+      final target = store.plan(place);
+      if (policy == null || policy.canAddBookings(target, adding: count)) continue;
+      final room = await requireBookingRoom(context, target, adding: count, source: 'import_bookings');
+      if (!mounted) return;
+      if (!room) {
+        setState(() => _saving = false);
+        messenger.showSnackBar(
+          SnackBar(content: Text(bookingsOverText(policy.bookingsLeft(target) ?? 0, policy.limits.bookingsPerHoliday))),
+        );
+        return;
+      }
+      policy = context.read<PremiumStore?>()?.policy;
+    }
     // A free holiday with no room left for the file opens the pass desk
     // first (once): with a pass, the file is kept there too.
     for (final key in places.toSet()) {

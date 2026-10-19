@@ -468,6 +468,12 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
       if (answer == null || !mounted) return;
       tripId = answer;
     }
+    // A new booking on a free holiday that has all its bookings opens the
+    // pass desk; without a pass the form stays as typed.
+    if (!_isEditing && countsTowardsFreePlan(widget.kind)) {
+      final room = await requireBookingRoom(context, store.plan(tripId), source: 'add_booking');
+      if (!room || !mounted) return;
+    }
     // Taken out of the trip it was in, with nowhere its dates fit: a trip
     // of its own, not back into the one it left.
     final newTrip = tripId.isEmpty && _tripId.isNotEmpty;

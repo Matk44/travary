@@ -19,6 +19,7 @@ import '../data/auth_service.dart';
 import '../data/demo_data.dart';
 import '../data/document_lock.dart';
 import '../data/firestore_travel_repository.dart';
+import '../data/free_plan_limits.dart';
 import '../data/memory_travel_repository.dart';
 import '../data/onboarding_record.dart';
 import '../data/pending_pass_claims.dart';
@@ -91,6 +92,7 @@ class Dependencies {
     required this.purchases,
     this.purchasesFor,
     this.offerLoaderFor,
+    this.freePlanLimits,
     required this.smartImport,
     this.visualProfiles,
     this.backup,
@@ -168,6 +170,10 @@ class Dependencies {
   /// preview, which shows the launch prices.
   final Future<List<Offer>> Function() Function(String userId)? offerLoaderFor;
 
+  /// The free plan's numbers as they change (`config/freePlan`). Cloud mode
+  /// only; otherwise, and until it answers, [FreePlanLimits.defaults].
+  final Stream<FreePlanLimits> Function()? freePlanLimits;
+
   /// The bundled artwork.
   final ArtCatalog artCatalog;
 
@@ -239,6 +245,7 @@ Future<Dependencies> bootstrap() async {
             pending: LocalPendingPassClaims(userId: uid),
           ),
     offerLoaderFor: _revenueCatKey.isEmpty ? null : (uid) => _revenueCatCatalog(uid).load,
+    freePlanLimits: cloud ? FirestoreFreePlanLimits().watch : null,
     // Smart Import always uses the cloud, even in demo mode. Firebase is set
     // up on first use, so demo mode still starts instantly and offline.
     smartImport: CloudSmartImportService(ensureSignedIn: () async => ensureSignedIn()),

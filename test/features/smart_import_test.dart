@@ -152,6 +152,7 @@ void main() {
       String? tripId,
       AttachmentStore? attachments,
       String? path,
+      DateTime Function()? clock,
     }) async {
       tester.view.physicalSize = const Size(1179, 2556);
       tester.view.devicePixelRatio = 3;
@@ -169,9 +170,12 @@ void main() {
                 repository: repository ?? MemoryTravelRepository(),
                 artCatalog: const ArtCatalog.empty(),
                 attachments: attachments,
+                clock: clock,
               ),
             ),
-            ChangeNotifierProvider(create: (_) => premium = PremiumStore(purchases: TestPurchaseService())),
+            ChangeNotifierProvider(
+              create: (_) => premium = PremiumStore(purchases: TestPurchaseService(), clock: clock),
+            ),
           ],
           child: MaterialApp(
             theme: buildTravaryTheme(),
@@ -353,6 +357,37 @@ void main() {
       expect(added, hasLength(2), reason: 'the bookings are still added');
       expect(added.every((b) => b.attachments.isEmpty), isTrue);
       expect(find.text(ticketsNotKeptText(2)), findsOneWidget);
+    });
+
+    testWidgets('bookings that don’t fit a free holiday’s 12 open the pass desk; "Not now" adds none', (tester) async {
+      // Lisbon, 1–8 Nov, with 11 of its 12 on 5 Oct: room for one more.
+      final repository = MemoryTravelRepository(userId: 'me')
+        ..replaceAll(
+          [trip('lisbon', title: 'Lisbon', plannedStart: d(11, 1), plannedEnd: d(11, 8))],
+          [for (var i = 0; i < 11; i++) booking('b$i', BookingKind.dining, d(11, 1 + i % 8), tripId: 'lisbon')],
+        );
+      final (travel, _) = await pump(
+        tester,
+        _FakeImport(
+          SmartImportResult([
+            draft('Fado night', BookingKind.event, d(11, 3)),
+            draft('Sintra tour', BookingKind.activity, d(11, 4)),
+            draft('Pack the adapter', BookingKind.note, d(11, 1)),
+          ]),
+        ),
+        repository: repository,
+        tripId: 'lisbon',
+        clock: () => DateTime(2026, 10, 5, 9),
+      );
+      await tester.tap(find.text('Add 3 bookings'));
+      await tester.pumpAndSettle();
+
+      final paywall = tester.widget<PaywallScreen>(find.byType(PaywallScreen));
+      expect((paywall.feature, paywall.tripId), (PremiumFeature.everyBooking, 'lisbon'));
+      await notNow(tester);
+      expect(travel.bookings, hasLength(11), reason: 'nothing saved without a pass');
+      expect(find.byType(SmartImportScreen), findsOneWidget, reason: 'the list stays, to untick some');
+      expect(find.text(bookingsOverText(1, 12)), findsOneWidget);
     });
 
     testWidgets('while it reads, Travi studies it instead of a spinner', (tester) async {

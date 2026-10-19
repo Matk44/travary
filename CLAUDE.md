@@ -91,8 +91,10 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   details". Forms are a paper ticket in the trip's colours; a new flight's
   ticket is headed by the departures board (`FlightFinder`) when flight
   data is on, its number filling in the rest (else the number heads it).
-- **Never lock someone's tickets.** Tickets and bookings are always reachable,
-  offline, whatever their plan.
+- **Never lock someone's tickets.** Tickets and bookings already in are
+  always reachable, editable and deletable, offline, whatever their plan.
+  Only adding past a free holiday's bookings before it starts needs a pass
+  (see Premium).
 - **Travel documents stay on the phone.** Passports, visas, insurance and
   the like (`TravelDocument`) are personal, not bookings: they belong to a
   person, not a trip. Stored only on this phone (`LocalTravelDocumentRepository`,
@@ -164,7 +166,8 @@ lib/
 │               ("Not now" and "has been added", this phone);
 │               ai_consent_record (the answer about Google's AI, this phone);
 │               auth_service (guest, Apple/Google/email-link sign-in, delete account);
-│               onboarding_record (users/{uid}.onboardingCompleted, every phone)
+│               onboarding_record (users/{uid}.onboardingCompleted, every phone);
+│               free_plan_limits (config/freePlan: a free holiday's bookings)
 ├── state/      TravelStore (ChangeNotifier): the single source of truth for screens;
 │               OnboardingStore (account-specific setup and actual saved booking identity),
 │               ArtCatalogController (bundled + installed packs), VisualProfileCoordinator,
@@ -327,6 +330,8 @@ trips/{tripId}                        title, theme, themeSource, destination, au
                                       liveFlights{bookingId: leg + checkedAt} (flight alerts, server-only)
 trips/{tripId}/bookings/{bookingId}   Booking.toJson() + a copy of the trip's memberIds[]
 invites/{code}                        tripId, createdBy, expiresAt (server-only)
+config/freePlan                       bookingsPerHoliday (set by hand in the console; every signed-in
+                                      phone reads it); the rest of config/ is server-only
 users/{uid}                           plus{expiresAt, willRenew}, tripPasses{tripId: {start, end}},
                                       Smart Import / classification usage, tester (set by hand in
                                       the console: premium for reviewers and debug phones) (server-only);
@@ -448,7 +453,7 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   travels with the trip"); free gets 2 Smart Imports (lifetime,
   `Pricing.freeSmartImports`, mirrored by `FREE_SMART_IMPORTS` on the server)
   and 2 ticket files per holiday (the files attached to bookings: photos and
-  PDFs, not the bookings or notes themselves, which are unlimited; the two
+  PDFs, not the bookings or notes themselves; the two
   numbers match because each import keeps its file;
   `Pricing.freeTicketFiles`, `canAttachTickets`, `ticketFilesIn`:
   one file kept on several bookings counts once). Files already attached
@@ -463,10 +468,38 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   The 2 free files are the owner's call (13 Oct 2026) to lift conversion,
   kept on purpose: raising the limit later is easy, taking files back isn't.
   Travel documents are never counted: they have no limit.
+- **12 bookings per free holiday until it starts** (owner, 20 Oct 2026: the
+  free plan gave away the whole core, so nothing grew with how much a
+  traveller relies on Travary). `AccessPolicy.bookingsLeft`,
+  `canAddBookings`, `bookingsCountedIn`: notes never count
+  (`countsTowardsFreePlan`), nor do the checklist, packing list or travel
+  documents (not bookings). Only adding is limited: what's in always
+  opens, edits and deletes, and deleting one frees a place. From the
+  holiday's first day nothing is ever blocked (someone abroad adding
+  tonight's dinner never meets a paywall); a new holiday starts empty, and
+  a pass, Plus or Plus travelling with the trip has no limit. The form's
+  save (`requireBookingRoom`, source `add_booking`, after the stretch
+  question so it counts the trip it lands in) opens the pass desk
+  (`PremiumFeature.everyBooking`: "Room for every booking?"); "Not now"
+  leaves the form as typed. Smart Import's review list checks every
+  holiday the ticked bookings land in before saving any
+  (`import_bookings`); "Not now" saves none and says how many fit
+  (`bookingsOverText`), so they can untick some. A new trip made by one
+  import isn't checked. The trip page counts them over "Add a booking"
+  once 3 or fewer are left (`bookingCountShown`,
+  `Pricing.bookingCountShownWithin`: "9 of 12 free bookings used"), tapping
+  to the desk (`booking_count`). The number is
+  `config/freePlan.bookingsPerHoliday` in Firestore (set by hand in the
+  console; every signed-in phone reads it, nobody writes it; 5 to 1000,
+  else the default `Pricing.freeBookingsPerHoliday`), so it moves without
+  a release (`FirestoreFreePlanLimits` → `PremiumStore.limits`). Enforced
+  by the app only, like the files: rules can't count a trip's bookings
+  cheaply.
 - **Gate every premium entry point with `requirePremium()`**
   (`features/premium/premium_gate.dart`): it returns the decision or opens
   the paywall. Never check entitlements ad hoc in a screen.
-- **Never gate** a traveller's own bookings, tickets, Today or Wallet.
+- **Never gate** what a traveller has already put in (bookings, tickets),
+  Today or Wallet. Adding is gated only by the free holiday's bookings above.
 - `PremiumFeature.released` controls what the paywall sells; unreleased
   features only show (marked "soon") in debug builds.
 - Purchases go through `PurchaseService`. With RevenueCat's keys (cloud
@@ -916,15 +949,19 @@ modal at launch or in onboarding:
 - **The paywall is the pass desk** (owner, 12 Oct 2026): `PaywallScreen`
   puts `OnboardingPassPanel` on the trip's onboarding stage with Travi
   presenting, a headline for the feature reached for (`paywallWordsFor`),
-  the benefits family first (`passBenefits`) and "Not now". Profile opens it
+  the benefits (`passBenefits`) and "Not now". Profile opens it
   for the trip on now or coming next. Nothing to scroll and Travi never
   moves (owner, 14 Oct 2026): the desk's floor starts just under his shadow
   (`snugFloor`) and a `FitColumn` (`design/widgets/fit_column.dart`) fits
   the room the stage gives it (`OnboardingFloorSpace`): the passes, the
   button and one row of "Not now" · Restore · Terms · Privacy always show,
-  the benefits only while they fit, family first, never a lesser one in a
-  greater one's place. Only an iPhone SE scrolls
-  (`test/visual_qa/paywall_fit_test.dart`).
+  the benefits only while they fit, never a lesser one in a greater one's
+  place. Most phones (a 13 mini to a 16) have room for one, so the first
+  line carries what a pass is bought for (owner, 20 Oct 2026): "Unlimited
+  bookings, and the plan on every phone" (family and
+  `PremiumFeature.everyBooking` share it; one line on a 13 mini, checked by
+  the fit test); the line reached for leads instead when it's another.
+  Only an iPhone SE scrolls (`test/visual_qa/paywall_fit_test.dart`).
 - **Two names only** (owner, changed 13 Oct 2026: "Annual Pass" says plainly
   that it's a yearly subscription, so it replaces the "Travary Plus" chosen
   on 12 Oct): **Annual Pass** (the yearly plan, `travary_annual_pass`) and

@@ -151,9 +151,9 @@ void main() {
       expect(find.text('Shall I read\nthe rest?', findRichText: true), findsOneWidget);
       expect(find.byKey(const ValueKey('onboarding-pass-holiday')), findsOneWidget);
       expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsOneWidget);
-      // What they reached for leads the benefits; family follows.
+      // What they reached for leads the benefits; unlimited bookings and the family follow.
       expect(find.text("I'll read the rest of your confirmations for you"), findsOneWidget);
-      expect(find.text('Everyone coming gets the plan and their own tickets'), findsOneWidget);
+      expect(find.text('Unlimited bookings, and the plan on every phone'), findsOneWidget);
       expect(find.textContaining('free trial', findRichText: true), findsNothing);
 
       await tapDesk(tester, 'onboarding-pass-annual');

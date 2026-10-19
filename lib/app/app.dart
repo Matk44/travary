@@ -94,6 +94,7 @@ class TravaryApp extends StatelessWidget {
                     ownsPurchases: accountPurchases != null,
                     clock: () => travel.now,
                     offerLoader: dependencies.offerLoaderFor?.call(uid),
+                    limits: dependencies.freePlanLimits?.call(),
                   );
                 },
               ),

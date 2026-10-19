@@ -44,6 +44,21 @@ String ticketsNotKeptText(int bookings) =>
     'The file wasn\'t kept on ${bookings == 1 ? '1 booking' : '$bookings bookings'}: free holidays keep '
     '${Pricing.freeTicketFiles} tickets. A pass keeps every one.';
 
+/// Above a free holiday's "Add a booking" once few are left
+/// (`AccessPolicy.bookingCountShown`): [used] of the [cap] bookings it
+/// takes before it starts. Full, the offer of a pass is held together and
+/// to the dot before it, so a wrapped line never starts with the dot or
+/// leaves a word alone.
+String bookingCountText(int used, int cap) => used < cap
+    ? '$used of $cap free bookings used'
+    : '$cap of $cap free bookings used\u00a0· A\u00a0pass\u00a0adds\u00a0more';
+
+/// Smart Import's review list, when the bookings ticked don't fit a free
+/// holiday: [left] more of its [cap] fit.
+String bookingsOverText(int left, int cap) => left == 0
+    ? 'This holiday has its $cap free bookings. A pass makes room for these.'
+    : 'Only $left more fit on this free holiday ($cap bookings). Untick some, or get a pass for every one.';
+
 /// What a Trip Pass covers, on the trip's details: "Trip Pass, until 30
 /// Oct 2026" ([lastDay] from `tripPassLastDay`).
 String tripPassCoversText(LocalDate lastDay) => 'Holiday Pass, until ${formatDate(lastDay)}';
@@ -65,21 +80,27 @@ String? tripPassEndsText(TripPass pass, LocalDate start, LocalDate end) {
 }
 
 /// What the Annual Pass or a Holiday Pass adds, on the pass desk and the
-/// paywall: family first, then every ticket, then Smart Import, and flight
-/// alerts once they're on sale. [first]: the one they just reached for,
-/// moved to the top.
+/// paywall: unlimited bookings and the family's plan first, then every
+/// ticket, Smart Import, and flight alerts once they're on sale. [first]:
+/// the one they just reached for, moved to the top.
+///
+/// The first line is all most phones have room for (the desk fits, never
+/// scrolls), so it carries both of what a pass is bought for: room for
+/// every booking ([PremiumFeature.everyBooking] shares it) and everyone
+/// on the plan. Keep it short enough for one line on an iPhone 13 mini.
 List<String> passBenefits({PremiumFeature? first, bool flightAlerts = false}) {
   final lines = <PremiumFeature, String>{
-    PremiumFeature.familySharing: 'Everyone coming gets the plan and their own tickets',
+    PremiumFeature.familySharing: 'Unlimited bookings, and the plan on every phone',
     PremiumFeature.ticketBackup:
         'Every ticket and confirmation kept and backed up (free keeps ${Pricing.freeTicketFiles})',
     PremiumFeature.smartImport: 'I\'ll read the rest of your confirmations for you',
     if (flightAlerts) PremiumFeature.flightAlerts: 'Delays and new times on everyone\'s phone',
   };
-  final top = lines[first];
+  final lead = first == PremiumFeature.everyBooking ? PremiumFeature.familySharing : first;
+  final top = lines[lead];
   return [
     ?top,
     for (final entry in lines.entries)
-      if (entry.key != first) entry.value,
+      if (entry.key != lead) entry.value,
   ];
 }

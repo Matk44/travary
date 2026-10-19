@@ -3,8 +3,10 @@ import 'pricing.dart';
 
 /// Everything the Annual Pass (or a Holiday Pass) unlocks.
 ///
-/// Rule of the house: a traveller's own tickets and bookings are never
-/// behind a paywall. Only these extras are.
+/// Rule of the house: nothing a traveller has already put in is ever behind
+/// a paywall: their bookings and tickets always open, edit and delete. Only
+/// these extras are, and adding past a free holiday's bookings
+/// ([FreePlanLimits.bookingsPerHoliday]) before it starts.
 ///
 /// Family first: what people pay for is everyone having the plan and their
 /// own tickets, and nothing lost with a phone. Smart Import is a bonus.
@@ -13,6 +15,11 @@ enum PremiumFeature {
     title: 'Family sharing',
     benefit: 'Up to 6 people on the plan, each with their own tickets offline and the same packing list to tick',
     pillar: PremiumPillar.together,
+  ),
+  everyBooking(
+    title: 'Every booking',
+    benefit: 'Room for every booking on the holiday, however big the plan',
+    pillar: PremiumPillar.peaceOfMind,
   ),
   ticketBackup(
     title: 'Every ticket',
@@ -39,7 +46,7 @@ enum PremiumFeature {
   /// Whether the feature is built and shipping. The paywall only sells
   /// released features (debug builds also show the rest, marked "Soon").
   bool get released => switch (this) {
-    smartImport || familySharing || ticketBackup => true,
+    smartImport || familySharing || everyBooking || ticketBackup => true,
     flightAlerts => flightAlertsReleased,
   };
 }

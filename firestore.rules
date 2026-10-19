@@ -13,6 +13,8 @@ rules_version = '2';
 //   tripPasses/{purchaseId}               claimed Holiday Passes, server only
 //   watchedFlights, flightStatus, flightUsage, pushTokens, config
 //                                         flight alerts and lookups, server only
+//   config/freePlan                       the free plan's numbers (set by hand in
+//                                         the console): every signed-in phone reads
 //
 // A trip (and everything in it) is visible only to its members. Only the
 // owner can delete a trip or change who's on it. Only the server grants
@@ -125,6 +127,13 @@ service cloud.firestore {
 
     function validOnboarding(data) {
       return data.onboardingCompleted == true && data.onboardingCompletedAt == request.time;
+    }
+
+    // The free plan's numbers ({bookingsPerHoliday: 12}), so they can change
+    // without a release. Read by every phone, written by nobody but the
+    // console. The rest of config is the server's.
+    match /config/freePlan {
+      allow read: if signedIn();
     }
 
     // Reads, including the app's collection-group query over all bookings,

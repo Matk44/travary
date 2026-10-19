@@ -22,7 +22,7 @@ import '../helpers.dart';
 /// The paywall (the pass desk) on the phones people use: the passes, the
 /// button, "Not now" and the links all on screen at once with nothing to
 /// scroll, Travi where he always stands, and as many benefits as there's
-/// room for, family first.
+/// room for, unlimited bookings and the family first.
 ///
 /// Always checks Travi's frame and the benefits' order. With
 /// `TRAVARY_VISUAL_QA=1` (run by `tool/visual_qa.sh`) it loads the app's
@@ -87,8 +87,8 @@ void main() {
         tester.getRect(find.byKey(const ValueKey('onboarding-pass-holiday'))).top,
         greaterThan(size.width * 1.262),
       );
-      // Whatever benefits fit, the family's leads them.
-      final family = find.text('Everyone coming gets the plan and their own tickets');
+      // Whatever benefits fit, unlimited bookings and the family lead them.
+      final family = find.text('Unlimited bookings, and the plan on every phone');
       for (final other in [
         'Every ticket and confirmation kept and backed up (free keeps 2)',
         "I'll read the rest of your confirmations for you",
@@ -113,7 +113,8 @@ void main() {
         expect(tester.getRect(find.byKey(ValueKey(key))).bottom, lessThanOrEqualTo(size.height - bottom), reason: key);
         expect(find.byKey(ValueKey(key)).hitTestable(), findsOneWidget, reason: key);
       }
-      expect(family.hitTestable(), findsOneWidget, reason: 'the family leads, on every phone');
+      expect(family.hitTestable(), findsOneWidget, reason: 'unlimited bookings and the family lead, on every phone');
+      expect(tester.getSize(family).height, lessThan(24), reason: 'on one line');
     });
   }
 

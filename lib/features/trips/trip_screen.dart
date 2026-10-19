@@ -9,8 +9,8 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/checklist_row.dart';
 import '../../design/widgets/ledger.dart';
-import '../../design/widgets/pass_badge.dart';
 import '../../design/widgets/plan_gap_row.dart';
+import '../../design/widgets/pass_badge.dart';
 import '../../design/widgets/travi_cameo.dart';
 import '../../design/widgets/trip_hero.dart';
 import '../../domain/domain.dart';
@@ -18,6 +18,7 @@ import '../../logic/card_text.dart';
 import '../../logic/checklist.dart';
 import '../../logic/day_plan.dart';
 import '../../logic/packing.dart';
+import '../../logic/price_text.dart';
 import '../../logic/sharing_pitch.dart';
 import '../../logic/travi_cameos.dart';
 import '../../logic/trip_gaps.dart';
@@ -29,6 +30,7 @@ import '../../state/premium_store.dart';
 import '../ai/trip_looks_offer.dart';
 import '../reminders/reminder_offer.dart';
 import '../booking/booking_actions.dart';
+import '../premium/premium_gate.dart';
 import 'checklist_item_sheet.dart';
 import 'packing_list_screen.dart';
 import 'trip_details_screen.dart';
@@ -168,11 +170,57 @@ class _TripBody extends StatelessWidget {
               TravarySpace.gutter,
               TravarySpace.md,
             ),
-            child: TicketButton(
-              key: const ValueKey('trip-add-booking'),
-              label: 'Add a booking',
-              icon: Icons.add_rounded,
-              onPressed: () => startAddBooking(context, tripId: plan.id, date: addDate, fillGaps: true),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (context.watch<PremiumStore?>() case final premium?)
+                  if (premium.policy.bookingCountShown(plan) case final used?)
+                    _BookingCount(plan: plan, used: used, cap: premium.limits.bookingsPerHoliday),
+                TicketButton(
+                  key: const ValueKey('trip-add-booking'),
+                  label: 'Add a booking',
+                  icon: Icons.add_rounded,
+                  onPressed: () => startAddBooking(context, tripId: plan.id, date: addDate, fillGaps: true),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// A free holiday's bookings counted once few are left before it starts
+/// ("9 of 12 free bookings used"), over "Add a booking". Tapping it opens
+/// the pass desk for this holiday.
+class _BookingCount extends StatelessWidget {
+  const _BookingCount({required this.plan, required this.used, required this.cap});
+
+  final TripPlan plan;
+  final int used;
+  final int cap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ink = TravaryChrome.of(context).colors.ink;
+    return Semantics(
+      button: true,
+      child: InkWell(
+        key: const ValueKey('trip-booking-count'),
+        borderRadius: BorderRadius.circular(TravaryRadius.small),
+        onTap: () =>
+            showPaywall(context, feature: PremiumFeature.everyBooking, tripId: plan.id, source: 'booking_count'),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: kMinInteractiveDimension),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: TravarySpace.sm, vertical: TravarySpace.xs),
+              child: Text(
+                bookingCountText(used, cap),
+                textAlign: TextAlign.center,
+                style: TravaryText.small.copyWith(color: ink),
+              ),
             ),
           ),
         ),
