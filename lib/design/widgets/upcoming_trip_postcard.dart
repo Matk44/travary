@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../domain/pricing.dart';
 import '../../logic/trip_postcard_text.dart';
 import '../art/art_catalog.dart';
 import '../art/art_slots.dart';
@@ -10,6 +11,7 @@ import '../tokens.dart';
 import '../trip_chrome.dart';
 import 'countdown_trip_hero.dart' show CountdownGeometry;
 import 'fitted_place_name.dart';
+import 'pass_badge.dart';
 
 /// A coming trip on the Trips tab: its destination's landscape postcard
 /// with the countdown luggage tag (the same blank tag as Today's) hung on
@@ -26,9 +28,11 @@ class UpcomingTripPostcard extends StatelessWidget {
     required this.onOpen,
     this.tag,
     this.variant = 0,
+    this.pass,
   });
 
   final TripPostcardText text;
+  final OfferKind? pass;
 
   /// The trip's landscape postcard (`TravelStore.tripPostcardFor`).
   final ArtImageRef postcard;
@@ -70,53 +74,66 @@ class UpcomingTripPostcard extends StatelessWidget {
 
         return Semantics(
           button: true,
-          label: text.semanticLabel,
+          label:
+              '${text.semanticLabel}${pass == null ? '' : ', ${pass == OfferKind.tripPass ? 'Holiday Pass' : 'Annual Pass'} active'}',
           excludeSemantics: true,
           onTap: onOpen,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onOpen,
-            child: SizedBox(
-              height: height - rise,
-              child: Stack(
-                // The cord runs up and out past the postcard.
-                clipBehavior: Clip.none,
-                children: [
-                  Positioned(
-                    left: left,
-                    top: -rise,
-                    width: width,
-                    height: height,
-                    child: Image(
-                      key: const ValueKey('trip-postcard-art'),
-                      // Decoded at the size it's shown, once for every row.
-                      image: ResizeImage(artImageProvider(postcard), width: (width * pixels).round()),
-                      // The whole card, deckled edge and all: never cropped.
-                      fit: BoxFit.contain,
-                      excludeFromSemantics: true,
-                      errorBuilder: (context, error, stackTrace) => const _PostcardStandIn(),
+            child: Column(
+              children: [
+                if (pass case final kind?)
+                  Padding(
+                    padding: const EdgeInsets.only(right: TravarySpace.gutter, bottom: TravarySpace.sm),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: PassBadge(kind: kind),
                     ),
                   ),
-                  Positioned(
-                    left: left + width * TripPostcardLayout.tagRight - body.right * tagWidth,
-                    top: -rise + width * TripPostcardLayout.tagTop - body.top * tagHeight,
-                    width: tagWidth,
-                    height: tagHeight,
-                    // The whole stack turns, shell and words together, from
-                    // the eyelet.
-                    child: Transform.rotate(
-                      key: const ValueKey('trip-tag-swing'),
-                      angle: tagDegrees(variant) * math.pi / 180,
-                      alignment: Alignment(eyelet.dx * 2 - 1, eyelet.dy * 2 - 1),
-                      child: HangingTag(
-                        image: tag,
-                        decodeWidth: (tagWidth * pixels).round(),
-                        copy: _TagCopy(text: text, ink: TravaryChrome.of(context).colors.ink),
+                SizedBox(
+                  height: height - rise,
+                  child: Stack(
+                    // The cord runs up and out past the postcard.
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned(
+                        left: left,
+                        top: -rise,
+                        width: width,
+                        height: height,
+                        child: Image(
+                          key: const ValueKey('trip-postcard-art'),
+                          // Decoded at the size it's shown, once for every row.
+                          image: ResizeImage(artImageProvider(postcard), width: (width * pixels).round()),
+                          // The whole card, deckled edge and all: never cropped.
+                          fit: BoxFit.contain,
+                          excludeFromSemantics: true,
+                          errorBuilder: (context, error, stackTrace) => const _PostcardStandIn(),
+                        ),
                       ),
-                    ),
+                      Positioned(
+                        left: left + width * TripPostcardLayout.tagRight - body.right * tagWidth,
+                        top: -rise + width * TripPostcardLayout.tagTop - body.top * tagHeight,
+                        width: tagWidth,
+                        height: tagHeight,
+                        // The whole stack turns, shell and words together, from
+                        // the eyelet.
+                        child: Transform.rotate(
+                          key: const ValueKey('trip-tag-swing'),
+                          angle: tagDegrees(variant) * math.pi / 180,
+                          alignment: Alignment(eyelet.dx * 2 - 1, eyelet.dy * 2 - 1),
+                          child: HangingTag(
+                            image: tag,
+                            decodeWidth: (tagWidth * pixels).round(),
+                            copy: _TagCopy(text: text, ink: TravaryChrome.of(context).colors.ink),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

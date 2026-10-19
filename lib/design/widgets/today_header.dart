@@ -2,10 +2,12 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../domain/pricing.dart';
 import '../art/art_slots.dart';
 import '../cards/card_parts.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
+import 'pass_badge.dart';
 
 /// What the header pill says: the weather when there's a forecast, else the
 /// date or a countdown.
@@ -23,7 +25,15 @@ class HeaderPillInfo {
 /// "Good morning" over "Day 3 of 7 · Orlando", with the pill at the top
 /// right. Tapping the pill or the day line opens the day chooser.
 class TodayHeader extends StatelessWidget {
-  const TodayHeader({super.key, this.title, this.titleLike, required this.subtitle, this.pill, this.onChooseDay});
+  const TodayHeader({
+    super.key,
+    this.title,
+    this.titleLike,
+    required this.subtitle,
+    this.pill,
+    this.pass,
+    this.onChooseDay,
+  });
 
   /// The big heading: the greeting on today's page, the day's name on
   /// another day. Left out on pages that head themselves (a trip's
@@ -37,6 +47,7 @@ class TodayHeader extends StatelessWidget {
   final String? titleLike;
   final String subtitle;
   final HeaderPillInfo? pill;
+  final OfferKind? pass;
   final VoidCallback? onChooseDay;
 
   @override
@@ -83,7 +94,16 @@ class TodayHeader extends StatelessWidget {
               ],
             ),
           ),
-          if (pill != null) ...[const SizedBox(width: TravarySpace.sm), _pill(colors)],
+          if (pill != null || pass != null) ...[
+            const SizedBox(width: TravarySpace.sm),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (pill != null) _pill(colors),
+                if (pass case final kind?) PassBadge(kind: kind),
+              ],
+            ),
+          ],
           const SizedBox(width: TodayLayout.pillInset),
         ],
       ),

@@ -14,6 +14,8 @@ import '../../logic/travi_cameos.dart';
 import '../../logic/trip_plan.dart';
 import '../../logic/trip_postcard_text.dart';
 import '../../state/travel_store.dart';
+import '../../state/premium_store.dart';
+import '../../design/widgets/pass_badge.dart';
 import '../sharing/join_trip_sheet.dart';
 import 'trip_details_sheet.dart';
 import 'trip_screen.dart';
@@ -29,6 +31,7 @@ class TripsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = context.watch<TravelStore>();
+    final passes = context.watch<PremiumStore?>()?.policy;
     final today = store.today;
     final active = <TripPlan>[];
     final upcoming = <TripPlan>[];
@@ -69,6 +72,7 @@ class TripsScreen extends StatelessWidget {
               postcard: art.image,
               tag: store.chromeArtFor(plan).surface(SurfaceSlot.countdownTag),
               variant: stableHash(plan.id),
+              pass: passes?.purchasedPassFor(plan),
               onOpen: () => _openTrip(context, plan),
             )
           else
@@ -190,6 +194,11 @@ class _TripTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        if (context.watch<PremiumStore?>()?.policy.purchasedPassFor(plan) case final kind?)
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: PassBadge(kind: kind),
+                          ),
                         Text(plan.trip.title, style: TravaryText.title, maxLines: 1, overflow: TextOverflow.ellipsis),
                         const SizedBox(height: 2),
                         if (plan.hasDates)

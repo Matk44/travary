@@ -427,6 +427,15 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
 
 ## Premium (Free / Trip Pass / Plus)
 
+- **Purchased pass badges** (19 Oct 2026): `AccessPolicy.purchasedPassFor`
+  identifies active personal purchases (Annual first, else this holiday's
+  Holiday Pass). `PassBadge` shows their generated foil tickets on Today,
+  Trips, the trip page, and the active Annual Pass in Profile. Shared
+  premium access has no product type and is never labelled as a personal
+  purchase. Still artwork and prompts: `docs/mockups/purchased-passes-v1/`;
+  owner selected both original v1 designs on 20 Oct 2026 after comparing
+  four alternatives; final asset paths and Claude handoff are in that
+  folder's README. No motion created or approved by this selection.
 - Rules live in one pure class: `logic/access.dart` (`AccessPolicy`). Plus
   unlocks everything; a Trip Pass unlocks one trip of at most 30 days,
   bought for the dates it had then (`TripPass`, `newTripPassFor`), until 7

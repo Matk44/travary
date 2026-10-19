@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/profile_stationery.dart';
 import '../../design/widgets/profile_travi.dart';
+import '../../design/widgets/pass_badge.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../state/premium_store.dart';
@@ -55,6 +56,11 @@ class PlusCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: TravarySpace.sm),
+                  if (policy.hasPlus)
+                    const Align(
+                      alignment: Alignment.centerRight,
+                      child: PassBadge(kind: OfferKind.plusAnnual),
+                    ),
                   Text(renewal ?? 'A little help for every holiday.', style: TravaryText.profilePassLead),
                   const SizedBox(height: TravarySpace.sm),
                   LayoutBuilder(

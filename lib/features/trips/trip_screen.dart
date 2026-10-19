@@ -9,6 +9,7 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/checklist_row.dart';
 import '../../design/widgets/ledger.dart';
+import '../../design/widgets/pass_badge.dart';
 import '../../design/widgets/plan_gap_row.dart';
 import '../../design/widgets/travi_cameo.dart';
 import '../../design/widgets/trip_hero.dart';
@@ -24,6 +25,7 @@ import '../../logic/trip_hero_text.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/reminders_store.dart';
 import '../../state/travel_store.dart';
+import '../../state/premium_store.dart';
 import '../ai/trip_looks_offer.dart';
 import '../reminders/reminder_offer.dart';
 import '../booking/booking_actions.dart';
@@ -111,6 +113,11 @@ class _TripBody extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
           children: [
+            if (context.watch<PremiumStore?>()?.policy.purchasedPassFor(plan) case final kind?)
+              Align(
+                alignment: Alignment.centerRight,
+                child: PassBadge(kind: kind),
+              ),
             TripHero(
               text: tripHeroTextFor(plan, store.today),
               // The place's own art first (its landscape postcard, else its

@@ -19,6 +19,30 @@ void main() {
 
   AccessPolicy policy(Entitlements e, [DateTime? at]) => AccessPolicy(e, at ?? now);
 
+  test('purchase badges identify active owned passes and never label shared access as a purchase', () {
+    final holiday = newTripPassFor(orlando);
+    final annual = PlusSubscription(expiresAt: now.add(const Duration(days: 10)));
+    final both = Entitlements(plus: annual, tripPasses: {'orlando': holiday});
+    expect(policy(Entitlements.none).purchasedPassFor(orlando), isNull);
+    expect(policy(both).purchasedPassFor(orlando), OfferKind.plusAnnual);
+    expect(policy(both).purchasedPassFor(null), OfferKind.plusAnnual);
+    expect(policy(both, now.add(const Duration(days: 11))).purchasedPassFor(orlando), OfferKind.tripPass);
+    expect(policy(both, now.add(const Duration(days: 12))).purchasedPassFor(orlando), isNull);
+    final justHoliday = Entitlements(tripPasses: {'orlando': holiday});
+    expect(policy(justHoliday).purchasedPassFor(orlando), OfferKind.tripPass);
+    expect(policy(justHoliday).purchasedPassFor(paris), isNull);
+    expect(policy(justHoliday).purchasedPassFor(null), isNull);
+    final shared = TripPlan(
+      Trip.fromJson('shared', {
+        ...trip('shared').toJson(),
+        'premium': {'grantedBy': 'another-traveller', 'until': annual.expiresAt.millisecondsSinceEpoch},
+      }),
+      orlando.bookings,
+    );
+    expect(policy(Entitlements.none).forTrip(shared).allowed, isTrue);
+    expect(policy(Entitlements.none).purchasedPassFor(shared), isNull);
+  });
+
   group('free plan', () {
     test('as many free Smart Imports as the server allows', () {
       final server = RegExp(

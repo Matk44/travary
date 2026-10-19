@@ -27,6 +27,7 @@ import '../../logic/travi_cameos.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/countdown_widget_store.dart';
 import '../../state/travel_store.dart';
+import '../../state/premium_store.dart';
 import '../../state/travi_greetings.dart';
 import '../booking/booking_actions.dart';
 import '../trips/packing_list_screen.dart';
@@ -191,6 +192,7 @@ class _TodayScreenState extends State<TodayScreen> {
           titleLike: day == today ? null : greeting,
           subtitle: _subtitle(store, plan, day),
           pill: _dayPill(store, plan, day),
+          pass: context.watch<PremiumStore?>()?.policy.purchasedPassFor(plan),
           onChooseDay: plan.dayCount > 1 ? () => _chooseDay(context, store, plan, day) : null,
         ),
         _day(context, store, plan, day),
@@ -203,6 +205,7 @@ class _TodayScreenState extends State<TodayScreen> {
           // Between trips the page is today: its forecast or date (the tag
           // has the count). Further on, the tag says it all.
           pill: after == null ? _todayPill(store) : null,
+          pass: context.watch<PremiumStore?>()?.policy.purchasedPassFor(plan),
         ),
         [SliverToBoxAdapter(child: _countdown(context, store, plan))],
       ),
@@ -233,6 +236,7 @@ class _TodayScreenState extends State<TodayScreen> {
                 ? '${undated.trip.title} · dates to come'
                 : (store.hasAnything ? 'No trips coming up' : 'Let\'s plan something'),
             pill: _todayPill(store),
+            pass: context.watch<PremiumStore?>()?.policy.purchasedPassFor(undated),
           ),
         ),
         if (!store.hasAnything)

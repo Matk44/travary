@@ -49,6 +49,14 @@ class AccessPolicy {
 
   bool get hasPlus => entitlements.plus?.activeAt(now) ?? false;
 
+  /// The traveller's active purchased pass to display. A shared trip's
+  /// premium stamp grants access but doesn't say which product was bought.
+  OfferKind? purchasedPassFor(TripPlan? plan) {
+    if (hasPlus) return OfferKind.plusAnnual;
+    if (plan != null && hasTripPass(plan)) return OfferKind.tripPass;
+    return null;
+  }
+
   int get freeSmartImportsLeft => max(0, Pricing.freeSmartImports - entitlements.smartImportsUsed);
 
   /// The Trip Pass bought for [plan], on or not.

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// The foil ticket at a readable size, including its transparent margin.
+abstract final class PassBadgeLayout {
+  static const width = 120.0;
+  static const height = width * 793 / 1983;
+}
+
 /// Colours from the "travel ephemera" mockup (v1): linen desk, cream paper,
 /// navy ink, coral and teal accents.
 abstract final class TravaryColors {
