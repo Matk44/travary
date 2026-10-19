@@ -69,15 +69,6 @@ enum CountdownFolder {
       .appendingPathComponent("CountdownWidget", isDirectory: true)
   }
 
-  /// The app's own bundle, two folders up from this extension's: its
-  /// Flutter assets draw the gallery preview before the app has written
-  /// anything.
-  static var flutterAssets: URL {
-    Bundle.main.bundleURL
-      .deletingLastPathComponent().deletingLastPathComponent()
-      .appendingPathComponent("Frameworks/App.framework/flutter_assets", isDirectory: true)
-  }
-
   static func load() -> CountdownData? {
     guard let url = url?.appendingPathComponent("countdown.json"),
           let bytes = try? Data(contentsOf: url),
@@ -89,31 +80,71 @@ enum CountdownFolder {
 }
 
 /// A file named in `countdown.json` (relative to the widget's folder), or
-/// one of the app's bundled assets for the preview.
+/// one of the small pictures and fonts inside this extension (`SampleArt/`,
+/// made from the app's art and written no larger than the widget draws
+/// them) for the preview before the app has written anything.
 struct ArtFile: Hashable {
   let url: URL
+
+  /// The longest side, in pixels, up to which a picture is read as it is.
+  private static let readAsIs = 1100
+
+  /// Pictures already read in this process, so the days of a timeline that
+  /// draw the same picture share one copy instead of each reading it again.
+  /// Room for about one trip's pictures (a large widget's are about 4 MB):
+  /// holding every trip's made the widget's peak higher, not lower.
+  private static let decoded: NSCache<NSString, UIImage> = {
+    let cache = NSCache<NSString, UIImage>()
+    cache.totalCostLimit = 6 * 1_048_576
+    return cache
+  }()
 
   init?(_ name: String?) {
     guard let name, let folder = CountdownFolder.url else { return nil }
     url = folder.appendingPathComponent(name)
   }
 
-  init(asset: String) {
-    url = CountdownFolder.flutterAssets.appendingPathComponent(asset)
+  /// A file in this extension's own bundle. One that's missing gives a URL
+  /// nothing can be read from, so the widget draws its stand-in.
+  init(sample name: String, _ type: String) {
+    url =
+      Bundle.main.url(forResource: name, withExtension: type)
+      ?? Bundle.main.bundleURL.appendingPathComponent("\(name).\(type)")
   }
 
-  /// Decoded no larger than [pixels] on its longer side: widgets have a
-  /// tight memory limit, and an image larger than the widget isn't drawn.
+  /// Decoded no larger than [pixels] on its longer side. Widgets are stopped
+  /// when they use too much memory (about 30 MB) and a picture costs three
+  /// to four times its decoded size to read, so the app writes each one no
+  /// larger than the largest widget draws it (`CountdownWidgetArtSize`).
   func image(maxPixels: CGFloat) -> UIImage? {
+    let pixels = max(1, Int(maxPixels.rounded(.up)))
+    let whole = url.path as NSString
+    let reduced = "\(url.path)#\(pixels)" as NSString
+    if let kept = Self.decoded.object(forKey: whole) ?? Self.decoded.object(forKey: reduced) { return kept }
     guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return nil }
+    // The app writes each picture no larger than the widget draws it
+    // (900 pixels at most): read as it is, not decoded into a second,
+    // reduced copy first, which costs three times its size while it's made
+    // (a small widget asks for less than that, and gets it scaled down when
+    // it's drawn). Only a larger picture (an older app's, before it writes
+    // again) is reduced as it's read.
+    if let size = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
+      let width = size[kCGImagePropertyPixelWidth] as? Int, let height = size[kCGImagePropertyPixelHeight] as? Int,
+      max(width, height) <= max(pixels, Self.readAsIs), let picture = UIImage(contentsOfFile: url.path)
+    {
+      Self.decoded.setObject(picture, forKey: whole, cost: width * height * 4)
+      return picture
+    }
     let options: [CFString: Any] = [
       kCGImageSourceCreateThumbnailFromImageAlways: true,
       kCGImageSourceCreateThumbnailWithTransform: true,
       kCGImageSourceShouldCacheImmediately: true,
-      kCGImageSourceThumbnailMaxPixelSize: max(1, Int(maxPixels.rounded(.up))),
+      kCGImageSourceThumbnailMaxPixelSize: pixels,
     ]
     guard let image = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary) else { return nil }
-    return UIImage(cgImage: image)
+    let picture = UIImage(cgImage: image)
+    Self.decoded.setObject(picture, forKey: reduced, cost: image.width * image.height * 4)
+    return picture
   }
 }
 

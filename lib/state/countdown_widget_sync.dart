@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 
+import '../data/countdown_widget_art.dart';
 import '../data/countdown_widget_bridge.dart';
 import '../design/art/art_catalog.dart';
 import '../design/art/art_slots.dart';
@@ -124,18 +125,20 @@ class CountdownWidgetSync {
       final folder = await bridge.folder();
       if (folder == null || _disposed) return;
       final keep = <String>{};
-      Future<String?> put(String kind, ArtImageRef? image) async {
+      // [longestSide]: pictures are written no larger than the widget draws
+      // them (see CountdownWidgetArtSize); fonts are copied as they are.
+      Future<String?> put(String kind, ArtImageRef? image, {int? longestSide}) async {
         if (image == null) return null;
-        final name = await _copy(folder, kind, image);
+        final name = await _copy(folder, kind, image, longestSide: longestSide);
         if (name != null) keep.add(name);
         return name;
       }
 
       Future<CountdownWidgetArt> files(_TripArt source) async => (
-        portrait: await put('art', source.portrait),
-        landscape: await put('art', source.landscape),
-        tag: await put('art', source.tag),
-        linen: await put('art', source.linen),
+        portrait: await put('art', source.portrait, longestSide: CountdownWidgetArtSize.portrait),
+        landscape: await put('art', source.landscape, longestSide: CountdownWidgetArtSize.landscape),
+        tag: await put('art', source.tag, longestSide: CountdownWidgetArtSize.tag),
+        linen: await put('art', source.linen, longestSide: CountdownWidgetArtSize.linen),
         ink: source.ink,
         paper: source.paper,
       );
@@ -147,7 +150,13 @@ class CountdownWidgetSync {
         idleArt: await files(idleArt),
         travi: {
           for (final mood in moods)
-            if (await put('travi', BundledArtImage(traviPeeks[mood]!.still.asset)) case final name?) mood: name,
+            if (await put(
+                  'travi',
+                  BundledArtImage(traviPeeks[mood]!.still.asset),
+                  longestSide: CountdownWidgetArtSize.travi,
+                )
+                case final name?)
+              mood: name,
         },
         fonts: {
           for (final entry in fonts.entries)
@@ -185,14 +194,20 @@ class CountdownWidgetSync {
     );
   }
 
-  /// Copies [image] into the widget's folder; null if it can't be read
-  /// (the widget then draws its stand-in).
-  Future<String?> _copy(CountdownWidgetFolder folder, String kind, ArtImageRef image) async {
+  /// Copies [image] into the widget's folder, as a PNG no longer than
+  /// [longestSide] when that's given (a picture the engine can't read is
+  /// copied as it is); null if it can't be read at all (the widget then
+  /// draws its stand-in).
+  Future<String?> _copy(CountdownWidgetFolder folder, String kind, ArtImageRef image, {int? longestSide}) async {
     try {
       final bytes = switch (image) {
         BundledArtImage(:final path) => (await _loadAsset(path)).buffer.asUint8List(),
         FileArtImage(:final path) => await File(path).readAsBytes(),
       };
+      if (longestSide != null) {
+        final shrunk = await shrinkForWidget(bytes, longestSide: longestSide);
+        if (shrunk != null) return folder.put(kind, shrunk, extension: '.png');
+      }
       return folder.put(kind, bytes, extension: p.extension(image.path).toLowerCase());
     } catch (error) {
       if (kDebugMode) debugPrint('Countdown widget: ${image.path} not copied: $error');

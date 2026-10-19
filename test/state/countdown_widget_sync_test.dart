@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:travary/data/countdown_widget_art.dart';
 import 'package:travary/data/countdown_widget_bridge.dart';
 import 'package:travary/data/memory_travel_repository.dart';
 import 'package:travary/domain/domain.dart';
@@ -31,6 +32,13 @@ class _FakeBridge implements CountdownWidgetBridge {
 
   @override
   Future<bool> requestPin() async => false;
+}
+
+/// A PNG's size, read from its header.
+({int width, int height}) pngSize(Uint8List png) {
+  final header = ByteData.sublistView(png);
+  expect(png.sublist(1, 4), 'PNG'.codeUnits);
+  return (width: header.getUint32(16), height: header.getUint32(20));
 }
 
 void main() {
@@ -84,9 +92,26 @@ void main() {
     for (final key in ['portrait', 'landscape', 'tag', 'linen']) {
       expect(File('${root.path}/${art[key]}').existsSync(), isTrue, reason: key);
     }
-    expect(art['portrait'], endsWith('.webp'));
+    // Written no larger than the widget draws them: its memory is small.
+    final limits = {
+      'portrait': CountdownWidgetArtSize.portrait,
+      'landscape': CountdownWidgetArtSize.landscape,
+      'tag': CountdownWidgetArtSize.tag,
+      'linen': CountdownWidgetArtSize.linen,
+    };
+    for (final MapEntry(:key, :value) in limits.entries) {
+      expect(art[key], endsWith('.png'), reason: key);
+      final size = pngSize(File('${root.path}/${art[key]}').readAsBytesSync());
+      expect(size.width > size.height ? size.width : size.height, lessThanOrEqualTo(value), reason: key);
+    }
     final travi = json['travi']! as Map<String, Object?>;
     expect(travi.keys, containsAll(['ready', 'today', 'wave']));
+    for (final still in travi.values) {
+      final name = (still! as Map)['file']! as String;
+      expect(name, endsWith('.png'));
+      final size = pngSize(File('${root.path}/$name').readAsBytesSync());
+      expect(size.width > size.height ? size.width : size.height, lessThanOrEqualTo(CountdownWidgetArtSize.travi));
+    }
     final fonts = json['fonts']! as Map<String, Object?>;
     expect(fonts.keys, ['serif', 'sans', 'sansMedium']);
     for (final name in fonts.values) {

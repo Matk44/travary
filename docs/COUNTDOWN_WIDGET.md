@@ -23,7 +23,8 @@ over at midnight even if Travary isn't opened for weeks.
    costs nothing). It copies the art Today draws with (the trip's
    countdown postcard or the neutral one, its landscape Trips postcard,
    the trip's tag and linen, its palette's ink and paper), Travi's peek
-   stills, and the tag's fonts. Never while "Preview a different time" is on.
+   stills, each as a PNG no larger than the widget draws it (see Memory),
+   and the tag's fonts. Never while "Preview a different time" is on.
 3. `lib/data/countdown_widget_bridge.dart`: the folder (`countdown.json`
    plus `art/`, `travi/`, `fonts/`, files named by their SHA-1 so a changed
    picture gets a new name) and a `reload` call, over the
@@ -89,6 +90,57 @@ small, else large. The tag's words shrink together when they don't fit,
 never one alone, and a place name stays on one line if it fits a little
 smaller, as on the app's tag.
 
+## Memory
+
+A widget is stopped by the phone when its process uses too much memory,
+about 30 MB (Apple doesn't publish the figure). **The simulator never stops
+it**, so a widget can look right there and show blank on a real iPhone: the
+grey placeholder is what the home screen draws when the widget couldn't be
+produced.
+
+An empty widget process already sits at about 14 MB. Reading a picture then
+costs three to four times its decoded size while it's made (the engine
+decodes the whole file and then a reduced copy), and a bundled postcard is
+1122 × 1402. What was measured on the simulator (iPhone 17, iOS 26.1), as
+the extension process's `phys_footprint_peak` from a fresh process
+(`footprint -p <pid>`; kill the process, then reload the widget):
+
+| Render | Before | After |
+|---|---|---|
+| Large widget, real data | 43 MB | 20 MB (with the small and medium widgets rendered too) |
+| The widget gallery's preview (small, medium, large) | 36 MB | 21 MB |
+
+What changed it:
+
+1. **The app writes smaller pictures** (`lib/data/countdown_widget_art.dart`,
+   `CountdownWidgetArtSize`): PNGs, the postcard at most 800 pixels on its
+   longest side, the landscape 900, the tag 600, the linen tile 512, Travi
+   480. The large widget on a 3x phone draws the postcard about 1000 pixels
+   tall, so it's enlarged by about a quarter, which its grain hides (checked
+   side by side on the simulator). Android decodes them with `inSampleSize`
+   as before.
+2. **The widget reads a picture as it is** when it's no larger than 1100
+   pixels (`ArtFile.image`), instead of making a reduced copy first, and
+   keeps one trip's pictures (about 6 MB) so the days of a timeline share
+   them. Holding every trip's made the peak higher, not lower. A larger
+   picture (an older app's, before it writes again) is still reduced as it's
+   read.
+3. **The gallery's preview uses small copies inside the extension**
+   (`ios/CountdownWidget/SampleArt/`: the three fonts and the sample
+   postcard, landscape, tag, linen and Travi), not the app's full-size
+   bundled art, which was also read from the app's own folder. They're made
+   from `assets/art/common/` (`countdown_postcard_anywhere`,
+   `trip_postcard_anywhere`, `countdown_luggage_tag`, `linen`) and
+   `assets/travi/cameos/stills/peek-cheer`, scaled to the same sizes (ImageIO,
+   `CGImageDestination`); they add about 4 MB to the app.
+4. **The linen tile is drawn 341 points across whatever its pixels**
+   (`LinenView`), so the smaller tile is softer, never denser.
+
+Keep it that way: a new picture goes through `CountdownWidgetArtSize`, and a
+change to how the widget draws is measured again, on the largest family
+with all three placed, before it's trusted. The numbers aren't a promise
+about a phone: its baseline differs, so leave room.
+
 ## Travi, and what moves
 
 Widgets can't play the app's films, so Travi rises and ducks as one move
@@ -121,6 +173,10 @@ between his peek stills:
 
 ## Not yet
 
+- The memory figures (see Memory) are from the simulator. Run the widget
+  on a real iPhone (Xcode's debug gauge on the `CountdownWidget` process, or
+  Settings → Privacy & Security → Analytics Data for a `JetsamEvent`) before
+  release.
 - Lock Screen and StandBy (`accessoryRectangular`) are easy additions.
 - Interactive taps need iOS 17; on iOS 15 and 16 there's no widget at all
   (the extension's minimum is 17).
