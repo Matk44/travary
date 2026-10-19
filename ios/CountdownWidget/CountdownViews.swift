@@ -325,8 +325,10 @@ private struct TraviView: View {
   }
 }
 
-/// The trip's woven linen, tiled as behind the app's screens (its 1024-pixel
-/// tile drawn at a third: 341 points).
+/// The trip's woven linen, tiled as behind the app's screens (its tile
+/// drawn 341 points across). The app writes the tile smaller than the 1024
+/// pixels it has in the app, so however many pixels it has, it's drawn 341
+/// points across: a smaller one is a little softer, never denser.
 private struct LinenView: View {
   let face: CountdownFace
   let scale: CGFloat
@@ -335,7 +337,7 @@ private struct LinenView: View {
     ZStack {
       Color(red: 0xEF / 255, green: 0xE8 / 255, blue: 0xDC / 255)
       if let tile = face.linen?.image(maxPixels: 341 * scale), let cgImage = tile.cgImage {
-        Image(uiImage: UIImage(cgImage: cgImage, scale: scale, orientation: .up))
+        Image(uiImage: UIImage(cgImage: cgImage, scale: CGFloat(cgImage.width) / 341, orientation: .up))
           .resizable(resizingMode: .tile)
       }
     }

@@ -79,21 +79,23 @@ struct CountdownFace {
   }
 
   /// Before the app has written anything (the widget gallery on a fresh
-  /// install): a sample countdown on the app's bundled art.
+  /// install): a sample countdown on small copies of the app's art that
+  /// live in this extension (`SampleArt/`), not the app's own full-size
+  /// files: reading those took more memory than a phone allows a widget.
   static let sample = CountdownFace(
     tripId: nil, heading: "NEXT ADVENTURE", eyebrow: "NEXT TRIP", days: "58", daysLabel: "DAYS TO GO",
     place: "Your next trip", dates: "Open Travary to start", shortDates: "Open Travary", label: "Trip countdown",
-    portrait: ArtFile(asset: "assets/art/common/countdown_postcard_anywhere.webp"),
-    landscape: ArtFile(asset: "assets/art/common/trip_postcard_anywhere.webp"),
-    tag: ArtFile(asset: "assets/art/common/countdown_luggage_tag.webp"),
-    linen: ArtFile(asset: "assets/art/common/linen.webp"),
+    portrait: ArtFile(sample: "sample_postcard", "png"),
+    landscape: ArtFile(sample: "sample_landscape", "png"),
+    tag: ArtFile(sample: "sample_tag", "png"),
+    linen: ArtFile(sample: "sample_linen", "jpg"),
     ink: Color(hex: "#1C2A47"), paper: Color(hex: "#F8F4EC"),
     travi: TraviStill(
-      file: ArtFile(asset: "assets/travi/cameos/stills/peek-cheer.webp"),
+      file: ArtFile(sample: "sample_travi", "png"),
       box: CGRect(x: 12, y: 88, width: 464, height: 392), canvas: 480
     ),
-    serif: ArtFile(asset: "assets/widget/fonts/widget_serif_bold.ttf"),
-    sans: ArtFile(asset: "assets/widget/fonts/widget_sans_semibold.ttf"),
-    sansMedium: ArtFile(asset: "assets/widget/fonts/widget_sans_medium.ttf")
+    serif: ArtFile(sample: "widget_serif_bold", "ttf"),
+    sans: ArtFile(sample: "widget_sans_semibold", "ttf"),
+    sansMedium: ArtFile(sample: "widget_sans_medium", "ttf")
   )
 }

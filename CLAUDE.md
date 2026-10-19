@@ -162,7 +162,8 @@ lib/
 │               reminder_scheduler + reminder_settings (local reminders, this phone);
 │               shared_files (files shared in from other apps);
 │               countdown_widget_bridge (the home-screen widget's folder + redraw, and
-│               asking the phone whether it's added or to place it); countdown_widget_settings
+│               asking the phone whether it's added or to place it); countdown_widget_art
+│               (its pictures, written no larger than it draws them); countdown_widget_settings
 │               ("Not now" and "has been added", this phone);
 │               ai_consent_record (the answer about Google's AI, this phone);
 │               auth_service (guest, Apple/Google/email-link sign-in, delete account);
@@ -872,6 +873,16 @@ and `CountdownWidgetSync` writes it, with the trip's postcards, tag, linen,
 ink and Travi's stills, to the widget's folder (iOS: the App Group;
 Android: the app's files) only when it changes. The tag is written in the
 app's own fonts (`assets/widget/fonts/`, the files google_fonts downloads).
+**A widget has about 30 MB** before the phone stops it, which the simulator
+never does (a widget that only ever worked there shows blank on a real
+iPhone): reading a picture costs three to four times its decoded size, so
+the app writes each one as a PNG no larger than the largest widget draws it
+(`CountdownWidgetArtSize`, `shrinkForWidget`; the linen tile is drawn 341
+points across whatever its pixels), and the preview in the widget gallery
+uses small copies inside the extension (`ios/CountdownWidget/SampleArt/`),
+not the app's full-size bundled art. Measure a change with `footprint -p`
+on the extension's process (`phys_footprint_peak`); keep a fresh process's
+peak well under 30 MB (`docs/COUNTDOWN_WIDGET.md`, "Memory").
 Travi pops up each morning until noon and when the tag is tapped (four
 seconds; iOS 17 App Intent, Android a broadcast); a tap elsewhere opens the
 trip (`travary://trip/<id>` → `AppSession.pendingWidgetTarget` → `HomeShell`).
