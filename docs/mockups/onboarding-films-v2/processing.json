@@ -296,26 +296,41 @@
     "held_frames": 0
   },
   "pass-up": {
-    "frames": 65,
-    "seconds": 2.71,
-    "drift_first": 4.8,
-    "drift_last": 7.2,
+    "aligned": {
+      "scale": 0.9792,
+      "dx": 7.0,
+      "dy": 16.6
+    },
+    "frames": 66,
+    "seconds": 2.75,
+    "drift_first": 3.5,
+    "drift_last": 5.4,
     "jumps": [],
     "held_frames": 0
   },
   "pass-toss": {
+    "aligned": {
+      "scale": 0.9792,
+      "dx": 7.1,
+      "dy": 16.6
+    },
     "frames": 43,
     "seconds": 1.79,
-    "drift_first": 5.2,
-    "drift_last": 6.5,
+    "drift_first": 3.8,
+    "drift_last": 5.0,
     "jumps": [],
     "held_frames": 1
   },
   "cheer-idle": {
+    "aligned": {
+      "scale": 0.9792,
+      "dx": 7.1,
+      "dy": 16.6
+    },
     "frames": 34,
     "seconds": 1.42,
-    "drift_first": 5.2,
-    "drift_last": 6.1,
+    "drift_first": 3.8,
+    "drift_last": 4.6,
     "jumps": [],
     "held_frames": 0
   }

@@ -101,6 +101,16 @@ face box on the registered frame for the overlay.
 | `pass-toss` | the "tiny bounce" came out as two hops (1.42–1.71 s and 1.83–2.17 s, wheels up to 120 px off the floor). Cut 1.40–2.21 s (`cut`, `keep` 0–2.6 s fixed): the ticket drops, he cheers on the floor, about 3 frames cross-fade at the join (1.8 s) |
 | `cheer-idle` | hopped three times; looped as a `palindrome` to 0.7 s instead (1.4 s: eyes open, fists pump, back), one small 30 px bounce |
 
+**The pulse, fixed (20 Oct 2026).** The owner saw Travi and the folio zoom
+in and out. Seedance frames every shot about 2.1% tighter than its key
+frames (the folio 288 px tall instead of 282, shifted 6-7 px), so easing
+into the exact key frames at each end zoomed each film in and back out: a
+pulse at every join and every turn of a loop. It's in every film made so
+far, the approved onboarding ones included. `process.py` now lines each
+film up with its key frames, measured on the standing folio (one
+correction per film: scale 0.9792, +7 px, +16.6 px for all three), and the
+folio stays within 1 px of its key-frame place through every join.
+
 Preview of the chain over the Tokyo and Switzerland stages:
 `../onboarding-films-v2/preview-pass-up-pass-toss-cheer-idle-cheer-idle.mp4`.
 If either fix doesn't read well on a phone, a re-roll of that film with

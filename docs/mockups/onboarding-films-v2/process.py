@@ -2,7 +2,11 @@
 """Turns Seedance sources into seamless, keyed onboarding films.
 
 For each film in shots.json:
-1. Decode the source, scaled onto the key frames' camera (941 wide).
+1. Decode the source, scaled onto the key frames' camera (941 wide), and
+   line it up with them: Seedance frames every shot about 2% tighter, which
+   eased into the key frames zoomed each film in and out (a pulse at every
+   join and every turn of a loop). The standing folio, which never moves,
+   measures the difference.
 2. Keep its action (`keep`, seconds) and drop the long hold at the end.
 3. Ease the first and last frames into the EXACT key frames, so every join
    between films (and every loop) is pixel-identical.
@@ -38,6 +42,8 @@ ROOT, FRAMES, (W, H) = SETS['onboarding']
 FPS = 24
 BLEND = 5  # frames eased into the exact key frame at each end
 GREEN = np.array([0, 177, 64], np.float32)
+# The standing folio is left of this column (build_keyframes.py's FOLIO_SPLIT).
+FOLIO_X = 440
 
 
 def decode(path):
@@ -71,9 +77,49 @@ def settles(frames, last):
     return (moving.max() + 1 if len(moving) else 0) / FPS
 
 
+def folio_box(rgb):
+    """The standing folio's left edge, top and bottom, or None."""
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    navy = (b > r + 10) & (r < 90) & (g < 100) & (b > 40)
+    navy[:, FOLIO_X:] = False
+    navy[:H * 3 // 10] = False
+    ys, xs = np.nonzero(navy)
+    if len(xs) < 500:
+        return None
+    return np.array([np.percentile(xs, 0.5), np.percentile(ys, 0.5), np.percentile(ys, 99.5)])
+
+
+def align(frames, first, last):
+    """[frames] scaled and moved onto the key frames' camera, measured on the
+    standing folio (one correction for the whole film, so nothing jitters),
+    and how. Left as they are when the folio isn't standing in its place at
+    both ends (a film where Travi carries it) or there's no folio (cameos)."""
+    if (W, H) != (941, 1672):
+        return frames, None
+    want, other = folio_box(first), folio_box(last)
+    if want is None or other is None or np.abs(want - other).max() > 3:
+        return frames, None
+    boxes = np.array([b for b in map(folio_box, frames) if b is not None])
+    if not len(boxes):
+        return frames, None
+    # Frames where something passes in front of it (a hand reaching down) are left out.
+    heights = boxes[:, 2] - boxes[:, 1]
+    got = np.median(boxes[np.abs(heights - np.median(heights)) < 0.01 * np.median(heights)], axis=0)
+    s = (want[2] - want[1]) / (got[2] - got[1])
+    dx, dy = want[0] - got[0] * s, want[2] - got[2] * s
+    fill = tuple(int(c) for c in GREEN)
+    out = np.empty_like(frames)
+    for i, frame in enumerate(frames):
+        im = Image.fromarray(frame.astype(np.uint8)).transform(
+            (W, H), Image.AFFINE, (1 / s, 0, -dx / s, 0, 1 / s, -dy / s), Image.BICUBIC, fillcolor=fill)
+        out[i] = np.asarray(im, np.float32)
+    return out, {'scale': round(float(s), 4), 'dx': round(float(dx), 1), 'dy': round(float(dy), 1)}
+
+
 def film(name, shot):
     frames = decode(ROOT / 'source' / f'{name}.mp4')
     first, last = still(shot['from']), still(shot['to'])
+    frames, aligned = align(frames, first, last)
     # Keep the action and a breath after it ('keep' overrides).
     if shot.get('loop'):
         start, end = 0, len(frames)
@@ -101,6 +147,7 @@ def film(name, shot):
         fades.append((round(a * FPS), round(b * FPS)))
     n = len(frames)
     report = {
+        'aligned': aligned,
         'frames': n,
         'seconds': round(n / FPS, 2),
         'drift_first': round(float(np.abs(frames[0] - first).mean()), 1),
