@@ -118,6 +118,34 @@ void main() {
     });
   }
 
+  for (final (size, bottom) in phones) {
+    final name = 'paywall_confirmed_${size.width.toInt()}x${size.height.toInt()}';
+    testWidgets(
+      'a ${size.width.toInt()} × ${size.height.toInt()} phone sees a bought pass confirmed without scrolling',
+      (tester) async {
+        await pump(tester, size, bottom, name: '${name}_desk');
+        await tester.tap(find.byKey(const ValueKey('onboarding-pass-buy')));
+        await tester.pumpAndSettle();
+        expect(find.byKey(const ValueKey('pass-confirmed-badge')), findsOneWidget);
+        expect(tester.getRect(find.byType(TraviPlayer)), Rect.fromLTWH(0, 0, size.width, size.width * 16 / 9));
+        expect(tester.takeException(), isNull);
+        if (TravaryText.serifFamily == null) return;
+        final scroll = tester.state<ScrollableState>(
+          find.descendant(of: find.byKey(const ValueKey('onboarding-scroll')), matching: find.byType(Scrollable)),
+        );
+        expect(scroll.position.maxScrollExtent, 0, reason: 'nothing to scroll');
+        for (final key in ['pass-confirmed-badge', 'pass-confirmed-coverage', 'pass-confirmed-done']) {
+          expect(
+            tester.getRect(find.byKey(ValueKey(key))).bottom,
+            lessThanOrEqualTo(size.height - bottom),
+            reason: key,
+          );
+          expect(find.byKey(ValueKey(key)).hitTestable(), findsOneWidget, reason: key);
+        }
+      },
+    );
+  }
+
   testWidgets('an iPhone SE scrolls to the button rather than covering Travi', (tester) async {
     await pump(tester, const Size(375, 667), 0, name: 'paywall_375x667');
     expect(tester.getRect(find.byType(TraviPlayer)), Rect.fromLTWH(0, 0, 375, 375 * 16 / 9));

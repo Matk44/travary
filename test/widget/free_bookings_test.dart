@@ -152,6 +152,28 @@ void main() {
       expect(travel.plan('lisbon')!.bookings, hasLength(12), reason: 'nothing saved without a pass');
     });
 
+    testWidgets('buying a Holiday Pass there confirms it, and leaving the desk saves the booking', (tester) async {
+      await pump(tester, form(BookingKind.dining), bookings: 12);
+      await add(tester, BookingKind.dining, 'Time Out Market');
+      await tester.ensureVisible(find.byKey(const ValueKey('onboarding-pass-buy')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('onboarding-pass-buy')));
+      await tester.pumpAndSettle();
+
+      // The desk confirms the pass: its badge, the holiday it's on.
+      expect(find.byKey(const ValueKey('pass-confirmed-badge')), findsOneWidget);
+      expect(find.text('Enjoy your\nholiday!', findRichText: true), findsOneWidget);
+      expect(find.text('1–8 Nov · covered until 15 Nov 2026'), findsOneWidget);
+      expect(travel.plan('lisbon')!.bookings, hasLength(12), reason: 'saved once they leave the desk');
+
+      // Even closing it counts as bought: the booking they were adding saves.
+      await tester.tap(find.byKey(const ValueKey('paywall-close')));
+      await tester.pumpAndSettle();
+      expect(find.byType(PaywallScreen), findsNothing);
+      expect(find.byType(EditBookingScreen), findsNothing);
+      expect(travel.plan('lisbon')!.bookings.where((b) => b.title == 'Time Out Market'), hasLength(1));
+    });
+
     testWidgets('a note always saves', (tester) async {
       await pump(tester, form(BookingKind.note), bookings: 12);
       await add(tester, BookingKind.note, 'Bring the adapter');

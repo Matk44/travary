@@ -501,6 +501,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('onboarding-pass-buy')));
       await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('pass-confirmed-done')));
+      await tester.pumpAndSettle();
 
       expect(find.byType(PaywallScreen), findsNothing);
       expect(service.calls, 2);

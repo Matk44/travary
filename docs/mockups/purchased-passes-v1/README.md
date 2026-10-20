@@ -19,7 +19,8 @@ WebP copies use q88, exact alpha, original dimensions. Never edit the compressed
 
 - Today: below the date/weather pill, to the right of the holiday subtitle.
 - Trips: above the postcard's top-right edge; plain rows carry the badge above their title.
-- Trip page: above the hero at the right.
+- Trip page: tucked onto the postcard's top-left corner, a little askew (`TripHero.badge`, 20 Oct 2026; it was above the hero at the right, on a row of its own).
+- Purchase confirmation: the pass desk shows the bought pass large (up to 250 pt) once the store confirms; see `../pass-purchase-motion-v1/README.md`.
 - Profile: active Annual Pass artwork alongside the subscription information.
 - These identify the signed-in traveller's active purchases. Annual takes priority over Holiday when both are active; Holiday only appears on its own trip and follows the existing pass date/grace rules.
 - A shared trip's server premium stamp has no product type. It continues to grant access but is not labelled as an Annual or Holiday purchase by this UI.

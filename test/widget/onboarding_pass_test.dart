@@ -11,6 +11,7 @@ import 'package:travary/design/widgets/onboarding_pass_desk.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/onboarding/onboarding_pass_screen.dart';
 import 'package:travary/logic/destinations.dart';
+import 'package:travary/logic/price_text.dart';
 import 'package:travary/state/premium_store.dart';
 import 'package:travary/state/travel_store.dart';
 
@@ -159,6 +160,15 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  /// A pass just bought: the desk confirms it (its badge, what it covers)
+  /// and hands back only when asked.
+  Future<void> carryOn(WidgetTester tester) async {
+    expect(result, isNull, reason: 'the desk confirms the pass before handing back');
+    expect(find.byKey(const ValueKey('pass-confirmed-badge')), findsOneWidget);
+    expect(find.byType(OnboardingPaperPass), findsNothing);
+    await tap(tester, 'pass-confirmed-done');
+  }
+
   testWidgets('live offers and selected Holiday Pass purchase cover the actual saved holiday', (tester) async {
     await pump(tester);
     expect(find.text(r'$19.25 once'), findsOneWidget);
@@ -168,6 +178,9 @@ void main() {
     expect(find.textContaining('Flight alerts'), findsNothing);
     expect(find.text('Test store: nothing is charged.'), findsOneWidget);
     await tap(tester, 'onboarding-pass-buy');
+    expect(find.text('Enjoy your\nholiday!', findRichText: true), findsOneWidget);
+    expect(find.text('8–17 Nov · covered until 24 Nov 2026'), findsOneWidget);
+    await carryOn(tester);
     expect(result, OnboardingPassOutcome.upgraded);
     expect(purchases.calls.single.offer.productId, 'holiday-live');
     expect(purchases.calls.single.pass, TripPass(tripId: 'holiday', start: d(11, 8), end: d(11, 17)));
@@ -208,6 +221,8 @@ void main() {
     expect(tester.widget<OnboardingPaperPass>(find.byKey(const ValueKey('onboarding-pass-annual'))).onTap, isNull);
     purchases.waiting!.complete();
     await tester.pumpAndSettle();
+    expect(find.text('Every holiday,\nsorted!', findRichText: true), findsOneWidget);
+    await carryOn(tester);
     expect(result, OnboardingPassOutcome.upgraded);
   });
 
@@ -240,6 +255,7 @@ void main() {
     expect(purchases.calls.single.offer.productId, 'new-holiday-product');
     expect(purchases.calls.single.offer.packageId, 'new-holiday-package');
     expect(purchases.calls.single.offer.offeringId, 'summer');
+    await carryOn(tester);
     expect(result, OnboardingPassOutcome.upgraded);
   });
 
@@ -285,11 +301,29 @@ void main() {
       tripPasses: {'holiday': TripPass(tripId: 'holiday', start: d(11, 8), end: d(11, 17))},
     );
     await tap(tester, 'onboarding-pass-restore');
-    expect(find.byType(OnboardingPaperPass), findsNothing);
-    expect(find.text('Your pass is restored. Your holiday is ready.'), findsOneWidget);
-    await tap(tester, 'onboarding-pass-buy');
+    // Their own pass for this holiday: confirmed like one just bought.
+    expect(find.text('Welcome\nback!', findRichText: true), findsOneWidget);
+    await carryOn(tester);
     expect(result, OnboardingPassOutcome.upgraded);
     expect(purchases.calls, isEmpty);
+  });
+
+  testWidgets('a payment the server hasn\'t recorded yet is never celebrated as a pass', (tester) async {
+    await pump(tester);
+    purchases.outcome = PurchaseOutcome.pending;
+    await tap(tester, 'onboarding-pass-buy');
+    expect(find.byKey(const ValueKey('pass-confirmed-badge')), findsNothing);
+    expect(find.text(passPendingText), findsOneWidget);
+    expect(find.byKey(const ValueKey('onboarding-pass-free')), findsOneWidget);
+    expect(result, isNull);
+  });
+
+  testWidgets('once a pass is bought, Back hands back as bought too', (tester) async {
+    await pump(tester);
+    await tap(tester, 'onboarding-pass-buy');
+    expect(find.byKey(const ValueKey('pass-confirmed-badge')), findsOneWidget);
+    await tap(tester, 'onboarding-pass-back');
+    expect(result, OnboardingPassOutcome.upgraded);
   });
 
   testWidgets('a restore failure stays actionable', (tester) async {
@@ -328,6 +362,7 @@ void main() {
     expect(find.byKey(const ValueKey('onboarding-pass-holiday')), findsOneWidget);
     expect(find.text(r'$19.25 once'), findsOneWidget);
     await tap(tester, 'onboarding-pass-buy');
+    await carryOn(tester);
     expect(result, OnboardingPassOutcome.upgraded);
     expect(purchases.calls.single.pass, TripPass(tripId: 'holiday', start: d(11, 8), end: d(11, 15)));
     expect(repository.bookings, isEmpty);
@@ -339,6 +374,7 @@ void main() {
     expect(find.byKey(const ValueKey('onboarding-pass-holiday')), findsNothing);
     expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsOneWidget);
     await tap(tester, 'onboarding-pass-buy');
+    await carryOn(tester);
     expect(result, OnboardingPassOutcome.upgraded);
     expect(purchases.calls.single.offer.kind, OfferKind.plusAnnual);
     expect(purchases.calls.single.pass, isNull);

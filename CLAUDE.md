@@ -141,6 +141,7 @@ lib/
 │               trip_window (the days a trip's bookings may use, where a booking
 │               goes: placeBooking, trip dates that leave bookings out, overlaps),
 │               checklist ("Before you go": order, wording, ideas),
+│               pass_confirmation (a bought pass confirmed: the stage's words, what it covers),
 │               ai_consent (asking before anything goes to Google's Gemini: wording, offers),
 │               packing (the packing list: wording, ideas, which list to reuse),
 │               countdown_widget (the home-screen widget's every day ahead, worded),
@@ -439,12 +440,28 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
 - **Purchased pass badges** (19 Oct 2026): `AccessPolicy.purchasedPassFor`
   identifies active personal purchases (Annual first, else this holiday's
   Holiday Pass). `PassBadge` shows their generated foil tickets on Today,
-  Trips, the trip page, and the active Annual Pass in Profile. Shared
-  premium access has no product type and is never labelled as a personal
-  purchase. Still artwork and prompts: `docs/mockups/purchased-passes-v1/`;
-  owner selected both original v1 designs on 20 Oct 2026 after comparing
-  four alternatives; final asset paths and Claude handoff are in that
-  folder's README. No motion created or approved by this selection.
+  Trips, the trip page (tucked onto the postcard's top-left corner,
+  `TripHero.badge`, read out with the trip), and the active Annual Pass in
+  Profile. Shared premium access has no product type and is never labelled
+  as a personal purchase. Still artwork and prompts:
+  `docs/mockups/purchased-passes-v1/`; owner selected both original v1
+  designs on 20 Oct 2026 after comparing four alternatives.
+- **A bought pass is confirmed** (20 Oct 2026): once the store confirms,
+  the pass desk (`OnboardingPassPanel`, on the paywall and both onboarding
+  desks) stamps the pass's badge onto its floor over what it covers
+  (`passCoverageFor`: the holiday and "covered until", or every holiday and
+  when the Annual Pass renews), the stage's words change
+  (`passConfirmedWords`: "Enjoy your holiday!", "Every holiday, sorted!", a
+  restore "Welcome back!") and Travi cheers (`traviCuesForPassConfirmed`,
+  the existing `cheer` film). One button hands back ("Carry on" on the
+  paywall, "Open my holiday" in onboarding); Close and Back after paying
+  also count as bought, so the gated action goes ahead. A restore of their
+  own pass for this holiday is confirmed the same way; a payment the server
+  hasn't recorded (`pending`) keeps "Payment received…" and is never
+  celebrated. Analytics `pass_confirmed` (kind, restored, source). The
+  animated version (a new `pass-hold` key frame, `pass-up` and `pass-toss`
+  films, the badge handed off as live UI) is planned, not made:
+  `docs/mockups/pass-purchase-motion-v1/README.md`.
 - Rules live in one pure class: `logic/access.dart` (`AccessPolicy`). Plus
   unlocks everything; a Trip Pass unlocks one trip of at most 30 days,
   bought for the dates it had then (`TripPass`, `newTripPassFor`), until 7

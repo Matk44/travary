@@ -22,7 +22,16 @@ import 'upcoming_trip_postcard.dart';
 /// postcard, cropped to landscape inside a plain paper print. Tapping the tag
 /// edits the trip.
 class TripHero extends StatelessWidget {
-  const TripHero({super.key, required this.text, this.postcard, this.portrait, this.tag, this.onTag, this.variant = 0});
+  const TripHero({
+    super.key,
+    required this.text,
+    this.postcard,
+    this.portrait,
+    this.tag,
+    this.onTag,
+    this.variant = 0,
+    this.badge,
+  });
 
   final TripHeroText text;
 
@@ -40,6 +49,15 @@ class TripHero extends StatelessWidget {
 
   /// Stable per trip: tilts the tag a little more or less.
   final int variant;
+
+  /// The traveller's pass on this trip (`PassBadge`), tucked under the
+  /// postcard's top-left corner, a little askew, so it's plainly this
+  /// trip's. Screen readers hear it with the trip ("…, Holiday Pass
+  /// active").
+  final Widget? badge;
+
+  /// How far the badge leans, in radians.
+  static const _badgeAngle = -0.07;
 
   /// Room above the postcard for the tag's cord, so it doesn't run into
   /// the top bar, and the tag hung a little lower than on the Trips tab.
@@ -74,7 +92,7 @@ class TripHero extends StatelessWidget {
           picture = const _PlainPrint();
         }
 
-        return Semantics(
+        final hero = Semantics(
           label: text.semanticLabel,
           button: onTag != null,
           onTap: onTag,
@@ -108,6 +126,21 @@ class TripHero extends StatelessWidget {
               ],
             ),
           ),
+        );
+        final pass = badge;
+        if (pass == null) return hero;
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            hero,
+            // Half up in the cord's room, half over the card's corner.
+            Positioned(
+              key: const ValueKey('trip-hero-badge'),
+              left: left - 4,
+              top: _cordRoom - PassBadgeLayout.height * .55,
+              child: Transform.rotate(angle: _badgeAngle, child: pass),
+            ),
+          ],
         );
       },
     );

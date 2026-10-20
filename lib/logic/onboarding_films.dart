@@ -87,6 +87,10 @@ List<TraviCue> traviCuesFor(
   OnboardingBeat.sendoff => [_cue(TraviPose.wave), _cue(TraviPose.folioFull)],
 };
 
+/// What Travi does once a pass is bought (or restored) on the pass desk:
+/// he cheers, from the desk's present (the `cheer` film).
+List<TraviCue> traviCuesForPassConfirmed() => [_cue(TraviPose.cheer)];
+
 /// The films from [from] to [to], fewest first; empty when he's there, and
 /// null when no chain of films connects them (he dissolves instead).
 List<TraviFilm>? traviRoute(TraviPose from, TraviPose to, {List<TraviFilm> films = traviFilms}) {

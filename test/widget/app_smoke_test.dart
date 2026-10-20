@@ -159,6 +159,10 @@ void main() {
       await tapDesk(tester, 'onboarding-pass-annual');
       expect(find.text('Get Annual Pass'), findsOneWidget);
       await tapDesk(tester, 'onboarding-pass-buy');
+      // The desk confirms the pass, Travi cheering, then hands back.
+      expect(find.text('Every holiday,\nsorted!', findRichText: true), findsOneWidget);
+      expect(find.byKey(const ValueKey('pass-confirmed-badge')), findsOneWidget);
+      await tapDesk(tester, 'pass-confirmed-done');
       expect(find.byType(PaywallScreen), findsNothing);
       // Then the OK for Google's AI, then the file.
       await tester.tap(find.byKey(const ValueKey('ai-consent-allow')));
@@ -180,6 +184,10 @@ void main() {
       expect(find.textContaining('Holiday Pass is one payment of'), findsOneWidget);
 
       await tapDesk(tester, 'onboarding-pass-buy');
+      expect(find.text('Enjoy your\nholiday!', findRichText: true), findsOneWidget);
+      expect(find.text('Orlando'), findsOneWidget);
+      expect(find.text('12–19 Oct · covered until 26 Oct 2026'), findsOneWidget);
+      await tapDesk(tester, 'pass-confirmed-done');
       final premium = Provider.of<PremiumStore>(tester.element(find.byType(HomeShell)), listen: false);
       final pass = premium.entitlements.tripPasses.values.single;
       expect((pass.start, pass.end), (LocalDate(2026, 10, 12), LocalDate(2026, 10, 19)));

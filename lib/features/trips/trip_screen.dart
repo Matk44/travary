@@ -115,11 +115,6 @@ class _TripBody extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
           children: [
-            if (context.watch<PremiumStore?>()?.policy.purchasedPassFor(plan) case final kind?)
-              Align(
-                alignment: Alignment.centerRight,
-                child: PassBadge(kind: kind),
-              ),
             TripHero(
               text: tripHeroTextFor(plan, store.today),
               // The place's own art first (its landscape postcard, else its
@@ -132,6 +127,10 @@ class _TripBody extends StatelessWidget {
               tag: chrome.slots.surface(SurfaceSlot.countdownTag),
               variant: plan.id.hashCode,
               onTag: () => editTripDetails(context, plan),
+              badge: switch (context.watch<PremiumStore?>()?.policy.purchasedPassFor(plan)) {
+                final kind? => PassBadge(kind: kind),
+                null => null,
+              },
             ),
             const SizedBox(height: TravarySpace.lg),
             if (celebrate)

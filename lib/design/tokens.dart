@@ -4,7 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 /// The foil ticket at a readable size, including its transparent margin.
 abstract final class PassBadgeLayout {
   static const width = 120.0;
-  static const height = width * 793 / 1983;
+  static const height = width / aspect;
+
+  /// The foil tickets' shape (1983 × 793).
+  static const aspect = 1983 / 793;
+
+  /// The widest the pass desk shows a just-bought pass.
+  static const confirmedWidth = 250.0;
 }
 
 /// Colours from the "travel ephemera" mockup (v1): linen desk, cream paper,

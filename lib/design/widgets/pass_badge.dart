@@ -6,9 +6,12 @@ import '../tokens.dart';
 /// A purchased pass as a physical foil ticket. The accessible name stays
 /// live even though the ticket's lettering is part of its artwork.
 class PassBadge extends StatelessWidget {
-  const PassBadge({super.key, required this.kind});
+  const PassBadge({super.key, required this.kind, this.width = PassBadgeLayout.width});
 
   final OfferKind kind;
+
+  /// Its width; the height keeps the ticket's shape ([PassBadgeLayout.aspect]).
+  final double width;
 
   String get label => kind == OfferKind.tripPass ? 'Holiday Pass' : 'Annual Pass';
 
@@ -23,8 +26,8 @@ class PassBadge extends StatelessWidget {
         excludeFromSemantics: true,
         child: Image.asset(
           'assets/art/common/${holiday ? 'holiday' : 'annual'}_pass_badge_v1.webp',
-          width: PassBadgeLayout.width,
-          height: PassBadgeLayout.height,
+          width: width,
+          height: width / PassBadgeLayout.aspect,
           fit: BoxFit.contain,
           excludeFromSemantics: true,
         ),

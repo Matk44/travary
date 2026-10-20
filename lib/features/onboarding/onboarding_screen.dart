@@ -22,6 +22,7 @@ import '../../logic/day_plan.dart';
 import '../../logic/onboarding_art.dart';
 import '../../logic/onboarding_films.dart';
 import '../../logic/onboarding_journey.dart';
+import '../../logic/pass_confirmation.dart';
 import '../../logic/onboarding_rules.dart';
 import '../../logic/trip_plan.dart';
 import '../../state/analytics.dart';
@@ -86,6 +87,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool _dayPending = false;
   bool _fresh = false;
   bool _bought = false;
+
+  /// A pass just bought or restored at the desk: it says so (Travi cheers)
+  /// before the holiday opens.
+  PassConfirmation? _confirmed;
   TraviPose? _awaiting;
   Completer<void>? _arrival;
   Timer? _sendoff;
@@ -460,14 +465,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final beat = _beatFor(draft, saved);
     final destination = plan?.trip.destination ?? draft.destination;
     final countdown = plan == null ? null : countdownTextFor(plan, travel.today);
-    final words = onboardingWordsFor(
-      beat,
-      place: destination?.name,
-      emailSent: session?.emailLinkSentTo != null,
-      covered: covered,
-      problem: _misread,
-      day: saved == null ? null : plan?.dayNumber(saved.startDate),
-    );
+    final confirmed = beat == OnboardingBeat.desk ? _confirmed : null;
+    final words = confirmed != null
+        ? passConfirmedWords(confirmed.kind, restored: confirmed.restored)
+        : onboardingWordsFor(
+            beat,
+            place: destination?.name,
+            emailSent: session?.emailLinkSentTo != null,
+            covered: covered,
+            problem: _misread,
+            day: saved == null ? null : plan?.dayNumber(saved.startDate),
+          );
     final arrival = beat == OnboardingBeat.arrival;
     final tagBeats = const {OnboardingBeat.booking, OnboardingBeat.reading, OnboardingBeat.misread};
     final stepsBack = _stepsBack(draft, saved);
@@ -475,7 +483,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       canPop: _offer == null && !stepsBack,
       onPopInvokedWithResult: (popped, _) {
         if (popped) return;
-        if (_offer == _Offer.account || _offer == _Offer.desk) {
+        if (confirmed != null) {
+          // Paid for: Back goes on into the holiday, as the button does.
+          _passChosen(OnboardingPassOutcome.upgraded);
+        } else if (_offer == _Offer.account || _offer == _Offer.desk) {
           _back();
         } else if (stepsBack) {
           _stepBack();
@@ -486,6 +497,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           stage: arrival ? onboardingWorkshopStage : onboardingStage(destination),
           cues: _folioUp
               ? const [(pose: TraviPose.folioFull, hold: Duration.zero, direct: false)]
+              : confirmed != null
+              ? traviCuesForPassConfirmed()
               : traviCuesFor(beat, bought: _bought, fresh: _fresh, signInSkipped: _signInSkipped),
           start: _rollIn ? TraviPose.empty : null,
           // He holds still under sheets and screens.
@@ -508,7 +521,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           },
         ),
         words: words,
-        wordsKey: '$beat-${session?.emailLinkSentTo}-$_misread',
+        wordsKey: '$beat-${session?.emailLinkSentTo}-$_misread-${confirmed != null}',
         floorKey: beat == OnboardingBeat.email ? OnboardingBeat.account : beat,
         snugFloor: beat == OnboardingBeat.desk,
         onBack: _offer == _Offer.account || _offer == _Offer.desk ? _back : null,
@@ -739,6 +752,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           key: const ValueKey('onboarding-desk'),
           tripId: saved?.tripId ?? draft.tripId,
           bookingId: saved?.id,
+          onConfirmed: (confirmation) => setState(() => _confirmed = confirmation),
           onDone: _passChosen,
         );
       case OnboardingBeat.sendoff:
