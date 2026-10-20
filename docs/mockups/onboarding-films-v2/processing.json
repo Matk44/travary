@@ -294,5 +294,29 @@
     "drift_last": 6.5,
     "jumps": [],
     "held_frames": 0
+  },
+  "pass-up": {
+    "frames": 65,
+    "seconds": 2.71,
+    "drift_first": 4.8,
+    "drift_last": 7.2,
+    "jumps": [],
+    "held_frames": 0
+  },
+  "pass-toss": {
+    "frames": 43,
+    "seconds": 1.79,
+    "drift_first": 5.2,
+    "drift_last": 6.5,
+    "jumps": [],
+    "held_frames": 1
+  },
+  "cheer-idle": {
+    "frames": 34,
+    "seconds": 1.42,
+    "drift_first": 5.2,
+    "drift_last": 6.1,
+    "jumps": [],
+    "held_frames": 0
   }
 }

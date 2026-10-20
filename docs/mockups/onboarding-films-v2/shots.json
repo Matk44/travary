@@ -421,10 +421,17 @@
       "seed": 410482,
       "keep": [
         0.0,
-        2.2
+        2.6
       ],
+      "keep_fixed": true,
       "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame: the blank ticket held up level with both hands.\n0.2-0.6s: with a quick, happy flick he sends the ticket straight down and toward the viewer: it leaves his hands and drops out of the bottom of the frame, gone by 0.6s.\n0.6-1.6s: both paper fists punch up high in a joyful cheer, eyes squeezed shut in a huge grin, a tiny bounce, wheels landing back on the floor line: the exact last frame.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
-      "handoff": 0.45
+      "handoff": 0.45,
+      "cut": [
+        [
+          1.4,
+          2.21
+        ]
+      ]
     },
     "cheer-idle": {
       "from": "14-cheer",
@@ -435,7 +442,8 @@
         3.0
       ],
       "loop": true,
-      "prompt": "A gentle, seamless idle loop that starts and ends on the EXACT same supplied frame. Travi cheers with both fists up: a small happy bounce on his wheels at about 1s and one soft blink at about 2s. By 2.6s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, no new props."
+      "prompt": "A gentle, seamless idle loop that starts and ends on the EXACT same supplied frame. Travi cheers with both fists up: a small happy bounce on his wheels at about 1s and one soft blink at about 2s. By 2.6s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, no new props.",
+      "palindrome": 0.7
     }
   }
 }

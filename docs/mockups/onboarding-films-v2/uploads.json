@@ -83,5 +83,10 @@
     "source": "docs/mockups/onboarding-keyframes-v1/registered/16-oops.png",
     "sha256": "4567386332eb31e9e919ddd109ecc598c3214130c86fb1286f1ac9a1c763a29f",
     "image_path": "1791551007637-fac1cc5da71132ed.png"
+  },
+  "18-pass-hold": {
+    "source": "docs/mockups/onboarding-keyframes-v1/registered/18-pass-hold.png",
+    "sha256": "b4d284f74202dc6af03ae8caec65424aac89935e0cbebabac0a75c2f4192b36e",
+    "image_path": "1792488024941-048e2ecbdd126069.png"
   }
 }

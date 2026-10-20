@@ -426,5 +426,38 @@
     "updated_at": 1791618000709,
     "source": "source/folio-open-idle-b.mp4",
     "source_sha256": "4aa956a8c8581573570c98063b29e5349f0eccfce81cb8255e0d6fbf11882e46"
+  },
+  "pass-up": {
+    "id": "2692f6b79fdfd710",
+    "task_id": "20qtqjnk7drmr0d1b2e9f3kgrr",
+    "status": "completed",
+    "seed": 410481,
+    "local_path": "1792488175018-ba99f895a9a4abb9.mp4",
+    "error": null,
+    "updated_at": 1792488175021,
+    "source": "source/pass-up.mp4",
+    "source_sha256": "edc192fa2657239956cbab6487c5838fe03b8db9dfa430f68633056095ae9c53"
+  },
+  "pass-toss": {
+    "id": "d004e9e0c6e81d3f",
+    "task_id": "nf5m3k5pkdrmt0d1b2ebvtezg8",
+    "status": "completed",
+    "seed": 410482,
+    "local_path": "1792488207068-0b7176c1dc4753e9.mp4",
+    "error": null,
+    "updated_at": 1792488207069,
+    "source": "source/pass-toss.mp4",
+    "source_sha256": "480617df79e8cd3597c00ceb92cf79163e11d6995f24f8207a1d5341768d6548"
+  },
+  "cheer-idle": {
+    "id": "a4e01ec3bdfbce50",
+    "task_id": "2jf1t4nt3hrmy0d1b2ea74chnm",
+    "status": "completed",
+    "seed": 410483,
+    "local_path": "1792488238508-4aaa4a22e29693da.mp4",
+    "error": null,
+    "updated_at": 1792488238510,
+    "source": "source/cheer-idle.mp4",
+    "source_sha256": "01378fcf7e43d5e201a4c83b61544b7ac7a5f94edb0b2999acd480cbda2d47f9"
   }
 }

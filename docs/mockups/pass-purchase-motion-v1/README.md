@@ -1,7 +1,7 @@
 # Pass purchase: confirmation motion plan (v1)
 
-20 October 2026. **Status: frame 18 made and registered; films written,
-not submitted.** The static confirmation is built and shipping (below).
+20 October 2026. **Status: films made and processed, awaiting the owner's
+review** before `export.py` and the app integration. The static confirmation is built and shipping (below).
 Frame 18 came from ChatGPT on 20 October ([still](frame-18-pass-hold.png),
 [prompts](PROMPTS.md), [provenance](generation.json)), reviewed and
 registered the same day (below). The films wait for the owner's go-ahead.
@@ -92,6 +92,19 @@ the shared camera (`registered/pass-hold.png`), then measure the ticket's
 face box on the registered frame for the overlay.
 
 ### Films for Scene Studio
+
+**Made 20 Oct 2026** (Scene Studio, Seedance 2.0) and processed:
+
+| Film | Result |
+|---|---|
+| `pass-up` | clean: he turns from presenting, reaches down, lifts the blank ticket and holds it up level (2.7 s, no jumps) |
+| `pass-toss` | the "tiny bounce" came out as two hops (1.42–1.71 s and 1.83–2.17 s, wheels up to 120 px off the floor). Cut 1.40–2.21 s (`cut`, `keep` 0–2.6 s fixed): the ticket drops, he cheers on the floor, about 3 frames cross-fade at the join (1.8 s) |
+| `cheer-idle` | hopped three times; looped as a `palindrome` to 0.7 s instead (1.4 s: eyes open, fists pump, back), one small 30 px bounce |
+
+Preview of the chain over the Tokyo and Switzerland stages:
+`../onboarding-films-v2/preview-pass-up-pass-toss-cheer-idle-cheer-idle.mp4`.
+If either fix doesn't read well on a phone, a re-roll of that film with
+"wheels never leave the floor" is the alternative.
 
 **Now in `../onboarding-films-v2/shots.json`** as `pass-up`, `pass-toss`
 (handoff 0.45 s) and `cheer-idle` (a loop, optional), written in that file's
