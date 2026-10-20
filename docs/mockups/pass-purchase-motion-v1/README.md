@@ -1,9 +1,10 @@
 # Pass purchase: confirmation motion plan (v1)
 
-20 October 2026. **Status: plan only.** Nothing here has been generated. The
-static confirmation is built and shipping (below). The owner makes the new
-still in ChatGPT and approves it before any film is submitted to Scene
-Studio.
+20 October 2026. **Status: frame 18 made and registered; films written,
+not submitted.** The static confirmation is built and shipping (below).
+Frame 18 came from ChatGPT on 20 October ([still](frame-18-pass-hold.png),
+[prompts](PROMPTS.md), [provenance](generation.json)), reviewed and
+registered the same day (below). The films wait for the owner's go-ahead.
 
 ## What ships now (static, no new artwork)
 
@@ -50,6 +51,24 @@ two films are needed instead of four.
 
 ### New key frame: 18 `pass-hold`
 
+**Made and registered (20 Oct 2026).** Review: the same Travi; one blank
+cream ticket with a gold edge, notched ends and a perforation, held level by
+both ends with the face clear; a delighted closed-mouth smile. He faces the
+camera more squarely than in `present` (as in `cheer`, where the toss film
+ends), so `pass-up` turns him; the by-eye folio and wheel offsets were
+corrected by registration. `build_keyframes.py 18-pass-hold` (frames can now
+be named, leaving the approved ones untouched) wrote
+`../onboarding-keyframes-v1/registered/18-pass-hold.png`: scale 0.93, wheels
+on the shared floor line (y 1176), the canonical folio in its place.
+
+**The ticket's box on the registered frame** (941 × 1672), gold edge
+included: x 398–644, y 892–989 (246 × 97, 2.54:1; as fractions left 0.423,
+top 0.533, width 0.261, height 0.058). His thumbs overlap its two ends, so
+the overlay sits just inside them. The badges are 2.5:1, so either pass
+covers the blank face.
+
+The prompt it was made from:
+
 Same inputs and shared prompt as frames 02–16 (`../onboarding-keyframes-v1/BATCH-PROMPTS.md`):
 Image 1 is `~/Desktop/Travi-ChatGPT/image-1-camera.png`, 941 × 1672, green
 close to #00B140. Paste the **shared prompt** from that file, then:
@@ -74,9 +93,14 @@ face box on the registered frame for the overlay.
 
 ### Films for Scene Studio
 
-In the same shape as `../onboarding-films-v2/shots.json` (Seedance 2.0,
-first + last frame, on green, 4 s with the end held). Seeds continue the
-onboarding series; `cheer-idle` is optional.
+**Now in `../onboarding-films-v2/shots.json`** as `pass-up`, `pass-toss`
+(handoff 0.45 s) and `cheer-idle` (a loop, optional), written in that file's
+house style; its shared identity and green-screen block is added to each
+prompt. Not submitted. To make them, with Scene Studio running
+(`~/Documents/video_generator`, `npm run dev`, port 3717):
+`python3 docs/mockups/onboarding-films-v2/films.py submit pass-up pass-toss cheer-idle`,
+then collect, `process.py` and `export.py` as for every film. The first
+drafts below are kept for reference.
 
 ```json
 {

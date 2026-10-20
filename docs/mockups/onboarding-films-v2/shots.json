@@ -404,6 +404,38 @@
       ],
       "loop": true,
       "prompt": "A gentle, seamless four-second idle loop that starts and ends on the EXACT same supplied frame. Travi holds the folio wide OPEN toward the viewer with both paper hands the whole time: it never closes, folds, turns or leaves his hands, and its open pages stay blank. A soft breath, one blink at about 1.5s, and a tiny inviting lift of the open folio toward the viewer at about 2.5s, with a hopeful smile. By 3.5s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted."
+    },
+    "pass-up": {
+      "from": "13-present",
+      "to": "18-pass-hold",
+      "seed": 410481,
+      "keep": [
+        0.0,
+        2.6
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.3s: hold the first frame.\n0.3-1.2s: a delighted gasp: he looks down at the floor in front of him, turns to face the viewer and reaches down with both paper hands toward the bottom of the frame.\n1.2-2.0s: he lifts a small blank ticket card with a gold foil edge and a plain cream face up into view and raises it level at chest height with both hands, holding it by its two short ends so the face shows, beaming: the exact last frame.\n2.0-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most). The ticket's face stays completely blank throughout."
+    },
+    "pass-toss": {
+      "from": "18-pass-hold",
+      "to": "14-cheer",
+      "seed": 410482,
+      "keep": [
+        0.0,
+        2.2
+      ],
+      "prompt": "ONE continuous four-second shot from the supplied first frame to the supplied last frame.\n0-0.2s: hold the first frame: the blank ticket held up level with both hands.\n0.2-0.6s: with a quick, happy flick he sends the ticket straight down and toward the viewer: it leaves his hands and drops out of the bottom of the frame, gone by 0.6s.\n0.6-1.6s: both paper fists punch up high in a joyful cheer, eyes squeezed shut in a huge grin, a tiny bounce, wheels landing back on the floor line: the exact last frame.\n1.6-4s: hold the EXACT supplied last frame perfectly still (one soft blink at most).",
+      "handoff": 0.45
+    },
+    "cheer-idle": {
+      "from": "14-cheer",
+      "to": "14-cheer",
+      "seed": 410483,
+      "keep": [
+        0.0,
+        3.0
+      ],
+      "loop": true,
+      "prompt": "A gentle, seamless idle loop that starts and ends on the EXACT same supplied frame. Travi cheers with both fists up: a small happy bounce on his wheels at about 1s and one soft blink at about 2s. By 2.6s everything is back exactly in the starting position and holds there to the end. No travel, wheels planted, no new props."
     }
   }
 }

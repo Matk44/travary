@@ -20,9 +20,12 @@ Output: registered/NN-name.png (941 x 1672, on green, for the films) and
 registered/contact.png. Needs numpy, Pillow and SciPy:
     python3 -m venv /tmp/kf && /tmp/kf/bin/pip install numpy pillow scipy
     /tmp/kf/bin/python docs/mockups/onboarding-keyframes-v1/build_keyframes.py
+Name frames to register only those (approved ones stay untouched):
+    /tmp/kf/bin/python .../build_keyframes.py 18-pass-hold
 """
 import json
 import os
+import sys
 
 import numpy as np
 from PIL import Image
@@ -58,6 +61,8 @@ FRAMES = {
     '14-cheer': ('frame-14-cheer.png', 'standing'),
     '15-wave': ('frame-15-wave.png', 'carried'),
     '16-oops': ('frame-16-oops.png', 'standing'),
+    # The pass desk's confirmation (docs/mockups/pass-purchase-motion-v1).
+    '18-pass-hold': ('../pass-purchase-motion-v1/frame-18-pass-hold.png', 'standing'),
 }
 # The standing folio never reaches past this column; Travi's wheels start
 # after it.
@@ -179,8 +184,19 @@ def main():
     anchor = (141.0, 1176.0)
     # The one canonical folio, in its one place.
     folio = place(empty, np.ones((H, W), np.float32), CAMERA_SCALE, anchor, camera(anchor))
-    log = {'reference': target, 'camera_scale': CAMERA_SCALE}
+    only = set(sys.argv[1:])
+    unknown = only - FRAMES.keys()
+    if unknown:
+        sys.exit(f'No such frame: {", ".join(sorted(unknown))}')
+    log_path = os.path.join(OUT, 'build.json')
+    log = {}
+    if only and os.path.exists(log_path):
+        with open(log_path) as f:
+            log = json.load(f)
+    log.update({'reference': target, 'camera_scale': CAMERA_SCALE})
     for name, (path, how) in FRAMES.items():
+        if only and name not in only:
+            continue
         rgba = keyed(load(path))
         canvas = np.broadcast_to(GREEN, (H, W, 3)).copy()
         if how == 'empty':
@@ -206,7 +222,7 @@ def main():
                          'folio': 'canonical' if how in ('standing', 'split') else 'carried'}
         Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8)).save(os.path.join(OUT, f'{name}.png'))
         print(name, json.dumps(log[name]))
-    with open(os.path.join(OUT, 'build.json'), 'w') as f:
+    with open(log_path, 'w') as f:
         json.dump(log, f, indent=2)
 
 

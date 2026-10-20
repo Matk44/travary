@@ -277,5 +277,25 @@
       ]
     ],
     "folio": "canonical"
+  },
+  "18-pass-hold": {
+    "footing": {
+      "left": 436.0,
+      "right": 853.0,
+      "bottom": 1221.0,
+      "height": 690.0
+    },
+    "scale": 0.9294,
+    "anchor": [
+      [
+        644.5,
+        1221.0
+      ],
+      [
+        675.0,
+        1176.0
+      ]
+    ],
+    "folio": "canonical"
   }
 }

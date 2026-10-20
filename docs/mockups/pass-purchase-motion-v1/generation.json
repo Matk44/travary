@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-20",
+  "tool": "built-in imagegen",
+  "status": "Generated still for owner review; not approved. No films, camera registration, overlay measurement or runtime integration performed.",
+  "brief_source": "/Users/khairofamily/AndroidStudioProjects/travary-check/docs/mockups/pass-purchase-motion-v1/README.md",
+  "shared_prompt_source": "../onboarding-keyframes-v1/BATCH-PROMPTS.md",
+  "input_images": [
+    {
+      "path": "/Users/khairofamily/Desktop/Travi-ChatGPT/image-1-camera.png",
+      "role": "edit target and master camera reference"
+    }
+  ],
+  "attempts": [
+    {
+      "stage": "initial",
+      "source": "/Users/khairofamily/.codex/generated_images/01a15874-4a0b-7730-ad9c-eb9479084ab8/exec-d5dc98de-0c0e-4b76-9e09-9cbaa63e9da0.png",
+      "prompt": "Use case: identity-preserve / precise-object-edit.\nAsset: one still keyframe for Travary onboarding, in the supplied folded-paper craft style.\nImage 1 (image-1-camera.png) is ALWAYS the edit target and master camera reference. Edit Image 1. Any second image is a limited acting/prop reference ONLY, as identified below.\n\nFor normal pose frames, preserve Image 1's 941 x 1672 portrait framing, camera, lighting, character scale and position BY EYE. Travi stays in the right half of the image, his handle around the source height and wheels around the source baseline; the body must not be enlarged, moved to the centre or reframed to resemble a supporting reference. Only acting, hands and held props change. Frame 7 has its explicitly requested raised, full-frame folio composition instead.\n\nTravi is the SAME coral ribbed-spinner suitcase mascot as Image 1: coral folded-paper body with vertical ribs, navy trim and corner caps, gold telescopic handle with navy grip, navy top carry handle, black spinner wheels with gold hubs, big friendly cartoon eyes and navy brows, articulated folded-paper hands. Keep his cream luggage tag with navy palm tree hanging from his handle in the same way as Image 1. Keep the character design and rich paper materials recognisable and consistent. Fit gestures within the canvas while retaining the body's size and spot.\n\nUnless the frame explicitly says Travi holds the folio, the navy holiday folio stands at the lower left as in Image 1, matching its scale, angle and position by eye, with its cream palm emblem, brass clasp, gold corners and cream paper peeking out.\n\nBACKGROUND: plain, even chroma green close to #00B140, edge to edge, with nothing else in it. Slight texture and small colour variation are fine. No scenery, visible floor, horizon, cast shadows, reflections, gradient or vignette. No green spill on the character or props.\nHeld writing surfaces are blank cream paper, without text, numbers, logos, lines or symbols, except the small person silhouette explicitly required in frame 12. Retain the permanent palm emblems on his hanging tag and navy folio. No added text, labels, UI, buttons, prices or watermark. Crisp edges, no motion blur.\n\nProduce one image only, for the frame below.\n\n18 — pass-hold\n\nTravi proudly holds up ONE blank miniature boarding ticket in front of his chest with BOTH folded-paper hands, facing the viewer squarely and perfectly level so the app can lay artwork over it.\nThe ticket: a horizontal card about 2.5 times as wide as it is tall, roughly 70% of his body width, with a small semicircular notch cut into the middle of each short end and a dotted perforation line dividing a narrow stub on the left from the main face. A plain warm-gold foil edge and an EMPTY flat cream face: no words, no airplane, no logo, no numbers, no pattern.\nHis hands hold it by the two short ends so the face is fully visible; his fingers do not cover the face.\nDelighted, proud expression: eyes bright, big closed-mouth smile, eyebrows lifted, looking at the viewer.\nWheels stay on the source baseline; body size and position as in Image 1. The navy folio stands at the left as in Image 1. Hanging tag unchanged.\nNo other props. No glow, sparkles or motion lines.\n\nThe dotted perforation is the sole exception to the shared no-lines instruction. Remove the separate HELD identity tag from Image 1; retain only the permanent hanging palm tag.",
+      "selected": false,
+      "reason": "Ticket slightly tilted; brief requests one leveling refinement."
+    },
+    {
+      "stage": "level-ticket refinement",
+      "source": "/Users/khairofamily/.codex/generated_images/01a15874-4a0b-7730-ad9c-eb9479084ab8/exec-105aaf97-89ac-4d77-b3b2-6d03ca5e49d6.png",
+      "prompt": "Use case: precise-object-edit.\nAsset: frame 18 pass-hold, a still keyframe for Travary.\nImage 1 is the edit target: the generated pass-hold still.\nThe same image, ticket perfectly level and facing the camera. Make the ticket's top and bottom edges exactly horizontal, its left and right ends equal in height, its cream face a flat frontal plane without perspective skew. Retain the existing warm-gold foil edge, semicircular notches at the short ends, dotted perforation line defining a narrow LEFT stub, blank cream face and approximate 2.5:1 width-to-height. Both hands grip only the short ends, with fingers clear of the blank face.\nChange only the ticket's alignment and the minimum finger/wrist adjustment needed to hold it level. Keep Travi's design, body scale and position, wheels and baseline, bright eyes and closed-mouth smile, eyebrows, handle and permanent hanging palm tag, standing navy folio at the left, paper materials, lighting, plain green background and portrait framing unchanged. No letters, numbers, logos, icons, patterns, scenery, shadows, glow, sparkles or motion. Keep the existing palm emblems on the hanging tag and navy folio. Produce one still image only, no animation.",
+      "selected": true,
+      "destination": "frame-18-pass-hold.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "a0315fc33dd1ecd446bd507c34d3b7fcad5e57285d2d9685ef671adfe55e9c16"
+    }
+  ],
+  "validation": {
+    "visual": "Reviewed both generated images. Selected image has a level frontal blank cream ticket with gold edge, notched short ends and left perforation, held by both hands; bright eyes and closed-mouth smile; permanent tag and standing folio retained; green background. No added copy or prices.",
+    "camera": "Approximate by-eye match only, consistent with source brief's generation tolerances; not pixel registered. Standing folio is lower/larger and body baseline slightly lower than the camera reference. Owner review precedes registration.",
+    "processing": "Copied generated PNG unchanged; no resizing, compositing, pixel correction or background keying."
+  },
+  "next": "Owner artwork approval before registering frame 18 or generating pass-up/pass-toss films. Existing present/cheer/wave/finale images do not require regeneration."
+}
