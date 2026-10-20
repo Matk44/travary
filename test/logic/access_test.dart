@@ -333,6 +333,75 @@ void main() {
     });
   });
 
+  group('a Holiday Pass is for one holiday', () {
+    // Japan 3–12 Nov with a pass; Lisbon 1–8 Dec without.
+    final japan = TripPlan(
+      trip('japan', title: 'Japan holiday', plannedStart: d(11, 3), plannedEnd: d(11, 12)),
+      const [],
+    );
+    final lisbon = TripPlan(trip('lisbon', title: 'Lisbon', plannedStart: d(12, 1), plannedEnd: d(12, 5)), [
+      for (var i = 0; i < 12; i++) booking('b$i', BookingKind.dining, d(12, 1 + i % 5), tripId: 'lisbon'),
+    ]);
+    final pass = Entitlements(tripPasses: {'japan': newTripPassFor(japan)});
+
+    test('it lifts its own holiday\'s limits, never another\'s', () {
+      expect(policy(pass).bookingsLeft(japan), isNull);
+      expect(policy(pass).ticketFilesLeft(japan, kept: 9), isNull);
+      expect(policy(pass).bookingsLeft(lisbon), 0);
+      expect(policy(pass).canAttachTickets(lisbon, kept: 2), isFalse);
+      expect(policy(pass).decide(PremiumFeature.familySharing, trip: lisbon).allowed, isFalse);
+    });
+
+    test('the desk can say which holiday it\'s for', () {
+      expect(policy(pass).holidayPassElsewhere(lisbon, [japan, lisbon])?.id, 'japan');
+      expect(policy(pass).holidayPassElsewhere(japan, [japan, lisbon]), isNull, reason: 'covered here');
+      expect(policy(Entitlements.none).holidayPassElsewhere(lisbon, [japan, lisbon]), isNull);
+      final annual = Entitlements(
+        plus: PlusSubscription(expiresAt: now.add(const Duration(days: 300))),
+        tripPasses: pass.tripPasses,
+      );
+      expect(policy(annual).holidayPassElsewhere(lisbon, [japan, lisbon]), isNull, reason: 'the Annual Pass covers it');
+      final ended = policy(pass, DateTime(2026, 11, 25));
+      expect(ended.holidayPassElsewhere(lisbon, [japan, lisbon]), isNull, reason: 'a pass that has ended');
+    });
+
+    test('Profile lists the passes still on, with their last day', () {
+      final both = Entitlements(tripPasses: {...pass.tripPasses, 'lisbon': newTripPassFor(lisbon)});
+      final active = policy(both).activeHolidayPasses([lisbon, japan]);
+      expect([for (final p in active) (p.plan.id, p.lastDay)], [('japan', d(11, 19)), ('lisbon', d(12, 12))]);
+      expect(policy(both, DateTime(2026, 11, 25)).activeHolidayPasses([lisbon, japan]).single.plan.id, 'lisbon');
+    });
+
+    test('worded', () {
+      expect(holidayPassElsewhereText('Japan holiday'), 'Your Holiday Pass covers Japan holiday only.');
+      expect(
+        annualUpgradeText('Japan holiday'),
+        'Your Holiday Pass covers Japan holiday. The Annual Pass covers every holiday for a year.',
+      );
+      expect(
+        annualUpgradeText(null),
+        'This holiday is covered already. The Annual Pass covers every holiday of yours for a year.',
+      );
+      expect(profilePassLead(passes: const []), 'A little help for every holiday.');
+      expect(
+        profilePassLead(passes: const ['Japan holiday']),
+        'Your Holiday Pass covers Japan holiday. The Annual Pass covers every holiday.',
+      );
+      expect(
+        profilePassLead(passes: const ['Japan', 'Lisbon']),
+        'Your Holiday Passes cover 2 holidays. The Annual Pass covers every one.',
+      );
+      expect(
+        profilePassLead(
+          plus: PlusSubscription(expiresAt: DateTime(2027, 10, 20, 9)),
+          passes: const ['Japan'],
+        ),
+        'Renews on 20 Oct 2027.',
+      );
+      expect(profileHolidayPassText('Japan holiday', d(11, 19)), 'Holiday Pass · Japan holiday, until 19 Nov');
+    });
+  });
+
   group('Plus travels with the trip', () {
     TripPlan stamped(DateTime until) => TripPlan(
       Trip(

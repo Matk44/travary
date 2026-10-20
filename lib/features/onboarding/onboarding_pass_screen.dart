@@ -48,6 +48,7 @@ class OnboardingPassPanel extends StatefulWidget {
     this.source,
     this.onConfirmed,
     this.passLanded = true,
+    this.offersUpgrade = false,
     required this.onDone,
   });
   final String? tripId;
@@ -70,6 +71,12 @@ class OnboardingPassPanel extends StatefulWidget {
   /// The bought pass's badge is stamped onto the floor once Travi has
   /// flicked it down (`PassConfirmationStage`); until then its place is kept.
   final bool passLanded;
+
+  /// A holiday covered by anything but the Annual Pass (the traveller's
+  /// own Holiday Pass, or someone else's pass on a shared trip) still
+  /// offers the Annual Pass, saying why: the paywall and Profile.
+  /// Onboarding keeps its ready state for a covered holiday.
+  final bool offersUpgrade;
 
   /// Where the desk was opened from, for funnel analytics.
   final String? source;
@@ -114,6 +121,10 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
     widget.onDone(outcome);
   }
 
+  /// A covered holiday can still take the Annual Pass here.
+  bool _upgrades(PremiumStore premium) =>
+      widget.offersUpgrade && !premium.hasPlus && premium.offer(OfferKind.plusAnnual) != null;
+
   void _confirm(PassConfirmation confirmation) {
     track('pass_confirmed', {
       'kind': confirmation.kind == OfferKind.tripPass ? 'holiday' : 'annual',
@@ -138,7 +149,7 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
     final travel = context.read<TravelStore>();
     final plan = travel.plan(widget.tripId ?? '');
     if (_working || premium.busy || !_validContext(travel)) return;
-    if (premium.forTrip(plan).allowed) return _continue(OnboardingPassOutcome.upgraded);
+    if (premium.forTrip(plan).allowed && !_upgrades(premium)) return _continue(OnboardingPassOutcome.upgraded);
     final kind = _selected;
     if (kind == null) return;
     final offer = premium.offer(kind);
@@ -209,15 +220,18 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
     final covered = validContext && premium.forTrip(plan).allowed;
     final pass = premium.offer(OfferKind.tripPass);
     final annual = premium.offer(OfferKind.plusAnnual);
+    final upgrade = validContext && covered && _upgrades(premium);
+    final selling = validContext && (!covered || upgrade);
     final canPass = validContext && !covered && pass != null && premium.policy.canBuyTripPassFor(plan);
-    if (validContext && !covered && _selected == null && (pass != null || annual != null)) {
+    // A Holiday Pass the traveller holds for another holiday doesn't cover
+    // this one: say so, or a second pass reads like a mistake.
+    final elsewhere = validContext ? premium.policy.holidayPassElsewhere(plan, travel.plans) : null;
+    if (selling && _selected == null && (pass != null || annual != null)) {
       _selected = canPass ? OfferKind.tripPass : OfferKind.plusAnnual;
     }
-    final selected = validContext && !covered
-        ? (_selected == OfferKind.tripPass ? (canPass ? pass : null) : annual)
-        : null;
+    final selected = selling ? (_selected == OfferKind.tripPass ? (canPass ? pass : null) : annual) : null;
     final busy = _working || premium.busy;
-    final ready = covered || !validContext;
+    final ready = !selling;
     final terms = selected == null
         ? null
         : selected.kind == OfferKind.plusAnnual
@@ -293,8 +307,29 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
             onPressed: busy ? null : premium.refreshOffers,
             child: const Text('Try again'),
           ),
+        // Why only the Annual Pass: this holiday is covered already.
+        if (upgrade)
+          FitItem(
+            keep: 60,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: fine(
+                annualUpgradeText(
+                  premium.policy.purchasedPassFor(plan) == OfferKind.tripPass ? plan?.trip.title : null,
+                ),
+              ),
+            ),
+          ),
+        if (elsewhere != null)
+          FitItem(
+            keep: 60,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: fine(holidayPassElsewhereText(elsewhere.trip.title)),
+            ),
+          ),
         // Why there's no Holiday Pass for this holiday (none at all: nothing to say).
-        if (!canPass && !premium.offersLoading && pass != null && plan != null)
+        if (!covered && !canPass && !premium.offersLoading && pass != null && plan != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 6),
             child: fine(

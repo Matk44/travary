@@ -152,6 +152,32 @@ class AccessPolicy {
 
   /// [plan]'s first day has come, by the phone's clock.
   bool hasStarted(TripPlan plan) => plan.start != null && !LocalDate.fromDateTime(now).isBefore(plan.start!);
+
+  /// The holiday the traveller's own Holiday Pass covers while [plan] isn't
+  /// covered at all, so the pass desk can say a pass is for its one
+  /// holiday: the soonest of [plans] with one on, else null.
+  TripPlan? holidayPassElsewhere(TripPlan? plan, Iterable<TripPlan> plans) {
+    if (hasPlus || forTrip(plan).allowed) return null;
+    final others = [
+      for (final other in plans)
+        if (other.id != plan?.id && hasTripPass(other)) other,
+    ]..sort((a, b) => (a.start ?? LocalDate(9999, 1, 1)).compareTo(b.start ?? LocalDate(9999, 1, 1)));
+    return others.firstOrNull;
+  }
+
+  /// The Holiday Passes the traveller holds that are still on, soonest
+  /// holiday first, with the last day each covers.
+  List<({TripPlan plan, LocalDate lastDay})> activeHolidayPasses(Iterable<TripPlan> plans) {
+    final out = [
+      for (final plan in plans)
+        if (hasTripPass(plan))
+          (
+            plan: plan,
+            lastDay: tripPassLastDay(tripPassFor(plan)!, plan.start, plan.end) ?? tripPassFor(plan)!.lastDay,
+          ),
+    ]..sort((a, b) => a.lastDay.compareTo(b.lastDay));
+    return out;
+  }
 }
 
 /// The bookings on [plan] that count towards a free holiday's

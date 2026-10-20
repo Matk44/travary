@@ -440,12 +440,27 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
 - **Purchased pass badges** (19 Oct 2026): `AccessPolicy.purchasedPassFor`
   identifies active personal purchases (Annual first, else this holiday's
   Holiday Pass). `PassBadge` shows their generated foil tickets on Today,
-  Trips, the trip page (tucked onto the postcard's top-left corner,
-  `TripHero.badge`, read out with the trip), and the active Annual Pass in
-  Profile. Shared premium access has no product type and is never labelled
+  on the Trips tab (slapped onto that holiday's own postcard, just inside
+  its top-left corner, `TripPostcardLayout.badgeLeft/Top`, so with several
+  holidays it can't be read as the next one's; a plain row carries it in
+  its own card), the trip page (tucked onto the postcard's top-left
+  corner, `TripHero.badge`, read out with the trip), and the active Annual
+  Pass in Profile. Shared premium access has no product type and is never labelled
   as a personal purchase. Still artwork and prompts:
   `docs/mockups/purchased-passes-v1/`; owner selected both original v1
   designs on 20 Oct 2026 after comparing four alternatives.
+- **A Holiday Pass is for one holiday** (21 Oct 2026): it lifts only its
+  own holiday's booking and file limits (`AccessPolicy.forTrip`). The pass
+  desk says so where it matters: a holiday without one, while the
+  traveller holds one for another, adds "Your Holiday Pass covers Japan
+  holiday only." (`holidayPassElsewhere`, `holidayPassElsewhereText`);
+  and from the paywall or Profile (`OnboardingPassPanel.offersUpgrade`) a
+  holiday covered by anything but the Annual Pass offers the Annual Pass
+  alone, saying why (`annualUpgradeText`), never "already covered" with
+  nothing to buy. Onboarding keeps its ready state. Profile's card leads
+  with what's held (`profilePassLead`), lists the Holiday Passes still on
+  with their holiday and last day (`activeHolidayPasses`,
+  `profileHolidayPassText`), and its benefits lead with unlimited bookings.
 - **A bought pass is confirmed** (20 Oct 2026): once the store confirms,
   the pass desk (`OnboardingPassPanel`, on the paywall and both onboarding
   desks) stamps the pass's badge onto its floor over what it covers

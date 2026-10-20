@@ -18,7 +18,7 @@ WebP copies use q88, exact alpha, original dimensions. Never edit the compressed
 ## Placement and state
 
 - Today: below the date/weather pill, to the right of the holiday subtitle.
-- Trips: above the postcard's top-right edge; plain rows carry the badge above their title.
+- Trips: slapped onto the holiday's own postcard, just inside its top-left corner and a little askew (21 Oct 2026; it sat on a line above the postcard, which read as ambiguous with several holidays); plain rows carry the badge above their title, inside their own card.
 - Trip page: tucked onto the postcard's top-left corner, a little askew (`TripHero.badge`, 20 Oct 2026; it was above the hero at the right, on a row of its own).
 - Purchase confirmation: the pass desk shows the bought pass large (up to 250 pt) once the store confirms; see `../pass-purchase-motion-v1/README.md`.
 - Profile: active Annual Pass artwork alongside the subscription information.

@@ -7,13 +7,15 @@ import '../../design/widgets/profile_stationery.dart';
 import '../../design/widgets/profile_travi.dart';
 import '../../design/widgets/pass_badge.dart';
 import '../../domain/domain.dart';
-import '../../logic/formatters.dart';
+import '../../logic/price_text.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../help/help_links.dart';
 import 'premium_gate.dart';
 
-/// Profile card: your plan, your Holiday Passes, a way to the Annual Pass,
+/// Profile card: your plan, the Holiday Passes still on (each with its
+/// holiday and last day), a way to the Annual Pass (a Holiday Pass holder
+/// can still take it: the desk offers it as the pass for every holiday),
 /// and, with one, a way to manage or cancel it in the store.
 class PlusCard extends StatelessWidget {
   const PlusCard({super.key});
@@ -25,13 +27,12 @@ class PlusCard extends StatelessWidget {
     final policy = premium.policy;
     final plus = premium.entitlements.plus;
 
-    final passes = [
-      for (final id in premium.entitlements.tripPasses.keys) travel.plan(id)?.trip.title ?? 'A past trip',
-    ];
+    final passes = policy.activeHolidayPasses(travel.plans);
     final left = policy.freeSmartImportsLeft;
-    final renewal = policy.hasPlus && plus != null
-        ? '${plus.willRenew ? 'Renews' : 'Ends'} on ${formatDate(LocalDate.fromDateTime(plus.expiresAt))}.'
-        : null;
+    final lead = profilePassLead(
+      plus: policy.hasPlus ? plus : null,
+      passes: [for (final p in passes) p.plan.trip.title],
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
@@ -61,14 +62,14 @@ class PlusCard extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: PassBadge(kind: OfferKind.plusAnnual),
                     ),
-                  Text(renewal ?? 'A little help for every holiday.', style: TravaryText.profilePassLead),
+                  Text(lead, key: const ValueKey('profile-pass-lead'), style: TravaryText.profilePassLead),
                   const SizedBox(height: TravarySpace.sm),
                   LayoutBuilder(
                     builder: (context, box) {
                       final benefits = Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const _Benefit(Icons.cloud_upload_rounded, 'Smart Imports'),
+                          const _Benefit(Icons.all_inclusive_rounded, 'Unlimited bookings'),
                           const _Benefit(Icons.people_rounded, 'Shared plans & tickets'),
                           const _Benefit(Icons.description_rounded, 'Booking-file backup'),
                           if (!policy.hasPlus) ...[
@@ -108,10 +109,10 @@ class PlusCard extends StatelessWidget {
                       );
                     },
                   ),
-                  for (final trip in passes)
+                  for (final p in passes)
                     Padding(
                       padding: const EdgeInsets.only(top: TravarySpace.sm),
-                      child: Text('Holiday Pass: $trip', style: TravaryText.label),
+                      child: Text(profileHolidayPassText(p.plan.trip.title, p.lastDay), style: TravaryText.label),
                     ),
                   if (!policy.hasPlus) ...[
                     const SizedBox(height: TravarySpace.sm),

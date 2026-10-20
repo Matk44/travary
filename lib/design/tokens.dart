@@ -663,6 +663,12 @@ abstract final class TripPostcardLayout {
   static const tagRight = 0.99;
   static const tagTop = 0.045;
 
+  /// Where a pass badge sits on the card (just inside its deckled
+  /// top-left corner): its left as a share of the postcard's width, its
+  /// top as a share of its height, below the tucked-under margin.
+  static const badgeLeft = 0.045;
+  static const badgeTop = 0.05;
+
   /// The tag hangs this far clockwise, give or take [tagAngleSpread] per
   /// trip, shell and words together.
   static const tagAngleDegrees = 4.0;

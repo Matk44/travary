@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:travary/data/demo_data.dart';
 import 'package:travary/design/tokens.dart';
 import 'package:travary/design/widgets/pass_badge.dart';
+import 'package:travary/design/widgets/upcoming_trip_postcard.dart';
 import 'package:travary/domain/domain.dart';
 import 'package:travary/features/today/today_screen.dart';
 import 'package:travary/features/trips/trips_screen.dart';
@@ -135,6 +136,16 @@ void main() {
     await capture(tester, 'holiday-today');
     await openTab(tester, 'Trips');
     expect(badges(TripsScreen), findsOneWidget);
+    // On the paid holiday's own postcard, inside its card: never on a line
+    // between two holidays, where it could be read as the next one's.
+    final card = find.ancestor(of: badges(TripsScreen), matching: find.byType(UpcomingTripPostcard));
+    expect(card, findsOneWidget);
+    expect(tester.widget<UpcomingTripPostcard>(card).pass, OfferKind.tripPass);
+    final art = tester.getRect(find.descendant(of: card, matching: find.byKey(const ValueKey('trip-postcard-art'))));
+    final badge = tester.getRect(
+      find.descendant(of: card, matching: find.byKey(const ValueKey('trip-postcard-badge'))),
+    );
+    expect(art.contains(badge.topLeft) && art.contains(badge.bottomRight), isTrue, reason: '$badge in $art');
     await capture(tester, 'holiday-trips');
 
     premium.debugSetEntitlements(Entitlements(plus: PlusSubscription(expiresAt: now.add(const Duration(days: 365)))));

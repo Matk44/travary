@@ -59,6 +59,35 @@ String bookingsOverText(int left, int cap) => left == 0
     ? 'This holiday has its $cap free bookings. A pass makes room for these.'
     : 'Only $left more fit on this free holiday ($cap bookings). Untick some, or get a pass for every one.';
 
+/// On the pass desk for a holiday with no pass, when the traveller's
+/// Holiday Pass is for another one ([title]): a pass covers one holiday.
+String holidayPassElsewhereText(String title) => 'Your Holiday Pass covers $title only.';
+
+/// On the pass desk (from Profile or a paywall) for a holiday that's
+/// covered already, by the traveller's own Holiday Pass for [title], or
+/// (null) by someone else's: the Annual Pass is the one left to offer.
+String annualUpgradeText(String? title) => title == null
+    ? 'This holiday is covered already. The Annual Pass covers every holiday of yours for a year.'
+    : 'Your Holiday Pass covers $title. The Annual Pass covers every holiday for a year.';
+
+/// Profile's pass card, under "Annual Pass": the Annual Pass's renewal
+/// ([plus] on), else the Holiday Passes on ([passes]: titles, soonest
+/// first), else an invitation.
+String profilePassLead({PlusSubscription? plus, required List<String> passes}) {
+  if (plus != null) {
+    return '${plus.willRenew ? 'Renews' : 'Ends'} on ${formatDate(LocalDate.fromDateTime(plus.expiresAt))}.';
+  }
+  return switch (passes) {
+    [] => 'A little help for every holiday.',
+    [final one] => 'Your Holiday Pass covers $one. The Annual Pass covers every holiday.',
+    _ => 'Your Holiday Passes cover ${passes.length} holidays. The Annual Pass covers every one.',
+  };
+}
+
+/// A Holiday Pass on Profile's card: its holiday and its last day.
+String profileHolidayPassText(String title, LocalDate lastDay) =>
+    'Holiday Pass · $title, until ${formatDayMonth(lastDay)}';
+
 /// What a Trip Pass covers, on the trip's details: "Trip Pass, until 30
 /// Oct 2026" ([lastDay] from `tripPassLastDay`).
 String tripPassCoversText(LocalDate lastDay) => 'Holiday Pass, until ${formatDate(lastDay)}';

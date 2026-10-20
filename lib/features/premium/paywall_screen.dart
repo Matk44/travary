@@ -81,6 +81,7 @@ class _PaywallScreenState extends State<PaywallScreen> with PassConfirmationStag
           feature: widget.feature,
           freeLabel: 'Not now',
           confirmedLabel: 'Carry on',
+          offersUpgrade: true,
           source: widget.source,
           onConfirmed: confirmPass,
           passLanded: passLanded,

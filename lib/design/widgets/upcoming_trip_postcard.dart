@@ -54,6 +54,9 @@ class UpcomingTripPostcard extends StatelessWidget {
   static double tagDegrees(int variant) =>
       TripPostcardLayout.tagAngleDegrees + TripPostcardLayout.tagAngleSpread * (variant % 3 - 1);
 
+  /// How far a pass on the postcard leans, in radians.
+  static const _badgeAngle = -0.06;
+
   @override
   Widget build(BuildContext context) {
     final pixels = MediaQuery.devicePixelRatioOf(context);
@@ -83,14 +86,6 @@ class UpcomingTripPostcard extends StatelessWidget {
             onTap: onOpen,
             child: Column(
               children: [
-                if (pass case final kind?)
-                  Padding(
-                    padding: const EdgeInsets.only(right: TravarySpace.gutter, bottom: TravarySpace.sm),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: PassBadge(kind: kind),
-                    ),
-                  ),
                 SizedBox(
                   height: height - rise,
                   child: Stack(
@@ -112,6 +107,19 @@ class UpcomingTripPostcard extends StatelessWidget {
                           errorBuilder: (context, error, stackTrace) => const _PostcardStandIn(),
                         ),
                       ),
+                      // The traveller's pass slapped onto this postcard's top-left
+                      // corner, a little askew: plainly this holiday's, never
+                      // the one below it.
+                      if (pass case final kind?)
+                        Positioned(
+                          key: const ValueKey('trip-postcard-badge'),
+                          left: left + width * TripPostcardLayout.badgeLeft,
+                          top: height * TripPostcardLayout.badgeTop,
+                          child: Transform.rotate(
+                            angle: _badgeAngle,
+                            child: PassBadge(kind: kind),
+                          ),
+                        ),
                       Positioned(
                         left: left + width * TripPostcardLayout.tagRight - body.right * tagWidth,
                         top: -rise + width * TripPostcardLayout.tagTop - body.top * tagHeight,

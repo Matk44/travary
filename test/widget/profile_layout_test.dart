@@ -310,6 +310,36 @@ void main() {
   }, variant: const TargetPlatformVariant({TargetPlatform.iOS}));
 
   testWidgets(
+    'a Holiday Pass holder sees which holiday it covers, and can still take the Annual Pass',
+    (tester) async {
+      await pumpProfile(
+        tester,
+        initial: Entitlements(
+          tripPasses: {
+            'lakes': TripPass(tripId: 'lakes', start: LocalDate(2026, 11, 25), end: LocalDate(2026, 11, 28)),
+          },
+        ),
+      );
+      final buy = find.byKey(const ValueKey('profile-annual-pass'));
+      await tester.scrollUntilVisible(buy, 150, scrollable: profileScroll());
+      await Scrollable.ensureVisible(tester.element(buy), alignment: 0.5);
+      await tester.pumpAndSettle();
+      final lead = tester.widget<Text>(find.byKey(const ValueKey('profile-pass-lead'))).data!;
+      expect(lead, startsWith('Your Holiday Pass covers '));
+      expect(lead, endsWith('. The Annual Pass covers every holiday.'));
+      expect(find.textContaining('Holiday Pass · '), findsOneWidget);
+      expect(find.textContaining(', until 5 Dec'), findsOneWidget);
+      expect(find.text('Unlimited bookings'), findsOneWidget);
+      await tester.tap(buy);
+      await tester.pumpAndSettle();
+      expect(find.byType(PaywallScreen), findsOneWidget);
+      expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsOneWidget, reason: 'never a dead end');
+      expect(tester.takeException(), isNull);
+    },
+    variant: const TargetPlatformVariant({TargetPlatform.iOS}),
+  );
+
+  testWidgets(
     'Annual Pass holder sees renewal and restore without a repeat upsell',
     (tester) async {
       await pumpProfile(
