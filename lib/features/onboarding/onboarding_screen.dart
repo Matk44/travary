@@ -42,6 +42,7 @@ import 'onboarding_account_screen.dart';
 import 'onboarding_pass_screen.dart';
 import 'onboarding_route.dart';
 import 'onboarding_stage_layout.dart';
+import 'pass_confirmation_stage.dart';
 
 /// After the first booking: the optional sign-in, then the pass desk, then
 /// off into the holiday, on the same stage.
@@ -63,7 +64,7 @@ class OnboardingScreen extends StatefulWidget {
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingScreenState extends State<OnboardingScreen> with PassConfirmationStage {
   late final OnboardingStore _setup;
   late final TravelStore _travel;
   late final bool _rollIn;
@@ -87,10 +88,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool _dayPending = false;
   bool _fresh = false;
   bool _bought = false;
-
-  /// A pass just bought or restored at the desk: it says so (Travi cheers)
-  /// before the holiday opens.
-  PassConfirmation? _confirmed;
   TraviPose? _awaiting;
   Completer<void>? _arrival;
   Timer? _sendoff;
@@ -145,6 +142,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _onPose(TraviPose? pose) {
     if (!mounted) return;
     setState(() => _resting = pose);
+    passPose(pose);
     if (pose == null) return;
     if (pose == _awaiting) {
       _awaiting = null;
@@ -169,6 +167,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   /// What he threw has left the frame: its live version takes over.
   void _onHandoff(TraviFilm film) {
     if (!mounted) return;
+    passHandoff(film);
     setState(() {
       if (film.from == TraviPose.tag) _tagPending = false;
       if (film.from == TraviPose.card) _dayPending = false;
@@ -465,7 +464,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final beat = _beatFor(draft, saved);
     final destination = plan?.trip.destination ?? draft.destination;
     final countdown = plan == null ? null : countdownTextFor(plan, travel.today);
-    final confirmed = beat == OnboardingBeat.desk ? _confirmed : null;
+    // A pass just bought or restored at the desk: it says so (Travi lifts
+    // it up and cheers) before the holiday opens.
+    final confirmed = beat == OnboardingBeat.desk ? this.confirmed : null;
     final words = confirmed != null
         ? passConfirmedWords(confirmed.kind, restored: confirmed.restored)
         : onboardingWordsFor(
@@ -506,6 +507,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           onPose: _onPose,
           onHandoff: _onHandoff,
           overlay: switch (beat) {
+            // The bought pass on the ticket he holds up.
+            OnboardingBeat.desk when confirmed != null => passOverlay,
             // The booking on the card he holds up, fading as he winds up the throw.
             OnboardingBeat.proof when saved != null && _fresh => (context, width) => AnimatedOpacity(
               opacity: _resting == TraviPose.card ? 1 : 0,
@@ -752,7 +755,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           key: const ValueKey('onboarding-desk'),
           tripId: saved?.tripId ?? draft.tripId,
           bookingId: saved?.id,
-          onConfirmed: (confirmation) => setState(() => _confirmed = confirmation),
+          onConfirmed: confirmPass,
+          passLanded: passLanded,
           onDone: _passChosen,
         );
       case OnboardingBeat.sendoff:

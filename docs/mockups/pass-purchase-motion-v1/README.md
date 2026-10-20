@@ -107,9 +107,12 @@ frames (the folio 288 px tall instead of 282, shifted 6-7 px), so easing
 into the exact key frames at each end zoomed each film in and back out: a
 pulse at every join and every turn of a loop. It's in every film made so
 far, the approved onboarding ones included. `process.py` now lines each
-film up with its key frames, measured on the standing folio (one
-correction per film: scale 0.9792, +7 px, +16.6 px for all three), and the
-folio stays within 1 px of its key-frame place through every join.
+film up with its key frames: its first and last frames are matched to the
+key frames it starts and ends on (a coarse-to-fine search over scale and
+position on the whole picture; one correction per film, so nothing
+jitters). A first version measured the standing folio, but that can't see
+films where Travi carries it, and misread the folio held open. All 36
+onboarding films are reprocessed and re-exported with it.
 
 Preview of the chain over the Tokyo and Switzerland stages:
 `../onboarding-films-v2/preview-pass-up-pass-toss-cheer-idle-cheer-idle.mp4`.

@@ -452,16 +452,20 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   (`passCoverageFor`: the holiday and "covered until", or every holiday and
   when the Annual Pass renews), the stage's words change
   (`passConfirmedWords`: "Enjoy your holiday!", "Every holiday, sorted!", a
-  restore "Welcome back!") and Travi cheers (`traviCuesForPassConfirmed`,
-  the existing `cheer` film). One button hands back ("Carry on" on the
+  restore "Welcome back!") and Travi acts it out
+  (`traviCuesForPassConfirmed`): he lifts a blank ticket to the viewer
+  (`pass-up`, to key frame 18 `passHold`), holds it while the bought badge
+  is drawn on it (`HeldPassBadge`, fitted to the ticket's measured box),
+  flicks it down (`pass-toss`) and cheers (`cheer-idle`); the desk's badge
+  is stamped on at the toss's handoff (`PassConfirmationStage`, shared by
+  the paywall and both onboarding desks: at once without films, after 7 s
+  at the latest). One button hands back ("Carry on" on the
   paywall, "Open my holiday" in onboarding); Close and Back after paying
   also count as bought, so the gated action goes ahead. A restore of their
   own pass for this holiday is confirmed the same way; a payment the server
   hasn't recorded (`pending`) keeps "Payment received…" and is never
-  celebrated. Analytics `pass_confirmed` (kind, restored, source). The
-  animated version (a new `pass-hold` key frame, `pass-up` and `pass-toss`
-  films, the badge handed off as live UI) is planned, not made:
-  `docs/mockups/pass-purchase-motion-v1/README.md`.
+  celebrated. Analytics `pass_confirmed` (kind, restored, source). How it
+  was made: `docs/mockups/pass-purchase-motion-v1/README.md`.
 - Rules live in one pure class: `logic/access.dart` (`AccessPolicy`). Plus
   unlocks everything; a Trip Pass unlocks one trip of at most 30 days,
   bought for the dates it had then (`TripPass`, `newTripPassFor`), until 7
@@ -1024,12 +1028,16 @@ modal at launch or in onboarding:
 - **One continuous animated story** (owner, 10 Oct 2026;
   `docs/onboarding/STORYBOARD_V2.md`). One locked camera: Travi stands on
   the same mark from the roll-in to the goodbye while the world changes
-  behind him. Every pause is a **key frame** (17 poses, ChatGPT stills lined
-  up to one camera by `docs/mockups/onboarding-keyframes-v1/build_keyframes.py`)
+  behind him. Every pause is a **key frame** (18 poses, ChatGPT stills lined
+  up to one camera by `docs/mockups/onboarding-keyframes-v1/build_keyframes.py`,
+  which can register named frames only)
   and every move is a **film between two key frames** made in the owner's
   Scene Studio (Seedance 2.0, first + last frame, on green), so any chain
   joins seamlessly. Films: `docs/mockups/onboarding-films-v2/` (`shots.json`
-  prompts, `films.py` submits/collects, `process.py` keys and trims,
+  prompts, `films.py` submits/collects, `process.py` lines each film up with
+  its key frames (its first and last frames matched to them: Seedance
+  frames every shot about 2% tighter, so unaligned films zoomed at every
+  join and loop, the owner's "pulsing"; 20 Oct 2026), then keys and trims,
   `export.py` writes `assets/onboarding/travi/{films,stills}/` as animated
   WebP with alpha and generates `lib/logic/onboarding_film_assets.dart`;
   never hand-edit it). `logic/onboarding_films.dart`: `TraviPose`,

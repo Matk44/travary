@@ -5,8 +5,8 @@ For each film in shots.json:
 1. Decode the source, scaled onto the key frames' camera (941 wide), and
    line it up with them: Seedance frames every shot about 2% tighter, which
    eased into the key frames zoomed each film in and out (a pulse at every
-   join and every turn of a loop). The standing folio, which never moves,
-   measures the difference.
+   join and every turn of a loop). Its first and last frames, matched to the
+   key frames it starts and ends on, measure the difference.
 2. Keep its action (`keep`, seconds) and drop the long hold at the end.
 3. Ease the first and last frames into the EXACT key frames, so every join
    between films (and every loop) is pixel-identical.
@@ -42,8 +42,6 @@ ROOT, FRAMES, (W, H) = SETS['onboarding']
 FPS = 24
 BLEND = 5  # frames eased into the exact key frame at each end
 GREEN = np.array([0, 177, 64], np.float32)
-# The standing folio is left of this column (build_keyframes.py's FOLIO_SPLIT).
-FOLIO_X = 440
 
 
 def decode(path):
@@ -77,43 +75,55 @@ def settles(frames, last):
     return (moving.max() + 1 if len(moving) else 0) / FPS
 
 
-def folio_box(rgb):
-    """The standing folio's left edge, top and bottom, or None."""
-    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
-    navy = (b > r + 10) & (r < 90) & (g < 100) & (b > 40)
-    navy[:, FOLIO_X:] = False
-    navy[:H * 3 // 10] = False
-    ys, xs = np.nonzero(navy)
-    if len(xs) < 500:
-        return None
-    return np.array([np.percentile(xs, 0.5), np.percentile(ys, 0.5), np.percentile(ys, 99.5)])
+def _warp(image, s, dx, dy, size):
+    """[image] scaled by [s] and moved by ([dx], [dy]) (in [size]'s pixels)."""
+    fill = tuple(int(c) for c in GREEN)
+    return image.transform(size, Image.AFFINE, (1 / s, 0, -dx / s, 0, 1 / s, -dy / s), Image.BILINEAR,
+                           fillcolor=fill)
+
+
+def register(frame, key):
+    """The scale and move that lay a film [frame] on its [key] frame: Seedance
+    starts on the first key frame and ends on the last, a little tighter.
+    Searched coarse to fine, on the whole picture."""
+    def at(k):
+        size = (W // k, H // k)
+        return Image.fromarray(frame.astype(np.uint8)).resize(size, Image.BILINEAR), \
+            np.asarray(Image.fromarray(key.astype(np.uint8)).resize(size, Image.BILINEAR), np.float32), size
+
+    def search(k, scales, moves, around):
+        src, want, size = at(k)
+        best = None
+        for sc in scales:
+            for mx in moves:
+                for my in moves:
+                    dx, dy = around[1] + mx, around[2] + my
+                    got = np.asarray(_warp(src, sc, dx / k, dy / k, size), np.float32)
+                    err = float(np.abs(got - want).mean())
+                    if best is None or err < best[0]:
+                        best = (err, sc, dx, dy)
+        return best
+
+    _, s0, dx0, dy0 = search(4, np.arange(0.95, 1.0101, 0.004), range(-28, 29, 4), (0, 0, 0))
+    err, s1, dx1, dy1 = search(2, np.arange(s0 - 0.004, s0 + 0.0041, 0.001), range(-4, 5), (0, dx0, dy0))
+    return s1, dx1, dy1, err
 
 
 def align(frames, first, last):
-    """[frames] scaled and moved onto the key frames' camera, measured on the
-    standing folio (one correction for the whole film, so nothing jitters),
-    and how. Left as they are when the folio isn't standing in its place at
-    both ends (a film where Travi carries it) or there's no folio (cameos)."""
+    """[frames] scaled and moved onto the key frames' camera, and how: one
+    correction for the whole film (the mean of where it starts and ends), so
+    nothing jitters. Seedance frames every shot about 2% tighter; eased into
+    the exact key frames, unaligned films zoomed at every join and loop."""
     if (W, H) != (941, 1672):
         return frames, None
-    want, other = folio_box(first), folio_box(last)
-    if want is None or other is None or np.abs(want - other).max() > 3:
-        return frames, None
-    boxes = np.array([b for b in map(folio_box, frames) if b is not None])
-    if not len(boxes):
-        return frames, None
-    # Frames where something passes in front of it (a hand reaching down) are left out.
-    heights = boxes[:, 2] - boxes[:, 1]
-    got = np.median(boxes[np.abs(heights - np.median(heights)) < 0.01 * np.median(heights)], axis=0)
-    s = (want[2] - want[1]) / (got[2] - got[1])
-    dx, dy = want[0] - got[0] * s, want[2] - got[2] * s
-    fill = tuple(int(c) for c in GREEN)
+    a = register(frames[0], first)
+    b = register(frames[-1], last)
+    s, dx, dy = ((a[i] + b[i]) / 2 for i in range(3))
     out = np.empty_like(frames)
     for i, frame in enumerate(frames):
-        im = Image.fromarray(frame.astype(np.uint8)).transform(
-            (W, H), Image.AFFINE, (1 / s, 0, -dx / s, 0, 1 / s, -dy / s), Image.BICUBIC, fillcolor=fill)
-        out[i] = np.asarray(im, np.float32)
-    return out, {'scale': round(float(s), 4), 'dx': round(float(dx), 1), 'dy': round(float(dy), 1)}
+        out[i] = np.asarray(_warp(Image.fromarray(frame.astype(np.uint8)), s, dx, dy, (W, H)), np.float32)
+    return out, {'scale': round(float(s), 4), 'dx': round(float(dx), 1), 'dy': round(float(dy), 1),
+                 'ends': [[round(float(v), 4) for v in a[:3]], [round(float(v), 4) for v in b[:3]]]}
 
 
 def film(name, shot):

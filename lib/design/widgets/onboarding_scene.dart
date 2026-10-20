@@ -2,11 +2,13 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../domain/pricing.dart';
 import '../../logic/card_text.dart';
 import '../../logic/onboarding_art.dart';
 import '../../logic/onboarding_films.dart';
 import '../tokens.dart';
 import 'onboarding_stage.dart';
+import 'pass_badge.dart';
 import 'travi_player.dart';
 
 /// A rectangle in the key frames' canvas (941 × 1672 px), laid onto a
@@ -184,6 +186,41 @@ class _Band extends CustomClipper<Rect> {
   Rect getClip(Size size) => Rect.fromLTRB(0, top ?? 0, size.width, bottom ?? size.height);
   @override
   bool shouldReclip(_Band old) => old.top != top || old.bottom != bottom;
+}
+
+/// The bought pass on the blank ticket Travi holds up (his "passHold" key
+/// frame), fitted to the ticket's width just inside his thumbs. The art's
+/// ticket is a little longer than his, so a sliver of his gold-edged card
+/// shows above and below, like the pass mounted on it. Never stretched.
+class HeldPassBadge extends StatelessWidget {
+  const HeldPassBadge({super.key, required this.kind, required this.width});
+  final OfferKind kind;
+  final double width;
+
+  // The blank ticket in the registered passHold key frame (canvas px), gold
+  // edge included, less a little at each end for his thumbs.
+  static const _ticket = Rect.fromLTRB(402, 892, 640, 989);
+
+  @override
+  Widget build(BuildContext context) {
+    final ticket = onboardingCanvasRect(_ticket, width);
+    const art = PassBadgeLayout.artTicket;
+    final badgeWidth = ticket.width / art.width;
+    final badgeHeight = badgeWidth / PassBadgeLayout.aspect;
+    return Stack(
+      children: [
+        Positioned(
+          left: ticket.left - art.left * badgeWidth,
+          top: ticket.center.dy - art.center.dy * badgeHeight,
+          width: badgeWidth,
+          height: badgeHeight,
+          child: ExcludeSemantics(
+            child: PassBadge(key: const ValueKey('held-pass-badge'), kind: kind, width: badgeWidth),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 /// The saved booking written on the blank card Travi holds up (his "card"

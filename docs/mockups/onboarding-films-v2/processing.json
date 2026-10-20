@@ -1,9 +1,26 @@
 {
   "tag-toss": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 67,
     "seconds": 2.79,
-    "drift_first": 5.6,
-    "drift_last": 7.0,
+    "drift_first": 2.8,
+    "drift_last": 5.3,
     "jumps": [
       1.92,
       1.96,
@@ -16,81 +33,230 @@
     "held_frames": 0
   },
   "folio-up": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 58,
     "seconds": 2.42,
-    "drift_first": 5.4,
-    "drift_last": 7.3,
-    "jumps": [
-      0.88,
-      0.96
-    ],
-    "held_frames": 7
+    "drift_first": 2.8,
+    "drift_last": 4.9,
+    "jumps": [],
+    "held_frames": 8
   },
   "tag-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 5.3,
-    "drift_last": 6.9,
+    "drift_first": 2.5,
+    "drift_last": 4.1,
     "jumps": [],
     "held_frames": 0
   },
   "folio-up-b": {
-    "frames": 54,
-    "seconds": 2.25,
-    "drift_first": 5.1,
-    "drift_last": 6.9,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 58,
+    "seconds": 2.42,
+    "drift_first": 2.5,
+    "drift_last": 4.7,
     "jumps": [],
     "held_frames": 7
   },
   "roll-in": {
-    "frames": 75,
-    "seconds": 3.12,
-    "drift_first": 2.2,
-    "drift_last": 7.1,
+    "aligned": {
+      "scale": 0.975,
+      "dx": 9.5,
+      "dy": 20.5,
+      "ends": [
+        [
+          0.97,
+          10.0,
+          25.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 76,
+    "seconds": 3.17,
+    "drift_first": 1.6,
+    "drift_last": 5.4,
     "jumps": [],
     "held_frames": 0
   },
   "world": {
-    "frames": 71,
-    "seconds": 2.96,
-    "drift_first": 5.4,
-    "drift_last": 6.9,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 73,
+    "seconds": 3.04,
+    "drift_first": 2.8,
+    "drift_last": 4.4,
     "jumps": [],
     "held_frames": 0
   },
   "tag-out": {
-    "frames": 61,
-    "seconds": 2.54,
-    "drift_first": 4.9,
-    "drift_last": 7.1,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 64,
+    "seconds": 2.67,
+    "drift_first": 2.3,
+    "drift_last": 4.3,
     "jumps": [
       1.04
     ],
     "held_frames": 0
   },
   "reading": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 73,
     "seconds": 3.04,
-    "drift_first": 5.0,
-    "drift_last": 7.5,
+    "drift_first": 2.5,
+    "drift_last": 5.0,
     "jumps": [],
     "held_frames": 3
   },
   "got-it": {
-    "frames": 67,
-    "seconds": 2.79,
-    "drift_first": 5.5,
-    "drift_last": 6.6,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 68,
+    "seconds": 2.83,
+    "drift_first": 2.8,
+    "drift_last": 4.1,
     "jumps": [],
     "held_frames": 0
   },
   "folio-in": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 41,
     "seconds": 1.71,
-    "drift_first": 5.5,
-    "drift_last": 14.7,
+    "drift_first": 3.0,
+    "drift_last": 5.2,
     "jumps": [
-      0.58,
       0.71,
       0.83,
       0.96,
@@ -103,18 +269,52 @@
     "held_frames": 1
   },
   "card-out": {
-    "frames": 61,
-    "seconds": 2.54,
-    "drift_first": 5.2,
-    "drift_last": 7.1,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 81,
+    "seconds": 3.38,
+    "drift_first": 2.8,
+    "drift_last": 4.1,
     "jumps": [],
-    "held_frames": 6
+    "held_frames": 7
   },
   "card-toss": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 47,
     "seconds": 1.96,
-    "drift_first": 4.9,
-    "drift_last": 6.2,
+    "drift_first": 2.3,
+    "drift_last": 3.9,
     "jumps": [
       1.21,
       1.33,
@@ -128,209 +328,602 @@
     "held_frames": 0
   },
   "proud": {
-    "frames": 59,
-    "seconds": 2.46,
-    "drift_first": 5.2,
-    "drift_last": 7.3,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 62,
+    "seconds": 2.58,
+    "drift_first": 2.6,
+    "drift_last": 4.6,
     "jumps": [],
-    "held_frames": 3
+    "held_frames": 4
   },
   "later": {
-    "frames": 64,
-    "seconds": 2.67,
-    "drift_first": 5.0,
-    "drift_last": 6.7,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 66,
+    "seconds": 2.75,
+    "drift_first": 2.5,
+    "drift_last": 4.2,
     "jumps": [],
     "held_frames": 0
   },
   "hello-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 4.8,
-    "drift_last": 6.1,
+    "drift_first": 2.2,
+    "drift_last": 3.4,
     "jumps": [],
     "held_frames": 0
   },
   "folio-open-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 4.9,
-    "drift_last": 6.3,
+    "drift_first": 2.4,
+    "drift_last": 3.8,
     "jumps": [],
     "held_frames": 0
   },
   "folio-full-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 13.4,
-    "drift_last": 13.9,
+    "drift_first": 2.8,
+    "drift_last": 3.3,
     "jumps": [],
     "held_frames": 0
   },
   "reading-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 5.5,
-    "drift_last": 6.5,
+    "drift_first": 2.8,
+    "drift_last": 3.8,
     "jumps": [],
     "held_frames": 0
   },
   "proud-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 4.8,
-    "drift_last": 6.1,
+    "drift_first": 2.3,
+    "drift_last": 3.6,
     "jumps": [],
     "held_frames": 0
   },
   "id-tag": {
-    "frames": 63,
-    "seconds": 2.62,
-    "drift_first": 4.9,
-    "drift_last": 7.7,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 97,
+    "seconds": 4.04,
+    "drift_first": 2.5,
+    "drift_last": 3.7,
     "jumps": [],
     "held_frames": 2
   },
   "envelope": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 51,
     "seconds": 2.12,
-    "drift_first": 5.4,
-    "drift_last": 7.1,
+    "drift_first": 2.7,
+    "drift_last": 4.4,
     "jumps": [],
-    "held_frames": 6
+    "held_frames": 4
   },
   "guest": {
-    "frames": 84,
-    "seconds": 3.5,
-    "drift_first": 5.3,
-    "drift_last": 6.9,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 86,
+    "seconds": 3.58,
+    "drift_first": 2.5,
+    "drift_last": 3.9,
     "jumps": [],
     "held_frames": 0
   },
   "finale": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 77,
     "seconds": 3.21,
-    "drift_first": 5.6,
-    "drift_last": 7.7,
+    "drift_first": 2.6,
+    "drift_last": 15.6,
     "jumps": [],
     "held_frames": 0
   },
   "linked": {
-    "frames": 69,
-    "seconds": 2.88,
-    "drift_first": 5.6,
-    "drift_last": 6.5,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 70,
+    "seconds": 2.92,
+    "drift_first": 2.9,
+    "drift_last": 4.5,
     "jumps": [],
     "held_frames": 0
   },
   "envelope-linked": {
-    "frames": 71,
-    "seconds": 2.96,
-    "drift_first": 5.1,
-    "drift_last": 5.5,
-    "jumps": [],
-    "held_frames": 13
-  },
-  "to-desk": {
-    "frames": 60,
-    "seconds": 2.5,
-    "drift_first": 4.7,
-    "drift_last": 7.2,
-    "jumps": [],
-    "held_frames": 4
-  },
-  "cheer": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 73,
     "seconds": 3.04,
-    "drift_first": 4.9,
-    "drift_last": 6.5,
+    "drift_first": 2.3,
+    "drift_last": 3.5,
+    "jumps": [],
+    "held_frames": 9
+  },
+  "to-desk": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 60,
+    "seconds": 2.5,
+    "drift_first": 2.6,
+    "drift_last": 4.9,
+    "jumps": [],
+    "held_frames": 5
+  },
+  "cheer": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 75,
+    "seconds": 3.12,
+    "drift_first": 2.4,
+    "drift_last": 3.8,
     "jumps": [],
     "held_frames": 0
   },
   "wave-paid": {
-    "frames": 60,
-    "seconds": 2.5,
-    "drift_first": 4.8,
-    "drift_last": 7.4,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 64,
+    "seconds": 2.67,
+    "drift_first": 2.3,
+    "drift_last": 4.6,
     "jumps": [],
     "held_frames": 6
   },
   "wave-free": {
-    "frames": 63,
-    "seconds": 2.62,
-    "drift_first": 5.1,
-    "drift_last": 7.2,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 65,
+    "seconds": 2.71,
+    "drift_first": 2.7,
+    "drift_last": 4.0,
     "jumps": [],
     "held_frames": 0
   },
   "oops": {
-    "frames": 48,
-    "seconds": 2.0,
-    "drift_first": 5.1,
-    "drift_last": 7.4,
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
+    "frames": 55,
+    "seconds": 2.29,
+    "drift_first": 2.7,
+    "drift_last": 4.9,
     "jumps": [],
     "held_frames": 0
   },
   "present-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 5.2,
-    "drift_last": 6.3,
+    "drift_first": 2.7,
+    "drift_last": 3.8,
     "jumps": [],
     "held_frames": 0
   },
   "id-tag-idle": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 5.3,
-    "drift_last": 6.4,
+    "drift_first": 2.6,
+    "drift_last": 3.7,
     "jumps": [],
     "held_frames": 0
   },
   "folio-open-idle-b": {
+    "aligned": {
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
+    },
     "frames": 97,
     "seconds": 4.04,
-    "drift_first": 5.3,
-    "drift_last": 6.5,
+    "drift_first": 2.9,
+    "drift_last": 4.0,
     "jumps": [],
     "held_frames": 0
   },
   "pass-up": {
     "aligned": {
-      "scale": 0.9792,
-      "dx": 7.0,
-      "dy": 16.6
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
     },
     "frames": 66,
     "seconds": 2.75,
-    "drift_first": 3.5,
-    "drift_last": 5.4,
+    "drift_first": 2.3,
+    "drift_last": 4.4,
     "jumps": [],
     "held_frames": 0
   },
   "pass-toss": {
     "aligned": {
-      "scale": 0.9792,
-      "dx": 7.1,
-      "dy": 16.6
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
     },
     "frames": 43,
     "seconds": 1.79,
-    "drift_first": 3.8,
-    "drift_last": 5.0,
+    "drift_first": 2.7,
+    "drift_last": 4.0,
     "jumps": [],
     "held_frames": 1
   },
   "cheer-idle": {
     "aligned": {
-      "scale": 0.9792,
-      "dx": 7.1,
-      "dy": 16.6
+      "scale": 0.98,
+      "dx": 9.0,
+      "dy": 16.0,
+      "ends": [
+        [
+          0.98,
+          9.0,
+          16.0
+        ],
+        [
+          0.98,
+          9.0,
+          16.0
+        ]
+      ]
     },
     "frames": 34,
     "seconds": 1.42,
-    "drift_first": 3.8,
-    "drift_last": 4.6,
+    "drift_first": 2.7,
+    "drift_last": 3.5,
     "jumps": [],
     "held_frames": 0
   }

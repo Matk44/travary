@@ -23,6 +23,7 @@ import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../help/help_links.dart';
 import 'onboarding_stage_layout.dart';
+import 'pass_confirmation_stage.dart';
 
 enum OnboardingPassOutcome { free, upgraded }
 
@@ -46,6 +47,7 @@ class OnboardingPassPanel extends StatefulWidget {
     this.confirmedLabel = 'Open my holiday',
     this.source,
     this.onConfirmed,
+    this.passLanded = true,
     required this.onDone,
   });
   final String? tripId;
@@ -64,6 +66,10 @@ class OnboardingPassPanel extends StatefulWidget {
   /// A pass was just bought, or restored: the stage cheers and says so
   /// (`passConfirmedWords`, `traviCuesForPassConfirmed`).
   final ValueChanged<PassConfirmation>? onConfirmed;
+
+  /// The bought pass's badge is stamped onto the floor once Travi has
+  /// flicked it down (`PassConfirmationStage`); until then its place is kept.
+  final bool passLanded;
 
   /// Where the desk was opened from, for funnel analytics.
   final String? source;
@@ -447,9 +453,18 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 12),
-          child: _StampIn(
-            child: PassBadge(key: const ValueKey('pass-confirmed-badge'), kind: confirmed.kind, width: width),
-          ),
+          child: widget.passLanded
+              ? _StampIn(
+                  child: PassBadge(key: const ValueKey('pass-confirmed-badge'), kind: confirmed.kind, width: width),
+                )
+              : Opacity(
+                  opacity: 0,
+                  child: PassBadge(
+                    key: const ValueKey('pass-confirmed-badge-waiting'),
+                    kind: confirmed.kind,
+                    width: width,
+                  ),
+                ),
         ),
         Semantics(
           liveRegion: true,
@@ -577,17 +592,14 @@ class OnboardingPassScreen extends StatefulWidget {
   State<OnboardingPassScreen> createState() => _OnboardingPassScreenState();
 }
 
-class _OnboardingPassScreenState extends State<OnboardingPassScreen> {
-  PassConfirmation? _confirmed;
-
-  void _back() => Navigator.of(context).pop(_confirmed == null ? null : OnboardingPassOutcome.upgraded);
+class _OnboardingPassScreenState extends State<OnboardingPassScreen> with PassConfirmationStage {
+  void _back() => Navigator.of(context).pop(confirmed == null ? null : OnboardingPassOutcome.upgraded);
 
   @override
   Widget build(BuildContext context) {
     final travel = context.watch<TravelStore>();
     final premium = context.watch<PremiumStore>();
     final plan = travel.plan(widget.tripId ?? '');
-    final confirmed = _confirmed;
     return PopScope(
       canPop: confirmed == null,
       onPopInvokedWithResult: (popped, _) {
@@ -596,11 +608,14 @@ class _OnboardingPassScreenState extends State<OnboardingPassScreen> {
       child: OnboardingStageLayout(
         scene: OnboardingScene(
           stage: onboardingStage(plan?.trip.destination),
-          cues: confirmed == null ? traviCuesFor(OnboardingBeat.desk) : traviCuesForPassConfirmed(),
+          cues: passCues(traviCuesFor(OnboardingBeat.desk)),
+          onPose: passPose,
+          onHandoff: passHandoff,
+          overlay: passOverlay,
         ),
-        words: confirmed == null
-            ? onboardingWordsFor(OnboardingBeat.desk, covered: plan != null && premium.forTrip(plan).allowed)
-            : passConfirmedWords(confirmed.kind, restored: confirmed.restored),
+        words: passWords(
+          onboardingWordsFor(OnboardingBeat.desk, covered: plan != null && premium.forTrip(plan).allowed),
+        ),
         wordsKey: confirmed == null ? 'desk' : 'desk-confirmed',
         onBack: _back,
         backEnabled: !premium.busy,
@@ -611,7 +626,8 @@ class _OnboardingPassScreenState extends State<OnboardingPassScreen> {
           tripId: widget.tripId,
           bookingId: widget.bookingId,
           notice: widget.notice,
-          onConfirmed: (confirmation) => setState(() => _confirmed = confirmation),
+          onConfirmed: confirmPass,
+          passLanded: passLanded,
           onDone: (outcome) => Navigator.of(context).pop(outcome),
         ),
       ),

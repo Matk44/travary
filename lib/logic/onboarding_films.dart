@@ -27,6 +27,9 @@ enum TraviPose {
   cheer,
   wave,
   oops,
+
+  /// A just-bought pass held up: a blank ticket the app lays the badge on.
+  passHold,
 }
 
 /// Where a clip sits on [traviCanvas], in pixels.
@@ -87,9 +90,17 @@ List<TraviCue> traviCuesFor(
   OnboardingBeat.sendoff => [_cue(TraviPose.wave), _cue(TraviPose.folioFull)],
 };
 
-/// What Travi does once a pass is bought (or restored) on the pass desk:
-/// he cheers, from the desk's present (the `cheer` film).
-List<TraviCue> traviCuesForPassConfirmed() => [_cue(TraviPose.cheer)];
+/// What Travi does once a pass is bought (or restored) on the pass desk: he
+/// lifts a blank ticket up to the viewer (`pass-up`) and holds it while the
+/// app shows the bought pass on it, then flicks it down to the desk
+/// (`pass-toss`, whose handoff lands the live badge there) and cheers.
+List<TraviCue> traviCuesForPassConfirmed() => [_cue(TraviPose.passHold, passHoldTime), _cue(TraviPose.cheer)];
+
+/// How long Travi holds the bought pass up for the traveller to see.
+const passHoldTime = Duration(milliseconds: 1400);
+
+/// The film whose handoff lands the bought pass on the desk.
+const passTossFilm = 'pass-toss';
 
 /// The films from [from] to [to], fewest first; empty when he's there, and
 /// null when no chain of films connects them (he dissolves instead).

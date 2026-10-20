@@ -35,6 +35,7 @@ POSES = {
     '06-folio-open': 'folioOpen', '07-folio-full': 'folioFull', '08-reading': 'reading', '09-card': 'card',
     '10-proud': 'proud', 'id-tag': 'idTag', '11-envelope': 'envelope', '12-linked': 'linked',
     '13-present': 'present', '14-cheer': 'cheer', '15-wave': 'wave', '16-oops': 'oops',
+    '18-pass-hold': 'passHold',
 }
 # Reviewed films: exported name -> keyed source. Missing ones dissolve.
 EXPORT = {
@@ -52,6 +53,8 @@ EXPORT = {
     'folio-open-idle': 'folio-open-idle-b',
     # Not made (10 Oct 2026, to save generations): the card, envelope and
     # oops idles; he holds the key frame there.
+    # A bought pass confirmed (20 Oct 2026).
+    'pass-up': 'pass-up', 'pass-toss': 'pass-toss', 'cheer-idle': 'cheer-idle',
 }
 # Played backwards: exported name -> the film it reverses.
 REVERSED = {'folio-out': 'folio-in', 'envelope-back': 'envelope', 'oops-back': 'oops'}

@@ -92,8 +92,15 @@ void main() {
     });
   });
 
-  test('Travi cheers, from the desk where he presents the passes', () {
-    expect(traviCuesForPassConfirmed().single.pose, TraviPose.cheer);
-    expect(traviRoute(TraviPose.present, TraviPose.cheer), hasLength(1), reason: 'the cheer film, no dissolve');
+  test('Travi lifts the pass up, holds it while it\'s shown, then flicks it down and cheers', () {
+    final cues = traviCuesForPassConfirmed();
+    expect([for (final cue in cues) cue.pose], [TraviPose.passHold, TraviPose.cheer]);
+    expect(cues.first.hold, passHoldTime);
+    // Films all the way, from the desk where he presents the passes: no dissolves.
+    expect([for (final film in traviRoute(TraviPose.present, TraviPose.passHold)!) film.id], ['pass-up']);
+    expect([for (final film in traviRoute(TraviPose.passHold, TraviPose.cheer)!) film.id], [passTossFilm]);
+    final toss = traviFilms.singleWhere((film) => film.id == passTossFilm);
+    expect(toss.handoff, isNotNull, reason: 'the live badge lands on the desk at the handoff');
+    expect(traviIdles[TraviPose.cheer], isNotNull, reason: 'he keeps cheering, not frozen');
   });
 }

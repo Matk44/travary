@@ -11,6 +11,10 @@ abstract final class PassBadgeLayout {
 
   /// The widest the pass desk shows a just-bought pass.
   static const confirmedWidth = 250.0;
+
+  /// The ticket itself within the artwork (its transparent margin around),
+  /// as fractions of the image.
+  static const artTicket = Rect.fromLTRB(.029, .111, .971, .872);
 }
 
 /// Colours from the "travel ephemera" mockup (v1): linen desk, cream paper,

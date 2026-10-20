@@ -6,12 +6,12 @@ import '../../domain/domain.dart';
 import '../../logic/onboarding_art.dart';
 import '../../logic/onboarding_films.dart';
 import '../../logic/onboarding_journey.dart';
-import '../../logic/pass_confirmation.dart';
 import '../../state/analytics.dart';
 import '../../state/premium_store.dart';
 import '../../state/travel_store.dart';
 import '../onboarding/onboarding_pass_screen.dart';
 import '../onboarding/onboarding_stage_layout.dart';
+import '../onboarding/pass_confirmation_stage.dart';
 
 /// The paywall is the pass desk from onboarding: Travi presenting Travary
 /// Plus and the Holiday Pass on the trip's own stage, its headline for what
@@ -37,10 +37,7 @@ class PaywallScreen extends StatefulWidget {
   State<PaywallScreen> createState() => _PaywallScreenState();
 }
 
-class _PaywallScreenState extends State<PaywallScreen> {
-  /// The pass just bought or restored here.
-  PassConfirmation? _confirmed;
-
+class _PaywallScreenState extends State<PaywallScreen> with PassConfirmationStage {
   @override
   void initState() {
     super.initState();
@@ -48,7 +45,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
   }
 
   void _close() {
-    if (_confirmed != null) return Navigator.of(context).pop(true);
+    if (confirmed != null) return Navigator.of(context).pop(true);
     track('paywall_dismissed', {'source': widget.source});
     Navigator.of(context).pop(false);
   }
@@ -57,7 +54,6 @@ class _PaywallScreenState extends State<PaywallScreen> {
   Widget build(BuildContext context) {
     final premium = context.watch<PremiumStore>();
     final plan = context.watch<TravelStore>().plan(widget.tripId ?? '');
-    final confirmed = _confirmed;
     return PopScope(
       // Paid for: Back leaves with "bought", like Carry on.
       canPop: !premium.busy && confirmed == null,
@@ -67,11 +63,12 @@ class _PaywallScreenState extends State<PaywallScreen> {
       child: OnboardingStageLayout(
         scene: OnboardingScene(
           stage: onboardingStage(plan?.trip.destination),
-          cues: confirmed == null ? traviCuesFor(OnboardingBeat.desk) : traviCuesForPassConfirmed(),
+          cues: passCues(traviCuesFor(OnboardingBeat.desk)),
+          onPose: passPose,
+          onHandoff: passHandoff,
+          overlay: passOverlay,
         ),
-        words: confirmed == null
-            ? paywallWordsFor(widget.feature)
-            : passConfirmedWords(confirmed.kind, restored: confirmed.restored),
+        words: passWords(paywallWordsFor(widget.feature)),
         wordsKey: confirmed == null ? 'paywall-${widget.feature?.name}' : 'paywall-confirmed',
         onBack: _close,
         backEnabled: !premium.busy,
@@ -85,7 +82,8 @@ class _PaywallScreenState extends State<PaywallScreen> {
           freeLabel: 'Not now',
           confirmedLabel: 'Carry on',
           source: widget.source,
-          onConfirmed: (confirmation) => setState(() => _confirmed = confirmation),
+          onConfirmed: confirmPass,
+          passLanded: passLanded,
           onDone: (outcome) {
             if (outcome == OnboardingPassOutcome.free) return _close();
             Navigator.of(context).pop(true);
