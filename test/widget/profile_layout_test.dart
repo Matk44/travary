@@ -340,6 +340,30 @@ void main() {
   );
 
   testWidgets(
+    'after upgrading a Holiday Pass: the Annual Pass leads, the Holiday Pass is still listed, no upsell',
+    (tester) async {
+      await pumpProfile(
+        tester,
+        initial: Entitlements(
+          plus: PlusSubscription(expiresAt: DateTime(2027, 9, 28)),
+          tripPasses: {
+            'lakes': TripPass(tripId: 'lakes', start: LocalDate(2026, 11, 25), end: LocalDate(2026, 11, 28)),
+          },
+        ),
+      );
+      final restore = find.byKey(const ValueKey('profile-restore-purchases'));
+      await tester.scrollUntilVisible(restore, 150, scrollable: profileScroll());
+      await tester.pumpAndSettle();
+      expect(tester.widget<Text>(find.byKey(const ValueKey('profile-pass-lead'))).data, 'Renews on 28 Sep 2027.');
+      expect(find.textContaining('Holiday Pass · '), findsOneWidget, reason: 'what they bought is still theirs');
+      expect(find.byKey(const ValueKey('profile-annual-pass')), findsNothing);
+      expect(find.byKey(const ValueKey('profile-manage-subscription')), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+    variant: const TargetPlatformVariant({TargetPlatform.iOS}),
+  );
+
+  testWidgets(
     'Annual Pass holder sees renewal and restore without a repeat upsell',
     (tester) async {
       await pumpProfile(
