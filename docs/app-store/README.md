@@ -1,5 +1,7 @@
 # Travary App Store listing draft
 
+> **Filling in the stores:** start with [STORE_POPULATION_HANDOVER.md](STORE_POPULATION_HANDOVER.md) (21 Oct 2026). It points to the ASO study's route map and field values, which supersede the drafts below.
+
 Prepared 16 October 2026. [Open the review](review.html), inspect the ten stills and select UK, Australian or US English for the metadata. Each field is also available as a plain `.txt` file under its locale folder and in [metadata.json](metadata.json).
 
 The images are draft green-screen artwork, generated with built-in ImageGen using the supplied pack and Travi's passport-icon reference. [Exact prompts and generation record](../mockups/app-store-screenshots-v1/GENERATION_LOG.md). Artwork approval has not been recorded. No motion or store upload was performed.
