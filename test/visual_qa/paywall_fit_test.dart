@@ -51,7 +51,13 @@ void main() {
     (Size(440, 956), 34.0), // iPhone 16 Pro Max
   ];
 
-  Future<void> pump(WidgetTester tester, Size size, double bottom, {required String name}) async {
+  Future<void> pump(
+    WidgetTester tester,
+    Size size,
+    double bottom, {
+    required String name,
+    String title = 'Japan holiday',
+  }) async {
     const dpr = 3.0;
     tester.view.physicalSize = size * dpr;
     tester.view.devicePixelRatio = dpr;
@@ -60,7 +66,7 @@ void main() {
     addTearDown(tester.view.reset);
 
     final boundary = GlobalKey();
-    await tester.pumpWidget(RepaintBoundary(key: boundary, child: _paywall()));
+    await tester.pumpWidget(RepaintBoundary(key: boundary, child: _paywall(title)));
     await tester.pumpAndSettle();
     if (!qa) return;
     await _precacheImages(tester);
@@ -115,6 +121,9 @@ void main() {
       }
       expect(family.hitTestable(), findsOneWidget, reason: 'unlimited bookings and the family lead, on every phone');
       expect(tester.getSize(family).height, lessThan(24), reason: 'on one line');
+      // The holiday's name whole on its ticket.
+      final holiday = tester.renderObject<RenderParagraph>(find.text('Japan holiday'));
+      expect(holiday.didExceedMaxLines, isFalse, reason: 'not cut short');
     });
   }
 
@@ -146,6 +155,40 @@ void main() {
     );
   }
 
+  // The Holiday Pass names the holiday it covers: a long name shrinks to
+  // the ticket's one line rather than pushing the button off screen.
+  for (final (size, bottom) in [phones.first, phones.last]) {
+    final name = 'paywall_long_name_${size.width.toInt()}x${size.height.toInt()}';
+    testWidgets('a long holiday name still fits a ${size.width.toInt()} × ${size.height.toInt()} phone', (
+      tester,
+    ) async {
+      const title = "Grandma's 80th birthday in the Lake District";
+      await pump(tester, size, bottom, name: name, title: title);
+      // Cut short, the dates whole, and the whole line read out.
+      final dates = find.text(' · 3–12 Nov');
+      expect(find.text(title), findsOneWidget);
+      expect(dates, findsOneWidget);
+      final ticket = tester.getRect(find.byKey(const ValueKey('onboarding-pass-holiday')));
+      expect(tester.getRect(dates).right, lessThan(ticket.right - ticket.width * 220 / 851 + 1));
+      final semantics = tester.ensureSemantics();
+      await tester.pump();
+      expect(find.bySemanticsLabel(RegExp(RegExp.escape('$title · 3–12 Nov'))), findsOneWidget);
+      semantics.dispose();
+      expect(tester.takeException(), isNull);
+      if (TravaryText.serifFamily == null) return;
+      // Big enough to read.
+      expect(tester.widget<Text>(dates).style!.fontSize, greaterThanOrEqualTo(ticket.width / 851 * 28 * 0.85 - 0.01));
+      final scroll = tester.state<ScrollableState>(
+        find.descendant(of: find.byKey(const ValueKey('onboarding-scroll')), matching: find.byType(Scrollable)),
+      );
+      expect(scroll.position.maxScrollExtent, 0, reason: 'nothing to scroll');
+      for (final key in ['onboarding-pass-buy', 'onboarding-pass-free', 'onboarding-pass-privacy']) {
+        expect(tester.getRect(find.byKey(ValueKey(key))).bottom, lessThanOrEqualTo(size.height - bottom), reason: key);
+        expect(find.byKey(ValueKey(key)).hitTestable(), findsOneWidget, reason: key);
+      }
+    });
+  }
+
   testWidgets('an iPhone SE scrolls to the button rather than covering Travi', (tester) async {
     await pump(tester, const Size(375, 667), 0, name: 'paywall_375x667');
     expect(tester.getRect(find.byType(TraviPlayer)), Rect.fromLTWH(0, 0, 375, 375 * 16 / 9));
@@ -155,11 +198,11 @@ void main() {
   });
 }
 
-Widget _paywall() {
+Widget _paywall(String title) {
   final now = DateTime(2026, 10, 5, 9);
   final repository = MemoryTravelRepository(userId: 'me')
     ..replaceAll([
-      trip('japan', title: 'Japan holiday', plannedStart: d(11, 3), plannedEnd: d(11, 12)).copyWith(
+      trip('japan', title: title, plannedStart: d(11, 3), plannedEnd: d(11, 12)).copyWith(
         destination: const TripDestination(countryCode: 'JP', countryName: 'Japan'),
       ),
     ], const []);

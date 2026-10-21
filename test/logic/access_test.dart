@@ -399,6 +399,12 @@ void main() {
         'Renews on 20 Oct 2027.',
       );
       expect(profileHolidayPassText('Japan holiday', d(11, 19)), 'Holiday Pass · Japan holiday, until 19 Nov');
+      expect(holidayPassScopeText('Lisbon', d(12, 1), d(12, 5)), (lead: 'Lisbon', end: ' · 1–5 Dec'));
+      expect(holidayPassRowText('Lisbon', price: r'$14.99'), (
+        title: 'Holiday Pass for Lisbon',
+        subtitle: r'Unlimited bookings and files, for everyone on it · $14.99 once',
+      ));
+      expect(holidayPassRowText('Lisbon').subtitle, 'Unlimited bookings and files, for everyone on it');
     });
   });
 

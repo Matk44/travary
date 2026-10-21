@@ -461,6 +461,15 @@ encoding error, run it with `LANG=en_US.UTF-8`. The travel documents' lock
   with what's held (`profilePassLead`), lists the Holiday Passes still on
   with their holiday and last day (`activeHolidayPasses`,
   `profileHolidayPassText`), and its benefits lead with unlimited bookings.
+  The desk's Holiday Pass always names the holiday it would go on, under
+  "HOLIDAY PASS" as "Every holiday for a year" is under the Annual Pass
+  ("Japan holiday · 3–12 Nov", `holidayPassScopeText`, never the store's
+  scope); one line, a long name cut short with its dates whole. From
+  Profile that's the holiday on now or coming next (`TravelStore.focus`);
+  any other holiday buys its own from its trip page, whose "Holiday Pass
+  for Lisbon" row (`holidayPassRowText`, source `trip_page`) shows while
+  that holiday is limited and can have one (`canBuyTripPassFor`: dated,
+  not ended, 30 days or less, no Annual Pass).
 - **A bought pass is confirmed** (20 Oct 2026): once the store confirms,
   the pass desk (`OnboardingPassPanel`, on the paywall and both onboarding
   desks) stamps the pass's badge onto its floor over what it covers

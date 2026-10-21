@@ -180,7 +180,13 @@ void main() {
 
       // Preselected when there's a holiday to attach it to.
       expect(find.text('Get Holiday Pass'), findsOneWidget);
-      expect(find.textContaining('Orlando · 12–19 Oct. It covers this holiday until 26 Oct 2026.'), findsOneWidget);
+      // The pass names the holiday it would go on.
+      expect(
+        find.descendant(of: find.byKey(const ValueKey('onboarding-pass-holiday')), matching: find.text('Orlando')),
+        findsOneWidget,
+      );
+      expect(find.text(' · 12–19 Oct'), findsOneWidget);
+      expect(find.textContaining('It covers Orlando until 26 Oct 2026, and only that holiday'), findsOneWidget);
       expect(find.textContaining('Holiday Pass is one payment of'), findsOneWidget);
 
       await tapDesk(tester, 'onboarding-pass-buy');

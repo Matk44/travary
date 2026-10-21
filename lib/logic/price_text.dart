@@ -59,6 +59,21 @@ String bookingsOverText(int left, int cap) => left == 0
     ? 'This holiday has its $cap free bookings. A pass makes room for these.'
     : 'Only $left more fit on this free holiday ($cap bookings). Untick some, or get a pass for every one.';
 
+/// The Holiday Pass ticket's scope on the pass desk, under "HOLIDAY PASS"
+/// as "Every holiday for a year" is under the Annual Pass: the holiday it
+/// would cover, by name and dates ("Lisbon · 1–5 Dec"), so it's never a
+/// guess which of several holidays it goes on. In two parts, so a long
+/// name can be cut short while the dates ([end]) stay whole.
+({String lead, String end}) holidayPassScopeText(String title, LocalDate start, LocalDate end) =>
+    (lead: title, end: ' · ${formatDayMonthRange(start, end)}');
+
+/// The trip page's way to a Holiday Pass for [title]: its row's words,
+/// with the store's [price] once it's known.
+({String title, String subtitle}) holidayPassRowText(String title, {String? price}) => (
+  title: 'Holiday Pass for $title',
+  subtitle: 'Unlimited bookings and files, for everyone on it${price == null ? '' : ' · $price once'}',
+);
+
 /// On the pass desk for a holiday with no pass, when the traveller's
 /// Holiday Pass is for another one ([title]): a pass covers one holiday.
 String holidayPassElsewhereText(String title) => 'Your Holiday Pass covers $title only.';

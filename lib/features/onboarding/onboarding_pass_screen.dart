@@ -252,6 +252,9 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
     // Under the passes: the passes, then what paying adds while there's
     // room for it. At the bottom, always on screen: the button, free, and
     // the small print's links. Nothing to scroll on a phone of today.
+    final holiday = plan != null && plan.hasDates
+        ? holidayPassScopeText(plan.trip.title, plan.start!, plan.end!)
+        : null;
     final top = <Widget>[
       if (!ready) ...[
         if (canPass)
@@ -262,7 +265,10 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
               annual: false,
               selected: _selected == OfferKind.tripPass,
               title: pass.displayTitle,
-              scope: pass.displayScope,
+              // The holiday it would go on, by name: from Profile, with
+              // several holidays, never a guess.
+              scope: holiday?.lead ?? pass.displayScope,
+              scopeEnd: holiday?.end,
               price: priceOf(pass),
               onTap: busy
                   ? null
@@ -365,9 +371,8 @@ class _OnboardingPassPanelState extends State<OnboardingPassPanel> {
             child: Padding(
               padding: const EdgeInsets.only(top: 2),
               child: fine(
-                '${plan.trip.title} · ${formatDayMonthRange(plan.start!, plan.end!)}. '
-                'It covers this holiday until ${formatDate(newTripPassFor(plan).lastDay)}. '
-                'Covers a holiday of up to ${Pricing.tripPassMaxDays} days.',
+                'It covers ${plan.trip.title} until ${formatDate(newTripPassFor(plan).lastDay)}, '
+                'and only that holiday (of up to ${Pricing.tripPassMaxDays} days).',
               ),
             ),
           ),

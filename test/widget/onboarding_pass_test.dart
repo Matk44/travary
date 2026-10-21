@@ -243,10 +243,15 @@ void main() {
     ];
     await tester.element(find.byType(OnboardingPassScreen)).read<PremiumStore>().refreshOffers();
     await tester.pumpAndSettle();
-    // The price and scope come from the store; the name is always the app's.
+    // The price comes from the store; the name is always the app's, and the
+    // Holiday Pass says which holiday it goes on, whatever the store's scope.
     expect(find.text('HOLIDAY PASS'), findsOneWidget);
     expect(find.text('ADVENTURE PASS'), findsNothing);
-    expect(find.text('Your upcoming escape'), findsOneWidget);
+    expect(find.text('Your upcoming escape'), findsNothing);
+    expect(
+      find.descendant(of: find.byKey(const ValueKey('onboarding-pass-holiday')), matching: find.text('Bali holiday')),
+      findsOneWidget,
+    );
     expect(find.text('22,49 € once'), findsOneWidget);
     expect(find.text('Get Holiday Pass'), findsOneWidget);
     expect(find.byKey(const ValueKey('onboarding-pass-annual')), findsNothing);

@@ -43,6 +43,7 @@ class OnboardingPaperPass extends StatelessWidget {
     required this.selected,
     required this.title,
     required this.scope,
+    this.scopeEnd,
     required this.price,
     required this.onTap,
   });
@@ -50,6 +51,10 @@ class OnboardingPaperPass extends StatelessWidget {
   final bool selected;
   final String title;
   final String scope;
+
+  /// The end of the scope line, kept whole when [scope] is cut short (a
+  /// holiday's dates after its name).
+  final String? scopeEnd;
   final String price;
   final VoidCallback? onTap;
   @override
@@ -77,7 +82,11 @@ class OnboardingPaperPass extends StatelessWidget {
                       children: [
                         Text(title.toUpperCase(), style: serif.copyWith(fontSize: 36 * s)),
                         SizedBox(height: 3 * s),
-                        Text(scope, style: copy.copyWith(fontSize: 28 * s)),
+                        _ScopeLine(
+                          scope,
+                          end: scopeEnd,
+                          style: copy.copyWith(fontSize: 28 * s),
+                        ),
                         Text.rich(
                           TextSpan(
                             text: price,
@@ -190,4 +199,65 @@ class PassDeskButton extends StatelessWidget {
       );
     },
   );
+}
+
+/// A pass's scope on one line, so the ticket keeps its artwork's height: a
+/// little too long shrinks a touch; longer (a long holiday name) ends in
+/// "…" with its [end] (the dates) whole.
+class _ScopeLine extends StatelessWidget {
+  const _ScopeLine(this.text, {this.end, required this.style});
+  final String text;
+  final String? end;
+  final TextStyle style;
+
+  /// Shrinks no smaller than this before the name is cut short...
+  static const _smallest = 0.85;
+
+  /// ...and the dates take no more of the line than this (doubled type).
+  static const _endShare = 0.6;
+
+  @override
+  Widget build(BuildContext context) {
+    final end = this.end;
+    if (end == null) {
+      return FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
+        child: Text(text, maxLines: 1, style: style),
+      );
+    }
+    return LayoutBuilder(
+      builder: (context, box) {
+        double widthOf(String words) {
+          final painter = TextPainter(
+            text: TextSpan(text: words, style: style),
+            textDirection: Directionality.of(context),
+            textScaler: MediaQuery.textScalerOf(context),
+            maxLines: 1,
+          )..layout();
+          final width = painter.width;
+          painter.dispose();
+          return width;
+        }
+
+        var scale = (box.maxWidth / widthOf('$text$end')).clamp(_smallest, 1.0);
+        final endWidth = widthOf(end);
+        if (endWidth * scale > box.maxWidth * _endShare) scale = box.maxWidth * _endShare / endWidth;
+        final sized = style.copyWith(fontSize: style.fontSize! * scale);
+        return Semantics(
+          label: '$text$end',
+          child: ExcludeSemantics(
+            child: Row(
+              children: [
+                Flexible(
+                  child: Text(text, maxLines: 1, softWrap: false, overflow: TextOverflow.ellipsis, style: sized),
+                ),
+                Text(end, maxLines: 1, softWrap: false, style: sized),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

@@ -159,6 +159,10 @@ class _TripBody extends StatelessWidget {
               const SizedBox(height: TravarySpace.lg),
               _Travellers(plan: plan),
             ],
+            if (_HolidayPassOffer.offeredFor(context, plan)) ...[
+              const SizedBox(height: TravarySpace.lg),
+              _HolidayPassOffer(plan: plan),
+            ],
           ],
         ),
         bottomNavigationBar: SafeArea(
@@ -408,6 +412,37 @@ class _Packing extends StatelessWidget {
         leading: const RowIcon(IconSlot.countdownBookings),
         trailing: Icon(Icons.chevron_right_rounded, color: colors.ink),
         onTap: () => openPackingList(context, plan),
+      ),
+    );
+  }
+}
+
+/// This holiday's own Holiday Pass, to buy whenever the traveller likes,
+/// not only when a limit is reached: shown while it can take one (dated,
+/// not over, at most 30 days, nothing covering it yet). Opens the pass desk
+/// for this holiday.
+class _HolidayPassOffer extends StatelessWidget {
+  const _HolidayPassOffer({required this.plan});
+
+  final TripPlan plan;
+
+  static bool offeredFor(BuildContext context, TripPlan plan) {
+    final policy = context.watch<PremiumStore?>()?.policy;
+    return policy != null && !policy.forTrip(plan).allowed && policy.canBuyTripPassFor(plan);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final offer = context.watch<PremiumStore>().offer(OfferKind.tripPass);
+    final text = holidayPassRowText(plan.trip.title, price: offer == null ? null : priceOf(offer));
+    return PaperPanel(
+      child: PaperRow(
+        key: const ValueKey('trip-holiday-pass'),
+        title: text.title,
+        subtitle: text.subtitle,
+        titleStyle: TravaryText.label.copyWith(fontSize: 16),
+        leading: const PassBadge(kind: OfferKind.tripPass, width: 64),
+        onTap: () => showPaywall(context, tripId: plan.id, source: 'trip_page'),
       ),
     );
   }
