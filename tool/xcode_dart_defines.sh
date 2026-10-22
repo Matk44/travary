@@ -13,7 +13,7 @@
 # tool/build_release.sh still leaves flight lookup out), and Debug and
 # Profile builds are left alone. Without the keys file a Release build
 # fails here, not on the phone (demo builds need no keys). Android does the
-# same in android/app/release_defines.gradle.kts.
+# same in android/app/build.gradle.kts.
 #
 # DART_DEFINES is Flutter's encoding: each KEY=value in base64, joined by
 # commas.

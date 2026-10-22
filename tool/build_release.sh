@@ -7,7 +7,7 @@
 #     refuses to build (and the app refuses to start that way, see bootstrap).
 #     Other release builds read them too: an Archive from Xcode
 #     (tool/xcode_dart_defines.sh) and a plain `flutter build appbundle`
-#     (android/app/release_defines.gradle.kts).
+#     (android/app/build.gradle.kts).
 #   - Live flight lookup (the add-flight board and the flight page's status).
 #     Needs the AeroDataBox plan on API.Market; FLIGHT_LOOKUP=false leaves it
 #     out until then.
