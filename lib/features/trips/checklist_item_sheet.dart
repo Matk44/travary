@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/tokens.dart';
+import '../../design/widgets/common.dart';
 import '../../design/widgets/date_picker.dart';
 import '../../domain/domain.dart';
 import '../../logic/checklist.dart';
@@ -28,8 +29,7 @@ Future<void> showChecklistItemSheet(
     isScrollControlled: true,
     showDragHandle: true,
     backgroundColor: TravaryColors.linen,
-    builder: (context) => Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+    builder: (_) => AboveKeyboard(
       child: ChecklistItemSheet(plan: plan, editing: editing, list: list, messenger: messenger),
     ),
   );

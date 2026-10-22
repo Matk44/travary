@@ -188,9 +188,11 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
 
   /// The nav highlights the chosen tab at once while the pages slide to it
   /// (or jump, with reduced motion). Rapid taps restart the slide from
-  /// wherever the pages are.
+  /// wherever the pages are. Leaving a tab puts its keyboard away
+  /// (Documents' search): tabs are kept alive, so it would follow along.
   void _select(int index) {
     if (index == _index) return;
+    FocusManager.instance.primaryFocus?.unfocus();
     setState(() => _index = index);
     // Today's countdown starts its entry as its page slides in.
     _showedToday();

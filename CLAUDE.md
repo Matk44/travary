@@ -201,7 +201,8 @@ lib/
 │               onboarding (Travi scenes, sign-in before the pass desk, home gate),
 │               ai (the consent sheet, the trip page's looks offer),
 │               widget (the home-screen countdown widget's setup sheet)
-└── app/        bootstrap (backend choice), app, home_shell (tab pages + add button)
+└── app/        bootstrap (backend choice), app, home_shell (tab pages + add button),
+                keyboard_guard (no keyboard without a field to type in)
 tool/           art_packs.dart: builds, validates and publishes art packs, and converts
                 bundled art to WebP (`bundled-webp`) (operator only)
 art_packs/      pack sources (+ catalog.json once published)
@@ -1146,6 +1147,17 @@ modal at launch or in onboarding:
   (keep a reference from `initState`).
 - Layouts must survive long titles and small phones: tests run at iPhone size
   and fail on overflow.
+- **The keyboard never hides what's typed, and never outlives it**
+  (`test/widget/keyboard_test.dart`). A sheet with a text field wraps its
+  builder in `AboveKeyboard` (`design/widgets/common.dart`) and scrolls its
+  content: the keyboard is read inside the sheet, never from the screen
+  under it, whose Scaffold has taken it out already (the invite sheet's
+  name sat behind the keyboard that way). `KeyboardGuard` (`app/keyboard_guard.dart`,
+  at the app's root) hides a keyboard that's up with no field focused:
+  iOS 26 brings it back after a brief app switch once Flutter has let go,
+  and Flutter never hides it (flutter/flutter#189051; remove the guard once
+  the Flutter we build with has the engine fix). Changing tabs puts the
+  keyboard away (`HomeShell._select`).
 - **Home tabs are pages of one `PageView`** (`app/home_shell.dart`). A nav tap
   slides through every tab in between (`NavLayout.switchDuration` 500 ms,
   `switchCurve` `easeOutBack`: the overshoot is the bobble, smaller for

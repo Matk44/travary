@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../design/tokens.dart';
+import '../../design/widgets/common.dart';
 import '../../logic/destinations.dart';
 
 /// Choose where a trip goes: any country, or a well-known region or city
@@ -16,8 +17,7 @@ Future<Place?> showPlacePicker(
   isScrollControlled: true,
   showDragHandle: true,
   backgroundColor: TravaryColors.linen,
-  builder: (context) => Padding(
-    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+  builder: (_) => AboveKeyboard(
     child: FractionallySizedBox(
       heightFactor: 0.85,
       child: PlacePicker(countriesOnly: countriesOnly, title: title, subtitle: subtitle),

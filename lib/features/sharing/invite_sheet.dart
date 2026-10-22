@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../data/sharing_service.dart';
 import '../../design/tokens.dart';
+import '../../design/widgets/common.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../logic/invite_link.dart';
@@ -20,10 +21,7 @@ Future<void> showInviteSheet(BuildContext context, TripPlan plan) => showModalBo
   context: context,
   isScrollControlled: true,
   showDragHandle: true,
-  builder: (_) => Padding(
-    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-    child: InviteSheet(plan: plan),
-  ),
+  builder: (_) => AboveKeyboard(child: InviteSheet(plan: plan)),
 );
 
 class InviteSheet extends StatefulWidget {
@@ -90,7 +88,7 @@ class _InviteSheetState extends State<InviteSheet> {
   Widget build(BuildContext context) {
     final invite = _invite;
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,

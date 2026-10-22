@@ -25,6 +25,7 @@ import '../state/onboarding_store.dart';
 import '../state/travi_greetings.dart';
 import '../features/onboarding/onboarding_gate.dart';
 import 'bootstrap.dart';
+import 'keyboard_guard.dart';
 import 'route_observer.dart';
 import 'trip_chrome_scope.dart';
 
@@ -143,7 +144,7 @@ class TravaryApp extends StatelessWidget {
               builder: (context, child) {
                 // Times are written the way the phone is set to show them.
                 ClockStyle.use24Hour = MediaQuery.alwaysUse24HourFormatOf(context);
-                return TripChromeScope(child: child!);
+                return KeyboardGuard(child: TripChromeScope(child: child!));
               },
               navigatorObservers: [appRouteObserver],
               home: const OnboardingGate(),

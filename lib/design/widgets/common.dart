@@ -124,6 +124,23 @@ class EmptyState extends StatelessWidget {
   }
 }
 
+/// A bottom sheet's content lifted clear of the keyboard: every sheet with
+/// a text field wraps its builder in this. It reads the keyboard from its
+/// own place in the sheet, never the screen under it, whose Scaffold has
+/// taken the keyboard out already: read from there, a sheet's field sat
+/// behind the keyboard where nobody could see what they typed.
+class AboveKeyboard extends StatelessWidget {
+  const AboveKeyboard({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+    child: child,
+  );
+}
+
 /// A bottom sheet's drag handle, drawn by the sheet itself (as Material's
 /// own: a 32 × 4 bar in a 48-point band), for sheets that let something
 /// stand over their top edge.

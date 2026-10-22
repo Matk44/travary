@@ -51,10 +51,7 @@ Future<_Outcome?> _showSheet(BuildContext context, TripDetailsSheet sheet) => sh
   // who peeks over the top edge.
   showDragHandle: false,
   backgroundColor: TravaryColors.linen,
-  builder: (context) => Padding(
-    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-    child: sheet,
-  ),
+  builder: (_) => AboveKeyboard(child: sheet),
 );
 
 sealed class _Outcome {

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/sharing_service.dart';
 import '../../design/tokens.dart';
+import '../../design/widgets/common.dart';
 import '../../logic/invite_link.dart';
 import '../../state/analytics.dart';
 import '../../state/app_session.dart';
@@ -18,10 +19,7 @@ Future<JoinedTrip?> showJoinTripSheet(BuildContext context, {String? code}) => s
   context: context,
   isScrollControlled: true,
   showDragHandle: true,
-  builder: (_) => Padding(
-    padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-    child: JoinTripSheet(code: code),
-  ),
+  builder: (_) => AboveKeyboard(child: JoinTripSheet(code: code)),
 );
 
 /// Asks for an invite code (or uses [code], from a link), joins, says so
@@ -92,7 +90,7 @@ class _JoinTripSheetState extends State<JoinTripSheet> {
   Widget build(BuildContext context) {
     final available = context.read<TravelStore>().sharingAvailable;
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
