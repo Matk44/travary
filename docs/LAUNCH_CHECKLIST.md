@@ -38,7 +38,10 @@ work, accounts, money); everything else can be done in this repo.
   builds with whatever the last flutter command left in
   `ios/Flutter/Generated.xcconfig`. Now the Runner's Flutter build phase
   adds the keys and flight lookup to any Release build that lacks them
-  (`tool/xcode_dart_defines.sh`) and fails without the keys file.
+  (`tool/xcode_dart_defines.sh`) and fails without the keys file. A plain
+  `flutter build appbundle --release` did the same on Android (22 Oct:
+  version 11 in closed testing wouldn't start); the app's Gradle build
+  now does the same (`android/app/release_defines.gradle.kts`).
 - [ ] **You:** App Store Connect: set the price of the Annual Pass
   (`travary_annual_pass`). Name the products "Annual Pass" and "Holiday
   Pass", and give each one a review screenshot (the pass desk). In-app

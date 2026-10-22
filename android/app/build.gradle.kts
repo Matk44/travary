@@ -22,6 +22,10 @@ val keystoreProperties = Properties().apply {
 }
 val hasUploadKey = keystorePropertiesFile.exists()
 
+// RevenueCat's keys and flight lookup for release builds the flutter
+// command didn't give them to.
+apply(from = "release_defines.gradle.kts")
+
 android {
     namespace = "com.travary.app"
     compileSdk = flutter.compileSdkVersion
