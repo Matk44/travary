@@ -1,4 +1,4 @@
-import { defineBoolean, defineInt, defineSecret } from 'firebase-functions/params';
+import { defineBoolean, defineInt, defineSecret, defineString } from 'firebase-functions/params';
 
 /**
  * Server-only secrets (Secret Manager). Never in functions/.env, source
@@ -19,6 +19,15 @@ export const revenueCatApiKey = defineSecret('REVENUECAT_API_KEY');
 
 /** The Authorization header RevenueCat's webhook sends (set in both places). */
 export const revenueCatWebhookAuth = defineSecret('REVENUECAT_WEBHOOK_AUTH');
+
+/**
+ * Cloudflare API token with Account → Email Sending: Edit, for the account
+ * emails sent from send.travary.app (accountEmails.ts).
+ */
+export const cloudflareEmailToken = defineSecret('CLOUDFLARE_EMAIL_TOKEN');
+
+/** The Cloudflare account that sends them (not a secret). */
+export const cloudflareAccountId = defineString('CLOUDFLARE_ACCOUNT_ID', { default: '1b63e91f9618e2482f550906703a747f' });
 
 /*
  * Flight alerts (functions/.env). The provider's plan: AeroDataBox Pro on

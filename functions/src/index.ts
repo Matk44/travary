@@ -6,6 +6,7 @@ export { smartImport } from './smartImport';
 export { classifyTripVisuals, purgeExpiredPlaceCoordinates } from './classifyTripVisuals';
 export { createTripInvite, joinTrip, removeTripMember } from './sharing';
 export { adoptGuestTripsCall as adoptGuestTrips, deleteAccountCall as deleteAccount } from './account';
+export { sendAccountEmail } from './accountEmails';
 export { flightStatus } from './flightStatus';
 export {
   checkWatchedFlights, registerPushToken, watchFlightsOnBookingChange, watchFlightsOnTripChange, watchFlightsOnUserChange,

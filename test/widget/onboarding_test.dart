@@ -594,34 +594,43 @@ void main() {
     expect(find.descendant(of: card, matching: find.byIcon(Icons.chevron_right_rounded)), findsNothing);
   });
 
-  testWidgets('email: a sent link is not a sign-in; opening it signs in and goes on to the desk', (tester) async {
+  testWidgets('email: a new account is not a sign-in until its address is confirmed; then on to the desk', (
+    tester,
+  ) async {
     final auth = FakeAuthService();
-    final links = StreamController<Uri>();
-    addTearDown(links.close);
     final saved = firstBooking();
     await pump(
       tester,
       draft: holiday().copyWith(bookingId: saved.id),
       saved: saved,
       auth: auth,
-      links: links.stream,
     );
     await tap(tester, 'onboarding-see-passes');
     await tap(tester, 'sign-in-email');
-    expect(find.textContaining('And you’re in.', findRichText: true), findsOneWidget);
-    expect(tester.widget<TicketButton>(find.byKey(const ValueKey('email-link-send'))).onPressed, isNull);
-    await tester.enterText(find.byKey(const ValueKey('email-link-field')), 'sam@example.com');
+    expect(find.textContaining('password.', findRichText: true), findsOneWidget);
+    expect(find.text('Create account'), findsOneWidget, reason: 'onboarding starts on a new account');
+    Finder submit() => find.byKey(const ValueKey('email-submit'));
+    expect(tester.widget<TicketButton>(submit()).onPressed, isNull);
+    await tester.enterText(find.byKey(const ValueKey('email-field')), 'sam@example.com');
+    await tester.enterText(find.byKey(const ValueKey('password-field')), 'short');
     await tester.pump();
-    await tap(tester, 'email-link-send');
-    expect(auth.calls, contains('sendSignInLink:sam@example.com'));
-    expect(find.byKey(const ValueKey('email-link-sent')), findsOneWidget);
+    expect(tester.widget<TicketButton>(submit()).onPressed, isNull, reason: 'at least 8 characters');
+    await tester.enterText(find.byKey(const ValueKey('password-field')), 'long enough');
+    await tester.pump();
+    await tap(tester, 'email-submit');
+    expect(auth.calls, contains('createWithPassword:sam@example.com'));
+    expect(find.byKey(const ValueKey('email-confirm-sent')), findsOneWidget);
     expect(find.textContaining('inbox.', findRichText: true), findsOneWidget);
     expect(auth.current!.isGuest, isTrue);
     expect(find.byType(OnboardingPassPanel), findsNothing);
-    // "Use a different email" goes back to the field; the guest way out stays.
-    expect(find.byKey(const ValueKey('email-link-change')), findsOneWidget);
+    // Not yet: the link hasn't been opened.
+    await tap(tester, 'email-confirm-check');
+    expect(find.textContaining('Not confirmed yet'), findsOneWidget);
+    // Other ways out stay: a different address, or carrying on as a guest.
+    expect(find.byKey(const ValueKey('email-confirm-change')), findsOneWidget);
     expect(find.byKey(const ValueKey('onboarding-account-skip')), findsOneWidget);
-    links.add(Uri.parse('https://links.test/sign-in?oobCode=abc'));
+    auth.linkOpened = true;
+    await tap(tester, 'email-confirm-check');
     await tester.pumpAndSettle();
     expect(auth.current!.methods, {SignInMethod.email});
     expect(find.byType(OnboardingPassPanel), findsOneWidget);

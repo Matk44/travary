@@ -86,10 +86,10 @@ A newly proposed scene or different choreography still requires its own review.
 
 9 October: implemented natively before the pass desk; details and checks in
 [ONBOARDING_NATIVE.md](ONBOARDING_NATIVE.md#native-account-scene--9-october).
-Apple and Google sign-in are live services. Email is the passwordless-link
-branch described above, built and tested with a fake service, and hidden
-until the project's link domain opens the app
-([EMAIL_LINK_SIGN_IN.md](EMAIL_LINK_SIGN_IN.md)). Purchases go through
+Apple and Google sign-in are live services. Email is now an email and
+password (22 Oct 2026, replacing the passwordless link described above):
+the form starts on a new account, and waits for the address to be confirmed
+([EMAIL_SIGN_IN.md](EMAIL_SIGN_IN.md)). Purchases go through
 RevenueCat with the account's Firebase uid, so signing in before the desk
 means a pass belongs to the signed-in account from the start. Bali plays the
 approved films; other places show their own stage with the settled Travi

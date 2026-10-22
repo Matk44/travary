@@ -24,9 +24,10 @@ work, accounts, money); everything else can be done in this repo.
   `travary.app` authorised, developer contact dreamprayer.dev@gmail.com.
   travary.app is now verified in Search Console for dreamprayer.dev too.
   Verified and published: Google sign-in now shows Travary and its logo.
-- [ ] **Decide:** launch with email sign-in or without it. It's off unless
-  the build passes `TRAVARY_EMAIL_LINKS=true`, and it needs the setup in
-  `docs/EMAIL_LINK_SIGN_IN.md`. Apple and Google cover most people.
+- [ ] Email sign-in (email and password, in every build since 22 Oct
+  2026): do the console and Cloudflare DNS setup in `docs/EMAIL_SIGN_IN.md`
+  (action URL on travary.app, emails sent from travary.app, DMARC, password
+  policy), deploy the site and functions, then the device checks there.
 
 ## 2. Purchases
 

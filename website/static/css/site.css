@@ -842,3 +842,10 @@ a.wall-card:hover .wall-name { color: #fff; }
 .join-code.is-code { font-size: clamp(2.2rem, 9vw, 3rem); letter-spacing: .18em; color: var(--ink); font-weight: 700; }
 .join-steps { margin: 0 0 1.25rem; padding-left: 1.25rem; color: var(--ink-2); }
 .join-steps li { margin-bottom: .5rem; }
+
+/* /auth/action: the links in Travary's account emails */
+.auth-text { margin: 0 0 1rem; color: var(--ink-2); font-size: 1.05rem; }
+.auth-form { margin-bottom: 1rem; }
+.auth-form[hidden] { display: none; }
+.auth-show { display: inline-flex; align-items: center; gap: 8px; font: 500 .9rem/1.2 var(--sans); color: var(--ink-soft); cursor: pointer; }
+.auth-help { margin-top: .5rem; }

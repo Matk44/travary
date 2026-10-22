@@ -13,9 +13,12 @@
 	<array>
 		<string>group.com.travary.app</string>
 	</array>
+	<!-- Invite links open the app; email passwords are kept (and strong ones
+	     suggested) under travary.app, which lists the app as webcredentials. -->
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:travary.app</string>
+		<string>webcredentials:travary.app</string>
 	</array>
 </dict>
 </plist>

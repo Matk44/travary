@@ -169,7 +169,7 @@ lib/
 │               (its pictures, written no larger than it draws them); countdown_widget_settings
 │               ("Not now" and "has been added", this phone);
 │               ai_consent_record (the answer about Google's AI, this phone);
-│               auth_service (guest, Apple/Google/email-link sign-in, delete account);
+│               auth_service (guest, Apple/Google/email-and-password sign-in, delete account);
 │               onboarding_record (users/{uid}.onboardingCompleted, every phone);
 │               free_plan_limits (config/freePlan: a free holiday's bookings)
 ├── state/      TravelStore (ChangeNotifier): the single source of truth for screens;
@@ -197,7 +197,7 @@ lib/
 ├── features/   Screens: today, trips (trip, trip details, checklist sheet), wallet (the "Documents" tab),
 │               booking (form, flight finder, detail, viewer), profile,
 │               travel_documents (list, form, document, the tab's entry pill),
-│               account (Profile's sign-in card, sign-in sheet, email-link form),
+│               account (Profile's sign-in card, sign-in sheet, email form),
 │               onboarding (Travi scenes, sign-in before the pass desk, home gate),
 │               ai (the consent sheet, the trip page's looks offer),
 │               widget (the home-screen countdown widget's setup sheet)
@@ -377,7 +377,6 @@ shared and paid trips back them up (see Family sharing and ticket backup).
 | Emulators | add `--dart-define=TRAVARY_EMULATOR_HOST=127.0.0.1` | Local Firebase emulators (`docs/ART_PACKS.md`) |
 | Real purchases | add `--dart-define-from-file=config/revenuecat.local.json` | RevenueCat's public SDK keys (git-ignored); without them, purchases are simulated (a release build refuses to start) |
 | Store builds | `tool/build_release.sh [android\|ios\|both]` | The App Bundle and .ipa with RevenueCat's keys and flight lookup (`FLIGHT_LOOKUP=false` leaves it out); checks the upload key and build number. An Archive from Xcode adds whichever of those the last flutter command didn't pass (`tool/xcode_dart_defines.sh`, the Runner's Flutter build phase), and fails without the keys file |
-| Email sign-in | add `--dart-define=TRAVARY_EMAIL_LINKS=true` | Passwordless links on `travary-444.firebaseapp.com` (or `TRAVARY_EMAIL_LINK_DOMAIN`); off until the app opens them (`docs/EMAIL_LINK_SIGN_IN.md`) |
 | Analytics in debug | add `--dart-define=TRAVARY_ANALYTICS=true` | Debug runs send nothing otherwise; release builds always send (`docs/ANALYTICS.md`) |
 | Flight alerts off | add `--dart-define=TRAVARY_FLIGHT_ALERTS=false` | They're on in every build by default; this hides them (a build-time kill switch); see Flight alerts |
 
@@ -653,13 +652,26 @@ Analytics retention period written in. Full list: `docs/LAUNCH_CHECKLIST.md`.)
   "Continue with Apple" / "Continue with Google" (the platform's own first)
   / "Continue with email". Signing in **links** the guest, so the uid and
   every trip stay as they are. Never required.
-- **Email** is a passwordless link (`AuthService.sendSignInLink`,
-  `EmailLinkForm`): the address waits on this phone (`auth/pending_email.txt`,
-  never sent anywhere) until the link opens the app (`AppSession` listens to
-  `app_links`). A sent link isn't a sign-in. Links come from the project's
-  own Hosting domain (`travary-444.firebaseapp.com`; a custom one is
-  optional), which must be an Associated Domain / App Link. Offered only with
-  `TRAVARY_EMAIL_LINKS=true`: setup in `docs/EMAIL_LINK_SIGN_IN.md`.
+- **Email** is an email and password (`EmailSignInForm`: sign in, create
+  an account, forgot password; owner, 22 Oct 2026, replacing the
+  passwordless links). Firebase keeps the passwords and makes the codes;
+  Travary sends the emails itself (`sendAccountEmail`,
+  `functions/src/accountEmails.ts`: Firebase won't let this project change
+  its templates, and its sender lands in spam) through Cloudflare Email
+  Sending from `account@send.travary.app`, rate-limited, Firebase's own
+  email only as the stand-in when the function can't be reached. A
+  new account links the guest but **counts only once its address is
+  confirmed** (the link in Firebase's email, opened on any device): until
+  then it's a guest with `Account.unconfirmedEmail`, never marked as
+  onboarded, and the app asks Firebase again every 5 s while it waits, on
+  resume and at launch (`AppSession.checkEmailConfirmed`,
+  `EmailConfirmationWatch`). Apple or Google linked over an unconfirmed
+  email drops it; `adoptGuestTrips` treats an unconfirmed email as a guest
+  (`isGuestToken`). The emails' links open travary.app's `/auth/action`
+  (Cloudflare Pages, `website/static/js/auth.js`, pinned to the project's
+  Web API key). Setup and the sending domain: `docs/EMAIL_SIGN_IN.md`. iOS keeps the
+  passwords under travary.app (`webcredentials`, and Android's
+  `get_login_creds` in `assetlinks.json`).
 - Every sign-in (linked or switched) sets `users/{uid}.onboardingCompleted`
   (`OnboardingRecord`), as does finishing onboarding, so that account skips
   onboarding on any other phone (`logic/onboarding_rules.dart`).

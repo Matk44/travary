@@ -62,3 +62,14 @@ export function tripFateOnAccountDeletion(ownerId: string, memberIds: readonly s
   if (others.length === 0) return { action: 'delete' };
   return { action: 'hand-over', memberIds: others, ownerId: others[0] };
 }
+
+/**
+ * Whether an ID token is a guest's, whose trips may move to the account the
+ * phone switched to: anonymous, or an email and password whose address was
+ * never confirmed (the app still counts that as a guest). Apple, Google and
+ * confirmed email accounts are someone's, and never taken.
+ */
+export function isGuestToken(token: { email_verified?: boolean; firebase: { sign_in_provider: string } }): boolean {
+  const provider = token.firebase.sign_in_provider;
+  return provider === 'anonymous' || (provider === 'password' && token.email_verified !== true);
+}

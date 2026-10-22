@@ -7,12 +7,13 @@ import '../../design/tokens.dart';
 import '../../design/widgets/sign_in_buttons.dart';
 import '../../domain/domain.dart';
 import '../../state/app_session.dart';
-import 'email_link_form.dart';
+import 'email_sign_in_form.dart';
 
-/// Signing in from a sheet: Apple, Google or an email link. Returns what to
-/// tell the traveller once this guest is linked, or null if they backed out.
-/// Switching to an existing account rebuilds the app instead, so nothing
-/// comes back here then.
+/// Signing in from a sheet: Apple, Google or an email and password. Returns
+/// what to tell the traveller once this guest is linked, or null if they
+/// backed out. Switching to an existing account rebuilds the app instead, so
+/// nothing comes back here then. [email]: straight to email, as a new
+/// account (Profile's "Continue with email").
 Future<String?> showSignInSheet(BuildContext context, {bool email = false}) => showModalBottomSheet<String>(
   context: context,
   isScrollControlled: true,
@@ -46,7 +47,7 @@ class _SignInSheetState extends State<_SignInSheet> {
     super.dispose();
   }
 
-  /// The email link was opened while the sheet waited.
+  /// The email was confirmed while the sheet waited.
   void _sessionChanged() {
     if (mounted && _pending == null && _session.account?.isGuest == false) {
       Navigator.of(context).pop('Signed in with your email.');
@@ -105,23 +106,19 @@ class _SignInSheetState extends State<_SignInSheet> {
             const SizedBox(height: 6),
             Text(
               _email
-                  ? 'We’ll email you a link. Open it on this phone.'
+                  ? 'Or create an account. We’ll email you a link to confirm it’s you.'
                   : 'Sign in the way you did before, and your plans come with you.',
               textAlign: TextAlign.center,
               style: TravaryText.body.copyWith(color: OnboardingColors.navy),
             ),
             const SizedBox(height: 20),
             if (_email)
-              EmailLinkForm(
+              EmailSignInForm(
+                create: widget.startWithEmail,
                 actions: [
                   if (!widget.startWithEmail)
                     TextButton(
-                      onPressed: busy
-                          ? null
-                          : () {
-                              session.cancelEmailLink();
-                              setState(() => _email = false);
-                            },
+                      onPressed: busy ? null : () => setState(() => _email = false),
                       style: TextButton.styleFrom(foregroundColor: OnboardingColors.navy),
                       child: const Text('Back to sign-in options'),
                     ),

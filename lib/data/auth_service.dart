@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 import '../domain/domain.dart';
 
@@ -30,15 +27,17 @@ class SignInResult {
 
   final Account account;
 
-  /// The Apple or Google account already existed (from another phone), so
-  /// this phone switched to it and the guest's [movedTrips] moved across.
+  /// The Apple, Google or email account already existed (from another
+  /// phone), so this phone switched to it and the guest's [movedTrips] moved
+  /// across.
   /// Otherwise the guest account itself was linked: same trips, same id.
   final bool switched;
   final int movedTrips;
 }
 
 /// Accounts: everyone starts as a guest; signing in links the guest to
-/// Apple, Google or an email address so their trips follow them to any phone.
+/// Apple, Google or an email and password so their trips follow them to any
+/// phone. An email counts once its address is confirmed.
 abstract interface class AuthService {
   Account? get current;
 
@@ -49,23 +48,33 @@ abstract interface class AuthService {
 
   /// Links the guest to Apple or Google (or switches to that account if it
   /// already exists, bringing the guest's trips). Throws [AuthFailure].
-  /// Email uses [sendSignInLink] and [signInWithLink] instead.
+  /// Email uses [signInWithPassword] and [createWithPassword] instead.
   Future<SignInResult> signIn(SignInMethod method);
 
-  /// Emails [email] a link that signs in on this phone, and remembers the
-  /// address for when the link comes back. Throws [AuthFailure].
-  Future<void> sendSignInLink(String email);
-
-  /// The address a link was last sent to, until it's used.
-  Future<String?> pendingEmail();
-
-  /// Whether [link] is one of those links.
-  bool isSignInLink(String link);
-
-  /// Signs in with a link sent to [email] (the pending address if omitted):
-  /// links the guest, or switches to that account if it already exists.
+  /// Signs in to an existing email account: switches to it, bringing the
+  /// guest's trips. If its address was never confirmed, the link is emailed
+  /// again and the account is still a guest ([Account.unconfirmedEmail]).
   /// Throws [AuthFailure].
-  Future<SignInResult> signInWithLink(String link, {String? email});
+  Future<SignInResult> signInWithPassword(String email, String password);
+
+  /// Gives the guest an email and password (same account, same trips) and
+  /// emails the link that confirms the address. Until it's opened the
+  /// account is still a guest ([Account.unconfirmedEmail]). An address that
+  /// already has an account signs in to it if the password is its own.
+  /// Throws [AuthFailure].
+  Future<SignInResult> createWithPassword(String email, String password);
+
+  /// Emails the link that confirms [Account.unconfirmedEmail] again. Throws
+  /// [AuthFailure].
+  Future<void> sendEmailConfirmation();
+
+  /// Asks Firebase for the account again (its address may have been
+  /// confirmed, on any device) and publishes it.
+  Future<Account?> refresh();
+
+  /// Emails [email] a link to choose a new password. Never says whether the
+  /// address has an account. Throws [AuthFailure].
+  Future<void> sendPasswordReset(String email);
 
   /// Signs out; Travary carries on as a new guest on this phone.
   Future<void> signOut();
@@ -76,32 +85,22 @@ abstract interface class AuthService {
 }
 
 /// Firebase Auth with Apple (Firebase's own provider flow: native on iOS,
-/// a web sheet on Android), Google (google_sign_in) and passwordless email
-/// links.
+/// a web sheet on Android), Google (google_sign_in) and an email and
+/// password.
 ///
-/// Email links open the app from the project's Firebase Hosting domain
-/// (`travary-444.firebaseapp.com`, or a custom one in
-/// `TRAVARY_EMAIL_LINK_DOMAIN`) once that domain is an Associated Domain on
-/// iOS and an App Link on Android. Until then email isn't offered: turn it
-/// on with `--dart-define=TRAVARY_EMAIL_LINKS=true` (docs/EMAIL_LINK_SIGN_IN.md).
+/// Firebase keeps the passwords (hashed) and makes the one-time codes. The
+/// emails (confirming an address, choosing a new password) are Travary's
+/// own: the `sendAccountEmail` function sends them through Cloudflare from
+/// send.travary.app, linking to travary.app's `/auth/action` page, so they
+/// reach the inbox. Firebase's own email stands in while the function can't
+/// be reached (docs/EMAIL_SIGN_IN.md).
 class FirebaseAuthService implements AuthService {
-  FirebaseAuthService({
-    required this.ensureSignedIn,
-    FirebaseFunctions? functions,
-    this.emailLinks = const bool.fromEnvironment('TRAVARY_EMAIL_LINKS'),
-    this.emailLinkDomain = const String.fromEnvironment('TRAVARY_EMAIL_LINK_DOMAIN'),
-  }) : _functions = functions {
+  FirebaseAuthService({required this.ensureSignedIn, FirebaseFunctions? functions}) : _functions = functions {
     unawaited(_start());
   }
 
   final Future<String> Function() ensureSignedIn;
   final FirebaseFunctions? _functions;
-
-  /// Email links are set up for this build.
-  final bool emailLinks;
-
-  /// A custom Hosting domain for the links; empty for the project's own.
-  final String emailLinkDomain;
   final _changes = StreamController<Account?>.broadcast();
   Account? _current;
   bool _googleReady = false;
@@ -133,16 +132,16 @@ class FirebaseAuthService implements AuthService {
 
   @override
   bool supports(SignInMethod method) => switch (defaultTargetPlatform) {
-    TargetPlatform.iOS || TargetPlatform.android => method != SignInMethod.email || emailLinks,
+    TargetPlatform.iOS || TargetPlatform.android => true,
     _ => false,
   };
 
   @override
   Future<SignInResult> signIn(SignInMethod method) async {
-    if (method == SignInMethod.email) throw const AuthFailure('Enter your email to get a sign-in link.');
+    if (method == SignInMethod.email) throw const AuthFailure('Enter your email and password.');
     await ensureSignedIn();
     final user = _auth.currentUser!;
-    final guestToken = user.isAnonymous ? await user.getIdToken() : null;
+    final guestToken = _isGuest(user) ? await user.getIdToken() : null;
     AuthCredential? googleCredential;
     try {
       if (method == SignInMethod.google) {
@@ -151,6 +150,8 @@ class FirebaseAuthService implements AuthService {
       } else {
         await user.linkWithProvider(_appleProvider());
       }
+      // An email never confirmed gives way to the sign-in chosen instead.
+      await _dropUnconfirmed(_auth.currentUser);
       await _auth.currentUser?.reload();
       return SignInResult(account: _refresh());
     } on FirebaseAuthException catch (e) {
@@ -172,69 +173,145 @@ class FirebaseAuthService implements AuthService {
     }
   }
 
-  /// The project's own Hosting domain, already authorised for sign-in.
-  static const _projectLinkDomain = 'travary-444.firebaseapp.com';
-
-  ActionCodeSettings get _linkSettings => ActionCodeSettings(
-    url: 'https://${emailLinkDomain.isEmpty ? _projectLinkDomain : emailLinkDomain}/sign-in',
-    handleCodeInApp: true,
-    iOSBundleId: 'com.travary.app',
-    androidPackageName: 'com.travary.app',
-    androidInstallApp: true,
-    // Only a custom domain is named; the project's own is the default.
-    linkDomain: emailLinkDomain.isEmpty ? null : emailLinkDomain,
-  );
-
   @override
-  Future<void> sendSignInLink(String email) async {
-    if (!emailLinks) throw const AuthFailure('Email sign-in isn\'t available yet.');
-    await ensureSignedIn();
-    try {
-      await _auth.sendSignInLinkToEmail(email: email.trim(), actionCodeSettings: _linkSettings);
-    } on FirebaseAuthException catch (e) {
-      throw _failure(e, SignInMethod.email);
-    }
-    await _pendingEmail.write(email.trim());
-  }
-
-  @override
-  Future<String?> pendingEmail() => _pendingEmail.read();
-
-  @override
-  bool isSignInLink(String link) => emailLinks && _auth.isSignInWithEmailLink(link);
-
-  @override
-  Future<SignInResult> signInWithLink(String link, {String? email}) async {
-    final address = email ?? await _pendingEmail.read();
-    if (address == null) {
-      throw const AuthFailure('Open the link on the phone you asked for it on, or send a new one.');
-    }
+  Future<SignInResult> signInWithPassword(String email, String password) async {
     await ensureSignedIn();
     final user = _auth.currentUser!;
-    final guestToken = user.isAnonymous ? await user.getIdToken() : null;
+    final guestToken = _isGuest(user) ? await user.getIdToken() : null;
     try {
-      await user.linkWithCredential(EmailAuthProvider.credentialWithLink(email: address, emailLink: link));
-      await _pendingEmail.clear();
-      await _auth.currentUser?.reload();
-      return SignInResult(account: _refresh());
+      return await _switchTo(email.trim(), password, from: user.uid, guestToken: guestToken);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use' || e.code == 'credential-already-in-use') {
-        // That address is already Travary's (another phone): switch to it and
-        // bring this guest's trips, as for Apple and Google.
-        try {
-          await _auth.signInWithEmailLink(email: address, emailLink: link);
-        } on FirebaseAuthException catch (e) {
-          throw _failure(e, SignInMethod.email);
-        }
-        await _pendingEmail.clear();
-        final moved = guestToken == null ? 0 : await _adopt(guestToken);
-        return SignInResult(account: _refresh(), switched: true, movedTrips: moved);
-      }
       throw _failure(e, SignInMethod.email);
     }
   }
 
-  final _pendingEmail = _PendingEmailFile();
+  @override
+  Future<SignInResult> createWithPassword(String email, String password) async {
+    final address = email.trim();
+    await ensureSignedIn();
+    final user = _auth.currentUser!;
+    final guestToken = _isGuest(user) ? await user.getIdToken() : null;
+    try {
+      // A mistyped address still waiting to be confirmed makes way for this one.
+      if (_unconfirmed(user)) await user.unlink(EmailAuthProvider.PROVIDER_ID);
+      await user.linkWithCredential(EmailAuthProvider.credential(email: address, password: password));
+    } on FirebaseAuthException catch (e) {
+      if (e.code != 'email-already-in-use' && e.code != 'credential-already-in-use') {
+        throw _failure(e, SignInMethod.email);
+      }
+      // That address is already Travary's (another phone): its own password
+      // signs in to it, as Apple and Google switch to theirs.
+      try {
+        return await _switchTo(address, password, from: user.uid, guestToken: guestToken);
+      } on FirebaseAuthException catch (e) {
+        throw switch (e.code) {
+          'invalid-credential' || 'wrong-password' || 'user-not-found' => const AuthFailure(
+            'That email already has a Travary account. Sign in with its password, or reset it.',
+          ),
+          _ => _failure(e, SignInMethod.email),
+        };
+      }
+    }
+    await _confirm(_auth.currentUser!);
+    await _auth.currentUser?.reload();
+    return SignInResult(account: _refresh());
+  }
+
+  /// Signs in to the email account [email], switching from the account
+  /// [from] (bringing its trips if it was a guest's). An address never
+  /// confirmed is sent its link again.
+  Future<SignInResult> _switchTo(String email, String password, {required String from, String? guestToken}) async {
+    final user = (await _auth.signInWithEmailAndPassword(email: email, password: password)).user!;
+    if (!user.emailVerified) await _confirm(user);
+    final switched = user.uid != from;
+    final moved = switched && guestToken != null ? await _adopt(guestToken) : 0;
+    return SignInResult(account: _refresh(), switched: switched, movedTrips: moved);
+  }
+
+  /// Asks `sendAccountEmail` for one of the account emails, sent from
+  /// travary.app. While the server can't (not deployed yet, the sender
+  /// down), [fallback] has Firebase send its own instead.
+  Future<void> _accountEmail(Map<String, Object> data, Future<void> Function() fallback) async {
+    try {
+      await _fns.httpsCallable('sendAccountEmail').call<dynamic>(data);
+    } on FirebaseFunctionsException catch (e) {
+      switch (e.code) {
+        case 'resource-exhausted':
+          throw const AuthFailure('We\'ve just sent one. Wait a minute, then try again.');
+        case 'invalid-argument':
+          throw const AuthFailure('That email address doesn\'t look right. Check it and try again.');
+        default:
+          await fallback();
+      }
+    }
+  }
+
+  /// Emails the link that confirms [user]'s address. Too many in a row are
+  /// refused; the last one still works, and there's "Send it again".
+  Future<void> _confirm(User user) async {
+    try {
+      await _accountEmail(const {'kind': 'confirm'}, user.sendEmailVerification);
+    } on Object catch (_) {}
+  }
+
+  @override
+  Future<void> sendEmailConfirmation() async {
+    final user = _auth.currentUser;
+    if (user == null || !_unconfirmed(user)) return;
+    try {
+      await _accountEmail(const {'kind': 'confirm'}, user.sendEmailVerification);
+    } on FirebaseAuthException catch (e) {
+      throw e.code == 'too-many-requests'
+          ? const AuthFailure('We\'ve just sent a few. Wait a minute, then try again.')
+          : _failure(e, SignInMethod.email);
+    }
+  }
+
+  @override
+  Future<Account?> refresh() async {
+    final user = _auth.currentUser;
+    if (user == null) return _current;
+    final waiting = _unconfirmed(user);
+    try {
+      await user.reload();
+      // A newly confirmed address goes into the next ID token too.
+      final now = _auth.currentUser;
+      if (waiting && now != null && now.emailVerified) await now.getIdToken(true);
+    } on FirebaseAuthException catch (_) {
+      // Offline, most likely: ask again later.
+      return _current;
+    }
+    return _refresh();
+  }
+
+  @override
+  Future<void> sendPasswordReset(String email) async {
+    final address = email.trim();
+    await ensureSignedIn();
+    try {
+      await _accountEmail({'kind': 'reset', 'email': address}, () => _auth.sendPasswordResetEmail(email: address));
+    } on FirebaseAuthException catch (e) {
+      // Email enumeration protection hides this; never tell either way.
+      if (e.code == 'user-not-found') return;
+      throw _failure(e, SignInMethod.email);
+    }
+  }
+
+  /// An email and password whose address hasn't been confirmed yet.
+  static bool _unconfirmed(User user) =>
+      !user.emailVerified && user.providerData.any((info) => info.providerId == EmailAuthProvider.PROVIDER_ID);
+
+  /// No confirmed way in: anonymous, or only an unconfirmed email. Its trips
+  /// may move to the account the phone switches to (`adoptGuestTrips`).
+  static bool _isGuest(User user) => user.isAnonymous || accountOf(user).isGuest;
+
+  /// Unlinks an unconfirmed email once another sign-in has been linked.
+  Future<void> _dropUnconfirmed(User? user) async {
+    if (user == null || !_unconfirmed(user)) return;
+    try {
+      await user.unlink(EmailAuthProvider.PROVIDER_ID);
+    } on FirebaseAuthException catch (_) {}
+  }
 
   @override
   Future<void> signOut() async {
@@ -329,51 +406,40 @@ class FirebaseAuthService implements AuthService {
     ),
     'network-request-failed' => const AuthFailure('You\'re offline. Connect and try again.'),
     'invalid-email' => const AuthFailure('That email address doesn\'t look right. Check it and try again.'),
-    'invalid-action-code' ||
-    'expired-action-code' => const AuthFailure('That sign-in link has expired or was already used. Send a new one.'),
+    // With email enumeration protection on, a wrong password and an address
+    // with no account are the same answer.
+    'invalid-credential' || 'wrong-password' || 'user-not-found' when method == SignInMethod.email => const AuthFailure(
+      'That email or password isn\'t right. Check them, or reset your password.',
+    ),
+    'weak-password' ||
+    'password-does-not-meet-requirements' => const AuthFailure('Choose a longer password: at least 8 characters.'),
+    'too-many-requests' => const AuthFailure('Too many tries in a row. Wait a few minutes, or reset your password.'),
+    'user-disabled' => const AuthFailure('That account has been switched off. Contact Travary support for help.'),
+    'operation-not-allowed' => const AuthFailure('Email sign-in isn\'t switched on yet. Use Apple or Google for now.'),
     'provider-already-linked' => const AuthFailure('You\'re already signed in with that.'),
     'requires-recent-login' => const AuthFailure('Please sign in again, then try once more.'),
     _ => AuthFailure('Sign-in didn\'t work (${e.code}). Try again.'),
   };
 
-  /// [user] as an [Account].
+  /// [user] as an [Account]. An email and password counts once its address
+  /// is confirmed; until then a guest has it as [Account.unconfirmedEmail].
   static Account accountOf(User user) {
-    final methods = {for (final info in user.providerData) ?SignInMethod.fromProviderId(info.providerId)};
+    bool counts(UserInfo info) => info.providerId != EmailAuthProvider.PROVIDER_ID || user.emailVerified;
+    final infos = user.providerData.where(counts).toList();
+    final methods = {for (final info in infos) ?SignInMethod.fromProviderId(info.providerId)};
     String? first(String? Function(UserInfo) pick) =>
-        user.providerData.map(pick).firstWhere((v) => v != null && v.isNotEmpty, orElse: () => null);
+        infos.map(pick).firstWhere((v) => v != null && v.isNotEmpty, orElse: () => null);
+    final waiting = methods.isEmpty && infos.length < user.providerData.length;
     return Account(
       uid: user.uid,
       methods: methods,
       name: (user.displayName?.isNotEmpty ?? false) ? user.displayName : first((i) => i.displayName),
-      email: (user.email?.isNotEmpty ?? false) ? user.email : first((i) => i.email),
+      email: methods.isEmpty
+          ? null
+          : (user.email?.isNotEmpty ?? false) && (user.emailVerified || !_unconfirmed(user))
+          ? user.email
+          : first((i) => i.email),
+      unconfirmedEmail: waiting ? user.email : null,
     );
-  }
-}
-
-/// The address an email link was sent to, on this phone only, until the link
-/// comes back (possibly after the app was closed). Never sent anywhere.
-class _PendingEmailFile {
-  Future<File> _file() async =>
-      File(p.join((await getApplicationSupportDirectory()).path, 'auth', 'pending_email.txt'));
-
-  Future<String?> read() async {
-    try {
-      final text = (await (await _file()).readAsString()).trim();
-      return text.isEmpty ? null : text;
-    } on Object catch (_) {
-      return null;
-    }
-  }
-
-  Future<void> write(String email) async {
-    final file = await _file();
-    await file.parent.create(recursive: true);
-    await file.writeAsString(email, flush: true);
-  }
-
-  Future<void> clear() async {
-    try {
-      await (await _file()).delete();
-    } on Object catch (_) {}
   }
 }

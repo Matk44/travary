@@ -21,9 +21,7 @@ class AppSession extends ChangeNotifier {
     _account = auth?.current;
     _subscription = auth?.changes.listen(_changed);
     _links = links?.listen((link) => unawaited(_openLink(link)));
-    if (auth != null) {
-      unawaited(auth!.pendingEmail().then((email) => _emailLinkSentTo ??= email).then((_) => _notify()));
-    }
+    _askIfConfirmed();
   }
 
   /// Null in demo mode: accounts need trips saved to the cloud.
@@ -38,9 +36,7 @@ class AppSession extends ChangeNotifier {
   String? _notice;
   String? _tripToOpenAfterSignIn;
   bool _offerAfterSignIn = false;
-  String? _emailLinkSentTo;
-  String? _emailLinkError;
-  ({String? tripId, bool offer})? _linkHandoff;
+  bool _askedIfConfirmed = false;
   bool _busy = false;
   bool _disposed = false;
 
@@ -69,12 +65,6 @@ class AppSession extends ChangeNotifier {
     return offer;
   }
 
-  /// Where the last sign-in link went, while it waits to be opened.
-  String? get emailLinkSentTo => _emailLinkSentTo;
-
-  /// Why the last sign-in link didn't work (expired, another phone), once.
-  String? get emailLinkError => _emailLinkError;
-
   /// A message for after the app rebuilt for a new account ("Signed in…"),
   /// shown once by the home screen.
   String? takeNotice() {
@@ -88,7 +78,13 @@ class AppSession extends ChangeNotifier {
   void _changed(Account? account) {
     // Between signing out and the new guest there's briefly no one.
     if (account == null) return;
+    final confirmed =
+        _account?.unconfirmedEmail != null &&
+        _account!.uid == account.uid &&
+        account.methods.contains(SignInMethod.email);
     _account = account;
+    if (confirmed) _emailConfirmed(account);
+    _askIfConfirmed();
     // During an action the switch waits for its end, so the message for
     // after the rebuild is ready first.
     if (!_busy) _uid = account.uid;
@@ -109,21 +105,60 @@ class AppSession extends ChangeNotifier {
     }
   });
 
-  /// Emails [email] a sign-in link. Opening it on this phone finishes
-  /// signing in (see [AppSession.new]'s links). Throws [AuthFailure].
-  Future<void> sendEmailLink(String email, {String? openTripId, bool offer = false}) => _run(() async {
-    _emailLinkError = null;
-    await auth!.sendSignInLink(email);
-    _emailLinkSentTo = email.trim();
-    _linkHandoff = (tripId: openTripId, offer: offer);
-    track('email_link_sent');
+  /// Signs in with an email and password, or [create]s an account with
+  /// them. Returns what to tell the traveller, or null while a new address
+  /// waits to be confirmed ([Account.unconfirmedEmail]: the account stays a
+  /// guest until its link is opened, see [checkEmailConfirmed]). Throws
+  /// [AuthFailure]. [openTripId] and [offer] as for [signIn].
+  Future<String?> signInWithEmail(
+    String email,
+    String password, {
+    bool create = false,
+    String? openTripId,
+    bool offer = false,
+  }) => _run(() async {
+    final result = create
+        ? await auth!.createWithPassword(email.trim(), password)
+        : await auth!.signInWithPassword(email.trim(), password);
+    if (create) track('email_account_created', {'switched': result.switched});
+    if (!result.switched && result.account.isGuest) return null;
+    return _signedIn(result, SignInMethod.email, openTripId: openTripId, offer: offer);
   });
 
-  /// Forgets the link that's on its way (to use another address).
-  void cancelEmailLink() {
-    _emailLinkSentTo = null;
-    _emailLinkError = null;
-    _notify();
+  /// Whether the address waiting to be confirmed has been (its link opened,
+  /// on this phone or any other). Cheap enough to ask every few seconds
+  /// while the traveller waits.
+  Future<bool> checkEmailConfirmed() async {
+    if (auth == null || _account?.unconfirmedEmail == null) return false;
+    final account = await auth!.refresh();
+    if (account != null) _changed(account);
+    return account?.methods.contains(SignInMethod.email) ?? false;
+  }
+
+  /// Emails the link that confirms the address again. Throws [AuthFailure].
+  Future<void> resendEmailConfirmation() => _run(() async {
+    await auth!.sendEmailConfirmation();
+    track('email_confirmation_sent');
+  });
+
+  /// Emails [email] a link to choose a new password. Throws [AuthFailure].
+  Future<void> sendPasswordReset(String email) => _run(() async {
+    await auth!.sendPasswordReset(email.trim());
+    track('password_reset_sent');
+  });
+
+  /// An address may have been confirmed while the app was closed: asked
+  /// once, when the account is first known.
+  void _askIfConfirmed() {
+    if (_askedIfConfirmed || _account?.unconfirmedEmail == null) return;
+    _askedIfConfirmed = true;
+    unawaited(checkEmailConfirmed());
+  }
+
+  /// The address was confirmed: now it's a sign-in, on every phone.
+  void _emailConfirmed(Account account) {
+    track('sign_in', {'method': SignInMethod.email.name, 'switched': false, 'moved': 0});
+    unawaited(onboardingRecord?.markCompleted(account.uid));
   }
 
   /// The invite code from a link that opened the app
@@ -155,32 +190,11 @@ class AppSession extends ChangeNotifier {
       _notify();
       return;
     }
-    // Invites and sign-in need an account (cloud mode).
+    // Invites need an account (cloud mode).
     if (auth == null) return;
     if (inviteCodeFrom(link) case final code?) {
       track('invite_link_opened');
       _pendingInviteCode = code;
-      _notify();
-      return;
-    }
-    final text = link.toString();
-    if (auth == null || !auth!.isSignInLink(text)) return;
-    try {
-      await _run(() async {
-        _emailLinkError = null;
-        final result = await auth!.signInWithLink(text);
-        final handoff = _linkHandoff;
-        _linkHandoff = null;
-        _emailLinkSentTo = null;
-        _signedIn(result, SignInMethod.email, openTripId: handoff?.tripId, offer: handoff?.offer ?? false);
-      });
-    } on AuthFailure catch (e) {
-      _emailLinkError = e.message;
-      track('email_link_failed');
-      _notify();
-    } catch (_) {
-      _emailLinkError = 'That link didn\'t work. Send a new one and try again.';
-      track('email_link_failed');
       _notify();
     }
   }
@@ -188,12 +202,17 @@ class AppSession extends ChangeNotifier {
   String _signedIn(SignInResult result, SignInMethod method, {String? openTripId, bool offer = false}) {
     track('sign_in', {'method': method.name, 'switched': result.switched, 'moved': result.movedTrips});
     _account = result.account;
-    // Whoever has signed in skips onboarding on their next phone.
-    unawaited(onboardingRecord?.markCompleted(result.account.uid));
+    // Whoever has signed in skips onboarding on their next phone; an email
+    // counts once it's confirmed (see [_emailConfirmed]).
+    final waiting = result.account.unconfirmedEmail;
+    if (waiting == null) unawaited(onboardingRecord?.markCompleted(result.account.uid));
     final moved = result.movedTrips;
     final label = method == SignInMethod.email ? 'your email' : method.label;
-    final message = result.switched
-        ? 'Signed in with $label.${moved > 0 ? ' $moved ${moved == 1 ? 'trip' : 'trips'} from this phone moved to your account.' : ''}'
+    final trips = moved > 0 ? ' $moved ${moved == 1 ? 'trip' : 'trips'} from this phone moved to your account.' : '';
+    final message = waiting != null
+        ? 'Nearly there: tap the link we sent to $waiting to finish signing in.$trips'
+        : result.switched
+        ? 'Signed in with $label.$trips'
         : 'Signed in with $label. Your trips are saved to your account.';
     if (result.account.uid != _uid) {
       _tripToOpenAfterSignIn = openTripId;

@@ -9,11 +9,13 @@ import '../../design/widgets/sign_in_buttons.dart';
 import '../../design/widgets/profile_stationery.dart';
 import '../../domain/domain.dart';
 import '../../state/app_session.dart';
+import 'email_sign_in_form.dart';
 import 'sign_in_sheet.dart';
 
 /// The account on Profile. A guest is invited to sign in with Apple, Google
-/// or an email link so their trips follow them to any phone; someone signed in sees
-/// who they are, and can sign out or delete the account.
+/// or an email and password so their trips follow them to any phone (an
+/// email waiting to be confirmed says so); someone signed in sees who they
+/// are, and can sign out or delete the account.
 class AccountCard extends StatelessWidget {
   const AccountCard({super.key});
 
@@ -109,6 +111,7 @@ class _SignInState extends State<_SignIn> {
     final email = widget.session.supports(SignInMethod.email)
         ? EmailSignInButton(onPressed: busy ? null : () => _email(context))
         : null;
+    final waiting = widget.session.account?.unconfirmedEmail;
     // Each platform's own sign-in first.
     final buttons = [
       ...defaultTargetPlatform == TargetPlatform.android ? [?google, ?apple] : [?apple, ?google],
@@ -123,6 +126,16 @@ class _SignInState extends State<_SignIn> {
           'Sign in to find your plans on another phone. Everything here stays just as it is.',
           style: TravaryText.bodySoft,
         ),
+        if (waiting != null) ...[
+          const SizedBox(height: TravarySpace.md),
+          EmailConfirmationWatch(
+            child: Text(
+              'Nearly there: tap the link we sent to $waiting to finish signing in with your email.',
+              key: const ValueKey('account-confirm-note'),
+              style: TravaryText.body,
+            ),
+          ),
+        ],
         const SizedBox(height: TravarySpace.lg),
         for (final (i, button) in buttons.indexed) ...[if (i > 0) const SizedBox(height: TravarySpace.sm), button],
         const SizedBox(height: TravarySpace.sm),

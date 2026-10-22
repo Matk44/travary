@@ -8,11 +8,11 @@ import '../../design/widgets/sign_in_buttons.dart';
 import '../../domain/domain.dart';
 import '../../state/analytics.dart';
 import '../../state/app_session.dart';
-import '../account/email_link_form.dart';
+import '../account/email_sign_in_form.dart';
 
 /// The optional sign-in just before the pass desk ("Keep your holiday with
-/// you."), as controls on the stage's floor: Apple, Google or an email link,
-/// or carry on as a guest. The stage shows Travi and the words
+/// you."), as controls on the stage's floor: Apple, Google or an email and
+/// password, or carry on as a guest. The stage shows Travi and the words
 /// ([onEmail] switches them to the email branch).
 ///
 /// Signing in links the guest, so the holiday stays as it is
@@ -61,8 +61,8 @@ class _OnboardingAccountPanelState extends State<OnboardingAccountPanel> {
     super.dispose();
   }
 
-  /// An email link opened while the panel waits (Apple and Google answer
-  /// through [_signIn] instead).
+  /// An email confirmed (or an email account signed in to) while the panel
+  /// waits (Apple and Google answer through [_signIn] instead).
   void _sessionChanged() {
     if (mounted && !_done && _pending == null && _session.account?.isGuest == false) {
       track('onboarding_account_linked', {'method': SignInMethod.email.name});
@@ -132,19 +132,15 @@ class _OnboardingAccountPanelState extends State<OnboardingAccountPanel> {
       child: const Text('Continue as a guest'),
     );
     if (_email) {
-      return EmailLinkForm(
+      return EmailSignInForm(
+        create: true,
         openTripId: widget.tripId,
         offer: true,
         actions: [
           const SizedBox(height: 4),
           TextButton(
             key: const ValueKey('onboarding-account-options'),
-            onPressed: busy
-                ? null
-                : () {
-                    session.cancelEmailLink();
-                    _setEmail(false);
-                  },
+            onPressed: busy ? null : () => _setEmail(false),
             style: TextButton.styleFrom(
               foregroundColor: OnboardingColors.navy,
               textStyle: TravaryText.body.copyWith(decoration: TextDecoration.underline),

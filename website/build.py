@@ -78,6 +78,11 @@ ANDROID_CERT_SHA256 = [
     "12:1C:4E:43:D4:0B:F7:0C:63:F1:EB:C3:18:1F:4E:C3:BD:50:06:5A:CB:01:24:8B:3B:98:A5:A5:94:CC:3D:ED",
 ]
 
+# The Firebase project's Web API key (public, like the app's own keys): the
+# one in the account emails' links. /auth/action only ever sends codes
+# to travary-444 with it, so a forged link can't post a new password elsewhere.
+FIREBASE_WEB_API_KEY = "AIzaSyCZu-S8_-xldAz-t4N-8j0-26nz6ZYVBHE"
+
 # Launch prices (USD), as lib/domain/pricing.dart. Stores show local prices.
 PRICE_HOLIDAY_PASS = "$14.99"
 PRICE_ANNUAL = "$34.99"
@@ -827,7 +832,7 @@ LEGAL = [
      "2026-10-15", "Updated"),
     ("privacy", "Privacy Policy | Travary", "Privacy Policy",
      "How Travary handles your trips, bookings and account: what's stored, who processes it, and how to delete it. Passports never leave your phone.",
-     "2026-10-16", "Effective"),
+     "2026-10-22", "Effective"),
     ("terms", "Terms of Use | Travary", "Terms of Use",
      "The terms for using Travary, the holiday organiser app, including the Annual Pass and the Holiday Pass.",
      "2026-10-15", "Effective"),
@@ -1164,6 +1169,46 @@ def build_pages() -> list[Page]:
 }})();
 </script>''')
 
+    # ---------------------------------------------------------- auth emails
+    # Travary's account emails (confirm your email, choose a new password,
+    # sent by functions/src/accountEmails.ts) link here (docs/EMAIL_SIGN_IN.md).
+    # The page finishes the link with Firebase's Identity Toolkit API
+    # (static/js/auth.js); the app notices by itself.
+    action = Page(path="/auth/action", title="Your Travary Account",
+                  meta="Confirm your email or choose a new password for your Travary account, from the link in the email we sent you.",
+                  h1="Your Travary account", kind="early", noindex=True, art="postcard:anywhere",
+                  scripts=["auth.js"])
+    write(action, f'''<section class="early">
+  <div class="wrap early-grid">
+    <div class="early-copy">
+      <p class="tag-label">Your account</p>
+      <h1 id="auth-title">One moment…</h1>
+      <div class="wl-card paper auth-card" id="auth" data-key="{FIREBASE_WEB_API_KEY}" aria-live="polite">
+        <p class="auth-text" id="auth-text">Checking your link.</p>
+        <noscript><p class="auth-text">This page needs JavaScript to finish the link from your email. Turn it on, then open the link again.</p></noscript>
+        <form class="wl-form auth-form" id="auth-form" hidden novalidate>
+          <input type="email" name="username" id="auth-email" autocomplete="username" hidden readonly>
+          <label class="wl-label" for="auth-password">New password</label>
+          <input class="wl-email" type="password" id="auth-password" name="password" autocomplete="new-password"
+                 minlength="8" required>
+          <label class="auth-show"><input type="checkbox" id="auth-show"> Show password</label>
+          <p class="wl-fine">At least 8 characters.</p>
+          <p class="wl-error" id="auth-error" hidden></p>
+          <button class="btn coral wl-submit" type="submit" id="auth-save">Save new password</button>
+        </form>
+        <p class="wl-fine auth-help">Something not right? Email <a href="mailto:dreamprayer.dev@gmail.com?subject=Travary%20account">dreamprayer.dev@gmail.com</a>.</p>
+      </div>
+    </div>
+    <div class="early-art">
+      <div class="stage-window early-stage" style="background:var(--sky)">
+        <div class="stage-plate is-current" style="background-image:url({IMAGES["stage:city_jp_kyoto"].url})"></div>
+        <div class="stage-floor" aria-hidden="true"></div>
+        {film_tag("envelope", "envelope", "Travi, the Travary suitcase, holding an envelope", "stage-travi", eager=True)}
+      </div>
+    </div>
+  </div>
+</section>''')
+
     # --------------------------------------------------------------- legal
     for slug, title, h1, meta, date, dated in LEGAL:
         page = Page(path=f"/{slug}", title=title, h1=h1, meta=meta, kind="legal",
@@ -1277,18 +1322,25 @@ def write_meta(pages: list[Page]) -> None:
   Cache-Control: public, max-age=2592000
 /.well-known/apple-app-site-association
   Content-Type: application/json
+/auth/*
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
+  X-Robots-Tag: noindex
 """, encoding="utf-8")
     # Every invite link shows the one join page (its script reads the code).
     (OUT / "_redirects").write_text("/join/*  /join  200\n", encoding="utf-8")
     # The app's link association, so invite links open the app.
     well_known = OUT / ".well-known"
     well_known.mkdir(exist_ok=True)
+    # webcredentials / get_login_creds: the phone's password manager keeps
+    # Travary's email passwords under travary.app, and suggests strong ones.
     (well_known / "apple-app-site-association").write_text(json.dumps({
         "applinks": {"details": [{"appIDs": [APPLE_APP_ID],
                                   "components": [{"/": "/join/*", "comment": "Family invites"}]}]},
+        "webcredentials": {"apps": [APPLE_APP_ID]},
     }, indent=1), encoding="utf-8")
     (well_known / "assetlinks.json").write_text(json.dumps([{
-        "relation": ["delegate_permission/common.handle_all_urls"],
+        "relation": ["delegate_permission/common.handle_all_urls", "delegate_permission/common.get_login_creds"],
         "target": {"namespace": "android_app", "package_name": ANDROID_PACKAGE,
                    "sha256_cert_fingerprints": ANDROID_CERT_SHA256},
     }], indent=1), encoding="utf-8")

@@ -16,6 +16,7 @@ import 'package:travary/data/smart_import_service.dart';
 import 'package:travary/design/tokens.dart';
 import 'package:travary/design/widgets/nav_bar.dart';
 import 'package:travary/domain/domain.dart';
+import 'package:travary/features/account/email_sign_in_form.dart';
 import 'package:travary/features/onboarding/onboarding_account_screen.dart';
 import 'package:travary/features/onboarding/onboarding_pass_screen.dart';
 import 'package:travary/features/trips/trip_screen.dart';
@@ -120,6 +121,59 @@ void main() {
     await openTab(tester, 'Trips');
     expect(inTrips('Kyoto'), findsWidgets);
     expect(inTrips('Lisbon'), findsNothing);
+  });
+
+  testWidgets('email on Profile: a new account waits for its link, then signs in by itself', (tester) async {
+    final auth = FakeAuthService();
+    await pumpApp(tester, auth);
+    await openTab(tester, 'Profile');
+    await tester.tap(find.byKey(const ValueKey('sign-in-email')));
+    await tester.pumpAndSettle();
+    expect(find.text('Create account'), findsOneWidget, reason: 'from Profile, a new account');
+    await tester.enterText(find.byKey(const ValueKey('email-field')), 'sam@example.com');
+    await tester.enterText(find.byKey(const ValueKey('password-field')), 'long enough');
+    await tester.pump();
+    await tester.tap(find.byKey(const ValueKey('email-submit')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('email-confirm-sent')), findsOneWidget);
+
+    // Put away, Profile says it's waiting; it's still a guest.
+    Navigator.of(tester.element(find.byKey(const ValueKey('email-confirm-sent')))).pop();
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('account-confirm-note')), findsOneWidget);
+    expect(find.byKey(const ValueKey('sign-out')), findsNothing);
+
+    // The link is opened (in Mail, or on a laptop): Profile notices by itself.
+    auth.linkOpened = true;
+    await tester.pump(EmailConfirmationWatch.every);
+    await tester.pumpAndSettle();
+    expect(find.text('Signed in with email'), findsOneWidget);
+    expect(find.text('sam@example.com'), findsOneWidget);
+    expect(find.byKey(const ValueKey('sign-out')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a forgotten password sends a link, never saying whether the address has an account', (tester) async {
+    final auth = FakeAuthService();
+    await pumpApp(tester, auth);
+    await openTab(tester, 'Profile');
+    await tester.tap(find.byKey(const ValueKey('sign-in-email')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('email-mode')));
+    await tester.pumpAndSettle();
+    expect(find.text('Sign in'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('email-forgot')));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const ValueKey('email-field')), 'sam@example.com');
+    await tester.pump();
+    await tester.tap(find.byKey(const ValueKey('email-reset-send')));
+    await tester.pumpAndSettle();
+    expect(auth.calls, ['sendPasswordReset:sam@example.com']);
+    expect(find.textContaining('If sam@example.com has a Travary account'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('email-reset-back')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('password-field')), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('signing out asks first, then starts afresh as a guest', (tester) async {

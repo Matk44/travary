@@ -40,34 +40,75 @@ class FakeAuthService implements AuthService {
   @override
   bool supports(SignInMethod method) => supported.contains(method);
 
-  /// Where the last sign-in link was sent, until it's used.
-  String? pending;
+  /// Email accounts that already exist (another phone), by address.
+  final emailAccounts = <String, ({String uid, String password, bool confirmed})>{};
 
-  @override
-  Future<void> sendSignInLink(String email) async {
-    calls.add('sendSignInLink:$email');
+  /// The address waiting to be confirmed has had its link opened (on any
+  /// device): the next [refresh] finds it confirmed, as Firebase does.
+  var linkOpened = false;
+
+  AuthFailure? _failure() {
     final failure = failNext;
     failNext = null;
-    if (failure != null) throw failure;
-    pending = email;
+    return failure;
   }
 
   @override
-  Future<String?> pendingEmail() async => pending;
+  Future<SignInResult> signInWithPassword(String email, String password) async {
+    calls.add('signInWithPassword:$email');
+    if (_failure() case final failure?) throw failure;
+    final existing = emailAccounts[email];
+    if (existing == null || existing.password != password) {
+      throw const AuthFailure('That email or password isn\'t right. Check them, or reset your password.');
+    }
+    final switched = existing.uid != _current.uid;
+    _set(
+      Account(
+        uid: existing.uid,
+        methods: existing.confirmed ? {SignInMethod.email} : const {},
+        email: existing.confirmed ? email : null,
+        unconfirmedEmail: existing.confirmed ? null : email,
+      ),
+    );
+    return SignInResult(account: _current, switched: switched, movedTrips: switched ? guestTrips : 0);
+  }
 
   @override
-  bool isSignInLink(String link) => link.startsWith('https://links.test/');
+  Future<SignInResult> createWithPassword(String email, String password) async {
+    calls.add('createWithPassword:$email');
+    if (_failure() case final failure?) throw failure;
+    if (emailAccounts.containsKey(email)) {
+      try {
+        return await signInWithPassword(email, password);
+      } on AuthFailure {
+        throw const AuthFailure('That email already has a Travary account. Sign in with its password, or reset it.');
+      }
+    }
+    linkOpened = false;
+    _set(Account(uid: _current.uid, methods: _current.methods, name: name, unconfirmedEmail: email));
+    return SignInResult(account: _current);
+  }
 
   @override
-  Future<SignInResult> signInWithLink(String link, {String? email}) async {
-    calls.add('signInWithLink');
-    final failure = failNext;
-    failNext = null;
-    if (failure != null) throw failure;
-    final address = email ?? pending;
-    if (address == null) throw const AuthFailure('Open the link on the phone you asked for it on.');
-    pending = null;
-    return signIn(SignInMethod.email);
+  Future<void> sendEmailConfirmation() async {
+    calls.add('sendEmailConfirmation');
+    if (_failure() case final failure?) throw failure;
+  }
+
+  @override
+  Future<Account?> refresh() async {
+    calls.add('refresh');
+    final waiting = _current.unconfirmedEmail;
+    if (waiting != null && linkOpened) {
+      _set(Account(uid: _current.uid, methods: {..._current.methods, SignInMethod.email}, name: name, email: waiting));
+    }
+    return _current;
+  }
+
+  @override
+  Future<void> sendPasswordReset(String email) async {
+    calls.add('sendPasswordReset:$email');
+    if (_failure() case final failure?) throw failure;
   }
 
   void _set(Account account) {

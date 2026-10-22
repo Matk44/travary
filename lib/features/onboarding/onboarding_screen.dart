@@ -400,7 +400,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> with PassConfirmati
   }
 
   void _back() {
-    context.read<AppSession?>()?.cancelEmailLink();
     setState(() {
       _offer = null;
       _email = false;
@@ -472,7 +471,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with PassConfirmati
         : onboardingWordsFor(
             beat,
             place: destination?.name,
-            emailSent: session?.emailLinkSentTo != null,
+            confirming: session?.account?.unconfirmedEmail != null,
             covered: covered,
             problem: _misread,
             day: saved == null ? null : plan?.dayNumber(saved.startDate),
@@ -524,7 +523,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with PassConfirmati
           },
         ),
         words: words,
-        wordsKey: '$beat-${session?.emailLinkSentTo}-$_misread-${confirmed != null}',
+        wordsKey: '$beat-${session?.account?.unconfirmedEmail}-$_misread-${confirmed != null}',
         floorKey: beat == OnboardingBeat.email ? OnboardingBeat.account : beat,
         snugFloor: beat == OnboardingBeat.desk,
         onBack: _offer == _Offer.account || _offer == _Offer.desk ? _back : null,

@@ -6,7 +6,7 @@ import { HttpsError, onCall } from 'firebase-functions/https';
 
 import { deletePushTokens } from './flightAlerts';
 import { deleteTripPasses, moveTripPasses, restampTrip } from './purchases';
-import { replaceMember, tripFateOnAccountDeletion } from './sharingLogic';
+import { isGuestToken, replaceMember, tripFateOnAccountDeletion } from './sharingLogic';
 
 /**
  * Accounts. Travellers start as anonymous guests; signing in with Apple or
@@ -14,9 +14,10 @@ import { replaceMember, tripFateOnAccountDeletion } from './sharingLogic';
  * the server, because the rules (rightly) never let the app change who is
  * on a trip:
  *
- * - adoptGuestTrips: the Apple or Google account already existed (signed in
- *   on another phone), so the app switched to it. The guest's trips move
- *   to it: memberIds, ownerId, memberNames and every booking's copy.
+ * - adoptGuestTrips: the Apple, Google or email account already existed
+ *   (signed in on another phone), so the app switched to it. The guest's
+ *   trips move to it: memberIds, ownerId, memberNames and every booking's
+ *   copy. A guest is anonymous, or has an email it never confirmed.
  * - deleteAccount: a traveller deletes their account. Trips they share are
  *   handed to the next person (or left); trips only they are on are
  *   deleted with their bookings, invites and ticket files.
@@ -24,7 +25,7 @@ import { replaceMember, tripFateOnAccountDeletion } from './sharingLogic';
 
 /** What the handlers need from Firebase Auth (faked in tests). */
 export interface AccountAuth {
-  verifyIdToken(token: string): Promise<{ uid: string; firebase: { sign_in_provider: string } }>;
+  verifyIdToken(token: string): Promise<{ uid: string; email_verified?: boolean; firebase: { sign_in_provider: string } }>;
   deleteUser(uid: string): Promise<void>;
 }
 
@@ -50,7 +51,7 @@ export async function adoptGuestTrips(
   let guest: string;
   try {
     const decoded = await auth.verifyIdToken(guestToken);
-    if (decoded.firebase.sign_in_provider !== 'anonymous') {
+    if (!isGuestToken(decoded)) {
       throw new HttpsError('permission-denied', 'Only a guest account\'s trips can be moved.');
     }
     guest = decoded.uid;
@@ -171,7 +172,7 @@ const adminAuth = (): AccountAuth => ({
 export const adoptGuestTripsCall = onCall(async (request) => {
   const uid = requireUid(request.auth);
   if (request.auth?.token.firebase?.sign_in_provider === 'anonymous') {
-    throw new HttpsError('failed-precondition', 'Sign in with Apple or Google first.');
+    throw new HttpsError('failed-precondition', 'Sign in first.');
   }
   return adoptGuestTrips(getFirestore(), adminAuth(), uid, body(request.data).guestToken);
 });

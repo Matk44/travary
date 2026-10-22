@@ -46,7 +46,7 @@ typedef OnboardingWords = ({String text, String accent, String? subtitle});
 OnboardingWords onboardingWordsFor(
   OnboardingBeat beat, {
   String? place,
-  bool emailSent = false,
+  bool confirming = false,
   bool covered = false,
   String? problem,
   int? day,
@@ -79,15 +79,15 @@ OnboardingWords onboardingWordsFor(
     accent: 'with you.',
     subtitle: 'Sign in to find your plan on another phone.',
   ),
-  OnboardingBeat.email when emailSent => (
+  OnboardingBeat.email when confirming => (
     text: 'Check your\n',
     accent: 'inbox.',
     subtitle: 'One tap on the link and you’re in.',
   ),
   OnboardingBeat.email => (
-    text: 'One little link.\n',
-    accent: 'And you’re in.',
-    subtitle: 'Enter your email to sign in.',
+    text: 'Your email\nand a ',
+    accent: 'password.',
+    subtitle: 'Make an account, or sign in to yours.',
   ),
   OnboardingBeat.signedIn => (text: 'Your holiday.\n', accent: 'Linked to you.', subtitle: null),
   OnboardingBeat.desk when covered => (

@@ -111,11 +111,11 @@ Implemented in Flutter at the owner's request, from the approved
   saved booking.
 - **Sign-in scene** (`OnboardingAccountScreen`): “Keep your holiday with
   you.” with Apple / Google (the platform's own first) / email, “Continue as
-  a guest” and “Signing in is free.” Email is the approved one-field branch
-  (“One little link. And you’re in.”), then a waiting state (“Check your
-  inbox.”) with resend, change address and guest; a sent link never claims
-  sign-in. Email is hidden until links are set up
-  ([EMAIL_LINK_SIGN_IN.md](EMAIL_LINK_SIGN_IN.md)).
+  a guest” and “Signing in is free.” Email is an email and password (“Your
+  email and a password.”), starting on a new account, then a waiting state
+  (“Check your inbox.”) with “I’ve tapped the link”, resend, a different
+  address and guest; an unconfirmed address never claims sign-in
+  ([EMAIL_SIGN_IN.md](EMAIL_SIGN_IN.md), 22 Oct 2026).
 - **Beats:** signing in shows “Your holiday. Linked to you.” and a “Signed in”
   line while Travi tucks the tag away; a guest's text fades while he puts it
   aside. Both then present the passes and the desk fades in (600 ms). Skip is

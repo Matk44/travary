@@ -14,13 +14,13 @@ const PROJECT = 'demo-travary';
 let app: ReturnType<typeof initializeApp>;
 let db: Firestore;
 
-/** Tokens are "<provider>:<uid>"; deleted users are recorded. */
+/** Tokens are "<provider>:<uid>[:verified]"; deleted users are recorded. */
 class FakeAuth implements AccountAuth {
   deleted: string[] = [];
   async verifyIdToken(token: string) {
-    const [provider, uid] = token.split(':');
+    const [provider, uid, verified] = token.split(':');
     if (!uid) throw new Error('bad token');
-    return { uid, firebase: { sign_in_provider: provider } };
+    return { uid, email_verified: verified === 'verified', firebase: { sign_in_provider: provider } };
   }
   async deleteUser(uid: string) {
     this.deleted.push(uid);
@@ -71,9 +71,16 @@ test('a guest\'s trips move to the account they signed in to, with every booking
   assert.deepEqual(auth.deleted, ['guest'], 'the empty guest account is removed');
 });
 
+test('a guest who typed an email but never confirmed it is still a guest', async () => {
+  const auth = new FakeAuth();
+  assert.deepEqual(await adoptGuestTrips(db, auth, 'me', 'password:guest'), { trips: 2 });
+  assert.deepEqual(auth.deleted, ['guest']);
+});
+
 test('only a guest account\'s trips can be taken, and only with its token', async () => {
   const auth = new FakeAuth();
   await assert.rejects(adoptGuestTrips(db, auth, 'me', 'google.com:mum'), /permission-denied|guest/);
+  await assert.rejects(adoptGuestTrips(db, auth, 'me', 'password:mum:verified'), /permission-denied|guest/);
   await assert.rejects(adoptGuestTrips(db, auth, 'me', 'nonsense'), /couldn't be confirmed/);
   await assert.rejects(adoptGuestTrips(db, auth, 'me', undefined), /token/);
   assert.deepEqual((await db.doc('trips/kyoto').get()).get('memberIds'), ['mum', 'guest']);
