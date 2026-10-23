@@ -141,7 +141,9 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
   (`TravarySystemBars`: `onLight` over linen, the home tabs and every app
   bar; `onStage` over onboarding's sky and cream floor; `onDark` over the
   folio). The tabs run on under Android's gesture bar as under the home
-  indicator; three-button navigation keeps Android's own scrim. Predictive
+  indicator, and Android draws no scrim of its own (with three buttons it
+  was a dark band across the tabs): its buttons sit on the tabs' fabric, as
+  on a Material navigation bar. Predictive
   back is on from Android 13 (Android 16 has it anyway); `PopScope` keeps
   onboarding's steps.
 

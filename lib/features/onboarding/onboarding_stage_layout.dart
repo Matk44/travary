@@ -211,17 +211,20 @@ class _OnboardingStageLayoutState extends State<OnboardingStageLayout> {
                     children: [
                       ConstrainedBox(
                         constraints: BoxConstraints(minHeight: math.max(0, geometry.controlsTop - padding.top - 12)),
-                        // A phone's words run the width; wider, they keep to
-                        // a readable column over the stage.
-                        child: geometry.controlsWidth.isFinite
-                            ? Align(
-                                alignment: Alignment.topCenter,
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(maxWidth: ScreenLayout.readableWidth),
-                                  child: wordsBlock,
-                                ),
-                              )
-                            : wordsBlock,
+                        // The words at the top, a phone's the width and a
+                        // wider screen's a readable column; the sky behind
+                        // large type only as tall as they are, never a
+                        // panel down to the controls over Travi.
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: SizedBox(
+                            width: math.min(
+                              size.width - 2 * TravarySpace.gutter,
+                              geometry.controlsWidth.isFinite ? ScreenLayout.readableWidth : double.infinity,
+                            ),
+                            child: wordsBlock,
+                          ),
+                        ),
                       ),
                       if (geometry.controlsWidth.isFinite)
                         Center(

@@ -23,6 +23,7 @@ import 'package:travary/domain/onboarding.dart';
 import 'package:travary/features/booking/booking_detail_screen.dart';
 import 'package:travary/features/booking/edit_booking_screen.dart';
 import 'package:travary/features/onboarding/onboarding_screen.dart';
+import 'package:travary/features/onboarding/onboarding_stage_layout.dart';
 import 'package:travary/features/premium/paywall_screen.dart';
 import 'package:travary/features/trips/trip_screen.dart';
 import 'package:travary/logic/destinations.dart';
@@ -200,6 +201,31 @@ void main() {
     expect(scroll.position.maxScrollExtent, 0, reason: '$beat on ${device.name}: nothing to scroll');
   }
 
+  // Larger text (a phone's font size over 110%) puts the sky behind the
+  // words so they read over Travi: only behind the words, never a panel
+  // down to the controls that hides him.
+  for (final device in const [
+    _Device('android_384x854_large_text', Size(384, 854), top: 32, bottom: 48),
+    _Device('iphone_390x844_large_text', Size(390, 844), top: 47, bottom: 34),
+    _Device('ipad_820x1180_large_text', Size(820, 1180)),
+  ]) {
+    testWidgets('large text on ${device.name}: the sky behind the words leaves Travi showing', (tester) async {
+      await setScreen(tester, device);
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      final boundary = await pumpOnboarding(tester, holiday);
+      await capture(tester, boundary, 'booking_${device.name}');
+      final sky = tester.getRect(
+        find.descendant(of: find.byType(OnboardingSky), matching: find.byType(DecoratedBox)).first,
+      );
+      final subtitle = tester.getRect(find.text('A screenshot or PDF is all I need.'));
+      expect(sky.bottom, lessThanOrEqualTo(subtitle.bottom + 12.5), reason: 'only as tall as the words');
+      // How far the words reach is a matter of the real type.
+      if (TravaryText.serifFamily == null) return;
+      expect(sky.bottom, lessThan(tester.getRect(find.byType(TraviPlayer)).center.dy), reason: 'Travi shows');
+    });
+  }
+
   for (final device in _devices) {
     testWidgets('onboarding on ${device.name}: every beat on one screen, Travi on one mark', (tester) async {
       await setScreen(tester, device);
@@ -332,6 +358,8 @@ const _devices = [
   // Phones, for comparison: unchanged.
   _Device('iphone_390x844', Size(390, 844), top: 47, bottom: 34),
   _Device('android_412x915', Size(412, 915), top: 24, bottom: 24),
+  // A Samsung with its three navigation buttons (its default).
+  _Device('android_384x854_buttons', Size(384, 854), top: 32, bottom: 48),
   // The iPhone Duo, folded (its cover screen) and open, upright and turned.
   _Device('duo_cover_466x678', Size(466, 678), top: 44, bottom: 21),
   _Device('duo_open_626x890', Size(626, 890)),

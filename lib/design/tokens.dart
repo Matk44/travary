@@ -86,9 +86,11 @@ abstract final class ScreenLayout {
 
 /// The phone's own bars over Travary. Nothing is drawn behind either: the
 /// screen runs edge to edge on every Android, as Android 15 requires and as
-/// an iPhone does (the home tabs run on under the gesture bar as they do
-/// under the home indicator), and Android gives three-button navigation its
-/// own soft scrim. Only the icons change, to read on what's under them.
+/// an iPhone does, the home tabs running on under the gesture bar as they do
+/// under the home indicator. Android isn't let draw its own scrim either
+/// (with three buttons it was a dark band across the tabs): the buttons sit
+/// on the tabs' fabric, as on a Material navigation bar. Only the icons
+/// change, to read on what's under them.
 abstract final class TravarySystemBars {
   /// Dark clock and buttons over the linen and paper.
   static const onLight = SystemUiOverlayStyle(
@@ -97,6 +99,8 @@ abstract final class TravarySystemBars {
     statusBarIconBrightness: Brightness.dark,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarContrastEnforced: false,
+    systemStatusBarContrastEnforced: false,
     systemNavigationBarIconBrightness: Brightness.dark,
   );
 
@@ -108,6 +112,8 @@ abstract final class TravarySystemBars {
     statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarContrastEnforced: false,
+    systemStatusBarContrastEnforced: false,
     systemNavigationBarIconBrightness: Brightness.dark,
   );
 
@@ -118,6 +124,8 @@ abstract final class TravarySystemBars {
     statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarContrastEnforced: false,
+    systemStatusBarContrastEnforced: false,
     systemNavigationBarIconBrightness: Brightness.light,
   );
 }
