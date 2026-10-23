@@ -60,6 +60,11 @@ class OnboardingStageGeometry {
   /// Travi's top in his films, in frame widths (the roll-in reaches 286 of
   /// the 540-pixel camera), and the words' clearance above him.
   static const traviTop = .53;
+
+  /// Where his body starts under the handle, in frame widths: words over
+  /// the handle read on their shadow; past here they need the sky behind
+  /// them (`OnboardingSky`).
+  static const traviBody = .72;
   static const _wordsClearance = 8.0;
 
   /// Where the controls start under Travi's wheels (1.25 frame widths; his

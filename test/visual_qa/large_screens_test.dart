@@ -201,28 +201,30 @@ void main() {
     expect(scroll.position.maxScrollExtent, 0, reason: '$beat on ${device.name}: nothing to scroll');
   }
 
-  // Larger text (a phone's font size over 110%) puts the sky behind the
-  // words so they read over Travi: only behind the words, never a panel
-  // down to the controls that hides him.
-  for (final device in const [
-    _Device('android_384x854_large_text', Size(384, 854), top: 32, bottom: 48),
-    _Device('iphone_390x844_large_text', Size(390, 844), top: 47, bottom: 34),
-    _Device('ipad_820x1180_large_text', Size(820, 1180)),
+  // The sky goes behind the words only when they grow down over Travi's
+  // body (large type), and is never more than the words: a Galaxy Z Flip a
+  // little above the usual text size (One UI's slider) shows him as is.
+  RenderOnboardingSky sky(WidgetTester tester) => tester.renderObject(find.byType(OnboardingSky));
+  for (final (device, scale, shows) in const [
+    (_Device('flip_384x939_text_115', Size(384, 939), top: 36, bottom: 48), 1.15, false),
+    (_Device('android_384x854_text_160', Size(384, 854), top: 32, bottom: 48), 1.6, true),
+    (_Device('iphone_390x844_text_160', Size(390, 844), top: 47, bottom: 34), 1.6, true),
+    (_Device('ipad_820x1180_text_160', Size(820, 1180)), 1.6, false),
   ]) {
-    testWidgets('large text on ${device.name}: the sky behind the words leaves Travi showing', (tester) async {
+    testWidgets('text at ${scale}x on ${device.name}: the sky only behind words that reach Travi', (tester) async {
       await setScreen(tester, device);
-      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      tester.platformDispatcher.textScaleFactorTestValue = scale;
       addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
       final boundary = await pumpOnboarding(tester, holiday);
       await capture(tester, boundary, 'booking_${device.name}');
-      final sky = tester.getRect(
-        find.descendant(of: find.byType(OnboardingSky), matching: find.byType(DecoratedBox)).first,
-      );
-      final subtitle = tester.getRect(find.text('A screenshot or PDF is all I need.'));
-      expect(sky.bottom, lessThanOrEqualTo(subtitle.bottom + 12.5), reason: 'only as tall as the words');
+      if (sky(tester).showsSky) {
+        final box = tester.getRect(find.byType(OnboardingSky));
+        final subtitle = tester.getRect(find.text('A screenshot or PDF is all I need.'));
+        expect(box.bottom, lessThanOrEqualTo(subtitle.bottom + 12.5), reason: 'only as big as the words');
+      }
       // How far the words reach is a matter of the real type.
       if (TravaryText.serifFamily == null) return;
-      expect(sky.bottom, lessThan(tester.getRect(find.byType(TraviPlayer)).center.dy), reason: 'Travi shows');
+      expect(sky(tester).showsSky, shows, reason: device.name);
     });
   }
 
@@ -244,6 +246,8 @@ void main() {
         mark = frame;
         expect(find.text(action).hitTestable(), findsOneWidget, reason: '$beat on ${device.name}');
         if (device.size.height >= 678) fits(tester, device, beat);
+        // At the usual text size the words never need the sky behind them.
+        if (TravaryText.serifFamily != null) expect(sky(tester).showsSky, isFalse, reason: '$beat on ${device.name}');
       }
     });
 

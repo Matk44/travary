@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import '../../design/tokens.dart';
@@ -84,8 +85,6 @@ class _OnboardingStageLayoutState extends State<OnboardingStageLayout> {
     final size = MediaQuery.sizeOf(context);
     final padding = MediaQuery.paddingOf(context);
     final reduced = MediaQuery.disableAnimationsOf(context);
-    // Large type grows over Travi, so it gets the sky behind it.
-    final largeType = MediaQuery.textScalerOf(context).scale(16) > 17.6;
     // Where Travi stands and the controls go: on a phone, just under his
     // wheels (1.25 frame widths; his shadow ends at 1.26), or lower if
     // asked; wider screens fit it all in (`OnboardingStageGeometry`).
@@ -94,8 +93,12 @@ class _OnboardingStageLayoutState extends State<OnboardingStageLayout> {
     final bottom = math.max(padding.bottom, MediaQuery.viewInsetsOf(context).bottom) + (snugFloor ? 6 : 16);
     final floorPadding = snugFloor ? 4.0 : 8.0;
     final subtitle = words.subtitle;
+    // Words grown down over Travi's body (large type) get the sky behind
+    // them; beside him they never reach him.
     final wordsBlock = OnboardingSky(
-      enabled: largeType,
+      room: geometry.beside
+          ? double.infinity
+          : frame.top + OnboardingStageGeometry.traviBody * frame.width - padding.top - 12,
       child: Column(
         children: [
           Text(
@@ -259,21 +262,75 @@ class _OnboardingStageLayoutState extends State<OnboardingStageLayout> {
   }
 }
 
-/// The petrol sky behind the words when large type would cover Travi.
-class OnboardingSky extends StatelessWidget {
-  const OnboardingSky({super.key, required this.enabled, required this.child});
-  final bool enabled;
-  final Widget child;
+/// The petrol sky behind the words, only when they're taller than the
+/// [room] above Travi's body (large type): words that reach no further than
+/// his handle read on their own shadow, as at the usual size, and the sky
+/// is only ever as big as the words, never a panel over him.
+class OnboardingSky extends SingleChildRenderObjectWidget {
+  const OnboardingSky({super.key, required this.room, required super.child});
+
+  final double room;
+
   @override
-  Widget build(BuildContext context) => !enabled
-      ? child
-      : DecoratedBox(
-          decoration: BoxDecoration(
-            color: OnboardingColors.sky.withValues(alpha: .9),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(padding: const EdgeInsets.all(12), child: child),
-        );
+  RenderOnboardingSky createRenderObject(BuildContext context) => RenderOnboardingSky(room);
+
+  @override
+  void updateRenderObject(BuildContext context, RenderOnboardingSky renderObject) => renderObject.room = room;
+}
+
+class RenderOnboardingSky extends RenderShiftedBox {
+  RenderOnboardingSky(this._room) : super(null);
+
+  double _room;
+  double get room => _room;
+  set room(double value) {
+    if (value == _room) return;
+    _room = value;
+    markNeedsLayout();
+  }
+
+  /// The sky is drawn behind the words.
+  bool get showsSky => _sky;
+  bool _sky = false;
+
+  static const _inset = 12.0;
+
+  /// The words laid out by [lay]: on their own, or inset in the sky when
+  /// they're taller than [room].
+  ({Size size, bool sky}) _layout(BoxConstraints constraints, Size Function(RenderBox, BoxConstraints) lay) {
+    final child = this.child;
+    if (child == null) return (size: constraints.smallest, sky: false);
+    final words = lay(child, constraints);
+    if (words.height <= _room) return (size: constraints.constrain(words), sky: false);
+    final inset = lay(child, constraints.deflate(const EdgeInsets.all(_inset)));
+    return (size: constraints.constrain(Size(inset.width + 2 * _inset, inset.height + 2 * _inset)), sky: true);
+  }
+
+  @override
+  Size computeDryLayout(BoxConstraints constraints) =>
+      _layout(constraints, (child, constraints) => child.getDryLayout(constraints)).size;
+
+  @override
+  void performLayout() {
+    final (:size, :sky) = _layout(constraints, (child, constraints) {
+      child.layout(constraints, parentUsesSize: true);
+      return child.size;
+    });
+    this.size = size;
+    _sky = sky;
+    if (child?.parentData case final BoxParentData data) data.offset = sky ? const Offset(_inset, _inset) : Offset.zero;
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (_sky) {
+      context.canvas.drawRRect(
+        RRect.fromRectAndRadius(offset & size, const Radius.circular(12)),
+        Paint()..color = OnboardingColors.sky.withValues(alpha: .9),
+      );
+    }
+    super.paint(context, offset);
+  }
 }
 
 /// Keeps the controls readable when they scroll up over the scenery (the
