@@ -26,20 +26,22 @@ class AccountCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.gutter),
       child: ProfileStationery.folio(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(52, 24, 20, 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('YOUR ACCOUNT', style: TravaryText.eyebrow),
-              const SizedBox(height: TravarySpace.sm),
-              if (!session.canSignIn)
-                const _DemoNotice()
-              else if (account == null || account.isGuest)
-                _SignIn(session: session)
-              else
-                _SignedIn(session: session, account: account),
-            ],
+        child: LayoutBuilder(
+          builder: (context, box) => Padding(
+            padding: EdgeInsets.fromLTRB(ProfileStationery.folioInset(box.maxWidth), 24, 20, 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('YOUR ACCOUNT', style: TravaryText.eyebrow),
+                const SizedBox(height: TravarySpace.sm),
+                if (!session.canSignIn)
+                  const _DemoNotice()
+                else if (account == null || account.isGuest)
+                  _SignIn(session: session)
+                else
+                  _SignedIn(session: session, account: account),
+              ],
+            ),
           ),
         ),
       ),

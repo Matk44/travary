@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/ledger.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../state/travel_documents_store.dart';
 import '../../state/travel_store.dart';
 import 'document_actions.dart';
@@ -40,7 +41,10 @@ class _TravelDocumentsScreenState extends State<TravelDocumentsScreen> {
         appBar: AppBar(title: const BarText(child: Text('Travel documents'))),
         body: LinenBackground(
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+            padding: readablePadding(
+              context,
+              const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+            ),
             children: [
               const TravelDocumentsSection(illustratedInvitation: true),
               const SizedBox(height: TravarySpace.xl),

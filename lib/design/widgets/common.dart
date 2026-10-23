@@ -102,26 +102,35 @@ class EmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TravarySpace.xxl, vertical: TravarySpace.xl),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          art ?? Icon(icon, size: 48, color: TravaryColors.kraft),
-          const SizedBox(height: TravarySpace.lg),
-          Text(title, style: TravaryText.title, textAlign: TextAlign.center),
-          const SizedBox(height: TravarySpace.sm),
-          Text(message, style: TravaryText.bodySoft, textAlign: TextAlign.center),
-          if (actionLabel != null && onAction != null) ...[
-            const SizedBox(height: TravarySpace.xl),
-            FilledButton.icon(onPressed: onAction, icon: const Icon(Icons.add_rounded), label: Text(actionLabel!)),
-          ],
-          if (secondaryLabel != null && onSecondary != null) ...[
-            const SizedBox(height: TravarySpace.sm),
-            TextButton(onPressed: onSecondary, child: Text(secondaryLabel!)),
-          ],
-        ],
+      // On a tablet the message keeps to a readable measure, centred.
+      child: Align(
+        heightFactor: 1,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: _maxWidth),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              art ?? Icon(icon, size: 48, color: TravaryColors.kraft),
+              const SizedBox(height: TravarySpace.lg),
+              Text(title, style: TravaryText.title, textAlign: TextAlign.center),
+              const SizedBox(height: TravarySpace.sm),
+              Text(message, style: TravaryText.bodySoft, textAlign: TextAlign.center),
+              if (actionLabel != null && onAction != null) ...[
+                const SizedBox(height: TravarySpace.xl),
+                FilledButton.icon(onPressed: onAction, icon: const Icon(Icons.add_rounded), label: Text(actionLabel!)),
+              ],
+              if (secondaryLabel != null && onSecondary != null) ...[
+                const SizedBox(height: TravarySpace.sm),
+                TextButton(onPressed: onSecondary, child: Text(secondaryLabel!)),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }
+
+  static const _maxWidth = 480.0;
 }
 
 /// A bottom sheet's content lifted clear of the keyboard: every sheet with

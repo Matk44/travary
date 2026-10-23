@@ -82,15 +82,19 @@ class _OnboardingSceneState extends State<OnboardingScene> with SingleTickerProv
   Widget build(BuildContext context) => ExcludeSemantics(
     child: LayoutBuilder(
       builder: (context, box) {
-        final width = box.maxWidth;
-        final frame = Rect.fromLTWH(0, 0, width, width / OnboardingCamera.aspect);
+        // Where the layout stood him (off a phone, not always the whole
+        // width from the top: `OnboardingStageGeometry`).
+        final frame =
+            OnboardingFrame.maybeOf(context)?.frame ??
+            Rect.fromLTWH(0, 0, box.maxWidth, box.maxWidth / OnboardingCamera.aspect);
+        final width = frame.width;
         return Stack(
           clipBehavior: Clip.hardEdge,
           children: [
             Positioned.fill(
               child: AnimatedBuilder(
                 animation: _reveal,
-                builder: (context, _) => _PopUp(stage: widget.stage, t: _reveal.value, from: _from),
+                builder: (context, _) => _PopUp(stage: widget.stage, t: _reveal.value, from: _from, frame: frame),
               ),
             ),
             Positioned.fromRect(
@@ -112,23 +116,24 @@ class _OnboardingSceneState extends State<OnboardingScene> with SingleTickerProv
 }
 
 /// The stage: [stage] standing up from the floor line over [from], which
-/// folds away first, [t] of the way.
+/// folds away first, [t] of the way, behind Travi's [frame].
 class _PopUp extends StatelessWidget {
-  const _PopUp({required this.stage, required this.t, required this.from});
+  const _PopUp({required this.stage, required this.t, required this.from, required this.frame});
   final OnboardingStage stage;
   final double t;
   final OnboardingStage? from;
+  final Rect frame;
 
   @override
   Widget build(BuildContext context) {
-    final plate = OnboardingStagePlate(stage: stage, floor: OnboardingCamera.floor);
+    final plate = OnboardingStagePlate(stage: stage, floor: OnboardingCamera.floor, frame: frame);
     final old = from;
     if (t >= 1 || old == null) return plate;
     return LayoutBuilder(
       builder: (context, box) {
-        final floorY = OnboardingCamera.floor * box.maxWidth;
+        final floorY = frame.top + OnboardingCamera.floor * frame.width;
         final hinge = Alignment(0, floorY / box.maxHeight * 2 - 1);
-        final oldPlate = OnboardingStagePlate(stage: old, floor: OnboardingCamera.floor);
+        final oldPlate = OnboardingStagePlate(stage: old, floor: OnboardingCamera.floor, frame: frame);
         // The old scenery folds back flat, then the new one stands up.
         final fold = Curves.easeInCubic.transform(const Interval(0, .4).transform(t));
         final rise = Curves.easeOutBack.transform(const Interval(.28, 1).transform(t));

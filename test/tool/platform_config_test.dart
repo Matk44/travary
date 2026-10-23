@@ -30,6 +30,21 @@ void main() {
     expect(File('android/settings.gradle.kts').readAsStringSync(), contains('id("com.google.firebase.crashlytics")'));
   });
 
+  test('Android has predictive back on every version, as Android 16 does', () {
+    expect(manifest, contains('android:enableOnBackInvokedCallback="true"'));
+  });
+
+  test('iPads keep every orientation, so they can share the screen (Split View, windows)', () {
+    final ipad = RegExp(
+      r'<key>UISupportedInterfaceOrientations~ipad</key>\s*<array>([\s\S]*?)</array>',
+    ).firstMatch(infoPlist);
+    expect(ipad, isNotNull);
+    for (final orientation in ['Portrait', 'PortraitUpsideDown', 'LandscapeLeft', 'LandscapeRight']) {
+      expect(ipad![1], contains('UIInterfaceOrientation$orientation'));
+    }
+    expect(infoPlist, isNot(contains('UIRequiresFullScreen')));
+  });
+
   test('iOS release builds upload their symbols, so native crashes are readable', () {
     final project = File('ios/Runner.xcodeproj/project.pbxproj').readAsStringSync();
     expect(project, contains('[Crashlytics] Upload symbols'));

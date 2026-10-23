@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/art/art_slots.dart';
@@ -11,6 +10,7 @@ import '../../design/widgets/date_picker.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/paper_form.dart';
 import '../../design/widgets/onboarding_folio.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../domain/onboarding.dart';
 import '../../logic/access.dart';
@@ -610,7 +610,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
           AppBar(
             backgroundColor: Colors.transparent,
             // Dark clock and battery on the light linen.
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            systemOverlayStyle: TravarySystemBars.onLight,
             centerTitle: true,
             title: Column(
               mainAxisSize: MainAxisSize.min,
@@ -679,7 +679,10 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
     final preview = _booking(id: widget.existing?.id ?? 'draft', tripId: plan?.id ?? '');
     final span = bookingSpanLabel(preview);
     return ListView(
-      padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.xxl),
+      padding: readablePadding(
+        context,
+        const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.md, TravarySpace.gutter, TravarySpace.xxl),
+      ),
       children: [
         if (heading != null) heading,
         if (_board) ...[

@@ -9,6 +9,7 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/common.dart';
 import '../../design/widgets/countdown_trip_hero.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../design/widgets/time_rail.dart';
 import '../../design/widgets/today_header.dart';
 import '../../design/widgets/travi_cameo.dart';
@@ -214,12 +215,14 @@ class _TodayScreenState extends State<TodayScreen> {
         [SliverToBoxAdapter(child: _whereNext(context))],
       ),
     };
+    // Wider than a phone, each day keeps to a readable width while the
+    // sheet slides across the whole screen.
     return CustomScrollView(
-      slivers: [
+      slivers: readableSlivers(context, [
         SliverToBoxAdapter(child: header),
         ...content,
         const SliverToBoxAdapter(child: SizedBox(height: TodayLayout.bottomGap)),
-      ],
+      ]),
     );
   }
 
@@ -228,7 +231,7 @@ class _TodayScreenState extends State<TodayScreen> {
   Widget _nothingOn(BuildContext context, TravelStore store, TodayFocus focus) {
     final undated = focus.undated;
     return CustomScrollView(
-      slivers: [
+      slivers: readableSlivers(context, [
         SliverToBoxAdapter(
           child: TodayHeader(
             title: greetingFor(store.now),
@@ -271,7 +274,7 @@ class _TodayScreenState extends State<TodayScreen> {
             ),
           ),
         const SliverToBoxAdapter(child: SizedBox(height: TodayLayout.bottomGap)),
-      ],
+      ]),
     );
   }
 

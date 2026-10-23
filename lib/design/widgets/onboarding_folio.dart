@@ -17,7 +17,7 @@ class OnboardingFolio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AnnotatedRegion<SystemUiOverlayStyle>(
-    value: SystemUiOverlayStyle.light,
+    value: TravarySystemBars.onDark,
     child: Scaffold(
       backgroundColor: OnboardingColors.binding,
       body: SafeArea(

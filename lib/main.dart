@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'app/app.dart';
 import 'app/bootstrap.dart';
+import 'app/orientation_policy.dart';
+import 'design/tokens.dart';
 
 /// Travary: add your bookings and every day of your holiday organises itself.
 ///
@@ -15,7 +17,11 @@ import 'app/bootstrap.dart';
 /// - `features/` screens
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // Edge to edge on every Android (Android 15 insists), the bars clear.
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(TravarySystemBars.onLight);
+  // Upright on a phone; a tablet or an open foldable turns.
+  await OrientationPolicy.instance.start();
   await _start();
 }
 

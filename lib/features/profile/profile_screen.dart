@@ -6,6 +6,7 @@ import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
 import '../../design/widgets/ledger.dart';
 import '../../design/widgets/profile_stationery.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/ai_consent.dart';
 import '../../logic/countdown_widget_setup.dart';
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: ListView(
-        padding: const EdgeInsets.only(bottom: TravarySpace.xxl),
+        padding: readablePadding(context, const EdgeInsets.only(bottom: TravarySpace.xxl)),
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, 0),

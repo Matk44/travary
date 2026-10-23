@@ -5,6 +5,7 @@ import '../../design/cards/travel_document_card.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
 import '../../design/widgets/date_picker.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/destinations.dart';
 import '../../logic/formatters.dart';
@@ -165,7 +166,10 @@ class _EditTravelDocumentScreenState extends State<EditTravelDocumentScreen> {
         actions: [TextButton(onPressed: _saving ? null : _save, child: const Text('Save'))],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+        padding: readablePadding(
+          context,
+          const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+        ),
         children: [
           const SectionLabel('What is it?', inset: false),
           Wrap(

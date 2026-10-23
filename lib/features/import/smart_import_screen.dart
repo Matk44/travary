@@ -9,6 +9,7 @@ import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
 import '../../design/widgets/onboarding_folio.dart';
 import '../../design/widgets/travi_cameo.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../domain/onboarding.dart';
 import '../../logic/access.dart';
@@ -298,7 +299,7 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
         body: _phase == _Phase.review
             ? _review(context)
             : ListView(
-                padding: const EdgeInsets.all(TravarySpace.gutter),
+                padding: readablePadding(context, const EdgeInsets.all(TravarySpace.gutter)),
                 children: [
                   OnboardingFolioHeading(
                     holiday: widget.onboardingHoliday!,
@@ -357,7 +358,10 @@ class _SmartImportScreenState extends State<SmartImportScreen> {
       children: [
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
+            padding: readablePadding(
+              context,
+              const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.lg),
+            ),
             children: [
               Text(
                 _drafts.length == 1 ? 'We found 1 booking' : 'We found ${_drafts.length} bookings',

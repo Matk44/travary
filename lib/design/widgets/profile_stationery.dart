@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -52,6 +53,11 @@ class ProfileStationery extends StatelessWidget {
 
   final Widget child;
   final bool folio;
+
+  /// Where words start on the folio [width] wide: clear of its binding,
+  /// which the art draws across its first tenth (169 of 1612 pixels) and so
+  /// widens with the card, a phone's 52 points at least.
+  static double folioInset(double width) => math.max(52, width * 169 / 1612 + 15);
 
   @override
   Widget build(BuildContext context) {

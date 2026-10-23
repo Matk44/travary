@@ -112,6 +112,38 @@ Firebase. Rebuilt from scratch in Sept 2026; the old app is archived in
 - **The look is swappable.** A unique hand-made interface ("travel ephemera":
   tickets, key cards, luggage tags, see the v1 mockup) goes on top of this
   build. Keep logic out of `design/` and styling out of `logic/`.
+- **Every screen, not just a phone** (owner, 23 Oct 2026). Phones up to
+  `ScreenLayout.phoneWidth` (440, an iPhone Pro Max) keep their layout
+  exactly; anything wider (iPads and their windows, Android tablets,
+  foldables: the iPhone Duo is about 1:1.42 folded *and* open, so even
+  folded it's short for its width) keeps the phone's proportions rather
+  than stretching or cropping them. Onboarding and the pass desk fit the
+  window with nothing to scroll (`OnboardingStageGeometry`,
+  `design/widgets/onboarding_stage.dart`): the stage is as large as leaves
+  the controls a phone's floor (the desk's room, `.86` of their width, at
+  most 400 wide), centred, the words kept clear of Travi, the same for every
+  beat so the camera never moves; its wall and floor run on to either side
+  with the art's edges feathered (`OnboardingStagePlate`); a landscape screen
+  stands Travi beside the words and controls (on a paper card) when that
+  shows him larger. Every other screen keeps its content to
+  `ScreenLayout.readableWidth` (572: a coming trip's postcard at its
+  widest, with its margin), centred, through its own scroll view's
+  padding (`readablePadding`, `readableSlivers`), so the linen and the
+  scroll view still run the whole width and a thumb at a tablet's edge
+  scrolls; the home tabs keep to `ScreenLayout.navWidth`. A phone stays
+  upright; a screen whose shorter side is 600 or more turns
+  (`OrientationPolicy`, rechecked as a foldable opens or closes), so every
+  layout works both ways up. `test/visual_qa/large_screens_test.dart` checks
+  it all on iPads, the Duo, a Galaxy Fold and Android tablets.
+- **The phone's own bars blend in.** Edge to edge on every Android (Android
+  15 requires it; `main.dart` asks for it on older ones too), nothing drawn
+  behind either bar, only the icons changing to read on what's under them
+  (`TravarySystemBars`: `onLight` over linen, the home tabs and every app
+  bar; `onStage` over onboarding's sky and cream floor; `onDark` over the
+  folio). The tabs run on under Android's gesture bar as under the home
+  indicator; three-button navigation keeps Android's own scrim. Predictive
+  back is on from Android 13 (Android 16 has it anyway); `PopScope` keeps
+  onboarding's steps.
 
 ## Architecture
 
@@ -187,6 +219,8 @@ lib/
 │               art/ (catalog, resolver, document_stamps,
 │               card_shells, art_slots), widgets/ (nav_bar, today_header, time_rail, trip_calendar,
 │               countdown_trip_hero, upcoming_trip_postcard, fitted_place_name,
+│               readable_width (content centred on a tablet), onboarding_stage (the
+│               stage's geometry on any window, and its plate),
 │               the C2 ledger look: ledger (paper panels, rows, TicketButton, linen),
 │               trip_hero, plan_gap_row, checklist_row, paper_form (form ticket,
 │               fields, date boxes),
@@ -202,7 +236,8 @@ lib/
 │               ai (the consent sheet, the trip page's looks offer),
 │               widget (the home-screen countdown widget's setup sheet)
 └── app/        bootstrap (backend choice), app, home_shell (tab pages + add button),
-                keyboard_guard (no keyboard without a field to type in)
+                keyboard_guard (no keyboard without a field to type in),
+                orientation_policy (a phone upright, a tablet or open foldable turns)
 tool/           art_packs.dart: builds, validates and publishes art packs, and converts
                 bundled art to WebP (`bundled-webp`) (operator only)
 art_packs/      pack sources (+ catalog.json once published)
@@ -412,7 +447,10 @@ backdrops, to catch alpha halos); and Today on each US city and region pack's
 shells (`test/visual_qa/us_city_cards_test.dart`) as `us_cards_<place>.png`, and on each of the world's 30 city packs and 10 country packs
 (`test/visual_qa/world_city_cards_test.dart`) as `world_cards_<place>.png`; and the paywall on six
 phones and an iPhone SE (`test/visual_qa/paywall_fit_test.dart`, which also checks nothing scrolls) as
-`paywall_<w>x<h>.png`. The two card lists are goldens in
+`paywall_<w>x<h>.png`; and onboarding, the pass desk, every home tab, a trip, a booking and its
+form on iPads (upright, turned, half a screen), the iPhone Duo folded and open, a Galaxy Fold and
+Android tablets (`test/visual_qa/large_screens_test.dart`, which also checks nothing scrolls) as
+`large/<screen>_<device>.png`. The two card lists are goldens in
 `test/widget/goldens/` (test font; update with `--update-goldens`).
 Never edit the reference to make a comparison pass.
 
@@ -1146,7 +1184,10 @@ modal at launch or in onboarding:
 - Dispose controllers/subscriptions; never use `context` in `dispose()`
   (keep a reference from `initState`).
 - Layouts must survive long titles and small phones: tests run at iPhone size
-  and fail on overflow.
+  and fail on overflow. Wider screens too: a new full-screen scroll view
+  pads with `readablePadding`/`readableSlivers` (zero on a phone), never a
+  fixed-width box, and sizes from its own width or `LayoutBuilder` rather
+  than the screen's height alone.
 - **The keyboard never hides what's typed, and never outlives it**
   (`test/widget/keyboard_test.dart`). A sheet with a text field wraps its
   builder in `AboveKeyboard` (`design/widgets/common.dart`) and scrolls its

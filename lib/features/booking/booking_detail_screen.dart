@@ -8,6 +8,7 @@ import '../../design/cards/booking_card.dart';
 import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/ledger.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/access.dart';
 import '../../logic/card_text.dart';
@@ -111,7 +112,7 @@ class _Page extends StatelessWidget {
           AppBar(
             backgroundColor: Colors.transparent,
             // Dark clock and battery on the light linen.
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            systemOverlayStyle: TravarySystemBars.onLight,
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).push(
@@ -132,7 +133,10 @@ class _Page extends StatelessWidget {
           ),
         ),
         body: ListView(
-          padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+          padding: readablePadding(
+            context,
+            const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+          ),
           children: [
             BookingCard(
               text: cardTextForBooking(booking),

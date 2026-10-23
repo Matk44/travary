@@ -16,6 +16,7 @@ import '../../logic/trip_postcard_text.dart';
 import '../../state/travel_store.dart';
 import '../../state/premium_store.dart';
 import '../../design/widgets/pass_badge.dart';
+import '../../design/widgets/readable_width.dart';
 import '../sharing/join_trip_sheet.dart';
 import 'trip_details_sheet.dart';
 import 'trip_screen.dart';
@@ -102,7 +103,7 @@ class TripsScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: CustomScrollView(
-        slivers: [
+        slivers: readableSlivers(context, [
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.lg, TravarySpace.gutter, 0),
@@ -139,7 +140,7 @@ class TripsScreen extends StatelessWidget {
           if (upcoming.isNotEmpty) postcardSection('Coming up', upcoming),
           if (past.isNotEmpty) section('Past trips', past.reversed.toList()),
           const SliverToBoxAdapter(child: SizedBox(height: TravarySpace.xxl)),
-        ],
+        ]),
       ),
     );
   }

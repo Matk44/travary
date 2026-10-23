@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/sharing_service.dart';
@@ -10,6 +9,7 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/trip_theme_style.dart';
 import '../../design/widgets/ledger.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/access.dart';
 import '../../logic/ai_consent.dart';
@@ -99,17 +99,15 @@ class _Details extends StatelessWidget {
           AppBar(
             backgroundColor: Colors.transparent,
             // Dark clock and battery on the light linen.
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            systemOverlayStyle: TravarySystemBars.onLight,
             centerTitle: true,
             title: Text('Trip details', style: TravaryText.formTitle),
           ),
         ),
         body: ListView(
-          padding: const EdgeInsets.fromLTRB(
-            TravarySpace.gutter,
-            TravarySpace.sm,
-            TravarySpace.gutter,
-            TravarySpace.xxl,
+          padding: readablePadding(
+            context,
+            const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.sm, TravarySpace.gutter, TravarySpace.xxl),
           ),
           children: [
             PaperPanel(

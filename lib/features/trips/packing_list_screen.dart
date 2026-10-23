@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/art/art_slots.dart';
@@ -8,6 +7,7 @@ import '../../design/tokens.dart';
 import '../../design/trip_chrome.dart';
 import '../../design/widgets/checklist_row.dart';
 import '../../design/widgets/ledger.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/formatters.dart';
 import '../../logic/packing.dart';
@@ -102,7 +102,7 @@ class _PackingBodyState extends State<_PackingBody> {
           child: BarText(
             child: AppBar(
               backgroundColor: Colors.transparent,
-              systemOverlayStyle: SystemUiOverlayStyle.dark,
+              systemOverlayStyle: TravarySystemBars.onLight,
               leading: BackButton(color: colors.ink),
               titleSpacing: 0,
               title: GestureDetector(
@@ -118,7 +118,10 @@ class _PackingBodyState extends State<_PackingBody> {
           ),
         ),
         body: ListView(
-          padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
+          padding: readablePadding(
+            context,
+            const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
+          ),
           children: [
             Text('Packing list', style: TravaryText.display.copyWith(color: colors.ink)),
             if (start != null && end != null) ...[

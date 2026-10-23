@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../design/art/art_catalog.dart' show ArtImageRef;
@@ -299,7 +300,12 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver, Rout
 
   @override
   Widget build(BuildContext context) {
-    return TripChromeScope(child: Builder(builder: (context) => _body(context)));
+    // Dark clock and buttons over the linen, whatever the screen before
+    // (onboarding's sky) asked for.
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: TravarySystemBars.onLight,
+      child: TripChromeScope(child: Builder(builder: (context) => _body(context))),
+    );
   }
 
   Widget _body(BuildContext context) {

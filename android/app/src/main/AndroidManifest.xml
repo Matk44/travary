@@ -17,10 +17,14 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Reminders are set again after the phone restarts. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Predictive back on Android 13 to 15, as Android 16 has it anyway:
+         a swipe back previews where it goes (Flutter's PopScope keeps
+         onboarding's steps). -->
     <application
         android:label="Itinerary App - Travary"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true">
         <!-- Analytics stays off until the app turns it on (release builds). -->
         <meta-data android:name="firebase_analytics_collection_enabled" android:value="false" />
         <meta-data android:name="google_analytics_adid_collection_enabled" android:value="false" />

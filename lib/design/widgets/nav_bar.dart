@@ -8,6 +8,7 @@ import '../art/card_shells.dart' show FractionRect;
 import '../cards/card_parts.dart';
 import '../tokens.dart';
 import '../trip_chrome.dart';
+import 'readable_width.dart';
 
 class NavItem {
   const NavItem(this.label, this.icon);
@@ -60,7 +61,10 @@ class TravaryNavBar extends StatelessWidget {
     return SizedBox(
       height: NavLayout.height + NavLayout.rise + bottom,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: NavLayout.inset),
+        // On a tablet the tabs keep a phone's proportions, centred.
+        padding: EdgeInsets.symmetric(
+          horizontal: NavLayout.inset + readableInset(context, maxWidth: ScreenLayout.navWidth),
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

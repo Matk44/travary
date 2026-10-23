@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// The foil ticket at a readable size, including its transparent margin.
@@ -55,6 +56,70 @@ abstract final class TravarySpace {
 
   /// Side margin for screen content.
   static const gutter = 20.0;
+}
+
+/// Screens other than a phone held upright: iPads and their windows, Android
+/// tablets, and foldables (the iPhone Duo is about 1:1.42 folded and
+/// unfolded). Phones up to [phoneWidth] keep their layout exactly; wider
+/// screens keep the phone's proportions rather than stretching them.
+abstract final class ScreenLayout {
+  /// The widest phone held upright (an iPhone Pro Max). Wider is a tablet,
+  /// a foldable or a window.
+  static const phoneWidth = 440.0;
+
+  /// On a wider screen, content keeps to this width, centred, with the
+  /// linen (or the stage) running on to either side: cards, forms and rows
+  /// at a size they were drawn for, never stretched across a tablet. Room
+  /// for a coming trip's postcard at its widest, with its margin.
+  static const readableWidth = TripPostcardLayout.maxWidth + 2 * TripPostcardLayout.inset;
+
+  /// The home tabs keep to this width, centred, so each stays a tab.
+  static const navWidth = 600.0;
+
+  /// A screen whose shorter side is at least this turns with the device (a
+  /// tablet, an unfolded foldable); a phone stays upright.
+  static const rotatesFrom = 600.0;
+
+  /// Whether a screen this wide keeps a phone's layout.
+  static bool isPhoneWidth(double width) => width <= phoneWidth;
+}
+
+/// The phone's own bars over Travary. Nothing is drawn behind either: the
+/// screen runs edge to edge on every Android, as Android 15 requires and as
+/// an iPhone does (the home tabs run on under the gesture bar as they do
+/// under the home indicator), and Android gives three-button navigation its
+/// own soft scrim. Only the icons change, to read on what's under them.
+abstract final class TravarySystemBars {
+  /// Dark clock and buttons over the linen and paper.
+  static const onLight = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  );
+
+  /// A light clock over onboarding's petrol sky; the floor at the bottom is
+  /// cream, so the buttons there stay dark.
+  static const onStage = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  );
+
+  /// Light clock and buttons over the folio's navy binding.
+  static const onDark = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.light,
+  );
 }
 
 /// The approved paper-theatre onboarding has a fixed stage palette.
@@ -701,6 +766,7 @@ ThemeData buildTravaryTheme() {
     appBarTheme: const AppBarTheme(
       backgroundColor: TravaryColors.linen,
       foregroundColor: TravaryColors.ink,
+      systemOverlayStyle: TravarySystemBars.onLight,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,

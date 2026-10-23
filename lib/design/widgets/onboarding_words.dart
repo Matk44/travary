@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../tokens.dart';
+import 'onboarding_stage.dart';
 
 /// The approved "Paper words": a cream headline ending in coral, settling
 /// into place once. Reduced motion shows it settled.
@@ -11,7 +12,8 @@ class PaperWords extends StatelessWidget {
   final String text;
   final String accent;
 
-  /// Font size as a share of the screen's width (at most 52).
+  /// Font size as a share of the screen's width (at most 52); on the stage,
+  /// of the width its words are laid out for (`OnboardingFrame`).
   final double size;
 
   /// A soft shadow keeps the words readable over busy scenery.
@@ -42,7 +44,10 @@ class PaperWords extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
           style: TravaryText.display.copyWith(
-            fontSize: math.min(52, MediaQuery.sizeOf(context).width * size),
+            fontSize: math.min(
+              OnboardingStageGeometry.wordsMaxSize,
+              (OnboardingFrame.maybeOf(context)?.wordsWidth ?? MediaQuery.sizeOf(context).width) * size,
+            ),
             color: OnboardingColors.paper,
             shadows: lifted ? shadows : null,
           ),

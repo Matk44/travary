@@ -10,7 +10,9 @@
 # States city and region cards (Today on each place's own shells,
 # us_cards_<place>.png) and the world's 21 most-visited cities' cards
 # (world_cards_<place>.png), and the paywall (the pass desk) on six phones
-# and an iPhone SE, checking nothing needs scrolling (paywall_<w>x<h>.png).
+# and an iPhone SE, checking nothing needs scrolling (paywall_<w>x<h>.png),
+# and onboarding, the pass desk and the home tabs on iPads, foldables and
+# Android tablets (large/<screen>_<device>.png).
 # Outputs in build/visual_qa/.
 #
 # The render uses the app's real fonts: Source Serif 4 and Inter as
@@ -35,4 +37,4 @@ ls "$fonts" | sed 's/^/  font: /'
 
 TRAVARY_VISUAL_QA=1 flutter test test/visual_qa/today_reference_test.dart test/visual_qa/countdown_hero_test.dart \
   test/visual_qa/trips_postcards_test.dart test/visual_qa/documents_stamps_test.dart test/visual_qa/us_city_cards_test.dart \
-  test/visual_qa/world_city_cards_test.dart test/visual_qa/paywall_fit_test.dart
+  test/visual_qa/world_city_cards_test.dart test/visual_qa/paywall_fit_test.dart test/visual_qa/large_screens_test.dart

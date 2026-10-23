@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../design/cards/travel_document_card.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/destinations.dart';
 import '../../logic/formatters.dart';
@@ -69,7 +70,10 @@ class _TravelDocumentScreenState extends State<TravelDocumentScreen> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+        padding: readablePadding(
+          context,
+          const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xxl),
+        ),
         children: [
           Row(
             children: [

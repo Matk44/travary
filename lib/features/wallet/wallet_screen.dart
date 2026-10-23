@@ -6,6 +6,7 @@ import '../../design/kind_style.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets/common.dart';
 import '../../design/widgets/destination_stamp.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/day_plan.dart';
@@ -78,7 +79,7 @@ class _WalletScreenState extends State<WalletScreen> {
       bottom: false,
       child: CustomScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        slivers: [
+        slivers: readableSlivers(context, [
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
@@ -169,7 +170,7 @@ class _WalletScreenState extends State<WalletScreen> {
           if (upcoming.isNotEmpty) section('Coming up', upcoming, EntryStatus.upcoming),
           if (past.isNotEmpty) section('Past', past, EntryStatus.done),
           const SliverToBoxAdapter(child: SizedBox(height: TravarySpace.xxl)),
-        ],
+        ]),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../design/art/art_slots.dart';
@@ -13,6 +12,7 @@ import '../../design/widgets/plan_gap_row.dart';
 import '../../design/widgets/pass_badge.dart';
 import '../../design/widgets/travi_cameo.dart';
 import '../../design/widgets/trip_hero.dart';
+import '../../design/widgets/readable_width.dart';
 import '../../domain/domain.dart';
 import '../../logic/card_text.dart';
 import '../../logic/checklist.dart';
@@ -92,7 +92,7 @@ class _TripBody extends StatelessWidget {
           AppBar(
             backgroundColor: Colors.transparent,
             // Dark clock and battery on the light linen.
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            systemOverlayStyle: TravarySystemBars.onLight,
             // A real back button (screen readers say "Back"), with where it
             // goes beside it.
             leading: BackButton(color: chrome.colors.ink),
@@ -113,7 +113,10 @@ class _TripBody extends StatelessWidget {
           ),
         ),
         body: ListView(
-          padding: const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
+          padding: readablePadding(
+            context,
+            const EdgeInsets.fromLTRB(TravarySpace.gutter, 0, TravarySpace.gutter, TravarySpace.xl),
+          ),
           children: [
             TripHero(
               text: tripHeroTextFor(plan, store.today),
@@ -167,11 +170,9 @@ class _TripBody extends StatelessWidget {
         ),
         bottomNavigationBar: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              TravarySpace.gutter,
-              TravarySpace.sm,
-              TravarySpace.gutter,
-              TravarySpace.md,
+            padding: readablePadding(
+              context,
+              const EdgeInsets.fromLTRB(TravarySpace.gutter, TravarySpace.sm, TravarySpace.gutter, TravarySpace.md),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
