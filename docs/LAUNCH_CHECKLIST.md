@@ -141,7 +141,7 @@ work, accounts, money); everything else can be done in this repo.
   `docs/ANALYTICS.md`), age rating, category Travel, 6.9-inch iPhone
   screenshots, and review notes (no login needed; passes can be bought in
   the sandbox). URLs are in the next items.
-- [ ] `privacy.html`: write in the Analytics retention period.
+- [x] `privacy.html`: write in the Analytics retention period (23 Oct: events 2 months, user data 14 months, reset on new activity; deployed).
 - [x] Support, privacy, terms and delete-your-data pages are on travary.app
   (`/support`, `/privacy`, `/terms`, `/delete-account`), and the app links
   there (15 Oct). The old GitHub Pages copies return 404: don't use them

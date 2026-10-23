@@ -18,7 +18,7 @@
     <h2 id="collect">1. What we collect and why</h2>
 
     <h3>Your account</h3>
-    <p>Travary works straight away with a <strong>guest account</strong>: a random identifier, with no name or email. If you choose <strong>Continue with Apple</strong> or <strong>Continue with Google</strong>, we receive your name and email address from that service (Apple may give us a private relay address instead) so your trips are kept if you change phones. If you choose <strong>Continue with email</strong>, we keep your email address and your password, stored only in scrambled (hashed) form by Google Firebase Authentication, so nobody can read it, us included. We email that address to confirm it's yours and, if you ask, to let you choose a new password; these emails come from travary.app and are sent by Google Firebase. We use your name and email only to run your account and to reply if you contact us.</p>
+    <p>Travary works straight away with a <strong>guest account</strong>: a random identifier, with no name or email. If you choose <strong>Continue with Apple</strong> or <strong>Continue with Google</strong>, we receive your name and email address from that service (Apple may give us a private relay address instead) so your trips are kept if you change phones. If you choose <strong>Continue with email</strong>, we keep your email address and your password, stored only in scrambled (hashed) form by Google Firebase Authentication, so nobody can read it, us included. We email that address to confirm it's yours and, if you ask, to let you choose a new password; these emails come from travary.app and are sent through Cloudflare's email service (or by Google Firebase if ours can't be reached). We use your name and email only to run your account and to reply if you contact us.</p>
 
     <h3>Your trips and bookings</h3>
     <p>What you add to the app: trip names, dates and destinations; each booking's name, type, dates and times, places, booking references, notes and details such as seats, room or party size; plans you mark as not needed; and your trip's "Before you go" checklist. We store these to show them to you and the people on your trip, and to sort them into days.</p>
@@ -36,7 +36,7 @@
     <p>To keep things fair and our costs in check, we count how many Smart Imports, automatic trip looks and flight lookups each account uses, with the date. These are numbers, not what you imported.</p>
 
     <h3>Usage statistics</h3>
-    <p>Travary uses <strong>Google Firebase Analytics</strong> to understand how the app is used, for example how many people finish setting up a holiday or open the pass options. It records which actions happen (such as "booking added" or "pass options shown"), counts, and basic device information (device model, operating system, app version and approximate country from your IP address). For a travel document it records only that one was added and its type (such as "passport"). It never records your destinations, bookings, document details, email address or anything you type. Each installation gets a random analytics ID; we don't attach your account to it. Travary switches off the advertising identifier on both iPhone and Android, and doesn't share these statistics with advertisers. Google processes them on our behalf, and RevenueCat is given the same random analytics ID so purchases can be counted alongside.</p>
+    <p>Travary uses <strong>Google Firebase Analytics</strong> to understand how the app is used, for example how many people finish setting up a holiday or open the pass options. It records which actions happen (such as "booking added" or "pass options shown"), counts, and basic device information (device model, operating system, app version and approximate country from your IP address). For a travel document it records only that one was added and its type (such as "passport"). It never records your destinations, bookings, document details, email address or anything you type. Each installation gets a random analytics ID. We don't give Google Analytics your account, name or email, but RevenueCat is given that analytics ID together with the identifier it keeps for your purchases, so purchases can be counted alongside the statistics; that ties the statistics to your account's purchase record. Travary switches off the advertising identifier on both iPhone and Android, and doesn't share these statistics with advertisers. Google processes them on our behalf.</p>
 
     <h3>Crash reports</h3>
     <p>If the app crashes or hits an error it can't recover from, it sends a crash report to <strong>Google Firebase Crashlytics</strong> so we can find and fix the problem. A report contains what went wrong and where in the app's code (the error and its stack trace), the app version, basic device information (device model, operating system and its version, free memory and storage, whether the app was in the foreground) and a random ID for this installation, so we can tell how many phones a problem affects. We don't attach your account, name or email to crash reports, and the app doesn't add your bookings, travel documents or anything you've typed to them. Google processes them on our behalf.</p>
@@ -101,7 +101,7 @@
           <tr><td>Apple App Store and Google Play</td><td>Payments and refunds</td></tr>
           <tr><td>RevenueCat</td><td>Managing purchases and subscriptions</td></tr>
           <tr><td>AeroDataBox (via API.Market)</td><td>Live flight status and flight alerts, where available</td></tr>
-          <tr><td>Cloudflare</td><td>Hosting travary.app and storing the waiting list</td></tr>
+          <tr><td>Cloudflare</td><td>Hosting travary.app, storing the waiting list, and sending account emails (confirming your address, choosing a new password)</td></tr>
         </tbody>
       </table>
     </div>
@@ -124,7 +124,7 @@
       <li><strong>Flight status answers:</strong> from 10 minutes (close to departure) to six hours (once the flight has landed).</li>
       <li><strong>Flight alert watch entries:</strong> until about three days after the flight, or sooner if the booking or trip is deleted or the trip is no longer covered by a pass.</li>
       <li><strong>Notification tokens:</strong> until you delete your account, or sooner if Apple or Google tells us the token no longer works.</li>
-      <li><strong>Usage statistics:</strong> kept by Google Analytics for a limited period set in our Analytics settings, and not linked to your account.</li>
+      <li><strong>Usage statistics:</strong> Google Analytics keeps the detailed events for 2 months, and what's tied to an installation's random analytics ID for 14 months after the app was last used. Reports that only count totals can be kept longer.</li>
       <li><strong>Crash reports:</strong> 90 days, then deleted by Firebase Crashlytics.</li>
       <li><strong>Server logs:</strong> kept for a limited time by Google Cloud (normally 30 days) to run and secure the service.</li>
       <li><strong>Records we must keep by law</strong> (such as purchase records the stores hold) are kept by Apple, Google or RevenueCat as their terms and the law require.</li>

@@ -829,16 +829,16 @@ def render_article(p: Page, by_slug: dict[str, Page]) -> str:
 LEGAL = [
     ("support", "Travary Support: Help With the Holiday Organiser", "How can we help?",
      "Help with Travary: adding bookings, Smart Import, sharing a trip, travel documents, the Annual Pass and the Holiday Pass, and your account.",
-     "2026-10-15", "Updated"),
+     "2026-10-23", "Updated"),
     ("privacy", "Privacy Policy | Travary", "Privacy Policy",
      "How Travary handles your trips, bookings and account: what's stored, who processes it, and how to delete it. Passports never leave your phone.",
-     "2026-10-22", "Effective"),
+     "2026-10-23", "Effective"),
     ("terms", "Terms of Use | Travary", "Terms of Use",
      "The terms for using Travary, the holiday organiser app, including the Annual Pass and the Holiday Pass.",
-     "2026-10-15", "Effective"),
+     "2026-10-23", "Effective"),
     ("delete-account", "Delete Your Travary Account and Data", "Delete your Travary data",
      "How to delete your Travary account and data: in the app, as a guest, or by email, and what is deleted and kept.",
-     "2026-10-15", "Updated"),
+     "2026-10-23", "Updated"),
 ]
 
 

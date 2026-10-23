@@ -36,9 +36,10 @@ manifest) and ad personalisation signals. No user ID is set.
 3. Update the public pages and store forms below **before** the release
    that sends anything. Done 13 Oct 2026 for `privacy.html` (usage
    statistics, flight alerts, notifications; `travary_support` commit
-   `1049de7`). Still to do: the store forms, and the exact Analytics
-   retention period in `privacy.html` ("Usage statistics" under "How long we
-   keep it").
+   `1049de7`). The retention period went in on 23 Oct 2026 (GA4
+   property 519144259: events 2 months, user data 14 months, reset on new
+   activity), with the "linked" wording above. The store forms are saved in
+   both consoles (Apple's App Privacy still to publish).
 
 ## Privacy page wording (for `privacy.html`, to review)
 
@@ -64,10 +65,15 @@ manifest) and ad personalisation signals. No user ID is set.
 
 ## Store privacy forms
 
-- **App Store Connect → App Privacy:** add *Usage Data → Product
-  Interaction* and *Diagnostics* if not already listed, *not linked to
-  identity* and *not used for tracking*. Purchases (*Purchase History*)
-  through RevenueCat, linked to the account.
+- **App Store Connect → App Privacy** (saved 21 Oct 2026, not yet
+  published): *Usage Data → Product Interaction*, *Identifiers → Device ID*
+  and *Location → Coarse Location* are declared **linked to the user**,
+  because the app gives RevenueCat the Firebase app instance ID together
+  with the account ID (`data/revenuecat_identity.dart`), so the two can be
+  joined. *Purchases → Purchase History* is linked too. *Diagnostics →
+  Crash Data* stays not linked (see below). Nothing is used for tracking.
+  Stop sending the instance ID to RevenueCat and these could become "not
+  linked"; change both forms if that happens.
 - **Google Play → Data safety:** *App activity → App interactions* and
   *App info and performance*, collected, not shared, for analytics. No
   advertising ID.
